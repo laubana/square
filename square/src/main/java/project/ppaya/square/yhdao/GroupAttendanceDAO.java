@@ -29,5 +29,19 @@ public class GroupAttendanceDAO
 		
 		return group_attendance_list;
 	}
+	public ArrayList<Integer> getGroupIdByUserId(String user_id)
+	{
+		ArrayList<Integer> group_id_list = null;
+		
+		GroupAttendanceMapper mapper = sqlSession.getMapper(GroupAttendanceMapper.class);
+		
+		try
+		{
+			group_id_list = mapper.getGroupIdByUserId(user_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_id_list;
+	}
 }
 

@@ -12,4 +12,12 @@ FROM
 WHERE
 	USER_ID = #{user_id}
 </select>
+<select id="getGroupIdByUserId" parameterType="string" resultType="int">
+SELECT
+	GROUP_ID
+FROM
+	GROUP_ATTENDANCE
+WHERE
+	USER_ID = #{user_id}
+</select>
 </mapper>
