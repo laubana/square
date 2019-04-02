@@ -7,4 +7,5 @@ import project.ppaya.square.yhvo.GroupAttendance;
 public interface GroupAttendanceMapper
 {
 	ArrayList<GroupAttendance> selectGroupAttendanceByUserId(String user_id);
+	ArrayList<Integer> getGroupIdByUserId(String user_id);
 }
