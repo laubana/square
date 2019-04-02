@@ -8,7 +8,7 @@ import project.ppaya.square.yhdao.GroupAttendanceDAO;
 import project.ppaya.square.yhdao.GroupDAO;
 import project.ppaya.square.yhvo.Group;
 
-public class userFromUtil
+public class userFormUtil
 {
 	@Autowired
 	static GroupAttendanceDAO group_attendanceDAO;
