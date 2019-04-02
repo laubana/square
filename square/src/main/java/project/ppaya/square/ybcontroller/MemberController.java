@@ -32,10 +32,10 @@ public class MemberController {
 	@RequestMapping(value = "memberPhoto", method = RequestMethod.GET)
 	public String memberPhotoForm(Model model) {
 		logger.info("개인앨범입니다!");
-
+/*
 		String user_id = "id1";
 		
-		model.addAttribute("group_list", userFormUtil.getGroupByUserId(user_id));
+		model.addAttribute("group_list", userFormUtil.getGroupByUserId(user_id));*/
 		
 		return "member/memberPhotoForm";
 	}
