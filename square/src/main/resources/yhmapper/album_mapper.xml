@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="project.ppaya.square.yhmapper.AlbumMapper">
+<insert id="insertAlbum" parameterType="map">
+INSERT INTO ALBUM
+(
+	EVENT_SCHEDULE_IMAGE_ID,
+	USER_ID
+)
+VALUES
+(
+	#{event_schedule_image_id},
+	#{user_id}
+)
+</insert>
+<delete id="deleteAlbumByNotEventScheduleImageIdUserId" parameterType="map">
+DELETE FROM ALBUM
+WHERE
+	<foreach item="event_schedule_image_id" collection="event_schedule_image_id_list" separator="AND" close="AND">
+		EVENT_SCHEDULE_IMAGE_ID != #{event_schedule_image_id}
+	</foreach>
+	USER_ID = #{user_id}
+</delete>
+<select id="selectAlbumByEventScheduleImageIdUserId" parameterType="map" resultType="Album">
+SELECT
+	*
+FROM
+	ALBUM
+WHERE
+	EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id} AND
+	USER_ID = #{user_id}
+</select>
+<select id="selectAlbumByEventScheduleImageIdListUserId" parameterType="map" resultType="Album">
+SELECT
+	*
+FROM
+	ALBUM
+WHERE
+	(
+	1 = 0
+	<foreach item="event_schedule_image_id" collection="event_schedule_image_id_list" open="OR" separator="OR">
+		EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id}
+	</foreach>
+	) AND	
+	USER_ID = #{user_id}
+</select>
+<select id="selectAlbumByEventScheduleImageIdListUserIdSelf" parameterType="map" resultType="Album">
+SELECT
+	*
+FROM
+	ALBUM
+WHERE
+	(
+	1 = 0
+	<foreach item="event_schedule_image_id" collection="event_schedule_image_id_list" open="OR" separator="OR">
+		EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id}
+	</foreach>
+	) AND	
+	USER_ID = #{user_id} AND
+	SELF = 1
+</select>
+<update id="updateSelfByUserId" parameterType="string">
+UPDATE ALBUM
+SET
+	SELF = 0
+WHERE
+	USER_ID = #{user_id}
+</update>
+<update id="updateSelfByEventScheduleImageIdUserId" parameterType="map">
+UPDATE ALBUM
+SET
+	SELF = 1
+WHERE
+	EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id} AND
+	USER_ID = #{user_id}
+</update>
+<update id="updateSelfByEventScheduleImageIdListUserId" parameterType="map">
+UPDATE ALBUM
+SET
+	SELF = 1
+WHERE
+	(
+	1 = 0
+	<foreach item="event_schedule_image_id" collection="event_schedule_image_id_list" open="OR" separator="OR">
+		EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id}
+	</foreach>
+	)
+	AND
+	USER_ID = #{user_id}
+</update>
+</mapper>

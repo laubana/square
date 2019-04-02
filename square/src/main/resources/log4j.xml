@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="project.ppaya.square">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->

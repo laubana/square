@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="project.ppaya.square.yhvo.User" alias="User" />
+		<typeAlias type="project.ppaya.square.yhvo.User" alias="UserSchedule" />
+		<typeAlias type="project.ppaya.square.yhvo.Album" alias="Album" />
+		<typeAlias type="project.ppaya.square.yhvo.Group" alias="Group" />
+		<typeAlias type="project.ppaya.square.yhvo.GroupAttendance" alias="GroupAttendance" />
+		<typeAlias type="project.ppaya.square.yhvo.Event" alias="Event" />
+		<typeAlias type="project.ppaya.square.yhvo.EventSchedule" alias="EventSchedule" />
+		<typeAlias type="project.ppaya.square.yhvo.EventScheduleAttendance" alias="EventScheduleAttendance" />
+		<typeAlias type="project.ppaya.square.yhvo.EventScheduleImage" alias="EventScheduleImage" />
+		<typeAlias type="project.ppaya.square.yhvo.EventScheduleImageFace" alias="EventScheduleImageFace" />
+	</typeAliases>
+	<mappers>
+		<mapper resource="yhmapper/user_mapper.xml" />
+		<mapper resource="yhmapper/user_schedule_mapper.xml" />
+		<mapper resource="yhmapper/album_mapper.xml" />
+		<mapper resource="yhmapper/group_mapper.xml" />
+		<mapper resource="yhmapper/group_attendance_mapper.xml" />
+		<mapper resource="yhmapper/event_mapper.xml" />
+		<mapper resource="yhmapper/event_schedule_mapper.xml" />
+		<mapper resource="yhmapper/event_schedule_attendance_mapper.xml" />
+		<mapper resource="yhmapper/event_schedule_image_mapper.xml" />
+		<mapper resource="yhmapper/event_schedule_image_face_mapper.xml" />
+	</mappers>
+</configuration>
