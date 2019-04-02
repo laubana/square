@@ -8,7 +8,7 @@
 SELECT
 	*
 FROM
-	EVENT_SCHEDULE
+	TABLE_EVENT_SCHEDULE
 WHERE
 	EVENT_ID = #{event_id}
 </select>
@@ -16,7 +16,7 @@ WHERE
 SELECT
 	*
 FROM
-	EVENT_SCHEDULE
+	TABLE_EVENT_SCHEDULE
 WHERE
 	1 = 0
 	<foreach item="event_id" collection="list" open="OR" separator="OR">
@@ -27,7 +27,7 @@ WHERE
 SELECT DISTINCT
 	EVENT_SCHEDULE_ID
 FROM
-	EVENT_SCHEDULE
+	TABLE_EVENT_SCHEDULE
 WHERE
 	EVENT_ID = #{event_id}
 </select>
@@ -35,7 +35,7 @@ WHERE
 SELECT DISTINCT
 	EVENT_SCHEDULE_ID
 FROM
-	EVENT_SCHEDULE
+	TABLE_EVENT_SCHEDULE
 WHERE
 	1 = 0
 	<foreach item="event_id" collection="list" open="OR" separator="OR">

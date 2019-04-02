@@ -8,7 +8,7 @@
 SELECT
 	*
 FROM
-	USER
+	TABLE_USER
 WHERE
 	USER_ID = #{user_id}
 </select>

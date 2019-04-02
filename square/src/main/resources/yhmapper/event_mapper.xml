@@ -8,7 +8,7 @@
 SELECT
 	*
 FROM
-	EVENT
+	TABLE_EVENT
 WHERE
 	GROUP_ID = #{group_id}
 </select>
@@ -16,7 +16,7 @@ WHERE
 SELECT
 	*
 FROM
-	EVENT
+	TABLE_EVENT
 WHERE
 	1 = 0
 	<foreach item="group_id" collection="list" open="OR" separator="OR">
@@ -27,7 +27,7 @@ WHERE
 SELECT DISTINCT
 	EVENT_ID
 FROM
-	EVENT
+	TABLE_EVENT
 WHERE
 	GROUP_ID = #{group_id}
 </select>
@@ -35,7 +35,7 @@ WHERE
 SELECT DISTINCT
 	EVENT_ID
 FROM
-	EVENT
+	TABLE_EVENT
 WHERE
 	1 = 0
 	<foreach item="group_id" collection="list" open="OR" separator="OR">
