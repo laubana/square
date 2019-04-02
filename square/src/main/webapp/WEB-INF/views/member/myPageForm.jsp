@@ -20,7 +20,7 @@
 			<header id="header">
 				<div class="inner">
 					<a href="#" class="image avatar"><img src="resources/GroupMain/images/member/c1.jpg" alt="" /></a>
-					<p><input type="button" value="이미지 변경"></p>
+					<p><input type="button" value="이미지 변경" style="height:3em;"></p>
 					<h1><strong>Harry</strong>님의 마이페이지<br /></h1>
 					<p>자기소개 할려면 하든가ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
 					ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>

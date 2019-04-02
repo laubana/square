@@ -2493,7 +2493,7 @@ input, select, textarea {
 		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		background-color: #989898;
+		background-color: #778899;
 		border-radius: 5px;
 		border: 0;
 		color: #ffffff !important;

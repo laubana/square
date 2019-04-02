@@ -62,6 +62,7 @@
 										빵빵빵빵빵빵 <a href="main">2조</a>.</p>
 									</header>
 									<p>빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵.</p>
+										<input type="button" value="정보 편집">
 								</div>
 							</section>
 
@@ -78,6 +79,7 @@
 										<li class="fa-bolt">등산 ㄱㄱ염</li>
 										<li class="fa-users">에라이~</li>
 									</ul>
+									<input type="button" value="이벤트 관리">
 								</div>
 							</section>
 
@@ -90,8 +92,8 @@
 										<article>
 											<a href="groupPhoto" class="image"><img src="resources/GroupMain/images/album/m1.jpg" alt="" /></a>
 											<a href="groupPhoto" class="image"><img src="resources/GroupMain/images/album/m2.jpg" alt="" /></a>
+										</article>
 											<div align="right"><a href="groupPhoto">+더보기</a></div>
-										</article>	
 									</div>
 								</div>
 							</section>
@@ -110,6 +112,7 @@
 										<br>
 										<div class="image avatar"><img src="resources/GroupMain/images/member/m6.jpg" alt="" style="width: 100px; height:auto;"></div>
 									<p>회원</p>
+									<input type="button" value="회원 관리">
 								</div>
 							</section>
 
@@ -139,6 +142,32 @@
 												<p>치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨.</p>
 											</div>
 										</article>
+										<div align="right"><a href="javascript:doDisplay();">+더보기</a></div>
+											<div id="myDIV" style="display: none;">
+    											<article>
+											<a href="#" class="image"><img src="resources/GroupMain/images/pic01.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>밥묵자</h4>
+												<p>밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥.</p>
+											</div>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="resources/GroupMain/images/pic02.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>냉면묵자</h4>
+												<p>냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면.</p>
+											</div>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="resources/GroupMain/images/pic03.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>치킨묵자</h4>
+												<p>치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨.</p>
+											</div>
+										</article>
+											</div>
+										<input type="button" value="게시판 관리">
+										
 									</div>
 								</div>
 							</section>
@@ -155,6 +184,19 @@
 					</section>
 
 			</div>
+
+<script type="text/javascript">
+//숨기기,보이기
+var bDisplay = true;
+function doDisplay(){
+    var con = document.getElementById("myDIV");
+    if(con.style.display=='none'){
+        con.style.display = 'block';
+    }else{
+        con.style.display = 'none';
+    }
+}
+</script>
 
 		<!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
