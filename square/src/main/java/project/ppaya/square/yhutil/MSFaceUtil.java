@@ -18,6 +18,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import project.ppaya.square.yhdao.EventDAO;
 import project.ppaya.square.yhdao.EventScheduleDAO;
@@ -28,15 +29,19 @@ import project.ppaya.square.yhvo.EventSchedule;
 import project.ppaya.square.yhvo.EventScheduleImage;
 import project.ppaya.square.yhvo.Reference;
 
+@Repository
 public class MSFaceUtil
 {
 	@Autowired
-	static EventDAO eventDAO;
-	static EventScheduleDAO event_scheduleDAO;
-	static EventScheduleImageDAO event_schedule_imageDAO;
-	static EventScheduleImageFaceDAO event_schedule_image_faceDAO;
+	EventDAO eventDAO;
+	@Autowired
+	EventScheduleDAO event_scheduleDAO;
+	@Autowired
+	EventScheduleImageDAO event_schedule_imageDAO;
+	@Autowired
+	EventScheduleImageFaceDAO event_schedule_image_faceDAO;
 	
-	public static void updateEventScheduleImageFaceByGroupId(int group_id)
+	public void updateEventScheduleImageFaceByGroupId(int group_id)
 	{
 		String result = null;
 		JSONArray jsonArray = null;
@@ -108,7 +113,7 @@ public class MSFaceUtil
 			}
 		}
 	}
-	public static void updateEventScheduleImageFaceByGroupIdList(ArrayList<Integer> group_id_list)
+	public void updateEventScheduleImageFaceByGroupIdList(ArrayList<Integer> group_id_list)
 	{
 		String result = null;
 		JSONArray jsonArray = null;
@@ -180,7 +185,7 @@ public class MSFaceUtil
 			}
 		}
 	}
-	public static void updateEventScheduleImageFaceByEventId(int event_id)
+	public void updateEventScheduleImageFaceByEventId(int event_id)
 	{
 		String result = null;
 		JSONArray jsonArray = null;
@@ -244,7 +249,7 @@ public class MSFaceUtil
 			}
 		}
 	}
-	public static void updateEventScheduleImageFaceByEventIdList(ArrayList<Integer> event_id_list)
+	public void updateEventScheduleImageFaceByEventIdList(ArrayList<Integer> event_id_list)
 	{
 		String result = null;
 		JSONArray jsonArray = null;
@@ -308,7 +313,7 @@ public class MSFaceUtil
 			}
 		}
 	}
-	public static void updateEventScheduleImageFaceByEventScheduleId(int event_schedule_id)
+	public void updateEventScheduleImageFaceByEventScheduleId(int event_schedule_id)
 	{
 		String result = null;
 		JSONArray jsonArray = null;
@@ -364,7 +369,7 @@ public class MSFaceUtil
 			}
 		}
 	}
-	public static void updateEventScheduleImageFaceByEventScheduleIdList(ArrayList<Integer> event_schedule_id_list)
+	public void updateEventScheduleImageFaceByEventScheduleIdList(ArrayList<Integer> event_schedule_id_list)
 	{
 		String result = null;
 		JSONArray jsonArray = null;

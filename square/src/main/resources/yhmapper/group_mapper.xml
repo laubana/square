@@ -8,7 +8,7 @@
 SELECT
 	*
 FROM
-	TABLE_GROUP
+	TABLE_G
 WHERE
 	1 = 0
 	<foreach item="group_id" collection="list" open="OR" separator="OR">

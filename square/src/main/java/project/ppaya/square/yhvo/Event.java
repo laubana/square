@@ -4,7 +4,7 @@ public class Event
 {
 	int event_id;
 	int group_id;
-	String host_id;
+	String user_id;
 	String name;
 	String content;
 	public Event(){}
@@ -20,11 +20,11 @@ public class Event
 	public void setGroup_id(int group_id) {
 		this.group_id = group_id;
 	}
-	public String getHost_id() {
-		return host_id;
+	public String getUser_id() {
+		return user_id;
 	}
-	public void setHost_id(String host_id) {
-		this.host_id = host_id;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 	public String getName() {
 		return name;

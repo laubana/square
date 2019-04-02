@@ -8,7 +8,7 @@
 SELECT
 	*
 FROM
-	TABLE_GROUP_ATTENDANCE
+	TABLE_GA
 WHERE
 	USER_ID = #{user_id}
 </select>
@@ -16,7 +16,7 @@ WHERE
 SELECT
 	GROUP_ID
 FROM
-	TABLE_GROUP_ATTENDANCE
+	TABLE_GA
 WHERE
 	USER_ID = #{user_id}
 </select>

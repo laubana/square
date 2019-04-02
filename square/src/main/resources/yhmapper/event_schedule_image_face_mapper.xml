@@ -8,7 +8,7 @@
 SELECT
 	*
 FROM
-	TABLE_EVENT_SCHEDULE_IMAGE_FACE
+	TABLE_ESIF
 WHERE
 	EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id}
 </select>
@@ -16,7 +16,7 @@ WHERE
 SELECT
 	*
 FROM
-	TABLE_EVENT_SCHEDULE_IMAGE_FACE
+	TABLE_ESIF
 WHERE
 	1 = 0
 	<foreach item="event_schedule_image_id" collection="list" open="OR" separator="OR">
@@ -27,7 +27,7 @@ WHERE
 SELECT DISTINCT
 	EVENT_SCHEDULE_IMAGE_FACE_ID
 FROM
-	TABLE_EVENT_SCHEDULE_IMAGE_FACE
+	TABLE_ESIF
 WHERE
 	EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id}
 </select>
@@ -35,7 +35,7 @@ WHERE
 SELECT DISTINCT
 	EVENT_SCHEDULE_IMAGE_FACE_ID
 FROM
-	TABLE_EVENT_SCHEDULE_IMAGE_FACE
+	TABLE_ESIF
 WHERE
 	1 = 0
 	<foreach item="event_schedule_image_id" collection="list" open="OR" separator="OR">	
@@ -46,7 +46,7 @@ WHERE
 SELECT DISTINCT
 	EVENT_SCHEDULE_IMAGE_ID
 FROM
-	TABLE_EVENT_SCHEDULE_IMAGE_FACE
+	TABLE_ESIF
 WHERE
 	EVENT_SCHEDULE_IMAGE_FACE_ID = #{event_schedule_image_face_id}
 </select>
@@ -54,7 +54,7 @@ WHERE
 SELECT DISTINCT
 	EVENT_SCHEDULE_IMAGE_ID
 FROM
-	TABLE_EVENT_SCHEDULE_IMAGE_FACE
+	TABLE_ESIF
 WHERE
 	1 = 0
 	<foreach item="event_schedule_image_face_id" collection="list" open="OR" separator="OR">	
@@ -62,7 +62,7 @@ WHERE
 	</foreach>
 </select>
 <insert id="insertEventScheduleImageFace" parameterType="map">
-INSERT INTO TABLE_EVENT_SCHEDULE_IMAGE_FACE
+INSERT INTO TABLE_ESIF
 (
 	EVENT_SCHEDULE_IMAGE_FACE_ID,
 	EVENT_SCHEDULE_IMAGE_ID,
@@ -82,7 +82,7 @@ VALUES
 )
 </insert>
 <update id="updateEventScheduleImageFaceIdByEventScheduleImageIdRectangle" parameterType="map">
-UPDATE TABLE_EVENT_SCHEDULE_IMAGE_FACE
+UPDATE TABLE_ESIF
 SET
 	EVENT_SCHEDULE_IMAGE_FACE_ID = #{event_schedule_image_face_id}
 WHERE

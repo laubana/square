@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
  * Handles requests for the application home page.
  */
 @Controller
-public class EventController
+public class YHEventController
 {	
-	private static final Logger logger = LoggerFactory.getLogger(EventController.class);
+	private static final Logger logger = LoggerFactory.getLogger(YHEventController.class);
 }

@@ -5,7 +5,7 @@ public class Group
 	int group_id;
 	int group_category_id;
 	String region;
-	String leader;
+	String user_id;
 	String name;
 	String content;
 	String group_logo;
@@ -29,11 +29,11 @@ public class Group
 	public void setRegion(String region) {
 		this.region = region;
 	}
-	public String getLeader() {
-		return leader;
+	public String getUser_id() {
+		return user_id;
 	}
-	public void setLeader(String leader) {
-		this.leader = leader;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 	public String getName() {
 		return name;

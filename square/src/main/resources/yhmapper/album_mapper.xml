@@ -5,7 +5,7 @@
   
 <mapper namespace="project.ppaya.square.yhmapper.AlbumMapper">
 <insert id="insertAlbum" parameterType="map">
-INSERT INTO TABLE_ALBUM
+INSERT INTO TABLE_A
 (
 	EVENT_SCHEDULE_IMAGE_ID,
 	USER_ID
@@ -17,7 +17,7 @@ VALUES
 )
 </insert>
 <delete id="deleteAlbumByNotEventScheduleImageIdUserId" parameterType="map">
-DELETE FROM TABLE_ALBUM
+DELETE FROM TABLE_A
 WHERE
 	<foreach item="event_schedule_image_id" collection="event_schedule_image_id_list" separator="AND" close="AND">
 		EVENT_SCHEDULE_IMAGE_ID != #{event_schedule_image_id}
@@ -28,7 +28,7 @@ WHERE
 SELECT
 	*
 FROM
-	TABLE_ALBUM
+	TABLE_A
 WHERE
 	EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id} AND
 	USER_ID = #{user_id}
@@ -37,7 +37,7 @@ WHERE
 SELECT
 	*
 FROM
-	TABLE_ALBUM
+	TABLE_A
 WHERE
 	(
 	1 = 0
@@ -51,7 +51,7 @@ WHERE
 SELECT
 	*
 FROM
-	TABLE_ALBUM
+	TABLE_A
 WHERE
 	(
 	1 = 0
@@ -63,14 +63,14 @@ WHERE
 	SELF = 1
 </select>
 <update id="updateSelfByUserId" parameterType="string">
-UPDATE TABLE_ALBUM
+UPDATE TABLE_A
 SET
 	SELF = 0
 WHERE
 	USER_ID = #{user_id}
 </update>
 <update id="updateSelfByEventScheduleImageIdUserId" parameterType="map">
-UPDATE TABLE_ALBUM
+UPDATE TABLE_A
 SET
 	SELF = 1
 WHERE
@@ -78,7 +78,7 @@ WHERE
 	USER_ID = #{user_id}
 </update>
 <update id="updateSelfByEventScheduleImageIdListUserId" parameterType="map">
-UPDATE TABLE_ALBUM
+UPDATE TABLE_A
 SET
 	SELF = 1
 WHERE

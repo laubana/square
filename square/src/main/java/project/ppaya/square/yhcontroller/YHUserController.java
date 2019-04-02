@@ -8,9 +8,9 @@ import org.springframework.stereotype.Controller;
  * Handles requests for the application home page.
  */
 @Controller
-public class UserController {
+public class YHUserController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	private static final Logger logger = LoggerFactory.getLogger(YHUserController.class);
 	
 	/*@Autowired
 	GroupAttendanceDAO group_attendanceDAO;

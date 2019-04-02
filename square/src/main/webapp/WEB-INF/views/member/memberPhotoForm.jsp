@@ -106,75 +106,14 @@ label img {
 
 						<div class="row">
 								<ul class="features">
-									<%-- <c:forEach var="group" items="${group_list}">
+									<c:forEach var="group" items="${group_list}">
 										<li>
-											<input type="checkbox" id="gruopCheckbox1" />
-											<label for="gruopCheckbox1">
+											<input type="checkbox" name="gruopCheckbox" />
+											<label for="gruopCheckbox">
 											<h3 align="center">${group.name}</h3>	
 										</label>
 										</li>
-									</c:forEach> --%>
-									
-									<li>
-										<input type="checkbox" id="gruopCheckbox1" />
-										<label for="gruopCheckbox1">
-										<h3 align="center">A그룹</h3>	
-										</label>															
-									</li>
-									<li>
-										<input type="checkbox" id="gruopCheckbox2" />
-										<label for="gruopCheckbox2">
-										<h3 align="center">B그룹</h3>	
-										</label>	
-									</li>
-									<li>
-										<input type="checkbox" id="gruopCheckbox3" />
-										<label for="gruopCheckbox3">
-										<h3 align="center">C그룹</h3>	
-										</label>		
-									</li>
-									<li>
-										<input type="checkbox" id="gruopCheckbox4" />
-										<label for="gruopCheckbox4">
-										<h3 align="center">D그룹</h3>	
-										</label>															
-									</li>
-									<li>
-										<input type="checkbox" id="gruopCheckbox5" />
-										<label for="gruopCheckbox5">
-										<h3 align="center">E그룹</h3>	
-										</label>	
-									</li>
-									<li>
-										<input type="checkbox" id="gruopCheckbox6" />
-										<label for="gruopCheckbox6">
-										<h3 align="center">F그룹</h3>	
-										</label>		
-									</li>
-									<li>
-										<input type="checkbox" id="gruopCheckbox7" />
-										<label for="gruopCheckbox7">
-										<h3 align="center">G그룹</h3>	
-										</label>		
-									</li>
-									<li>
-										<input type="checkbox" id="gruopCheckbox8" />
-										<label for="gruopCheckbox8">
-										<h3 align="center">H그룹</h3>	
-										</label>		
-									</li>
-									<li>
-										<input type="checkbox" id="gruopCheckbox9" />
-										<label for="gruopCheckbox9">
-										<h3 align="center">I그룹</h3>	
-										</label>		
-									</li>
-									<li>
-										<input type="checkbox" id="gruopCheckbox10" />
-										<label for="gruopCheckbox10">
-										<h3 align="center">K그룹</h3>	
-										</label>		
-									</li>
+									</c:forEach>
 								</ul>
 								
 								

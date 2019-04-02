@@ -7,9 +7,9 @@ import org.springframework.stereotype.Controller;
  * Handles requests for the application home page.
  */
 @Controller
-public class UserScheduleController
+public class YHUserScheduleController
 {	
-	private static final Logger logger = LoggerFactory.getLogger(UserScheduleController.class);
+	private static final Logger logger = LoggerFactory.getLogger(YHUserScheduleController.class);
 	
 	
 }
