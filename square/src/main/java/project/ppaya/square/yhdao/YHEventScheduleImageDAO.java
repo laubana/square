@@ -116,4 +116,32 @@ public class YHEventScheduleImageDAO
 		
 		return event_schedule_image_id_list;
 	}
+	public ArrayList<EventScheduleImage> selectEventScheduleImageByEventScheduleImageId(String event_schedule_image_id)
+	{
+		ArrayList<EventScheduleImage> event_schedule_image_list = null;
+		
+		YHEventScheduleImageMapper mapper = sqlSession.getMapper(YHEventScheduleImageMapper.class);
+		
+		try
+		{
+			event_schedule_image_list = mapper.selectEventScheduleImageByEventScheduleImageId(event_schedule_image_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_image_list;
+	}
+	public ArrayList<EventScheduleImage> selectEventScheduleImageByEventScheduleImageIdList(ArrayList<String> event_schedule_image_id_list)
+	{
+		ArrayList<EventScheduleImage> event_schedule_image_list = null;
+		
+		YHEventScheduleImageMapper mapper = sqlSession.getMapper(YHEventScheduleImageMapper.class);
+		
+		try
+		{
+			event_schedule_image_list = mapper.selectEventScheduleImageByEventScheduleImageIdList(event_schedule_image_id_list);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_image_list;
+	}
 }

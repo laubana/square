@@ -149,4 +149,21 @@ public class YHAlbumDAO
 		
 		return album_list;	
 	}
+	public ArrayList<String> getEventScheduleImageIdByEventScheduleImageIdListUserIdSelf(ArrayList<String> old_event_schedule_image_id_list, String user_id)
+	{
+		ArrayList<String> new_event_schedule_image_id_list = new ArrayList<>();
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("event_schedule_image_id_list", old_event_schedule_image_id_list);
+		map.put("user_id", user_id);
+
+		YHAlbumMapper mapper = sqlSession.getMapper(YHAlbumMapper.class);
+		
+		try
+		{
+			new_event_schedule_image_id_list = mapper.getEventScheduleImageIdByEventScheduleImageIdListUserIdSelf(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return new_event_schedule_image_id_list;
+	}
 }

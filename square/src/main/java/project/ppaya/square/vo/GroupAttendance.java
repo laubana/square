@@ -4,6 +4,7 @@ public class GroupAttendance
 {
 	int group_id;
 	String user_id;
+	int blind;
 	public GroupAttendance(){}
 	public int getGroup_id() {
 		return group_id;
@@ -16,5 +17,11 @@ public class GroupAttendance
 	}
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+	public int getBlind() {
+		return blind;
+	}
+	public void setBlind(int blind) {
+		this.blind = blind;
 	}
 }

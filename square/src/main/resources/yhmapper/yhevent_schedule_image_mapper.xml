@@ -22,6 +22,25 @@ VALUES
 	#{ext}
 )
 </insert>
+<select id="selectEventScheduleImageByEventScheduleImageId" parameterType="int" resultType="EventScheduleImage">
+SELECT
+	*
+FROM
+	TABLE_ESI
+WHERE
+	EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id}
+</select>
+<select id="selectEventScheduleImageByEventScheduleImageIdList" parameterType="list" resultType="EventScheduleImage">
+SELECT
+	*
+FROM
+	TABLE_ESI
+WHERE
+	1 = 0
+	<foreach item="event_schedule_image_id" collection="list" open="OR" separator="OR">
+		EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id}
+	</foreach>
+</select>
 <select id="selectEventScheduleImageByEventScheduleId" parameterType="int" resultType="EventScheduleImage">
 SELECT
 	*

@@ -25,7 +25,7 @@ import project.ppaya.square.yhdao.YHGroupDAO;
 import project.ppaya.square.yhdao.YHUserDAO;
 
 @Repository
-public class UserFormUtil
+public class YHUserFormUtil
 {
 	@Autowired
 	YHUserDAO userDAO;
@@ -46,7 +46,7 @@ public class UserFormUtil
 	@Autowired
 	YHAlbumDAO albumDAO;
 	@Autowired
-	MSFaceUtil ms_faceUtil;
+	YHMSFaceUtil ms_faceUtil;
 	
 	public void updateAlbumByUserId(String user_id)
 	{
@@ -120,7 +120,7 @@ public class UserFormUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = MSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = ms_faceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -139,7 +139,7 @@ public class UserFormUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = MSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = ms_faceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)

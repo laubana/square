@@ -15,4 +15,5 @@ public interface YHAlbumMapper
 	public int updateSelfByUserId(String user_id);
 	public int updateSelfByEventScheduleImageIdUserId(HashMap<String, Object> map);
 	public int updateSelfByEventScheduleImageIdListUserId(HashMap<String, Object> map);
+	public ArrayList<String> getEventScheduleImageIdByEventScheduleImageIdListUserIdSelf(HashMap<String, Object> map);
 }

@@ -33,6 +33,20 @@ WHERE
 	EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id} AND
 	USER_ID = #{user_id}
 </select>
+<select id="getEventScheduleImageIdByEventScheduleImageIdListUserId" parameterType="map" resultType="Album">
+SELECT
+	*
+FROM
+	TABLE_A
+WHERE
+	(
+	1 = 0
+	<foreach item="event_schedule_image_id" collection="event_schedule_image_id_list" open="OR" separator="OR">
+		EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id}
+	</foreach>
+	) AND	
+	USER_ID = #{user_id}
+</select>
 <select id="selectAlbumByEventScheduleImageIdListUserId" parameterType="map" resultType="Album">
 SELECT
 	*
@@ -50,6 +64,21 @@ WHERE
 <select id="selectAlbumByEventScheduleImageIdListUserIdSelf" parameterType="map" resultType="Album">
 SELECT
 	*
+FROM
+	TABLE_A
+WHERE
+	(
+	1 = 0
+	<foreach item="event_schedule_image_id" collection="event_schedule_image_id_list" open="OR" separator="OR">
+		EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id}
+	</foreach>
+	) AND	
+	USER_ID = #{user_id} AND
+	SELF = 1
+</select>
+<select id="getEventScheduleImageIdByEventScheduleImageIdListUserIdSelf" parameterType="map" resultType="string">
+SELECT
+	EVENT_SCHEDULE_IMAGE_ID
 FROM
 	TABLE_A
 WHERE

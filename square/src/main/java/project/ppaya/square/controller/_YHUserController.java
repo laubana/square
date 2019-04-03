@@ -1,4 +1,4 @@
-package project.ppaya.square.yhcontroller;
+package project.ppaya.square.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
