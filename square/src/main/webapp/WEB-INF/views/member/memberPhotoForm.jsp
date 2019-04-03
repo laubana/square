@@ -155,8 +155,8 @@ label img {
 						</c:forEach>
 						<c:forEach var="image" items="${self_image_list}">
 							<article class="col-6 col-12-xsmall work-item">
-								<input type="checkbox" id="albumCheckbox${image.event_schedule_image_id}" />
-								<label for="albumCheckbox${image.event_schedule_image_id}">
+								<input type="checkbox" id="self_albumCheckbox${image.event_schedule_image_id}" />
+								<label for="self_albumCheckbox${image.event_schedule_image_id}">
 								<img src="resources/image/${image.event_schedule_image_id}" alt="" />
 								</label>
 								<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
