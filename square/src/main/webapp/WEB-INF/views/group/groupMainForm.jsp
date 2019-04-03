@@ -14,7 +14,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
 	</head>
-	<body class="is-preload">
+	<body class="is-preload" onload="fn_onload();">
 
 		<!-- Header -->
 			<section id="header">
@@ -109,10 +109,12 @@
 										<div class="image avatar"><img src="resources/GroupMain/images/member/m3.jpg" alt="" style="width: 100px; height:auto;"></div>
 										<div class="image avatar"><img src="resources/GroupMain/images/member/m4.jpg" alt="" style="width: 100px; height:auto;"></div>
 										<div class="image avatar"><img src="resources/GroupMain/images/member/m5.jpg" alt="" style="width: 100px; height:auto;"></div>
-										<br>
+										<div align="right"><a href="javascript:doDisplay2();" id="link4" onclick="javascript:link4_onclick();">+더보기</a></div>
+										<div id="myDIV2" style="display: none;">
 										<div class="image avatar"><img src="resources/GroupMain/images/member/m6.jpg" alt="" style="width: 100px; height:auto;"></div>
+										</div>
+										<div align="right"><a href="javascript:doDisplay2();" id="link3" onclick="javascript:link3_onclick();">+숨기기</a></div>
 									<p>회원</p>
-									<input type="button" value="회원 관리">
 								</div>
 							</section>
 
@@ -142,32 +144,33 @@
 												<p>치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨.</p>
 											</div>
 										</article>
-										<div align="right"><a href="javascript:doDisplay();">+더보기</a></div>
-											<div id="myDIV" style="display: none;">
+										<hr>
+										<div align="right"><a href="javascript:doDisplay1();" id="link2" onclick="javascript:link2_onclick();">+더보기</a></div>
+											<div id="myDIV1" style="display: none;">
     											<article>
 											<a href="#" class="image"><img src="resources/GroupMain/images/pic01.jpg" alt="" /></a>
 											<div class="inner">
-												<h4>밥묵자</h4>
+												<h4>라면묵자</h4>
 												<p>밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥.</p>
 											</div>
 										</article>
 										<article>
 											<a href="#" class="image"><img src="resources/GroupMain/images/pic02.jpg" alt="" /></a>
 											<div class="inner">
-												<h4>냉면묵자</h4>
+												<h4>김밥묵자</h4>
 												<p>냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면.</p>
 											</div>
 										</article>
 										<article>
 											<a href="#" class="image"><img src="resources/GroupMain/images/pic03.jpg" alt="" /></a>
 											<div class="inner">
-												<h4>치킨묵자</h4>
+												<h4>우동묵자</h4>
 												<p>치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨.</p>
 											</div>
 										</article>
 											</div>
+											<div align="right"><a href="javascript:doDisplay1();" id="link1" onclick="javascript:link1_onclick();">+숨기기</a></div>
 										<input type="button" value="게시판 관리">
-										
 									</div>
 								</div>
 							</section>
@@ -188,13 +191,45 @@
 <script type="text/javascript">
 //숨기기,보이기
 var bDisplay = true;
-function doDisplay(){
-    var con = document.getElementById("myDIV");
+function doDisplay1(){
+    var con = document.getElementById("myDIV1");
     if(con.style.display=='none'){
         con.style.display = 'block';
     }else{
         con.style.display = 'none';
     }
+}
+
+function doDisplay2(){
+    var con = document.getElementById("myDIV2");
+    if(con.style.display=='none'){
+        con.style.display = 'block';
+    }else{
+        con.style.display = 'none';
+    }
+}
+
+function fn_onload() {
+	document.getElementById('link1').style.visibility = "hidden";
+	document.getElementById('link2').style.visibility = "visible";
+	document.getElementById('link3').style.visibility = "hidden";
+	document.getElementById('link4').style.visibility = "visible";
+}
+function link1_onclick() {
+	document.getElementById('link1').style.visibility = "hidden";
+	document.getElementById('link2').style.visibility = "visible";
+}
+function link2_onclick() {
+	document.getElementById('link1').style.visibility = "visible";
+	document.getElementById('link2').style.visibility = "hidden";
+}
+function link3_onclick() {
+	document.getElementById('link3').style.visibility = "hidden";
+	document.getElementById('link4').style.visibility = "visible";
+}
+function link4_onclick() {
+	document.getElementById('link3').style.visibility = "visible";
+	document.getElementById('link4').style.visibility = "hidden";
 }
 </script>
 
