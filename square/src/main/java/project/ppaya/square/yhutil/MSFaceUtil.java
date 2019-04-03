@@ -15,6 +15,7 @@ import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -441,7 +442,10 @@ public class MSFaceUtil
 		}
 		temp += "\"" + face_id_list.get(face_id_list.size() - 1) + "\"";
 		temp += "]";
-		
+
+        System.out.println(face_id);
+        System.out.println(temp);
+        
 		HttpClient httpclient = HttpClients.createDefault();
 		
         try
@@ -463,7 +467,7 @@ public class MSFaceUtil
             HttpResponse httpResponse = httpclient.execute(httpPost);
             
             result = EntityUtils.toString(httpResponse.getEntity()).trim();
-            
+
             jsonArray = new JSONArray(result);
             
             for(int i = 0; i <jsonArray.length(); i++)
@@ -477,6 +481,7 @@ public class MSFaceUtil
         }
         catch (Exception error)
         {
+        	error.printStackTrace();
             return null;
         }
 	}

@@ -1,5 +1,6 @@
 package project.ppaya.square.yhcontroller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -63,6 +64,13 @@ public class YHUserController {
 	@Autowired
 	YHAlbumDAO albumDAO;
 	
+	@RequestMapping(value = "joinForm", method = RequestMethod.GET)
+	public String joinForm() {
+		logger.info("로그인입니다!");
+
+		return "member/joinForm";
+	}
+	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String loginForm() {
 		logger.info("로그인입니다!");
@@ -81,7 +89,13 @@ public class YHUserController {
 	public String memberPhotoForm(Model model)
 	{
 		logger.info("개인앨범입니다!");
-
+		
+		File directory = new File(Reference.file_path);
+		if(!directory.isDirectory())
+		{
+			directory.mkdirs();
+		}
+		
 		String result = null;
 		JSONArray jsonArray = null;
 		JSONObject jsonObject = null;
@@ -177,11 +191,7 @@ public class YHUserController {
 		
 		attend_event_schedule_image_face_id_list = event_schedule_image_faceDAO.getEventScheduleImageFaceIdByEventScheduleImageIdList(attend_event_schedule_image_id_list);
 		
-		similar_event_schedule_image_face_id = ms_faceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(attend_event_schedule_image_face_id_list, ms_faceUtil.detectFace(Reference.file_path, image_id));
-		for(int i = 0; i < similar_event_schedule_image_face_id.size(); i++)
-		{
-			logger.debug("{}", similar_event_schedule_image_face_id.get(i));
-		}
+		similar_event_schedule_image_face_id = ms_faceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(attend_event_schedule_image_face_id_list, (new JSONArray(ms_faceUtil.detectFace(Reference.file_path, image_id))).getJSONObject(0).getString("faceId")  );
 		
 		similar_event_schedule_image_id_list = event_schedule_image_faceDAO.getEventScheduleImageIdByEventScheduleImageFaceIdList(similar_event_schedule_image_face_id);
 		
@@ -195,7 +205,7 @@ public class YHUserController {
 		event_schedule_image_id_list = event_schedule_imageDAO.getEventScheduleImageIdByEventScheduleIdList(event_schedule_id_list);
 		
 		model.addAttribute("image_list", albumDAO.selectAlbumByEventScheduleImageIdListUserId(event_schedule_image_id_list, user_id));
-		//model.addAttribute("self_image_list", albumDAO.selectAlbumByEventScheduleImageIdListUserIdSelf(event_schedule_image_id_list, user_id));
+		model.addAttribute("self_image_list", albumDAO.selectAlbumByEventScheduleImageIdListUserIdSelf(event_schedule_image_id_list, user_id));
 		
 		return "member/memberPhotoForm";
 	}

@@ -27,7 +27,7 @@ public class YHAlbumDAO
 		
 		try
 		{
-			result = mapper.updateSelfByEventScheduleImageIdUserId(map);
+			result = mapper.updateSelfByEventScheduleImageIdListUserId(map);
 		}
 		catch(Exception error){error.printStackTrace();}
 		
@@ -143,7 +143,7 @@ public class YHAlbumDAO
 		
 		try
 		{
-			album_list = mapper.selectAlbumByEventScheduleImageIdListUserId(map);
+			album_list = mapper.selectAlbumByEventScheduleImageIdListUserIdSelf(map);
 		}
 		catch(Exception error){error.printStackTrace();}
 		
