@@ -8,6 +8,7 @@
 		<typeAlias type="project.ppaya.square.vo.User" alias="UserSchedule" />
 		<typeAlias type="project.ppaya.square.vo.Album" alias="Album" />
 		<typeAlias type="project.ppaya.square.vo.Group" alias="Group" />
+		<typeAlias type="project.ppaya.square.vo.GroupBoard" alias="GroupBoard" />
 		<typeAlias type="project.ppaya.square.vo.GroupAttendance" alias="GroupAttendance" />
 		<typeAlias type="project.ppaya.square.vo.Event" alias="Event" />
 		<typeAlias type="project.ppaya.square.vo.EventSchedule" alias="EventSchedule" />
@@ -20,6 +21,7 @@
 		<mapper resource="yhmapper/yhuser_schedule_mapper.xml" />
 		<mapper resource="yhmapper/yhalbum_mapper.xml" />
 		<mapper resource="yhmapper/yhgroup_mapper.xml" />
+		<mapper resource="yhmapper/yhgroup_board_mapper.xml" />
 		<mapper resource="yhmapper/yhgroup_attendance_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_schedule_mapper.xml" />
