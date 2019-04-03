@@ -108,8 +108,8 @@ label img {
 								<ul class="features">
 									<c:forEach var="group" items="${group_list}">
 										<li>
-											<input type="checkbox" name="gruopCheckbox" />
-											<label for="gruopCheckbox">
+											<input type="checkbox" id="gruopCheckbox${group.name}" name="gruopCheckbox" />
+											<label for="gruopCheckbox${group.name}">
 											<h3 align="center">${group.name}</h3>	
 										</label>
 										</li>
@@ -141,7 +141,31 @@ label img {
 									</li>
 								</ul>
 						
+						<c:forEach var="image" items="${image_list}">
 							<article class="col-6 col-12-xsmall work-item">
+								<input type="checkbox" id="albumCheckbox${image.event_schedule_image_id}" />
+								<label for="albumCheckbox${image.event_schedule_image_id}">
+								<img src="resources/image/${image.event_schedule_image_id}" alt="" />
+								</label>
+								<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Magna sed consequat tempus</h3>
+								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+							</article>
+						</c:forEach>
+						<c:forEach var="image" items="${self_image_list}">
+							<article class="col-6 col-12-xsmall work-item">
+								<input type="checkbox" id="albumCheckbox${image.event_schedule_image_id}" />
+								<label for="albumCheckbox${image.event_schedule_image_id}">
+								<img src="resources/image/${image.event_schedule_image_id}" alt="" />
+								</label>
+								<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Magna sed consequat tempus</h3>
+								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+							</article>
+						</c:forEach>
+							<!-- <article class="col-6 col-12-xsmall work-item">
 								<input type="checkbox" id="albumCheckbox1" />
 								<label for="albumCheckbox1">
 								<img src="resources/MemberPhoto/images/thumbs/01.jpg" alt="" />
@@ -180,7 +204,7 @@ label img {
 								Ultricies lacinia interdum</h3>
 								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
+							</article> -->
 							
 						</div>
 						<ul class="actions">
