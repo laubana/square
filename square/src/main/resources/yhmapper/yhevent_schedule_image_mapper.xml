@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleImageMapper">
+<insert id="insertEventScheduleImage" parameterType="map">
+INSERT INTO TABLE_ESI
+(
+	EVENT_SCHEDULE_IMAGE_ID,
+	USER_ID,
+	EVENT_SCHEDULE_ID,
+	FILENAME,
+	EXT
+)
+VALUES
+(
+	#{event_schedule_image_id},
+	#{user_id},
+	#{event_schedule_id},
+	#{filename},
+	#{ext}
+)
+</insert>
+<select id="selectEventScheduleImageByEventScheduleId" parameterType="int" resultType="EventScheduleImage">
+SELECT
+	*
+FROM
+	TABLE_ESI
+WHERE
+	EVENT_SCHEDULE_ID = #{event_schedule_id}
+</select>
+<select id="selectEventScheduleImageByEventScheduleIdList" parameterType="list" resultType="EventScheduleImage">
+SELECT
+	*
+FROM
+	TABLE_ESI
+WHERE
+	1 = 0
+	<foreach item="event_schedule_id" collection="list" open="OR" separator="OR">
+		EVENT_SCHEDULE_ID = #{event_schedule_id}
+	</foreach>
+</select>
+<update id="updateEventScheduleImageDetectDateByEventScheduleImageId" parameterType="map">
+UPDATE TABLE_ESI
+SET
+	DETECT_DATE = #{detect_date}
+WHERE
+	EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id}
+</update>
+<select id="getEventScheduleImageIdByEventScheduleId" parameterType="int" resultType="string">
+SELECT DISTINCT
+	EVENT_SCHEDULE_IMAGE_ID
+FROM
+	TABLE_ESI
+WHERE
+	EVENT_SCHEDULE_ID = #{event_schedule_id}
+</select>
+<select id="getEventScheduleImageIdByEventScheduleIdList" parameterType="list" resultType="string">
+SELECT DISTINCT
+	EVENT_SCHEDULE_IMAGE_ID
+FROM
+	TABLE_ESI
+WHERE
+	1 = 0
+	<foreach item="event_schedule_id" collection="list" open="OR" separator="OR">
+		EVENT_SCHEDULE_ID = #{event_schedule_id}
+	</foreach>
+</select>
+</mapper>

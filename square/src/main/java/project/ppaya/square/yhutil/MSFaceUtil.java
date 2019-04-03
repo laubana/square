@@ -20,26 +20,26 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import project.ppaya.square.yhdao.EventDAO;
-import project.ppaya.square.yhdao.EventScheduleDAO;
-import project.ppaya.square.yhdao.EventScheduleImageDAO;
-import project.ppaya.square.yhdao.EventScheduleImageFaceDAO;
-import project.ppaya.square.yhvo.Event;
-import project.ppaya.square.yhvo.EventSchedule;
-import project.ppaya.square.yhvo.EventScheduleImage;
-import project.ppaya.square.yhvo.Reference;
+import project.ppaya.square.vo.Event;
+import project.ppaya.square.vo.EventSchedule;
+import project.ppaya.square.vo.EventScheduleImage;
+import project.ppaya.square.vo.Reference;
+import project.ppaya.square.yhdao.YHEventDAO;
+import project.ppaya.square.yhdao.YHEventScheduleDAO;
+import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
+import project.ppaya.square.yhdao.YHEventScheduleImageFaceDAO;
 
 @Repository
 public class MSFaceUtil
 {
 	@Autowired
-	EventDAO eventDAO;
+	YHEventDAO eventDAO;
 	@Autowired
-	EventScheduleDAO event_scheduleDAO;
+	YHEventScheduleDAO event_scheduleDAO;
 	@Autowired
-	EventScheduleImageDAO event_schedule_imageDAO;
+	YHEventScheduleImageDAO event_schedule_imageDAO;
 	@Autowired
-	EventScheduleImageFaceDAO event_schedule_image_faceDAO;
+	YHEventScheduleImageFaceDAO event_schedule_image_faceDAO;
 	
 	public void updateEventScheduleImageFaceByGroupId(int group_id)
 	{

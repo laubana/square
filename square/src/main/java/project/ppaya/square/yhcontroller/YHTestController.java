@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import project.ppaya.square.yhdao.GroupAttendanceDAO;
-import project.ppaya.square.yhdao.GroupDAO;
+import project.ppaya.square.vo.Group;
+import project.ppaya.square.vo.GroupAttendance;
+import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
+import project.ppaya.square.yhdao.YHGroupDAO;
 import project.ppaya.square.yhutil.UserFormUtil;
-import project.ppaya.square.yhvo.Group;
-import project.ppaya.square.yhvo.GroupAttendance;
 
 /**
  * Handles requests for the application home page.
@@ -29,9 +29,9 @@ public class YHTestController
 	UserFormUtil user_formUtil;
 	
 	@Autowired
-	GroupDAO groupDAO;
+	YHGroupDAO groupDAO;
 	@Autowired
-	GroupAttendanceDAO group_attendanceDAO;
+	YHGroupAttendanceDAO group_attendanceDAO;
 	
 	@RequestMapping(value = "test_myPage", method = RequestMethod.GET)
 	public void test()

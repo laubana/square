@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="project.ppaya.square.yhmapper.YHEventMapper">
+<select id="selectEventByGroupId" parameterType="string" resultType="Event">
+SELECT
+	*
+FROM
+	TABLE_E
+WHERE
+	GROUP_ID = #{group_id}
+</select>
+<select id="selectEventByGroupIdList" parameterType="list" resultType="Event">
+SELECT
+	*
+FROM
+	TABLE_E
+WHERE
+	1 = 0
+	<foreach item="group_id" collection="list" open="OR" separator="OR">
+		GROUP_ID = #{group_id}
+	</foreach>
+</select>
+<select id="getEventIdByGroupId" parameterType="int" resultType="int">
+SELECT DISTINCT
+	EVENT_ID
+FROM
+	TABLE_E
+WHERE
+	GROUP_ID = #{group_id}
+</select>
+<select id="getEventIdByGroupIdList" parameterType="list" resultType="int">
+SELECT DISTINCT
+	EVENT_ID
+FROM
+	TABLE_E
+WHERE
+	1 = 0
+	<foreach item="group_id" collection="list" open="OR" separator="OR">
+		GROUP_ID = #{group_id}
+	</foreach>
+</select>
+</mapper>

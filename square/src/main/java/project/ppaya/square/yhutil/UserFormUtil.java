@@ -8,43 +8,43 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import project.ppaya.square.yhdao.AlbumDAO;
-import project.ppaya.square.yhdao.EventDAO;
-import project.ppaya.square.yhdao.EventScheduleAttendanceDAO;
-import project.ppaya.square.yhdao.EventScheduleDAO;
-import project.ppaya.square.yhdao.EventScheduleImageDAO;
-import project.ppaya.square.yhdao.EventScheduleImageFaceDAO;
-import project.ppaya.square.yhdao.GroupAttendanceDAO;
-import project.ppaya.square.yhdao.GroupDAO;
-import project.ppaya.square.yhdao.UserDAO;
-import project.ppaya.square.yhvo.Event;
-import project.ppaya.square.yhvo.EventSchedule;
-import project.ppaya.square.yhvo.EventScheduleImage;
-import project.ppaya.square.yhvo.Group;
-import project.ppaya.square.yhvo.Reference;
-import project.ppaya.square.yhvo.User;
+import project.ppaya.square.vo.Event;
+import project.ppaya.square.vo.EventSchedule;
+import project.ppaya.square.vo.EventScheduleImage;
+import project.ppaya.square.vo.Group;
+import project.ppaya.square.vo.Reference;
+import project.ppaya.square.vo.User;
+import project.ppaya.square.yhdao.YHAlbumDAO;
+import project.ppaya.square.yhdao.YHEventDAO;
+import project.ppaya.square.yhdao.YHEventScheduleAttendanceDAO;
+import project.ppaya.square.yhdao.YHEventScheduleDAO;
+import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
+import project.ppaya.square.yhdao.YHEventScheduleImageFaceDAO;
+import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
+import project.ppaya.square.yhdao.YHGroupDAO;
+import project.ppaya.square.yhdao.YHUserDAO;
 
 @Repository
 public class UserFormUtil
 {
 	@Autowired
-	UserDAO userDAO;
+	YHUserDAO userDAO;
 	@Autowired
-	EventDAO eventDAO;
+	YHEventDAO eventDAO;
 	@Autowired
-	EventScheduleAttendanceDAO event_schedule_attendanceDAO;
+	YHEventScheduleAttendanceDAO event_schedule_attendanceDAO;
 	@Autowired
-	EventScheduleDAO event_scheduleDAO;
+	YHEventScheduleDAO event_scheduleDAO;
 	@Autowired
-	EventScheduleImageDAO event_schedule_imageDAO;
+	YHEventScheduleImageDAO event_schedule_imageDAO;
 	@Autowired
-	EventScheduleImageFaceDAO event_schedule_image_faceDAO;
+	YHEventScheduleImageFaceDAO event_schedule_image_faceDAO;
 	@Autowired
-	GroupAttendanceDAO group_attendanceDAO;
+	YHGroupAttendanceDAO group_attendanceDAO;
 	@Autowired
-	GroupDAO groupDAO;
+	YHGroupDAO groupDAO;
 	@Autowired
-	AlbumDAO albumDAO;
+	YHAlbumDAO albumDAO;
 	@Autowired
 	MSFaceUtil ms_faceUtil;
 	
@@ -66,8 +66,6 @@ public class UserFormUtil
 		
 		albumDAO.updateSelfByUserId(user_id);
 		
-		System.out.println("here");
-		
 		ArrayList<String> event_schedule_image_face_id_list = event_schedule_image_faceDAO.getEventScheduleImageFaceIdByEventScheduleImageIdList(event_schedule_image_id_list);
 		
 		ArrayList<String> similar_event_schedule_image_face_id = ms_faceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(event_schedule_image_face_id_list, ms_faceUtil.detectFace(Reference.file_path, image_id));
@@ -79,11 +77,6 @@ public class UserFormUtil
 	public ArrayList<Group> getGroupByUserId(String user_id)
 	{
 		ArrayList<Integer> group_id_list = group_attendanceDAO.getGroupIdByUserId(user_id);
-		
-		for(int i = 0; i < group_id_list.size(); i++)
-		{
-			System.out.println(group_id_list.get(i));
-		}
 		
 		return groupDAO.selectGroupByGroupIdList(group_id_list); 
 	}

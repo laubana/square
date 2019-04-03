@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import project.ppaya.square.yhdao.AlbumDAO;
-import project.ppaya.square.yhdao.EventDAO;
-import project.ppaya.square.yhdao.EventScheduleDAO;
-import project.ppaya.square.yhdao.EventScheduleImageDAO;
+import project.ppaya.square.vo.Album;
+import project.ppaya.square.yhdao.YHAlbumDAO;
+import project.ppaya.square.yhdao.YHEventDAO;
+import project.ppaya.square.yhdao.YHEventScheduleDAO;
+import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
 import project.ppaya.square.yhutil.UserFormUtil;
-import project.ppaya.square.yhvo.Album;
 
 @Controller
 public class UserFormAction
@@ -28,13 +28,13 @@ public class UserFormAction
 	@Autowired
 	UserFormUtil user_formUtil;
 	@Autowired
-	EventDAO eventDAO;
+	YHEventDAO eventDAO;
 	@Autowired
-	EventScheduleDAO event_scheduleDAO;
+	YHEventScheduleDAO event_scheduleDAO;
 	@Autowired
-	EventScheduleImageDAO event_schedule_imageDAO;
+	YHEventScheduleImageDAO event_schedule_imageDAO;
 	@Autowired
-	AlbumDAO albumDAO;
+	YHAlbumDAO albumDAO;
 	
 	@ResponseBody
 	@RequestMapping(value = "/getAlbumByEventGroupIdList", method = RequestMethod.POST)
