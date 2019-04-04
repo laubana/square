@@ -14,7 +14,7 @@ import project.ppaya.square.vo.Group;
 import project.ppaya.square.vo.GroupAttendance;
 import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
 import project.ppaya.square.yhdao.YHGroupDAO;
-import project.ppaya.square.yhutil.UserFormUtil;
+import project.ppaya.square.yhutil.YHUserFormUtil;
 
 /**
  * Handles requests for the application home page.
@@ -26,7 +26,7 @@ public class YHTestController
 	private static final Logger logger = LoggerFactory.getLogger(YHTestController.class);
 	
 	@Autowired
-	UserFormUtil user_formUtil;
+	YHUserFormUtil user_formUtil;
 	
 	@Autowired
 	YHGroupDAO groupDAO;

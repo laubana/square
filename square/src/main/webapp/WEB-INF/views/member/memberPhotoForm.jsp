@@ -140,27 +140,28 @@ label img {
 									<h3 align="center" style="color:maroon;">얼굴인식</h3>	
 									</li>
 								</ul>
-						
-						<c:forEach var="image" items="${image_list}">
+			
+						<c:forEach var="image" items="${event_schedule_image_list}">
 							<article class="col-6 col-12-xsmall work-item">
 								<input type="checkbox" id="albumCheckbox${image.event_schedule_image_id}" />
 								<label for="albumCheckbox${image.event_schedule_image_id}">
 								<img src="resources/image/${image.event_schedule_image_id}" alt="" />
 								</label>
 								<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Magna sed consequat tempus</h3>
+								TOTAL</h3>
 								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
 							</article>
 						</c:forEach>
-						<c:forEach var="image" items="${self_image_list}">
+						
+						<c:forEach var="image" items="${self_event_schedule_image_list}">
 							<article class="col-6 col-12-xsmall work-item">
 								<input type="checkbox" id="self_albumCheckbox${image.event_schedule_image_id}" />
 								<label for="self_albumCheckbox${image.event_schedule_image_id}">
 								<img src="resources/image/${image.event_schedule_image_id}" alt="" />
 								</label>
 								<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Magna sed consequat tempus</h3>
+								SELF</h3>
 								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
 							</article>

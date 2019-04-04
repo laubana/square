@@ -1,14 +1,15 @@
-package project.ppaya.square.yhcontroller;
+package project.ppaya.square.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-
 /**
  * Handles requests for the application home page.
  */
 @Controller
-public class YHEventController
+public class UserScheduleController
 {	
-	private static final Logger logger = LoggerFactory.getLogger(YHEventController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserScheduleController.class);
+	
+	
 }

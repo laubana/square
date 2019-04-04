@@ -31,7 +31,7 @@ import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
 import project.ppaya.square.yhdao.YHEventScheduleImageFaceDAO;
 
 @Repository
-public class MSFaceUtil
+public class YHMSFaceUtil
 {
 	@Autowired
 	YHEventDAO eventDAO;
@@ -78,7 +78,7 @@ public class MSFaceUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = MSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -97,7 +97,7 @@ public class MSFaceUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = MSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -150,7 +150,7 @@ public class MSFaceUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = MSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -169,7 +169,7 @@ public class MSFaceUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = MSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -214,7 +214,7 @@ public class MSFaceUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = MSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -233,7 +233,7 @@ public class MSFaceUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = MSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -278,7 +278,7 @@ public class MSFaceUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = MSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -297,7 +297,7 @@ public class MSFaceUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = MSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -334,7 +334,7 @@ public class MSFaceUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = MSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -353,7 +353,7 @@ public class MSFaceUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = MSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -390,7 +390,7 @@ public class MSFaceUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = MSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -409,7 +409,7 @@ public class MSFaceUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = MSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -426,7 +426,7 @@ public class MSFaceUtil
 			}
 		}
 	}
-	public static ArrayList<String> getSimilarEventScheduleImageFaceIdListByFaceId(ArrayList<String> face_id_list, String face_id)
+	public ArrayList<String> getSimilarEventScheduleImageFaceIdListByFaceId(ArrayList<String> face_id_list, String face_id)
 	{
 		ArrayList<String> similar_event_schedule_image_face_id_list = new ArrayList<>();
 		String result = null;
@@ -442,9 +442,6 @@ public class MSFaceUtil
 		}
 		temp += "\"" + face_id_list.get(face_id_list.size() - 1) + "\"";
 		temp += "]";
-
-        System.out.println(face_id);
-        System.out.println(temp);
         
 		HttpClient httpclient = HttpClients.createDefault();
 		
@@ -485,7 +482,7 @@ public class MSFaceUtil
             return null;
         }
 	}
-	public static String getSimilarEventScheduleImageFaceListByFaceId(ArrayList<String> face_id_list, String face_id)
+	public String getSimilarEventScheduleImageFaceListByFaceId(ArrayList<String> face_id_list, String face_id)
 	{
 		String temp = "";
 		temp += "[";
@@ -525,7 +522,7 @@ public class MSFaceUtil
             return error.getMessage();
         }
 	}
-	public static String getSimilarFace(String list_id, String face_id)
+	public String getSimilarFace(String list_id, String face_id)
 	{		
 		HttpClient httpclient = HttpClients.createDefault();
 		
@@ -554,7 +551,7 @@ public class MSFaceUtil
             return error.getMessage();
         }
 	}
-	public static String detectFace(String path, String file)
+	public String detectFace(String path, String file)
 	{
 		HttpClient httpclient = HttpClients.createDefault();
 		
@@ -580,7 +577,7 @@ public class MSFaceUtil
             return error.getMessage();
         }
 	}
-	public static String insertFace(String list_id, String path, String file)
+	public String insertFace(String list_id, String path, String file)
 	{
 		HttpClient httpclient = HttpClients.createDefault();
 		
@@ -604,7 +601,7 @@ public class MSFaceUtil
 		    return error.getMessage();
 		}
 	}
-	public static String insertFace(String list_id, String path, String file, int left, int top, int width, int height)
+	public String insertFace(String list_id, String path, String file, int left, int top, int width, int height)
 	{
 		HttpClient httpclient = HttpClients.createDefault();
 		
@@ -630,7 +627,7 @@ public class MSFaceUtil
 		    return error.getMessage();
 		}
 	}
-	public static String getFaceList(String id)
+	public String getFaceList(String id)
 	{
 		HttpClient httpclient = HttpClients.createDefault();
 		
@@ -651,7 +648,7 @@ public class MSFaceUtil
 		    return error.getMessage();
 		}
 	}
-	public static String deleteFaceList(String id)
+	public String deleteFaceList(String id)
 	{
 		HttpClient httpclient = HttpClients.createDefault();
 		
@@ -672,7 +669,7 @@ public class MSFaceUtil
 		    return error.getMessage();
 		}
 	}
-	public static String createFaceList(String id, String name)
+	public String createFaceList(String id, String name)
 	{
 		HttpClient httpclient = HttpClients.createDefault();
 		
@@ -696,7 +693,7 @@ public class MSFaceUtil
 		    return error.getMessage();
 		}
 	}
-	public static String getMultipleFaceList()
+	public String getMultipleFaceList()
 	{
 		HttpClient httpclient = HttpClients.createDefault();
 		

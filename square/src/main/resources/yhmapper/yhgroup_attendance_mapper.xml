@@ -4,6 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHGroupAttendanceMapper">
+<select id="selectGroupAttendanceByGroupId" parameterType="int" resultType="GroupAttendance">
+SELECT
+	*
+FROM
+	TABLE_GA
+WHERE
+	GROUP_ID = #{group_id}
+</select>
 <select id="selectGroupAttendanceByUserId" parameterType="string" resultType="GroupAttendance">
 SELECT
 	*
