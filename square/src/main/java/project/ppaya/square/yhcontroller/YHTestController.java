@@ -1,9 +1,12 @@
 package project.ppaya.square.yhcontroller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.apache.commons.fileupload.MultipartStream;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -11,6 +14,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
@@ -20,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import project.ppaya.square.vo.Group;
 import project.ppaya.square.vo.Reference;
@@ -66,10 +71,7 @@ public class YHTestController
 
             if (httpEntity != null) 
             {
-            	accessToken = EntityUtils.toString(httpEntity);
-            	System.out.println(accessToken);
-            	System.out.println(accessToken.replaceAll("\"", ""));
-            	
+            	accessToken = EntityUtils.toString(httpEntity).replaceAll("\"", "");            	
             }
         }
         catch(Exception error){error.printStackTrace();}
@@ -78,9 +80,9 @@ public class YHTestController
 
         try
         {
-            URIBuilder uriBuilder = new URIBuilder("https://api.videoindexer.ai/trial/Accounts/"+ Reference.ms_video_index_id +"/Videos?name=" + (new Date()).getTime() + "&accessToken=" + accessToken + "\"");
+            URIBuilder uriBuilder = new URIBuilder("https://api.videoindexer.ai/trial/Accounts/"+ Reference.ms_video_index_id +"/Videos?name=" + (new Date()).getTime() + "&accessToken=" + accessToken);
 
-            uriBuilder.setParameter("privacy", "Private");
+            uriBuilder.setParameter("privacy", "Private");/*
             uriBuilder.setParameter("priority", "{string}");
             uriBuilder.setParameter("description", "{string}");
             uriBuilder.setParameter("partition", "{string}");
@@ -97,17 +99,21 @@ public class YHTestController
             uriBuilder.setParameter("personModelId", "{string}");
             uriBuilder.setParameter("sendSuccessEmail", "False");
             uriBuilder.setParameter("assetId", "{string}");
-            uriBuilder.setParameter("brandsCategories", "{string}");
+            uriBuilder.setParameter("brandsCategories", "{string}");*/
 
             HttpPost httpPost = new HttpPost(uriBuilder.build());
-            
-            httpPost.setHeader("Content-Type", "multipart/form-data");
 
-            StringEntity reqEntity = new StringEntity("{body}");
-            httpPost.setEntity(reqEntity);
+	        
+            MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
+            
+            multipartEntityBuilder.addBinaryBody("film2", new File(Reference.file_path + "\\" + "test.mp4"));
+            
+            HttpEntity httpEntity = multipartEntityBuilder.build();
+            
+            httpPost.setEntity(httpEntity);
 
             HttpResponse response = httpClient.execute(httpPost);
-            HttpEntity httpEntity = response.getEntity();
+            httpEntity = response.getEntity();
 
             if (httpEntity != null) 
             {
