@@ -443,7 +443,7 @@ public class YHMSFaceUtil
 		temp += "\"" + face_id_list.get(face_id_list.size() - 1) + "\"";
 		temp += "]";
         
-		HttpClient httpclient = HttpClients.createDefault();
+		HttpClient httpClient = HttpClients.createDefault();
 		
         try
         {			
@@ -461,7 +461,7 @@ public class YHMSFaceUtil
             				"\"maxNumOfCandidatesReturned\":1000" +
             		"}"));
             
-            HttpResponse httpResponse = httpclient.execute(httpPost);
+            HttpResponse httpResponse = httpClient.execute(httpPost);
             
             result = EntityUtils.toString(httpResponse.getEntity()).trim();
 
@@ -495,7 +495,7 @@ public class YHMSFaceUtil
 		temp += "\"" + face_id_list.get(face_id_list.size() - 1) + "\"";
 		temp += "]";
 		
-		HttpClient httpclient = HttpClients.createDefault();
+		HttpClient httpClient = HttpClients.createDefault();
 		
         try
         {			
@@ -513,7 +513,7 @@ public class YHMSFaceUtil
             				"\"maxNumOfCandidatesReturned\":1000" +
             		"}"));
             
-            HttpResponse httpResponse = httpclient.execute(httpPost);
+            HttpResponse httpResponse = httpClient.execute(httpPost);
             
             return EntityUtils.toString(httpResponse.getEntity()).trim();
         }
@@ -524,7 +524,7 @@ public class YHMSFaceUtil
 	}
 	public String getSimilarFace(String list_id, String face_id)
 	{		
-		HttpClient httpclient = HttpClients.createDefault();
+		HttpClient httpClient = HttpClients.createDefault();
 		
         try
         {			
@@ -542,7 +542,7 @@ public class YHMSFaceUtil
             				"\"maxNumOfCandidatesReturned\":1000" +
             		"}"));
             
-            HttpResponse httpResponse = httpclient.execute(httpPost);
+            HttpResponse httpResponse = httpClient.execute(httpPost);
             
             return EntityUtils.toString(httpResponse.getEntity()).trim();
         }
@@ -553,7 +553,7 @@ public class YHMSFaceUtil
 	}
 	public String detectFace(String path, String file)
 	{
-		HttpClient httpclient = HttpClients.createDefault();
+		HttpClient httpClient = HttpClients.createDefault();
 		
         try
         {			
@@ -568,7 +568,7 @@ public class YHMSFaceUtil
             
             httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 
-            HttpResponse httpResponse = httpclient.execute(httpPost);
+            HttpResponse httpResponse = httpClient.execute(httpPost);
             
             return EntityUtils.toString(httpResponse.getEntity()).trim();
         }
@@ -579,7 +579,7 @@ public class YHMSFaceUtil
 	}
 	public String insertFace(String list_id, String path, String file)
 	{
-		HttpClient httpclient = HttpClients.createDefault();
+		HttpClient httpClient = HttpClients.createDefault();
 		
 		try
 		{
@@ -592,7 +592,7 @@ public class YHMSFaceUtil
 		    
 		    httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 		    
-		    HttpResponse httpResponse = httpclient.execute(httpPost);
+		    HttpResponse httpResponse = httpClient.execute(httpPost);
 			
 			return EntityUtils.toString(httpResponse.getEntity()).trim();
 		}
@@ -603,7 +603,7 @@ public class YHMSFaceUtil
 	}
 	public String insertFace(String list_id, String path, String file, int left, int top, int width, int height)
 	{
-		HttpClient httpclient = HttpClients.createDefault();
+		HttpClient httpClient = HttpClients.createDefault();
 		
 		try
 		{
@@ -618,7 +618,7 @@ public class YHMSFaceUtil
 		    
 		    httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 		    
-		    HttpResponse httpResponse = httpclient.execute(httpPost);
+		    HttpResponse httpResponse = httpClient.execute(httpPost);
 			
 			return EntityUtils.toString(httpResponse.getEntity()).trim();
 		}
@@ -629,7 +629,7 @@ public class YHMSFaceUtil
 	}
 	public String getFaceList(String id)
 	{
-		HttpClient httpclient = HttpClients.createDefault();
+		HttpClient httpClient = HttpClients.createDefault();
 		
 		try
 		{			
@@ -639,7 +639,7 @@ public class YHMSFaceUtil
 		    
 		    httpGet.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_key);
 		    
-		    HttpResponse httpResponse = httpclient.execute(httpGet);
+		    HttpResponse httpResponse = httpClient.execute(httpGet);
 			
 			return EntityUtils.toString(httpResponse.getEntity()).trim();
 		}
@@ -650,7 +650,7 @@ public class YHMSFaceUtil
 	}
 	public String deleteFaceList(String id)
 	{
-		HttpClient httpclient = HttpClients.createDefault();
+		HttpClient httpClient = HttpClients.createDefault();
 		
 		try
 		{			
@@ -660,7 +660,7 @@ public class YHMSFaceUtil
 		    
 		    httpDelete.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_key);
 		    
-		    HttpResponse httpResponse = httpclient.execute(httpDelete);
+		    HttpResponse httpResponse = httpClient.execute(httpDelete);
 			
 			return EntityUtils.toString(httpResponse.getEntity()).trim();
 		}
@@ -671,7 +671,7 @@ public class YHMSFaceUtil
 	}
 	public String createFaceList(String id, String name)
 	{
-		HttpClient httpclient = HttpClients.createDefault();
+		HttpClient httpClient = HttpClients.createDefault();
 		
 		try
 		{			
@@ -684,7 +684,7 @@ public class YHMSFaceUtil
 		    
 		    httpPut.setEntity(new StringEntity("{\"name\":\"" + name + "\"}"));
 		    
-		    HttpResponse httpResponse = httpclient.execute(httpPut);
+		    HttpResponse httpResponse = httpClient.execute(httpPut);
 			
 			return EntityUtils.toString(httpResponse.getEntity()).trim();
 		}
@@ -695,7 +695,7 @@ public class YHMSFaceUtil
 	}
 	public String getMultipleFaceList()
 	{
-		HttpClient httpclient = HttpClients.createDefault();
+		HttpClient httpClient = HttpClients.createDefault();
 		
 		try
 		{			
@@ -705,7 +705,7 @@ public class YHMSFaceUtil
 			
 		    httpGet.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_key);
 		   
-		    HttpResponse httpResponse = httpclient.execute(httpGet);
+		    HttpResponse httpResponse = httpClient.execute(httpGet);
 		    
 		    return EntityUtils.toString(httpResponse.getEntity()).trim();
 		}

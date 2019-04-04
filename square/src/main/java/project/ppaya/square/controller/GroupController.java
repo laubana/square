@@ -77,7 +77,7 @@ public class GroupController
 		
 		ArrayList<String> user_id_list = yh_group_attendanceDAO.getUserIdByGroupId(group_id);
 		ArrayList<User> user_list = yh_userDAO.selectUserByUserIdList(user_id_list);
-		//Group의 Attendance List 전송
+		//Group의 User List 전송
 		request.addAttribute("user_list", user_list);
 		
 		ArrayList<GroupBoard> group_board_list = yh_group_boardDAO.selectGroupBoardByGroupId(group_id);
