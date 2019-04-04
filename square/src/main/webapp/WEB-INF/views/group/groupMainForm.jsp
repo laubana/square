@@ -15,7 +15,9 @@
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
 	</head>
 	<body class="is-preload" onload="fn_onload();">
-
+<c:forEach var="group_attendance" items="${group_attendance_list}">
+${group_attendance.user_id}
+</c:forEach>
 		<!-- Header -->
 			<section id="header">
 				<header>
