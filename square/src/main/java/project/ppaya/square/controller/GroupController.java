@@ -16,12 +16,14 @@ import project.ppaya.square.vo.EventScheduleImage;
 import project.ppaya.square.vo.Group;
 import project.ppaya.square.vo.GroupAttendance;
 import project.ppaya.square.vo.GroupBoard;
+import project.ppaya.square.vo.User;
 import project.ppaya.square.yhdao.YHEventDAO;
 import project.ppaya.square.yhdao.YHEventScheduleDAO;
 import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
 import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
 import project.ppaya.square.yhdao.YHGroupBoardDAO;
 import project.ppaya.square.yhdao.YHGroupDAO;
+import project.ppaya.square.yhdao.YHUserDAO;
 
 @Repository
 @Controller
@@ -29,6 +31,8 @@ public class GroupController
 {	
 	private static final Logger logger = LoggerFactory.getLogger(GroupController.class);
 
+	@Autowired
+	YHUserDAO yh_userDAO;
 	@Autowired
 	YHGroupDAO yh_groupDAO;
 	@Autowired
@@ -71,9 +75,10 @@ public class GroupController
 		//Group의 Image List 전송
 		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
 		
-		ArrayList<GroupAttendance> group_attendance_list = yh_group_attendanceDAO.selectGroupAttendanceByGroupId(group_id);
+		ArrayList<String> user_id_list = yh_group_attendanceDAO.getUserIdByGroupId(group_id);
+		ArrayList<User> user_list = yh_userDAO.selectUserByUserIdList(user_id_list);
 		//Group의 Attendance List 전송
-		request.addAttribute("group_attendance_list", group_attendance_list);
+		request.addAttribute("user_list", user_list);
 		
 		ArrayList<GroupBoard> group_board_list = yh_group_boardDAO.selectGroupBoardByGroupId(group_id);
 		//Group의 Board List 전송

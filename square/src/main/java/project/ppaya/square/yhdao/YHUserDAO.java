@@ -1,5 +1,7 @@
 package project.ppaya.square.yhdao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,6 +28,20 @@ public class YHUserDAO
 		catch(Exception error){error.printStackTrace();}
 		
 		return user;
+	}
+	public ArrayList<User> selectUserByUserIdList(ArrayList<String> user_id_list)
+	{
+		ArrayList<User> user_list = null;
+
+		YHUserMapper mapper = sqlSession.getMapper(YHUserMapper.class);
+		
+		try
+		{
+			user_list = mapper.selectUserByUserIdList(user_id_list);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return user_list;
 	}
 }
 
