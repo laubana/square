@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import project.ppaya.square.shdao.SH_DAO_User;
 import project.ppaya.square.vo.Album;
 import project.ppaya.square.vo.Event;
 import project.ppaya.square.vo.EventSchedule;
@@ -80,6 +83,25 @@ public class UserController {
 
 		return "member/loginForm";
 	}
+	
+	@RequestMapping(value = "login", method = RequestMethod.POST)
+	public String loginCheck(
+			HttpSession session
+			, Model model
+			, String email
+			, String password ){
+		logger.debug("지나감");
+		SH_DAO_User udao = new SH_DAO_User();
+		int check = udao.loginCheck(email, password);
+		if (check == 1) {
+			session.setAttribute("login_email", email);
+		} else{
+			model.addAttribute("login_check","fail");
+			
+		}
+	
+	return "main";
+}
 	
 	@RequestMapping(value = "myPage", method = RequestMethod.GET)
 	public String myPageForm(Model request)
