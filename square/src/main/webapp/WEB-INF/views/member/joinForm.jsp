@@ -48,7 +48,7 @@ input[type="submit"]
 <body>
 						<!-- Contact -->
 								<h2>join</h2>
-								 <img src="resources/join/images/pic03.jpg" alt="" />
+								 <img src="resources/Join/images/pic03.jpg" alt="" />
 									<form>
 									<table class="joinTable">
 										<tr>
@@ -99,6 +99,6 @@ input[type="submit"]
 
 								
 
-	<script src="resources/join/assets/js/jquery.min.js"></script>
+	<script src="resources/Join/assets/js/jquery.min.js"></script>
 </body>
 </html>
