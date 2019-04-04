@@ -28,7 +28,7 @@
 	rel="stylesheet">
 
 <!-- Main Stylesheet File -->
-<link href="resources/CreateGroup/css/style.css" rel="stylesheet">
+<link href="resources/GroupCreate/css/style.css" rel="stylesheet">
 
 <!-- =======================================================
     Template Name: Onassis
@@ -194,13 +194,13 @@
 		</div>
 
 		<!-- JavaScript Libraries -->
-		<script src="resources/CreateGroup/lib/jquery/jquery.min.js"></script>
-		<script src="resources/CreateGroup/lib/bootstrap/js/bootstrap.min.js"></script>
-		<script src="resources/CreateGroup/lib/php-mail-form/validate.js"></script>
-		<script src="resources/CreateGroup/lib/chart/chart.js"></script>
-		<script src="resources/CreateGroup/lib/easing/easing.min.js"></script>
+		<script src="resources/GroupCreate/lib/jquery/jquery.min.js"></script>
+		<script src="resources/GroupCreate/lib/bootstrap/js/bootstrap.min.js"></script>
+		<script src="resources/GroupCreate/lib/php-mail-form/validate.js"></script>
+		<script src="resources/GroupCreate/lib/chart/chart.js"></script>
+		<script src="resources/GroupCreate/lib/easing/easing.min.js"></script>
 
 		<!-- Template Main Javascript File -->
-		<script src="resources/CreateGroup/js/main.js"></script>
+		<script src="resources/GroupCreate/js/main.js"></script>
 </body>
 </html>
