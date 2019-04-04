@@ -12,4 +12,15 @@ FROM
 WHERE
 	USER_ID = #{user_id}
 </select>
+<select id="selectUserByUserIdList" parameterType="list" resultType="User">
+SELECT
+	*
+FROM
+	TABLE_U
+WHERE
+	1 = 0
+	<foreach item="user_id" collection="list" open="OR" separator="OR">
+		USER_ID = #{user_id}
+	</foreach>
+</select>
 </mapper>
