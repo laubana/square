@@ -9,6 +9,5 @@ public interface SH_Mapper_User {
 
 	
 	public User getUserByEmail(String email);
-	public ArrayList<Group> getGroupByUser(String user);
-	
+
 }

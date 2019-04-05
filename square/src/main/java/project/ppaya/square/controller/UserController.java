@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import project.ppaya.square.shdao.SH_DAO_Group;
 import project.ppaya.square.shdao.SH_DAO_User;
 import project.ppaya.square.vo.EventScheduleImage;
 import project.ppaya.square.vo.Group;
@@ -58,6 +59,8 @@ public class UserController {
 	YHAlbumDAO yh_albumDAO;
 	@Autowired
 	SH_DAO_User sh_udao;
+	@Autowired
+	SH_DAO_Group sh_gdao;
 	
 	@RequestMapping(value = "joinForm", method = RequestMethod.GET)
 	public String joinForm()
@@ -90,7 +93,7 @@ public class UserController {
 			, String email
 			, String password ){
 		logger.debug("지나감");
-		SH_DAO_User sh_udao = new SH_DAO_User();
+		email = "id1";
 		int check = sh_udao.loginCheck(email, password);
 		if (check == 1) {
 			session.setAttribute("login_email", email);
@@ -106,7 +109,7 @@ public class UserController {
 	public String sh_myPageForm(Model request)
 	{
 		String userid = "id1"; //세현: 나중에는 세션에서 id 받아서 넣기. 일단 임시로 넣어 둠
-		ArrayList<Group> glist = sh_udao.getGroupByUser(userid);
+		ArrayList<Group> glist = sh_gdao.getGroupByUser(userid);
 		request.addAttribute("glist",glist);
 		return "member/myPageForm";
 	}

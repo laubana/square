@@ -20,7 +20,7 @@
 	</typeAliases>
 	<mappers>
 		<mapper resource="shmapper/sh_mapper_user.xml" />
-		
+		<mapper resource="shmapper/sh_mapper_group.xml" />
 		<mapper resource="yhmapper/yhuser_mapper.xml" />
 		<mapper resource="yhmapper/yhuser_schedule_mapper.xml" />
 		<mapper resource="yhmapper/yhalbum_mapper.xml" />
