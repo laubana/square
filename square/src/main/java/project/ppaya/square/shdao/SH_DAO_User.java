@@ -1,10 +1,16 @@
 package project.ppaya.square.shdao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import project.ppaya.square.shmapper.SH_Mapper_User;
+import project.ppaya.square.vo.Group;
 import project.ppaya.square.vo.User;
 
+@Repository
 public class SH_DAO_User {
 	
 	
@@ -23,5 +29,10 @@ public int loginCheck(String email, String password){
 		return 0;
 	}
 }
+
+
+
+
+
 
 }

@@ -1,6 +1,5 @@
 package project.ppaya.square.controller;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -17,11 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import project.ppaya.square.shdao.SH_DAO_Group;
 import project.ppaya.square.shdao.SH_DAO_User;
-import project.ppaya.square.vo.Album;
-import project.ppaya.square.vo.Event;
-import project.ppaya.square.vo.EventSchedule;
-import project.ppaya.square.vo.EventScheduleAttendance;
 import project.ppaya.square.vo.EventScheduleImage;
 import project.ppaya.square.vo.Group;
 import project.ppaya.square.vo.Reference;
@@ -36,18 +32,12 @@ import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
 import project.ppaya.square.yhdao.YHGroupDAO;
 import project.ppaya.square.yhdao.YHUserDAO;
 import project.ppaya.square.yhutil.YHMSFaceUtil;
-import project.ppaya.square.yhutil.YHUserFormUtil;
 
 @Repository
 @Controller
 public class UserController {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
-	@Autowired
-	YHUserFormUtil yh_user_formUtil;
-	@Autowired
-	YHMSFaceUtil yh_ms_faceUtil;
 	
 	@Autowired
 	YHUserDAO yh_userDAO;
@@ -67,13 +57,25 @@ public class UserController {
 	YHGroupAttendanceDAO yh_group_attendanceDAO; 
 	@Autowired
 	YHAlbumDAO yh_albumDAO;
+	@Autowired
+	SH_DAO_User sh_udao;
+	@Autowired
+	SH_DAO_Group sh_gdao;
 	
 	@RequestMapping(value = "joinForm", method = RequestMethod.GET)
 	public String joinForm()
 	{
-		logger.info("로그인입니다!");
+		logger.info("join-get입니다!");
 
 		return "member/joinForm";
+	}
+	@RequestMapping(value = "joinForm", method = RequestMethod.POST)
+	public String joinForm2()
+	{
+		logger.info("join-post입니다!");
+		//세현: 현재 joinForm 에서 보내주는 값들에 대해, 팀 내의 논의가 필요하므로 일단 보류해놓고 나중에 계속 작업하겠음 
+		
+		return "main";
 	}
 	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
@@ -85,14 +87,14 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String loginCheck(
+	public String sh_loginCheck(
 			HttpSession session
 			, Model model
 			, String email
 			, String password ){
 		logger.debug("지나감");
-		SH_DAO_User udao = new SH_DAO_User();
-		int check = udao.loginCheck(email, password);
+		email = "id1";
+		int check = sh_udao.loginCheck(email, password);
 		if (check == 1) {
 			session.setAttribute("login_email", email);
 		} else{
@@ -104,10 +106,11 @@ public class UserController {
 }
 	
 	@RequestMapping(value = "myPage", method = RequestMethod.GET)
-	public String myPageForm(Model request)
+	public String sh_myPageForm(Model request)
 	{
-		//ArrayList<Group>
-		
+		String userid = "id1"; //세현: 나중에는 세션에서 id 받아서 넣기. 일단 임시로 넣어 둠
+		ArrayList<Group> glist = sh_gdao.getGroupByUser(userid);
+		request.addAttribute("glist",glist);
 		return "member/myPageForm";
 	}
 	
@@ -141,7 +144,7 @@ public class UserController {
 			{
 				yh_event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id(), (new Date()).getTime());
 				
-				result = yh_ms_faceUtil.detectFace(Reference.file_path, event_schedule_image_list.get(i).getEvent_schedule_image_id());
+				result = YHMSFaceUtil.detectFace(Reference.file_path, event_schedule_image_list.get(i).getEvent_schedule_image_id());
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -160,7 +163,7 @@ public class UserController {
 			{
 				yh_event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id(), (new Date()).getTime());
 				
-				result = yh_ms_faceUtil.detectFace(Reference.file_path, event_schedule_image_list.get(i).getEvent_schedule_image_id());
+				result = YHMSFaceUtil.detectFace(Reference.file_path, event_schedule_image_list.get(i).getEvent_schedule_image_id());
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -197,7 +200,7 @@ public class UserController {
 		
 		ArrayList<String> attend_event_schedule_image_face_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageFaceIdByEventScheduleImageIdList(attend_event_schedule_image_id_list);
 		
-		ArrayList<String> similar_event_schedule_image_face_id = yh_ms_faceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(attend_event_schedule_image_face_id_list, (new JSONArray(yh_ms_faceUtil.detectFace(Reference.file_path, image_id))).getJSONObject(0).getString("faceId")  );
+		ArrayList<String> similar_event_schedule_image_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(attend_event_schedule_image_face_id_list, (new JSONArray(YHMSFaceUtil.detectFace(Reference.file_path, image_id))).getJSONObject(0).getString("faceId")  );
 		
 		ArrayList<String> similar_event_schedule_image_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageIdByEventScheduleImageFaceIdList(similar_event_schedule_image_face_id);
 		
