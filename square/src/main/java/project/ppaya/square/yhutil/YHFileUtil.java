@@ -1,8 +1,10 @@
 package project.ppaya.square.yhutil;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Date;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -14,6 +16,34 @@ public class YHFileUtil
 	public static String getExt(String filename)
 	{
 		return filename.substring(filename.lastIndexOf('.') + 1);
+	}
+	public static String saveJpegFromBase64(String base64, String path)
+	{		
+		String filename = Long.toString((new Date()).getTime());
+		
+		File directory = new File(path);
+		if(!directory.isDirectory())
+		{
+			directory.mkdirs();
+		}
+		
+		int i = 0;
+		while(true)
+		{
+			File file = new File(path + "\\" + filename + "_" + Integer.toString(i) + ".jpeg");
+			if(!file.isFile()){break;}	
+			i++;
+		}
+		
+		try
+		{
+			FileOutputStream imageOutFile = new FileOutputStream(path + "\\" + filename + "_" + i + ".jpeg");
+	    	imageOutFile.write(Base64.decodeBase64(base64));
+	    	imageOutFile.close();
+	    	
+	    	return filename + "_" + i + ".jpeg";
+		}
+		catch(Exception error){error.printStackTrace(); return null;}
 	}
 	public static String saveFile(MultipartFile old_file, String path)
 	{

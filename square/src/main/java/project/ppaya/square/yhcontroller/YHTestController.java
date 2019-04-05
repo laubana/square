@@ -1,9 +1,8 @@
 package project.ppaya.square.yhcontroller;
 
-import java.io.FileOutputStream;
 import java.util.Date;
 
-import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.filefilter.RegexFileFilter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -17,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import project.ppaya.square.vo.EventScheduleVideo;
 import project.ppaya.square.vo.Reference;
 import project.ppaya.square.yhdao.YHEventScheduleVideoDAO;
+import project.ppaya.square.yhdao.YHEventScheduleVideoFaceDAO;
 import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
 import project.ppaya.square.yhdao.YHGroupDAO;
-import project.ppaya.square.yhutil.YHUserFormUtil;
+import project.ppaya.square.yhutil.YHFileUtil;
+import project.ppaya.square.yhutil.YHMSFaceUtil;
 import project.ppaya.square.yhutil.YHVideoIndexerUtil;
 
 /**
@@ -32,25 +33,20 @@ public class YHTestController
 	private static final Logger logger = LoggerFactory.getLogger(YHTestController.class);
 	
 	@Autowired
-	YHUserFormUtil yh_user_formUtil;
-	
-	@Autowired
 	YHGroupDAO yh_groupDAO;
 	@Autowired
 	YHGroupAttendanceDAO yh_group_attendanceDAO;
 	@Autowired
 	YHEventScheduleVideoDAO yh_event_schedule_videoDAO;
+	@Autowired
+	YHEventScheduleVideoFaceDAO yh_event_schedule_video_faceDAO;
 	
 	@RequestMapping(value = "yhtest", method = RequestMethod.GET)
 	public void test()
 	{
 		EventScheduleVideo event_schedule_video = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleVideoId("e37ca75893");
 		
-		if(event_schedule_video.getDetect_date() != null)
-		{
-			
-		}
-		else
+		if(event_schedule_video.getDetect_date() == null)
 		{
 			JSONObject jsonObject = new JSONObject(YHVideoIndexerUtil.getVideoIndex("e37ca75893"));
 			
@@ -60,22 +56,19 @@ public class YHTestController
 				
 				for(int i = 0; i < jsonArray.length(); i++)
 				{
-					String thumbnail_id = YHVideoIndexerUtil.getThumbnail("e37ca75893", jsonArray.getJSONObject(i).getString("thumbnailId"));
-					logger.debug(thumbnail_id);
-					try
-					{
-						String filename = Reference.file_path + "\\" + (new Date()).getTime() + ".jpeg";
-						FileOutputStream imageOutFile = new FileOutputStream(filename);
-			        	imageOutFile.write(Base64.decodeBase64(thumbnail_id));
-			        	imageOutFile.close();
-					}
-					catch(Exception error){error.printStackTrace();}
+					String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHVideoIndexerUtil.getThumbnail("e37ca75893", jsonArray.getJSONObject(i).getString("thumbnailId")), Reference.file_path + "\\test");
+					
+					yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(((new JSONArray(YHMSFaceUtil.detectFace(Reference.file_path + "\\test", event_schedule_video_image_id))).getJSONObject(0)).getString("faceId"), event_schedule_video_image_id, "e37ca75893", (new Date()).getTime());
 				}
 			}
 			else
 			{
 				logger.debug("Error");
 			}
+		}
+		else if(3600000 < (new Date()).getTime() - event_schedule_video.getDetect_date())
+		{
+			
 		}
 		//logger.debug("{}", YHVideoIndexerUtil.uploadVideo(Reference.file_path, "test.mp4"));
 		

@@ -1,0 +1,384 @@
+public void updateEventScheduleImageFaceByGroupId(int group_id)
+	{
+		String result = null;
+		JSONArray jsonArray = null;
+		JSONObject jsonObject = null;
+		
+		ArrayList<Event> event_list = eventDAO.selectEventByGroupId(group_id);
+		
+		ArrayList<Integer> event_id_list = new ArrayList<>();
+		for(int i = 0; i < event_list.size(); i++)
+		{
+			event_id_list.add(event_list.get(i).getEvent_id());
+		}
+		
+		ArrayList<EventSchedule> event_schedule_list = event_scheduleDAO.selectEventScheduleByEventIdList(event_id_list);
+		
+		ArrayList<Integer> event_schedule_id_list = new ArrayList<>();
+		for(int i = 0; i < event_schedule_list.size(); i++)
+		{
+			event_schedule_id_list.add(event_schedule_list.get(i).getEvent_schedule_id());
+		}
+		
+		ArrayList<EventScheduleImage> event_schedule_image_list = event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
+		
+		ArrayList<String> event_schedule_image_id_list = new ArrayList<>();
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			event_schedule_image_id_list.add(event_schedule_image_list.get(i).getEvent_schedule_image_id());
+		}
+		
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			if(event_schedule_image_list.get(i).getDetect_date() == null)
+			{
+				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
+				
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				jsonArray = new JSONArray(result);
+				
+				for(int j = 0; j < jsonArray.length(); j++)
+				{
+					jsonObject = jsonArray.getJSONObject(j);
+					
+					event_schedule_image_faceDAO.insertEventScheduleImageFace(jsonObject.getString("faceId"), event_schedule_image_id_list.get(i),
+							jsonObject.getJSONObject("faceRectangle").getInt("top"),
+							jsonObject.getJSONObject("faceRectangle").getInt("left"),
+							jsonObject.getJSONObject("faceRectangle").getInt("width"),
+							jsonObject.getJSONObject("faceRectangle").getInt("height")
+							);
+				}
+			}
+			else if(3600000 < (new Date()).getTime() - event_schedule_image_list.get(i).getDetect_date())
+			{
+				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
+				
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				jsonArray = new JSONArray(result);
+				
+				for(int j = 0; j < jsonArray.length(); j++)
+				{
+					jsonObject = jsonArray.getJSONObject(j);
+					
+					event_schedule_image_faceDAO.updateEventScheduleImageFaceIdByEventScheduleImageIdRectangle(jsonObject.getString("faceId"), event_schedule_image_id_list.get(i),
+							jsonObject.getJSONObject("faceRectangle").getInt("top"),
+							jsonObject.getJSONObject("faceRectangle").getInt("left"),
+							jsonObject.getJSONObject("faceRectangle").getInt("width"),
+							jsonObject.getJSONObject("faceRectangle").getInt("height")
+							);
+				}
+			}
+		}
+	}
+	public void updateEventScheduleImageFaceByGroupIdList(ArrayList<Integer> group_id_list)
+	{
+		String result = null;
+		JSONArray jsonArray = null;
+		JSONObject jsonObject = null;
+		
+		ArrayList<Event> event_list = eventDAO.selectEventByGroupIdList(group_id_list);
+		
+		ArrayList<Integer> event_id_list = new ArrayList<>();
+		for(int i = 0; i < event_list.size(); i++)
+		{
+			event_id_list.add(event_list.get(i).getEvent_id());
+		}
+		
+		ArrayList<EventSchedule> event_schedule_list = event_scheduleDAO.selectEventScheduleByEventIdList(event_id_list);
+		
+		ArrayList<Integer> event_schedule_id_list = new ArrayList<>();
+		for(int i = 0; i < event_schedule_list.size(); i++)
+		{
+			event_schedule_id_list.add(event_schedule_list.get(i).getEvent_schedule_id());
+		}
+		
+		ArrayList<EventScheduleImage> event_schedule_image_list = event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
+		
+		ArrayList<String> event_schedule_image_id_list = new ArrayList<>();
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			event_schedule_image_id_list.add(event_schedule_image_list.get(i).getEvent_schedule_image_id());
+		}
+		
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			if(event_schedule_image_list.get(i).getDetect_date() == null)
+			{
+				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
+				
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				jsonArray = new JSONArray(result);
+				
+				for(int j = 0; j < jsonArray.length(); j++)
+				{
+					jsonObject = jsonArray.getJSONObject(j);
+					
+					event_schedule_image_faceDAO.insertEventScheduleImageFace(jsonObject.getString("faceId"), event_schedule_image_id_list.get(i),
+							jsonObject.getJSONObject("faceRectangle").getInt("top"),
+							jsonObject.getJSONObject("faceRectangle").getInt("left"),
+							jsonObject.getJSONObject("faceRectangle").getInt("width"),
+							jsonObject.getJSONObject("faceRectangle").getInt("height")
+							);
+				}
+			}
+			else if(3600000 < (new Date()).getTime() - event_schedule_image_list.get(i).getDetect_date())
+			{
+				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
+				
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				jsonArray = new JSONArray(result);
+				
+				for(int j = 0; j < jsonArray.length(); j++)
+				{
+					jsonObject = jsonArray.getJSONObject(j);
+					
+					event_schedule_image_faceDAO.updateEventScheduleImageFaceIdByEventScheduleImageIdRectangle(jsonObject.getString("faceId"), event_schedule_image_id_list.get(i),
+							jsonObject.getJSONObject("faceRectangle").getInt("top"),
+							jsonObject.getJSONObject("faceRectangle").getInt("left"),
+							jsonObject.getJSONObject("faceRectangle").getInt("width"),
+							jsonObject.getJSONObject("faceRectangle").getInt("height")
+							);
+				}
+			}
+		}
+	}
+	public void updateEventScheduleImageFaceByEventId(int event_id)
+	{
+		String result = null;
+		JSONArray jsonArray = null;
+		JSONObject jsonObject = null;
+		
+		ArrayList<EventSchedule> event_schedule_list = event_scheduleDAO.selectEventScheduleByEventId(event_id);
+		
+		ArrayList<Integer> event_schedule_id_list = new ArrayList<>();
+		for(int i = 0; i < event_schedule_list.size(); i++)
+		{
+			event_schedule_id_list.add(event_schedule_list.get(i).getEvent_schedule_id());
+		}
+		
+		ArrayList<EventScheduleImage> event_schedule_image_list = event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
+		
+		ArrayList<String> event_schedule_image_id_list = new ArrayList<>();
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			event_schedule_image_id_list.add(event_schedule_image_list.get(i).getEvent_schedule_image_id());
+		}
+		
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			if(event_schedule_image_list.get(i).getDetect_date() == null)
+			{
+				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
+				
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				jsonArray = new JSONArray(result);
+				
+				for(int j = 0; j < jsonArray.length(); j++)
+				{
+					jsonObject = jsonArray.getJSONObject(j);
+					
+					event_schedule_image_faceDAO.insertEventScheduleImageFace(jsonObject.getString("faceId"), event_schedule_image_id_list.get(i),
+							jsonObject.getJSONObject("faceRectangle").getInt("top"),
+							jsonObject.getJSONObject("faceRectangle").getInt("left"),
+							jsonObject.getJSONObject("faceRectangle").getInt("width"),
+							jsonObject.getJSONObject("faceRectangle").getInt("height")
+							);
+				}
+			}
+			else if(3600000 < (new Date()).getTime() - event_schedule_image_list.get(i).getDetect_date())
+			{
+				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
+				
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				jsonArray = new JSONArray(result);
+				
+				for(int j = 0; j < jsonArray.length(); j++)
+				{
+					jsonObject = jsonArray.getJSONObject(j);
+					
+					event_schedule_image_faceDAO.updateEventScheduleImageFaceIdByEventScheduleImageIdRectangle(jsonObject.getString("faceId"), event_schedule_image_id_list.get(i),
+							jsonObject.getJSONObject("faceRectangle").getInt("top"),
+							jsonObject.getJSONObject("faceRectangle").getInt("left"),
+							jsonObject.getJSONObject("faceRectangle").getInt("width"),
+							jsonObject.getJSONObject("faceRectangle").getInt("height")
+							);
+				}
+			}
+		}
+	}
+	public void updateEventScheduleImageFaceByEventIdList(ArrayList<Integer> event_id_list)
+	{
+		String result = null;
+		JSONArray jsonArray = null;
+		JSONObject jsonObject = null;
+		
+		ArrayList<EventSchedule> event_schedule_list = event_scheduleDAO.selectEventScheduleByEventIdList(event_id_list);
+		
+		ArrayList<Integer> event_schedule_id_list = new ArrayList<>();
+		for(int i = 0; i < event_schedule_list.size(); i++)
+		{
+			event_schedule_id_list.add(event_schedule_list.get(i).getEvent_schedule_id());
+		}
+		
+		ArrayList<EventScheduleImage> event_schedule_image_list = event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
+		
+		ArrayList<String> event_schedule_image_id_list = new ArrayList<>();
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			event_schedule_image_id_list.add(event_schedule_image_list.get(i).getEvent_schedule_image_id());
+		}
+		
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			if(event_schedule_image_list.get(i).getDetect_date() == null)
+			{
+				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
+				
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				jsonArray = new JSONArray(result);
+				
+				for(int j = 0; j < jsonArray.length(); j++)
+				{
+					jsonObject = jsonArray.getJSONObject(j);
+					
+					event_schedule_image_faceDAO.insertEventScheduleImageFace(jsonObject.getString("faceId"), event_schedule_image_id_list.get(i),
+							jsonObject.getJSONObject("faceRectangle").getInt("top"),
+							jsonObject.getJSONObject("faceRectangle").getInt("left"),
+							jsonObject.getJSONObject("faceRectangle").getInt("width"),
+							jsonObject.getJSONObject("faceRectangle").getInt("height")
+							);
+				}
+			}
+			else if(3600000 < (new Date()).getTime() - event_schedule_image_list.get(i).getDetect_date())
+			{
+				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
+				
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				jsonArray = new JSONArray(result);
+				
+				for(int j = 0; j < jsonArray.length(); j++)
+				{
+					jsonObject = jsonArray.getJSONObject(j);
+					
+					event_schedule_image_faceDAO.updateEventScheduleImageFaceIdByEventScheduleImageIdRectangle(jsonObject.getString("faceId"), event_schedule_image_id_list.get(i),
+							jsonObject.getJSONObject("faceRectangle").getInt("top"),
+							jsonObject.getJSONObject("faceRectangle").getInt("left"),
+							jsonObject.getJSONObject("faceRectangle").getInt("width"),
+							jsonObject.getJSONObject("faceRectangle").getInt("height")
+							);
+				}
+			}
+		}
+	}
+	public void updateEventScheduleImageFaceByEventScheduleId(int event_schedule_id)
+	{
+		String result = null;
+		JSONArray jsonArray = null;
+		JSONObject jsonObject = null;
+		
+		ArrayList<EventScheduleImage> event_schedule_image_list = event_schedule_imageDAO.selectEventScheduleImageByEventScheduleId(event_schedule_id);
+		
+		ArrayList<String> event_schedule_image_id_list = new ArrayList<>();
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			event_schedule_image_id_list.add(event_schedule_image_list.get(i).getEvent_schedule_image_id());
+		}
+		
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			if(event_schedule_image_list.get(i).getDetect_date() == null)
+			{
+				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
+				
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				jsonArray = new JSONArray(result);
+				
+				for(int j = 0; j < jsonArray.length(); j++)
+				{
+					jsonObject = jsonArray.getJSONObject(j);
+					
+					event_schedule_image_faceDAO.insertEventScheduleImageFace(jsonObject.getString("faceId"), event_schedule_image_id_list.get(i),
+							jsonObject.getJSONObject("faceRectangle").getInt("top"),
+							jsonObject.getJSONObject("faceRectangle").getInt("left"),
+							jsonObject.getJSONObject("faceRectangle").getInt("width"),
+							jsonObject.getJSONObject("faceRectangle").getInt("height")
+							);
+				}
+			}
+			else if(3600000 < (new Date()).getTime() - event_schedule_image_list.get(i).getDetect_date())
+			{
+				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
+				
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				jsonArray = new JSONArray(result);
+				
+				for(int j = 0; j < jsonArray.length(); j++)
+				{
+					jsonObject = jsonArray.getJSONObject(j);
+					
+					event_schedule_image_faceDAO.updateEventScheduleImageFaceIdByEventScheduleImageIdRectangle(jsonObject.getString("faceId"), event_schedule_image_id_list.get(i),
+							jsonObject.getJSONObject("faceRectangle").getInt("top"),
+							jsonObject.getJSONObject("faceRectangle").getInt("left"),
+							jsonObject.getJSONObject("faceRectangle").getInt("width"),
+							jsonObject.getJSONObject("faceRectangle").getInt("height")
+							);
+				}
+			}
+		}
+	}
+	public void updateEventScheduleImageFaceByEventScheduleIdList(ArrayList<Integer> event_schedule_id_list)
+	{
+		String result = null;
+		JSONArray jsonArray = null;
+		JSONObject jsonObject = null;
+		
+		ArrayList<EventScheduleImage> event_schedule_image_list = event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
+		
+		ArrayList<String> event_schedule_image_id_list = new ArrayList<>();
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			event_schedule_image_id_list.add(event_schedule_image_list.get(i).getEvent_schedule_image_id());
+		}
+		
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			if(event_schedule_image_list.get(i).getDetect_date() == null)
+			{
+				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
+				
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				jsonArray = new JSONArray(result);
+				
+				for(int j = 0; j < jsonArray.length(); j++)
+				{
+					jsonObject = jsonArray.getJSONObject(j);
+					
+					event_schedule_image_faceDAO.insertEventScheduleImageFace(jsonObject.getString("faceId"), event_schedule_image_id_list.get(i),
+							jsonObject.getJSONObject("faceRectangle").getInt("top"),
+							jsonObject.getJSONObject("faceRectangle").getInt("left"),
+							jsonObject.getJSONObject("faceRectangle").getInt("width"),
+							jsonObject.getJSONObject("faceRectangle").getInt("height")
+							);
+				}
+			}
+			else if(3600000 < (new Date()).getTime() - event_schedule_image_list.get(i).getDetect_date())
+			{
+				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
+				
+				result = detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				jsonArray = new JSONArray(result);
+				
+				for(int j = 0; j < jsonArray.length(); j++)
+				{
+					jsonObject = jsonArray.getJSONObject(j);
+					
+					event_schedule_image_faceDAO.updateEventScheduleImageFaceIdByEventScheduleImageIdRectangle(jsonObject.getString("faceId"), event_schedule_image_id_list.get(i),
+							jsonObject.getJSONObject("faceRectangle").getInt("top"),
+							jsonObject.getJSONObject("faceRectangle").getInt("left"),
+							jsonObject.getJSONObject("faceRectangle").getInt("width"),
+							jsonObject.getJSONObject("faceRectangle").getInt("height")
+							);
+				}
+			}
+		}
+	}

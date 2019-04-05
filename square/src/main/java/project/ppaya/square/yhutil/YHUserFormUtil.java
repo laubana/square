@@ -45,8 +45,6 @@ public class YHUserFormUtil
 	YHGroupDAO groupDAO;
 	@Autowired
 	YHAlbumDAO albumDAO;
-	@Autowired
-	YHMSFaceUtil ms_faceUtil;
 	
 	public void updateAlbumByUserId(String user_id)
 	{
@@ -68,7 +66,7 @@ public class YHUserFormUtil
 		
 		ArrayList<String> event_schedule_image_face_id_list = event_schedule_image_faceDAO.getEventScheduleImageFaceIdByEventScheduleImageIdList(event_schedule_image_id_list);
 		
-		ArrayList<String> similar_event_schedule_image_face_id = ms_faceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(event_schedule_image_face_id_list, ms_faceUtil.detectFace(Reference.file_path, image_id));
+		ArrayList<String> similar_event_schedule_image_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(event_schedule_image_face_id_list, YHMSFaceUtil.detectFace(Reference.file_path, image_id));
 		
 		ArrayList<String> similar_event_schedule_image_id_list = event_schedule_image_faceDAO.getEventScheduleImageIdByEventScheduleImageFaceIdList(similar_event_schedule_image_face_id);
 		
@@ -120,7 +118,7 @@ public class YHUserFormUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = ms_faceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = YHMSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -139,7 +137,7 @@ public class YHUserFormUtil
 			{
 				event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_id_list.get(i), (new Date()).getTime());
 				
-				result = ms_faceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
+				result = YHMSFaceUtil.detectFace(Reference.file_path, event_schedule_image_id_list.get(i));
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)

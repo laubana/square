@@ -1,6 +1,5 @@
 package project.ppaya.square.controller;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,10 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import project.ppaya.square.shdao.SH_DAO_User;
-import project.ppaya.square.vo.Album;
-import project.ppaya.square.vo.Event;
-import project.ppaya.square.vo.EventSchedule;
-import project.ppaya.square.vo.EventScheduleAttendance;
 import project.ppaya.square.vo.EventScheduleImage;
 import project.ppaya.square.vo.Group;
 import project.ppaya.square.vo.Reference;
@@ -36,18 +31,12 @@ import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
 import project.ppaya.square.yhdao.YHGroupDAO;
 import project.ppaya.square.yhdao.YHUserDAO;
 import project.ppaya.square.yhutil.YHMSFaceUtil;
-import project.ppaya.square.yhutil.YHUserFormUtil;
 
 @Repository
 @Controller
 public class UserController {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
-	@Autowired
-	YHUserFormUtil yh_user_formUtil;
-	@Autowired
-	YHMSFaceUtil yh_ms_faceUtil;
 	
 	@Autowired
 	YHUserDAO yh_userDAO;
@@ -152,7 +141,7 @@ public class UserController {
 			{
 				yh_event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id(), (new Date()).getTime());
 				
-				result = yh_ms_faceUtil.detectFace(Reference.file_path, event_schedule_image_list.get(i).getEvent_schedule_image_id());
+				result = YHMSFaceUtil.detectFace(Reference.file_path, event_schedule_image_list.get(i).getEvent_schedule_image_id());
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -171,7 +160,7 @@ public class UserController {
 			{
 				yh_event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id(), (new Date()).getTime());
 				
-				result = yh_ms_faceUtil.detectFace(Reference.file_path, event_schedule_image_list.get(i).getEvent_schedule_image_id());
+				result = YHMSFaceUtil.detectFace(Reference.file_path, event_schedule_image_list.get(i).getEvent_schedule_image_id());
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -208,7 +197,7 @@ public class UserController {
 		
 		ArrayList<String> attend_event_schedule_image_face_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageFaceIdByEventScheduleImageIdList(attend_event_schedule_image_id_list);
 		
-		ArrayList<String> similar_event_schedule_image_face_id = yh_ms_faceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(attend_event_schedule_image_face_id_list, (new JSONArray(yh_ms_faceUtil.detectFace(Reference.file_path, image_id))).getJSONObject(0).getString("faceId")  );
+		ArrayList<String> similar_event_schedule_image_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(attend_event_schedule_image_face_id_list, (new JSONArray(YHMSFaceUtil.detectFace(Reference.file_path, image_id))).getJSONObject(0).getString("faceId")  );
 		
 		ArrayList<String> similar_event_schedule_image_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageIdByEventScheduleImageFaceIdList(similar_event_schedule_image_face_id);
 		

@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,13 +21,12 @@ import project.ppaya.square.yhdao.YHEventScheduleDAO;
 import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
 import project.ppaya.square.yhutil.YHUserFormUtil;
 
+@Repository
 @Controller
 public class YHUserFormAction
 {	
 	private static final Logger logger = LoggerFactory.getLogger(YHUserFormAction.class);
-	
-	@Autowired
-	YHUserFormUtil user_formUtil;
+
 	@Autowired
 	YHEventDAO eventDAO;
 	@Autowired
