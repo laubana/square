@@ -67,13 +67,23 @@ public class UserController {
 	YHGroupAttendanceDAO yh_group_attendanceDAO; 
 	@Autowired
 	YHAlbumDAO yh_albumDAO;
+	@Autowired
+	SH_DAO_User sh_udao;
 	
 	@RequestMapping(value = "joinForm", method = RequestMethod.GET)
 	public String joinForm()
 	{
-		logger.info("로그인입니다!");
+		logger.info("join-get입니다!");
 
 		return "member/joinForm";
+	}
+	@RequestMapping(value = "joinForm", method = RequestMethod.POST)
+	public String joinForm2()
+	{
+		logger.info("join-post입니다!");
+		//세현: 현재 joinForm 에서 보내주는 값들에 대해, 팀 내의 논의가 필요하므로 일단 보류해놓고 나중에 계속 작업하겠음 
+		
+		return "main";
 	}
 	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
@@ -85,14 +95,14 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String loginCheck(
+	public String sh_loginCheck(
 			HttpSession session
 			, Model model
 			, String email
 			, String password ){
 		logger.debug("지나감");
-		SH_DAO_User udao = new SH_DAO_User();
-		int check = udao.loginCheck(email, password);
+		SH_DAO_User sh_udao = new SH_DAO_User();
+		int check = sh_udao.loginCheck(email, password);
 		if (check == 1) {
 			session.setAttribute("login_email", email);
 		} else{
@@ -104,10 +114,11 @@ public class UserController {
 }
 	
 	@RequestMapping(value = "myPage", method = RequestMethod.GET)
-	public String myPageForm(Model request)
+	public String sh_myPageForm(Model request)
 	{
-		//ArrayList<Group>
-		
+		String userid = "id1"; //세현: 나중에는 세션에서 id 받아서 넣기. 일단 임시로 넣어 둠
+		ArrayList<Group> glist = sh_udao.getGroupByUser(userid);
+		request.addAttribute("glist",glist);
 		return "member/myPageForm";
 	}
 	
