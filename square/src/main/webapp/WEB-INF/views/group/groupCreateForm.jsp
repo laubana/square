@@ -1,206 +1,274 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Onassis - Bootstrap Agecy Template</title>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<meta content="" name="keywords">
-<meta content="" name="description">
-
-<!-- Favicons -->
-<link href="img/favicon.png" rel="icon">
-<link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-
-<!-- Google Fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic|Raleway:400,300,700"
-	rel="stylesheet">
-
-<!-- Bootstrap CSS File -->
-<link href="resources/CreateGroup/lib/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- Libraries CSS Files -->
-<link
-	href="resources/CreateGroup/lib/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-
-<!-- Main Stylesheet File -->
-<link href="resources/GroupCreate/css/style.css" rel="stylesheet">
-
-<!-- =======================================================
-    Template Name: Onassis
-    Template URL: https://templatemag.com/onassis-bootstrap-agency-template/
-    Author: TemplateMag.com
-    License: https://templatemag.com/license/
-  ======================================================= -->
-<script>
-	// Add the following code if you want the name of the file appear on select
-	$(".custom-file-input").on(
-			"change",
-			function() {
-				var fileName = $(this).val().split("\\").pop();
-				$(this).siblings(".custom-file-label").addClass("selected")
-						.html(fileName);
+    pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>GroupCreate</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="resources/GroupCreate/assets/css/main.css" />
+	<script src=resources/js/jquery-3.3.1.min.js></script>
+	<script>
+			// Add the following code if you want the name of the file appear on select
+			$(".custom-file-input").on("change", function() {
+			  var fileName = $(this).val().split("\\").pop();
+			  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+			  
+			  <img src="resources/GroupCreate/images/rabbit_carrot.png" alt="" />
 			});
+			
+			$(document).ready(
+					function()
+					{
+						$("#groupExpressButton").on("click",editGroupExpress)
+					});	
+			
+	</script>  
+	
+	</head>
+	<body class="is-preload" onload="fn_onload();">
+<c:forEach var="user_id" items="${user_id}">
+${user_id}
+</c:forEach>
+		<!-- Header -->
+		
+			<section id="header">
+				<header>
+				<span class="image avatar">
+						<input type="file" class="custom-file-input" id="group_logo" name="group_logos">
+						<label class="custom-file-label" for="group_logo">
+							<img src="resources/GroupCreate/images/rabbit_carrot.png" alt="" />
+						</label>
+				</span>
+			
+					<p>해시해시해시<br />
+					태그태그태그태그</p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="main">main</a></li>
+						<li><a href="#two">그룹 생성 폼</a></li>
+						<li><a href="#three">앨범</a></li>
+						<li><a href="#four">게시판</a></li>
+						<li><a href="#five">게시판</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- One -->
+							<section id="one">
+								<div class="image main" data-position="center">
+									<img src="resources/GroupCreate/images/banner.jpg" alt="" />
+								</div>
+								<div class="container">
+									<header class="major">
+										<h1>그룹 소개</h1><br>
+									</header>
+										<textarea class="groupExpress" id="content"
+											name="content" placeholder="Explain about your group here!"></textarea><br>
+										<input type="button" class="groupExpressButton" id="groupExpressButton" value="그룹 소개 등록">
+								</div>
+							</section>
+
+						<!-- Two -->
+							<section id="two">
+								<div class="container">
+									<h3>이벤트 활동</h3>
+									<p>벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트.</p>
+									<ul class="feature-icons">
+										<li class="fa-code">치킨ㄱㄱ? 파티(3/4)</li>
+										<li class="fa-cubes">소맥 파티 구함</li>
+										<li class="fa-book">코딩 팟!!</li>
+										<li class="fa-coffee">삽겹살 먹구싶다 ㅠ</li>
+										<li class="fa-bolt">등산 ㄱㄱ염</li>
+										<li class="fa-users">에라이~</li>
+									</ul>
+									<input type="button" value="이벤트 관리">
+								</div>
+							</section>
+
+						<!-- Three -->
+							<section id="three">
+								<div class="container">
+									<h3>앨범</h3>
+									<p>앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범.</p>
+									<div class="features">
+										<article>
+											<a href="groupPhoto" class="image"><img src="resources/GroupCreate/images/album/m1.jpg" alt="" /></a>
+											<a href="groupPhoto" class="image"><img src="resources/GroupCreate/images/album/m2.jpg" alt="" /></a>
+										</article>
+											<div align="right"><a href="groupPhoto">+더보기</a></div>
+									</div>
+								</div>
+							</section>
+
+						<!-- Four -->	<!-- 아바타 이미지 필섹 가로 140 세로 140 -->
+							<section id="four">
+								<div class="container">
+									<h3>회원 정보</h3>
+										<div class="image avatar"><a href="myPage"><img src="resources/GroupCreate/images/member/c1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
+									<p>주최자</p>
+										<div class="image avatar"><img src="resources/GroupCreate/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></div>
+										<div class="image avatar"><img src="resources/GroupCreate/images/member/m2.jpg" alt="" style="width: 100px; height:auto;"></div>
+										<div class="image avatar"><img src="resources/GroupCreate/images/member/m3.jpg" alt="" style="width: 100px; height:auto;"></div>
+										<div class="image avatar"><img src="resources/GroupCreate/images/member/m4.jpg" alt="" style="width: 100px; height:auto;"></div>
+										<div class="image avatar"><img src="resources/GroupCreate/images/member/m5.jpg" alt="" style="width: 100px; height:auto;"></div>
+										<div align="right"><a href="javascript:doDisplay2();" id="link4" onclick="javascript:link4_onclick();">+더보기</a></div>
+										<div id="myDIV2" style="display: none;">
+										<div class="image avatar"><img src="resources/GroupCreate/images/member/m6.jpg" alt="" style="width: 100px; height:auto;"></div>
+										</div>
+										<div align="right"><a href="javascript:doDisplay2();" id="link3" onclick="javascript:link3_onclick();">+숨기기</a></div>
+									<p>회원</p>
+								</div>
+							</section>
+
+						<!-- Five -->
+							<section id="five">
+								<div class="container">
+									<h3>게시판</h3>
+									<div class="features">
+										<article>
+											<a href="#" class="image"><img src="resources/GroupCreate/images/pic01.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>밥묵자</h4>
+												<p>밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥.</p>
+											</div>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="resources/GroupCreate/images/pic02.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>냉면묵자</h4>
+												<p>냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면.</p>
+											</div>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="resources/GroupCreate/images/pic03.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>치킨묵자</h4>
+												<p>치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨.</p>
+											</div>
+										</article>
+										<hr>
+										<div align="right"><a href="javascript:doDisplay1();" id="link2" onclick="javascript:link2_onclick();">+더보기</a></div>
+											<div id="myDIV1" style="display: none;">
+    											<article>
+											<a href="#" class="image"><img src="resources/GroupCreate/images/pic01.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>라면묵자</h4>
+												<p>밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥.</p>
+											</div>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="resources/GroupMain/images/pic02.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>김밥묵자</h4>
+												<p>냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면.</p>
+											</div>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="resources/GroupCreate/images/pic03.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>우동묵자</h4>
+												<p>치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨.</p>
+											</div>
+										</article>
+											</div>
+											<div align="right"><a href="javascript:doDisplay1();" id="link1" onclick="javascript:link1_onclick();">+숨기기</a></div>
+										<input type="button" value="게시판 관리">
+									</div>
+								</div>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+<script type="text/javascript">
+//숨기기,보이기
+var bDisplay = true;
+function doDisplay1(){
+    var con = document.getElementById("myDIV1");
+    if(con.style.display=='none'){
+        con.style.display = 'block';
+    }else{
+        con.style.display = 'none';
+    }
+}
+
+function doDisplay2(){
+    var con = document.getElementById("myDIV2");
+    if(con.style.display=='none'){
+        con.style.display = 'block';
+    }else{
+        con.style.display = 'none';
+    }
+}
+
+function fn_onload() {
+	document.getElementById('link1').style.visibility = "hidden";
+	document.getElementById('link2').style.visibility = "visible";
+	document.getElementById('link3').style.visibility = "hidden";
+	document.getElementById('link4').style.visibility = "visible";
+}
+function link1_onclick() {
+	document.getElementById('link1').style.visibility = "hidden";
+	document.getElementById('link2').style.visibility = "visible";
+}
+function link2_onclick() {
+	document.getElementById('link1').style.visibility = "visible";
+	document.getElementById('link2').style.visibility = "hidden";
+}
+function link3_onclick() {
+	document.getElementById('link3').style.visibility = "hidden";
+	document.getElementById('link4').style.visibility = "visible";
+}
+function link4_onclick() {
+	document.getElementById('link3').style.visibility = "visible";
+	document.getElementById('link4').style.visibility = "hidden";
+}
 </script>
-</head>
 
-<body>
+		<!-- 기본 Scripts -->
+		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
 
-	<!-- Menu -->
-	<nav class="menu" id="theMenu">
-		<div class="menu-wrap">
-			<h1 class="logo">
-				<a href="index.html#home">PPAYA</a>
-			</h1>
-			<i class="fa fa-times-circle menu-close"></i> <a href="main"
-				class="smoothscroll">main</a> <a href="grouplist"
-				class="smoothscroll">search group</a> <a href="#about"
-				class="smoothscroll">About</a> <a href="#contact"
-				class="smoothscroll">Contact</a> <a href="#"><i
-				class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a>
-			<a href="#"><i class="fa fa-dribbble"></i></a> <a href="#"><i
-				class="fa fa-envelope"></i></a>
-		</div>
-
-		<!-- Menu button -->
-		<div id="menuToggle">
-			<i class="fa fa-bars"></i>
-		</div>
-	</nav>
-
-
-
-	<!-- ========== HEADER SECTION ========== -->
-	<section id="home" name="home"></section>
-	<div id="headerwrap">
-		<div class="container">
-			<br>
-			<h1>PPAYA</h1>
-			<h2>Fancy Group Sharing Services</h2>
-			<div class="row">
-				<br> <br> <br>
-				<div class="col-lg-6 col-lg-offset-3"></div>
-			</div>
-		</div>
-		<!-- /container -->
-	</div>
-	<!-- /headerwrap -->
-
-
-	<!-- ========== WHITE SECTION ========== -->
-	<div id="w">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2">
-					<h3>
-						<bold>Welcom to PPAYA!</bold>
-						<br>
-						<board>Welcome to Our Fancy Group Sharing Services!</bold> <br>
-						반갑습니당당당^^ <bold>아래 가이드를 따라 그룹을 생성해주쎄용</bold>. <br />
-					</h3>
-				</div>
-			</div>
-		</div>
-		<!-- /w -->
-
-
-		<!-- 3rd Step : 그룹 정보 입력-->
-		<!-- ========== SERVICES - GREY SECTION ========== -->
-		<section id="services" name="services"></section>
-		<div class="container">
-			<h3>Create your Group!</h3>
-			<br>
-			<form>
-				<h3>Group Title!</h3>
-				<input type="text" name="groupTitle" placeholder="group Title..">
-			<br>
-			<div class="container mt-3">
-				<h3>Group Image!</h3>
-				<p>Express your group with fancy image!</p>
-					<h3>Upload Group Logo:</h3>
-					<div class="custom-file mb-3" align="center">
-						<input type="file" class="custom-file-input" id="customFile"
-							name="filename"> 
-					</div>
-					<h3>Upload Group Image:</h3>
-					<div align="center">
-						<input type="file" id="myFile" name="filename2">				
-					</div>
-					<div class="container">
-					<h3>select group interests</h3>
-						<div class="form-check-inline">
-						 	<input type="radio" class="form-check-input" id="radio1" name="optradio" value="food">food
-						</div>
-						<div class="form-check-inline">
-							<input type="radio" class="form-check-input" id="radio2" name="optradio" value="beauty">beauty
-						</div>
-						<div class="form-check-inline">
-							 <input type="radio" class="form-check-input" id="radio3" name="optradio" value="sports">sports
-						</div>
-						<h3>express about your group!</h3>
-						<textarea class="groupExpress" id="groupExpress"
-							name="groupExpress" placeholder="Explain about your group here!"></textarea>
-			</div>
-			</form>
-			<input type="button" value="submit">
-		</div>
-
-		<!-- /container -->
-
-
-
-
-
-
-
-		<!-- ========== WHITE SECTION ========== -->
-		<div id="w">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 col-lg-offset-2">
-						<h3>
-							WE WORK HARD TO DELIVER A
-							<bold>HIGH QUALITY SERVICE</bold>
-							. OUR AIM IS YOUR COMPLETE
-							<bold>SATISFACTION</bold>
-							.
-						</h3>
-					</div>
-				</div>
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /w -->
-
-		<div id="copyrights">
-			<div class="container">
-				<p>
-					&copy; Copyrights <strong>Onassis</strong>. All Rights Reserved
-				</p>
-				<div class="credits">
-					<!--
-          You are NOT allowed to delete the credit link to TemplateMag with free version.
-          You can delete the credit link only if you bought the pro version.
-          Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/onassis-bootstrap-agency-template/
-          Licensing information: https://templatemag.com/license/
-        -->
-					Created with Onassis template by <a href="https://templatemag.com/">TemplateMag</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- JavaScript Libraries -->
-		<script src="resources/GroupCreate/lib/jquery/jquery.min.js"></script>
-		<script src="resources/GroupCreate/lib/bootstrap/js/bootstrap.min.js"></script>
-		<script src="resources/GroupCreate/lib/php-mail-form/validate.js"></script>
-		<script src="resources/GroupCreate/lib/chart/chart.js"></script>
-		<script src="resources/GroupCreate/lib/easing/easing.min.js"></script>
-
-		<!-- Template Main Javascript File -->
-		<script src="resources/GroupCreate/js/main.js"></script>
-</body>
+		<!-- Scripts -->
+			<script src="resources/GroupCreate/assets/js/jquery.min.js"></script>
+			<script src="resources/GroupCreate/assets/js/jquery.scrollex.min.js"></script>
+			<script src="resources/GroupCreate/assets/js/jquery.scrolly.min.js"></script>
+			<script src="resources/GroupCreate/assets/js/browser.min.js"></script>
+			<script src="resources/GroupCreate/assets/js/breakpoints.min.js"></script>
+			<script src="resources/GroupCreate/assets/js/util.js"></script>
+			<script src="resources/GroupCreate/assets/js/main.js"></script>
+ 
+	</body>
 </html>
