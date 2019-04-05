@@ -15,6 +15,8 @@
 		<typeAlias type="project.ppaya.square.vo.EventScheduleAttendance" alias="EventScheduleAttendance" />
 		<typeAlias type="project.ppaya.square.vo.EventScheduleImage" alias="EventScheduleImage" />
 		<typeAlias type="project.ppaya.square.vo.EventScheduleImageFace" alias="EventScheduleImageFace" />
+		<typeAlias type="project.ppaya.square.vo.EventScheduleVideo" alias="EventScheduleVideo" />
+		<typeAlias type="project.ppaya.square.vo.EventScheduleVideoFace" alias="EventScheduleVideoFace" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="shmapper/sh_mapper_user.xml" />
@@ -30,5 +32,7 @@
 		<mapper resource="yhmapper/yhevent_schedule_attendance_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_schedule_image_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_schedule_image_face_mapper.xml" />
+		<mapper resource="yhmapper/yhevent_schedule_video_mapper.xml" />
+		<mapper resource="yhmapper/yhevent_schedule_video_face_mapper.xml" />
 	</mappers>
 </configuration>

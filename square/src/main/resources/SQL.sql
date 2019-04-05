@@ -166,9 +166,3 @@ INSERT INTO TABLE_ESI(EVENT_SCHEDULE_IMAGE_ID, FILENAME, EXT, USER_ID, EVENT_SCH
 INSERT INTO TABLE_ESI(EVENT_SCHEDULE_IMAGE_ID, FILENAME, EXT, USER_ID, EVENT_SCHEDULE_ID) VALUES('event_schedule1_image6.jpg', 'event_schedule1_image6.jpg', 'jpg', 'id1', 1);
 INSERT INTO TABLE_ESI(EVENT_SCHEDULE_IMAGE_ID, FILENAME, EXT, USER_ID, EVENT_SCHEDULE_ID) VALUES('event_schedule1_image7.jpg', 'event_schedule1_image7.jpg', 'jpg', 'id1', 1);
 COMMIT;
-
-		<typeAlias type="project.ppaya.square.vo.EventScheduleVideo" alias="EventScheduleVideo" />
-		<typeAlias type="project.ppaya.square.vo.EventScheduleVideoFace" alias="EventScheduleVideoFace" />
-		
-		<mapper resource="yhmapper/yhevent_schedule_video_mapper.xml" />
-		<mapper resource="yhmapper/yhevent_schedule_video_face_mapper.xml" />
