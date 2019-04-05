@@ -31,16 +31,8 @@ public int loginCheck(String email, String password){
 }
 
 
-public ArrayList<Group> getGroupByUser(String user){
-	SH_Mapper_User umapper = session.getMapper(SH_Mapper_User.class);
-	ArrayList<Group> glist = new ArrayList<>();
-	
-	try
-	{
-		glist = umapper.getGroupByUser(user);
-	}
-	catch(Exception error){error.printStackTrace();}
-	return glist;
-}
+
+
+
 
 }

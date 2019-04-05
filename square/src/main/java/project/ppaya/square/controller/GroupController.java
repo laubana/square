@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import project.ppaya.square.shdao.SH_DAO_Group;
+import project.ppaya.square.shdao.SH_DAO_User;
 import project.ppaya.square.vo.Event;
 import project.ppaya.square.vo.EventScheduleImage;
 import project.ppaya.square.vo.Group;
@@ -45,10 +47,20 @@ public class GroupController
 	YHEventScheduleImageDAO yh_event_schedule_imageDAO;
 	@Autowired
 	YHGroupBoardDAO yh_group_boardDAO;
-	
+	@Autowired
+	SH_DAO_Group sh_gdao;
+	@Autowired
+	SH_DAO_User sh_udao;
 	@RequestMapping(value = "groupSearch", method = RequestMethod.GET)
-	public String searchForm()
-	{
+	public String searchForm(
+			String category
+			, Model request) {
+		
+		String testint = "1"; //나중에 jsp에서 값 받을 거. TABLE_G 테이블의 group_category_id 찾을 값.
+		int ctg = Integer.parseInt(testint);
+		ArrayList<Group> glist = new ArrayList<>();
+		glist = sh_gdao.getGroupByCategory(ctg);
+		request.addAttribute("glist", glist);
 		logger.info("그룹탐색입니다!");
 
 		return "group/groupSearchForm";
