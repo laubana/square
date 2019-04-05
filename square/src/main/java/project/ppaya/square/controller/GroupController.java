@@ -56,16 +56,10 @@ public class GroupController
 			String category
 			, Model request) {
 		
-		String testint = "1";
+		String testint = "1"; //나중에 jsp에서 값 받을 거. TABLE_G 테이블의 group_category_id 찾을 값.
 		int ctg = Integer.parseInt(testint);
 		ArrayList<Group> glist = new ArrayList<>();
 		glist = sh_gdao.getGroupByCategory(ctg);
-		Group g1 = new Group();
-		g1.setGroup_category_id(2);
-		g1.setContent("여기는 지금 g1내용");
-		g1.setGroup_id(1);
-		g1.setName("여기는 g1 이름");
-		glist.add(g1);
 		request.addAttribute("glist", glist);
 		logger.info("그룹탐색입니다!");
 
