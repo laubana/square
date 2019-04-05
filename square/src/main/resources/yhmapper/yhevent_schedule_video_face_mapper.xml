@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleVideoFaceMapper">
+<insert id="insertEventScheduleVideoFace" parameterType="map">
+INSERT INTO TABLE_ESVF
+(
+	EVENT_SCHEDULE_VIDEO_FACE_ID,
+	EVENT_SCHEDULE_VIDEO_IMAGE_ID,
+	EVENT_SCHEDULE_VIDEO_ID,
+	DETECT_DATE
+)
+VALUES
+(
+	#{event_schedule_video_face_id},
+	#{event_schedule_video_image_id},
+	#{event_schedule_video_id},
+	#{detect_date}
+)
+</insert>	
+</mapper>
