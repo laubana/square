@@ -39,11 +39,4 @@ FROM
 WHERE
 	EVENT_SCHEDULE_VIDEO_ID = #{event_schedule_video_id}
 </select>
-<update id="updateDetectDateByEventScheduleVideoId" parameterType="map">
-UPDATE TABLE_ESV
-SET
-	DETECT_DATE = #{detect_date}
-WEHRE
-	EVENT_SCHEDULE_VIDEO_ID = #{event_schedule_video_id}
-</update>
 </mapper>
