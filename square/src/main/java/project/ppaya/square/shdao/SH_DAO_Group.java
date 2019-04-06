@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import project.ppaya.square.shmapper.SH_Mapper_Group;
 import project.ppaya.square.vo.Group;
+import project.ppaya.square.vo.GroupCategory;
 
 
 @Repository
@@ -37,5 +38,19 @@ public ArrayList<Group> getGroupByCategory(int category){
 	catch(Exception error){error.printStackTrace();}
 	return glist;
 }
+
+
+public ArrayList<GroupCategory> getCategoryList(){
+	SH_Mapper_Group gmapper = session.getMapper(SH_Mapper_Group.class);
+	ArrayList<GroupCategory> clist = null;
+	
+	try
+	{
+		clist = gmapper.getCategoryList();
+	}
+	catch(Exception error){error.printStackTrace();}
+	return clist;
+}
+
 
 }

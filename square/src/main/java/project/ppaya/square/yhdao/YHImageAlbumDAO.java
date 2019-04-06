@@ -7,11 +7,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import project.ppaya.square.vo.Album;
-import project.ppaya.square.yhmapper.YHAlbumMapper;
+import project.ppaya.square.vo.ImageAlbum;
+import project.ppaya.square.yhmapper.YHImageAlbumMapper;
 
 @Repository
-public class YHAlbumDAO
+public class YHImageAlbumDAO
 {
 	@Autowired
 	SqlSession sqlSession;
@@ -23,7 +23,7 @@ public class YHAlbumDAO
 		map.put("event_schedule_image_id_list", event_schedule_image_id_list);
 		map.put("user_id", user_id);
 		
-		YHAlbumMapper mapper = sqlSession.getMapper(YHAlbumMapper.class);
+		YHImageAlbumMapper mapper = sqlSession.getMapper(YHImageAlbumMapper.class);
 		
 		try
 		{
@@ -40,7 +40,7 @@ public class YHAlbumDAO
 		map.put("event_schedule_image_id", event_schedule_image_id);
 		map.put("user_id", user_id);
 		
-		YHAlbumMapper mapper = sqlSession.getMapper(YHAlbumMapper.class);
+		YHImageAlbumMapper mapper = sqlSession.getMapper(YHImageAlbumMapper.class);
 		
 		try
 		{
@@ -54,7 +54,7 @@ public class YHAlbumDAO
 	{
 		int result = 0;
 		
-		YHAlbumMapper mapper = sqlSession.getMapper(YHAlbumMapper.class);
+		YHImageAlbumMapper mapper = sqlSession.getMapper(YHImageAlbumMapper.class);
 		
 		try
 		{
@@ -64,86 +64,86 @@ public class YHAlbumDAO
 		
 		return result;
 	}
-	public int insertAlbum(String event_schedule_image_id, String user_id)
+	public int insertImageAlbum(String event_schedule_image_id, String user_id)
 	{
 		int result = 0;
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("event_schedule_image_id", event_schedule_image_id);
 		map.put("user_id", user_id);
 		
-		YHAlbumMapper mapper = sqlSession.getMapper(YHAlbumMapper.class);
+		YHImageAlbumMapper mapper = sqlSession.getMapper(YHImageAlbumMapper.class);
 		
 		try
 		{
-			result = mapper.insertAlbum(map);
+			result = mapper.insertImageAlbum(map);
 		}
 		catch(Exception error){error.printStackTrace();}
 		
 		return result;
 	}
-	public int deleteAlbumByNotEventScheduleImageIdUserId(ArrayList<String> event_schedule_image_id_list, String user_id)
+	public int deleteImageAlbumByNotEventScheduleImageIdUserId(ArrayList<String> event_schedule_image_id_list, String user_id)
 	{
 		int result = 0;
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("event_schedule_image_id_list", event_schedule_image_id_list);
 		map.put("user_id", user_id);
 		
-		YHAlbumMapper mapper = sqlSession.getMapper(YHAlbumMapper.class);
+		YHImageAlbumMapper mapper = sqlSession.getMapper(YHImageAlbumMapper.class);
 		
 		try
 		{
-			result = mapper.deleteAlbumByNotEventScheduleImageIdUserId(map);
+			result = mapper.deleteImageAlbumByNotEventScheduleImageIdUserId(map);
 		}
 		catch(Exception error){error.printStackTrace();}
 		
 		return result;	
 	}
-	public ArrayList<Album> selectAlbumByEventScheduleImageIdUserId(String event_schedule_image_id, String user_id)
+	public ArrayList<ImageAlbum> selectImageAlbumByEventScheduleImageIdUserId(String event_schedule_image_id, String user_id)
 	{
-		ArrayList<Album> album_list = new ArrayList<>();
+		ArrayList<ImageAlbum> album_list = new ArrayList<>();
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("event_schedule_image_id", event_schedule_image_id);
 		map.put("user_id", user_id);
 		
-		YHAlbumMapper mapper = sqlSession.getMapper(YHAlbumMapper.class);
+		YHImageAlbumMapper mapper = sqlSession.getMapper(YHImageAlbumMapper.class);
 		
 		try
 		{
-			album_list = mapper.selectAlbumByEventScheduleImageIdUserId(map);
+			album_list = mapper.selectImageAlbumByEventScheduleImageIdUserId(map);
 		}
 		catch(Exception error){error.printStackTrace();}
 		
 		return album_list;	
 	}
-	public ArrayList<Album> selectAlbumByEventScheduleImageIdListUserId(ArrayList<String> event_schedule_image_id_list, String user_id)
+	public ArrayList<ImageAlbum> selectImageAlbumByEventScheduleImageIdListUserId(ArrayList<String> event_schedule_image_id_list, String user_id)
 	{
-		ArrayList<Album> album_list = new ArrayList<>();
+		ArrayList<ImageAlbum> album_list = new ArrayList<>();
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("event_schedule_image_id_list", event_schedule_image_id_list);
 		map.put("user_id", user_id);
 
-		YHAlbumMapper mapper = sqlSession.getMapper(YHAlbumMapper.class);
+		YHImageAlbumMapper mapper = sqlSession.getMapper(YHImageAlbumMapper.class);
 		
 		try
 		{
-			album_list = mapper.selectAlbumByEventScheduleImageIdListUserId(map);
+			album_list = mapper.selectImageAlbumByEventScheduleImageIdListUserId(map);
 		}
 		catch(Exception error){error.printStackTrace();}
 		
 		return album_list;	
 	}
-	public ArrayList<Album> selectAlbumByEventScheduleImageIdListUserIdSelf(ArrayList<String> event_schedule_image_id_list, String user_id)
+	public ArrayList<ImageAlbum> selectImageAlbumByEventScheduleImageIdListUserIdSelf(ArrayList<String> event_schedule_image_id_list, String user_id)
 	{
-		ArrayList<Album> album_list = new ArrayList<>();
+		ArrayList<ImageAlbum> album_list = new ArrayList<>();
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("event_schedule_image_id_list", event_schedule_image_id_list);
 		map.put("user_id", user_id);
 
-		YHAlbumMapper mapper = sqlSession.getMapper(YHAlbumMapper.class);
+		YHImageAlbumMapper mapper = sqlSession.getMapper(YHImageAlbumMapper.class);
 		
 		try
 		{
-			album_list = mapper.selectAlbumByEventScheduleImageIdListUserIdSelf(map);
+			album_list = mapper.selectImageAlbumByEventScheduleImageIdListUserIdSelf(map);
 		}
 		catch(Exception error){error.printStackTrace();}
 		
@@ -156,7 +156,7 @@ public class YHAlbumDAO
 		map.put("event_schedule_image_id_list", old_event_schedule_image_id_list);
 		map.put("user_id", user_id);
 
-		YHAlbumMapper mapper = sqlSession.getMapper(YHAlbumMapper.class);
+		YHImageAlbumMapper mapper = sqlSession.getMapper(YHImageAlbumMapper.class);
 		
 		try
 		{

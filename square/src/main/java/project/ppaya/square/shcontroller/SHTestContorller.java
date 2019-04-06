@@ -8,13 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import project.ppaya.square.shdao.SH_DAO_Group;
 import project.ppaya.square.shdao.SH_DAO_User;
 
 @Controller
 public class SHTestContorller {
 Logger logger = Logger.getLogger(SHTestContorller.class);
-	
-
-	
 	
 }

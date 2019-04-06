@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="project.ppaya.square.yhmapper.YHAlbumMapper">
-<insert id="insertAlbum" parameterType="map">
-INSERT INTO TABLE_A
+<mapper namespace="project.ppaya.square.yhmapper.YHImageAlbumMapper">
+<insert id="insertImageAlbum" parameterType="map">
+INSERT INTO TABLE_IA
 (
 	EVENT_SCHEDULE_IMAGE_ID,
 	USER_ID
@@ -16,28 +16,28 @@ VALUES
 	#{user_id}
 )
 </insert>
-<delete id="deleteAlbumByNotEventScheduleImageIdUserId" parameterType="map">
-DELETE FROM TABLE_A
+<delete id="deleteImageAlbumByNotEventScheduleImageIdUserId" parameterType="map">
+DELETE FROM TABLE_IA
 WHERE
 	<foreach item="event_schedule_image_id" collection="event_schedule_image_id_list" separator="AND" close="AND">
 		EVENT_SCHEDULE_IMAGE_ID != #{event_schedule_image_id}
 	</foreach>
 	USER_ID = #{user_id}
 </delete>
-<select id="selectAlbumByEventScheduleImageIdUserId" parameterType="map" resultType="Album">
+<select id="selectImageAlbumByEventScheduleImageIdUserId" parameterType="map" resultType="ImageAlbum">
 SELECT
 	*
 FROM
-	TABLE_A
+	TABLE_IA
 WHERE
 	EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id} AND
 	USER_ID = #{user_id}
 </select>
-<select id="getEventScheduleImageIdByEventScheduleImageIdListUserId" parameterType="map" resultType="Album">
+<select id="getEventScheduleImageIdByEventScheduleImageIdListUserId" parameterType="map" resultType="ImageAlbum">
 SELECT
 	*
 FROM
-	TABLE_A
+	TABLE_IA
 WHERE
 	(
 	1 = 0
@@ -47,11 +47,11 @@ WHERE
 	) AND	
 	USER_ID = #{user_id}
 </select>
-<select id="selectAlbumByEventScheduleImageIdListUserId" parameterType="map" resultType="Album">
+<select id="selectImageAlbumByEventScheduleImageIdListUserId" parameterType="map" resultType="ImageAlbum">
 SELECT
 	*
 FROM
-	TABLE_A
+	TABLE_IA
 WHERE
 	(
 	1 = 0
@@ -61,11 +61,11 @@ WHERE
 	) AND	
 	USER_ID = #{user_id}
 </select>
-<select id="selectAlbumByEventScheduleImageIdListUserIdSelf" parameterType="map" resultType="Album">
+<select id="selectImageAlbumByEventScheduleImageIdListUserIdSelf" parameterType="map" resultType="ImageAlbum">
 SELECT
 	*
 FROM
-	TABLE_A
+	TABLE_IA
 WHERE
 	(
 	1 = 0
@@ -80,7 +80,7 @@ WHERE
 SELECT
 	EVENT_SCHEDULE_IMAGE_ID
 FROM
-	TABLE_A
+	TABLE_IA
 WHERE
 	(
 	1 = 0
@@ -92,14 +92,14 @@ WHERE
 	SELF = 1
 </select>
 <update id="updateSelfByUserId" parameterType="string">
-UPDATE TABLE_A
+UPDATE TABLE_IA
 SET
 	SELF = 0
 WHERE
 	USER_ID = #{user_id}
 </update>
 <update id="updateSelfByEventScheduleImageIdUserId" parameterType="map">
-UPDATE TABLE_A
+UPDATE TABLE_IA
 SET
 	SELF = 1
 WHERE
@@ -107,7 +107,7 @@ WHERE
 	USER_ID = #{user_id}
 </update>
 <update id="updateSelfByEventScheduleImageIdListUserId" parameterType="map">
-UPDATE TABLE_A
+UPDATE TABLE_IA
 SET
 	SELF = 1
 WHERE

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import project.ppaya.square.vo.Album;
-import project.ppaya.square.yhdao.YHAlbumDAO;
+import project.ppaya.square.vo.ImageAlbum;
+import project.ppaya.square.yhdao.YHImageAlbumDAO;
 import project.ppaya.square.yhdao.YHEventDAO;
 import project.ppaya.square.yhdao.YHEventScheduleDAO;
 import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
@@ -34,5 +34,5 @@ public class YHUserFormAction
 	@Autowired
 	YHEventScheduleImageDAO event_schedule_imageDAO;
 	@Autowired
-	YHAlbumDAO albumDAO;
+	YHImageAlbumDAO albumDAO;
 }

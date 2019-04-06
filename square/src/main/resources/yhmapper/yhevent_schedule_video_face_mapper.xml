@@ -4,6 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleVideoFaceMapper">
+<update id="updateEventScheduleVideoFaceIdByEventScheduleVideoImageId" parameterType="map">
+UPDATE TABLE_ESVF
+SET
+	EVENT_SCHEDULE_VIDEO_FACE_ID = #{event_schedule_video_face_id}
+WHERE
+	EVENT_SCHEDULE_VIDEO_IMAGE_ID = #{event_schedule_video_image_id}
+</update>
 <insert id="insertEventScheduleVideoFace" parameterType="map">
 INSERT INTO TABLE_ESVF
 (
@@ -19,5 +26,21 @@ VALUES
 	#{event_schedule_video_id},
 	#{detect_date}
 )
-</insert>	
+</insert>
+<select id="selectEventScheduleVideoFaceByEventScheduleVideoId" parameterType="string" resultType="EventScheduleVideo">
+SELECT
+	*
+FROM	
+	TABLE_ESVF
+WHERE
+	EVENT_SCHEDULE_VIDEO_ID = #{event_schedule_video_id}
+</select>
+<select id="getEventScheduleVideoFaceIdByEventScheduleVideoId" parameterType="string" resultType="string">
+SELECT
+	EVENT_SCHEDULE_VIDEO_FACE_ID
+FROM
+	TABLE_ESVF
+WHERE
+	EVENT_SCHEDULE_VIDEO_ID = #{event_schedule_video_id}
+</select>
 </mapper>

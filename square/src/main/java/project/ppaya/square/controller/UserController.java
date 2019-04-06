@@ -22,7 +22,8 @@ import project.ppaya.square.vo.EventScheduleImage;
 import project.ppaya.square.vo.Group;
 import project.ppaya.square.vo.Reference;
 import project.ppaya.square.vo.User;
-import project.ppaya.square.yhdao.YHAlbumDAO;
+import project.ppaya.square.vo.UserHashtag;
+import project.ppaya.square.yhdao.YHImageAlbumDAO;
 import project.ppaya.square.yhdao.YHEventDAO;
 import project.ppaya.square.yhdao.YHEventScheduleAttendanceDAO;
 import project.ppaya.square.yhdao.YHEventScheduleDAO;
@@ -56,7 +57,8 @@ public class UserController {
 	@Autowired
 	YHGroupAttendanceDAO yh_group_attendanceDAO; 
 	@Autowired
-	YHAlbumDAO yh_albumDAO;
+	YHImageAlbumDAO yh_image_albumDAO;
+	
 	@Autowired
 	SH_DAO_User sh_udao;
 	@Autowired
@@ -108,9 +110,27 @@ public class UserController {
 	@RequestMapping(value = "myPage", method = RequestMethod.GET)
 	public String sh_myPageForm(Model request)
 	{
+		//그 사람이 참여 중인 그룹 리스트 보내기
 		String userid = "id1"; //세현: 나중에는 세션에서 id 받아서 넣기. 일단 임시로 넣어 둠
 		ArrayList<Group> glist = sh_gdao.getGroupByUser(userid);
 		request.addAttribute("glist",glist);
+		
+		//해시태그 보내기
+/*
+나중에 user_hashtag 테이블 생성되고 나면 살리기 
+ 		ArrayList<UserHashtag> hlist = null;
+		hlist = sh_udao.getUserHashtag(userid);
+일단 아래는 임시
+ */		
+		ArrayList<UserHashtag> hlist = new ArrayList<UserHashtag>();
+		hlist = sh_udao.getUserHashtag(userid);
+		int i = 0;
+		for(i = 1 ; i <= 5 ; i = i + 1){
+			hlist.add(new UserHashtag("tempid"+i,i));
+		}
+		request.addAttribute("hlist",hlist);
+
+		
 		return "member/myPageForm";
 	}
 	
@@ -189,14 +209,14 @@ public class UserController {
 		
 		ArrayList<String> attend_event_schedule_image_id_list = yh_event_schedule_imageDAO.getEventScheduleImageIdByEventScheduleIdList(attend_event_schedule_id_list);
 
-		yh_albumDAO.deleteAlbumByNotEventScheduleImageIdUserId(attend_event_schedule_image_id_list, user_id);
+		yh_image_albumDAO.deleteImageAlbumByNotEventScheduleImageIdUserId(attend_event_schedule_image_id_list, user_id);
 		
 		for(int i = 0; i < attend_event_schedule_image_id_list.size(); i++)
 		{
-			yh_albumDAO.insertAlbum(attend_event_schedule_image_id_list.get(i), user_id);
+			yh_image_albumDAO.insertImageAlbum(attend_event_schedule_image_id_list.get(i), user_id);
 		}
 		
-		yh_albumDAO.updateSelfByUserId(user_id);
+		yh_image_albumDAO.updateSelfByUserId(user_id);
 		
 		ArrayList<String> attend_event_schedule_image_face_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageFaceIdByEventScheduleImageIdList(attend_event_schedule_image_id_list);
 		
@@ -204,7 +224,7 @@ public class UserController {
 		
 		ArrayList<String> similar_event_schedule_image_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageIdByEventScheduleImageFaceIdList(similar_event_schedule_image_face_id);
 		
-		yh_albumDAO.updateSelfByEventScheduleImageIdListUserId(similar_event_schedule_image_id_list, user_id);
+		yh_image_albumDAO.updateSelfByEventScheduleImageIdListUserId(similar_event_schedule_image_id_list, user_id);
 		//Album 업데이트 끝
 		
 		event_id_list = yh_eventDAO.getEventIdByGroupIdList(group_id_list);
@@ -215,7 +235,7 @@ public class UserController {
 		
 		ArrayList<String> old_event_schedule_image_id_list = yh_event_schedule_imageDAO.getEventScheduleImageIdByEventScheduleIdList(event_schedule_id_list);
 		
-		ArrayList<String> new_event_schedule_image_id_list = yh_albumDAO.getEventScheduleImageIdByEventScheduleImageIdListUserIdSelf(old_event_schedule_image_id_list, user_id);
+		ArrayList<String> new_event_schedule_image_id_list = yh_image_albumDAO.getEventScheduleImageIdByEventScheduleImageIdListUserIdSelf(old_event_schedule_image_id_list, user_id);
 		
 		request.addAttribute("self_event_schedule_image_list", yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleImageIdList(new_event_schedule_image_id_list));
 		
