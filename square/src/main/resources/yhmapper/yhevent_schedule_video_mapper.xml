@@ -39,4 +39,15 @@ FROM
 WHERE
 	EVENT_SCHEDULE_VIDEO_ID = #{event_schedule_video_id}
 </select>
+<select id="getEventScheduleVideoIdByEventScheduleIdList" parameterType="list" resultType="string">
+SELECT
+	EVENT_SCHEDULE_VIDEO_ID
+FROM
+	TABLE_ESV
+WHERE
+	1 = 0
+	<foreach item="event_schedule_id" collection="list" open="OR" separator="OR">
+		EVENT_SCHEDULE_ID = #{event_schedule_id}
+	</foreach>
+</select>
 </mapper>

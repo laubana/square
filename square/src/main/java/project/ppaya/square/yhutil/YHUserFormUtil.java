@@ -14,7 +14,7 @@ import project.ppaya.square.vo.EventScheduleImage;
 import project.ppaya.square.vo.Group;
 import project.ppaya.square.vo.Reference;
 import project.ppaya.square.vo.User;
-import project.ppaya.square.yhdao.YHAlbumDAO;
+import project.ppaya.square.yhdao.YHImageAlbumDAO;
 import project.ppaya.square.yhdao.YHEventDAO;
 import project.ppaya.square.yhdao.YHEventScheduleAttendanceDAO;
 import project.ppaya.square.yhdao.YHEventScheduleDAO;
@@ -44,7 +44,7 @@ public class YHUserFormUtil
 	@Autowired
 	YHGroupDAO groupDAO;
 	@Autowired
-	YHAlbumDAO albumDAO;
+	YHImageAlbumDAO albumDAO;
 	
 	public void updateAlbumByUserId(String user_id)
 	{
@@ -55,11 +55,11 @@ public class YHUserFormUtil
 		
 		ArrayList<String> event_schedule_image_id_list = event_schedule_imageDAO.getEventScheduleImageIdByEventScheduleIdList(event_schedule_id_list);
 
-		albumDAO.deleteAlbumByNotEventScheduleImageIdUserId(event_schedule_image_id_list, user_id);
+		albumDAO.deleteImageAlbumByNotEventScheduleImageIdUserId(event_schedule_image_id_list, user_id);
 		
 		for(int i = 0; i < event_schedule_image_id_list.size(); i++)
 		{
-			albumDAO.insertAlbum(event_schedule_image_id_list.get(i), user_id);
+			albumDAO.insertImageAlbum(event_schedule_image_id_list.get(i), user_id);
 		}
 		
 		albumDAO.updateSelfByUserId(user_id);

@@ -23,7 +23,7 @@ import project.ppaya.square.vo.Group;
 import project.ppaya.square.vo.Reference;
 import project.ppaya.square.vo.User;
 import project.ppaya.square.vo.UserHashtag;
-import project.ppaya.square.yhdao.YHAlbumDAO;
+import project.ppaya.square.yhdao.YHImageAlbumDAO;
 import project.ppaya.square.yhdao.YHEventDAO;
 import project.ppaya.square.yhdao.YHEventScheduleAttendanceDAO;
 import project.ppaya.square.yhdao.YHEventScheduleDAO;
@@ -57,7 +57,8 @@ public class UserController {
 	@Autowired
 	YHGroupAttendanceDAO yh_group_attendanceDAO; 
 	@Autowired
-	YHAlbumDAO yh_albumDAO;
+	YHImageAlbumDAO yh_image_albumDAO;
+	
 	@Autowired
 	SH_DAO_User sh_udao;
 	@Autowired
@@ -208,14 +209,14 @@ public class UserController {
 		
 		ArrayList<String> attend_event_schedule_image_id_list = yh_event_schedule_imageDAO.getEventScheduleImageIdByEventScheduleIdList(attend_event_schedule_id_list);
 
-		yh_albumDAO.deleteAlbumByNotEventScheduleImageIdUserId(attend_event_schedule_image_id_list, user_id);
+		yh_image_albumDAO.deleteImageAlbumByNotEventScheduleImageIdUserId(attend_event_schedule_image_id_list, user_id);
 		
 		for(int i = 0; i < attend_event_schedule_image_id_list.size(); i++)
 		{
-			yh_albumDAO.insertAlbum(attend_event_schedule_image_id_list.get(i), user_id);
+			yh_image_albumDAO.insertImageAlbum(attend_event_schedule_image_id_list.get(i), user_id);
 		}
 		
-		yh_albumDAO.updateSelfByUserId(user_id);
+		yh_image_albumDAO.updateSelfByUserId(user_id);
 		
 		ArrayList<String> attend_event_schedule_image_face_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageFaceIdByEventScheduleImageIdList(attend_event_schedule_image_id_list);
 		
@@ -223,7 +224,7 @@ public class UserController {
 		
 		ArrayList<String> similar_event_schedule_image_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageIdByEventScheduleImageFaceIdList(similar_event_schedule_image_face_id);
 		
-		yh_albumDAO.updateSelfByEventScheduleImageIdListUserId(similar_event_schedule_image_id_list, user_id);
+		yh_image_albumDAO.updateSelfByEventScheduleImageIdListUserId(similar_event_schedule_image_id_list, user_id);
 		//Album 업데이트 끝
 		
 		event_id_list = yh_eventDAO.getEventIdByGroupIdList(group_id_list);
@@ -234,7 +235,7 @@ public class UserController {
 		
 		ArrayList<String> old_event_schedule_image_id_list = yh_event_schedule_imageDAO.getEventScheduleImageIdByEventScheduleIdList(event_schedule_id_list);
 		
-		ArrayList<String> new_event_schedule_image_id_list = yh_albumDAO.getEventScheduleImageIdByEventScheduleImageIdListUserIdSelf(old_event_schedule_image_id_list, user_id);
+		ArrayList<String> new_event_schedule_image_id_list = yh_image_albumDAO.getEventScheduleImageIdByEventScheduleImageIdListUserIdSelf(old_event_schedule_image_id_list, user_id);
 		
 		request.addAttribute("self_event_schedule_image_list", yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleImageIdList(new_event_schedule_image_id_list));
 		

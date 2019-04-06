@@ -1,5 +1,6 @@
 package project.ppaya.square.yhdao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
@@ -75,5 +76,19 @@ public class YHEventScheduleVideoDAO
 		catch(Exception error){error.printStackTrace();}
 		
 		return event_schedule_video;
+	}
+	public ArrayList<String> getEventScheduleVideoIdByEventScheduleIdList(ArrayList<Integer> event_schedule_id_list)
+	{
+		ArrayList<String> event_schedule_video_id_list = null;
+		
+		YHEventScheduleVideoMapper mapper = sqlSession.getMapper(YHEventScheduleVideoMapper.class);
+		
+		try
+		{
+			event_schedule_video_id_list = mapper.getEventScheduleVideoIdByEventScheduleIdList(event_schedule_id_list);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_video_id_list;
 	}
 }

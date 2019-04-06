@@ -47,6 +47,7 @@ public class GroupController
 	YHEventScheduleImageDAO yh_event_schedule_imageDAO;
 	@Autowired
 	YHGroupBoardDAO yh_group_boardDAO;
+	
 	@Autowired
 	SH_DAO_Group sh_gdao;
 	@Autowired
