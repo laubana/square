@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleImageFaceMapper">
+<delete id="deleteEventScheduleImageFaceByEventScheduleImageId" parameterType="string">
+DELETE FROM TABLE_ESIF
+WHERE
+	EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id}
+</delete>
 <select id="selectEventScheduleImageFaceByEventScheduleImageId" parameterType="string" resultType="EventScheduleImageFace">
 SELECT
 	*

@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleVideoFaceMapper">
+<delete id="deleteEventScheduleVideoFaceByEventScheduleVideoId" parameterType="string">
+DELETE FROM TABLE_ESVF
+WHERE
+	EVENT_SCHEDULE_VIDEO_ID = #{event_schedule_video_id}
+</delete>
 <update id="updateEventScheduleVideoFaceIdByEventScheduleVideoImageId" parameterType="map">
 UPDATE TABLE_ESVF
 SET
@@ -16,15 +21,13 @@ INSERT INTO TABLE_ESVF
 (
 	EVENT_SCHEDULE_VIDEO_FACE_ID,
 	EVENT_SCHEDULE_VIDEO_IMAGE_ID,
-	EVENT_SCHEDULE_VIDEO_ID,
-	DETECT_DATE
+	EVENT_SCHEDULE_VIDEO_ID
 )
 VALUES
 (
 	#{event_schedule_video_face_id},
 	#{event_schedule_video_image_id},
-	#{event_schedule_video_id},
-	#{detect_date}
+	#{event_schedule_video_id}
 )
 </insert>
 <select id="selectEventScheduleVideoFaceByEventScheduleVideoId" parameterType="string" resultType="EventScheduleVideo">
@@ -42,5 +45,16 @@ FROM
 	TABLE_ESVF
 WHERE
 	EVENT_SCHEDULE_VIDEO_ID = #{event_schedule_video_id}
+</select>
+<select id="getEventScheduleVideoFaceIdByEventScheduleVideoIdList" parameterType="list" resultType="string">
+SELECT DISTINCT
+	EVENT_SCHEDULE_VIDEO_FACE_ID
+FROM
+	TABLE_ESVF
+WHERE
+	1 = 0
+	<foreach item="event_schedule_video_id" collection="list" open="OR" separator="OR">	
+		EVENT_SCHEDULE_VIDEO_ID = #{event_schedule_video_id}
+	</foreach>
 </select>
 </mapper>

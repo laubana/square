@@ -137,14 +137,13 @@ public class UserController {
 	@RequestMapping(value = "memberPhoto", method = RequestMethod.GET)
 	public String memberPhotoForm(Model request)
 	{
-		long start_time = (new Date()).getTime();
 		String result = null;
 		JSONArray jsonArray = null;
-		JSONObject jsonObject = null;
-		
-		User user;
+		JSONObject jsonObject = null;	
+
 		String user_id = "id1";
-		String image_id;
+		User user = yh_userDAO.selectUserByUserId(user_id);;
+		String image_id = user.getImage_id();
 		
 		ArrayList<Integer> group_id_list = yh_group_attendanceDAO.getGroupIdByUserId(user_id);
 		
@@ -152,9 +151,7 @@ public class UserController {
 		request.addAttribute("group_list", group_list);
 		
 		//EventScheduleImageFace 업데이트
-		ArrayList<Integer> event_id_list = yh_eventDAO.getEventIdByGroupIdList(group_id_list);
-		
-		ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventIdList(event_id_list);
+		ArrayList<Integer> event_schedule_id_list = yh_event_schedule_attendanceDAO.getEventScheduleIdByUserId(user_id);
 		
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
 		
@@ -183,6 +180,8 @@ public class UserController {
 			{
 				yh_event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id(), (new Date()).getTime());
 				
+				yh_event_schedule_image_faceDAO.deleteEventScheduleImageFaceByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id());
+				
 				result = YHMSFaceUtil.detectFace(Reference.file_path, event_schedule_image_list.get(i).getEvent_schedule_image_id());
 				jsonArray = new JSONArray(result);
 				
@@ -190,7 +189,7 @@ public class UserController {
 				{
 					jsonObject = jsonArray.getJSONObject(j);
 					
-					yh_event_schedule_image_faceDAO.updateEventScheduleImageFaceIdByEventScheduleImageIdRectangle(jsonObject.getString("faceId"), event_schedule_image_list.get(i).getEvent_schedule_image_id(),
+					yh_event_schedule_image_faceDAO.insertEventScheduleImageFace(jsonObject.getString("faceId"), event_schedule_image_list.get(i).getEvent_schedule_image_id(),
 							jsonObject.getJSONObject("faceRectangle").getInt("top"),
 							jsonObject.getJSONObject("faceRectangle").getInt("left"),
 							jsonObject.getJSONObject("faceRectangle").getInt("width"),
@@ -202,9 +201,6 @@ public class UserController {
 		//EventScheduleImageFace 업데이트 끝
 
 		//Album 업데이트
-		user = yh_userDAO.selectUserByUserId(user_id);
-		image_id = user.getImage_id();
-		
 		ArrayList<Integer> attend_event_schedule_id_list = yh_event_schedule_attendanceDAO.getEventScheduleIdByUserId(user_id);
 		
 		ArrayList<String> attend_event_schedule_image_id_list = yh_event_schedule_imageDAO.getEventScheduleImageIdByEventScheduleIdList(attend_event_schedule_id_list);
@@ -220,14 +216,14 @@ public class UserController {
 		
 		ArrayList<String> attend_event_schedule_image_face_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageFaceIdByEventScheduleImageIdList(attend_event_schedule_image_id_list);
 		
-		ArrayList<String> similar_event_schedule_image_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(attend_event_schedule_image_face_id_list, (new JSONArray(YHMSFaceUtil.detectFace(Reference.file_path, image_id))).getJSONObject(0).getString("faceId")  );
+		ArrayList<String> similar_event_schedule_image_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(attend_event_schedule_image_face_id_list, (new JSONArray(YHMSFaceUtil.detectFace(Reference.file_path, image_id))).getJSONObject(0).getString("faceId"));
 		
 		ArrayList<String> similar_event_schedule_image_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageIdByEventScheduleImageFaceIdList(similar_event_schedule_image_face_id);
 		
 		yh_image_albumDAO.updateSelfByEventScheduleImageIdListUserId(similar_event_schedule_image_id_list, user_id);
 		//Album 업데이트 끝
 		
-		event_id_list = yh_eventDAO.getEventIdByGroupIdList(group_id_list);
+		ArrayList<Integer> event_id_list = yh_eventDAO.getEventIdByGroupIdList(group_id_list);
 		
 		event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventIdList(event_id_list);
 		
@@ -238,10 +234,6 @@ public class UserController {
 		ArrayList<String> new_event_schedule_image_id_list = yh_image_albumDAO.getEventScheduleImageIdByEventScheduleImageIdListUserIdSelf(old_event_schedule_image_id_list, user_id);
 		
 		request.addAttribute("self_event_schedule_image_list", yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleImageIdList(new_event_schedule_image_id_list));
-		
-		long end_time = (new Date()).getTime();
-		
-		System.out.println((long)(end_time - start_time) / (long)1000);
 		
 		return "member/memberPhotoForm";
 	}

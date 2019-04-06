@@ -19,6 +19,20 @@ public class YHEventScheduleVideoFaceDAO
 	@Autowired
 	SqlSession sqlSession;
 
+	public int deleteEventScheduleVideoFaceByEventScheduleVideoId(String event_schedule_video_id)
+	{
+		int result = 0;
+		
+		YHEventScheduleVideoFaceMapper mapper = sqlSession.getMapper(YHEventScheduleVideoFaceMapper.class);
+		
+		try
+		{
+			result = mapper.deleteEventScheduleVideoFaceByEventScheduleVideoId(event_schedule_video_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public int insertEventScheduleVideoFace
 	(
 			String event_schedule_video_face_id,
@@ -86,6 +100,20 @@ public class YHEventScheduleVideoFaceDAO
 		try
 		{
 			event_schedule_video_face_id_list = mapper.getEventScheduleVideoFaceIdByEventScheduleVideoId(event_schedule_video_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_video_face_id_list;
+	}
+	public ArrayList<String> getEventScheduleVideoFaceIdByEventScheduleVideoIdList(ArrayList<String> event_schedule_video_id_list)
+	{
+		ArrayList<String> event_schedule_video_face_id_list = null;
+		
+		YHEventScheduleVideoFaceMapper mapper = sqlSession.getMapper(YHEventScheduleVideoFaceMapper.class);
+		
+		try
+		{
+			event_schedule_video_face_id_list = mapper.getEventScheduleVideoFaceIdByEventScheduleVideoIdList(event_schedule_video_id_list);
 		}
 		catch(Exception error){error.printStackTrace();}
 		

@@ -7,6 +7,7 @@ import project.ppaya.square.vo.EventScheduleImageFace;
 
 public interface YHEventScheduleImageFaceMapper
 {
+	public int deleteEventScheduleImageFaceByEventScheduleImageId(String event_schedule_image_id);
 	public ArrayList<EventScheduleImageFace> selectEventScheduleImageFaceByEventScheduleImageId(String event_schedule_image_id);
 	public ArrayList<EventScheduleImageFace> selectEventScheduleImageFaceByEventScheduleImageIdList(ArrayList<String> event_schedule_image_id_list);
 	public ArrayList<String> getEventScheduleImageFaceIdByEventScheduleImageId(String event_schedule_image_id);

@@ -16,6 +16,20 @@ public class YHEventScheduleImageFaceDAO
 	@Autowired
 	SqlSession sqlSession;
 
+	public int deleteEventScheduleImageFaceByEventScheduleImageId(String event_schedule_image_id)
+	{
+		int result = 0;
+		
+		YHEventScheduleImageFaceMapper mapper = sqlSession.getMapper(YHEventScheduleImageFaceMapper.class);
+		
+		try
+		{
+			result = mapper.deleteEventScheduleImageFaceByEventScheduleImageId(event_schedule_image_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public ArrayList<EventScheduleImageFace> selectEventScheduleImageFaceByEventScheduleImageId(String event_schedule_image_id)
 	{
 		ArrayList<EventScheduleImageFace> event_schedule_image_face_list = null;
