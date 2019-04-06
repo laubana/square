@@ -22,6 +22,12 @@ WHERE
 	GROUP_CATEGORY_ID like #{category}
 </select>
 
-
+<select id="getCategoryList"  resultType="GroupCategory">
+SELECT
+	*
+FROM
+	TABLE_GC
+order by GROUP_CATEGORY_ID
+</select>
 
 </mapper>

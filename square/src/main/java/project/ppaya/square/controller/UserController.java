@@ -22,6 +22,7 @@ import project.ppaya.square.vo.EventScheduleImage;
 import project.ppaya.square.vo.Group;
 import project.ppaya.square.vo.Reference;
 import project.ppaya.square.vo.User;
+import project.ppaya.square.vo.UserHashtag;
 import project.ppaya.square.yhdao.YHAlbumDAO;
 import project.ppaya.square.yhdao.YHEventDAO;
 import project.ppaya.square.yhdao.YHEventScheduleAttendanceDAO;
@@ -108,9 +109,27 @@ public class UserController {
 	@RequestMapping(value = "myPage", method = RequestMethod.GET)
 	public String sh_myPageForm(Model request)
 	{
+		//그 사람이 참여 중인 그룹 리스트 보내기
 		String userid = "id1"; //세현: 나중에는 세션에서 id 받아서 넣기. 일단 임시로 넣어 둠
 		ArrayList<Group> glist = sh_gdao.getGroupByUser(userid);
 		request.addAttribute("glist",glist);
+		
+		//해시태그 보내기
+/*
+나중에 user_hashtag 테이블 생성되고 나면 살리기 
+ 		ArrayList<UserHashtag> hlist = null;
+		hlist = sh_udao.getUserHashtag(userid);
+일단 아래는 임시
+ */		
+		ArrayList<UserHashtag> hlist = new ArrayList<UserHashtag>();
+		hlist = sh_udao.getUserHashtag(userid);
+		int i = 0;
+		for(i = 1 ; i <= 5 ; i = i + 1){
+			hlist.add(new UserHashtag("tempid"+i,i));
+		}
+		request.addAttribute("hlist",hlist);
+
+		
 		return "member/myPageForm";
 	}
 	

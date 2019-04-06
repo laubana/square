@@ -5,11 +5,13 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="project.ppaya.square.vo.User" alias="User" />
+		<typeAlias type="project.ppaya.square.vo.UserHashtag" alias="UserHashtag" />
 		<typeAlias type="project.ppaya.square.vo.User" alias="UserSchedule" />
 		<typeAlias type="project.ppaya.square.vo.Album" alias="Album" />
 		<typeAlias type="project.ppaya.square.vo.Group" alias="Group" />
 		<typeAlias type="project.ppaya.square.vo.GroupBoard" alias="GroupBoard" />
 		<typeAlias type="project.ppaya.square.vo.GroupAttendance" alias="GroupAttendance" />
+		<typeAlias type="project.ppaya.square.vo.GroupCategory" alias="GroupCategory" />
 		<typeAlias type="project.ppaya.square.vo.Event" alias="Event" />
 		<typeAlias type="project.ppaya.square.vo.EventSchedule" alias="EventSchedule" />
 		<typeAlias type="project.ppaya.square.vo.EventScheduleAttendance" alias="EventScheduleAttendance" />
@@ -17,6 +19,7 @@
 		<typeAlias type="project.ppaya.square.vo.EventScheduleImageFace" alias="EventScheduleImageFace" />
 		<typeAlias type="project.ppaya.square.vo.EventScheduleVideo" alias="EventScheduleVideo" />
 		<typeAlias type="project.ppaya.square.vo.EventScheduleVideoFace" alias="EventScheduleVideoFace" />
+		
 	</typeAliases>
 	<mappers>
 		<mapper resource="shmapper/sh_mapper_user.xml" />
