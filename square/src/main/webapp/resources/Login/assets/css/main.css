@@ -126,7 +126,7 @@ input, select, textarea {
 		-webkit-justify-content: center;
 		-ms-justify-content: center;
 		justify-content: center;
-		background-color: #000;
+		background-color: #414549; /*범인*/
 		padding: 6em 4em 4em 4em;
 	}
 
@@ -198,7 +198,7 @@ input, select, textarea {
 			position: absolute;
 			top: 0;
 			visibility: hidden;
-			width: 150%;
+			width: 110%;
 		}
 
 			#bg div.visible {
@@ -369,13 +369,13 @@ input, select, textarea {
 		-ms-transition: border-bottom-color 0.2s ease, color 0.2s ease;
 		transition: border-bottom-color 0.2s ease, color 0.2s ease;
 		border-bottom: dotted 1px rgba(255, 255, 255, 0.25);
-		color: #1cb495;
+		color: #778899;
 		text-decoration: none;
 	}
 
 		a:hover {
 			border-bottom-color: transparent;
-			color: #1cb495 !important;
+			color: #778899 !important;
 			text-decoration: none;
 		}
 
@@ -654,7 +654,7 @@ input, select, textarea {
 			}
 
 			form .message.success {
-				color: #1cb495;
+				color: #fff;
 			}
 
 				form .message.success:before {
@@ -968,7 +968,7 @@ input, select, textarea {
 		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
 		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
 		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
-		background-color: #1cb495;
+		background-color: #778899;
 		border-radius: 6px;
 		border: 0;
 		color: #ffffff !important;
@@ -988,7 +988,7 @@ input, select, textarea {
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			background-color: #1fcaa7;
+			background-color: #6c757c;
 		}
 
 		input[type="submit"]:active,
@@ -996,7 +996,7 @@ input, select, textarea {
 		input[type="button"]:active,
 		button:active,
 		.button:active {
-			background-color: #199e83;
+			background-color: #555d63;
 		}
 
 		input[type="submit"].disabled, input[type="submit"]:disabled,

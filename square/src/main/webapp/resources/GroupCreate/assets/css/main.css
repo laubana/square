@@ -2624,6 +2624,11 @@ input, select, textarea {
 			cursor: default;
 			opacity: 0.25;
 		}
+		
+		.groupExpressDiv
+		{
+			visibility: hidden;
+		}
 
 /* Features */
 

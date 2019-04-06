@@ -13,7 +13,7 @@
 
 		<!-- Header -->
 			<header id="header">
-				<h1><a href="#intro">2조</a></h1>
+				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
 						<li><a href="#">회원가입</a></li>
@@ -50,22 +50,22 @@
 					<!-- Gallery  -->
 						<div class="gallery">
 							<article class="from-left">
-								<a href="groupSearch" class="image fit"><img src="resources/Main/images/thumbs/01.jpg" title="The Anonymous Red" alt="" /></a>
+								<a href="groupSearch" class="image fit thumb1"><img src="resources/Main/images/thumbs/01.jpg" title="The Anonymous Red" alt="" /></a>
 							</article>
 							<article class="from-right">
-								<a href="#" class="image fit"><img src="resources/Main/images/thumbs/02.jpg" title="Airchitecture II" alt="" /></a>
+								<a href="groupSearch" class="image fit thumb2"><img src="resources/Main/images/thumbs/02.jpg" title="Airchitecture II" alt="" /></a>
 							</article>
 							<article class="from-left">
-								<a href="#" class="image fit"><img src="resources/Main/images/thumbs/03.jpg" title="Air Lounge" alt="" /></a>
+								<a href="groupSearch" class="image fit thumb3"><img src="resources/Main/images/thumbs/03.jpg" title="Air Lounge" alt="" /></a>
 							</article>
 							<article class="from-right">
-								<a href="#" class="image fit"><img src="resources/Main/images/thumbs/04.jpg" title="Carry on" alt="" /></a>
+								<a href="groupSearch" class="image fit thumb4"><img src="resources/Main/images/thumbs/04.jpg" title="Carry on" alt="" /></a>
 							</article>
 							<article class="from-left">
-								<a href="#" class="image fit"><img src="resources/Main/images/thumbs/05.jpg" title="The sparkling shell" alt="" /></a>
+								<a href="groupSearch" class="image fit thumb5"><img src="resources/Main/images/thumbs/05.jpg" title="The sparkling shell" alt="" /></a>
 							</article>
 							<article class="from-right">
-								<a href="#" class="image fit"><img src="resources/Main/images/thumbs/06.jpg" title="Bent IX" alt="" /></a>
+								<a href="groupSearch" class="image fit thumb6"><img src="resources/Main/images/thumbs/06.jpg" title="Bent IX" alt="" /></a>
 							</article>
 						</div>
 
@@ -73,7 +73,7 @@
 			</section>
 
 		<!-- Zero -->
-			<section id="zero" class="main style2 left dark fullscreen">
+			<!-- <section id="zero" class="main style2 left dark fullscreen">
 				<div class="content box style2">
 					<header>
 						<h2>로그인</h2>
@@ -86,7 +86,7 @@
 					</div>
 				</div>
 				<a href="#one" class="button style2 down anchored">Next</a>
-			</section>
+			</section> -->
 
 		<!-- One -->
 			<section id="one" class="main style2 right dark fullscreen">
@@ -140,6 +140,21 @@
 
 			</footer>
 
+
+
+		<!-- 기본 Scripts -->
+		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
+
+		<!-- Scripts -->
+			<script src="resources/Main/assets/js/jquery.min.js"></script>
+			<script src="resources/Main/assets/js/jquery.poptrox.min.js"></script>
+			<script src="resources/Main/assets/js/jquery.scrolly.min.js"></script>
+			<script src="resources/Main/assets/js/jquery.scrollex.min.js"></script>
+			<script src="resources/Main/assets/js/browser.min.js"></script>
+			<script src="resources/Main/assets/js/breakpoints.min.js"></script>
+			<script src="resources/Main/assets/js/util.js"></script>
+			<script src="resources/Main/assets/js/main.js"></script>
+
 <!-- 페이지 이동 버튼 -->
 <script>
 $(document).ready(function () {
@@ -160,19 +175,6 @@ function gcreateMove() {
 	location.href="";
 }
 </script>
-
-		<!-- 기본 Scripts -->
-		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
-
-		<!-- Scripts -->
-			<script src="resources/Main/assets/js/jquery.min.js"></script>
-			<script src="resources/Main/assets/js/jquery.poptrox.min.js"></script>
-			<script src="resources/Main/assets/js/jquery.scrolly.min.js"></script>
-			<script src="resources/Main/assets/js/jquery.scrollex.min.js"></script>
-			<script src="resources/Main/assets/js/browser.min.js"></script>
-			<script src="resources/Main/assets/js/breakpoints.min.js"></script>
-			<script src="resources/Main/assets/js/util.js"></script>
-			<script src="resources/Main/assets/js/main.js"></script>
 
 	</body>
 </html>

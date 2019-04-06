@@ -79,17 +79,17 @@ label img {
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
+					<div align="left"><h1 style="font-size:50px;"><a href="main">2조</a></h1></div>
 					<a href="#" class="image avatar"><img src="resources/GroupMain/images/member/c1.jpg" alt="" /></a>
 					<h1><strong>Harry</strong>님의 그룹 사진<br /></h1>
 					<p>편집 할려면 하든가ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
 					ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
 					<nav id="nav">
 					<ul>
-						<li></li><li></li><li></li><li></li><li></li><li></li>
-						<li></li><li></li><li></li><li></li><li></li><li></li>
-						<li></li><li></li><li></li><li></li>
+						<li></li><li></li><li></li><li></li><li></li>
 						<li><a href="#three" class="active">그룹 선택</a></li>
 						<li><a href="#four" class="active">앨범 편집</a></li>
+						<li><a href="#video" class="active">영상 편집</a></li>
 					</ul>
 				</nav>
 				</div>
@@ -219,6 +219,16 @@ label img {
 							<li><a href="myPage" class="button">편집 확인</a></li>
 						</ul>
 					</section>
+
+		<!-- 영상 -->
+			<section id="video">
+				<h1>영상 편집</h1>
+				<p>1 퍄퍄</p>
+				<p>2 파파</p>
+				<p>3 포포</p>
+				<p>4 표표</p>
+				<a href="myPage" class="button">편집 확인</a>
+			</section>
 
 			</div>
 
