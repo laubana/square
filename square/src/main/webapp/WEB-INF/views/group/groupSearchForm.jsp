@@ -7,7 +7,7 @@
 		<title>GroupSearch</title>	
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="resources/Main/assets/css/main.css" />
+		<link rel="stylesheet" href="resources/GroupSearch/assets/css/main.css" />
 		
 		<!-- 추가 -->
 		<link rel='stylesheet' href='http://www.davilious.com/codepen/font-awesome/css/font-awesome.css'>
@@ -114,7 +114,7 @@ input::placeholder {
 .filter-btn {
   position: relative;
   display: inline-block;
-  color: #5ab7e0;
+  color: #4b6a77;
   text-align: center;
   line-height: 25px;
   text-decoration: none;
@@ -137,7 +137,7 @@ input::placeholder {
   display: inline-block;
   width: auto;
   padding: 2px 10px;
-  font-size: .7rem;
+  font-size: .9rem;
   height: 20px;
   /*3px at the top due to background 20 + 2 of padding - 25 of parent = 3*/
   line-height: 20px;
@@ -225,7 +225,7 @@ input::placeholder {
   						</div>
 						</div>			
 					<footer>
-						<a href="#work" class="button style2 down">More</a>
+						<a href="#work" class="button style2 down"></a>
 					</footer>
 				</div>
 			</section>
@@ -241,10 +241,10 @@ input::placeholder {
 					<!-- Gallery  -->
 						<div class="gallery">
 							<article class="from-left">
-								<a href="groupMain" class="image fit"><img src="resources/Main/images/thumbs/01.jpg" title="The Anonymous Red" alt="" /></a>
+								<a href="groupMain" class="image fit"><img src="resources/GroupSearch/images/logo/01.jpg" title="The Anonymous Red" alt="" /></a>
 							</article>
 							<article class="from-right">
-								<a href="groupMain" class="image fit"><img src="resources/Main/images/thumbs/02.jpg" title="Airchitecture II" alt="" /></a>
+								<a href="groupMain" class="image fit"><img src="resources/GroupSearch/images/logo/02.jpg" title="Airchitecture II" alt="" /></a>
 							</article>
 						</div>
 
@@ -276,17 +276,20 @@ input::placeholder {
 
 		<!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
-
 		<!-- Scripts -->
-			<script src="resources/Main/assets/js/jquery.min.js"></script>
-			<script src="resources/Main/assets/js/jquery.poptrox.min.js"></script>
-			<script src="resources/Main/assets/js/jquery.scrolly.min.js"></script>
-			<script src="resources/Main/assets/js/jquery.scrollex.min.js"></script>
-			<script src="resources/Main/assets/js/browser.min.js"></script>
-			<script src="resources/Main/assets/js/breakpoints.min.js"></script>
-			<script src="resources/Main/assets/js/util.js"></script>
-			<script src="resources/Main/assets/js/main.js"></script>
-
+			<script src="resources/GroupSearch/assets/js/jquery.min.js"></script>
+			<script src="resources/GroupSearch/assets/js/jquery.poptrox.min.js"></script>
+			<script src="resources/GroupSearch/assets/js/jquery.scrolly.min.js"></script>
+			<script src="resources/GroupSearch/assets/js/jquery.scrollex.min.js"></script>
+			<script src="resources/GroupSearch/assets/js/browser.min.js"></script>
+			<script src="resources/GroupSearch/assets/js/breakpoints.min.js"></script>
+			<script src="resources/GroupSearch/assets/js/util.js"></script>
+			<script src="resources/GroupSearch/assets/js/main.js"></script>
+			
+<script>
+$("#intro").css("background", "url('resources/GroupSearch/assets/css/images/overlay.png'), url('resources/GroupSearch/images/${requestScope.image}.jpg')");
+$("#intro").css("background-size","256px 256px, cover");
+</script>
 <script>
 $('input[type=search]').on({
 	  'focus': function(){

@@ -946,7 +946,226 @@ input, select, option, textarea {
 		display: inline-block;
 	}
 
-		.image:before {
+	.image:before {
+			-moz-transition: opacity 0.2s ease-in-out;
+			-webkit-transition: opacity 0.2s ease-in-out;
+			-ms-transition: opacity 0.2s ease-in-out;
+			transition: opacity 0.2s ease-in-out;
+			background: url("images/overlay.png");
+			border-radius: 0.35em;
+			content: '';
+			display: block;
+			height: 100%;
+			left: 0;
+			opacity: 0.5;
+			position: absolute;
+			top: 0;
+			width: 100%;
+		}
+
+		.image.thumb {
+			text-align: center;
+		}
+	
+			.image.thumb1:after {
+				-moz-transition: opacity 0.2s ease-in-out;
+				-webkit-transition: opacity 0.2s ease-in-out;
+				-ms-transition: opacity 0.2s ease-in-out;
+				transition: opacity 0.2s ease-in-out;
+				border-radius: 0.35em;
+				border: solid 3px rgba(255, 255, 255, 0.5);
+				color: #fff;
+				content: 'IT';
+				display: inline-block;
+				font-size: 0.8em;
+				font-weight: 400;
+				left: 50%;
+				line-height: 2.25em;
+				margin: -1.25em 0 0 -3em;
+				opacity: 0;
+				padding: 0 1.5em;
+				position: absolute;
+				text-align: center;
+				text-decoration: none;
+				top: 50%;
+				white-space: nowrap;
+			}
+			
+			.image.thumb2:after {
+				-moz-transition: opacity 0.2s ease-in-out;
+				-webkit-transition: opacity 0.2s ease-in-out;
+				-ms-transition: opacity 0.2s ease-in-out;
+				transition: opacity 0.2s ease-in-out;
+				border-radius: 0.35em;
+				border: solid 3px rgba(255, 255, 255, 0.5);
+				color: #fff;
+				content: 'Family';
+				display: inline-block;
+				font-size: 0.8em;
+				font-weight: 400;
+				left: 50%;
+				line-height: 2.25em;
+				margin: -1.25em 0 0 -3em;
+				opacity: 0;
+				padding: 0 1.5em;
+				position: absolute;
+				text-align: center;
+				text-decoration: none;
+				top: 50%;
+				white-space: nowrap;
+			}
+			
+			.image.thumb3:after {
+				-moz-transition: opacity 0.2s ease-in-out;
+				-webkit-transition: opacity 0.2s ease-in-out;
+				-ms-transition: opacity 0.2s ease-in-out;
+				transition: opacity 0.2s ease-in-out;
+				border-radius: 0.35em;
+				border: solid 3px rgba(255, 255, 255, 0.5);
+				color: #fff;
+				content: 'Pet';
+				display: inline-block;
+				font-size: 0.8em;
+				font-weight: 400;
+				left: 50%;
+				line-height: 2.25em;
+				margin: -1.25em 0 0 -3em;
+				opacity: 0;
+				padding: 0 1.5em;
+				position: absolute;
+				text-align: center;
+				text-decoration: none;
+				top: 50%;
+				white-space: nowrap;
+			}
+			
+			.image.thumb4:after {
+				-moz-transition: opacity 0.2s ease-in-out;
+				-webkit-transition: opacity 0.2s ease-in-out;
+				-ms-transition: opacity 0.2s ease-in-out;
+				transition: opacity 0.2s ease-in-out;
+				border-radius: 0.35em;
+				border: solid 3px rgba(255, 255, 255, 0.5);
+				color: #fff;
+				content: 'Cooking';
+				display: inline-block;
+				font-size: 0.8em;
+				font-weight: 400;
+				left: 50%;
+				line-height: 2.25em;
+				margin: -1.25em 0 0 -3em;
+				opacity: 0;
+				padding: 0 1.5em;
+				position: absolute;
+				text-align: center;
+				text-decoration: none;
+				top: 50%;
+				white-space: nowrap;
+			}
+			
+			.image.thumb5:after {
+				-moz-transition: opacity 0.2s ease-in-out;
+				-webkit-transition: opacity 0.2s ease-in-out;
+				-ms-transition: opacity 0.2s ease-in-out;
+				transition: opacity 0.2s ease-in-out;
+				border-radius: 0.35em;
+				border: solid 3px rgba(255, 255, 255, 0.5);
+				color: #fff;
+				content: 'Hiking';
+				display: inline-block;
+				font-size: 0.8em;
+				font-weight: 400;
+				left: 50%;
+				line-height: 2.25em;
+				margin: -1.25em 0 0 -3em;
+				opacity: 0;
+				padding: 0 1.5em;
+				position: absolute;
+				text-align: center;
+				text-decoration: none;
+				top: 50%;
+				white-space: nowrap;
+			}
+			
+			.image.thumb6:after {
+				-moz-transition: opacity 0.2s ease-in-out;
+				-webkit-transition: opacity 0.2s ease-in-out;
+				-ms-transition: opacity 0.2s ease-in-out;
+				transition: opacity 0.2s ease-in-out;
+				border-radius: 0.35em;
+				border: solid 3px rgba(255, 255, 255, 0.5);
+				color: #fff;
+				content: 'Music';
+				display: inline-block;
+				font-size: 0.8em;
+				font-weight: 400;
+				left: 50%;
+				line-height: 2.25em;
+				margin: -1.25em 0 0 -3em;
+				opacity: 0;
+				padding: 0 1.5em;
+				position: absolute;
+				text-align: center;
+				text-decoration: none;
+				top: 50%;
+				white-space: nowrap;
+			}
+
+			.image.thumb1:hover:after {
+				opacity: 1.0;
+			}
+			
+			.image.thumb1:hover:before {
+				background: url("images/overlay.png"), url("images/overlay.png");
+				opacity: 1.0;
+			}
+			
+			.image.thumb2:hover:after {
+				opacity: 1.0;
+			}
+			
+			.image.thumb2:hover:before {
+				background: url("images/overlay.png"), url("images/overlay.png");
+				opacity: 1.0;
+			}
+			
+			.image.thumb3:hover:after {
+				opacity: 1.0;
+			}
+			
+			.image.thumb3:hover:before {
+				background: url("images/overlay.png"), url("images/overlay.png");
+				opacity: 1.0;
+			}
+			
+			.image.thumb4:hover:after {
+				opacity: 1.0;
+			}
+			
+			.image.thumb4:hover:before {
+				background: url("images/overlay.png"), url("images/overlay.png");
+				opacity: 1.0;
+			}
+			
+			.image.thumb5:hover:after {
+				opacity: 1.0;
+			}
+			
+			.image.thumb5:hover:before {
+				background: url("images/overlay.png"), url("images/overlay.png");
+				opacity: 1.0;
+			}
+			
+			.image.thumb6:hover:after {
+				opacity: 1.0;
+			}
+			
+			.image.thumb6:hover:before {
+				background: url("images/overlay.png"), url("images/overlay.png");
+				opacity: 1.0;
+			}
+
+		/* .image:before {
 			content: '';
 			position: absolute;
 			left: 0;
@@ -954,7 +1173,7 @@ input, select, option, textarea {
 			width: 100%;
 			height: 100%;
 			background: url("images/overlay.png");
-		}
+		} */
 
 		.image img {
 			display: block;

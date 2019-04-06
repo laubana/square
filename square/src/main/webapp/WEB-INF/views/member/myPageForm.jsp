@@ -19,16 +19,16 @@
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
+					<div align="left"><h1 style="font-size:50px;"><a href="main">2조</a></h1></div>
 					<a href="#" class="image avatar"><img src="resources/GroupMain/images/member/c1.jpg" alt="" /></a>
-					<p><input type="button" value="이미지 변경" style="height:3em;"></p>
 					<h1><strong>Harry</strong>님의 마이페이지<br /></h1>
 					<p>자기소개 할려면 하든가ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
 					ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
 					<nav id="nav">
 					<ul>
 						<li><a href="#one" class="active">정보</a></li>
-						<li><a href="#two" class="active">그룹 활동</a></li>
-						<li><a href="#three" class="active">관심 분야</a></li>
+						<li><a href="#two" class="active">관심 분야</a></li>
+						<li><a href="#three" class="active">그룹 활동</a></li>
 						<li><a href="#four" class="active">앨범</a></li>
 					</ul>
 				</nav>

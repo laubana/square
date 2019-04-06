@@ -50,7 +50,7 @@
 
 		}
 
-	// Footer.
+	// Footer(범인).
 		breakpoints.on('<=medium', function() {
 			$footer.insertAfter($main);
 		});

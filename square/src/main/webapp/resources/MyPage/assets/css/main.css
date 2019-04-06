@@ -110,7 +110,7 @@ input, select, textarea {
 		-webkit-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 		-ms-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 		transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-		border-bottom: dotted 1px;
+		/* border-bottom: dotted 1px; */
 		color: #778899;
 		text-decoration: none;
 	}
@@ -2505,7 +2505,7 @@ input, select, textarea {
 		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-		background-color: white;
+		background-color: transparent;
 		border-radius: 0.35em;
 		border: solid 3px #efefef;
 		color: #787878 !important;
@@ -2515,7 +2515,7 @@ input, select, textarea {
 		height: 3.15em;
 		height: calc(2.75em + 6px);
 		line-height: 2.75em;
-		min-width: 3em;
+		min-width: 10em;
 		padding: 0 1.5em;
 		text-align: center;
 		text-decoration: none;
@@ -2704,7 +2704,7 @@ input, select, textarea {
 			margin: 0 0 1em 0;
 			width: 6.25em;
 		}
-
+		
 /* Footer */
 
 	#footer .icons {
@@ -3327,68 +3327,4 @@ input, select, textarea {
 					line-height: 1.75em;
 				}
 
-		/* Header */
-
-			#header {
-				padding: 2.25em 1.5em;
-			}
-
-				#header h1 {
-					font-size: 1.35em;
-				}
-
-		/* Footer */
-
-			#footer {
-				padding: 2.25em 1.5em;
-			}
-
-		/* Main */
-
-			#main {
-				padding: 2.25em 1.5em 0.25em 1.5em;
-			}
-
-				#main > section {
-					margin: 2.25em 0 0 0;
-					padding: 2.25em 0 0 0;
-				}
-
-		/* Poptrox */
-
-			.poptrox-popup {
-				border-radius: 0;
-			}
-
-				.poptrox-popup .nav-next:before,
-				.poptrox-popup .nav-previous:before {
-					margin-top: -1em;
-				}
-
-	}
-
-/* XSmall */
-
-	@media screen and (max-width: 480px) {
-
-		/* Header */
-
-			#header {
-				padding: 4.5em 1.5em;
-			}
-
-				#header h1 br {
-					display: none;
-				}
-
-		/* Footer */
-
-			#footer .copyright li {
-				border-left-width: 0;
-				display: block;
-				line-height: 2.25em;
-				margin-left: 0;
-				padding-left: 0;
-			}
-
-	}
+		

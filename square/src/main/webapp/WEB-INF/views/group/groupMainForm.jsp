@@ -13,26 +13,37 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
+		<link rel="stylesheet" href="resources/TextA/css/style.css">
+		
 	</head>
 	<body class="is-preload" onload="fn_onload();">
-<c:forEach var="group_attendance" items="${group_attendance_list}">
-${group_attendance.user_id}
-</c:forEach>
+
+		<!-- Header 메인 바 -->
+			<header id="header1">
+				<h1><a href="main">2조</a></h1>
+				<nav>
+					<ul>
+						<li><a href="#">회원가입</a></li>
+						<li><a href="#">그룹생성</a></li>
+						<li><a href="login">로그인</a></li>
+					</ul>
+				</nav>
+			</header>
+
 		<!-- Header -->
 			<section id="header">
 				<header>
-					<span class="image avatar"><img src="resources/GroupMain/images/logo.jpg" alt="" /></span>
+					<span class="image avatar"><img src="resources/Main/images/logo/01.jpg" alt="" /></span>
 					<h1 id="logo"><a href="#">빠야 그룹</a></h1>
-					<p>해시해시해시<br />
-					태그태그태그태그</p>
+					<p style="font-size:15px;">[관심분야][관심분야][관심분야][관심분야]</p>
 				</header>
 				<nav id="nav">
 					<ul>
 						<li><a href="#one" class="active">정보</a></li>
-						<li><a href="#two">이벤트</a></li>
-						<li><a href="#three">앨범</a></li>
-						<li><a href="#four">회원</a></li>
-						<li><a href="#five">게시판</a></li>
+						<li><a href="#two">회원</a></li>
+						<li><a href="#three">코멘트</a></li>
+						<li><a href="#four">앨범</a></li>
+						<li><a href="#five">이벤트</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -49,13 +60,13 @@ ${group_attendance.user_id}
 		<!-- Wrapper -->
 			<div id="wrapper">
 
-				<!-- Main -->
+				<!-- Main 가:1280세:480-->
 					<div id="main">
 
 						<!-- One -->
 							<section id="one">
 								<div class="image main" data-position="center">
-									<img src="resources/GroupMain/images/banner.jpg" alt="" />
+									<img src="resources/GroupMain/images/banner/01.jpg" alt="" />
 								</div>
 								<div class="container">
 									<header class="major">
@@ -64,86 +75,121 @@ ${group_attendance.user_id}
 										빵빵빵빵빵빵 <a href="main">2조</a>.</p>
 									</header>
 									<p>빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵.</p>
-										<input type="button" value="정보 편집">
 								</div>
 							</section>
-
-						<!-- Two -->
+						
+						<!-- Two -->	<!-- 아바타 이미지 필섹 가로 140 세로 140 -->
 							<section id="two">
 								<div class="container">
-									<h3>이벤트 활동</h3>
-									<p>벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트벤트벤트이벤트이벤트.</p>
-									<ul class="feature-icons">
-										<li class="fa-code">치킨ㄱㄱ? 파티(3/4)</li>
-										<li class="fa-cubes">소맥 파티 구함</li>
-										<li class="fa-book">코딩 팟!!</li>
-										<li class="fa-coffee">삽겹살 먹구싶다 ㅠ</li>
-										<li class="fa-bolt">등산 ㄱㄱ염</li>
-										<li class="fa-users">에라이~</li>
-									</ul>
-									<input type="button" value="이벤트 관리">
+									<h3>회원 정보</h3>
+										<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/c1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
+									<p>주최자</p>
+										<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></a>
+										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m2.jpg" alt="" style="width: 100px; height:auto;"></a>
+										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m3.jpg" alt="" style="width: 100px; height:auto;"></a>
+										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m4.jpg" alt="" style="width: 100px; height:auto;"></a>
+										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m5.jpg" alt="" style="width: 100px; height:auto;"></a></div>
+										<div align="right"><a href="javascript:doDisplay2();" id="link4" onclick="javascript:link4_onclick();">+더보기</a></div>
+										<div id="myDIV2" style="display: none;">
+										<div>
+										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m6.jpg" alt="" style="width: 100px; height:auto;"></a>
+										</div>
+								</div>
+										<div align="right"><a href="javascript:doDisplay2();" id="link3" onclick="javascript:link3_onclick();">+숨기기</a></div>
+									<p>회원</p>
 								</div>
 							</section>
-
+						
 						<!-- Three -->
 							<section id="three">
+								<div class="container">
+									<h3>코멘트</h3>
+						<div class="comments">
+
+							<div class="comment-wrap">
+								<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/c1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
+								<div class="comment-block">
+									<form action="">
+										<textarea name="" id="" cols="30" rows="3" placeholder="Add comment..."></textarea>
+									</form>
+							</div>
+						</div>
+						<div align="right"><input type="button" value="확인" ></div>
+						<br>
+						
+						<div class="comment-wrap">
+							<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
+							<div class="comment-block">
+								<p class="comment-text">부트?</p>
+									<div class="bottom-comment">
+										<div class="comment-date">4월 24일, 2019년 @ 10:38 AM</div>
+											<ul class="comment-actions">
+												<li class="name">Emma</li>
+												<li class="complain">Complain</li>
+											</ul>
+									</div>
+							</div>
+						</div>
+
+						<div class="comment-wrap">
+							<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/c1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
+							<div class="comment-block">
+								<p class="comment-text">ㅅㅂ!</p>
+									<div class="bottom-comment">
+										<div class="comment-date">4월 23일, 2019년 @ 10:32 AM</div>
+											<ul class="comment-actions">
+												<li class="name">Harry</li>
+												<li class="complain">Complain</li>
+											</ul>
+										</div>
+									</div>
+						</div>
+		
+						</div>		
+								</div>
+							</section>
+							
+						<!-- Four -->
+							<section id="four">
 								<div class="container">
 									<h3>앨범</h3>
 									<p>앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범.</p>
 									<div class="features">
-										<article>
-											<a href="groupPhoto" class="image"><img src="resources/GroupMain/images/album/m1.jpg" alt="" /></a>
-											<a href="groupPhoto" class="image"><img src="resources/GroupMain/images/album/m2.jpg" alt="" /></a>
-										</article>
+										<article class="col-6 col-12-xsmall work-item">
+											<a href="resources/GroupMain/images/album/m1.jpg" class="image thumb"><img src="resources/GroupMain/images/album/m1.jpg" alt="" /></a>
+											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">산이당!</h3>
+											<a href="resources/GroupMain/images/album/m2.jpg" class="image thumb"><img src="resources/GroupMain/images/album/m2.jpg" alt="" /></a>
+											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">산산산</h3>
 											<div align="right"><a href="groupPhoto">+더보기</a></div>
+										</article>
 									</div>
-								</div>
-							</section>
-
-						<!-- Four -->	<!-- 아바타 이미지 필섹 가로 140 세로 140 -->
-							<section id="four">
-								<div class="container">
-									<h3>회원 정보</h3>
-										<div class="image avatar"><a href="myPage"><img src="resources/GroupMain/images/member/c1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
-									<p>주최자</p>
-										<div class="image avatar"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></div>
-										<div class="image avatar"><img src="resources/GroupMain/images/member/m2.jpg" alt="" style="width: 100px; height:auto;"></div>
-										<div class="image avatar"><img src="resources/GroupMain/images/member/m3.jpg" alt="" style="width: 100px; height:auto;"></div>
-										<div class="image avatar"><img src="resources/GroupMain/images/member/m4.jpg" alt="" style="width: 100px; height:auto;"></div>
-										<div class="image avatar"><img src="resources/GroupMain/images/member/m5.jpg" alt="" style="width: 100px; height:auto;"></div>
-										<div align="right"><a href="javascript:doDisplay2();" id="link4" onclick="javascript:link4_onclick();">+더보기</a></div>
-										<div id="myDIV2" style="display: none;">
-										<div class="image avatar"><img src="resources/GroupMain/images/member/m6.jpg" alt="" style="width: 100px; height:auto;"></div>
-										</div>
-										<div align="right"><a href="javascript:doDisplay2();" id="link3" onclick="javascript:link3_onclick();">+숨기기</a></div>
-									<p>회원</p>
 								</div>
 							</section>
 
 						<!-- Five -->
 							<section id="five">
 								<div class="container">
-									<h3>게시판</h3>
+									<h3>이벤트</h3>
 									<div class="features">
 										<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/pic01.jpg" alt="" /></a>
+											<a href="#" class="image"><img src="resources/GroupMain/images/event/01.jpg" alt="" /></a>
 											<div class="inner">
-												<h4>밥묵자</h4>
-												<p>밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥.</p>
-											</div>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/pic02.jpg" alt="" /></a>
-											<div class="inner">
-												<h4>냉면묵자</h4>
-												<p>냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면.</p>
-											</div>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/pic03.jpg" alt="" /></a>
-											<div class="inner">
-												<h4>치킨묵자</h4>
+												<h4>치킨 묵자</h4>
 												<p>치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨.</p>
+											</div>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="resources/GroupMain/images/event/02.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>생선 묵자</h4>
+												<p>생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선.</p>
+											</div>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="resources/GroupMain/images/event/03.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>냥이냥이</h4>
+												<p>냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이.</p>
 											</div>
 										</article>
 										<hr>
@@ -172,11 +218,10 @@ ${group_attendance.user_id}
 										</article>
 											</div>
 											<div align="right"><a href="javascript:doDisplay1();" id="link1" onclick="javascript:link1_onclick();">+숨기기</a></div>
-										<input type="button" value="게시판 관리">
+										<input type="button" value="이벤트 페이지 이동">
 									</div>
 								</div>
 							</section>
-
 					</div>
 
 				<!-- Footer -->
@@ -237,7 +282,11 @@ function link4_onclick() {
 
 		<!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
-
+		<!-- 추가 Scripts -->
+			<script src="resources/MyPage/assets/js/jquery.poptrox.min.js"></script>
+			<script src="resources/MyPage/assets/js/browser.min.js"></script>
+			<script src="resources/MyPage/assets/js/breakpoints.min.js"></script>	
+			<script src="resources/GroupMain/assets/js/main2.js"></script>
 		<!-- Scripts -->
 			<script src="resources/GroupMain/assets/js/jquery.min.js"></script>
 			<script src="resources/GroupMain/assets/js/jquery.scrollex.min.js"></script>
