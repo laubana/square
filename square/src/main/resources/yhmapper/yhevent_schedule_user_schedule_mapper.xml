@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleUserScheduleMapper">
+<delete id="deleteEventScheduleUserScheduleByUserIdEventScheduleId" parameterType="map">
+DELETE FROM TABLE_ESUS
+WHERE
+	USER_ID = #{user_id} AND
+	EVENT_SCHEDULE_ID = #{event_schedule_id}
+</delete>
+<insert id="insertEventScheduleUserSchedule" parameterType="EventScheduleUserSchedule">
+INSERT INTO TABLE_ESUS
+(
+	USER_SCHEDULE_ID,
+	USER_ID,
+	EVENT_SCHEDULE_ID,
+	START_DATE,
+	END_DATE
+)
+VALUES
+(
+	ESUS_SEQ.NEXTVAL,
+	#{user_id},
+	#{event_schedule_id},
+	#{start_date},
+	#{end_date}
+);
+</insert>
+<select id="selectEventScheduleUserScheduleByUserIdEventScheduleIdStartDateEndDate" parameterType="map" resultType="Schedule">
+SELECT
+	*
+FROM
+	TABLE_ESUS
+WHERE
+	USER_ID = #{user_id} AND
+	EVENT_SCHEDULE_ID = #{event_schedule_id} AND
+	((#{start_date} &lt; END_DATE AND END_DATE &lt;= #{end_date}) OR 
+	(#{start_date} &lt;= START_DATE AND START_DATE &lt; #{end_date}) OR
+	(START_DATE &lt; #{start_date} AND #{end_date} &lt; END_DATE))
+</select>
+</mapper>
