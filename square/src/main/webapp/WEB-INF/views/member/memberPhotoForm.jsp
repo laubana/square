@@ -103,44 +103,38 @@ label img {
 					<!-- Three -->
 					<section id="three">
 						<h1>그룹 선택</h1>
-
-						<div class="row">
+						<!-- Form 그룹 -->
+						<form action="">
+						<div>
 								<ul class="features">
 									<c:forEach var="group" items="${group_list}">
 										<li>
-											<input type="checkbox" id="gruopCheckbox${group.name}" name="gruopCheckbox" />
-											<label for="gruopCheckbox${group.name}">
-											<h3 align="center">${group.name}</h3>	
-										</label>
+											<input type="checkbox" id="gruopCheckbox${group.group_id}" name="groupCheckbox" class="check" value="${group.group_id}" group_id="${group.group_id}">
+											<label for="gruopCheckbox${group.group_id}">
+											<h3 align="center">${group.group_id}</h3>	
+											</label>
 										</li>
 									</c:forEach>
 								</ul>
-								
-								
-								
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<a href="#" class="button" >선택 확인</a>
+								<div align="center">
+											<input type="checkbox" id="faceCheckbox" name="faceCheckbox" class="check">
+											<label for="faceCheckbox">
+											<h3 align="center" style="color:maroon;">Face</h3>
+											</label>
+											<br>	
+								<input type="submit" value="선택 확인">
+								</div>
 						</div>
+						</form>
+						<!-- Form 그룹 끝 -->
 					</section>
 
 				<!-- Four -->
 					<section id="four">
 						<h1>앨범 편집</h1>
+						<!-- Form 사진 영상 -->
+						<form action="">
 						<div class="row">
-							<ul class="features">
-									<li>
-									<input type="checkbox" id="faceCheckbox" />
-									<label for="faceCheckbox">
-									<h3 align="center" style="color:maroon;">얼굴인식</h3>	
-									</li>
-								</ul>
-			
 						<c:forEach var="image" items="${event_schedule_image_list}">
 							<article class="col-6 col-12-xsmall work-item">
 								<input type="checkbox" id="albumCheckbox${image.event_schedule_image_id}" />
@@ -153,7 +147,7 @@ label img {
 								Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
 							</article>
 						</c:forEach>
-						
+					
 						<c:forEach var="image" items="${self_event_schedule_image_list}">
 							<article class="col-6 col-12-xsmall work-item">
 								<input type="checkbox" id="self_albumCheckbox${image.event_schedule_image_id}" />
@@ -207,29 +201,22 @@ label img {
 								Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
 							</article> -->
 							
+							
+							
 						</div>
-						<ul class="actions">
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<li><a href="myPage" class="button">편집 확인</a></li>
-						</ul>
+					<div class="video" id="video">
+						<hr>
+						<h1>영상 편집</h1>
+						<p>아무거나</p>
+						<p>아무거나</p>
+						<p>아무거나</p>
+						<p>아무거나</p>
+						<p>아무거나</p>
+						<div align="center"><input type="submit" value="편집 확인"></div>
+					</div>
+						</form>
+						<!-- Form 사진 영상 끝 -->
 					</section>
-
-		<!-- 영상 -->
-			<section id="video">
-				<h1>영상 편집</h1>
-				<p>1 퍄퍄</p>
-				<p>2 파파</p>
-				<p>3 포포</p>
-				<p>4 표표</p>
-				<a href="myPage" class="button">편집 확인</a>
-			</section>
-
 			</div>
 
 		<!-- Footer -->
@@ -257,6 +244,25 @@ label img {
 			<script src="resources/MemberPhoto/assets/js/breakpoints.min.js"></script>
 			<script src="resources/MemberPhoto/assets/js/util.js"></script>
 			<script src="resources/MemberPhoto/assets/js/main.js"></script>
+
+<script>
+$(document).ready(function () {
+	
+	$(".check").change(function()
+	{
+		var checked_group = [];
+		
+		$.each($(":checkbox[name='groupCheckbox']:checked"), function(){            
+			checked_group.push($(this).val());
+        });
+		
+		console.log(checked_group);
+		console.log($(":checkbox[name='faceCheckbox']").prop("checked"));
+    });
+
+})
+
+</script>
 
 	</body>
 </html>
