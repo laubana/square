@@ -11,4 +11,6 @@ public interface SH_Mapper_User {
 	
 	public User getUserByEmail(String email);
 	public ArrayList<UserHashtag> getUserHashtag(String userid);
+	public int inputUser(User user);
+
 }

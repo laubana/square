@@ -47,8 +47,21 @@ public ArrayList<UserHashtag> getUserHashtag(String userid){
 	return hlist;
 }
 
-
-
+public int inputUser(User user){
+	
+	SH_Mapper_User umapper = session.getMapper(SH_Mapper_User.class);
+	int input_check = 0;
+	
+	try
+	{
+		input_check = umapper.inputUser(user);
+	}
+	catch(Exception e){
+		e.printStackTrace();
+	}
+	
+	return input_check;
+}
 
 
 }

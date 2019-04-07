@@ -9,7 +9,7 @@ public interface SH_Mapper_Group {
 
 	public ArrayList<Group> getGroupByUser(String user);
 	public ArrayList<Group> getGroupByCategory(int category);
+	public ArrayList<Group> getGroupByKeyword(String keyword);
 	public ArrayList<GroupCategory> getCategoryList();
-	
 	
 }

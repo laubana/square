@@ -30,4 +30,14 @@ FROM
 order by GROUP_CATEGORY_ID
 </select>
 
+<select id="getGroupByKeyword"  parameterType = "String" resultType="Group">
+SELECT
+	*
+FROM
+	TABLE_G
+WHERE
+	NAME like '%' || #{keyword} || '%'
+</select>
+
 </mapper>
+

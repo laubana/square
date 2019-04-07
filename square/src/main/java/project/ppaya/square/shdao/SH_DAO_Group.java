@@ -52,5 +52,20 @@ public ArrayList<GroupCategory> getCategoryList(){
 	return clist;
 }
 
+public ArrayList<Group> getGroupByKeyword(String keyword){
+	SH_Mapper_Group gmapper = session.getMapper(SH_Mapper_Group.class);
+	ArrayList<Group> glist = null;
+	try
+	{
+		glist = gmapper.getGroupByKeyword(keyword);
+	}
+	catch(Exception e){
+		e.printStackTrace();
+	}
+	return glist;
+	
+	
+}
+
 
 }

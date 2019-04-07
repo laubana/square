@@ -14,6 +14,14 @@ WHERE
 	USER_ID = #{USER_ID}
 </select>
 
+<insert id="inputUser"  parameterType="User">
+INSERT INTO
+	table_u (user_id, password, name, region)
+	values(#{user_id},#{password},#{name}, #{region}) 
+
+</insert>
+
+
 <!--  erd 기준으로  user_hashtag 테이블이 sql에 올라오면 살리기
 <select id="getUserHashtag"  parameterType="String" resultType="UserHashtag">
 SELECT
