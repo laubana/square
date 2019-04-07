@@ -28,7 +28,7 @@ VALUES
 	#{end_date}
 );
 </insert>
-<select id="selectEventScheduleUserScheduleByUserIdEventScheduleIdStartDateEndDate" parameterType="map" resultType="Schedule">
+<select id="selectEventScheduleUserScheduleByUserIdEventScheduleIdStartDateEndDate" parameterType="map" resultType="EventScheduleUserSchedule">
 SELECT
 	*
 FROM

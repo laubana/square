@@ -1,21 +1,15 @@
 package project.ppaya.square.yhcontroller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.ppaya.square.vo.EventScheduleUserSchedule;
 import project.ppaya.square.yhdao.YHEventScheduleUserScheduleDAO;
@@ -33,24 +27,21 @@ public class YHTestUserScheduleController
 	YHUserDAO yh_usertDAO;
 	@Autowired
 	YHEventScheduleUserScheduleDAO yh_event_schedule_user_scheduleDAO;
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+	
 	@RequestMapping(value = "/eventFormByClient", method = RequestMethod.GET)
-	public String eventFormByClientGET()
+	public void eventFormByClientGET()
 	{
 		int event_schedule_id = 1;
 		String user_id = "id1";
 		
 		ArrayList<EventScheduleUserSchedule> event_schedule_user_schedule_list = yh_event_schedule_user_scheduleDAO.selectEventScheduleUserScheduleByUserIdEventScheduleIdStartDateEndDate(event_schedule_id, user_id, (new Date()).getTime(), (new Date()).getTime() + 24 * 3600 * 1000);
 	
+		logger.debug("{}", event_schedule_user_schedule_list.size());
+		
 		for(int i = 0; i < event_schedule_user_schedule_list.size(); i++)
 		{
 			logger.debug("{}", event_schedule_user_schedule_list.get(i).getUser_schedule_id());
 		}
-		
-		
-		return "eventFormByClient";
 	}
 	/*@ResponseBody
 	@RequestMapping(value = "/getMultipleIntegrateScheduleMapListAction", method = RequestMethod.POST)
