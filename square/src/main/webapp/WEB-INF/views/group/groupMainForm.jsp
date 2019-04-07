@@ -82,21 +82,19 @@
 							<section id="two">
 								<div class="container">
 									<h3>회원 정보</h3>
-										<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/c1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
+										<div>
+											<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/c1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
+										<div>
 									<p>주최자</p>
-										<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></a>
+										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></a>
 										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m2.jpg" alt="" style="width: 100px; height:auto;"></a>
 										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m3.jpg" alt="" style="width: 100px; height:auto;"></a>
 										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m4.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m5.jpg" alt="" style="width: 100px; height:auto;"></a></div>
-										<div align="right"><a href="javascript:doDisplay2();" id="link4" onclick="javascript:link4_onclick();">+더보기</a></div>
-										<div id="myDIV2" style="display: none;">
-										<div>
+										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m5.jpg" alt="" style="width: 100px; height:auto;"></a>
 										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m6.jpg" alt="" style="width: 100px; height:auto;"></a>
 										</div>
-								</div>
-										<div align="right"><a href="javascript:doDisplay2();" id="link3" onclick="javascript:link3_onclick();">+숨기기</a></div>
 									<p>회원</p>
+									<a href="groupMember" class="button">회원 페이지 이동</a>
 								</div>
 							</section>
 						
@@ -105,17 +103,6 @@
 								<div class="container">
 									<h3>코멘트</h3>
 						<div class="comments">
-
-							<div class="comment-wrap">
-								<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/c1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
-								<div class="comment-block">
-									<form action="">
-										<textarea name="" id="" cols="30" rows="3" placeholder="Add comment..."></textarea>
-									</form>
-							</div>
-						</div>
-						<div align="right"><input type="button" value="확인" ></div>
-						<br>
 						
 						<div class="comment-wrap">
 							<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
@@ -144,7 +131,9 @@
 										</div>
 									</div>
 						</div>
-		
+						
+						<a href="groupComment" class="button">코멘트 페이지 이동</a>
+						
 						</div>		
 								</div>
 							</section>
@@ -160,7 +149,7 @@
 											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">산이당!</h3>
 											<a href="resources/GroupMain/images/album/m2.jpg" class="image thumb"><img src="resources/GroupMain/images/album/m2.jpg" alt="" /></a>
 											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">산산산</h3>
-											<div align="right"><a href="groupPhoto">+더보기</a></div>
+											<a href="groupPhoto" class="button">앨범 페이지 이동</a>
 										</article>
 									</div>
 								</div>
@@ -196,29 +185,29 @@
 										<div align="right"><a href="javascript:doDisplay1();" id="link2" onclick="javascript:link2_onclick();">+더보기</a></div>
 											<div id="myDIV1" style="display: none;">
     											<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/pic01.jpg" alt="" /></a>
+											<a href="#" class="image"><img src="resources/GroupMain/images/event/04.jpg" alt="" /></a>
 											<div class="inner">
-												<h4>라면묵자</h4>
-												<p>밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥밥.</p>
+												<h4>냐옹냐옹</h4>
+												<p>냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹.</p>
 											</div>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/pic02.jpg" alt="" /></a>
+											<a href="#" class="image"><img src="resources/GroupMain/images/event/05.jpg" alt="" /></a>
 											<div class="inner">
-												<h4>김밥묵자</h4>
-												<p>냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면냉면.</p>
+												<h4>성경성경</h4>
+												<p>신을 믿으세용!신을 믿으세용!신을 믿으세용!신을 믿으세용!신을 믿으세용!신을 믿으세용!신을 믿으세용!.</p>
 											</div>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/pic03.jpg" alt="" /></a>
+											<a href="#" class="image"><img src="resources/GroupMain/images/event/06.jpg" alt="" /></a>
 											<div class="inner">
-												<h4>우동묵자</h4>
-												<p>치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨.</p>
+												<h4>호수호수</h4>
+												<p>호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수.</p>
 											</div>
 										</article>
 											</div>
 											<div align="right"><a href="javascript:doDisplay1();" id="link1" onclick="javascript:link1_onclick();">+숨기기</a></div>
-										<input type="button" value="이벤트 페이지 이동">
+										<a href="groupEventList" class="button">이벤트 페이지 이동</a>
 									</div>
 								</div>
 							</section>
