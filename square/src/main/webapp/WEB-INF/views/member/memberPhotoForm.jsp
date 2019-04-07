@@ -108,9 +108,9 @@ label img {
 								<ul class="features">
 									<c:forEach var="group" items="${group_list}">
 										<li>
-											<input type="checkbox" id="gruopCheckbox${group.name}" name="gruopCheckbox" />
-											<label for="gruopCheckbox${group.name}">
-											<h3 align="center">${group.name}</h3>	
+											<input type="checkbox" id="gruopCheckbox${group.group_id}" name="gruopCheckbox" />
+											<label for="gruopCheckbox${group.group_id}">
+											<h3 align="center">${group.group_id}</h3>	
 										</label>
 										</li>
 									</c:forEach>
