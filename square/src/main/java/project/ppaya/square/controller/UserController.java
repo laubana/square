@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import project.ppaya.square.shdao.SH_DAO_Group;
 import project.ppaya.square.shdao.SH_DAO_User;
 import project.ppaya.square.vo.EventScheduleImage;
+import project.ppaya.square.vo.EventScheduleVideo;
 import project.ppaya.square.vo.Group;
 import project.ppaya.square.vo.Reference;
 import project.ppaya.square.vo.User;
@@ -29,10 +30,15 @@ import project.ppaya.square.yhdao.YHEventScheduleAttendanceDAO;
 import project.ppaya.square.yhdao.YHEventScheduleDAO;
 import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
 import project.ppaya.square.yhdao.YHEventScheduleImageFaceDAO;
+import project.ppaya.square.yhdao.YHEventScheduleVideoDAO;
+import project.ppaya.square.yhdao.YHEventScheduleVideoFaceDAO;
 import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
 import project.ppaya.square.yhdao.YHGroupDAO;
 import project.ppaya.square.yhdao.YHUserDAO;
+import project.ppaya.square.yhdao.YHVideoAlbumDAO;
+import project.ppaya.square.yhutil.YHFileUtil;
 import project.ppaya.square.yhutil.YHMSFaceUtil;
+import project.ppaya.square.yhutil.YHVideoIndexerUtil;
 
 @Repository
 @Controller
@@ -51,13 +57,19 @@ public class UserController {
 	@Autowired
 	YHEventScheduleImageDAO yh_event_schedule_imageDAO;
 	@Autowired
+	YHEventScheduleVideoDAO yh_event_schedule_videoDAO;
+	@Autowired
 	YHEventScheduleImageFaceDAO yh_event_schedule_image_faceDAO;
+	@Autowired
+	YHEventScheduleVideoFaceDAO yh_event_schedule_video_faceDAO;
 	@Autowired
 	YHGroupDAO yh_groupDAO;
 	@Autowired
 	YHGroupAttendanceDAO yh_group_attendanceDAO; 
 	@Autowired
 	YHImageAlbumDAO yh_image_albumDAO;
+	@Autowired
+	YHVideoAlbumDAO yh_video_albumDAO;
 	
 	@Autowired
 	SH_DAO_User sh_udao;
@@ -200,7 +212,7 @@ public class UserController {
 		}
 		//EventScheduleImageFace 업데이트 끝
 
-		//Album 업데이트
+		//ImageAlbum 업데이트
 		ArrayList<Integer> attend_event_schedule_id_list = yh_event_schedule_attendanceDAO.getEventScheduleIdByUserId(user_id);
 		
 		ArrayList<String> attend_event_schedule_image_id_list = yh_event_schedule_imageDAO.getEventScheduleImageIdByEventScheduleIdList(attend_event_schedule_id_list);
@@ -221,7 +233,86 @@ public class UserController {
 		ArrayList<String> similar_event_schedule_image_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageIdByEventScheduleImageFaceIdList(similar_event_schedule_image_face_id);
 		
 		yh_image_albumDAO.updateSelfByEventScheduleImageIdListUserId(similar_event_schedule_image_id_list, user_id);
-		//Album 업데이트 끝
+		//ImageAlbum 업데이트 끝
+		
+		//EventScheduleVideoFace 업데이트
+		event_schedule_id_list = yh_event_schedule_attendanceDAO.getEventScheduleIdByUserId(user_id);
+		
+		ArrayList<String> event_schedule_video_id_list = yh_event_schedule_videoDAO.getEventScheduleVideoIdByEventScheduleIdList(event_schedule_id_list);
+		
+		for(int i = 0; i < event_schedule_video_id_list.size(); i++)
+		{
+			String event_schedule_video_id = event_schedule_video_id_list.get(i);
+			
+			EventScheduleVideo event_schedule_video = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleVideoId(event_schedule_video_id);
+			
+			if(event_schedule_video.getDetect_date() == null)
+			{
+				yh_event_schedule_videoDAO.updateDetectDateByEventScheduleVideoId((new Date()).getTime(), event_schedule_video_id);
+				
+				jsonObject = new JSONObject(YHVideoIndexerUtil.getVideoIndex(event_schedule_video_id));
+				
+				if(jsonObject.isNull("errorType"))
+				{
+					jsonArray = jsonObject.getJSONObject("summarizedInsights").getJSONArray("faces");
+					
+					for(int j = 0; j < jsonArray.length(); j++)
+					{
+						String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHVideoIndexerUtil.getThumbnail(event_schedule_video_id, jsonArray.getJSONObject(j).getString("thumbnailId")), Reference.file_path);
+						
+						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(((new JSONArray(YHMSFaceUtil.detectFace(Reference.file_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId"), event_schedule_video_image_id, event_schedule_video_id);
+					}
+				}
+			}
+			else if(3600000 < (new Date()).getTime() - event_schedule_video.getDetect_date())
+			{	
+				yh_event_schedule_videoDAO.updateDetectDateByEventScheduleVideoId((new Date()).getTime(), event_schedule_video_id);
+				
+				yh_event_schedule_video_faceDAO.deleteEventScheduleVideoFaceByEventScheduleVideoId(event_schedule_video_id);
+				
+				jsonObject = new JSONObject(YHVideoIndexerUtil.getVideoIndex(event_schedule_video_id));
+				
+				if(jsonObject.isNull("errorType"))
+				{
+					jsonArray = jsonObject.getJSONObject("summarizedInsights").getJSONArray("faces");
+					
+					for(int j = 0; j < jsonArray.length(); j++)
+					{
+						String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHVideoIndexerUtil.getThumbnail(event_schedule_video_id, jsonArray.getJSONObject(j).getString("thumbnailId")), Reference.file_path);
+						
+						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(((new JSONArray(YHMSFaceUtil.detectFace(Reference.file_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId"), event_schedule_video_image_id, event_schedule_video_id);
+					}
+				}		
+			}
+		}
+		//EventScheduleVideoFace 업데이트 끝
+		
+		//VideoAlbum 업데이트
+		attend_event_schedule_id_list = yh_event_schedule_attendanceDAO.getEventScheduleIdByUserId(user_id);
+		
+		ArrayList<String> attend_event_schedule_video_id_list = yh_event_schedule_videoDAO.getEventScheduleVideoIdByEventScheduleIdList(attend_event_schedule_id_list);
+		
+		yh_video_albumDAO.deleteVideoAlbumByNotEventScheduleVideoIdUserId(attend_event_schedule_video_id_list, user_id);
+		
+		for(int i = 0; i < attend_event_schedule_video_id_list.size(); i++)
+		{
+			yh_video_albumDAO.insertVideoAlbum(attend_event_schedule_video_id_list.get(i), user_id);
+		}
+		
+		yh_video_albumDAO.updateSelfByUserId(user_id);
+		
+		for(int i = 0; i < attend_event_schedule_video_id_list.size(); i++)
+		{
+			ArrayList<String> attend_event_schedule_video_face_id_list = yh_event_schedule_video_faceDAO.getEventScheduleVideoFaceIdByEventScheduleVideoId(attend_event_schedule_video_id_list.get(i));
+			
+			ArrayList<String> similar_event_schedule_video_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(attend_event_schedule_video_face_id_list, (new JSONArray(YHMSFaceUtil.detectFace(Reference.file_path, image_id))).getJSONObject(0).getString("faceId"));
+			
+			if(similar_event_schedule_video_face_id.size() != 0)
+			{
+				yh_video_albumDAO.updateSelfByEventScheduleVideoIdUserId(attend_event_schedule_video_id_list.get(i), user_id);
+			}
+		}
+		//VideoAlbum 업데이트 끝
 		
 		return "member/memberPhotoForm";
 	}

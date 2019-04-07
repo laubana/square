@@ -1,0 +1,142 @@
+package project.ppaya.square.yhutil;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.FileEntity;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import project.ppaya.square.vo.EventScheduleUserSchedule;
+import project.ppaya.square.vo.Reference;
+
+public class YHEventSchedeulUserScheduleUtil
+{	
+	public static ArrayList<EventScheduleUserSchedule> cropEventScheduleUserScheduleList(ArrayList<EventScheduleUserSchedule> old_event_schedule_user_schedule_list, long start_date, long end_date)
+	{
+		ArrayList<EventScheduleUserSchedule> new_event_schedule_user_schedule_list = (ArrayList<EventScheduleUserSchedule>)old_event_schedule_user_schedule_list.clone();
+
+		for(int i = 0; i < new_event_schedule_user_schedule_list.size(); i++)
+		{			
+			if(new_event_schedule_user_schedule_list.get(i).getStart_date() < start_date)
+			{
+				new_event_schedule_user_schedule_list.get(i).setStart_date(start_date);
+			}
+			if(end_date < new_event_schedule_user_schedule_list.get(i).getEnd_date())
+			{
+				new_event_schedule_user_schedule_list.get(i).setEnd_date(end_date);
+			}
+		}
+		
+		return new_event_schedule_user_schedule_list;
+	}
+	public static ArrayList<EventScheduleUserSchedule> parseIntegratedEventScheduleUserScheduleListToView
+	(
+			ArrayList<EventScheduleUserSchedule> event_schedule_user_schedule_list,
+			int user_schedule_id,
+			String user_id,
+			int event_schedule_id,
+			long start_period,
+			long end_period
+			)
+	{
+		ArrayList<EventScheduleUserSchedule> view = new ArrayList<>();
+		
+		if(event_schedule_user_schedule_list.size() != 0)
+		{
+			if(start_period < event_schedule_user_schedule_list.get(0).getStart_date())
+			{
+				view.add(new EventScheduleUserSchedule(user_schedule_id, user_id, event_schedule_id, start_period, event_schedule_user_schedule_list.get(0).getStart_date(), 0));
+			}
+			
+			for(int i = 0; i < event_schedule_user_schedule_list.size() - 1; i++)
+			{
+				view.add(event_schedule_user_schedule_list.get(i));
+				
+				view.add(new EventScheduleUserSchedule(user_schedule_id, user_id, event_schedule_id, event_schedule_user_schedule_list.get(i).getEnd_date(), event_schedule_user_schedule_list.get(i + 1).getStart_date(), 0));
+			}
+			view.add(event_schedule_user_schedule_list.get(event_schedule_user_schedule_list.size() - 1));
+			
+			if(event_schedule_user_schedule_list.get(event_schedule_user_schedule_list.size() - 1).getEnd_date() < end_period)
+			{
+				view.add(new EventScheduleUserSchedule(user_schedule_id, user_id, event_schedule_id, event_schedule_user_schedule_list.get(event_schedule_user_schedule_list.size() - 1).getEnd_date(), end_period, 0));
+			}
+		}
+		else
+		{
+			view.add(new EventScheduleUserSchedule(user_schedule_id, user_id, event_schedule_id, start_period, end_period, 0));
+		}
+		return view;
+	}
+	public static ArrayList<EventScheduleUserSchedule> integrateEventScheduleUserScheduleList
+	(
+			ArrayList<EventScheduleUserSchedule> old_event_schedule_user_schedule_list,
+			int user_schedule_id,
+			String user_id,
+			int event_schedule_id
+			)
+	{
+		ArrayList<EventScheduleUserSchedule> temp_evet_schedule_user_schedule_list = (ArrayList<EventScheduleUserSchedule>)old_event_schedule_user_schedule_list.clone();
+		ArrayList<EventScheduleUserSchedule> new_event_schedule_user_schedule_list = new ArrayList<>();  
+		long start_date = -1;
+		long end_date = -1;
+		
+		Collections.sort(temp_evet_schedule_user_schedule_list, new Comparator<EventScheduleUserSchedule>()
+		{
+			public int compare(EventScheduleUserSchedule event_schedule_user_schedule1, EventScheduleUserSchedule event_schedule_user_schedule2)
+			{
+				return (int)(event_schedule_user_schedule1.getStart_date() - event_schedule_user_schedule2.getStart_date());
+			}
+		});
+		
+		for(int i = 0; i < temp_evet_schedule_user_schedule_list.size(); i++)
+		{
+			if(start_date == -1 || end_date == -1)
+			{
+				start_date = temp_evet_schedule_user_schedule_list.get(i).getStart_date();
+				end_date = temp_evet_schedule_user_schedule_list.get(i).getEnd_date();
+			}
+			
+			try
+			{
+				if(temp_evet_schedule_user_schedule_list.get(i + 1).getStart_date() <= end_date)
+				{
+					if(end_date < temp_evet_schedule_user_schedule_list.get(i + 1).getEnd_date())
+					{
+						end_date = temp_evet_schedule_user_schedule_list.get(i + 1).getEnd_date();
+					}
+					else{continue;}
+				}
+				else
+				{					
+					new_event_schedule_user_schedule_list.add(new EventScheduleUserSchedule(user_schedule_id, user_id, event_schedule_id, start_date, end_date, 1));
+					
+					start_date = -1;
+					end_date = -1;
+					
+					continue;
+				}
+			}
+			catch(Exception error)
+			{				
+				new_event_schedule_user_schedule_list.add(new EventScheduleUserSchedule(user_schedule_id, user_id, event_schedule_id, start_date, end_date, 1));
+				
+				break;
+			}
+		}
+		
+		return new_event_schedule_user_schedule_list;
+	}
+}
