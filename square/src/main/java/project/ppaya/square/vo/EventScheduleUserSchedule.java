@@ -1,5 +1,7 @@
 package project.ppaya.square.vo;
 
+import java.util.Date;
+
 public class EventScheduleUserSchedule
 {
 	int user_schedule_id;
@@ -9,10 +11,9 @@ public class EventScheduleUserSchedule
 	long end_date;
 	int typeof;
 	public EventScheduleUserSchedule(){}
-	public EventScheduleUserSchedule(int user_schedule_id, String user_id, int event_schedule_id, long start_date,
+	public EventScheduleUserSchedule(String user_id, int event_schedule_id, long start_date,
 			long end_date, int typeof) {
 		super();
-		this.user_schedule_id = user_schedule_id;
 		this.user_id = user_id;
 		this.event_schedule_id = event_schedule_id;
 		this.start_date = start_date;
@@ -54,5 +55,11 @@ public class EventScheduleUserSchedule
 	}
 	public void setTypeof(int typeof) {
 		this.typeof = typeof;
+	}
+	@Override
+	public String toString() {
+		return "EventScheduleUserSchedule [user_schedule_id=" + user_schedule_id + ", user_id=" + user_id
+				+ ", event_schedule_id=" + event_schedule_id + ", start_date=" + new Date(start_date) + ", end_date=" + new Date(end_date)
+				+ ", typeof=" + typeof + "]";
 	}
 }

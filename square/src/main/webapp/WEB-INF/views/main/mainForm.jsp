@@ -16,8 +16,8 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="#">회원가입</a></li>
-						<li><a href="#">그룹생성</a></li>
+						<li><a href="joinForm">회원가입</a></li>
+						<li><a href="groupCreateForm">그룹생성</a></li>
 						<li><a href="login">로그인</a></li>
 					</ul>
 				</nav>
@@ -50,43 +50,26 @@
 					<!-- Gallery  -->
 						<div class="gallery">
 							<article class="from-left">
-								<a href="groupSearch" class="image fit thumb1"><img src="resources/Main/images/thumbs/01.jpg" title="The Anonymous Red" alt="" /></a>
+								<a href="groupSearch?group_category_id=${clist[0].group_category_id}" class="image fit thumb1"><img src="resources/Main/images/thumbs/01.jpg" alt="" /></a>
 							</article>
 							<article class="from-right">
-								<a href="groupSearch" class="image fit thumb2"><img src="resources/Main/images/thumbs/02.jpg" title="Airchitecture II" alt="" /></a>
+								<a href="groupSearch?group_category_id=${clist[1].group_category_id}" class="image fit thumb2"><img src="resources/Main/images/thumbs/02.jpg" alt="" /></a>
 							</article>
 							<article class="from-left">
-								<a href="groupSearch" class="image fit thumb3"><img src="resources/Main/images/thumbs/03.jpg" title="Air Lounge" alt="" /></a>
+								<a href="groupSearch?group_category_id=${clist[2].group_category_id}" class="image fit thumb3"><img src="resources/Main/images/thumbs/03.jpg" alt="" /></a>
 							</article>
 							<article class="from-right">
-								<a href="groupSearch" class="image fit thumb4"><img src="resources/Main/images/thumbs/04.jpg" title="Carry on" alt="" /></a>
+								<a href="groupSearch?group_category_id=${clist[3].group_category_id}" class="image fit thumb4"><img src="resources/Main/images/thumbs/04.jpg" alt="" /></a>
 							</article>
 							<article class="from-left">
-								<a href="groupSearch" class="image fit thumb5"><img src="resources/Main/images/thumbs/05.jpg" title="The sparkling shell" alt="" /></a>
+								<a href="groupSearch?group_category_id=${clist[4].group_category_id}" class="image fit thumb5"><img src="resources/Main/images/thumbs/05.jpg" alt="" /></a>
 							</article>
 							<article class="from-right">
-								<a href="groupSearch" class="image fit thumb6"><img src="resources/Main/images/thumbs/06.jpg" title="Bent IX" alt="" /></a>
+								<a href="groupSearch?group_category_id=${clist[5].group_category_id}" class="image fit thumb6"><img src="resources/Main/images/thumbs/06.jpg" alt="" /></a>
 							</article>
 						</div>
-
 				</div>
 			</section>
-
-		<!-- Zero -->
-			<!-- <section id="zero" class="main style2 left dark fullscreen">
-				<div class="content box style2">
-					<header>
-						<h2>로그인</h2>
-					</header>
-					<p>로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인.
-					로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인,
-					로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인로그인.</p>
-					<div class="actions special">
-						<input type="button" value="로그인" id="mlogin">
-					</div>
-				</div>
-				<a href="#one" class="button style2 down anchored">Next</a>
-			</section> -->
 
 		<!-- One -->
 			<section id="one" class="main style2 right dark fullscreen">

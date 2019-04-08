@@ -3,6 +3,8 @@ package project.ppaya.square.yhcontroller;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import project.ppaya.square.vo.EventScheduleUserSchedule;
+import project.ppaya.square.yhdao.YHEventScheduleAttendanceDAO;
 import project.ppaya.square.yhdao.YHEventScheduleUserScheduleDAO;
 import project.ppaya.square.yhdao.YHUserDAO;
+import project.ppaya.square.yhutil.YHEventSchedeulUserScheduleUtil;
+import project.ppaya.square.yhutil.YHVideoIndexerUtil;
 
 /**
  * Handles requests for the application home page.
@@ -27,21 +32,40 @@ public class YHTestUserScheduleController
 	YHUserDAO yh_usertDAO;
 	@Autowired
 	YHEventScheduleUserScheduleDAO yh_event_schedule_user_scheduleDAO;
+	@Autowired
+	YHEventScheduleAttendanceDAO yh_event_schedule_attendanceDAO;
 	
 	@RequestMapping(value = "/eventFormByClient", method = RequestMethod.GET)
 	public void eventFormByClientGET()
 	{
 		int event_schedule_id = 1;
-		String user_id = "id1";
+		long start_date = Long.parseLong("1554649200000");
+		long end_date = Long.parseLong("1554735600000");
 		
-		ArrayList<EventScheduleUserSchedule> event_schedule_user_schedule_list = yh_event_schedule_user_scheduleDAO.selectEventScheduleUserScheduleByUserIdEventScheduleIdStartDateEndDate(event_schedule_id, user_id, (new Date()).getTime(), (new Date()).getTime() + 24 * 3600 * 1000);
-	
-		logger.debug("{}", event_schedule_user_schedule_list.size());
+		ArrayList<String> user_id_list = yh_event_schedule_attendanceDAO.getUserIdByEventScheduleId(event_schedule_id);
 		
-		for(int i = 0; i < event_schedule_user_schedule_list.size(); i++)
+		ArrayList<ArrayList<EventScheduleUserSchedule>> integrated_event_schedule_user_schedule_list_list = new ArrayList<>();
+		
+		for(int i = 0; i < user_id_list.size(); i++)
 		{
-			logger.debug("{}", event_schedule_user_schedule_list.get(i).getUser_schedule_id());
+			integrated_event_schedule_user_schedule_list_list.add(YHEventSchedeulUserScheduleUtil.integrateEventScheduleUserScheduleList(YHEventSchedeulUserScheduleUtil.cropEventScheduleUserScheduleList(yh_event_schedule_user_scheduleDAO.selectEventScheduleUserScheduleByUserIdEventScheduleIdStartDateEndDate(event_schedule_id, user_id_list.get(i), start_date, end_date), start_date, end_date), user_id_list.get(i), 1));
+		}	
+		
+		ArrayList<EventScheduleUserSchedule> integrated_event_schedule_user_schedule_list = YHEventSchedeulUserScheduleUtil.integrateEventScheduleUserScheduleListList(integrated_event_schedule_user_schedule_list_list, event_schedule_id);
+		
+		ArrayList<EventScheduleUserSchedule> view = YHEventSchedeulUserScheduleUtil.parseIntegratedEventScheduleUserScheduleListToView(integrated_event_schedule_user_schedule_list, "", event_schedule_id, start_date, end_date);
+		
+		for(int i = 0; i < view.size(); i++)
+		{
+			logger.debug("{}", view.get(i));
 		}
+	}
+	@RequestMapping(value = "/yhtest", method = RequestMethod.GET)
+	public void yhtest()
+	{
+		JSONObject jsonObject = new JSONObject(YHVideoIndexerUtil.getVideoIndex("3a9c7198af"));
+		JSONArray jsonArray = jsonObject.getJSONObject("summarizedInsights").getJSONArray("faces");
+		logger.debug("{}", jsonArray.length());
 	}
 	/*@ResponseBody
 	@RequestMapping(value = "/getMultipleIntegrateScheduleMapListAction", method = RequestMethod.POST)
