@@ -17,6 +17,13 @@
 				$(this).siblings(".custom-file-label").addClass("selected")
 						.html(fileName);
 			});
+	
+	
+	function inputDomainByself()
+		{
+			document.getElementById("join_domain").click();
+		}
+	 
 	</script>	
 	
 	</head>
@@ -38,7 +45,7 @@
 				<p><input type="text" name="user_idEmailType" placeholder="email 직접 입력"></p>
 			</div> -->
 		
-					<select name = "user_id">
+					<select id="join_domain" name = "join_domain" onchange="inputDomainByself()">
 						<option>선택</option>
 						<option>yahoo.com</option>
 						<option>naver.com</option>

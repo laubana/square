@@ -15,6 +15,7 @@
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="resources/GroupCreate/assets/css/main.css" />
 <script src=resources/Basic/assets/js/jquery-3.3.1.min.js></script>
+
 <script>
 			// Add the following code if you want the name of the file appear on select
  			$(".custom-file-input").on("change", function() {
@@ -22,17 +23,16 @@
 			  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 			   
 			 
-			});
-			
- 			$(document).ready(
-					function()
-					{
-						$("#groupLogoButton").on("click",groupLogoFunction);
-					});	
+			});	
 
- 			function groupLogoFunction()
+ 			function groupLogoButton()
  			{
- 				
+ 				document.getElementById("group_logo").click();
+ 			}
+ 			
+ 			function groupImageButton()
+ 			{
+ 				document.getElementById("group_image").click();
  			}
 			 
 	</script>
@@ -47,7 +47,7 @@ ${user_id}
 	<section id="header">
 		<header>
 			<span class="image avatar"> <input type="file"
-				class="custom-file-input" id="group_logo" name="group_logo" hidden>
+				class="custom-file-input" id="group_logo" name="group_logo" >
 				<label class="custom-file-label" for="group_logo"> <img
 					src="resources/GroupCreate/images/sh_squirrel.png" alt="" />
 			</label>
@@ -62,8 +62,7 @@ ${user_id}
 				<li><a href="#one" class="main">main</a></li>
 				<li><a href="#two">그룹 생성 폼</a></li>
 				<li><a href="#three">앨범</a></li>
-				<li><a href="#four">게시판</a></li>
-				<li><a href="#five">게시판</a></li>
+	
 			</ul>
 		</nav>
 		<footer>
@@ -129,16 +128,16 @@ ${user_id}
 							<h1>그룹 이미지 등록</h1>
 						</header>
 					<div class="groupImageDiv" align="left">
-						<input type="file" class="group-image-input" id="group_image"
-								name="group_image" hidden> 
 							<label>
-						<input type="button" class="group-image-label" id="group-image-label" value="그룹 이미지 등록">	
+						<input type="button" class="group-image-input" id="group-image-input" 
+						value="그룹 이미지 등록" onclick="groupImageButton()">	
 							</label>
 						</div>
 					
 						<h1>그룹 로고 등록</h1>
 						<div class="groupLogoDiv" align="left">
-								<input type="button" class="groupLogoButton" id="groupLogoButton" value="그룹 로고 등록">
+								<input type="button" class="group-logo-input" id="group-logo-input"
+								 value="그룹 로고 등록" onclick="groupLogoButton()">
 						</div>
 					</div>
 				</section>
@@ -174,6 +173,8 @@ ${user_id}
 			</div>
 		</form>
 
+
+
 		<!-- Footer -->
 		<section id="footer">
 			<div class="container">
@@ -185,7 +186,8 @@ ${user_id}
 		</section>
 
 	</div>
-
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMLOYZKedHAwZTuo14Q0rrlveLsKm3or0&callback=initMap"
+  type="text/javascript"></script>
 	<script type="text/javascript">
 //숨기기,보이기
 var bDisplay = true;

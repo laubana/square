@@ -180,7 +180,7 @@ input::placeholder {
 	
 					<div class="container">
   						<div class="wrap-input">  
-  							<input type="search" class="input-txt" placeholder="Search">
+  							<input type="search" class="input-txt" placeholder="Search" onsubmit="searchKeywordFunction()">
   						<div class="filters">
     						<div class="filter-btn active">
       							<input type="radio" value="">
@@ -322,7 +322,33 @@ $('input[type=search]').on({
 	         .val( queryValue + '' + $(this).val() + '' ).focus()
 	   }
 	})
+	
+	
 </script>
+
+<!-- 키워드로 그룹 서치 ajax  -->
+<!-- <script>
+function searchKeywordFunction()
+{
+		$.ajax({
+				url:'groupSearchByKeyword',
+				type:'GET',
+				data: {str : 'tempData'},
+				dataType:'json',
+				success:function(array)
+				{
+					$('#input-txt').val(array);
+					$('array.Group')
+				},
+				error:function(e)
+				{
+					alert('저장되지 않음');
+				}	
+		});
+		
+}
+
+</script> -->
 
 	</body>
 </html>
