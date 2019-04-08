@@ -40,6 +40,11 @@ public class Hashtag {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public String toString() {
+		return "Hashtag [hashtag_id=" + hashtag_id + ", name=" + name + "]";
+	}
 	
 	
 	

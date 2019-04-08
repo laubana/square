@@ -22,15 +22,16 @@ INSERT INTO
 </insert>
 
 
-<!--  erd 기준으로  user_hashtag 테이블이 sql에 올라오면 살리기
-<select id="getUserHashtag"  parameterType="String" resultType="UserHashtag">
-SELECT
-	*
-FROM
-	나중에 생성하는 거 보고 테이블 이름
-WHERE
-	USER_ID = #{USER_ID}
+<select id="getUserHashtag"  parameterType="String" resultType="Hashtag">
+select
+	* 
+from
+	table_h
+where
+	table_h.hashtag_id
+in
+	(select hashtag_id from table_uh where user_id like #{user_id})
+
 </select>
 
- -->
 </mapper>

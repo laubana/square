@@ -86,12 +86,21 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "joinForm", method = RequestMethod.POST)
-	public String joinForm2()
+	public String joinForm2(User user)//나중에 email 도메인 부분도 받기
 	{
 		logger.info("join-post입니다!");
-		//세현: 현재 joinForm 에서 보내주는 값들에 대해, 팀 내의 논의가 필요하므로 일단 보류해놓고 나중에 계속 작업하겠음 
+		int check = 0;
+		//가입 정보 DB 넣기. 나중에 아이디 부분이랑 도메인 부분이랑 합쳐서 다시 아이디에 넣기. 성공하면 1, 실패하면 0
+		check = sh_udao.inputUser(user);
 		
-		return "main";
+		//로그인 실패
+		if(check == 0){
+			return "member/joinForm";
+		}
+		//로그인 성공
+		else{
+			return "main";
+		}
 	}
 	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
@@ -128,18 +137,20 @@ public class UserController {
 		ArrayList<Group> glist = sh_gdao.getGroupByUser(userid);
 		request.addAttribute("glist",glist);
 		
+
 		//해시태그 보내기
-/*
-나중에 table_h 와 table_uh 에 튜블 많이 생성된 후에 살리기 
- 		ArrayList<UserHashtag> hlist = null;
+		/*	
+		나중에 table_h 와 table_uh 에 튜블 많이 생성된 후에 살리기 . 일단 아래는 임시
+ 		ArrayList<Hashtag> hlist = null;
 		hlist = sh_udao.getUserHashtag(userid);
-일단 아래는 임시
- */		
+ */			
+	
 		ArrayList<Hashtag> hlist = new ArrayList<Hashtag>();
 		int i = 0;
 		for(i = 1 ; i <= 6 ; i = i + 1){
 			hlist.add( new Hashtag(i, "temphashtag"+i) );
 		}
+	
 		request.addAttribute("hlist",hlist);
 
 		

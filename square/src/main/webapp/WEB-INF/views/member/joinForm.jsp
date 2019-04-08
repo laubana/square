@@ -30,7 +30,7 @@
 			</header>
 
 		<!-- Signup Form -->
-			<form id="join-form" method="post" action="#">
+			<form id="join-form" method="post" action="joinForm2">
 				<p><input type="text" name="user_id" id="user_id" placeholder="id 입력">
 
 		<!-- non-display 로 ~! -->
@@ -38,7 +38,7 @@
 				<p><input type="text" name="user_idEmailType" placeholder="email 직접 입력"></p>
 			</div> -->
 		
-					<select name = "user_id">
+					<select name = "user_id2">
 						<option>선택</option>
 						<option>yahoo.com</option>
 						<option>naver.com</option>
