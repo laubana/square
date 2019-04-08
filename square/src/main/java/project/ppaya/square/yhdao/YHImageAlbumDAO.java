@@ -77,7 +77,7 @@ public class YHImageAlbumDAO
 		{
 			result = mapper.insertImageAlbum(map);
 		}
-		catch(Exception error){error.printStackTrace();}
+		catch(Exception error){}
 		
 		return result;
 	}

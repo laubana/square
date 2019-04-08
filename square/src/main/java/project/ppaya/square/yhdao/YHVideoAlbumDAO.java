@@ -30,7 +30,7 @@ public class YHVideoAlbumDAO
 		{
 			result = mapper.insertVideoAlbum(map);
 		}
-		catch(Exception error){error.printStackTrace();}
+		catch(Exception error){}
 		
 		return result;
 	}

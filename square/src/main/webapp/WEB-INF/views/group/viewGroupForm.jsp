@@ -73,12 +73,7 @@
 									<img src="resources/GroupMain/images/banner/01.jpg" alt="" />
 								</div>
 								<div class="container">
-									<header class="major">
-										<h2>빠야빠야빠야 빵야!</h2>
-										<p>빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵<br />
-										빵빵빵빵빵빵 <a href="main">2조</a>.</p>
-									</header>
-									<p>빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵빵.</p>
+									<p>${group.content}</p>
 								</div>
 							</section>
 						
@@ -87,15 +82,13 @@
 								<div class="container">
 									<h3>회원 정보</h3>
 										<div>
-											<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/c1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
+											<a href="viewUserForm?user_id=${leader.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${leader.image_id}" alt="" style="width: 100px; height:auto;"></a>
+										</div>
 										<div>
 									<p>주최자</p>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m2.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m3.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m4.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m5.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m6.jpg" alt="" style="width: 100px; height:auto;"></a>
+										<c:forEach var="user" items="${user_list}">
+											<a href="viewUserForm?user_id=${user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${user.image_id}" alt="" style="width: 100px; height:auto;"></a>
+										</c:forEach>
 										</div>
 									<p>회원</p>
 									<a href="groupMember" class="button">회원 페이지 이동</a>
@@ -107,8 +100,24 @@
 								<div class="container">
 									<h3>코멘트</h3>
 						<div class="comments">
-						
+						<c:forEach var="group_comment" items="${group_comment_list}">
 						<div class="comment-wrap">
+							<div>
+							<a href="viewUserForm?user_id=${group_comment.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${group_comment.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
+							</div>
+							<div class="comment-block">
+								<p class="comment-text">${group_comment.content}</p>
+									<div class="bottom-comment">
+										<div class="comment-date">4월 24일, 2019년 @ 10:38 AM</div>
+											<ul class="comment-actions">
+												<li class="name">${group_comment.user.user_id}</li>
+												<li class="complain">Complain</li>
+											</ul>
+									</div>
+							</div>
+						</div>
+						</c:forEach>
+						<!-- <div class="comment-wrap">
 							<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
 							<div class="comment-block">
 								<p class="comment-text">부트?</p>
@@ -134,7 +143,7 @@
 											</ul>
 										</div>
 									</div>
-						</div>
+						</div> -->
 						
 						<a href="groupComment" class="button">코멘트 페이지 이동</a>
 						

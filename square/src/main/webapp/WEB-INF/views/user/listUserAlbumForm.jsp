@@ -80,8 +80,8 @@ label img {
 			<header id="header">
 				<div class="inner">
 					<div align="left"><h1 style="font-size:50px;"><a href="main">2조</a></h1></div>
-					<a href="#" class="image avatar"><img src="resources/GroupMain/images/member/c1.jpg" alt="" /></a>
-					<h1><strong>Harry</strong>님의 그룹 사진<br /></h1>
+					<a href="#" class="image avatar"><img src="resources/image/${user.image_id}" alt="" /></a>
+					<h1><strong>${user.user_id}</strong>님의 그룹 사진<br /></h1>
 					<p>편집 할려면 하든가ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
 					ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
 					<nav id="nav">
@@ -122,7 +122,6 @@ label img {
 											<h3 align="center" style="color:maroon;">Face</h3>
 											</label>
 											<br>	
-								<input type="submit" value="선택 확인">
 								</div>
 						</div>
 						</form>
@@ -134,7 +133,7 @@ label img {
 						<h1>앨범 편집</h1>
 						<!-- Form 사진 영상 -->
 						<form action="">
-						<div class="row">
+						<div id="image_album" class="row">
 						<c:forEach var="image" items="${event_schedule_image_list}">
 							<article class="col-6 col-12-xsmall work-item">
 								<input type="checkbox" id="albumCheckbox${image.event_schedule_image_id}" />
@@ -251,15 +250,15 @@ $(document).ready(function () {
 	$(".check").change(function()
 	{
 		var map = {};
-		var checked_group_list = [];
+		var group_id_list = [];
 		var self = $(":checkbox[name='faceCheckbox']").prop("checked");
 		
 		console.log(self);		
 		$.each($(":checkbox[name='groupCheckbox']:checked"), function(){            
-			checked_group_list.push($(this).val());
+			group_id_list.push($(this).val());
         });
 		
-		map["checked_group_list"] = checked_group_list;
+		map["group_id_list"] = group_id_list;
 		map["self"] = self;
 		
 		console.log(map);
@@ -271,8 +270,15 @@ $(document).ready(function () {
 			dataType: "JSON",
 			contentType: "application/json; charset=UTF-8",
 			success: function(result)
-			{
+			{			
+				var buff = "";
+				console.log(result);
+				for(var i = 0; i < result.length; i++)
+				{
+					buff += "<img src='resources/image/" + result[i].filename + "' style='width:100px; height:auto;'/>";
+				}
 				
+				document.getElementById("image_album").innerHTML = buff;
 			},
 			error: function(error){console.log(error);}
 		});

@@ -125,7 +125,8 @@ public class UserController
 		JSONArray jsonArray = null;
 		JSONObject jsonObject = null;	
 		
-		User user = yh_userDAO.selectUserByUserId(user_id);;
+		User user = yh_userDAO.selectUserByUserId(user_id);
+		request.addAttribute("user", user);
 		String image_id = user.getImage_id();
 		
 		ArrayList<Integer> group_id_list = yh_group_attendanceDAO.getGroupIdByUserId(user_id);

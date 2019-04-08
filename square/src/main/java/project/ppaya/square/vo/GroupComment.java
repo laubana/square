@@ -6,6 +6,7 @@ public class GroupComment
 	int group_id;
 	String user_id;
 	String content;
+	User user;
 	public GroupComment(){}
 	public int getGroup_comment_id() {
 		return group_comment_id;
@@ -30,5 +31,11 @@ public class GroupComment
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

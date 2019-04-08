@@ -83,6 +83,10 @@ public class GroupController
 		//Group 전송
 		request.addAttribute("group", group);
 		
+		User leader = yh_userDAO.selectUserByUserId(group.getUser_id());
+		//Leader 전송
+		request.addAttribute("leader", leader);
+		
 		//GroupHashtag List 전송
 		ArrayList<GroupHashtag> group_hashtag_list = yh_group_hashtagDAO.selectGroupHashtagByGroupId(group_id);
 		request.addAttribute("group_hashtag_list", group_hashtag_list);
@@ -103,6 +107,10 @@ public class GroupController
 		request.addAttribute("user_list", user_list);
 		
 		ArrayList<GroupComment> group_comment_list = yh_group_boardDAO.selectGroupCommentByGroupId(group_id);
+		for(int i = 0; i < group_comment_list.size(); i++)
+		{
+			group_comment_list.get(i).setUser(yh_userDAO.selectUserByUserId(group_comment_list.get(i).getUser_id()));
+		}
 		//GroupComment List 전송
 		request.addAttribute("group_comment_list", group_comment_list);
 		
