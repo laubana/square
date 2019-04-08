@@ -20,6 +20,7 @@
 		<typeAlias type="project.ppaya.square.vo.EventScheduleImageFace" alias="EventScheduleImageFace" />
 		<typeAlias type="project.ppaya.square.vo.EventScheduleVideo" alias="EventScheduleVideo" />
 		<typeAlias type="project.ppaya.square.vo.EventScheduleVideoFace" alias="EventScheduleVideoFace" />
+		<typeAlias type="project.ppaya.square.vo.Hashtag" alias="Hashtag" />
 		
 	</typeAliases>
 	<mappers>

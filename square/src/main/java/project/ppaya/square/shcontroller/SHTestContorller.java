@@ -47,24 +47,7 @@ public ArrayList<Group> response_GroupSearch(String keyword){
 	return glist;
 }
 
-@RequestMapping(value = "joinForm2", method = RequestMethod.GET)
-public String joinForm2(User user)
-{
-	User user1 = new User();
-	user1.setUser_id("tes2");
-	user1.setPassword("tes2");
-	user1.setRegion("test2_reg");
-	user1.setName("tes2");
-	
-	sh_udao.inputUser(user1);
-	
-	
-	logger.info("join2입니다!");
-	//세현: 현재 joinForm 에서 보내주는 값들에 대해, 팀 내의 논의가 필요하므로 일단 보류해놓고 나중에 계속 작업하겠음 
-	
-	
-	return "main/mainForm";
-}
+
 
 
 

@@ -60,11 +60,11 @@
 						</header>
 						<p>태그 넣자!!</p>
 						<ul class="tag">
-										<li><a href="#">농구</a></li>
-										<li><a href="#">축구</a></li>
-										<li><a href="#">배구</a></li>
-										<li><a href="#">야구</a></li>
-										<li><a href="#">미식축구</a></li>
+										<li><a href="#">${ hlist[0].name }</a></li>
+										<li><a href="#">${ hlist[1].name }</a></li>
+										<li><a href="#">${ hlist[2].name }</a></li>
+										<li><a href="#">${ hlist[3].name }</a></li>
+										<li><a href="#">${ hlist[4].name }</a></li>
 									</ul>
 						<ul class="actions">
 							<li><a href="#" class="button">관심 분야 편집</a></li>
