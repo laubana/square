@@ -15,6 +15,20 @@ public class YHEventScheduleAttendanceDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<String> getUserIdByEventScheduleId(int event_schedule_id)
+	{
+		ArrayList<String> user_id_list = null;
+		
+		YHEventScheduleAttendanceMapper mapper = sqlSession.getMapper(YHEventScheduleAttendanceMapper.class);
+		
+		try
+		{
+			user_id_list = mapper.getUserIdByEventScheduleId(event_schedule_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return user_id_list;
+	}
 	public ArrayList<EventScheduleAttendance> selectEventScheduleAttendaceByUserId(String user_id)
 	{
 		ArrayList<EventScheduleAttendance> event_schedule_list = null;
