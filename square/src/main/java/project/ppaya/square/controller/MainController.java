@@ -26,25 +26,21 @@ SH_DAO_Group sh_gdao;
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String mainForm(Model request)
 	{
-		//카테고리 리스트 받아 옴
+		/* 나중에 groupCategory 테이블에 튜플 많이 들어가면 살리기
 		ArrayList<GroupCategory> clist = null;
 		clist = sh_gdao.getCategoryList();
+		*/
+		ArrayList<GroupCategory> clist = new ArrayList<>();
 		int i = 0;
 		if(clist != null) {
 			request.addAttribute("clist",clist);
-			for(i = 1 ; i <= 5; i = i +1){
+			for(i = 1 ; i <= 6; i = i +1){
 				clist.add(new GroupCategory(i,"temp_name"+i));
 			}
 			
 			logger.info("메인입니다!");
 		} 
 		
-		else {
-			GroupCategory g1 = new GroupCategory("오류입니다");
-			clist = new ArrayList<GroupCategory>();
-			clist.add(g1);
-			request.addAttribute("clist", clist);
-		}
 		return "main/mainForm";
 
 	}
