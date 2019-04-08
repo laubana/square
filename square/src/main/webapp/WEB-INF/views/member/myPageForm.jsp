@@ -75,6 +75,10 @@
 					<section id="three">
 						<h1>그룹 활동</h1>
 
+<%-- <c:forEach var="g" items="${glist }">
+	${g.name }
+</c:forEach> --%>
+
 						<div class="row">
 							<ul class="features">
 									<li>
