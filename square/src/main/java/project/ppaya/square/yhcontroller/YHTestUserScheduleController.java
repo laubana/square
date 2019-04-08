@@ -3,6 +3,8 @@ package project.ppaya.square.yhcontroller;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import project.ppaya.square.yhdao.YHEventScheduleAttendanceDAO;
 import project.ppaya.square.yhdao.YHEventScheduleUserScheduleDAO;
 import project.ppaya.square.yhdao.YHUserDAO;
 import project.ppaya.square.yhutil.YHEventSchedeulUserScheduleUtil;
+import project.ppaya.square.yhutil.YHVideoIndexerUtil;
 
 /**
  * Handles requests for the application home page.
@@ -56,6 +59,13 @@ public class YHTestUserScheduleController
 		{
 			logger.debug("{}", view.get(i));
 		}
+	}
+	@RequestMapping(value = "/yhtest", method = RequestMethod.GET)
+	public void yhtest()
+	{
+		JSONObject jsonObject = new JSONObject(YHVideoIndexerUtil.getVideoIndex("3a9c7198af"));
+		JSONArray jsonArray = jsonObject.getJSONObject("summarizedInsights").getJSONArray("faces");
+		logger.debug("{}", jsonArray.length());
 	}
 	/*@ResponseBody
 	@RequestMapping(value = "/getMultipleIntegrateScheduleMapListAction", method = RequestMethod.POST)
