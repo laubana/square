@@ -36,4 +36,13 @@ FROM
 WHERE
 	USER_ID = #{user_id}
 </select>
+<select id="getGroupIdByUserIdNotBlind" parameterType="string" resultType="int">
+SELECT
+	GROUP_ID
+FROM
+	TABLE_GA
+WHERE
+	USER_ID = #{user_id} AND
+	BLIND = 0
+</select>
 </mapper>

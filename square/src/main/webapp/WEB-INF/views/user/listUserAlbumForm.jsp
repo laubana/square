@@ -250,14 +250,32 @@ $(document).ready(function () {
 	
 	$(".check").change(function()
 	{
-		var checked_group = [];
+		var map = {};
+		var checked_group_list = [];
+		var self = $(":checkbox[name='faceCheckbox']").prop("checked");
 		
+		console.log(self);		
 		$.each($(":checkbox[name='groupCheckbox']:checked"), function(){            
-			checked_group.push($(this).val());
+			checked_group_list.push($(this).val());
         });
 		
-		console.log(checked_group);
-		console.log($(":checkbox[name='faceCheckbox']").prop("checked"));
+		map["checked_group_list"] = checked_group_list;
+		map["self"] = self;
+		
+		console.log(map);
+		
+		$.ajax({
+			url: "testAction",
+			type: "POST",
+			data: JSON.stringify(map),
+			dataType: "JSON",
+			contentType: "application/json; charset=UTF-8",
+			success: function(result)
+			{
+				
+			},
+			error: function(error){console.log(error);}
+		});
     });
 
 })

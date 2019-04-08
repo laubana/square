@@ -15,6 +15,20 @@ public class YHGroupDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<Group> selectGroupByGroupCategoryId(int group_category_id)
+	{
+		ArrayList<Group> group_list = null;
+		
+		YHGroupMapper mapper = sqlSession.getMapper(YHGroupMapper.class);
+		
+		try
+		{
+			group_list = mapper.selectGroupByGroupCategoryId(group_category_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_list;
+	}
 	public Group selectGroupByGroupId(int group_id)
 	{
 		Group group = null;

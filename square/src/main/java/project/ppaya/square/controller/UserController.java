@@ -15,13 +15,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import project.ppaya.square.shdao.SH_DAO_Group;
 import project.ppaya.square.shdao.SH_DAO_User;
 import project.ppaya.square.vo.EventScheduleImage;
 import project.ppaya.square.vo.EventScheduleVideo;
 import project.ppaya.square.vo.Group;
-import project.ppaya.square.vo.Hashtag;
+import project.ppaya.square.vo.GroupHashtag;
 import project.ppaya.square.vo.Reference;
 import project.ppaya.square.vo.User;
 import project.ppaya.square.vo.UserHashtag;
@@ -36,6 +37,7 @@ import project.ppaya.square.yhdao.YHEventScheduleVideoFaceDAO;
 import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
 import project.ppaya.square.yhdao.YHGroupDAO;
 import project.ppaya.square.yhdao.YHUserDAO;
+import project.ppaya.square.yhdao.YHUserHashtagDAO;
 import project.ppaya.square.yhdao.YHVideoAlbumDAO;
 import project.ppaya.square.yhutil.YHFileUtil;
 import project.ppaya.square.yhutil.YHMSFaceUtil;
@@ -43,8 +45,8 @@ import project.ppaya.square.yhutil.YHVideoIndexerUtil;
 
 @Repository
 @Controller
-public class UserController {
-
+public class UserController
+{
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
@@ -66,6 +68,8 @@ public class UserController {
 	@Autowired
 	YHGroupDAO yh_groupDAO;
 	@Autowired
+	YHUserHashtagDAO yhuser_hashtagDAO;
+	@Autowired
 	YHGroupAttendanceDAO yh_group_attendanceDAO; 
 	@Autowired
 	YHImageAlbumDAO yh_image_albumDAO;
@@ -77,94 +81,50 @@ public class UserController {
 	@Autowired
 	SH_DAO_Group sh_gdao;
 	
-	@RequestMapping(value = "joinForm", method = RequestMethod.GET)
-	public String joinForm()
+	@RequestMapping(value = "joinUserForm", method = RequestMethod.GET)
+	public String joinUserFormGET()
 	{
-		logger.info("join-get입니다!");
-
-		return "member/joinForm";
+		return "user/joinUserForm";
 	}
-	
-	@RequestMapping(value = "joinForm", method = RequestMethod.POST)
-	public String joinForm2(User user)//나중에 email 도메인 부분도 받기
+	@RequestMapping(value = "loginUserForm", method = RequestMethod.GET)
+	public String loginUserFormGET()
 	{
-		logger.info("join-post입니다!");
-		int check = 0;
-		//가입 정보 DB 넣기. 나중에 아이디 부분이랑 도메인 부분이랑 합쳐서 다시 아이디에 넣기. 성공하면 1, 실패하면 0
-		check = sh_udao.inputUser(user);
-		
-		//로그인 실패
-		if(check == 0){
-			return "member/joinForm";
-		}
-		//로그인 성공
-		else{
-			return "main";
-		}
+		return "user/loginUserForm";
 	}
-	
-	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public String loginForm()
+	@RequestMapping(value = "viewUserForm", method = RequestMethod.GET)
+	public String viewUserForm
+	(
+			Model request,
+			@RequestParam(value = "user_id", defaultValue = "id1") String user_id
+			//String user_id
+			)
 	{
-		logger.info("로그인입니다!");
-
-		return "member/loginForm";
-	}
-	
-	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String sh_loginCheck(
-			HttpSession session
-			, Model model
-			, String email
-			, String password ){
-		logger.debug("지나감");
-		email = "id1";
-		int check = sh_udao.loginCheck(email, password);
-		if (check == 1) {
-			session.setAttribute("login_email", email);
-		} else{
-			model.addAttribute("login_check","fail");
-			
-		}
-	
-	return "main";
-}
-	
-	@RequestMapping(value = "myPage", method = RequestMethod.GET)
-	public String sh_myPageForm(Model request){
-		//그 사람이 참여 중인 그룹 리스트 보내기
-		String userid = "id1"; //세현: 나중에는 세션에서 id 받아서 넣기. 일단 임시로 넣어 둠
-		ArrayList<Group> glist = sh_gdao.getGroupByUser(userid);
-		request.addAttribute("glist",glist);
+		User user = yh_userDAO.selectUserByUserId(user_id);
+		//User 전송
+		request.addAttribute("user", user);
 		
-
-		//해시태그 보내기
-		/*	
-		나중에 table_h 와 table_uh 에 튜블 많이 생성된 후에 살리기 . 일단 아래는 임시
- 		ArrayList<Hashtag> hlist = null;
-		hlist = sh_udao.getUserHashtag(userid);
- */			
-	
-		ArrayList<Hashtag> hlist = new ArrayList<Hashtag>();
-		int i = 0;
-		for(i = 1 ; i <= 6 ; i = i + 1){
-			hlist.add( new Hashtag(i, "temphashtag"+i) );
-		}
-	
-		request.addAttribute("hlist",hlist);
-
+		ArrayList<Integer> group_id_list = yh_group_attendanceDAO.getGroupIdByUserIdNotBlind(user_id);
+		ArrayList<Group> group_list = yh_groupDAO.selectGroupByGroupIdList(group_id_list);
+		//Group List 전송
+		request.addAttribute("group_list", group_list);
 		
-		return "member/myPageForm";
+		ArrayList<UserHashtag> user_hashtag_list = yhuser_hashtagDAO.selectUserHashtagByUserId(user_id);
+		//UserHashtag List 전송
+		request.addAttribute("user_hashtag_list", user_hashtag_list);
+		
+		return "user/viewUserForm";
 	}
-	
-	@RequestMapping(value = "memberPhoto", method = RequestMethod.GET)
-	public String memberPhotoForm(Model request)
+	@RequestMapping(value = "listUserAlbumForm", method = RequestMethod.GET)
+	public String listUserAlbumForm
+	(
+			Model request,
+			@RequestParam(value = "user_id", defaultValue = "id1") String user_id
+			)
 	{
 		String result = null;
 		JSONArray jsonArray = null;
 		JSONObject jsonObject = null;	
-
-		String user_id = "id1";
+		
 		User user = yh_userDAO.selectUserByUserId(user_id);;
 		String image_id = user.getImage_id();
 		
@@ -258,13 +218,13 @@ public class UserController {
 			EventScheduleVideo event_schedule_video = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleVideoId(event_schedule_video_id);
 			
 			if(event_schedule_video.getDetect_date() == null)
-			{
-				yh_event_schedule_videoDAO.updateDetectDateByEventScheduleVideoId((new Date()).getTime(), event_schedule_video_id);
-				
+			{				
 				jsonObject = new JSONObject(YHVideoIndexerUtil.getVideoIndex(event_schedule_video_id));
 				
 				if(jsonObject.isNull("errorType"))
 				{
+					yh_event_schedule_videoDAO.updateDetectDateByEventScheduleVideoId((new Date()).getTime(), event_schedule_video_id);
+					
 					jsonArray = jsonObject.getJSONObject("summarizedInsights").getJSONArray("faces");
 					
 					for(int j = 0; j < jsonArray.length(); j++)
@@ -316,16 +276,19 @@ public class UserController {
 		{
 			ArrayList<String> attend_event_schedule_video_face_id_list = yh_event_schedule_video_faceDAO.getEventScheduleVideoFaceIdByEventScheduleVideoId(attend_event_schedule_video_id_list.get(i));
 			
-			ArrayList<String> similar_event_schedule_video_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(attend_event_schedule_video_face_id_list, (new JSONArray(YHMSFaceUtil.detectFace(Reference.file_path, image_id))).getJSONObject(0).getString("faceId"));
-			
-			if(similar_event_schedule_video_face_id.size() != 0)
+			if(attend_event_schedule_video_face_id_list.size() != 0)
 			{
-				yh_video_albumDAO.updateSelfByEventScheduleVideoIdUserId(attend_event_schedule_video_id_list.get(i), user_id);
+				ArrayList<String> similar_event_schedule_video_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(attend_event_schedule_video_face_id_list, (new JSONArray(YHMSFaceUtil.detectFace(Reference.file_path, image_id))).getJSONObject(0).getString("faceId"));
+				
+				if(similar_event_schedule_video_face_id.size() != 0)
+				{
+					yh_video_albumDAO.updateSelfByEventScheduleVideoIdUserId(attend_event_schedule_video_id_list.get(i), user_id);
+				}
 			}
 		}
 		//VideoAlbum 업데이트 끝
 		
-		return "member/memberPhotoForm";
+		return "user/listUserAlbumForm";
 	}
 	
 }

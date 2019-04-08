@@ -49,24 +49,18 @@
 
 					<!-- Gallery  -->
 						<div class="gallery">
-							<article class="from-left">
-								<a href="groupSearch?group_category_id=${clist[0].group_category_id}" class="image fit thumb1"><img src="resources/Main/images/thumbs/01.jpg" alt="" /></a>
-							</article>
-							<article class="from-right">
-								<a href="groupSearch?group_category_id=${clist[1].group_category_id}" class="image fit thumb2"><img src="resources/Main/images/thumbs/02.jpg" alt="" /></a>
-							</article>
-							<article class="from-left">
-								<a href="groupSearch?group_category_id=${clist[2].group_category_id}" class="image fit thumb3"><img src="resources/Main/images/thumbs/03.jpg" alt="" /></a>
-							</article>
-							<article class="from-right">
-								<a href="groupSearch?group_category_id=${clist[3].group_category_id}" class="image fit thumb4"><img src="resources/Main/images/thumbs/04.jpg" alt="" /></a>
-							</article>
-							<article class="from-left">
-								<a href="groupSearch?group_category_id=${clist[4].group_category_id}" class="image fit thumb5"><img src="resources/Main/images/thumbs/05.jpg" alt="" /></a>
-							</article>
-							<article class="from-right">
-								<a href="groupSearch?group_category_id=${clist[5].group_category_id}" class="image fit thumb6"><img src="resources/Main/images/thumbs/06.jpg" alt="" /></a>
-							</article>
+							<c:forEach var="group_category" items="#{group_category_list}" varStatus="status">
+								<c:if test="${status.index % 2 == 1}">
+									<article class="from-right">
+										<a href="listGroupForm?group_category_id=${group_category.group_category_id}" class="image fit thumb1"><img src="resources/Main/images/thumbs/${group_category.group_category_id}.jpg" alt="" /></a>
+									</article>
+								</c:if>
+								<c:if test="${status.index % 2 == 0}">
+									<article class="from-left">
+										<a href="listGroupForm?group_category_id=${group_category.group_category_id}" class="image fit thumb1"><img src="resources/Main/images/thumbs/${group_category.group_category_id}.jpg" alt="" /></a>
+									</article>
+								</c:if>
+							</c:forEach>
 						</div>
 				</div>
 			</section>

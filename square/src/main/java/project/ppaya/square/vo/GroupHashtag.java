@@ -1,20 +1,20 @@
 package project.ppaya.square.vo;
 
-public class UserHashtag
+public class GroupHashtag
 {
 	String hashtag;
-	String user_id;
-	public UserHashtag(){}
+	int group_id;
+	public GroupHashtag(){}
 	public String getHashtag() {
 		return hashtag;
 	}
 	public void setHashtag(String hashtag) {
 		this.hashtag = hashtag;
 	}
-	public String getUser_id() {
-		return user_id;
+	public int getGroup_id() {
+		return group_id;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setGroup_id(int group_id) {
+		this.group_id = group_id;
 	}
 }

@@ -8,8 +8,8 @@ public class EventScheduleImage
 	String filename;
 	String ext;
 	Long detect_date;
-	double latitude;
-	double longitude;
+	String latitude;
+	String longitude;
 	public EventScheduleImage(){}
 	public String getEvent_schedule_image_id() {
 		return event_schedule_image_id;
@@ -47,16 +47,16 @@ public class EventScheduleImage
 	public void setDetect_date(Long detect_date) {
 		this.detect_date = detect_date;
 	}
-	public double getLatitude() {
+	public String getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(double latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
-	public double getLongitude() {
+	public String getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(double longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 }

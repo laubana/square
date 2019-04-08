@@ -114,6 +114,7 @@ public class YHMSFaceUtil
         }
         catch (Exception error)
         {
+        	error.printStackTrace();
             return error.getMessage();
         }
 	}
@@ -143,6 +144,7 @@ public class YHMSFaceUtil
         }
         catch (Exception error)
         {
+        	error.printStackTrace();
             return error.getMessage();
         }
 	}
@@ -167,8 +169,9 @@ public class YHMSFaceUtil
             
             return EntityUtils.toString(httpResponse.getEntity()).trim();
         }
-        catch (Exception error)
+        catch(Exception error)
         {
+        	error.printStackTrace();
             return error.getMessage();
         }
 	}
@@ -193,6 +196,7 @@ public class YHMSFaceUtil
 		}
 		catch (Exception error)
 		{
+			error.printStackTrace();
 		    return error.getMessage();
 		}
 	}
@@ -219,6 +223,7 @@ public class YHMSFaceUtil
 		}
 		catch (Exception error)
 		{
+			error.printStackTrace();
 		    return error.getMessage();
 		}
 	}
@@ -240,6 +245,7 @@ public class YHMSFaceUtil
 		}
 		catch (Exception error)
 		{
+			error.printStackTrace();
 		    return error.getMessage();
 		}
 	}
@@ -261,6 +267,7 @@ public class YHMSFaceUtil
 		}
 		catch (Exception error)
 		{
+			error.printStackTrace();
 		    return error.getMessage();
 		}
 	}
@@ -285,6 +292,7 @@ public class YHMSFaceUtil
 		}
 		catch (Exception error)
 		{
+			error.printStackTrace();
 		    return error.getMessage();
 		}
 	}
@@ -306,6 +314,7 @@ public class YHMSFaceUtil
 		}
 		catch (Exception error)
 		{
+			error.printStackTrace();
 		    return error.getMessage();
 		}
 	}

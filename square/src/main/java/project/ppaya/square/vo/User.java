@@ -7,6 +7,7 @@ public class User
 	String name;
 	String region;
 	String image_id;
+	String content;
 	public User(){}
 	public String getUser_id() {
 		return user_id;
@@ -37,5 +38,11 @@ public class User
 	}
 	public void setImage_id(String image_id) {
 		this.image_id = image_id;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 }

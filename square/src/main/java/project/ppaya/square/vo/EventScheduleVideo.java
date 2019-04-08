@@ -8,8 +8,8 @@ public class EventScheduleVideo
 	Long detect_date;
 	String user_id;
 	int event_schedule_id;
-	double latitude;
-	double longitude;
+	String latitude;
+	String longitude;
 	public EventScheduleVideo(){}
 	public String getEvent_schedule_video_id() {
 		return event_schedule_video_id;
@@ -47,16 +47,16 @@ public class EventScheduleVideo
 	public void setEvent_schedule_id(int event_schedule_id) {
 		this.event_schedule_id = event_schedule_id;
 	}
-	public double getLatitude() {
+	public String getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(double latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
-	public double getLongitude() {
+	public String getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(double longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 }

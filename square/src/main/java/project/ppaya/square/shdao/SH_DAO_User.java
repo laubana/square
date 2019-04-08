@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import project.ppaya.square.shmapper.SH_Mapper_User;
 import project.ppaya.square.vo.Group;
-import project.ppaya.square.vo.Hashtag;
+import project.ppaya.square.vo.GroupHashtag;
 import project.ppaya.square.vo.User;
 import project.ppaya.square.vo.UserHashtag;
 
@@ -32,10 +32,10 @@ public int loginCheck(String email, String password){
 	}
 }
 
-public ArrayList<Hashtag> getUserHashtag(String userid){
+public ArrayList<GroupHashtag> getUserHashtag(String userid){
 	
 	SH_Mapper_User umapper = session.getMapper(SH_Mapper_User.class);
-	ArrayList<Hashtag> hlist = null;
+	ArrayList<GroupHashtag> hlist = null;
 	
 	try
 	{

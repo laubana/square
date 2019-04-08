@@ -21,9 +21,8 @@
 				<div class="inner">
 					<div align="left"><h1 style="font-size:50px;"><a href="main">2조</a></h1></div>
 					<a href="#" class="image avatar"><img src="resources/GroupMain/images/member/c1.jpg" alt="" /></a>
-					<h1><strong>Harry</strong>님의 마이페이지<br /></h1>
-					<p>자기소개 할려면 하든가ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-					ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
+					<h1><strong>${user.name}</strong>님의 마이페이지<br /></h1>
+					<p>${user.content}</p>
 					<nav id="nav">
 					<ul>
 						<li><a href="#one" class="active">정보</a></li>
@@ -58,7 +57,11 @@
 						<header class="major">
 							<h2>관심 분야</h2>
 						</header>
-						<p>태그 넣자!!</p>
+						<p>
+							<c:forEach var="user_hashtag" items="${user_hashtag_list}">
+								#${user_hashtag.hashtag}
+							</c:forEach>
+						</p>
 						<ul class="tag">
 										<li><a href="#">${ hlist[0].name }</a></li>
 										<li><a href="#">${ hlist[1].name }</a></li>
@@ -119,7 +122,7 @@ ${glist[0].content }
 							</article>
 						</div>
 						<ul class="actions">
-							<li><a href="memberPhoto" class="button">앨범 편집</a></li>
+							<li><a href="listUserAlbumForm?user_id=${user.user_id}" class="button">앨범 편집</a></li>
 						</ul>
 					</section>
 

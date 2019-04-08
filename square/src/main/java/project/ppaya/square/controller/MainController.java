@@ -12,36 +12,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import project.ppaya.square.shdao.SH_DAO_Group;
 import project.ppaya.square.vo.GroupCategory;
+import project.ppaya.square.yhdao.YHGroupCategoryDAO;
 
 
 
 @Controller
 public class MainController
-{
-	
-@Autowired
-SH_DAO_Group sh_gdao;
+{ 
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+	@Autowired
+	SH_DAO_Group sh_gdao;
+	@Autowired
+	YHGroupCategoryDAO yh_group_categoryDAO;
 
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String mainForm(Model request)
 	{
-		/* 나중에 groupCategory 테이블에 튜플 많이 들어가면 살리기
-		ArrayList<GroupCategory> clist = null;
-		clist = sh_gdao.getCategoryList();
-		*/
-		ArrayList<GroupCategory> clist = new ArrayList<>();
-		int i = 0;
-		if(clist != null) {
-			request.addAttribute("clist",clist);
-			for(i = 1 ; i <= 6; i = i +1){
-				clist.add(new GroupCategory(i,"temp_name"+i));
-			}
-			
-			logger.info("메인입니다!");
-		} 
+		ArrayList<GroupCategory> group_category_list = yh_group_categoryDAO.selectGroupCategory();
 		
-		return "main/mainForm";
+		request.addAttribute("group_category_list", group_category_list);
+		
+		return "main/main";
 
 	}
 

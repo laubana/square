@@ -34,8 +34,12 @@
 			<section id="header">
 				<header>
 					<span class="image avatar"><img src="resources/Main/images/logo/01.jpg" alt="" /></span>
-					<h1 id="logo"><a href="#">빠야 그룹</a></h1>
-					<p style="font-size:15px;">[관심분야][관심분야][관심분야][관심분야]</p>
+					<h1 id="logo"><a href="#">${group.name}</a></h1>
+					<p style="font-size:15px;">
+						<c:forEach var="group_hashtag" items="${group_hashtag_list}">
+							#${group_hashtag.hashtag}
+						</c:forEach>
+					</p>
 				</header>
 				<nav id="nav">
 					<ul>

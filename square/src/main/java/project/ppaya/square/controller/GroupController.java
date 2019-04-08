@@ -10,21 +10,23 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import project.ppaya.square.shdao.SH_DAO_Group;
 import project.ppaya.square.shdao.SH_DAO_User;
 import project.ppaya.square.vo.Event;
 import project.ppaya.square.vo.EventScheduleImage;
 import project.ppaya.square.vo.Group;
-import project.ppaya.square.vo.GroupAttendance;
-import project.ppaya.square.vo.GroupBoard;
+import project.ppaya.square.vo.GroupComment;
+import project.ppaya.square.vo.GroupHashtag;
 import project.ppaya.square.vo.User;
 import project.ppaya.square.yhdao.YHEventDAO;
 import project.ppaya.square.yhdao.YHEventScheduleDAO;
 import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
 import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
-import project.ppaya.square.yhdao.YHGroupBoardDAO;
+import project.ppaya.square.yhdao.YHGroupCommentDAO;
 import project.ppaya.square.yhdao.YHGroupDAO;
+import project.ppaya.square.yhdao.YHGroupHashtagDAO;
 import project.ppaya.square.yhdao.YHUserDAO;
 
 @Repository
@@ -46,71 +48,67 @@ public class GroupController
 	@Autowired
 	YHEventScheduleImageDAO yh_event_schedule_imageDAO;
 	@Autowired
-	YHGroupBoardDAO yh_group_boardDAO;
+	YHGroupCommentDAO yh_group_boardDAO;
+	@Autowired
+	YHGroupHashtagDAO yh_group_hashtagDAO;
 	
 	@Autowired
 	SH_DAO_Group sh_gdao;
 	@Autowired
 	SH_DAO_User sh_udao;
-	@RequestMapping(value = "groupSearch", method = RequestMethod.GET)
-	public String searchForm(
-			String category
-			, Model request) {
+	
+	@RequestMapping(value = "listGroupForm", method = RequestMethod.GET)
+	public String listGroupForm
+	(
+			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
+			//int group_category_id,
+			Model request
+			)
+	{
+		ArrayList<Group> group_list = yh_groupDAO.selectGroupByGroupCategoryId(group_category_id);
 		
-		String testint = "1"; //나중에 jsp에서 값 받을 거. TABLE_G 테이블의 group_category_id 찾을 값.
-		int ctg = Integer.parseInt(testint);
-		ArrayList<Group> glist = null;
-		//glist = sh_gdao.getGroupByCategory(ctg); 나중에 테이블 나오면 하고 일단 배열에 임시로 객체 넣어 놓기
+		request.addAttribute("group_list", group_list);
 
-		glist = new ArrayList<>();
-		int i = 0; 	Group g1 = new Group();
-		for(i = 0; i <= 6; i = i + 1){
-			g1.setContent("tempContent" + 1);
-			g1.setName("tempName"+1);
-			g1.setGroup_category_id(i);
-			g1.setGroup_id(i);
-			g1.setRegion("tempRegn"+i);
-			glist.add(g1);
-		}
-		request.addAttribute("glist", glist);
-		logger.info("그룹탐색입니다!");
-
-		return "group/groupSearchForm";
+		return "group/listGroupForm";
 	}
-	@RequestMapping(value = "groupCreateForm", method = RequestMethod.GET)
+	@RequestMapping(value = "createGroupForm", method = RequestMethod.GET)
 	public String createGroupForm(Model request)
 	{
-		return "group/groupCreateForm";
+		return "group/createGroupForm";
 	}
-	@RequestMapping(value = "groupMain", method = RequestMethod.GET)
-	public String mainForm(Model request, int group_id)
+	@RequestMapping(value = "viewGroupForm", method = RequestMethod.GET)
+	public String viewGroupForm(Model request, int group_id)
 	{
 		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
 		//Group 전송
 		request.addAttribute("group", group);
 		
+		//GroupHashtag List 전송
+		ArrayList<GroupHashtag> group_hashtag_list = yh_group_hashtagDAO.selectGroupHashtagByGroupId(group_id);
+		request.addAttribute("group_hashtag_list", group_hashtag_list);
+		
 		ArrayList<Event> event_list = yh_eventDAO.selectEventByGroupId(group_id);
-		//Group의 Event List 전송
+		//GroupEvent List 전송
 		request.addAttribute("event_list", event_list);
 		
 		ArrayList<Integer> event_id_list = yh_eventDAO.getEventIdByGroupId(group_id);
 		ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventIdList(event_id_list);
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
-		//Group의 Image List 전송
+		//GroupImage List 전송
 		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
 		
 		ArrayList<String> user_id_list = yh_group_attendanceDAO.getUserIdByGroupId(group_id);
 		ArrayList<User> user_list = yh_userDAO.selectUserByUserIdList(user_id_list);
-		//Group의 User List 전송
+		//GroupUser List 전송
 		request.addAttribute("user_list", user_list);
 		
-		ArrayList<GroupBoard> group_board_list = yh_group_boardDAO.selectGroupBoardByGroupId(group_id);
-		//Group의 Board List 전송
-		request.addAttribute("group_board_list", group_board_list);
+		ArrayList<GroupComment> group_comment_list = yh_group_boardDAO.selectGroupCommentByGroupId(group_id);
+		//GroupComment List 전송
+		request.addAttribute("group_comment_list", group_comment_list);
 		
-		return "group/groupMainForm";
+		return "group/viewGroupForm";
 	}
-	@RequestMapping(value = "groupPhoto", method = RequestMethod.GET)
+	@RequestMapping(value = "listGroupAlbumForm", method = RequestMethod.GET)
 	public String photoForm(Model request, int group_id)
 	{
 		ArrayList<Integer> event_id_list = yh_eventDAO.getEventIdByGroupId(group_id);
@@ -119,6 +117,6 @@ public class GroupController
 		//Group의 Image List 전송
 		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
 
-		return "group/groupPhotoForm";
+		return "group/listGroupAlbumForm";
 	}
 }

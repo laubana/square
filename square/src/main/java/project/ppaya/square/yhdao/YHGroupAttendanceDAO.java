@@ -15,6 +15,20 @@ public class YHGroupAttendanceDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<Integer> getGroupIdByUserIdNotBlind(String user_id)
+	{
+		ArrayList<Integer> group_id_list = null;
+		
+		YHGroupAttendanceMapper mapper = sqlSession.getMapper(YHGroupAttendanceMapper.class);
+		
+		try
+		{
+			group_id_list = mapper.getGroupIdByUserIdNotBlind(user_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_id_list;
+	}
 	public ArrayList<String> getUserIdByGroupId(int group_id)
 	{
 		ArrayList<String> user_id_list = null;

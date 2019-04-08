@@ -10,4 +10,5 @@ public interface YHGroupAttendanceMapper
 	public ArrayList<GroupAttendance> selectGroupAttendanceByGroupId(int group_id);
 	public ArrayList<GroupAttendance> selectGroupAttendanceByUserId(String user_id);
 	public ArrayList<Integer> getGroupIdByUserId(String user_id);
+	public ArrayList<Integer> getGroupIdByUserIdNotBlind(String user_id);
 }

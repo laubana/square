@@ -1,6 +1,7 @@
 package project.ppaya.square.yhdao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,23 @@ public class YHUserDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public User selectUserByUserIdPassword(String user_id, String password)
+	{
+		User user = null;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("password", password);
+		
+		YHUserMapper mapper = sqlSession.getMapper(YHUserMapper.class);
+		
+		try
+		{
+			user = mapper.selectUserByUserIdPassword(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return user;
+	}
 	public User selectUserByUserId(String user_id)
 	{
 		User user = null;

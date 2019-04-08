@@ -1,6 +1,7 @@
 package project.ppaya.square.yhaction;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -51,5 +52,11 @@ public class YHUserAction
 		
 		yh_image_albumDAO.selectImageAlbumByEventScheduleImageIdListUserId(event_schedule_image_id_list, user_id);
 		yh_image_albumDAO.selectImageAlbumByEventScheduleImageIdListUserIdSelf(event_schedule_image_id_list, user_id);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/testAction", method = RequestMethod.POST)
+	public void testAction(HttpSession session, @RequestBody HashMap<Object, Object> map)
+	{
+		logger.debug("{}", map);
 	}
 }
