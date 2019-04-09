@@ -24,35 +24,23 @@
 
 		<!-- Header -->
 			<header id="header">
-				<h1>회원가입</h1>
-				<p>회원가입 좀 해주세요.<br>
-				<a href="main">main 페이지 이동</a>.</p>
+				<h1>Join</h1>
 			</header>
 
 		<!-- Signup Form -->
 			<form id="join-form" method="post" action="joinForm2">
-				<p><input type="text" name="user_id" id="user_id" placeholder="id 입력">
+				<p><input type="text" name="user_id" id="user_id" placeholder="ID">
 
 		<!-- non-display 로 ~! -->
 <!-- 			<div class="inputEmailType">
 				<p><input type="text" name="user_idEmailType" placeholder="email 직접 입력"></p>
 			</div> -->
-		
-					<select name = "user_id2">
-						<option>선택</option>
-						<option>yahoo.com</option>
-						<option>naver.com</option>
-						<option>gmail.com</option>
-						<option>daum.net</option>
-						<option>hanmail.net</option>
-						<option>직접입력</option>
-					</select></p>
-				<p><input type="password" name="password" id="password" placeholder="password 입력"></p>
-				<p><input type="text" name="name" id="name" placeholder="name 입력"></p>
+		</p>
+				<p><input type="password" name="password" id="password" placeholder="비밀번호"></p>
+				<p><input type="text" name="name" id="name" placeholder="이름"></p>
     		<div class="custom-file mb-3" align="left">
-				<p><input type="file" class="image_id" id="personal image" name="filename"> 
 			</div>
-				<p><input type="text" name="region" id="region"></p>
+				<p><input type="text" name="region" id="region" placeholder="지역"></p>
 				<p><input type="submit" value="Join"></p><br>
 			</form>
 		

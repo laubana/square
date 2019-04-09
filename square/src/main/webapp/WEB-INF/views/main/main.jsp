@@ -8,6 +8,24 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/Main/assets/css/main.css" />
+		<script>
+			function logoutUserAction()
+			{
+				$.ajax({
+					url: "logoutUserAction",
+					type: "POST",
+					success: function()
+					{
+						location.replace("<c:out value='main'/>");
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+			function loginUserForm()
+			{
+				location.replace("<c:out value='loginUserForm'/>");
+			}
+		</script>
 	</head>
 	<body class="is-preload">
 
@@ -16,9 +34,15 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="joinForm">회원가입</a></li>
-						<li><a href="groupCreateForm">그룹생성</a></li>
-						<li><a href="login">로그인</a></li>
+						<li><a href="listRecommendationForm"></a>
+						<c:if test="${sessionScope.user_id != null}">
+						<li><a href="createGroupForm">그룹생성</a></li>
+					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
+						</c:if>
+						<c:if test="${sessionScope.user_id == null}">
+						<li><a href="joinUserForm">회원가입</a></li>
+							<li><a href="javascript:loginUserForm()">로그인</a></li>
+						</c:if>
 					</ul>
 				</nav>
 			</header>
@@ -66,6 +90,7 @@
 			</section>
 
 		<!-- One -->
+		<c:if test="${sessionScope.user_id == null}">
 			<section id="one" class="main style2 right dark fullscreen">
 				<div class="content box style2">
 					<header>
@@ -96,7 +121,7 @@
 				</div>
 				<a href="#intro" class="button style2 down anchored">Next</a>
 			</section>
-
+</c:if>
 		<!-- Footer -->
 			<footer id="footer">
 
