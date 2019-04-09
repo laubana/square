@@ -15,6 +15,20 @@ public class YHEventDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public Event selectEventByEventId(int event_id)
+	{
+		Event event = null;
+		
+		YHEventMapper mapper = sqlSession.getMapper(YHEventMapper.class);
+		
+		try
+		{
+			event = mapper.selectEventByEventId(event_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event;
+	}
 	public ArrayList<Event> selectEventByGroupId(int group_id)
 	{
 		ArrayList<Event> event_list = null;

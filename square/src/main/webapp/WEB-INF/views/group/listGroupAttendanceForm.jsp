@@ -23,9 +23,9 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="joinForm">회원가입</a></li>
-						<li><a href="groupCreateForm">그룹생성</a></li>
-						<li><a href="login">로그인</a></li>
+						<li><a href="joinUserForm">회원가입</a></li>
+						<li><a href="createGroupForm">그룹생성</a></li>
+						<li><a href="loginUserForm">로그인</a></li>
 					</ul>
 				</nav>
 			</header>
@@ -33,18 +33,17 @@
 		<!-- Header -->
 			<section id="header">
 				<header>
-					<span class="image avatar"><img src="resources/Main/images/logo/01.jpg" alt="" /></span>
-					<h1 id="logo"><a href="#">빠야 그룹</a></h1>
-					<p style="font-size:15px;">[관심분야][관심분야][관심분야][관심분야]</p>
+					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>
+					<h1 id="logo"><a href="viewGroupForm?group_id=${group.group_id}">
+					${group.name}
+					</a></h1>
+					<p style="font-size:15px;">
+					<c:forEach var="group_hashtag" items="${group_hashtag_list}">
+							#${group_hashtag.hashtag}
+						</c:forEach>
+					</p>
 				</header>
 				<nav id="nav">
-					<ul>
-						<li><a href="groupMain">메인</a></li>
-						<li><a href="#two" class="active">회원</a></li>
-						<li><a href="groupComment">코멘트</a></li>
-						<li><a href="groupPhoto">앨범</a></li>
-						<li><a href="groupEventList">이벤트</a></li>
-					</ul>
 				</nav>
 				<footer>
 					<ul class="icons">
@@ -68,39 +67,13 @@
 								<div class="container">
 									<h3>회원 정보</h3>
 										<div>
-											<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/c1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
+											<a href="viewUserForm?user_id=${leader.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${leader.image_id}" alt="" style="width: 100px; height:auto;"></a>
+											</div>
 										<div>
 									<p>주최자</p>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m2.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m3.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m4.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m5.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m6.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m2.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m3.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m4.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m5.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m6.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m2.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m3.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m4.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m5.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m6.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m2.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m3.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m4.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m5.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m6.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m2.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m3.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m4.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m5.jpg" alt="" style="width: 100px; height:auto;"></a>
-										<a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m6.jpg" alt="" style="width: 100px; height:auto;"></a>
+										<c:forEach var="user" items="${user_list}">
+											<a href="viewUserForm?user_id=${user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${user.image_id}" alt="" style="width: 100px; height:auto;"></a>
+										</c:forEach>
 										</div>
 									<p>회원</p>
 								</div>

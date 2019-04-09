@@ -7,6 +7,7 @@ public class GroupComment
 	String user_id;
 	String content;
 	User user;
+	long input_date;
 	public GroupComment(){}
 	public int getGroup_comment_id() {
 		return group_comment_id;
@@ -37,5 +38,11 @@ public class GroupComment
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public long getInput_date() {
+		return input_date;
+	}
+	public void setInput_date(long input_date) {
+		this.input_date = input_date;
 	}
 }

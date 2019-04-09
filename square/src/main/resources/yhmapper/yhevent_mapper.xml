@@ -4,6 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHEventMapper">
+<select id="selectEventByEventId" parameterType="int" resultType="Event">
+SELECT
+	*
+FROM
+	TABLE_E
+WHERE
+	EVENT_ID = #{event_id}
+</select>
 <select id="selectEventByGroupId" parameterType="int" resultType="Event">
 SELECT
 	*

@@ -7,6 +7,7 @@ public class Event
 	String user_id;
 	String name;
 	String content;
+	String image_id;
 	public Event(){}
 	public int getEvent_id() {
 		return event_id;
@@ -37,5 +38,11 @@ public class Event
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getImage_id() {
+		return image_id;
+	}
+	public void setImage_id(String image_id) {
+		this.image_id = image_id;
 	}
 }

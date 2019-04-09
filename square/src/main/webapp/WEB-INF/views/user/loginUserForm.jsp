@@ -14,12 +14,11 @@
 		<!-- Header -->
 			<header id="header">
 				<h1>Login</h1>
-				<p><a href="main">2조</a>&nbsp;로그인이나 해라.</p>
 			</header>
 
 		<!-- Signup Form -->
 			<form id="signup-form" method="post" action="login">
-				<p>환영합니다!</p><br>
+				<br>
 				<p><input type="email" name="email" id="email" placeholder="Email Address"></p><br>
 				<p><input type="password" name="password" id="password" placeholder="Password"></p><br>
 				<p><input type="submit" value="Login"></p>

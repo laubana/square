@@ -95,7 +95,7 @@ public class UserController
 	public String viewUserForm
 	(
 			Model request,
-			@RequestParam(value = "user_id", defaultValue = "id1") String user_id
+			@RequestParam(value = "user_id", defaultValue = "id1id1@gmail.com") String user_id
 			//String user_id
 			)
 	{
@@ -118,7 +118,7 @@ public class UserController
 	public String listUserAlbumForm
 	(
 			Model request,
-			@RequestParam(value = "user_id", defaultValue = "id1") String user_id
+			@RequestParam(value = "user_id", defaultValue = "id1@gmail.com") String user_id
 			)
 	{
 		String result = null;

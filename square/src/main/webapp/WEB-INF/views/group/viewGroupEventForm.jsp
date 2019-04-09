@@ -35,9 +35,13 @@
 		<!-- Header -->
 			<section id="header">
 				<header>
-					<span class="image avatar"><img src="resources/Main/images/logo/01.jpg" alt="" /></span>
-					<h1 id="logo"><a href="groupMain">빠야 그룹</a></h1>
-					<p style="font-size:15px;">[관심분야][관심분야][관심분야][관심분야]</p>
+					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>
+					<h1 id="logo"><a href="viewGroupForm?group_id=${group.group_id}">${group.name}</a></h1>
+					<p style="font-size:15px;">
+					<c:forEach var="group_hashtag" items="${group_hashtag_list}">
+							#${group_hashtag.hashtag}
+						</c:forEach>
+					</p>
 				</header>
 				<nav id="nav">
 					<ul>
@@ -70,18 +74,17 @@
 								<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="">치킨 묵자</a></h2>
-										<p>굽네치킨, 네네치킨, 파닭파닭, 하림</p>
+										<h2><a href="">${event.name}</a></h2>
 									</div>
 									<div class="meta">
 										<time class="published" datetime="2019-04-08">2019년 4월 8일</time>
-										<a href="myPage" class="author"><span class="name">Harry</span><img src="resources/GroupMain/images/member/c1.jpg" alt="" /></a>
+										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">${leader.name}</span><img src="resources/image/user_image/${leader.image_id}" alt="" /></a>
 									</div>
 								</header>
-								<span class="image featured"><img src="resources/GroupMain/images/event/01.jpg" alt="" /></span>
-								<p>치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자
-								치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자
-								치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자치킨묵자</p>
+								<span class="image featured"><img src="resources/image/event_image/${event.image_id}" alt="" /></span>
+								<p>
+								${event.content}
+								</p>
 								<div align="right"><footer>
 										<a href="#" class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
 										<a href="#" class="icon fa-comment">128</a>&nbsp;&nbsp;

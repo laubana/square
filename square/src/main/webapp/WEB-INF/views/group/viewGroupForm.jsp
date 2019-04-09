@@ -23,9 +23,9 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="joinForm">회원가입</a></li>
-						<li><a href="groupCreateForm">그룹생성</a></li>
-						<li><a href="login">로그인</a></li>
+						<li><a href="joinUserForm">회원가입</a></li>
+						<li><a href="createGroupForm">그룹생성</a></li>
+						<li><a href="loginUserForm">로그인</a></li>
 					</ul>
 				</nav>
 			</header>
@@ -33,7 +33,7 @@
 		<!-- Header -->
 			<section id="header">
 				<header>
-					<span class="image avatar"><img src="resources/Main/images/logo/01.jpg" alt="" /></span>
+					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>
 					<h1 id="logo"><a href="#">${group.name}</a></h1>
 					<p style="font-size:15px;">
 						<c:forEach var="group_hashtag" items="${group_hashtag_list}">
@@ -70,7 +70,7 @@
 						<!-- One -->
 							<section id="one">
 								<div class="image main" data-position="center">
-									<img src="resources/GroupMain/images/banner/01.jpg" alt="" />
+									<img src="resources/image/group_image/${group.group_image}" alt="" />
 								</div>
 								<div class="container">
 									<p>${group.content}</p>
@@ -91,7 +91,7 @@
 										</c:forEach>
 										</div>
 									<p>회원</p>
-									<a href="groupMember" class="button">회원 페이지 이동</a>
+									<a href="listGroupAttendanceForm?group_id=${group.group_id}" class="button">회원 페이지 이동</a>
 								</div>
 							</section>
 						
@@ -108,9 +108,9 @@
 							<div class="comment-block">
 								<p class="comment-text">${group_comment.content}</p>
 									<div class="bottom-comment">
-										<div class="comment-date">4월 24일, 2019년 @ 10:38 AM</div>
+										<div class="comment-date">${group_comment.input_date}</div>
 											<ul class="comment-actions">
-												<li class="name">${group_comment.user.user_id}</li>
+												<li class="name">${group_comment.user.name}</li>
 												<li class="complain">Complain</li>
 											</ul>
 									</div>
@@ -145,7 +145,7 @@
 									</div>
 						</div> -->
 						
-						<a href="groupComment" class="button">코멘트 페이지 이동</a>
+						<a href="listGroupCommentForm?group_id${group.group_id}" class="button">코멘트 페이지 이동</a>
 						
 						</div>		
 								</div>
@@ -155,14 +155,15 @@
 							<section id="four">
 								<div class="container">
 									<h3>앨범</h3>
-									<p>앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범앨범.</p>
+						
 									<div class="features">
 										<article class="col-6 col-12-xsmall work-item">
-											<a href="resources/GroupMain/images/album/m1.jpg" class="image thumb"><img src="resources/GroupMain/images/album/m1.jpg" alt="" /></a>
-											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">산이당!</h3>
-											<a href="resources/GroupMain/images/album/m2.jpg" class="image thumb"><img src="resources/GroupMain/images/album/m2.jpg" alt="" /></a>
-											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">산산산</h3>
-											<a href="groupPhoto" class="button">앨범 페이지 이동</a>
+											<c:forEach var="event_schedule_image" items="${event_schedule_image_list}">
+												<a href="resources/image/${event_schedule_image.filename}" class="image thumb"><img src="resources/image/${event_schedule_image.filename}" alt="" /></a>
+											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.event_schedule_id}</h3>
+											</c:forEach>
+											<br>
+											<a href="listGroupAlbumForm?group_id=${group.group_id}" class="button">앨범 페이지 이동</a>
 										</article>
 									</div>
 								</div>
@@ -173,54 +174,18 @@
 								<div class="container">
 									<h3>이벤트</h3>
 									<div class="features">
-										<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/event/01.jpg" alt="" /></a>
+									<c:forEach var="event" items="${event_list}">
+									<article>
+											<a href="viewGroupEventForm?group_id=${group.group_id}&event_id=${event.event_id}" class="image"><img src="resources/image/event_image/${event.image_id}" alt="" /></a>
 											<div class="inner">
-												<h4>치킨 묵자</h4>
-												<p>치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨.</p>
+												<h4>${event.name}</h4>
+												<p>${event.content}</p>
 											</div>
 										</article>
-										<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/event/02.jpg" alt="" /></a>
-											<div class="inner">
-												<h4>생선 묵자</h4>
-												<p>생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선.</p>
-											</div>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/event/03.jpg" alt="" /></a>
-											<div class="inner">
-												<h4>냥이냥이</h4>
-												<p>냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이.</p>
-											</div>
-										</article>
-										<hr>
-										<div align="right"><a href="javascript:doDisplay1();" id="link2" onclick="javascript:link2_onclick();">+더보기</a></div>
-											<div id="myDIV1" style="display: none;">
-    											<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/event/04.jpg" alt="" /></a>
-											<div class="inner">
-												<h4>냐옹냐옹</h4>
-												<p>냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹.</p>
-											</div>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/event/05.jpg" alt="" /></a>
-											<div class="inner">
-												<h4>성경성경</h4>
-												<p>신을 믿으세용!신을 믿으세용!신을 믿으세용!신을 믿으세용!신을 믿으세용!신을 믿으세용!신을 믿으세용!.</p>
-											</div>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/event/06.jpg" alt="" /></a>
-											<div class="inner">
-												<h4>호수호수</h4>
-												<p>호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수.</p>
-											</div>
-										</article>
+										</c:forEach>
 											</div>
 											<div align="right"><a href="javascript:doDisplay1();" id="link1" onclick="javascript:link1_onclick();">+숨기기</a></div>
-										<a href="groupEventList" class="button">이벤트 페이지 이동</a>
+										<a href="listGroupEventForm?group_id=${group.group_id}" class="button">이벤트 페이지 이동</a>
 									</div>
 								</div>
 							</section>

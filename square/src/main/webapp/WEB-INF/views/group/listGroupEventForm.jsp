@@ -33,18 +33,15 @@
 		<!-- Header -->
 			<section id="header">
 				<header>
-					<span class="image avatar"><img src="resources/Main/images/logo/01.jpg" alt="" /></span>
-					<h1 id="logo"><a href="groupMain">빠야 그룹</a></h1>
-					<p style="font-size:15px;">[관심분야][관심분야][관심분야][관심분야]</p>
+					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>
+					<h1 id="logo"><a href="viewGroupForm?group_id=${group.group_id}">${group.name}</a></h1>
+					<p style="font-size:15px;">
+					<c:forEach var="group_hashtag" items="${group_hashtag_list}">
+							#${group_hashtag.hashtag}
+						</c:forEach>
+					</p>
 				</header>
 				<nav id="nav">
-					<ul>
-						<li><a href="groupMain">메인</a></li>
-						<li><a href="groupMember">회원</a></li>
-						<li><a href="groupComment">코멘트</a></li>
-						<li><a href="groupPhoto">앨범</a></li>
-						<li><a href="#five" class="active">이벤트</a></li>
-					</ul>
 				</nav>
 				<footer>
 					<ul class="icons">
@@ -68,48 +65,15 @@
 								<div class="container">
 									<h3>이벤트</h3>
 									<div class="features">
-										<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/event/01.jpg" alt="" /></a>
+										<c:forEach var="event" items="${event_list}">
+									<article>
+											<a href="viewGroupEventForm?group_id=${group.group_id}&event_id=${event.event_id}" class="image"><img src="resources/image/event_image/${event.image_id}" alt="" /></a>
 											<div class="inner">
-												<h4>치킨 묵자</h4>
-												<p>치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨치킨.</p>
+												<h4>${event.name}</h4>
+												<p>${event.content}</p>
 											</div>
 										</article>
-										<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/event/02.jpg" alt="" /></a>
-											<div class="inner">
-												<h4>생선 묵자</h4>
-												<p>생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선생선.</p>
-											</div>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/event/03.jpg" alt="" /></a>
-											<div class="inner">
-												<h4>냥이냥이</h4>
-												<p>냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이냥이.</p>
-											</div>
-										</article>
-    									<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/event/04.jpg" alt="" /></a>
-											<div class="inner">
-												<h4>냐옹냐옹</h4>
-												<p>냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹냐옹.</p>
-											</div>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/event/05.jpg" alt="" /></a>
-											<div class="inner">
-												<h4>성경성경</h4>
-												<p>신을 믿으세용!신을 믿으세용!신을 믿으세용!신을 믿으세용!신을 믿으세용!신을 믿으세용!신을 믿으세용!.</p>
-											</div>
-										</article>
-										<article>
-											<a href="#" class="image"><img src="resources/GroupMain/images/event/06.jpg" alt="" /></a>
-											<div class="inner">
-												<h4>호수호수</h4>
-												<p>호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수호수.</p>
-											</div>
-										</article>
+										</c:forEach>
 											
 									</div>
 								</div>

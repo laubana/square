@@ -27,8 +27,7 @@
 							<div class="items">
 
 								<div class="item intro span-2">
-									<h1>빠야 그룹</h1>
-									<p>사진을 넣자! 사진을 넣자! 사진을 넣자! 사진을 넣자!</p>
+									<h1>${group.name}</h1>
 								</div>
 
 								<article class="item thumb span-1">
