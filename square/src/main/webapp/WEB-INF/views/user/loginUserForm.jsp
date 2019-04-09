@@ -8,6 +8,30 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/Login/assets/css/main.css" />
+		<script>
+			function loginUserFormAction()
+			{
+				$.ajax({
+					url: "loginUserFormAction",
+					type: "POST",
+					data: $("#signup-form").serialize(),
+					dataType: "JSON",
+					success: function(result)
+					{
+						if(result == true)
+						{
+							alert("로그인 성공");
+							location.replace("<c:out value='main'/>");
+						}
+						else
+						{
+							alert("로그인 실패");
+						}
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+		</script>
 	</head>
 	<body class="is-preload">
 
@@ -17,9 +41,9 @@
 			</header>
 
 		<!-- Signup Form -->
-			<form id="signup-form" method="post" action="login">
+			<form id="signup-form" method="post" onsubmit="loginUserFormAction()">
 				<br>
-				<p><input type="email" name="email" id="email" placeholder="Email Address"></p><br>
+				<p><input type="email" name="user_id" id="email" placeholder="Email Address"></p><br>
 				<p><input type="password" name="password" id="password" placeholder="Password"></p><br>
 				<p><input type="submit" value="Login"></p>
 			</form>

@@ -109,4 +109,10 @@ public class UserAction {
 			return "false";
 		}
 	}
+	@ResponseBody
+	@RequestMapping(value = "logoutUserAction", method = RequestMethod.POST)
+	public void logoutUserAction(HttpSession session)
+	{
+		session.removeAttribute("user_id");
+	}
 }
