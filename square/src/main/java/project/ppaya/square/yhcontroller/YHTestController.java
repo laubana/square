@@ -62,7 +62,11 @@ public class YHTestController
 	@RequestMapping(value = "/yhtest1", method = RequestMethod.GET)
 	public void yhtest1()
 	{
-		
+		try
+		{
+			CalendarQuickstart.main();
+		}
+		catch(Exception error){error.printStackTrace();}
 	}
 	@RequestMapping(value = "yhtest2", method = RequestMethod.GET)
 	public void yhtest2()
