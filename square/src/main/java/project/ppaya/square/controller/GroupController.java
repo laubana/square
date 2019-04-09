@@ -57,6 +57,17 @@ public class GroupController
 	@Autowired
 	SH_DAO_User sh_udao;
 	
+	@RequestMapping(value = "createGroupEventForm", method = RequestMethod.GET)
+	public String createGroupEventForm
+	(
+			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
+			//int group_id,
+			Model request
+			)
+	{
+
+		return "group/createGroupEventForm";
+	}
 	@RequestMapping(value = "listGroupForm", method = RequestMethod.GET)
 	public String listGroupForm
 	(

@@ -22,7 +22,6 @@
 					<div align="left"><h1 style="font-size:50px;"><a href="main">2조</a></h1></div>
 					<a href="#" class="image avatar"><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
 					<h1><strong>${user.name}</strong>님의 마이페이지<br /></h1>
-					<p>${user.content}</p>
 					<nav id="nav">
 					<ul>
 						<li><a href="#one" class="active">정보</a></li>
@@ -42,11 +41,11 @@
 				<!-- One -->
 					<section id="one">
 						<header class="major">
-							<h2>간략 정보</h2>
+							<h2>소개</h2>
 						</header>
-						<p>마이페이지 바꿈.</p>
-						<p>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-						ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
+						<p>
+							${user.content}
+						</p>
 						<ul class="actions">
 							<li><a href="#" class="button">정보 편집</a></li>
 						</ul>

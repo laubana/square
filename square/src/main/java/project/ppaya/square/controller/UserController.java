@@ -119,6 +119,7 @@ public class UserController
 	(
 			Model request,
 			@RequestParam(value = "user_id", defaultValue = "id1@gmail.com") String user_id
+			//String user_id
 			)
 	{
 		String result = null;
