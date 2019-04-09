@@ -77,31 +77,17 @@
 					<!-- Three -->
 					<section id="three">
 						<h1>그룹 활동</h1>
-
-<c:forEach var="g" items="${glist }">
-	${g.content}
-</c:forEach>
-${glist[0].content }
 						<div class="row">
 							<ul class="features">
-									<li>
-										<span><img src="resources/GroupMain/images/logo.jpg" alt="" /></span>
-										<h3>A그룹</h3>
-										<p>빠야빠야빠야 빵야 빠야빠야빠야 빵야 빠야빠야빠야 빵야.</p>
-										<a href="groupMain" class="button">이동</a>
+							
+
+							<c:forEach var="group" items="${group_list}">
+								<li>
+										<span><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>
+										<h3>${group.name}</h3>
+										<a href="viewGroupForm?group_id=${group.group_id}" class="button">이동</a>
 									</li>
-									<li>
-										<span><img src="resources/GroupMain/images/logo.jpg" alt="" /></span>
-										<h3>B그룹</h3>
-										<p>빠야빠야빠야 빵야 빠야빠야빠야 빵야 빠야빠야빠야 빵야.</p>
-										<a href="groupMain" class="button">이동</a>
-									</li>
-									<li>
-										<span><img src="resources/GroupMain/images/logo.jpg" alt="" /></span>
-										<h3>C그룹</h3>
-										<p>빠야빠야빠야 빵야 빠야빠야빠야 빵야 빠야빠야빠야 빵야.</p>
-										<a href="groupMain" class="button">이동</a>
-									</li>
+							</c:forEach>
 								</ul>
 						</div>
 					</section>

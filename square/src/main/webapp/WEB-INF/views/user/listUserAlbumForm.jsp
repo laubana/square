@@ -138,7 +138,7 @@ label img {
 							<article class="col-6 col-12-xsmall work-item">
 								<input type="checkbox" id="albumCheckbox${image.event_schedule_image_id}" />
 								<label for="albumCheckbox${image.event_schedule_image_id}">
-								<img src="resources/image/${image.event_schedule_image_id}" alt="" />
+								<img src="resources/image/event_schedule_image/${image.event_schedule_image_id}" alt="" />
 								</label>
 								<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								TOTAL</h3>
@@ -275,7 +275,7 @@ $(document).ready(function () {
 				console.log(result);
 				for(var i = 0; i < result.length; i++)
 				{
-					buff += "<img src='resources/image/" + result[i].filename + "' style='width:100px; height:auto;'/>";
+					buff += "<img src='resources/image/event_schedule_image/" + result[i].filename + "'/>";
 				}
 				
 				document.getElementById("image_album").innerHTML = buff;

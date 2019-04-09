@@ -159,7 +159,7 @@
 									<div class="features">
 										<article class="col-6 col-12-xsmall work-item">
 											<c:forEach var="event_schedule_image" items="${event_schedule_image_list}">
-												<a href="resources/image/${event_schedule_image.filename}" class="image thumb"><img src="resources/image/${event_schedule_image.filename}" alt="" /></a>
+												<a href="resources/image/event_schedule_image/${event_schedule_image.filename}" class="image thumb"><img src="resources/image/event_schedule_image/${event_schedule_image.filename}" alt="" /></a>
 											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.event_schedule_id}</h3>
 											</c:forEach>
 											<br>

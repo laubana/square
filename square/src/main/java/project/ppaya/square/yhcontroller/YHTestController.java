@@ -93,9 +93,9 @@ public class YHTestController
 					
 					for(int j = 0; j < jsonArray.length(); j++)
 					{
-						String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHVideoIndexerUtil.getThumbnail(event_schedule_video_id, jsonArray.getJSONObject(j).getString("thumbnailId")), Reference.file_path);
+						String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHVideoIndexerUtil.getThumbnail(event_schedule_video_id, jsonArray.getJSONObject(j).getString("thumbnailId")), Reference.event_schedule_image_path);
 						
-						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(((new JSONArray(YHMSFaceUtil.detectFace(Reference.file_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId"), event_schedule_video_image_id, event_schedule_video_id);
+						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(((new JSONArray(YHMSFaceUtil.detectFace(Reference.event_schedule_image_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId"), event_schedule_video_image_id, event_schedule_video_id);
 					}
 				}
 			}
@@ -113,9 +113,9 @@ public class YHTestController
 					
 					for(int j = 0; j < jsonArray.length(); j++)
 					{
-						String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHVideoIndexerUtil.getThumbnail(event_schedule_video_id, jsonArray.getJSONObject(j).getString("thumbnailId")), Reference.file_path);
+						String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHVideoIndexerUtil.getThumbnail(event_schedule_video_id, jsonArray.getJSONObject(j).getString("thumbnailId")), Reference.event_schedule_image_path);
 						
-						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(((new JSONArray(YHMSFaceUtil.detectFace(Reference.file_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId"), event_schedule_video_image_id, event_schedule_video_id);
+						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(((new JSONArray(YHMSFaceUtil.detectFace(Reference.event_schedule_image_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId"), event_schedule_video_image_id, event_schedule_video_id);
 					}
 				}		
 			}
@@ -138,7 +138,7 @@ public class YHTestController
 		{
 			ArrayList<String> attend_event_schedule_video_face_id_list = yh_event_schedule_video_faceDAO.getEventScheduleVideoFaceIdByEventScheduleVideoId(attend_event_schedule_video_id_list.get(i));
 			
-			ArrayList<String> similar_event_schedule_video_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(attend_event_schedule_video_face_id_list, (new JSONArray(YHMSFaceUtil.detectFace(Reference.file_path, image_id))).getJSONObject(0).getString("faceId"));
+			ArrayList<String> similar_event_schedule_video_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(attend_event_schedule_video_face_id_list, (new JSONArray(YHMSFaceUtil.detectFace(Reference.event_schedule_image_path, image_id))).getJSONObject(0).getString("faceId"));
 			
 			if(similar_event_schedule_video_face_id.size() != 0)
 			{
