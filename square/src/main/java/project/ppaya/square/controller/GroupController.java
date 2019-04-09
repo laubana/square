@@ -68,11 +68,6 @@ public class GroupController
 
 		return "group/createGroupEventForm";
 	}
-	@RequestMapping(value = "createGroupForm", method = RequestMethod.GET)
-	public String createGroupForm(Model request)
-	{
-		return "group/createGroupForm";
-	}
 	@RequestMapping(value = "listGroupForm", method = RequestMethod.GET)
 	public String listGroupForm
 	(
