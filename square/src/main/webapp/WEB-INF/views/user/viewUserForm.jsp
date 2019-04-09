@@ -76,13 +76,11 @@
 					<!-- Three -->
 					<section id="three">
 						<h1>그룹 활동</h1>
-						<div class="row">
+						<div class="row" align="center">
 							<ul class="features">
-							
-
 							<c:forEach var="group" items="${group_list}">
 								<li>
-										<span><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>
+										<span><img src="resources/image/group_logo/${group.group_logo}" class="image fit tumb" alt="" /></span>
 										<h3>${group.name}</h3>
 										<a href="viewGroupForm?group_id=${group.group_id}" class="button">이동</a>
 									</li>
