@@ -5,18 +5,24 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="project.ppaya.square.vo.User" alias="User" />
-		<typeAlias type="project.ppaya.square.vo.UserHashtag" alias="UserHashtag" />
-		<typeAlias type="project.ppaya.square.vo.GroupHashtag" alias="GroupHashtag" />
-		<typeAlias type="project.ppaya.square.vo.EventScheduleUserSchedule" alias="EventScheduleUserSchedule" />
+		<typeAlias type="project.ppaya.square.vo.UserHashtag" alias="UserHashtag" />		
 		<typeAlias type="project.ppaya.square.vo.ImageAlbum" alias="ImageAlbum" />
 		<typeAlias type="project.ppaya.square.vo.VideoAlbum" alias="VideoAlbum" />
-		<typeAlias type="project.ppaya.square.vo.Group" alias="Group" />
-		<typeAlias type="project.ppaya.square.vo.GroupComment" alias="GroupComment" />
-		<typeAlias type="project.ppaya.square.vo.GroupAttendance" alias="GroupAttendance" />
+		
 		<typeAlias type="project.ppaya.square.vo.GroupCategory" alias="GroupCategory" />
+		<typeAlias type="project.ppaya.square.vo.Group" alias="Group" />
+		<typeAlias type="project.ppaya.square.vo.GroupAttendance" alias="GroupAttendance" />
+		<typeAlias type="project.ppaya.square.vo.GroupComment" alias="GroupComment" />
+		<typeAlias type="project.ppaya.square.vo.GroupHashtag" alias="GroupHashtag" />
+		
 		<typeAlias type="project.ppaya.square.vo.Event" alias="Event" />
+		<typeAlias type="project.ppaya.square.vo.EventAttendance" alias="EventAttendance" />
+		<typeAlias type="project.ppaya.square.vo.EventComment" alias="EventComment" />
+		
 		<typeAlias type="project.ppaya.square.vo.EventSchedule" alias="EventSchedule" />
 		<typeAlias type="project.ppaya.square.vo.EventScheduleAttendance" alias="EventScheduleAttendance" />
+		<typeAlias type="project.ppaya.square.vo.EventScheduleUserSchedule" alias="EventScheduleUserSchedule" />
+		
 		<typeAlias type="project.ppaya.square.vo.EventScheduleImage" alias="EventScheduleImage" />
 		<typeAlias type="project.ppaya.square.vo.EventScheduleImageFace" alias="EventScheduleImageFace" />
 		<typeAlias type="project.ppaya.square.vo.EventScheduleVideo" alias="EventScheduleVideo" />
@@ -30,21 +36,27 @@
 		<mapper resource="shmapper/sh_mapper_group.xml" />
 		
 		<mapper resource="yhmapper/yhuser_mapper.xml" />
-		<mapper resource="yhmapper/yhgroup_category_mapper.xml" />
-		<mapper resource="yhmapper/yhevent_schedule_user_schedule_mapper.xml" />
+		<mapper resource="yhmapper/yhuser_hashtag_mapper.xml" />
 		<mapper resource="yhmapper/yhimage_album_mapper.xml" />
 		<mapper resource="yhmapper/yhvideo_album_mapper.xml" />
+		
+		<mapper resource="yhmapper/yhgroup_category_mapper.xml" />
 		<mapper resource="yhmapper/yhgroup_mapper.xml" />
-		<mapper resource="yhmapper/yhgroup_comment_mapper.xml" />
 		<mapper resource="yhmapper/yhgroup_attendance_mapper.xml" />
+		<mapper resource="yhmapper/yhgroup_comment_mapper.xml" />
+		<mapper resource="yhmapper/yhgroup_hashtag_mapper.xml" />
+		
 		<mapper resource="yhmapper/yhevent_mapper.xml" />
+		<mapper resource="yhmapper/yhevent_attendance_mapper.xml" />
+		<mapper resource="yhmapper/yhevent_comment_mapper.xml" />
+		
 		<mapper resource="yhmapper/yhevent_schedule_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_schedule_attendance_mapper.xml" />
+		<mapper resource="yhmapper/yhevent_schedule_user_schedule_mapper.xml" />
+
 		<mapper resource="yhmapper/yhevent_schedule_image_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_schedule_image_face_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_schedule_video_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_schedule_video_face_mapper.xml" />
-		<mapper resource="yhmapper/yhuser_hashtag_mapper.xml" />
-		<mapper resource="yhmapper/yhgroup_hashtag_mapper.xml" />
 	</mappers>
 </configuration>
