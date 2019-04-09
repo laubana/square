@@ -35,9 +35,4 @@ public class MainController
 		return "main/main";
 
 	}
-	@RequestMapping(value = "listRecommendationForm", method = RequestMethod.GET)
-	public String listRecommendationForm()
-	{
-		return "main/listRecommendationForm";
-	}
 }
