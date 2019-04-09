@@ -16,6 +16,7 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
+						<li><a href="recommendEvent"></a>
 						<li><a href="joinForm">회원가입</a></li>
 						<li><a href="groupCreateForm">그룹생성</a></li>
 						<li><a href="login">로그인</a></li>
