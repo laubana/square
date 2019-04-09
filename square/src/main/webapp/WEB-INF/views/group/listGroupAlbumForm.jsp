@@ -25,7 +25,9 @@
 						<h1><a href=""><strong>그룹 이름</strong> 앨범</a></h1>
 						<nav>
 							<ul>
-								<li><a href="#footer" class="icon fa-info-circle">앨범 편집</a></li>
+								<li><p class="copyright">
+									&copy; Unttled. Design: <a href="http://html5up.net">HTML5 UP</a>.
+								</p></li>
 							</ul>
 						</nav>
 					</header>
@@ -110,58 +112,7 @@
 					</div>
 
 				<!-- Footer -->
-					<footer id="footer" class="panel">
-						<div class="inner split">
-							<div>
-								<section>
-									<h2>그룹을 편집하자</h2>
-									<p>사진을 사진사진.</p>
-								</section>
-								<section>
-									<h2>이동 사이트</h2>
-									<ul class="icons">
-										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-										<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-										<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-									</ul>
-								</section>
-								<p class="copyright">
-									&copy; Unttled. Design: <a href="http://html5up.net">HTML5 UP</a>.
-								</p>
-							</div>
-							<div>
-								<section>
-									<h2>Get in touch</h2>
-									<form method="post" action="#">
-										<div class="fields">
-											<div class="field half">
-												<input type="file" />
-											</div>
-											<div class="field half">
-												<input type="file" />
-											</div>
-											<div class="field half">
-												<input type="file" />
-											</div>
-											<div class="field half">
-												<input type="file" />
-											</div>
-											<div class="field ">
-												<input type="file" />
-											</div>
-										</div>
-										<ul class="actions">
-											<li><input type="submit" value="확인" class="primary" /></li>
-										</ul>
-									</form>
-								</section>
-							</div>
-						</div>
-					</footer>
-
+					
 			</div>
 
 		<!-- Scripts -->

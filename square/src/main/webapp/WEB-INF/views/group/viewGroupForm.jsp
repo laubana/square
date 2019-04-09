@@ -77,7 +77,7 @@
 								</div>
 							</section>
 						
-						<!-- Two -->	<!-- 아바타 이미지 필섹 가로 140 세로 140 -->
+						<!-- Two -->
 							<section id="two">
 								<div class="container">
 									<h3>회원 정보</h3>
