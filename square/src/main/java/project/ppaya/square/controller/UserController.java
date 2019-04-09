@@ -95,7 +95,7 @@ public class UserController
 	public String viewUserForm
 	(
 			Model request,
-			@RequestParam(value = "user_id", defaultValue = "id1id1@gmail.com") String user_id
+			@RequestParam(value = "user_id", defaultValue = "id1@gmail.com") String user_id
 			//String user_id
 			)
 	{
@@ -111,6 +111,8 @@ public class UserController
 		ArrayList<UserHashtag> user_hashtag_list = yhuser_hashtagDAO.selectUserHashtagByUserId(user_id);
 		//UserHashtag List 전송
 		request.addAttribute("user_hashtag_list", user_hashtag_list);
+		
+		ArrayList<String> event_schedule_image_id_list = 
 		
 		return "user/viewUserForm";
 	}
