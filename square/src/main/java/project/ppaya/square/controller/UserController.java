@@ -3,8 +3,6 @@ package project.ppaya.square.controller;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.servlet.http.HttpSession;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -22,7 +20,6 @@ import project.ppaya.square.shdao.SH_DAO_User;
 import project.ppaya.square.vo.EventScheduleImage;
 import project.ppaya.square.vo.EventScheduleVideo;
 import project.ppaya.square.vo.Group;
-import project.ppaya.square.vo.GroupHashtag;
 import project.ppaya.square.vo.Reference;
 import project.ppaya.square.vo.User;
 import project.ppaya.square.vo.UserHashtag;
@@ -95,7 +92,7 @@ public class UserController
 	public String viewUserForm
 	(
 			Model request,
-			@RequestParam(value = "user_id", defaultValue = "id1id1@gmail.com") String user_id
+			@RequestParam(value = "user_id", defaultValue = "id1@gmail.com") String user_id
 			//String user_id
 			)
 	{
@@ -111,6 +108,8 @@ public class UserController
 		ArrayList<UserHashtag> user_hashtag_list = yhuser_hashtagDAO.selectUserHashtagByUserId(user_id);
 		//UserHashtag List 전송
 		request.addAttribute("user_hashtag_list", user_hashtag_list);
+		
+		//ArrayList<String> event_schedule_image_id_list = 
 		
 		return "user/viewUserForm";
 	}
@@ -292,5 +291,4 @@ public class UserController
 		
 		return "user/listUserAlbumForm";
 	}
-	
 }

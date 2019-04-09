@@ -110,8 +110,7 @@
 									<div class="bottom-comment">
 										<div class="comment-date">${group_comment.input_date}</div>
 											<ul class="comment-actions">
-												<li class="name">${group_comment.user.name}</li>
-												<li class="complain">Complain</li>
+												<li class="name"><a href="viewUserForm?user_id=${group_comment.user.user_id}">${group_comment.user.name}</a></li>
 											</ul>
 									</div>
 							</div>
@@ -176,7 +175,7 @@
 									<div class="features">
 									<c:forEach var="event" items="${event_list}">
 									<article>
-											<a href="viewGroupEventForm?group_id=${group.group_id}&event_id=${event.event_id}" class="image"><img src="resources/image/event_image/${event.image_id}" alt="" /></a>
+											<a href="viewEventForm?group_id=${group.group_id}&event_id=${event.event_id}" class="image"><img src="resources/image/event_image/${event.image_id}" alt="" /></a>
 											<div class="inner">
 												<h4>${event.name}</h4>
 												<p>${event.content}</p>
@@ -185,7 +184,7 @@
 										</c:forEach>
 											</div>
 											<div align="right"><a href="javascript:doDisplay1();" id="link1" onclick="javascript:link1_onclick();">+숨기기</a></div>
-										<a href="listGroupEventForm?group_id=${group.group_id}" class="button">이벤트 페이지 이동</a>
+										<a href="listEventForm?group_id=${group.group_id}" class="button">이벤트 페이지 이동</a>
 									</div>
 								</div>
 							</section>
