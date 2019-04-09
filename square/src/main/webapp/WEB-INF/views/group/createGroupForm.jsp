@@ -39,9 +39,6 @@
 
 </head>
 <body class="is-preload" onload="fn_onload();">
-	<c:forEach var="user_id" items="${user_id}">
-${user_id}
-</c:forEach>
 	<!-- Header -->
 
 	<section id="header">
