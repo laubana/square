@@ -21,10 +21,6 @@
 					error: function(error){console.log(error);}
 				});
 			}
-			function loginUserForm()
-			{
-				location.replace("<c:out value='loginUserForm'/>");
-			}
 		</script>
 	</head>
 	<body class="is-preload">
@@ -36,12 +32,13 @@
 					<ul>
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
+						<li>${sessionScope.user_id}</li>
 						<li><a href="createGroupForm">그룹생성</a></li>
 					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
 						<li><a href="joinUserForm">회원가입</a></li>
-							<li><a href="javascript:loginUserForm()">로그인</a></li>
+							<li><a href="loginUserForm">로그인</a></li>
 						</c:if>
 					</ul>
 				</nav>
@@ -50,11 +47,9 @@
 		<!-- Intro -->
 			<section id="intro" class="main style1 dark fullscreen">
 				<div class="content">
-					<header>
-						<h2>2조.</h2>
-					</header>
-					<p>Welcome to <strong>2조</strong> 참조하실 분은 <a href="https://www.meetup.com/ko-KR/">meetup</a><br />
-					그리고 단어가 궁금하면 <a href="https://ja.dict.naver.com/">네이버 일본어 사전</a>.</p>
+				<header>
+					<h2>SQUARE</h2>
+				</header>
 					<footer>
 						<a href="#work" class="button style2 down">More</a>
 					</footer>
@@ -65,10 +60,7 @@
 			<section id="work" class="main style3 primary">
 				<div class="content">
 					<header>
-						<h2>분야별 그룹 탐색</h2>
-						<p>탐색을 합시당.
-						탐색탐색,
-						탐탐탐탐탐.</p>
+						<h2>카테고리</h2>
 					</header>
 
 					<!-- Gallery  -->

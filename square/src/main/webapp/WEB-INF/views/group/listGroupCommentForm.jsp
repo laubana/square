@@ -40,6 +40,14 @@
 							#${group_hashtag.hashtag}
 						</c:forEach>
 					</p>
+					<c:if test="${sessionScope.user_id != null}">
+						<c:if test="${group_attendance != null}">
+							<a href="" class="button">탈퇴</a>
+						</c:if>
+						<c:if test="${group_attendance == null}">
+							<a href="" class="button">참여</a>
+						</c:if>
+					</c:if>
 				</header>
 				<nav id="nav">
 				</nav>
@@ -77,7 +85,6 @@
 										<div class="comment-date">${group_comment.input_date}</div>
 											<ul class="comment-actions">
 												<li class="name">${group_comment.user.name}</li>
-												<li class="complain">Complain</li>
 											</ul>
 									</div>
 							</div>

@@ -70,7 +70,6 @@
 										<div class="comment-date">${event_comment.input_date}</div>
 											<ul class="comment-actions">
 												<li class="name">${event_comment.user.name}</li>
-												<li class="complain">Complain</li>
 											</ul>
 									</div>
 							</div>

@@ -23,9 +23,15 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="joinUserForm">회원가입</a></li>
+						<li><a href="listRecommendationForm"></a>
+						<c:if test="${sessionScope.user_id != null}">
 						<li><a href="createGroupForm">그룹생성</a></li>
-						<li><a href="loginUserForm">로그인</a></li>
+					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
+						</c:if>
+						<c:if test="${sessionScope.user_id == null}">
+						<li><a href="joinUserForm">회원가입</a></li>
+							<li><a href="loginUserForm">로그인</a></li>
+						</c:if>
 					</ul>
 				</nav>
 			</header>
@@ -42,6 +48,14 @@
 							#${group_hashtag.hashtag}
 						</c:forEach>
 					</p>
+					<c:if test="${sessionScope.user_id != null}">
+						<c:if test="${group_attendance != null}">
+							<a href="" class="button">탈퇴</a>
+						</c:if>
+						<c:if test="${group_attendance == null}">
+							<a href="" class="button">참여</a>
+						</c:if>
+					</c:if>
 				</header>
 				<nav id="nav">
 				</nav>

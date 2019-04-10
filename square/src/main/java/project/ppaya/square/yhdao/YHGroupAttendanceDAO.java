@@ -1,6 +1,7 @@
 package project.ppaya.square.yhdao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,57 @@ public class YHGroupAttendanceDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public int insertGroupAttendance(String user_id, int group_id)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("group_id", group_id);
+		
+		YHGroupAttendanceMapper mapper = sqlSession.getMapper(YHGroupAttendanceMapper.class);
+		
+		try
+		{
+			result = mapper.insertGroupAttendance(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
+	public int deleteGroupAttendanceByGroupIdUserId(String user_id, int group_id)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("group_id", group_id);
+		
+		YHGroupAttendanceMapper mapper = sqlSession.getMapper(YHGroupAttendanceMapper.class);
+		
+		try
+		{
+			result = mapper.deleteGroupAttendanceByGroupIdUserId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
+	public GroupAttendance selectGroupAttendanceByGroupIdUserId(String user_id, int group_id)
+	{
+		GroupAttendance group_attendance = null;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("group_id", group_id);
+		
+		YHGroupAttendanceMapper mapper = sqlSession.getMapper(YHGroupAttendanceMapper.class);
+		
+		try
+		{
+			group_attendance = mapper.selectGroupAttendanceByGroupIdUserId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_attendance;
+	}
 	public ArrayList<Integer> getGroupIdByUserIdNotBlind(String user_id)
 	{
 		ArrayList<Integer> group_id_list = null;

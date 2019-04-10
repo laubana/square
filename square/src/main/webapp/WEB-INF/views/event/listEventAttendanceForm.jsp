@@ -23,9 +23,15 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="joinUserForm">회원가입</a></li>
+						<li><a href="listRecommendationForm"></a>
+						<c:if test="${sessionScope.user_id != null}">
 						<li><a href="createGroupForm">그룹생성</a></li>
-						<li><a href="loginUserForm">로그인</a></li>
+					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
+						</c:if>
+						<c:if test="${sessionScope.user_id == null}">
+						<li><a href="joinUserForm">회원가입</a></li>
+							<li><a href="loginUserForm">로그인</a></li>
+						</c:if>
 					</ul>
 				</nav>
 			</header>
@@ -62,7 +68,6 @@
 
 						<!-- Five -->
 							<section id="five">
-								<section id="two">
 								<div class="container">
 									<h3>회원 정보</h3>
 										<div>
@@ -75,9 +80,8 @@
 										</c:forEach>
 										</div>
 									<p>회원</p>
-									<a href="listEventAttendanceForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">회원 페이지 이동</a>
+								
 								</div>
-							</section>
 							</section>
 					</div>
 

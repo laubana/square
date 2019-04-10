@@ -4,6 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHGroupCategoryMapper">
+<select id="selectGroupCategoryByGroupCategoryId" parameterType="int" resultType="GroupCategory">
+SELECT
+	*
+FROM
+	TABLE_GCA
+WHERE
+	GROUP_CATEGORY_ID = #{group_category_id}
+</select>
 <select id="selectGroupCategory" resultType="GroupCategory">
 SELECT
 	*

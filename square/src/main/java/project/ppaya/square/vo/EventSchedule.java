@@ -6,7 +6,8 @@ public class EventSchedule
 	int event_id;
 	long start_date;
 	long end_date;
-	String title;
+	String name;
+	String content;
 	String place;
 	public EventSchedule(){}
 	public int getEvent_schedule_id() {
@@ -33,11 +34,17 @@ public class EventSchedule
 	public void setEnd_date(long end_date) {
 		this.end_date = end_date;
 	}
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public String getPlace() {
 		return place;

@@ -21,6 +21,7 @@
 		
 		<typeAlias type="project.ppaya.square.vo.EventSchedule" alias="EventSchedule" />
 		<typeAlias type="project.ppaya.square.vo.EventScheduleAttendance" alias="EventScheduleAttendance" />
+		<typeAlias type="project.ppaya.square.vo.EventScheduleComment" alias="EventScheduleComment" />
 		<typeAlias type="project.ppaya.square.vo.EventScheduleUserSchedule" alias="EventScheduleUserSchedule" />
 		
 		<typeAlias type="project.ppaya.square.vo.EventScheduleImage" alias="EventScheduleImage" />
@@ -52,6 +53,7 @@
 		
 		<mapper resource="yhmapper/yhevent_schedule_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_schedule_attendance_mapper.xml" />
+		<mapper resource="yhmapper/yhevent_schedule_comment_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_schedule_user_schedule_mapper.xml" />
 
 		<mapper resource="yhmapper/yhevent_schedule_image_mapper.xml" />

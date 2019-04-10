@@ -14,7 +14,56 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
-		
+		<script>
+			function logoutUserAction()
+			{
+				$.ajax({
+					url: "logoutUserAction",
+					type: "POST",
+					success: function()
+					{
+						location.replace("<c:out value='main'/>");
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+			function withdrawGroupAction()
+			{
+				map = {};
+				map["user_id"] = "${sessionScope.user_id}";
+				map["group_id"] = ${group.group_id};
+				
+				$.ajax({
+					url: "withdrawGroupAction",
+					type: "POST",
+					data: JSON.stringify(map),
+					contentType: "application/json; charset=UTF-8",
+					success: function()
+					{
+						location.reload();
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+			function joinGroupAction()
+			{
+				map = {};
+				map["user_id"] = "${sessionScope.user_id}";
+				map["group_id"] = ${group.group_id};
+				
+				$.ajax({
+					url: "joinGroupAction",
+					type: "POST",
+					data: JSON.stringify(map),
+					contentType: "application/json; charset=UTF-8",
+					success: function()
+					{
+						location.reload();
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+		</script>
 	</head>
 	<body class="is-preload" onload="fn_onload();">
 
@@ -23,9 +72,16 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="joinUserForm">회원가입</a></li>
+						<li><a href="listRecommendationForm"></a>
+						<c:if test="${sessionScope.user_id != null}">
+						<li>${sessionScope.user_id}</li>
 						<li><a href="createGroupForm">그룹생성</a></li>
-						<li><a href="loginUserForm">로그인</a></li>
+					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
+						</c:if>
+						<c:if test="${sessionScope.user_id == null}">
+						<li><a href="joinUserForm">회원가입</a></li>
+							<li><a href="loginUserForm">로그인</a></li>
+						</c:if>
 					</ul>
 				</nav>
 			</header>
@@ -40,6 +96,14 @@
 							#${group_hashtag.hashtag}
 						</c:forEach>
 					</p>
+					<c:if test="${sessionScope.user_id != null}">
+						<c:if test="${group_attendance != null}">
+							<a href="javascript:withdrawGroupAction()" class="button">탈퇴</a>
+						</c:if>
+						<c:if test="${group_attendance == null}">
+							<a href="javascript:joinGroupAction()" class="button">참여</a>
+						</c:if>
+					</c:if>
 				</header>
 				<nav id="nav">
 					<ul>
@@ -91,7 +155,7 @@
 										</c:forEach>
 										</div>
 									<p>회원</p>
-									<a href="listGroupAttendanceForm?group_id=${group.group_id}" class="button">회원 페이지 이동</a>
+									<a href="listGroupAttendanceForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">회원 페이지 이동</a>
 								</div>
 							</section>
 						
@@ -116,35 +180,8 @@
 							</div>
 						</div>
 						</c:forEach>
-						<!-- <div class="comment-wrap">
-							<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
-							<div class="comment-block">
-								<p class="comment-text">부트?</p>
-									<div class="bottom-comment">
-										<div class="comment-date">4월 24일, 2019년 @ 10:38 AM</div>
-											<ul class="comment-actions">
-												<li class="name">Emma</li>
-												<li class="complain">Complain</li>
-											</ul>
-									</div>
-							</div>
-						</div>
-
-						<div class="comment-wrap">
-							<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/c1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
-							<div class="comment-block">
-								<p class="comment-text">ㅅㅂ!</p>
-									<div class="bottom-comment">
-										<div class="comment-date">4월 23일, 2019년 @ 10:32 AM</div>
-											<ul class="comment-actions">
-												<li class="name">Harry</li>
-												<li class="complain">Complain</li>
-											</ul>
-										</div>
-									</div>
-						</div> -->
 						
-						<a href="listGroupCommentForm?group_id${group.group_id}" class="button">코멘트 페이지 이동</a>
+						<a href="listGroupCommentForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">코멘트 페이지 이동</a>
 						
 						</div>		
 								</div>
@@ -162,7 +199,7 @@
 											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.event_schedule_id}</h3>
 											</c:forEach>
 											<br>
-											<a href="listGroupAlbumForm?group_id=${group.group_id}" class="button">앨범 페이지 이동</a>
+											<a href="listGroupAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">앨범 페이지 이동</a>
 										</article>
 									</div>
 								</div>
@@ -175,7 +212,7 @@
 									<div class="features">
 									<c:forEach var="event" items="${event_list}">
 									<article>
-											<a href="viewEventForm?group_id=${group.group_id}&event_id=${event.event_id}" class="image"><img src="resources/image/event_image/${event.image_id}" alt="" /></a>
+											<a href="viewEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="image"><img src="resources/image/event_image/${event.image_id}" alt="" /></a>
 											<div class="inner">
 												<h4>${event.name}</h4>
 												<p>${event.content}</p>
@@ -184,7 +221,7 @@
 										</c:forEach>
 											</div>
 											<div align="right"><a href="javascript:doDisplay1();" id="link1" onclick="javascript:link1_onclick();">+숨기기</a></div>
-										<a href="listEventForm?group_id=${group.group_id}" class="button">이벤트 페이지 이동</a>
+										<a href="listEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">이벤트 페이지 이동</a>
 									</div>
 								</div>
 							</section>

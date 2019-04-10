@@ -2,6 +2,8 @@ package project.ppaya.square.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import project.ppaya.square.vo.Event;
+import project.ppaya.square.vo.EventAttendance;
 import project.ppaya.square.vo.EventComment;
 import project.ppaya.square.vo.EventSchedule;
 import project.ppaya.square.vo.EventScheduleImage;
 import project.ppaya.square.vo.Group;
+import project.ppaya.square.vo.GroupAttendance;
+import project.ppaya.square.vo.GroupCategory;
 import project.ppaya.square.vo.GroupHashtag;
 import project.ppaya.square.vo.User;
 import project.ppaya.square.yhdao.YHEventAttendanceDAO;
@@ -23,6 +28,8 @@ import project.ppaya.square.yhdao.YHEventCommentDAO;
 import project.ppaya.square.yhdao.YHEventDAO;
 import project.ppaya.square.yhdao.YHEventScheduleDAO;
 import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
+import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
+import project.ppaya.square.yhdao.YHGroupCategoryDAO;
 import project.ppaya.square.yhdao.YHGroupCommentDAO;
 import project.ppaya.square.yhdao.YHGroupDAO;
 import project.ppaya.square.yhdao.YHGroupHashtagDAO;
@@ -38,6 +45,8 @@ public class EventController
 	@Autowired
 	YHGroupDAO yh_groupDAO;
 	@Autowired
+	YHGroupCategoryDAO yh_group_categoryDAO;
+	@Autowired
 	YHEventAttendanceDAO yh_event_attendanceDAO;
 	@Autowired
 	YHEventDAO yh_eventDAO;
@@ -51,6 +60,8 @@ public class EventController
 	YHGroupCommentDAO yh_group_commentDAO;
 	@Autowired
 	YHGroupHashtagDAO yh_group_hashtagDAO;
+	@Autowired
+	YHGroupAttendanceDAO yh_group_attendanceDAO;
 
 	@RequestMapping(value = "createEventForm", method = RequestMethod.GET)
 	public String createEventForm
@@ -72,6 +83,11 @@ public class EventController
 			//int group_id
 			)
 	{
+		
+		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
+		//GroupCategory 전송
+		request.addAttribute("group_category", group_category);
+		
 		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
 		//Group 전송
 		request.addAttribute("group", group);
@@ -89,6 +105,7 @@ public class EventController
 	@RequestMapping(value = "viewEventForm", method = RequestMethod.GET)
 	public String viewEventForm
 	(
+			HttpSession session,
 			Model request,
 			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
@@ -97,8 +114,30 @@ public class EventController
 			//int event_id
 			)
 	{
-		//GroupCategoryId 전송
-		request.addAttribute("group_category_id", group_category_id);
+		String user_id = (String)session.getAttribute("user_id"); 
+		if(user_id != null)
+		{
+			GroupAttendance group_attendance = yh_group_attendanceDAO.selectGroupAttendanceByGroupIdUserId(user_id, group_id);
+			request.addAttribute("group_attendance", group_attendance);
+			if(group_attendance != null)
+			{
+				EventAttendance event_attendance = yh_event_attendanceDAO.selectEventAttendanceByEventIdUserId(user_id, event_id);
+				request.addAttribute("event_attendance", event_attendance);
+			}
+			else
+			{
+				request.addAttribute("event_attendance", null);
+			}
+		}
+		else
+		{
+			request.addAttribute("group_attendance", null);
+			request.addAttribute("event_attendance", null);
+		}
+		
+		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
+		//GroupCategory 전송
+		request.addAttribute("group_category", group_category);
 		
 		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
 		//Group 전송

@@ -23,9 +23,15 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="joinForm">회원가입</a></li>
-						<li><a href="groupCreateForm">그룹생성</a></li>
-						<li><a href="login">로그인</a></li>
+						<li><a href="listRecommendationForm"></a>
+						<c:if test="${sessionScope.user_id != null}">
+						<li><a href="createGroupForm">그룹생성</a></li>
+					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
+						</c:if>
+						<c:if test="${sessionScope.user_id == null}">
+						<li><a href="joinUserForm">회원가입</a></li>
+							<li><a href="loginUserForm">로그인</a></li>
+						</c:if>
 					</ul>
 				</nav>
 			</header>
@@ -34,7 +40,7 @@
 			<section id="header">
 				<header>
 					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>
-					<h1 id="logo"><a href="viewGroupForm?group_id=${group.group_id}">${group.name}</a></h1>
+					<h1 id="logo"><a href="viewGroupForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}">${group.name}</a></h1>
 					<p style="font-size:15px;">
 					<c:forEach var="group_hashtag" items="${group_hashtag_list}">
 							#${group_hashtag.hashtag}
@@ -67,7 +73,7 @@
 									<div class="features">
 										<c:forEach var="event" items="${event_list}">
 									<article>
-											<a href="viewEventForm?group_id=${group.group_id}&event_id=${event.event_id}" class="image"><img src="resources/image/event_image/${event.image_id}" alt="" /></a>
+											<a href="viewEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="image"><img src="resources/image/event_image/${event.image_id}" alt="" /></a>
 											<div class="inner">
 												<h4>${event.name}</h4>
 												<p>${event.content}</p>

@@ -28,6 +28,7 @@ import project.ppaya.square.vo.Reference;
 import project.ppaya.square.vo.User;
 import project.ppaya.square.vo.UserHashtag;
 import project.ppaya.square.yhdao.YHImageAlbumDAO;
+import project.ppaya.square.yhdao.YHEventAttendanceDAO;
 import project.ppaya.square.yhdao.YHEventDAO;
 import project.ppaya.square.yhdao.YHEventScheduleAttendanceDAO;
 import project.ppaya.square.yhdao.YHEventScheduleDAO;
@@ -46,9 +47,9 @@ import project.ppaya.square.yhutil.YHVideoIndexerUtil;
 
 @Repository
 @Controller
-public class GroupAction {
+public class EventAction {
 
-	private static final Logger logger = LoggerFactory.getLogger(GroupAction.class);
+	private static final Logger logger = LoggerFactory.getLogger(EventAction.class);
 	
 	@Autowired
 	YHUserDAO yh_userDAO;
@@ -71,6 +72,8 @@ public class GroupAction {
 	@Autowired
 	YHUserHashtagDAO yhuser_hashtagDAO;
 	@Autowired
+	YHEventAttendanceDAO yh_event_attendanceDAO;
+	@Autowired
 	YHGroupAttendanceDAO yh_group_attendanceDAO; 
 	@Autowired
 	YHImageAlbumDAO yh_image_albumDAO;
@@ -83,30 +86,21 @@ public class GroupAction {
 	SH_DAO_Group sh_gdao;
 	
 	@ResponseBody
-	@RequestMapping(value = "listGroupAction", method = RequestMethod.POST)
-	public ArrayList<Group> listGroupAction(Model request, @RequestBody HashMap<String, Object> map)
-	{
-		int group_category_id = (int)map.get("group_category_id"); 
-		String keyword = (String)map.get("keyword");
-		
-		return yh_groupDAO.selectGroupByGroupCategoryIdKeyword(group_category_id, keyword);
-	}
-	@ResponseBody
-	@RequestMapping(value = "joinGroupAction", method = RequestMethod.POST)
-	public void joinGroupAction(Model request, @RequestBody HashMap<String, Object> map)
+	@RequestMapping(value = "joinEventAction", method = RequestMethod.POST)
+	public void joinEventAction(Model request, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)map.get("user_id");
-		int group_id = (int)map.get("group_id");		
+		int event_id = (int)map.get("event_id");		
 		
-		yh_group_attendanceDAO.insertGroupAttendance(user_id, group_id);
+		yh_event_attendanceDAO.insertEventAttendance(user_id, event_id);
 	}
 	@ResponseBody
-	@RequestMapping(value = "withdrawGroupAction", method = RequestMethod.POST)
-	public void withdrawGroupAction(Model request, @RequestBody HashMap<String, Object> map)
+	@RequestMapping(value = "withdrawEventAction", method = RequestMethod.POST)
+	public void withdrawEventAction(Model request, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)map.get("user_id");
-		int group_id = (int)map.get("group_id");		
+		int event_id = (int)map.get("event_id");	
 		
-		yh_group_attendanceDAO.deleteGroupAttendanceByGroupIdUserId(user_id, group_id);
+		yh_event_attendanceDAO.deleteEventAttendanceByEventIdUserId(user_id, event_id);
 	}
 }

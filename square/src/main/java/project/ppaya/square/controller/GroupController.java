@@ -2,6 +2,8 @@ package project.ppaya.square.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import project.ppaya.square.shdao.SH_DAO_User;
 import project.ppaya.square.vo.Event;
 import project.ppaya.square.vo.EventScheduleImage;
 import project.ppaya.square.vo.Group;
+import project.ppaya.square.vo.GroupAttendance;
+import project.ppaya.square.vo.GroupCategory;
 import project.ppaya.square.vo.GroupComment;
 import project.ppaya.square.vo.GroupHashtag;
 import project.ppaya.square.vo.User;
@@ -24,6 +28,7 @@ import project.ppaya.square.yhdao.YHEventDAO;
 import project.ppaya.square.yhdao.YHEventScheduleDAO;
 import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
 import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
+import project.ppaya.square.yhdao.YHGroupCategoryDAO;
 import project.ppaya.square.yhdao.YHGroupCommentDAO;
 import project.ppaya.square.yhdao.YHGroupDAO;
 import project.ppaya.square.yhdao.YHGroupHashtagDAO;
@@ -37,6 +42,8 @@ public class GroupController
 
 	@Autowired
 	YHUserDAO yh_userDAO;
+	@Autowired
+	YHGroupCategoryDAO yh_group_categoryDAO;
 	@Autowired
 	YHGroupDAO yh_groupDAO;
 	@Autowired
@@ -70,8 +77,9 @@ public class GroupController
 			Model request
 			)
 	{
-		//GroupCategoryId 전송
-		request.addAttribute("group_category_id", group_category_id);
+		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
+		//GroupCategory 전송
+		request.addAttribute("group_category", group_category);
 		
 		ArrayList<Group> group_list = yh_groupDAO.selectGroupByGroupCategoryId(group_category_id);
 		//Group List 전송
@@ -82,6 +90,7 @@ public class GroupController
 	@RequestMapping(value = "viewGroupForm", method = RequestMethod.GET)
 	public String viewGroupForm
 	(
+			HttpSession session,
 			Model request,
 			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id
@@ -89,6 +98,21 @@ public class GroupController
 			//int group_id
 			)
 	{
+		String user_id = (String)session.getAttribute("user_id"); 
+		if(user_id != null)
+		{
+			GroupAttendance group_attendance = yh_group_attendanceDAO.selectGroupAttendanceByGroupIdUserId(user_id, group_id);
+			request.addAttribute("group_attendance", group_attendance);
+		}
+		else
+		{
+			request.addAttribute("group_attendance", null);
+		}
+		
+		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
+		//GroupCategory 전송
+		request.addAttribute("group_category", group_category);
+		
 		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
 		//Group 전송
 		request.addAttribute("group", group);
@@ -129,12 +153,28 @@ public class GroupController
 	@RequestMapping(value = "listGroupAttendanceForm", method = RequestMethod.GET)
 	public String listGroupAttendanceForm
 	(
+			HttpSession session,
 			Model request,
 			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id
 			//int group_id
 			)
 	{
+		String user_id = (String)session.getAttribute("user_id"); 
+		if(user_id != null)
+		{
+			GroupAttendance group_attendance = yh_group_attendanceDAO.selectGroupAttendanceByGroupIdUserId(user_id, group_id);
+			request.addAttribute("group_attendance", group_attendance);
+		}
+		else
+		{
+			request.addAttribute("group_attendance", null);
+		}
+		
+		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
+		//GroupCategory 전송
+		request.addAttribute("group_category", group_category);
+		
 		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
 		//Group 전송
 		request.addAttribute("group", group);
@@ -157,12 +197,28 @@ public class GroupController
 	@RequestMapping(value = "listGroupCommentForm", method = RequestMethod.GET)
 	public String listGroupCommentForm
 	(
+			HttpSession session,
 			Model request,
 			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id
 			//int group_id
 			)
 	{
+		String user_id = (String)session.getAttribute("user_id"); 
+		if(user_id != null)
+		{
+			GroupAttendance group_attendance = yh_group_attendanceDAO.selectGroupAttendanceByGroupIdUserId(user_id, group_id);
+			request.addAttribute("group_attendance", group_attendance);
+		}
+		else
+		{
+			request.addAttribute("group_attendance", null);
+		}
+		
+		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
+		//GroupCategory 전송
+		request.addAttribute("group_category", group_category);
+		
 		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
 		//Group 전송
 		request.addAttribute("group", group);
@@ -182,14 +238,30 @@ public class GroupController
 		return "group/listGroupCommentForm";
 	}
 	@RequestMapping(value = "listGroupAlbumForm", method = RequestMethod.GET)
-	public String photoForm
+	public String listGroupAlbumForm
 	(
+			HttpSession session,
 			Model request,
 			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id
 			//int group_id
 			)
 	{
+		String user_id = (String)session.getAttribute("user_id"); 
+		if(user_id != null)
+		{
+			GroupAttendance group_attendance = yh_group_attendanceDAO.selectGroupAttendanceByGroupIdUserId(user_id, group_id);
+			request.addAttribute("group_attendance", group_attendance);
+		}
+		else
+		{
+			request.addAttribute("group_attendance", null);
+		}
+		
+		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
+		//GroupCategory 전송
+		request.addAttribute("group_category", group_category);
+		
 		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
 		//Group 전송
 		request.addAttribute("group", group);

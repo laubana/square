@@ -41,6 +41,42 @@
 			      zoom: 8
 			    });
 			  }
+			function withdrawEventAction()
+			{
+				map = {};
+				map["user_id"] = "${sessionScope.user_id}";
+				map["event_id"] = ${event.event_id};
+				
+				$.ajax({
+					url: "withdrawEventAction",
+					type: "POST",
+					data: JSON.stringify(map),
+					contentType: "application/json; charset=UTF-8",
+					success: function()
+					{
+						location.reload();
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+			function joinEventAction()
+			{
+				map = {};
+				map["user_id"] = "${sessionScope.user_id}";
+				map["event_id"] = ${event.event_id};
+				
+				$.ajax({
+					url: "joinEventAction",
+					type: "POST",
+					data: JSON.stringify(map),
+					contentType: "application/json; charset=UTF-8",
+					success: function()
+					{
+						location.reload();
+					},
+					error: function(error){console.log(error);}
+				});
+			}
 		</script>
 		
 	</head>
@@ -51,9 +87,15 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="#">회원가입</a></li>
-						<li><a href="#">그룹생성</a></li>
-						<li><a href="login">로그인</a></li>
+						<li><a href="listRecommendationForm"></a>
+						<c:if test="${sessionScope.user_id != null}">
+						<li><a href="createGroupForm">그룹생성</a></li>
+					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
+						</c:if>
+						<c:if test="${sessionScope.user_id == null}">
+						<li><a href="joinUserForm">회원가입</a></li>
+							<li><a href="loginUserForm">로그인</a></li>
+						</c:if>
 					</ul>
 				</nav>
 			</header>
@@ -68,9 +110,25 @@
 							#${group_hashtag.hashtag}
 						</c:forEach>
 					</p>
+					<c:if test="${sessionScope.user_id != null}">
+						<c:if test="${group_attendance != null}">
+							<c:if test="${event_attendance != null}">
+								<a href="javascript:withdrawEventAction()" class="button">탈퇴</a>
+							</c:if>
+							<c:if test="${event_attendance == null}">
+								<a href="javascript:joinEventAction()" class="button">참여</a>
+							</c:if>
+						</c:if>
+					</c:if>
 				</header>
 				<nav id="nav">
-					
+					<ul>
+						<li><a href="#one" class="active">정보</a></li>
+						<li><a href="#two">회원</a></li>
+						<li><a href="#three">코멘트</a></li>
+						<li><a href="#four">앨범</a></li>
+						<li><a href="#five">이벤트 스케줄</a></li>
+					</ul>
 				</nav>
 				<footer>
 					<ul class="icons">
@@ -90,7 +148,7 @@
 					<div id="main">
 
 						<!-- Five -->
-							<section id="five">
+							<section id="one">
 								<article class="post">
 								<header>
 									<div class="title">
@@ -176,21 +234,29 @@
 											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.event_schedule_id}</h3>
 											</c:forEach>
 											<br>
-											<a href="listGroupAlbumForm?group_id=${group.group_id}" class="button">앨범 페이지 이동</a>
+											<a href="listEventAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">앨범 페이지 이동</a>
 										</article>
 									</div>
 								</div>
 							</section>
 							
-							<section>
-								<div class="container">	
-									<h1>암거나</h1>
-									<h2>스케줄</h2>
-									<h3>스케줄</h3>
-									<h4>스케줄</h4>
-									<p>암거나암거나</p>
-									<a href="viewEventScheduleForm" class="button">스케줄 페이지 이동</a>	
-								</div>
+							<section id="five">
+								<div class="container">
+									<h3>이벤트 스케줄 페이지</h3>
+									<div class="features">
+									<c:forEach var="event_schedule" items="${event_schedule_list}">
+									<article>
+										
+											<div class="inner">
+											<h4><a href="viewEventScheduleForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}">${event_schedule.name}</a></h4>
+										
+											</div>
+										</article>
+										</c:forEach>
+											</div>
+											
+										<a href="listEventScheduleForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">이벤트 스케줄 페이지 이동</a>
+									</div>
 							</section>
 							
 				</div>

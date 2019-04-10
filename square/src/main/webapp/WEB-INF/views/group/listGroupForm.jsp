@@ -161,9 +161,15 @@ input::placeholder {
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="joinUserForm">회원가입</a></li>
+						<li><a href="listRecommendationForm"></a>
+						<c:if test="${sessionScope.user_id != null}">
 						<li><a href="createGroupForm">그룹생성</a></li>
-						<li><a href="loginUserForm">로그인</a></li>
+					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
+						</c:if>
+						<c:if test="${sessionScope.user_id == null}">
+						<li><a href="joinUserForm">회원가입</a></li>
+							<li><a href="loginUserForm">로그인</a></li>
+						</c:if>
 					</ul>
 				</nav>
 			</header>
@@ -172,11 +178,8 @@ input::placeholder {
 			<section id="intro" class="main style1 dark fullscreen">
 				<div class="content">
 					<header>
-						<h2>2조.</h2>
+						<h2>${group_category.name}</h2>
 					</header>
-					<p>Welcome to <strong>2조</strong> 참조하실 분은 <a href="https://www.meetup.com/ko-KR/">meetup</a><br />
-					그리고 단어가 궁금하면 <a href="https://ja.dict.naver.com/">네이버 일본어 사전</a>.</p>
-	
 					<div class="container">
   						<div class="wrap-input">  
   							<input type="search" id="keyword" class="input-txt" placeholder="Search" name="keyword">
@@ -239,12 +242,6 @@ input::placeholder {
 
 					<!-- Gallery  -->
 						<div class="gallery">
-							<article class="from-left">
-								<a href="groupMain" class="image fit"><img src="resources/GroupSearch/images/logo/01.jpg" title="The Anonymous Red" alt="" /></a>
-							</article>
-							<article class="from-right">
-								<a href="groupMain" class="image fit"><img src="resources/GroupSearch/images/logo/02.jpg" title="Airchitecture II" alt="" /></a>
-							</article>
 						</div>
 
 				</div>
@@ -290,7 +287,7 @@ $("#intro").css("background", "url('resources/GroupSearch/assets/css/images/over
 $("#intro").css("background-size","256px 256px, cover");
 </script>
 <script>
-var group_category_id = ${group_category_id};
+var group_category_id = ${group_category.group_category_id};
 $('input[type=search]').on({
 	  'focus': function(){
 	     $(this).parent().addClass('focused');
