@@ -134,7 +134,7 @@
 										</c:forEach>
 										</div>
 									<p>회원</p>
-									<a href="listGroupAttendanceForm?group_id=${group.group_id}" class="button">회원 페이지 이동</a>
+									<a href="listEventAttendanceForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">회원 페이지 이동</a>
 								</div>
 							</section>
 					<!-- Three -->
@@ -142,34 +142,23 @@
 								<div class="container">
 									<h3>코멘트</h3>
 						<div class="comments">
+						<c:forEach var="event_comment" items="${event_comment_list}">
 						<div class="comment-wrap">
-							<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
+							<div>
+							<a href="viewUserForm?user_id=${event_comment.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${event_comment.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
+							</div>
 							<div class="comment-block">
-								<p class="comment-text">부트?</p>
+								<p class="comment-text">${event_comment.content}</p>
 									<div class="bottom-comment">
-										<div class="comment-date">4월 24일, 2019년 @ 10:38 AM</div>
+										<div class="comment-date">${event_comment.input_date}</div>
 											<ul class="comment-actions">
-												<li class="name">Emma</li>
-												<li class="complain">Complain</li>
+												<li class="name"><a href="viewUserForm?user_id=${event_comment.user.user_id}">${event_comment.user.name}</a></li>
 											</ul>
 									</div>
 							</div>
 						</div>
-
-						<div class="comment-wrap">
-							<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/c1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
-							<div class="comment-block">
-								<p class="comment-text">ㅅㅂ!</p>
-									<div class="bottom-comment">
-										<div class="comment-date">4월 23일, 2019년 @ 10:32 AM</div>
-											<ul class="comment-actions">
-												<li class="name">Harry</li>
-												<li class="complain">Complain</li>
-											</ul>
-										</div>
-									</div>
-						</div>
-						<a href="listGroupCommentForm?group_id${group.group_id}" class="button">코멘트 페이지 이동</a>
+						</c:forEach>
+						<a href="listEventCommentForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">코멘트 페이지 이동</a>
 						
 						</div>		
 								</div>

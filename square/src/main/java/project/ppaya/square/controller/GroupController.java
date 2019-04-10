@@ -130,6 +130,7 @@ public class GroupController
 	public String listGroupAttendanceForm
 	(
 			Model request,
+			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id
 			//int group_id
 			)
@@ -157,6 +158,7 @@ public class GroupController
 	public String listGroupCommentForm
 	(
 			Model request,
+			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id
 			//int group_id
 			)
@@ -183,6 +185,7 @@ public class GroupController
 	public String photoForm
 	(
 			Model request,
+			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id
 			//int group_id
 			)

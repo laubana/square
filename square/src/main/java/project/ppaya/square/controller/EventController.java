@@ -55,6 +55,7 @@ public class EventController
 	@RequestMapping(value = "createEventForm", method = RequestMethod.GET)
 	public String createEventForm
 	(
+			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
 			//int group_id,
 			Model request
@@ -66,6 +67,7 @@ public class EventController
 	public String listEventForm
 	(
 			Model request,
+			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id
 			//int group_id
 			)
@@ -88,12 +90,16 @@ public class EventController
 	public String viewEventForm
 	(
 			Model request,
+			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
 			@RequestParam(value = "event_id", defaultValue = "1") int event_id
 			//int group_id,
 			//int event_id
 			)
 	{
+		//GroupCategoryId 전송
+		request.addAttribute("group_category_id", group_category_id);
+		
 		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
 		//Group 전송
 		request.addAttribute("group", group);
@@ -142,6 +148,7 @@ public class EventController
 	public String listEventAttendanceForm
 	(
 			Model request,
+			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
 			@RequestParam(value = "event_id", defaultValue = "1") int event_id
 			//int group_id,
@@ -172,6 +179,7 @@ public class EventController
 	public String listEventCommentForm
 	(
 			Model request,
+			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
 			@RequestParam(value = "event_id", defaultValue = "1") int event_id
 			//int group_id,
@@ -200,6 +208,7 @@ public class EventController
 	public String listEventAlbumForm
 	(
 			Model request,
+			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
 			@RequestParam(value = "event_id", defaultValue = "1") int event_id
 			//int group_id,

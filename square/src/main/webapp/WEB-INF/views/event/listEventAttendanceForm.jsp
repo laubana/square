@@ -23,9 +23,9 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="joinForm">회원가입</a></li>
-						<li><a href="groupCreateForm">그룹생성</a></li>
-						<li><a href="login">로그인</a></li>
+						<li><a href="joinUserForm">회원가입</a></li>
+						<li><a href="createGroupForm">그룹생성</a></li>
+						<li><a href="loginUserForm">로그인</a></li>
 					</ul>
 				</nav>
 			</header>
@@ -62,21 +62,22 @@
 
 						<!-- Five -->
 							<section id="five">
+								<section id="two">
 								<div class="container">
-									<h3>이벤트</h3>
-									<div class="features">
-										<c:forEach var="event" items="${event_list}">
-									<article>
-											<a href="viewGroupEventForm?group_id=${group.group_id}&event_id=${event.event_id}" class="image"><img src="resources/image/event_image/${event.image_id}" alt="" /></a>
-											<div class="inner">
-												<h4>${event.name}</h4>
-												<p>${event.content}</p>
-											</div>
-										</article>
+									<h3>회원 정보</h3>
+										<div>
+											<a href="viewUserForm?user_id=${leader.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${leader.image_id}" alt="" style="width: 100px; height:auto;"></a>
+										</div>
+										<div>
+									<p>주최자</p>
+										<c:forEach var="user" items="${user_list}">
+											<a href="viewUserForm?user_id=${user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 										</c:forEach>
-											
-									</div>
+										</div>
+									<p>회원</p>
+									<a href="listEventAttendanceForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">회원 페이지 이동</a>
 								</div>
+							</section>
 							</section>
 					</div>
 
