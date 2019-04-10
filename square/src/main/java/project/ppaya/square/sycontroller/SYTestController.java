@@ -17,4 +17,10 @@ public class SYTestController
 	{
 		return "main/listRecommendationForm";
 	}
+	
+	@RequestMapping(value = "test1", method = RequestMethod.GET)
+	public String test1()
+	{
+		return "main/test1";
+	}
 }
