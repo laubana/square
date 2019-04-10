@@ -4,6 +4,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleVideoMapper">
+<select id="selectEventScheduleVideoByEventScheduleIdList" parameterType="list" resultType="EventScheduleVideo">
+SELECT
+	*
+FROM
+	TABLE_ESV
+WHERE
+	1 = 0
+	<foreach item="event_schedule_id" collection="list" open="OR" separator="OR">
+		EVENT_SCHEDULE_ID = #{event_schedule_id}
+	</foreach>
+</select>
+<select id="selectEventScheduleVideoByEventScheduleVideoIdList" parameterType="list" resultType="EventScheduleVideo">
+SELECT
+	*
+FROM
+	TABLE_ESV
+WHERE
+	1 = 0
+	<foreach item="event_schedule_video_id" collection="list" open="OR" separator="OR">
+		EVENT_SCHEDULE_VIDEO_ID = #{event_schedule_video_id}
+	</foreach>
+</select>
 <update id="updateDetectDateByEventScheduleVideoId" parameterType="map">
 UPDATE TABLE_ESV
 SET

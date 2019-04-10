@@ -134,7 +134,7 @@ public class YHImageAlbumDAO
 	}
 	public ArrayList<ImageAlbum> selectImageAlbumByEventScheduleImageIdListUserIdSelf(ArrayList<String> event_schedule_image_id_list, String user_id)
 	{
-		ArrayList<ImageAlbum> album_list = new ArrayList<>();
+		ArrayList<ImageAlbum> image_album_list = new ArrayList<>();
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("event_schedule_image_id_list", event_schedule_image_id_list);
 		map.put("user_id", user_id);
@@ -143,11 +143,11 @@ public class YHImageAlbumDAO
 		
 		try
 		{
-			album_list = mapper.selectImageAlbumByEventScheduleImageIdListUserIdSelf(map);
+			image_album_list = mapper.selectImageAlbumByEventScheduleImageIdListUserIdSelf(map);
 		}
 		catch(Exception error){error.printStackTrace();}
 		
-		return album_list;	
+		return image_album_list;	
 	}
 	public ArrayList<String> getEventScheduleImageIdByEventScheduleImageIdListUserIdSelf(ArrayList<String> old_event_schedule_image_id_list, String user_id)
 	{

@@ -271,14 +271,36 @@ $(document).ready(function () {
 			contentType: "application/json; charset=UTF-8",
 			success: function(result)
 			{			
-				var buff = "";
-				console.log(result);
-				for(var i = 0; i < result.length; i++)
+				if(result.event_schedule_image_list.length != 0)
 				{
-					buff += "<img src='resources/image/event_schedule_image/" + result[i].filename + "'/>";
+					var image_buff = "";
+					for(var i = 0; i < result.event_schedule_image_list.length; i++)
+					{
+						image_buff += "<img src='resources/image/event_schedule_image/" + result.event_schedule_image_list[i].filename + "'/>";
+					}
+					
+					document.getElementById("image_album").innerHTML = image_buff;
 				}
-				
-				document.getElementById("image_album").innerHTML = buff;
+				else
+				{
+					document.getElementById("image_album").innerHTML = "";
+				}
+				if(result.event_schedule_image_list.length != 0)
+				{
+					var video_buff = "";
+					video_buff += "<video width='320' height='240' controls>"
+					for(var i = 0; i < result.event_schedule_video_list.length; i++)
+					{
+						video_buff += "<source src='resources/image/event_schedule_video/" + result.event_schedule_video_list[i].filename +"' type='video/mp4'>";
+					}
+					video_buff += "</video>"
+					
+					document.getElementById("video").innerHTML = video_buff;
+				}
+				else
+				{
+					document.getElementById("video").innerHTML = "";
+				}
 			},
 			error: function(error){console.log(error);}
 		});
