@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import project.ppaya.square.vo.ImageAlbum;
+import project.ppaya.square.vo.VideoAlbum;
 import project.ppaya.square.yhmapper.YHImageAlbumMapper;
 import project.ppaya.square.yhmapper.YHVideoAlbumMapper;
 
@@ -17,6 +18,23 @@ public class YHVideoAlbumDAO
 	@Autowired
 	SqlSession sqlSession;
 
+	public ArrayList<String> getEventScheduleVideoIdByEventScheduleVideoIdListUserIdSelf(ArrayList<String> old_event_schedule_video_id_list, String user_id)
+	{
+		ArrayList<String> new_event_schedule_video_id_list = null;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("event_schedule_video_id_list", old_event_schedule_video_id_list);
+		map.put("user_id", user_id);
+		
+		YHVideoAlbumMapper mapper = sqlSession.getMapper(YHVideoAlbumMapper.class);
+		
+		try
+		{
+			new_event_schedule_video_id_list = mapper.getEventScheduleVideoIdByEventScheduleVideoIdListUserIdSelf(map);
+		}
+		catch(Exception error){}
+		
+		return new_event_schedule_video_id_list;
+	}
 	public int insertVideoAlbum(String event_schedule_video_id, String user_id)
 	{
 		int result = 0;

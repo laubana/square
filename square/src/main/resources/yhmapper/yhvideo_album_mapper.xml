@@ -39,4 +39,19 @@ WHERE
 	EVENT_SCHEDULE_VIDEO_ID = #{event_schedule_video_id} AND
 	USER_ID = #{user_id}
 </update>
+<select id="getEventScheduleVideoIdByEventScheduleVideoIdListUserIdSelf" parameterType="map" resultType="string">
+SELECT
+	EVENT_SCHEDULE_VIDEO_ID
+FROM
+	TABLE_VA
+WHERE
+	(
+	1 = 0
+	<foreach item="event_schedule_video_id" collection="event_schedule_video_id_list" open="OR" separator="OR">
+		EVENT_SCHEDULE_VIDEO_ID = #{event_schedule_video_id}
+	</foreach>
+	) AND	
+	USER_ID = #{user_id} AND
+	SELF = 1
+</select>
 </mapper>

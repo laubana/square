@@ -132,6 +132,10 @@ public class EventController
 		//EventComment List 전송
 		request.addAttribute("event_comment_list", event_comment_list);
 		
+		//event_place 임시 전송
+		String cood = "{lat: 37.566535, lng: 126.97796919999996}";
+		request.addAttribute(cood,"event_place");
+		
 		return "event/viewEventForm";
 	}
 	@RequestMapping(value = "listEventAttendanceForm", method = RequestMethod.GET)
