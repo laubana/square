@@ -44,13 +44,7 @@
 					</p>
 				</header>
 				<nav id="nav">
-					<ul>
-						<li><a href="groupMain">메인</a></li>
-						<li><a href="groupMember">회원</a></li>
-						<li><a href="groupComment">코멘트</a></li>
-						<li><a href="groupPhoto">앨범</a></li>
-						<li><a href="#five" class="active">이벤트</a></li>
-					</ul>
+					
 				</nav>
 				<footer>
 					<ul class="icons">
@@ -87,13 +81,101 @@
 								</p>
 								<div align="right"><footer>
 										<a href="#" class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
-										<a href="#" class="icon fa-comment">128</a>&nbsp;&nbsp;
-										<a href="Eventschedule" class="button">스케줄 페이지 이동</a>					
+										<a href="#" class="icon fa-comment">128</a>&nbsp;&nbsp;				
 								</footer></div>
 							</article>
 							</section>
-					</div>
 
+					</div>
+					
+					<div id="main">
+
+					<!-- Two -->
+							<section id="two">
+								<div class="container">
+									<h3>회원 정보</h3>
+										<div>
+											<a href="viewUserForm?user_id=${leader.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${leader.image_id}" alt="" style="width: 100px; height:auto;"></a>
+										</div>
+										<div>
+									<p>주최자</p>
+										<c:forEach var="user" items="${user_list}">
+											<a href="viewUserForm?user_id=${user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${user.image_id}" alt="" style="width: 100px; height:auto;"></a>
+										</c:forEach>
+										</div>
+									<p>회원</p>
+									<a href="listGroupAttendanceForm?group_id=${group.group_id}" class="button">회원 페이지 이동</a>
+								</div>
+							</section>
+					<!-- Three -->
+							<section id="three">
+								<div class="container">
+									<h3>코멘트</h3>
+						<div class="comments">
+						<div class="comment-wrap">
+							<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/m1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
+							<div class="comment-block">
+								<p class="comment-text">부트?</p>
+									<div class="bottom-comment">
+										<div class="comment-date">4월 24일, 2019년 @ 10:38 AM</div>
+											<ul class="comment-actions">
+												<li class="name">Emma</li>
+												<li class="complain">Complain</li>
+											</ul>
+									</div>
+							</div>
+						</div>
+
+						<div class="comment-wrap">
+							<div><a href="myPage" class="image avatar thumb"><img src="resources/GroupMain/images/member/c1.jpg" alt="" style="width: 100px; height:auto;"></a></div>
+							<div class="comment-block">
+								<p class="comment-text">ㅅㅂ!</p>
+									<div class="bottom-comment">
+										<div class="comment-date">4월 23일, 2019년 @ 10:32 AM</div>
+											<ul class="comment-actions">
+												<li class="name">Harry</li>
+												<li class="complain">Complain</li>
+											</ul>
+										</div>
+									</div>
+						</div>
+						<a href="listGroupCommentForm?group_id${group.group_id}" class="button">코멘트 페이지 이동</a>
+						
+						</div>		
+								</div>
+							</section>
+
+					<!-- Four -->
+							<section id="four">
+								<div class="container">
+									<h3>앨범</h3>
+						
+									<div class="features">
+										<article class="col-6 col-12-xsmall work-item">
+											<c:forEach var="event_schedule_image" items="${event_schedule_image_list}">
+												<a href="resources/image/event_schedule_image/${event_schedule_image.filename}" class="image thumb"><img src="resources/image/event_schedule_image/${event_schedule_image.filename}" alt="" /></a>
+											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.event_schedule_id}</h3>
+											</c:forEach>
+											<br>
+											<a href="listGroupAlbumForm?group_id=${group.group_id}" class="button">앨범 페이지 이동</a>
+										</article>
+									</div>
+								</div>
+							</section>
+							
+							<section>
+								<div class="container">	
+									<h1>암거나</h1>
+									<h2>스케줄</h2>
+									<h3>스케줄</h3>
+									<h4>스케줄</h4>
+									<p>암거나암거나</p>
+									<a href="viewEventScheduleForm" class="button">스케줄 페이지 이동</a>	
+								</div>
+							</section>
+							
+				</div>
+				
 				<!-- Footer -->
 					<section id="footer">
 						<div class="container">
