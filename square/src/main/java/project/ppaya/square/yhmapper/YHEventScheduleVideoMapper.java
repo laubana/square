@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import project.ppaya.square.vo.ImageAlbum;
+import project.ppaya.square.vo.EventScheduleImage;
 import project.ppaya.square.vo.EventScheduleVideo;
 
 public interface YHEventScheduleVideoMapper
@@ -12,4 +13,6 @@ public interface YHEventScheduleVideoMapper
 	public int updateDetectDateByEventScheduleVideoId(HashMap<String, Object> map);
 	public EventScheduleVideo selectEventScheduleVideoByEventScheduleVideoId(String event_schedule_video_id);
 	public ArrayList<String> getEventScheduleVideoIdByEventScheduleIdList(ArrayList<Integer> event_schedule_id_list);
+	public ArrayList<EventScheduleVideo> selectEventScheduleVideoByEventScheduleVideoIdList(ArrayList<String> event_schedule_video_id_list);
+	public ArrayList<EventScheduleVideo> selectEventScheduleVideoByEventScheduleIdList(ArrayList<Integer> event_schedule_id_list);
 }

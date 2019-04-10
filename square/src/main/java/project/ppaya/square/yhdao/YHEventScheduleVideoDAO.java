@@ -7,8 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import project.ppaya.square.vo.EventScheduleImage;
 import project.ppaya.square.vo.EventScheduleVideo;
 import project.ppaya.square.yhmapper.YHEventScheduleImageFaceMapper;
+import project.ppaya.square.yhmapper.YHEventScheduleImageMapper;
 import project.ppaya.square.yhmapper.YHEventScheduleVideoMapper;
 
 @Repository
@@ -17,6 +19,34 @@ public class YHEventScheduleVideoDAO
 	@Autowired
 	SqlSession sqlSession;
 
+	public ArrayList<EventScheduleVideo> selectEventScheduleVideoByEventScheduleIdList(ArrayList<Integer> event_schedule_id_list)
+	{
+		ArrayList<EventScheduleVideo> event_schedule_video_list = null;
+		
+		YHEventScheduleVideoMapper mapper = sqlSession.getMapper(YHEventScheduleVideoMapper.class);
+		
+		try
+		{
+			event_schedule_video_list = mapper.selectEventScheduleVideoByEventScheduleIdList(event_schedule_id_list);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_video_list;
+	}
+	public ArrayList<EventScheduleVideo> selectEventScheduleVideoByEventScheduleVideoIdList(ArrayList<String> event_schedule_video_id_list)
+	{
+		ArrayList<EventScheduleVideo> event_schedule_video_list = null;
+		
+		YHEventScheduleVideoMapper mapper = sqlSession.getMapper(YHEventScheduleVideoMapper.class);
+		
+		try
+		{
+			event_schedule_video_list = mapper.selectEventScheduleVideoByEventScheduleVideoIdList(event_schedule_video_id_list);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_video_list;
+	}
 	public int insertEventScheduleVideo
 	(
 			String event_schedule_video_id,
