@@ -290,6 +290,7 @@ $("#intro").css("background", "url('resources/GroupSearch/assets/css/images/over
 $("#intro").css("background-size","256px 256px, cover");
 </script>
 <script>
+var group_category_id = ${group_category_id};
 $('input[type=search]').on({
 	  'focus': function(){
 	     $(this).parent().addClass('focused');
@@ -321,19 +322,46 @@ $('input[type=search]').on({
 	         .val( queryValue + '' + $(this).val() + '' ).focus()
 	   }
 	})
+	$("#keyword").keypress(function(event)
+			{
+				if(event.which == 13)
+				{
+					document.getElementById("show_work_button").click();
+				}
+			});
 	$("#show_work_button").on("click", function()
 			{
 				var map = {};
+				
 				map["keyword"] = $("#keyword").val();
+				map["group_category_id"] = group_category_id;
+				
 				$.ajax({
 					url: "listGroupAction",
 					type: "POST",
 					data: JSON.stringify(map),
 					dataType: "JSON",
 					contentType: "application/json; charset=UTF-8",
-					success: function(result)
+					success: function(group_list)
 					{
+						var buff = "";
 						
+						for(var i = 0; i < group_list.length; i++)
+						{
+							if(i % 2 == 1)
+							{
+								buff += "<article class='from-left'>";
+								buff += "<a href='viewGroupForm?group_category_id=" + group_category_id + "&group_id=" + group_list[i].group_id + "' class='image fit'><img src='resources/image/group_logo/" + group_list[i].group_logo + "' title='" + group_list[i].name +"' alt='' /></a>";
+								buff += "</article>"
+							}
+							else
+							{
+								buff += "<article class='from-right'>";
+								buff += "<a href='viewGroupForm?group_category_id=" + group_category_id + "&group_id=" + group_list[i].group_id + "'class='image fit'><img src='resources/image/group_logo/" + group_list[i].group_logo + "' title='" + group_list[i].name +"' alt='' /></a>";
+								buff += "</article>"
+							}
+						}
+						$("#work").html(buff);
 					},
 					error: function(error)
 					{
@@ -341,7 +369,7 @@ $('input[type=search]').on({
 					}
 				});
 				$("#work").css("display", "block");
-			});
+			})
 </script>
 
 	</body>

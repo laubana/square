@@ -70,8 +70,11 @@ public class GroupController
 			Model request
 			)
 	{
-		ArrayList<Group> group_list = yh_groupDAO.selectGroupByGroupCategoryId(group_category_id);
+		//GroupCategoryId 전송
+		request.addAttribute("group_category_id", group_category_id);
 		
+		ArrayList<Group> group_list = yh_groupDAO.selectGroupByGroupCategoryId(group_category_id);
+		//Group List 전송
 		request.addAttribute("group_list", group_list);
 
 		return "group/listGroupForm";

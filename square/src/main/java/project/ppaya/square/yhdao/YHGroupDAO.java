@@ -1,6 +1,7 @@
 package project.ppaya.square.yhdao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,23 @@ public class YHGroupDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<Group> selectGroupByGroupCategoryIdKeyword(int group_category_id, String keyword)
+	{
+		ArrayList<Group> group_list = null;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("group_category_id", group_category_id);
+		map.put("keyword", keyword);
+		
+		YHGroupMapper mapper = sqlSession.getMapper(YHGroupMapper.class);
+		
+		try
+		{
+			group_list = mapper.selectGroupByGroupCategoryIdKeyword(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_list;
+	}
 	public ArrayList<Group> selectGroupByGroupCategoryId(int group_category_id)
 	{
 		ArrayList<Group> group_list = null;

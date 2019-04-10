@@ -260,8 +260,6 @@ $(document).ready(function () {
 		map["group_id_list"] = group_id_list;
 		map["self"] = self;
 		
-		console.log(map);
-		
 		$.ajax({
 			url: "testAction",
 			type: "POST",
