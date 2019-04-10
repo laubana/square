@@ -9,15 +9,28 @@
 -->
 <html>
 	<head>
-		<title>GroupEventView</title>
+		<title>createEventForm</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/EventView/assets/css/main.css" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
-		
-		
+		<script src=resources/Basic/assets/js/jquery-3.3.1.min.js></script>
 	</head>
+
+	<script>
+	function createEventImage()
+	{
+		document.getElementById("file").click();
+	}
+	
+	function uploadFirstEventImage()
+	{
+		var x = document.createElement("INPUT");
+		x.setAttribute("type", "file");
+		document.getElementById("album").appendChild(x);
+	}
+	</script>
 	<body class="is-preload">
 
 		<!-- Header 메인 바 -->
@@ -44,13 +57,7 @@
 					</p>
 				</header>
 				<nav id="nav">
-					<ul>
-						<li><a href="groupMain">메인</a></li>
-						<li><a href="groupMember">회원</a></li>
-						<li><a href="groupComment">코멘트</a></li>
-						<li><a href="groupPhoto">앨범</a></li>
-						<li><a href="#five" class="active">이벤트</a></li>
-					</ul>
+					
 				</nav>
 				<footer>
 					<ul class="icons">
@@ -66,34 +73,47 @@
 		<!-- Wrapper -->
 			<div id="wrapper">
 
-				<!-- Main 가:1280세:480-->
+				<!-- Main -->
 					<div id="main">
 
-						<!-- Five -->
+						<!-- 그룹의 설립일 등 기본 정보 -->
 							<section id="five">
 								<article class="post">
 								<header>
+								<!-- 타이틀 생성 -->
 									<div class="title">
-										<h2><a href="">${event.name}</a></h2>
+									<input type="text" class="Event_title "id="Event_title" placeholder="groupTitle">
 									</div>
 									<div class="meta">
-										<time class="published" datetime="2019-04-08">2019년 4월 8일</time>
-										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">${leader.name}</span><img src="resources/image/user_image/${leader.image_id}" alt="" /></a>
+								<!-- 그룹 설립일 자동입력 -데이터 베이스에 sysdate 오면 session으로 받아올 예정-->
+										<time class="published" datetime="2019-04-08">DB에서 sysdate 찍어줌</time> 
+										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><small>리더 아이디 자리</small></a>
+										<span class="name">${leader.name}</span><p><small>리더 이름 자리</small></p>
+											<p><small>리더 이미지 자리</small></p><img src="resources/image/user_image/${leader.image_id}" alt="" />
 									</div>
 								</header>
-								<span class="image featured"><img src="resources/image/event_image/${event.image_id}" alt="" /></span>
-								<p>
-								${event.content}
-								</p>
+								<!-- 그룹 대표 이미지 업로드 -->
 								<div align="right"><footer>
-										<a href="#" class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
-										<a href="#" class="icon fa-comment">128</a>&nbsp;&nbsp;
-										<a href="Eventschedule" class="button">스케줄 페이지 이동</a>					
+									<label><input type="file" id="file"></label>
+									<input type="button" class="createEventImage" id="createEventImage" value="그룹 이미지 등록" onclick="createEventImage()">		
 								</footer></div>
 							</article>
 							</section>
-					</div>
+						</div>
 
+						<!-- 그룹의 설립일 등 기본 정보 -->
+							<div id="album">
+							<section id="six">
+								<footer><div id="album" class="container" >
+									<h3>앨범</h3>
+									<p>우리 그룹을 표현할 첫 사진을 넣어보세요</p>
+									<button onclick="uploadFirstEventImage()">사진 더 추가</button>		
+								</div></footer>
+							</section>
+						</div><br><br>
+							
+				
+				
 				<!-- Footer -->
 					<section id="footer">
 						<div class="container">
@@ -103,7 +123,6 @@
 						</div>
 					</section>
 
-			</div>
 
 		<!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
@@ -122,4 +141,4 @@
 			<script src="resources/GroupMain/assets/js/main.js"></script>
 
 	</body>
-</html>s
+</html>
