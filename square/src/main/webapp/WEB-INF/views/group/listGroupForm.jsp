@@ -153,7 +153,6 @@ input::placeholder {
   color: white;
 }
 </style>
-
 	</head>
 	<body class="is-preload">
 
@@ -162,9 +161,9 @@ input::placeholder {
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="joinForm">회원가입</a></li>
-						<li><a href="groupCreateForm">그룹생성</a></li>
-						<li><a href="login">로그인</a></li>
+						<li><a href="joinUserForm">회원가입</a></li>
+						<li><a href="createGroupForm">그룹생성</a></li>
+						<li><a href="loginUserForm">로그인</a></li>
 					</ul>
 				</nav>
 			</header>
@@ -180,7 +179,7 @@ input::placeholder {
 	
 					<div class="container">
   						<div class="wrap-input">  
-  							<input type="search" class="input-txt" placeholder="Search">
+  							<input type="search" id="keyword" class="input-txt" placeholder="Search" name="keyword">
   						<div class="filters">
     						<div class="filter-btn active">
       							<input type="radio" value="">
@@ -225,13 +224,13 @@ input::placeholder {
   						</div>
 						</div>			
 					<footer>
-						<a href="#work" class="button style2 down"></a>
+						<a href="#work" class="button style2 down" id="show_work_button"></a>
 					</footer>
 				</div>
 			</section>
 
 		<!-- Work -->
-			<section id="work" class="main style3 primary">
+			<section id="work" class="main style3 primary" style="display: none;">
 				<div class="content">
 					<header>
 						<h2>분야별 그룹 탐색</h2>
@@ -322,6 +321,27 @@ $('input[type=search]').on({
 	         .val( queryValue + '' + $(this).val() + '' ).focus()
 	   }
 	})
+	$("#show_work_button").on("click", function()
+			{
+				var map = {};
+				map["keyword"] = $("#keyword").val();
+				$.ajax({
+					url: "listGroupAction",
+					type: "POST",
+					data: JSON.stringify(map),
+					dataType: "JSON",
+					contentType: "application/json; charset=UTF-8",
+					success: function(result)
+					{
+						
+					},
+					error: function(error)
+					{
+						
+					}
+				});
+				$("#work").css("display", "block");
+			});
 </script>
 
 	</body>

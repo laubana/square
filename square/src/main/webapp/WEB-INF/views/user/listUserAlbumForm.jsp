@@ -253,7 +253,6 @@ $(document).ready(function () {
 		var group_id_list = [];
 		var self = $(":checkbox[name='faceCheckbox']").prop("checked");
 		
-		console.log(self);		
 		$.each($(":checkbox[name='groupCheckbox']:checked"), function(){            
 			group_id_list.push($(this).val());
         });
