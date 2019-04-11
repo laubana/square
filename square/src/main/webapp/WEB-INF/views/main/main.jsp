@@ -68,12 +68,12 @@
 							<c:forEach var="group_category" items="#{group_category_list}" varStatus="status">
 								<c:if test="${status.index % 2 == 1}">
 									<article class="from-right">
-										<a href="listGroupForm?group_category_id=${group_category.group_category_id}" class="image fit thumb1"><img src="resources/Main/images/thumbs/${group_category.group_category_id}.jpg" alt="" /></a>
+										<a href="listGroupForm?group_category_id=${group_category.group_category_id}" class="image fit thumb${group_category.group_category_id}"><img src="resources/Main/images/thumbs/${group_category.group_category_id}.jpg" alt="" /></a>
 									</article>
 								</c:if>
 								<c:if test="${status.index % 2 == 0}">
 									<article class="from-left">
-										<a href="listGroupForm?group_category_id=${group_category.group_category_id}" class="image fit thumb1"><img src="resources/Main/images/thumbs/${group_category.group_category_id}.jpg" alt="" /></a>
+										<a href="listGroupForm?group_category_id=${group_category.group_category_id}" class="image fit thumb${group_category.group_category_id}"><img src="resources/Main/images/thumbs/${group_category.group_category_id}.jpg" alt="" /></a>
 									</article>
 								</c:if>
 							</c:forEach>
