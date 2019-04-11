@@ -4,44 +4,16 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>test1</title>
+		<title>Main</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/Main/assets/css/main.css" />
-<%-- 		<script>
-			function logoutUserAction()
-			{
-				$.ajax({
-					url: "logoutUserAction",
-					type: "POST",
-					success: function()
-					{
-						location.replace("<c:out value='main'/>");
-					},
-					error: function(error){console.log(error);}
+		<script>
+			$(document).ready(function(){
+				  $("button").click(function(){
+				    $("p").toggle();
+				  });
 				});
-			}
-			function loginUserForm()
-			{
-				location.replace("<c:out value='loginUserForm'/>");
-			}
-			
-			/*//실시간 검색어로 바뀌게 
-			setTimeout(function() {
-				if (realTimeKeyword) //realTimeKeyword에 값 저장 {
-					$Element("da_iframe_time").attr("lve.keyword", );	 
-					var welMinime = $Element("minime");
-					if (welMinime) {
-						welMinime.attr("lve.keyword", );
-					}
-					$Element("da_iframe_rolling").attr("lve.keyword", );
-					$Element("cnsv_shbx").attr("lve.keyword", );
-					$Element("da_iframe_below").attr("lve.keyword", );
-				}
-			}, 0);
-			 */
-			
-			
 		</script>
 	</head>
 	<body class="is-preload">
@@ -51,29 +23,15 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-					<li>
-						<div class="realTimeList">
-						<a href="listRecommendationForm">급상승 키워드</a>
-							<ul class="realTimeElement">
-							<li class="realTime_item">
-							<a href="#" class="rt_a" data-click="lve.keyword">		<!-- data-*으로 타입 정할 수 있음. -->
-							<span class="rt_k">아이마이</span>
-							</a>
-							<li class="realTime_item">
-							<a href="#" class="rt_a" data-click="lve.keyword">
-							<span class="rt_k">미마인</span>
-							</a>
-							</li>
-							</ul>
-						</div>
-					</li>
+						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
+						<li>${sessionScope.user_id}</li>
 						<li><a href="createGroupForm">그룹생성</a></li>
 					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
 						<li><a href="joinUserForm">회원가입</a></li>
-							<li><a href="javascript:loginUserForm()">로그인</a></li>
+							<li><a href="loginUserForm">로그인</a></li>
 						</c:if>
 					</ul>
 				</nav>
@@ -82,11 +40,9 @@
 		<!-- Intro -->
 			<section id="intro" class="main style1 dark fullscreen">
 				<div class="content">
-					<header>
-						<h2>2조.</h2>
-					</header>
-					<p>Welcome to <strong>2조</strong> 참조하실 분은 <a href="https://www.meetup.com/ko-KR/">meetup</a><br />
-					그리고 단어가 궁금하면 <a href="https://ja.dict.naver.com/">네이버 일본어 사전</a>.</p>
+				<header>
+					<h2>SQUARE</h2>
+				</header>
 					<footer>
 						<a href="#work" class="button style2 down">More</a>
 					</footer>
@@ -97,10 +53,7 @@
 			<section id="work" class="main style3 primary">
 				<div class="content">
 					<header>
-						<h2>분야별 그룹 탐색</h2>
-						<p>탐색을 합시당.
-						탐색탐색,
-						탐탐탐탐탐.</p>
+						<h2>카테고리</h2>
 					</header>
 
 					<!-- Gallery  -->
@@ -209,6 +162,6 @@ function gcreateMove() {
 	location.href="";
 }
 </script>
- --%>
+
 	</body>
 </html>
