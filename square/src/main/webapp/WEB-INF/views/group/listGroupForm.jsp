@@ -234,17 +234,7 @@ input::placeholder {
 
 		<!-- Work -->
 			<section id="work" class="main style3 primary" style="display: none;">
-				<div class="content">
-					<header>
-						<h2>분야별 그룹 탐색</h2>
-						<p>검색해 주세요.</p>
-					</header>
-
-					<!-- Gallery  -->
-						<div class="gallery">
-						</div>
-
-				</div>
+				
 			</section>
 
 
@@ -283,7 +273,7 @@ input::placeholder {
 			<script src="resources/GroupSearch/assets/js/main.js"></script>
 			
 <script>
-$("#intro").css("background", "url('resources/GroupSearch/assets/css/images/overlay.png'), url('resources/GroupSearch/images/${requestScope.image}.jpg')");
+$("#intro").css("background", "url('resources/GroupSearch/assets/css/images/overlay.png'), url('resources/Main/images/thumbs/${group_category.filename}')");
 $("#intro").css("background-size","256px 256px, cover");
 </script>
 <script>
@@ -347,15 +337,19 @@ $('input[type=search]').on({
 						{
 							if(i % 2 == 1)
 							{
+								buff += "<div class='gallery'>"
 								buff += "<article class='from-left'>";
-								buff += "<a href='viewGroupForm?group_category_id=" + group_category_id + "&group_id=" + group_list[i].group_id + "' class='image fit'><img src='resources/image/group_logo/" + group_list[i].group_logo + "' title='" + group_list[i].name +"' alt='' /></a>";
+								buff += "<a href='viewGroupForm?group_category_id=" + group_category_id + "&group_id=" + group_list[i].group_id + "'class='image fit'><img src='resources/image/group_logo/" + group_list[i].group_logo + "' title='" + group_list[i].name +"' alt='' /></a>";
 								buff += "</article>"
+								buff += "</div>"
 							}
 							else
 							{
+								buff += "<div class='gallery'>"
 								buff += "<article class='from-right'>";
 								buff += "<a href='viewGroupForm?group_category_id=" + group_category_id + "&group_id=" + group_list[i].group_id + "'class='image fit'><img src='resources/image/group_logo/" + group_list[i].group_logo + "' title='" + group_list[i].name +"' alt='' /></a>";
 								buff += "</article>"
+								buff += "</div>"
 							}
 						}
 						$("#work").html(buff);
