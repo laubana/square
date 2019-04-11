@@ -15,7 +15,50 @@
 		<link rel="stylesheet" href="resources/EventView/assets/css/main.css" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
-		
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['timeline']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+    	  var json_event_schedule_user_schedule_list_list = JSON.parse('${json_event_schedule_user_schedule_list_list}');
+    	  
+    	  for(var i = 0; i < json_event_schedule_user_schedule_list_list.length; i++)
+    		 {
+        var container = document.getElementById('timeline' + json_event_schedule_user_schedule_list_list[i].user.user_id);
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+        
+        dataTable.addColumn({ type: 'string', id: 'President' });
+		dataTable.addColumn({ type: 'string', id: 'Name' });
+		dataTable.addColumn({ type: 'string', id: 'style', role: 'style' });
+        dataTable.addColumn({ type: 'date', id: 'Start' });
+        dataTable.addColumn({ type: 'date', id: 'End' });
+        for(var j = 0; j < json_event_schedule_user_schedule_list_list[i].list.length; j++)
+        {
+        	if(json_event_schedule_user_schedule_list_list[i].list[j]["typeof"] == 1)
+        		{
+		        dataTable.addRows([
+		          [ json_event_schedule_user_schedule_list_list[i].user.user_id, '', 'Tomato', new Date(json_event_schedule_user_schedule_list_list[i].list[j].start_date), new Date(json_event_schedule_user_schedule_list_list[i].list[j].end_date) ]]);
+        }
+        else
+		{
+            dataTable.addRows([
+              [ json_event_schedule_user_schedule_list_list[i].user.user_id, '', 'MediumSeaGreen', new Date(json_event_schedule_user_schedule_list_list[i].list[j].start_date), new Date(json_event_schedule_user_schedule_list_list[i].list[j].end_date) ]]);
+            }
+        	var option = {
+					width : (json_event_schedule_user_schedule_list_list[i].list[json_event_schedule_user_schedule_list_list[i].list.length - 1].end_date - json_event_schedule_user_schedule_list_list[i].list[0].start_date) / 50000,
+					height: 250,
+				};
+				chart.draw(dataTable, option);
+        
+        document.getElementById('timeline_image' + json_event_schedule_user_schedule_list_list[i].user.user_id).innerHTML = "<a href='viewUserForm?user_id=" + json_event_schedule_user_schedule_list_list[i].user.user_id + "' class='image avatar thumb'><img src='resources/image/user_image/" + json_event_schedule_user_schedule_list_list[i].user.image_id + "' alt='' style='width: 100px; height:auto;'></a>";
+    		 }
+      }
+      }
+    </script>
+    <script>
+    	console.log(JSON.parse('${json_event_schedule_user_schedule_list_list}'));
+    </script>
 	<script>
 	var CLIENT_ID = '823134128365-5e3gpcpbt5nvqc4mfgsbess1v9d8kj9g.apps.googleusercontent.com';
     var API_KEY = 'AIzaSyAujlCmx3gpGvD5ZHDN3Vqwp1hG0h-J3cc';
@@ -49,7 +92,7 @@
 			contentType: "application/json; charset=UTF-8",
 			success: function()
 			{
-				//location.reload();
+				location.reload();
 			},
 			error: function(error){console.log(error);}
 		});
@@ -77,33 +120,35 @@
 	{
 		if(gapi.auth2.getAuthInstance().isSignedIn.get() == true)
 		{			
-			map = {};
+			var map = {};
 			
 			map["user_id"] = "${sessionScope.user_id}";
 			map["event_schedule_id"] = ${event_schedule.event_schedule_id};
+			map["google_user_schedule_list"] = [];
 			listUpcomingEvents();
 			var interval = setInterval(function()
 					{
 				if(google_user_schedule_list.length != 0)
 						{
-					map["google_user_schedule_list"] = google_user_schedule_list;
+							for(var i = 0; i < google_user_schedule_list.length; i++)
+							{
+								map.google_user_schedule_list.push({start_date: google_user_schedule_list[i].start_date, end_date: google_user_schedule_list[i].end_date});
+							}
+							$.ajax({
+								url: "joinEventScheduleAction",
+								type: "POST",
+								data: JSON.stringify(map),
+								contentType: "application/json; charset=UTF-8",
+								success: function()
+								{
+									location.reload();
+								},
+								error: function(error){console.log(error);}
+							});
 							clearInterval(interval);
 						}
 					},100);
 			
-			console.log(map);
-			
-			$.ajax({
-				url: "joinEventScheduleAction",
-				type: "POST",
-				data: {map:map},
-				contentType: "application/json; charset=UTF-8",
-				success: function()
-				{
-					//location.reload();
-				},
-				error: function(error){console.log(error);}
-			});
 		}
 		else
 		{
@@ -111,23 +156,34 @@
 			gapi.auth2.getAuthInstance().isSignedIn.listen(function()
 					{
 				
+				var map = {};
+				
+				map["user_id"] = "${sessionScope.user_id}";
+				map["event_schedule_id"] = ${event_schedule.event_schedule_id};
+				map["google_user_schedule_list"] = [];
 				listUpcomingEvents();
-					
-					map = {};
-			map["user_id"] = "${sessionScope.user_id}";
-			map["event_schedule_id"] = ${event_schedule.event_schedule_id};
-			
-			$.ajax({
-				url: "joinEventScheduleAction",
-				type: "POST",
-				data: JSON.stringify(map),
-				contentType: "application/json; charset=UTF-8",
-				success: function()
-				{
-					location.reload();
-				},
-				error: function(error){console.log(error);}
-			});
+				var interval = setInterval(function()
+						{
+					if(google_user_schedule_list.length != 0)
+							{
+								for(var i = 0; i < google_user_schedule_list.length; i++)
+								{
+									map.google_user_schedule_list.push({start_date: google_user_schedule_list[i].start_date, end_date: google_user_schedule_list[i].end_date});
+								}
+								$.ajax({
+									url: "joinEventScheduleAction",
+									type: "POST",
+									data: JSON.stringify(map),
+									contentType: "application/json; charset=UTF-8",
+									success: function()
+									{
+										location.reload();
+									},
+									error: function(error){console.log(error);}
+								});
+								clearInterval(interval);
+							}
+						},100);
 		});
 		}
 	}	
@@ -321,15 +377,20 @@
 							</section>
 							
 							<!-- 관리 -->
-							<section>
+							<c:if test="${sessionScope.user_id == leader.user_id}">
+							<section id="six">
 								<div class="container">	
-									<h1>관리</h1>
-									<h2>관리</h2>
-									<h3>관리</h3>
-									<h4>관리</h4>
-									<p>관리</p>
+									<h3>회원 스케줄</h3>
+									<c:forEach var="event_schedule_user_schedule_list" items="${event_schedule_user_schedule_list_list}">
+									<div id="timeline_image${event_schedule_user_schedule_list.user.user_id}">
+										</div>
+										<div id="timeline${event_schedule_user_schedule_list.user.user_id}" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 80%">
+										</div>
+									</c:forEach>
+									<div id="timeline" style="height: 180px;"></div>
 								</div>
 							</section>
+							</c:if>
 							
 				</div>
 				
