@@ -1,5 +1,6 @@
 package project.ppaya.square.action;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import project.ppaya.square.shdao.SH_DAO_Group;
 import project.ppaya.square.shdao.SH_DAO_User;
 import project.ppaya.square.vo.EventScheduleImage;
+import project.ppaya.square.vo.EventScheduleUserSchedule;
 import project.ppaya.square.vo.EventScheduleVideo;
 import project.ppaya.square.vo.Group;
 import project.ppaya.square.vo.GroupHashtag;
@@ -34,6 +36,7 @@ import project.ppaya.square.yhdao.YHEventScheduleAttendanceDAO;
 import project.ppaya.square.yhdao.YHEventScheduleDAO;
 import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
 import project.ppaya.square.yhdao.YHEventScheduleImageFaceDAO;
+import project.ppaya.square.yhdao.YHEventScheduleUserScheduleDAO;
 import project.ppaya.square.yhdao.YHEventScheduleVideoDAO;
 import project.ppaya.square.yhdao.YHEventScheduleVideoFaceDAO;
 import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
@@ -51,6 +54,8 @@ public class EventScheduleAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(EventScheduleAction.class);
 	
+	@Autowired
+	YHEventScheduleUserScheduleDAO yh_event_schedule_user_scheduleDAO;
 	@Autowired
 	YHUserDAO yh_userDAO;
 	@Autowired
@@ -87,18 +92,33 @@ public class EventScheduleAction {
 	
 	@ResponseBody
 	@RequestMapping(value = "joinEventScheduleAction", method = RequestMethod.POST)
-	public void joinEventScheduleAction(Model request, HashMap<String, Object> map)
+	public void joinEventScheduleAction(Model request, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)map.get("user_id");
 		int event_schedule_id = (int)map.get("event_schedule_id");
+		ArrayList<HashMap<String, String>> google_user_schedule_list = (ArrayList<HashMap<String, String>>)map.get("google_user_schedule_list");
 		
-		//ArrayList<HashMap<String, String>> test_list = (ArrayList<HashMap<String, String>>)map.get("google_user_schedule_list");  
-		logger.debug("{}", map.containsKey("google_user_schedule_list"));
-		logger.debug("{}", map.toString());
-		/*for(int i = 0; i < test_list.size(); i++)
+		yh_event_schedule_user_scheduleDAO.deleteEventScheduleUserScheduleByUserIdEventScheduleId(user_id, event_schedule_id);
+		
+		//String user_id, int event_schedule_id, long start_date, long end_date, int typeof
+		for(int i = 0; i < google_user_schedule_list.size(); i++)
 		{
-			logger.debug("{}, {}", test_list.get(i).get("start_date"), test_list.get(i).get("end_date"));
-		}*/
+			
+			try
+			{
+				yh_event_schedule_user_scheduleDAO.insertEventScheduleUserSchedule(
+						new EventScheduleUserSchedule(
+								user_id,
+								event_schedule_id,
+								new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(google_user_schedule_list.get(i).get("start_date")).getTime(),
+								new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(google_user_schedule_list.get(i).get("end_date")).getTime(),
+								1
+								)
+						);
+			}
+			catch(Exception error){error.printStackTrace();}
+			/**/
+		}
 		
 		yh_event_schedule_attendanceDAO.insertEventScheduleAttendance(user_id, event_schedule_id);
 	}

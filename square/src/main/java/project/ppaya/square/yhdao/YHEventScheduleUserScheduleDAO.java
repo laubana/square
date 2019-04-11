@@ -46,7 +46,7 @@ public class YHEventScheduleUserScheduleDAO
 		
 		try
 		{
-			result = mapper.deleteEventScheduleUserScheduleByUserIdEventScheduleId(map);
+			result = mapper.insertEventScheduleUserSchedule(map);
 		}
 		catch(Exception error){error.printStackTrace();}
 		
