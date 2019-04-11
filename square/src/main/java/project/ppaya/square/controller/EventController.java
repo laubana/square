@@ -179,7 +179,7 @@ public class EventController
 		
 		//event_place 임시 전송
 		String cood = "{lat: 37.566535, lng: 126.97796919999996}";
-		request.addAttribute(cood,"event_place");
+		request.addAttribute("event_place", cood);
 		
 		return "event/viewEventForm";
 	}
