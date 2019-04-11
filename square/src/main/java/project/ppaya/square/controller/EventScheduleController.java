@@ -196,21 +196,41 @@ public class EventScheduleController
 		//Image List 전송
 		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
 		
-		ArrayList<HashMap<String, Object>> test_list = new ArrayList<>();
+		long current_time = (new Date()).getTime();
+		
+		ArrayList<HashMap<String, Object>> user_view_list_list = new ArrayList<>();
+		ArrayList<ArrayList<EventScheduleUserSchedule>> integrate_event_schedule_user_schedule_list_list = new ArrayList<>();
 		for(int i = 0; i < user_list.size(); i++)
 		{
 			HashMap<String, Object> test_map = new HashMap<>();
+			ArrayList<EventScheduleUserSchedule> integrate_event_schedule_user_schedule_list = YHEventSchedeulUserScheduleUtil.integrateEventScheduleUserScheduleList(YHEventSchedeulUserScheduleUtil.cropEventScheduleUserScheduleList(yh_event_schedule_user_scheduleDAO.selectEventScheduleUserScheduleByUserIdEventScheduleIdStartDateEndDate(event_schedule_id, user_list.get(i).getUser_id(), current_time, current_time + 7 * 86400 * 1000), current_time, current_time + 7 * 86400 * 1000), user_list.get(i).getUser_id(), event_schedule_id);
+			integrate_event_schedule_user_schedule_list_list.add(integrate_event_schedule_user_schedule_list);
+			ArrayList<EventScheduleUserSchedule> integrate_view_list = YHEventSchedeulUserScheduleUtil.parseIntegratedEventScheduleUserScheduleListToView(integrate_event_schedule_user_schedule_list, user_list.get(i).getUser_id(), event_schedule_id, current_time, current_time + 7 * 86400 * 1000);
 			test_map.put("user", user_list.get(i));
-			ArrayList<EventScheduleUserSchedule> temp_test_list = YHEventSchedeulUserScheduleUtil.parseIntegratedEventScheduleUserScheduleListToView(YHEventSchedeulUserScheduleUtil.integrateEventScheduleUserScheduleList(YHEventSchedeulUserScheduleUtil.cropEventScheduleUserScheduleList(yh_event_schedule_user_scheduleDAO.selectEventScheduleUserScheduleByUserIdEventScheduleIdStartDateEndDate(event_schedule_id, user_list.get(i).getUser_id(), (new Date()).getTime(), (new Date()).getTime() + 7 * 86400 * 1000), (new Date()).getTime(), (new Date()).getTime() + 7 * 86400 * 1000), user_list.get(i).getUser_id(), event_schedule_id), user_list.get(i).getUser_id(), event_schedule_id, (new Date()).getTime(), (new Date()).getTime() + 7 * 86400 * 1000)  ;
-			test_map.put("list", temp_test_list);
+			test_map.put("list", integrate_view_list);
 			
-			test_list.add(test_map);
+			user_view_list_list.add(test_map);
 		}
 		
-		logger.debug("{}", new JSONArray(test_list).toString(2));
+		request.addAttribute("json_event_schedule_user_schedule_list_list", new JSONArray(user_view_list_list));
+		request.addAttribute("event_schedule_user_schedule_list_list", user_view_list_list);
 		
-		request.addAttribute("json_event_schedule_user_schedule_list_list", new JSONArray(test_list));
-		request.addAttribute("event_schedule_user_schedule_list_list", test_list);
+		ArrayList<EventScheduleUserSchedule> test_list3 = new ArrayList<>();
+		for(long i = current_time; i < current_time + 7 * 86400000; i += 60000)
+		{
+			int count = user_list.size();
+			
+			for(int j = 0; j < integrate_event_schedule_user_schedule_list_list.size(); j++)
+			{
+				if(YHEventSchedeulUserScheduleUtil.isExistPeriodInEventScheduleUserScheduleList(integrate_event_schedule_user_schedule_list_list.get(j), i, i + 3600000) == true)
+				{
+					count--;
+				}
+			}
+			
+			test_list3.add(new EventScheduleUserSchedule("", 0, i, i + 60000, count));
+		}
+		request.addAttribute("test_list3", new JSONArray(test_list3));
 		
 		return "event_schedule/viewEventScheduleForm";
 	}

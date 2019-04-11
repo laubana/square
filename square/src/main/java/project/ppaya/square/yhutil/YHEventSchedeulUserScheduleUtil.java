@@ -26,6 +26,22 @@ import project.ppaya.square.vo.Reference;
 
 public class YHEventSchedeulUserScheduleUtil
 {	
+	public static boolean isExistPeriodInEventScheduleUserScheduleList(ArrayList<EventScheduleUserSchedule> event_schedule_user_schedule_list, long start_date, long end_date)
+	{
+		for(int i = 0; i < event_schedule_user_schedule_list.size(); i++)
+		{
+			if(
+					(start_date < event_schedule_user_schedule_list.get(i).getEnd_date() && event_schedule_user_schedule_list.get(i).getEnd_date() <= end_date) ||
+					(start_date <= event_schedule_user_schedule_list.get(i).getStart_date() && event_schedule_user_schedule_list.get(i).getStart_date() < end_date) ||
+					(event_schedule_user_schedule_list.get(i).getStart_date() < start_date && end_date < event_schedule_user_schedule_list.get(i).getEnd_date())
+					)
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
 	public static ArrayList<EventScheduleUserSchedule> cropEventScheduleUserScheduleList(ArrayList<EventScheduleUserSchedule> old_event_schedule_user_schedule_list, long start_date, long end_date)
 	{
 		ArrayList<EventScheduleUserSchedule> new_event_schedule_user_schedule_list = (ArrayList<EventScheduleUserSchedule>)old_event_schedule_user_schedule_list.clone();

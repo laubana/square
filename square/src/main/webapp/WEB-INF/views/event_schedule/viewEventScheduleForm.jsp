@@ -19,8 +19,9 @@
     <script type="text/javascript">
       google.charts.load('current', {'packages':['timeline']});
       google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-    	  var json_event_schedule_user_schedule_list_list = JSON.parse('${json_event_schedule_user_schedule_list_list}');
+      function drawChart()
+      {
+		var json_event_schedule_user_schedule_list_list = JSON.parse('${json_event_schedule_user_schedule_list_list}');
     	  
     	  for(var i = 0; i < json_event_schedule_user_schedule_list_list.length; i++)
     		 {
@@ -54,7 +55,37 @@
         document.getElementById('timeline_image' + json_event_schedule_user_schedule_list_list[i].user.user_id).innerHTML = "<a href='viewUserForm?user_id=" + json_event_schedule_user_schedule_list_list[i].user.user_id + "' class='image avatar thumb'><img src='resources/image/user_image/" + json_event_schedule_user_schedule_list_list[i].user.image_id + "' alt='' style='width: 100px; height:auto;'></a>";
     		 }
       }
+    	 
       }
+      
+      google.charts.load("current", {packages:['corechart']});
+      google.charts.setOnLoadCallback(drawChart1);
+      function drawChart1() {
+    	  var list = JSON.parse('${test_list3}');
+    	  var data_test = [["Element", "Density", {role: "style"}]];
+    	  for(var i = 0; i < list.length; i++)
+    		  {
+    		  	data_test.push(["Copper", list[i]["typeof"], "#b87333"]);
+    		  }
+        var data = google.visualization.arrayToDataTable(data_test);
+
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+                         { calc: "stringify",
+                           sourceColumn: 1,
+                           type: "string",
+                           role: "annotation" },
+                         2]);
+
+        var options = {
+          width: 10000,
+          height: 400,
+          bar: {groupWidth: "95%"},
+          legend: { position: "none" },
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById("timeline"));
+        chart.draw(view, options);
+    }
     </script>
     <script>
     	console.log(JSON.parse('${json_event_schedule_user_schedule_list_list}'));
@@ -387,7 +418,8 @@
 										<div id="timeline${event_schedule_user_schedule_list.user.user_id}" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 80%">
 										</div>
 									</c:forEach>
-									<div id="timeline" style="height: 180px;"></div>
+									<div id="timeline" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 80%">
+									</div>
 								</div>
 							</section>
 							</c:if>
