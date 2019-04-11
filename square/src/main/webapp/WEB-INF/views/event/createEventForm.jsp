@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <!--
+192 233 행 주석 처리 해놓음
 	Read Only by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
@@ -17,21 +18,6 @@
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
 		<script src=resources/Basic/assets/js/jquery-3.3.1.min.js></script>
 	</head>
-	<!-- 구글 맵스 위한 style 태그. 다른 요소 적용할 style이 있다면 style 태그를 별도로 만들어주기 바람 -->
-		<style>
-			#map {
-					width: 500px;
-					height: 350px;
-					position: relative !important; /* changing this to fixed makes the map dissapear */
-					top: 0; 
-					bottom: 0; 
-					left: 0; 
-					right: 0; 
-					z-index: 0;
-			    }
-		html,body {height: 100%; margin: 0; padding: 0;}
-		</style>
-
 
 	<script>
 	function createEventImage()
@@ -47,6 +33,23 @@
 	}
 	</script>
 	
+	<!-- 구글 맵스 위한 style 태그. 다른 요소 적용할 style이 있다면 style 태그를 별도로 만들어주기 바람 -->
+		<style>
+			#map {
+				width: 500px;
+				height: 350px;
+				position: relative !important; /* changing this to fixed makes the map dissapear */
+				top: 0; 
+				bottom: 0; 
+				left: 0; 
+				right: 0; 
+				z-index: 0;
+		     }
+		html,body {height: 100%; margin: 0; padding: 0;}
+		</style>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap">
+		</script>
+
 	<!-- *세현: 구글 맵스 위한 스크립트. 다른 기능을 위한 함수를 추가하려면 태그를 따로 마련해주기 바람. -->
 	<script>
 		var map;
@@ -189,7 +192,7 @@
 		<!-- Header -->
 			<section id="header">
 				<header>
-					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>
+					<%-- <span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span> --%>
 					<h1 id="logo"><a href="viewGroupForm?group_id=${group.group_id}">${group.name}</a></h1>
 					<p style="font-size:15px;">
 					<c:forEach var="group_hashtag" items="${group_hashtag_list}">
@@ -230,7 +233,7 @@
 										<time class="published" datetime="2019-04-08">DB에서 sysdate 찍어줌</time> 
 										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><small>리더 아이디 자리</small></a>
 										<span class="name">${leader.name}</span><p><small>리더 이름 자리</small></p>
-											<p><small>리더 이미지 자리</small></p><img src="resources/image/user_image/${leader.image_id}" alt="" />
+										<%-- 	<p><small>리더 이미지 자리</small></p><img src="resources/image/user_image/${leader.image_id}" alt="" /> --%>
 									</div>
 								</header>
 								<!-- 그룹 대표 이미지 업로드 -->
@@ -240,29 +243,39 @@
 								</footer></div>
 							</article>
 							</section>
+					</div>		
+		</div>
+		
 							
-							
-							
-							<!-- google maps -->
+				<!-- google maps-->
+					<div id="main">
 							<section id="section_map">
 								<article class="post">
 								<header>
-								<!-- 타이틀 생성 -->
 									<div class="title">
-										<div id = "map"></div>
-										<input type="button" value="장소 추천 보기" onclick="codeAddress()">
-										<div id = "output1"></div>
-										<div id = "output"></div>
+										여기는 title 클래스 div 태그
 									</div>
 								</header>
+								<p>
+									여기는 p태그
+								</p>
+									<div id="map" >
+									</div>
+									어디에 들어가나
+								<div align="right">
+									<footer>
+										오른쪽 아래에 버튼
+									</footer>
+								</div>
 							</article>
-							</section>		
+							</section>
+					</div>
+
 							
 							
 							
 							
-							
-						</div>
+						
 
 						<!-- 그룹의 설립일 등 기본 정보 -->
 							<div id="album">
@@ -270,6 +283,8 @@
 								<footer><div id="album" class="container" >
 									<h3>앨범</h3>
 									<p>우리 그룹을 표현할 첫 사진을 넣어보세요</p>
+																			
+									
 									<button onclick="uploadFirstEventImage()">사진 더 추가</button>		
 								</div></footer>
 							</section>
