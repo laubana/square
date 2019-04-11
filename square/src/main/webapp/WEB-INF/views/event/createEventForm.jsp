@@ -244,21 +244,14 @@
 							</article>
 							</section>
 					</div>		
-		</div>
+
 		
 							
 				<!-- google maps-->
-					<div id="main">
 							<section id="section_map">
 								<article class="post">
-								<header>
-									<div class="title">
-										여기는 title 클래스 div 태그
-									</div>
-								</header>
-								<p>
-									여기는 p태그
-								</p>
+								<p>여기는 p태그
+</p>
 									<div id="map" >
 									</div>
 									어디에 들어가나
@@ -269,13 +262,6 @@
 								</div>
 							</article>
 							</section>
-					</div>
-
-							
-							
-							
-							
-						
 
 						<!-- 그룹의 설립일 등 기본 정보 -->
 							<div id="album">
@@ -284,14 +270,11 @@
 									<h3>앨범</h3>
 									<p>우리 그룹을 표현할 첫 사진을 넣어보세요</p>
 																			
-									
 									<button onclick="uploadFirstEventImage()">사진 더 추가</button>		
 								</div></footer>
 							</section>
 						</div><br><br>
-							
-				
-				
+								
 				<!-- Footer -->
 					<section id="footer">
 						<div class="container">
@@ -301,7 +284,7 @@
 						</div>
 					</section>
 
-
+		</div>
 		<!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
 		<!-- 추가 Scripts -->
