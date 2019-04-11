@@ -72,6 +72,16 @@ public class EventController
 			Model request
 			)
 	{
+		//event_place 임시 전송
+		ArrayList<String> cood_list = new ArrayList<>();
+		cood_list.add("{lat: -41.330162, lng: 174.865694}");
+		cood_list.add("{lat: -42.734358, lng: 147.439506}");
+		cood_list.add("{lat: -42.734358, lng: 147.501315}");
+		cood_list.add("{lat: -42.734358, lng: 147.501315}");
+		cood_list.add("{lat: -43.999792, lng: 170.463352}");
+		request.addAttribute("event_place", cood_list);
+		
+		
 		return "event/createEventForm";
 	}
 	@RequestMapping(value = "listEventForm", method = RequestMethod.GET)
@@ -179,7 +189,7 @@ public class EventController
 		
 		//event_place 임시 전송
 		String cood = "{lat: 37.566535, lng: 126.97796919999996}";
-		request.addAttribute(cood,"event_place");
+		request.addAttribute("event_place", cood);
 		
 		return "event/viewEventForm";
 	}

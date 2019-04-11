@@ -16,31 +16,38 @@
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
 		
-		<!-- *세현: 구글맵 띄우기 위한 style 지정 태그 -->
-		<style>
-			#map {
-					width: 300px;
-					height: 300px;
-					position: relative !important; /*changing this to fixed makes the map dissapear*/
-					top: 0; 
-					bottom: 0; 
-					left: 0; 
-					right: 0; 
-					z-index: 0;
-	 		     }
-			html,body {height: 100%; margin: 0; padding: 0;}
+	<style>
+	#map {
+			width: 500px;
+			height: 350px;
+			position: relative !important; /* changing this to fixed makes the map dissapear */
+			top: 0; 
+			bottom: 0; 
+			left: 0; 
+			right: 0; 
+			z-index: 0;
+		     }
+		html,body {height: 100%; margin: 0; padding: 0;}
 		</style>
-		<!-- *세현: 구글 맵 띄우기 위한 script 태그 -->
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap">
 		</script>
+			<!-- *세현: 구글 맵 띄우기 위한 script 태그 
+			여기는 맵 관련 스크립트만 들어갈 태그임. 다른 스크립트는 태그 하나 더 만들어 주기 바람.-->
 		<script>
+				/* 컨트롤러에서 보낸 좌표 값을 밑에 center 속성의 값으로 넣어주기 */ 
 			var map;
 			function initMap() {
 			    map = new google.maps.Map(document.getElementById('map'), {
-			      center: {lat: -34.397, lng: 150.644},
+			      center: ${requestScope.event_place},
 			      zoom: 8
 			    });
 			  }
+		</script>
+			
+		
+		
+		
+		<script>
 			function withdrawEventAction()
 			{
 				map = {};
@@ -164,9 +171,7 @@
 									${event.content}
 								</p>
 									<div id="map" ></div>
-								<div id = "div_map">
 									어디에 들어가나
-								</div>
 								<div align="right"><footer>
 										<a href="#" class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
 										<a href="#" class="icon fa-comment">128</a>&nbsp;&nbsp;				
