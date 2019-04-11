@@ -26,7 +26,7 @@
 						<nav>
 							<ul>
 								<li><p class="copyright">
-									&copy; Unttled. Design: <a href="http://html5up.net">HTML5 UP</a>.
+									&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>.
 								</p></li>
 							</ul>
 						</nav>
