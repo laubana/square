@@ -87,10 +87,18 @@ public class EventScheduleAction {
 	
 	@ResponseBody
 	@RequestMapping(value = "joinEventScheduleAction", method = RequestMethod.POST)
-	public void joinEventScheduleAction(Model request, @RequestBody HashMap<String, Object> map)
+	public void joinEventScheduleAction(Model request, HashMap<String, Object> map)
 	{
 		String user_id = (String)map.get("user_id");
-		int event_schedule_id = (int)map.get("event_schedule_id");		
+		int event_schedule_id = (int)map.get("event_schedule_id");
+		
+		//ArrayList<HashMap<String, String>> test_list = (ArrayList<HashMap<String, String>>)map.get("google_user_schedule_list");  
+		logger.debug("{}", map.containsKey("google_user_schedule_list"));
+		logger.debug("{}", map.toString());
+		/*for(int i = 0; i < test_list.size(); i++)
+		{
+			logger.debug("{}, {}", test_list.get(i).get("start_date"), test_list.get(i).get("end_date"));
+		}*/
 		
 		yh_event_schedule_attendanceDAO.insertEventScheduleAttendance(user_id, event_schedule_id);
 	}

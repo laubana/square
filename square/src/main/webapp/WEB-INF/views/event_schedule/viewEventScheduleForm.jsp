@@ -15,7 +15,27 @@
 		<link rel="stylesheet" href="resources/EventView/assets/css/main.css" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
+		
 	<script>
+	var CLIENT_ID = '823134128365-5e3gpcpbt5nvqc4mfgsbess1v9d8kj9g.apps.googleusercontent.com';
+    var API_KEY = 'AIzaSyAujlCmx3gpGvD5ZHDN3Vqwp1hG0h-J3cc';
+    var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+    var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+    
+    function handleClientLoad() {
+        gapi.load('client:auth2', initClient);
+      }
+    function initClient() {
+        gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          discoveryDocs: DISCOVERY_DOCS,
+          scope: SCOPES
+        }).then(function () {
+        }, function(error) {
+        	console.log(error);
+        });
+      }
 	function withdrawEventScheduleAction()
 	{
 		map = {};
@@ -29,31 +49,94 @@
 			contentType: "application/json; charset=UTF-8",
 			success: function()
 			{
-				location.reload();
+				//location.reload();
 			},
 			error: function(error){console.log(error);}
 		});
 	}
+	function listUpcomingEvents() {
+        gapi.client.calendar.events.list({
+          'calendarId': 'primary',
+          'timeMin': (new Date()).toISOString(),
+          'showDeleted': false,
+          'singleEvents': true,
+          'maxResults': 10,
+          'orderBy': 'startTime'
+        }).then(function(response) {
+        	for(var i = 0; i < response.result.items.length; i++)
+        	{
+        		google_user_schedule_list.push({start_date: response.result.items[i].start.dateTime,
+        			end_date: response.result.items[i].end.dateTime});
+        	}
+         
+        });
+      }
+
+	var google_user_schedule_list = [];
 	function joinEventScheduleAction()
 	{
-		map = {};
-		map["user_id"] = "${sessionScope.user_id}";
-		map["event_schedule_id"] = ${event_schedule.event_schedule_id};
-		
-		$.ajax({
-			url: "joinEventScheduleAction",
-			type: "POST",
-			data: JSON.stringify(map),
-			contentType: "application/json; charset=UTF-8",
-			success: function()
-			{
-				location.reload();
-			},
-			error: function(error){console.log(error);}
+		if(gapi.auth2.getAuthInstance().isSignedIn.get() == true)
+		{			
+			map = {};
+			
+			map["user_id"] = "${sessionScope.user_id}";
+			map["event_schedule_id"] = ${event_schedule.event_schedule_id};
+			listUpcomingEvents();
+			var interval = setInterval(function()
+					{
+				if(google_user_schedule_list.length != 0)
+						{
+					map["google_user_schedule_list"] = google_user_schedule_list;
+							clearInterval(interval);
+						}
+					},100);
+			
+			console.log(map);
+			
+			$.ajax({
+				url: "joinEventScheduleAction",
+				type: "POST",
+				data: {map:map},
+				contentType: "application/json; charset=UTF-8",
+				success: function()
+				{
+					//location.reload();
+				},
+				error: function(error){console.log(error);}
+			});
+		}
+		else
+		{
+			gapi.auth2.getAuthInstance().signIn();
+			gapi.auth2.getAuthInstance().isSignedIn.listen(function()
+					{
+				
+				listUpcomingEvents();
+					
+					map = {};
+			map["user_id"] = "${sessionScope.user_id}";
+			map["event_schedule_id"] = ${event_schedule.event_schedule_id};
+			
+			$.ajax({
+				url: "joinEventScheduleAction",
+				type: "POST",
+				data: JSON.stringify(map),
+				contentType: "application/json; charset=UTF-8",
+				success: function()
+				{
+					location.reload();
+				},
+				error: function(error){console.log(error);}
+			});
 		});
+		}
 	}	
 	</script>
 		
+		<script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
 	</head>
 	<body class="is-preload">
 
@@ -137,7 +220,6 @@
 										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">${leader.name}</span><img src="resources/image/user_image/${leader.image_id}" alt="" /></a>
 									</div>
 								</header>
-								<span class="image featured"><img src="resources/image/event_image/${event.image_id}" alt="" /></span>
 								<p>
 								${event_schedule.content}
 								</p>
