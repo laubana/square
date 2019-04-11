@@ -92,7 +92,7 @@
 					회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입,
 					회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입.</p>
 					<div class="actions special">
-						<input type="button" value="회원 가입" id="mjoin">
+						<a href="joinUserForm" class="button" style="color:white;">회원 가입</a>
 					</div>
 				</div>
 				<a href="#two" class="button style2 down anchored">Next</a>
@@ -108,7 +108,7 @@
 					그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성,
 					그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성.</p>
 					<div class="actions special">
-						<input type="button" value="그룹 생성" id="gcreate">
+						<a href="createGroupForm" class="button" style="color:white;">그룹 생성</a>
 					</div>
 				</div>
 				<a href="#intro" class="button style2 down anchored">Next</a>
