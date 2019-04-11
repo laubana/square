@@ -132,8 +132,9 @@ border: 0;
 				<header>
 					<!-- 그룹 로고 이미지 -->
 					<span class="image avatar"><img id="foo2" src="resources/Main/images/bb.jpg" /></span>
-					<h1 id="logo"><a href="#">빠야 그룹</a></h1>
-					<p style="font-size:15px;">[관심분야][관심분야][관심분야][관심분야]</p>
+					<div id="live-text"><h1 id="logo"><a>Group Name</a></h1></div>
+					<div id="live-text1"><p style="font-size:15px;">[tag1]</p></div>
+					<div id="live-text2"><p style="font-size:15px;">[tag2]</p></div><div id="live-text3"><p style="font-size:15px;">[tag3]</p></div><div id="live-text4"><p style="font-size:15px;">[tag4]</p></div><div id="live-text5"><p style="font-size:15px;">[tag5]</p></div>
 				</header>
 				<nav id="nav">
 					<ul>
@@ -170,7 +171,7 @@ border: 0;
 							<br>
 							<!-- 폼 -->
 							<form action="" method="post">
-							<input type="text" name="group_id" id="group_id" placeholder="그룹 이름">
+							<input type="text" name="group_id" id="input" placeholder="그룹 이름">
 							<br>
 							<h1>그룹 소개</h1>
 							<br>
@@ -209,11 +210,12 @@ border: 0;
     								<label for="radio-6" class="radio-label">음악</label>
   								</div>
 							</div>
-							<h1>그룹 관심 분야</h1>
-							<input type="text" placeholder="그룹 관심 분야 1">
-							<input type="text" placeholder="그룹 관심 분야 2">
-							<input type="text" placeholder="그룹 관심 분야 3">
-							<input type="text" placeholder="그룹 관심 분야 4">
+							<h1>그룹 Tag</h1>
+							<input type="text" placeholder="그룹 tag1" class="input1">
+							<input type="text" placeholder="그룹 tag2" class="input2">
+							<input type="text" placeholder="그룹 tag3" class="input3">
+							<input type="text" placeholder="그룹 tag4" class="input4">
+							<input type="text" placeholder="그룹 tag5" class="input5">
 							<br>
 							<h1>그룹 활동 지역</h1>
 							<input type="text" placeholder="그룹 활동 지역">
@@ -286,6 +288,175 @@ $("#imgInp2").change(function() {
     readURL2(this);
 });
 
+</script>
+
+<script>
+(function(container, liveText, minFontSize, maxFontSize){
+	  $.fn.getTextWidth = function(){
+	  var self = $(this),
+	      children = self.children(),
+	      calculator = $('<span style="display: inline-block;">'),
+	      width;
+
+	  children.wrap(calculator);
+	  width = children.parent().width();
+	  return width;
+	};
+	  
+	$('#input').keyup(function(e) {
+	  let text = $(this).val(),
+	      container = $("#container"),
+	      liveText = $('#live-text'), 
+	      spacesCount,
+	      textWidth,
+	      size;  
+	        
+	  liveText.html('<h1>'+text+'</h1>');
+	  
+	});
+
+	
+	})(30,60);
+</script>
+
+<script type="text/javascript">
+  (function(container, liveText, minFontSize, maxFontSize){
+	  $.fn.getTextWidth = function(){
+	  var self = $(this),
+	      children = self.children(),
+	      calculator = $('<span style="display: inline-block;">'),
+	      width;
+
+	  children.wrap(calculator);
+	  width = children.parent().width();
+	  return width;
+	};
+	  
+	$('.input1').keyup(function(e) {
+	  let text = $(this).val(),
+	      liveText = $('#live-text1'), 
+	      spacesCount,
+	      textWidth,
+	      size;  
+	        
+	  liveText.html('<p style="font-size:15px;">'+text+'</p>');
+	  
+	});
+
+	
+	})(30,60);
+</script>
+
+<script type="text/javascript">
+  (function(container, liveText, minFontSize, maxFontSize){
+	  $.fn.getTextWidth = function(){
+	  var self = $(this),
+	      children = self.children(),
+	      calculator = $('<span style="display: inline-block;">'),
+	      width;
+
+	  children.wrap(calculator);
+	  width = children.parent().width();
+	  return width;
+	};
+	  
+	$('.input2').keyup(function(e) {
+	  let text = $(this).val(),
+	      liveText = $('#live-text2'), 
+	      spacesCount,
+	      textWidth,
+	      size;  
+	        
+	  liveText.html('<p style="font-size:15px;">'+text+'</p>');
+	  
+	});
+
+	
+	})(30,60);
+</script>
+
+<script type="text/javascript">
+  (function(container, liveText, minFontSize, maxFontSize){
+	  $.fn.getTextWidth = function(){
+	  var self = $(this),
+	      children = self.children(),
+	      calculator = $('<span style="display: inline-block;">'),
+	      width;
+
+	  children.wrap(calculator);
+	  width = children.parent().width();
+	  return width;
+	};
+	  
+	$('.input3').keyup(function(e) {
+	  let text = $(this).val(),
+	      liveText = $('#live-text3'), 
+	      spacesCount,
+	      textWidth,
+	      size;  
+	        
+	  liveText.html('<p style="font-size:15px;">'+text+'</p>');
+	  
+	});
+
+	
+	})(30,60);
+</script>
+
+<script type="text/javascript">
+  (function(container, liveText, minFontSize, maxFontSize){
+	  $.fn.getTextWidth = function(){
+	  var self = $(this),
+	      children = self.children(),
+	      calculator = $('<span style="display: inline-block;">'),
+	      width;
+
+	  children.wrap(calculator);
+	  width = children.parent().width();
+	  return width;
+	};
+	  
+	$('.input4').keyup(function(e) {
+	  let text = $(this).val(),
+	      liveText = $('#live-text4'), 
+	      spacesCount,
+	      textWidth,
+	      size;  
+	        
+	  liveText.html('<p style="font-size:15px;">'+text+'</p>');
+	  
+	});
+
+	
+	})(30,60);
+</script>
+
+<script type="text/javascript">
+  (function(container, liveText, minFontSize, maxFontSize){
+	  $.fn.getTextWidth = function(){
+	  var self = $(this),
+	      children = self.children(),
+	      calculator = $('<span style="display: inline-block;">'),
+	      width;
+
+	  children.wrap(calculator);
+	  width = children.parent().width();
+	  return width;
+	};
+	  
+	$('.input5').keyup(function(e) {
+	  let text = $(this).val(),
+	      liveText = $('#live-text5'), 
+	      spacesCount,
+	      textWidth,
+	      size;  
+	        
+	  liveText.html('<p style="font-size:15px;">'+text+'</p>');
+	  
+	});
+
+	
+	})(30,60);
 </script>
 
 
