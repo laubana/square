@@ -172,7 +172,6 @@
 								</p>
 									<div id="map" ></div>
 									어디에 들어가나
-								</div>
 								<div align="right"><footer>
 										<a href="#" class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
 										<a href="#" class="icon fa-comment">128</a>&nbsp;&nbsp;				
