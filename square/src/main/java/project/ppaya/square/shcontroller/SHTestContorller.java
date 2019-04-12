@@ -1,6 +1,9 @@
 ﻿package project.ppaya.square.shcontroller;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
@@ -38,6 +41,69 @@ SH_DAO_Group sh_gdao;
 @Autowired
 SH_DAO_User sh_udao;
 
+
+@RequestMapping(value = "shtest1", method = RequestMethod.GET)
+public String shtest1(Locale locale, Model model) {
+	
+	
+	return "test_sh/shtest1";
+}
+@RequestMapping(value = "shtest2", method = RequestMethod.GET)
+public String shtest2(Locale locale, Model model) {
+	
+	
+	return "test_sh/shtest2";
+}
+@RequestMapping(value = "shtest3", method = RequestMethod.GET)
+public String shtest3(Locale locale, Model model) {
+	
+ArrayList<String> coodlist = new ArrayList<>();
+coodlist.add("'광주광역시 북구'");
+coodlist.add("'서울특별시 종로구'");
+coodlist.add("'seoul'");
+coodlist.add("'광주광역시 북구'");
+coodlist.add("'강원도 춘천'");
+	model.addAttribute("coodlist", coodlist);
+	return "test_sh/shtest3";
+}
+
+
+@RequestMapping(value = "shtest4", method = RequestMethod.GET)
+public String shtest4(Locale locale, Model model) {
+	ArrayList<String> coodlist = new ArrayList<>();
+	coodlist.add("{lat: -37.774785, lng: 145.137978}");
+	coodlist.add("{lat: -37.819616, lng: 144.968119}");
+	coodlist.add("{lat: -37.774785, lng: 145.137978}");
+	coodlist.add("{lat: -39.927193, lng: 175.053218}");
+	coodlist.add("{lat: -41.330162, lng: 174.865694}");
+		model.addAttribute("coodlist", coodlist);
+	
+	return "test_sh/shtest4";
+}
+@RequestMapping(value = "shtest5", method = RequestMethod.GET)
+public String shtest5(Locale locale, Model model) {
+	
+	
+	return "test_sh/shtest5";
+}
+@RequestMapping(value = "shtest6", method = RequestMethod.GET)
+public String shtest6(Locale locale, Model model) {
+	
+	
+	return "test_sh/shtest6";
+}
+@RequestMapping(value = "shtest7", method = RequestMethod.GET)
+public String shtest7(Locale locale, Model model) {
+	
+	
+	return "test_sh/shtest7";
+}
+@RequestMapping(value = "shtest8", method = RequestMethod.GET)
+public String shtest8(Locale locale, Model model) {
+	
+	
+	return "test_sh/shtest8";
+}
 
 
 
