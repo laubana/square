@@ -32,7 +32,7 @@
 		document.getElementById("album").appendChild(x);
 	}
 	</script>
-	
+	/
 	<!-- 구글 맵스 위한 style 태그. 다른 요소 적용할 style이 있다면 style 태그를 별도로 만들어주기 바람 -->
 		<style>
 			#map {
@@ -51,6 +51,36 @@
 		</script>
 
 	<!-- *세현: 구글 맵스 위한 스크립트. 다른 기능을 위한 함수를 추가하려면 태그를 따로 마련해주기 바람. -->
+<script>
+	$(document).ready(function() {
+	
+		var coodlist = [
+			{lat: -41.330162, lng: 174.865694},
+			{lat: -42.734358, lng: 147.439506},
+			{lat: -42.734358, lng: 147.501315},
+			{lat: -42.734358, lng: 147.501315},
+			{lat: -43.999792, lng: 170.463352}
+		];
+		
+		
+		/* 이벤트 연결 코딩 예시 */	
+	$('#button1').on('click',function() {} )
+		
+		
+	var str_output = "";
+	var str_temp;
+	for( i = 0; i < coodlist.length; i = i + 1 ){
+		str_temp = '{' + String( coodlist[i].lat ) + ', '+ String( coodlist[i].lng ) + '}';
+		str_output = str_output + 
+		'<input type = "button" id = "button' + i + '" value = "'+ str_temp + '" onClick = "geocodeLatLng(' + coodlist[i].lat + ', ' + coodlist[0].lng + ')">';
+		
+	}
+	$('#place_output').html(str_output);	
+	
+	});
+</script>
+
+
 	<script>
 		var map;
 		var geocoder;
@@ -66,56 +96,63 @@
 		}
 
 	
-	
+<%-- 	
 		function codeAddress() {
-		<%-- 맵 필수 변수 말고, 내가 쓸려고 만든 변수들 --%>
-		var arealist = []; <%-- 맵스에 좌표 보내주면 지역 이름 넘겨줄 건데, 그 지역 이름들을 모아서 넣어둘 배열--%>
-		var areacnt = []; <%-- 그 지역 이름이 몇 번 나왔나 빈도수를 저장할 배열 (list와 배열 첨자가 같아야 함,주의) --%>
-		var index_list = 0; <%-- 지역 이름 목록의 첨자 변수--%>
-		var index_cnt = 0; <%-- 지역 이름들의 빈도수를 저장한 배열의 첨자 변수 --%>
-		var max_cnt = 0; <%-- 빈도수 중에 가장 자주 나온 지역 이름의 위치를 기억할 첨자 변수--%>
-		var output = document.getElementById('output');  <%-- 출력해줄 div의 객체 접근 변수--%>
-		var output1 = document.getElementById('output1'); <%-- 그냥 연습용 출력 div--%>
-		var flag = false; <%-- 맵스가 반환해준 지역 이름이, 이미 목록에 있는지 여부를 확인하는 flag --%>
-		var str1 = "HelloBigWorld!"; <%-- 맵스에게 좌표를 보내주면 지역 이름을 반환해주는데, 그 지역 이름을 임시로 저장할 string--%>
-		var totalflag = false; <%-- for구문 전체가 다 돌았는지 확인할 flag
+		맵 필수 변수 말고, 내가 쓸려고 만든 변수들
+		var arealist = []; 맵스에 좌표 보내주면 지역 이름 넘겨줄 건데, 그 지역 이름들을 모아서 넣어둘 배열
+		var areacnt = []; 그 지역 이름이 몇 번 나왔나 빈도수를 저장할 배열 (list와 배열 첨자가 같아야 함,주의)
+		var index_list = 0; 지역 이름 목록의 첨자 변수
+		var index_cnt = 0; 지역 이름들의 빈도수를 저장한 배열의 첨자 변수
+		var max_cnt = 0; 빈도수 중에 가장 자주 나온 지역 이름의 위치를 기억할 첨자 변수
+		var output = document.getElementById('output');  출력해줄 div의 객체 접근 변수
+		var output1 = document.getElementById('output1'); 그냥 연습용 출력 div
+		var flag = false; 맵스가 반환해준 지역 이름이, 이미 목록에 있는지 여부를 확인하는 flag
+		var str1 = "HelloBigWorld!"; 맵스에게 좌표를 보내주면 지역 이름을 반환해주는데, 그 지역 이름을 임시로 저장할 string
+		var totalflag = false; for구문 전체가 다 돌았는지 확인할 flag
 					(이거는 javascript가 쓰레드 방식으로 작동해서, for구문이 다 끝날 때까지 기다렸다 실행해야 함.
-					그래서 flag 세워놓고 setinterval로 계속 반복해서 확인 함. flag 세워질 때까지--%>
-	    var address = document.getElementById('address').value; <%-- 사용자가 검색하기 위해 입력해 놓은 검색어를 받아오기 위한 객체 접근 변수--%>
-	    var smallflag = false; <%-- 맵스가 반환해주는 요소 중에 administrative_area_level_2 요소가 있는지 여부를 확인할 flag--%>
+					그래서 flag 세워놓고 setinterval로 계속 반복해서 확인 함. flag 세워질 때까지
+	    var address = document.getElementById('address').value; 사용자가 검색하기 위해 입력해 놓은 검색어를 받아오기 위한 객체 접근 변수
+	    var smallflag = false; 맵스가 반환해주는 요소 중에 administrative_area_level_2 요소가 있는지 여부를 확인할 flag
 	    
-	    <%-- 좌표 목록. 무료 키는 5개 밖에 안됨--%>
+	    좌표 목록. 무료 키는 5개 밖에 안됨
 		var coodlist = [
-			{lat: -41.330162, lng: 174.865694},
-			{lat: -42.734358, lng: 147.439506},
-			{lat: -42.734358, lng: 147.501315},
-			{lat: -42.734358, lng: 147.501315},
-			{lat: -43.999792, lng: 170.463352}
-	
-		
+			{lat: -37.774785, lng: 145.137978},
+			{lat: -37.819616, lng: 144.968119},
+			{lat: -38.330766, lng: 144.695692},
+			{lat: -39.927193, lng: 175.053218},
+			{lat: -41.330162, lng: 174.865694}
 		];
 	    
 		/* 변수들 초기화 */
 		arealist[0] = str1;
 		areacnt[0] = 0;
+		var latlng = {lat: -37.774785, lng: 145.137978};
+
+		
 		
 		/* 좌표들의 목록들을 하나씩 꺼내오면서 아래의 함수 실행 */
 		for( i = 0; i < coodlist.length; i = i + 1) {
-			
+			latlng.lat = coodlist[i].lat;
+			latlng.lng = coodlist[i].lng;
+			console.log('forcheck'+ i + ': ' + console.log('check'+ i + JSON.stringify(latlng).replace(/&quot;/gi, '')) );
+
 			/* 구글맵 지원 기능. 좌표를 보내면 행정 구역 반환 */
-			geocoder.geocode({'location': coodlist[i]}
+			geocoder.geocode({'location': latlng }
 		   		, function(results, status) {
 		   			
 					if (status == 'OK') {
 							flag = false;
 						smallflag = false;
 						for( m = 0; m < results[0].address_components.length; m = m +1 ){
+						console.log('1-'+ i + ': ' + console.log('check'+ i + JSON.stringify(latlng).replace(/&quot;/gi, '')) );
 							
 							/* 이 부분은 받아올 행정 구역의 규모를 설정함. 이 부분은 우리가 정하는 게 아니라,
 							구글에서 자체적으로 정해 놓은 변수를 써야 하기 때문에, 구글 맵스 api 페이지나 
 							검색 결과인 results의 sample을 보고 결정하길 바람. */
+									console.log('2-'+ i + ': '+ results[0].address_components[m].types[0]);								
 							if( results[0].address_components[m].types[0] == "administrative_area_level_2" )
-								{ 	str1 = String( results[0].address_components[m].long_name );
+								{ 	
+									str1 = String( results[0].address_components[m].long_name );
 									/* 검색 결과로 반환해 준 행정구역이, 이 전 검색 결과들 중에 이미 있는지 확인 */
 									smallflag = true;
 									break; }
@@ -126,6 +163,8 @@
 							if(smallflag){
 								for( j = 0; j <= arealist.length; j = j + 1 ){
 									if( str1 == arealist[j] ) {
+										
+										console.log('3-'+ i + ': ' + arealist[j]);
 										index_list = j;
 										areacnt[j] = areacnt[j] + 1;
 										flag = true;
@@ -133,6 +172,7 @@
 									}
 								}
 								if(!flag){
+									console.log('4-'+ i + ': '+str1);
 									arealist.push(str1);
 									areacnt.push(1);
 								}
@@ -146,25 +186,116 @@
 			따라서 앞의 처리들이 완료 됐는지 확인해 줄 flag */
 			totalflag = true;
 		}
+--%>
+
+function codeAddress() {
+	var arealist = []; 
+	var areacnt = []; 
+	var index_list = 0; 
+	var index_cnt = 0; 
+	var max_cnt = 0; 
+	var output = document.getElementById('output');  
+	var output1 = document.getElementById('output1');
+	var flag = false; 
+	var str1 = "HelloBigWorld!";
+	var totalflag = false;
+    var address = document.getElementById('address').value; 
+    var smallflag = false; 
+    
+	var coodlist = [
+		{lat: -37.774785, lng: 145.137978},
+		{lat: -37.819616, lng: 144.968119},
+		{lat: -38.330766, lng: 144.695692},
+		{lat: -39.927193, lng: 175.053218},
+		{lat: -41.330162, lng: 174.865694}
+	];
+    
+	/* 변수들 초기화 */
+	arealist[0] = str1;
+	areacnt[0] = 0;
+	var latlng = {lat: -37.774785, lng: 145.137978};
+	
 	
 		/* 이 부분은 유환이가 짜 준 코드. 잘 모르겠으면 유환이한테 다시 한 번 물어볼 것. */
+		var temp_cnt;
+		var temp_list;
 		var interval = setInterval(function()
 				{
 					if(totalflag)
 					{
-						for(k = 0; k < areacnt.length; k = k + 1){
-							if( max_cnt <= areacnt[k] ){
+						for(k = 0; k < areacnt.length-1; k = k + 1){
+							/* if( max_cnt <= areacnt[k] ){
 								max_cnt = areacnt[k];
 								index_cnt = k;
+							} */
+							/* 선택정렬 알고리즘 */
+							if(areacnt[k] > areacnt[k+1]){
+								temp_cnt = areacnt[k];
+								areacnt[k] = areacnt[k+1];
+								areacnt[k+1] = temp_cnt;
+								
+								temp_list = arealist[k];
+								arealist[k] = arealist[k+1];
+								arealist[k+1] = temp_list; 
 							}
+								console.log('5:' + arealist[k]);
 						}
 						/* 그래서 최종적으로 나온 행정구역들 중, 가장 자주 나온(cnt가 높은) 행정구역을 띄워 줌. */
 						output.innerHTML = arealist[index_cnt];
 						clearInterval(interval);
 					}
 				}, 100);
-	 }
  
+		var intervalcnt = 0;
+		var interval = setInterval(function(){
+			console.log('forcheck'+ intervalcnt + ': ' + console.log('check'+ intervalcnt + JSON.stringify(latlng).replace(/&quot;/gi, '')) );
+			
+						
+			intervalcnt = intervalcnt + 1;
+			if (intervalcnt > 4){
+				totalflag = true;
+				clearInterval(interval2);
+
+			}
+			
+		}, 100);
+
+		}	
+		
+		
+		
+		
+		var temp_cnt;
+		var temp_list;
+		var interval = setInterval(function()
+				{
+					if(totalflag)
+					{
+						for(k = 0; k < areacnt.length-1; k = k + 1){
+							/* if( max_cnt <= areacnt[k] ){
+								max_cnt = areacnt[k];
+								index_cnt = k;
+							} */
+							/* 선택정렬 알고리즘 */
+							if(areacnt[k] > areacnt[k+1]){
+								temp_cnt = areacnt[k];
+								areacnt[k] = areacnt[k+1];
+								areacnt[k+1] = temp_cnt;
+								
+								temp_list = arealist[k];
+								arealist[k] = arealist[k+1];
+								arealist[k+1] = temp_list; 
+							}
+								console.log('5:' + arealist[k]);
+						}
+						/* 그래서 최종적으로 나온 행정구역들 중, 가장 자주 나온(cnt가 높은) 행정구역을 띄워 줌. */
+						output.innerHTML = arealist[index_cnt];
+						clearInterval(interval);
+					}
+				}, 100);
+
+
+		
 </script>
 	
 	
@@ -251,11 +382,17 @@
 							<section id="section_map">
 								<article class="post">
 								<p>여기는 p태그
-</p>
+								</p>
 									<div id="map" >
 									</div>
-									어디에 들어가나
-								<div align="right">
+									<div align="right">
+										<div id = "place_output"></div>
+									</div>
+									<input type = "text" id = "address" value = "seoul">
+									<input type = "button" id = "button_mapsearch" value = "검색" onClick = "codeAddress()">
+									<div align="right">
+									<div id = "output"></div>
+									<div id = "output1"></div>
 									<footer>
 										오른쪽 아래에 버튼
 									</footer>
