@@ -75,9 +75,10 @@
 							<ul class="features">
 							<c:forEach var="group" items="${group_list}">
 								<li>
+										<a href="viewGroupForm?group_id=${group.group_id}">
 										<span><img src="resources/image/group_logo/${group.group_logo}" class="image fit tumb" alt="" /></span>
 										<h3>${group.name}</h3>
-										<a href="viewGroupForm?group_id=${group.group_id}" class="button">이동</a>
+										</a>
 									</li>
 							</c:forEach>
 								</ul>
