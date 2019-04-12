@@ -8,6 +8,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupSearch/assets/css/main.css" />
+		<link rel="stylesheet" href="resources/TextA/css/style.css">
 		
 		<!-- 추가 -->
 		<link rel='stylesheet' href='http://www.davilious.com/codepen/font-awesome/css/font-awesome.css'>
@@ -114,7 +115,7 @@ input::placeholder {
 .filter-btn {
   position: relative;
   display: inline-block;
-  color: #4b6a77;
+  color: black;
   text-align: center;
   line-height: 25px;
   text-decoration: none;
@@ -234,7 +235,7 @@ input::placeholder {
 
 		<!-- Work -->
 			<section id="work" class="main style3 primary" style="display: none;">
-				
+			
 			</section>
 
 
@@ -271,10 +272,10 @@ input::placeholder {
 			<script src="resources/GroupSearch/assets/js/breakpoints.min.js"></script>
 			<script src="resources/GroupSearch/assets/js/util.js"></script>
 			<script src="resources/GroupSearch/assets/js/main.js"></script>
-			
+<%-- ${group_category.filename} --%>			
 <script>
-$("#intro").css("background", "url('resources/GroupSearch/assets/css/images/overlay.png'), url('resources/Main/images/thumbs/${group_category.filename}')");
-$("#intro").css("background-size","256px 256px, cover");
+$("#intro").css("background", "url('resources/GroupSearch/assets/css/images/overlay.png'), url('resources/Main/images/thumbs/${group_category.group_category_id}.jpg')");
+$("#intro").css("background-size","100% 100%");
 </script>
 <script>
 var group_category_id = ${group_category.group_category_id};

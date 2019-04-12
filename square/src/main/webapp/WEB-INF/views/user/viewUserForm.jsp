@@ -20,16 +20,11 @@
 			<header id="header">
 				<div class="inner">
 					<div align="left"><h1 style="font-size:50px;"><a href="main">2조</a></h1></div>
-					<a href="#" class="image avatar"><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
+					<a class="image avatar"><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
 					<h1><strong>${user.name}</strong>님의 마이페이지<br /></h1>
 					<nav id="nav">
-					<ul>
-						<li><a href="#one" class="active">정보</a></li>
-						<li><a href="#two" class="active">관심 분야</a></li>
-						<li><a href="#three" class="active">그룹 활동</a></li>
-						<li><a href="#four" class="active">앨범</a></li>
-					</ul>
-				</nav>
+					
+					</nav>
 				</div>
 			</header>
 

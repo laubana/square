@@ -8,6 +8,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/Main/assets/css/main.css" />
+		<link rel="stylesheet" href="resources/TextA/css/style.css">
 		<script>
 			function logoutUserAction()
 			{
@@ -88,9 +89,7 @@
 					<header>
 						<h2>회원 가입</h2>
 					</header>
-					<p>회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입.
-					회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입,
-					회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입회원 가입.</p>
+					<p>2조에 가입하여 사람들과 좋아하는 일을 함께하고 새로운 경험을 찾아보세요.</p>
 					<div class="actions special">
 						<a href="joinUserForm" class="button" style="color:white;">회원 가입</a>
 					</div>
@@ -104,9 +103,7 @@
 					<header>
 						<h2>그룹 생성</h2>
 					</header>
-					<p>그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성.
-					그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성,
-					그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성그룹 생성.</p>
+					<p>자신의  관심사를 토대로 이벤트를 운영하는 그룹을 만들세요. 그룹을 만들고 열정과 ??을 가진 사람들을 모아 보세요.</p>
 					<div class="actions special">
 						<a href="createGroupForm" class="button" style="color:white;">그룹 생성</a>
 					</div>
