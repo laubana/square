@@ -57,35 +57,6 @@
       }
     	 
       }
-      
-      google.charts.load("current", {packages:['corechart']});
-      google.charts.setOnLoadCallback(drawChart1);
-      function drawChart1() {
-    	  var list = JSON.parse('${test_list3}');
-    	  var data_test = [["Element", "Density", {role: "style"}]];
-    	  for(var i = 0; i < list.length; i++)
-    		  {
-    		  	data_test.push(["Copper", list[i]["typeof"], "#b87333"]);
-    		  }
-        var data = google.visualization.arrayToDataTable(data_test);
-
-        var view = new google.visualization.DataView(data);
-        view.setColumns([0, 1,
-                         { calc: "stringify",
-                           sourceColumn: 1,
-                           type: "string",
-                           role: "annotation" },
-                         2]);
-
-        var options = {
-          width: 10000,
-          height: 400,
-          bar: {groupWidth: "95%"},
-          legend: { position: "none" },
-        };
-        var chart = new google.visualization.ColumnChart(document.getElementById("timeline"));
-        chart.draw(view, options);
-    }
     </script>
     <script>
     	console.log(JSON.parse('${json_event_schedule_user_schedule_list_list}'));
@@ -415,10 +386,9 @@
 									<c:forEach var="event_schedule_user_schedule_list" items="${event_schedule_user_schedule_list_list}">
 									<div id="timeline_image${event_schedule_user_schedule_list.user.user_id}">
 										</div>
-										<div id="timeline${event_schedule_user_schedule_list.user.user_id}" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 80%">
+										<div id="timeline${event_schedule_user_schedule_list.user.user_id}" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 100%">
 										</div>
 									</c:forEach>
-									<div id="timeline" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 80%">
 									</div>
 								</div>
 							</section>

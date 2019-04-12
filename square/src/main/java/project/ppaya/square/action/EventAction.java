@@ -36,6 +36,7 @@ import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
 import project.ppaya.square.yhdao.YHEventScheduleImageFaceDAO;
 import project.ppaya.square.yhdao.YHEventScheduleVideoDAO;
 import project.ppaya.square.yhdao.YHEventScheduleVideoFaceDAO;
+import project.ppaya.square.yhdao.YHEventUnionDAO;
 import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
 import project.ppaya.square.yhdao.YHGroupDAO;
 import project.ppaya.square.yhdao.YHUserDAO;
@@ -79,6 +80,8 @@ public class EventAction {
 	YHImageAlbumDAO yh_image_albumDAO;
 	@Autowired
 	YHVideoAlbumDAO yh_video_albumDAO;
+	@Autowired
+	YHEventUnionDAO yh_event_unionDAO;
 	
 	@Autowired
 	SH_DAO_User sh_udao;
@@ -102,5 +105,18 @@ public class EventAction {
 		int event_id = (int)map.get("event_id");	
 		
 		yh_event_attendanceDAO.deleteEventAttendanceByEventIdUserId(user_id, event_id);
+	}
+	@ResponseBody
+	@RequestMapping(value = "unifyEventAction", method = RequestMethod.POST)
+	public void unifyEventAction(Model request, @RequestBody HashMap<String, Object> map)
+	{
+		int event_id = (int)map.get("event_id");
+		ArrayList<Integer> group_id_list = (ArrayList<Integer>)map.get("group_id_list");
+		
+		yh_event_unionDAO.deleteEventUnionByNotGroupIdEventId(event_id, group_id_list);
+		for(int i = 0; i < group_id_list.size(); i++)
+		{
+			yh_event_unionDAO.insertEventUnion(event_id, group_id_list.get(i));
+		}
 	}
 }

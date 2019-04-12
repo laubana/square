@@ -16,6 +16,23 @@ public class YHGroupDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<Group> selectGroupByGroupIdListNotGroupId(ArrayList<Integer> group_id_list, int group_id)
+	{
+		ArrayList<Group> group_list = null;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("group_id_list", group_id_list);
+		map.put("group_id", group_id);
+		
+		YHGroupMapper mapper = sqlSession.getMapper(YHGroupMapper.class);
+		
+		try
+		{
+			group_list = mapper.selectGroupByGroupIdListNotGroupId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_list;
+	}
 	public ArrayList<Group> selectGroupByGroupCategoryIdKeyword(int group_category_id, String keyword)
 	{
 		ArrayList<Group> group_list = null;

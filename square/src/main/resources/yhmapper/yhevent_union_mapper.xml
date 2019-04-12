@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="project.ppaya.square.yhmapper.YHEventUnionMapper">
+<insert id="insertEventUnion" parameterType="map">
+INSERT INTO TABLE_EU
+(
+	EVENT_ID,
+	GROUP_ID
+)
+VALUES
+(
+	#{event_id},
+	#{group_id}
+)
+</insert>
+<select id="getEventIdByGroupId" parameterType="int" resultType="int">
+SELECT
+	EVENT_ID
+FROM
+	TABLE_EU
+WHERE
+	GROUP_ID = #{group_id}
+</select>
+<select id="getGroupIdByEventId" parameterType="int" resultType="int">
+SELECT
+	GROUP_ID
+FROM
+	TABLE_EU
+WHERE
+	EVENT_ID = #{event_id}
+</select>
+<delete id="deleteEventUnionByNotGroupIdEventId" parameterType="map">
+DELETE FROM TABLE_EU
+WHERE
+	<foreach item="group_id" collection="group_id_list" separator="AND" close="AND">
+		GROUP_ID != #{group_id}
+	</foreach>
+	EVENT_ID = #{event_id}
+</delete>
+</mapper>

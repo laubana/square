@@ -12,6 +12,17 @@ FROM
 WHERE
 	EVENT_ID = #{event_id}
 </select>
+<select id="selectEventByEventIdList" parameterType="list" resultType="Event">
+SELECT
+	*
+FROM
+	TABLE_E
+WHERE
+	1 = 0
+	<foreach item="event_id" collection="list" open="OR" separator="OR">
+		EVENT_ID = #{event_id}
+	</foreach>
+</select>
 <select id="selectEventByGroupId" parameterType="int" resultType="Event">
 SELECT
 	*

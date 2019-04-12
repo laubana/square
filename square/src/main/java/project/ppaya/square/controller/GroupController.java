@@ -27,6 +27,7 @@ import project.ppaya.square.vo.User;
 import project.ppaya.square.yhdao.YHEventDAO;
 import project.ppaya.square.yhdao.YHEventScheduleDAO;
 import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
+import project.ppaya.square.yhdao.YHEventUnionDAO;
 import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
 import project.ppaya.square.yhdao.YHGroupCategoryDAO;
 import project.ppaya.square.yhdao.YHGroupCommentDAO;
@@ -58,6 +59,8 @@ public class GroupController
 	YHGroupCommentDAO yh_group_commentDAO;
 	@Autowired
 	YHGroupHashtagDAO yh_group_hashtagDAO;
+	@Autowired
+	YHEventUnionDAO yh_event_unionDAO;
 	
 	@Autowired
 	SH_DAO_Group sh_gdao;
@@ -147,6 +150,11 @@ public class GroupController
 		}
 		//GroupComment List 전송
 		request.addAttribute("group_comment_list", group_comment_list);
+		
+		ArrayList<Integer> event_union_event_id_list = yh_event_unionDAO.getEventIdByGroupId(group_id);
+		ArrayList<Event> event_union_event_list = yh_eventDAO.selectEventByEventIdList(event_union_event_id_list);
+		//EventUnion List 전송
+		request.addAttribute("event_union_event_list", event_union_event_list);
 		
 		return "group/viewGroupForm";
 	}

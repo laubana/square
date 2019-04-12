@@ -220,10 +220,25 @@
 										</article>
 										</c:forEach>
 											</div>
-											<div align="right"><a href="javascript:doDisplay1();" id="link1" onclick="javascript:link1_onclick();">+숨기기</a></div>
 										<a href="listEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">이벤트 페이지 이동</a>
 									</div>
-								</div>
+							</section>
+							<section id="six">
+								<div class="container">
+									<h3>연합 이벤트</h3>
+									<div class="features">
+									<c:forEach var="event_union_event" items="${event_union_event_list}">
+									<article>
+											<a href="viewEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event_union_event.event_id}" class="image"><img src="resources/image/event_image/${event_union_event.image_id}" alt="" /></a>
+											<div class="inner">
+												<h4>${event_union_event.name}</h4>
+												<p>${event_union_event.content}</p>
+											</div>
+										</article>
+										</c:forEach>
+											</div>
+										<a href="listEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">연합 이벤트 페이지 이동</a>
+									</div>
 							</section>
 					</div>
 

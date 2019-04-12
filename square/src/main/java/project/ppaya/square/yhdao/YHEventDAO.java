@@ -29,6 +29,20 @@ public class YHEventDAO
 		
 		return event;
 	}
+	public ArrayList<Event> selectEventByEventIdList(ArrayList<Integer> event_id_list)
+	{
+		ArrayList<Event> event_list = null;
+		
+		YHEventMapper mapper = sqlSession.getMapper(YHEventMapper.class);
+		
+		try
+		{
+			event_list = mapper.selectEventByEventIdList(event_id_list);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_list;
+	}
 	public ArrayList<Event> selectEventByGroupId(int group_id)
 	{
 		ArrayList<Event> event_list = null;

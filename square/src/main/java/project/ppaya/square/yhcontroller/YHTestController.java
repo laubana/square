@@ -62,11 +62,7 @@ public class YHTestController
 	@RequestMapping(value = "/yhtest1", method = RequestMethod.GET)
 	public void yhtest1()
 	{
-		try
-		{
-			CalendarQuickstart.main();
-		}
-		catch(Exception error){error.printStackTrace();}
+		System.out.println(YHMSFaceUtil.detectFace(Reference.event_schedule_image_path, "test.jpg"));
 	}
 	@RequestMapping(value = "yhtest2", method = RequestMethod.GET)
 	public void yhtest2()

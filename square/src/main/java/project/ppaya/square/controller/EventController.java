@@ -28,6 +28,7 @@ import project.ppaya.square.yhdao.YHEventCommentDAO;
 import project.ppaya.square.yhdao.YHEventDAO;
 import project.ppaya.square.yhdao.YHEventScheduleDAO;
 import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
+import project.ppaya.square.yhdao.YHEventUnionDAO;
 import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
 import project.ppaya.square.yhdao.YHGroupCategoryDAO;
 import project.ppaya.square.yhdao.YHGroupCommentDAO;
@@ -62,6 +63,8 @@ public class EventController
 	YHGroupHashtagDAO yh_group_hashtagDAO;
 	@Autowired
 	YHGroupAttendanceDAO yh_group_attendanceDAO;
+	@Autowired
+	YHEventUnionDAO yh_event_unionDAO;
 
 	@RequestMapping(value = "createEventForm", method = RequestMethod.GET)
 	public String createEventForm
@@ -190,6 +193,11 @@ public class EventController
 		//event_place 임시 전송
 		String cood = "{lat: 37.566535, lng: 126.97796919999996}";
 		request.addAttribute("event_place", cood);
+		
+		ArrayList<Integer> group_union_id_list = yh_event_unionDAO.getGroupIdByEventId(event_id);
+		ArrayList<Group> group_union_list = yh_groupDAO.selectGroupByGroupIdListNotGroupId(group_union_id_list, group_id);
+		//GroupUnion List 전송
+		request.addAttribute("group_union_list", group_union_list);
 		
 		return "event/viewEventForm";
 	}

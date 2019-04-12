@@ -84,11 +84,28 @@
 					error: function(error){console.log(error);}
 				});
 			}
+			function unifyEventAction()
+			{
+				map = {};
+				map["event_id"] = ${event.event_id};
+				map["group_id_list"] = [1, 2];
+				
+				$.ajax({
+					url: "unifyEventAction",
+					type: "POST",
+					data: JSON.stringify(map),
+					contentType: "application/json; charset=UTF-8",
+					success: function()
+					{
+						location.reload();
+					},
+					error: function(error){console.log(error);}
+				});
+			}
 		</script>
 		
 	</head>
 	<body class="is-preload">
-
 		<!-- Header 메인 바 -->
 			<header id="header1">
 				<h1><a href="main">2조</a></h1>
@@ -261,6 +278,25 @@
 											</div>
 											
 										<a href="listEventScheduleForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">이벤트 스케줄 페이지 이동</a>
+									</div>
+							</section>
+							<section id="six">
+								<div class="container">
+									<h3>참여 그룹</h3>
+									<div class="features">
+									<c:forEach var="group_union" items="${group_union_list}">
+						<div class="comment-wrap">
+							<div>
+							<a href="viewGroupForm?group_categoryid=${group_union.group_category_id}&group_id=${group_union.group_id}" class="image avatar thumb"><img src="resources/image/group_logo/${group_union.group_logo}" alt="" style="width: 100px; height:auto;"></a>
+							</div>
+						</div>
+						</c:forEach>
+						<c:if test="${sessionScope.user_id == leader.user_id}">
+<input type="button" onclick="javascript:unifyEventAction()" value="연합 그룹 추가">
+</c:if>
+											</div>
+											
+										
 									</div>
 							</section>
 							
