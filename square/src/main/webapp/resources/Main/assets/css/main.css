@@ -662,7 +662,7 @@ input, select, option, textarea {
 		-webkit-transition: background-color 0.2s ease-in-out;
 		-ms-transition: background-color 0.2s ease-in-out;
 		transition: background-color 0.2s ease-in-out;
-		background-color: #98c593;
+		background-color: #778899;
 		border: 0;
 		border-radius: 3.5em;
 		color: #ffffff;
@@ -1023,7 +1023,7 @@ input, select, option, textarea {
 				border-radius: 0.35em;
 				border: solid 3px rgba(255, 255, 255, 0.5);
 				color: #fff;
-				content: 'Pet';
+				content: 'Animal';
 				display: inline-block;
 				font-size: 0.8em;
 				font-weight: 400;
@@ -2453,7 +2453,7 @@ input, select, option, textarea {
 
 	#intro {
 		background: url("images/overlay.png"), url("../../images/intro.jpg");
-		background-size: 256px 256px, cover;
+		background-size: 100% 100%;
 		background-attachment: fixed, fixed;
 		background-position: top left, bottom center;
 		background-repeat: repeat, no-repeat;
@@ -2463,7 +2463,7 @@ input, select, option, textarea {
 
 	#zero {
 		background: url("images/overlay.png"), url("../../images/zero.jpg");
-		background-size: 256px 256px, cover;
+		background-size: 100% 100%;
 		background-attachment: fixed, fixed;
 		background-position: top left, center center;
 	}
@@ -2472,7 +2472,7 @@ input, select, option, textarea {
 
 	#one {
 		background: url("images/overlay.png"), url("../../images/one.jpg");
-		background-size: 256px 256px, cover;
+		background-size: 100% 100%;
 		background-attachment: fixed, fixed;
 		background-position: top left, center center;
 	}
@@ -2481,7 +2481,7 @@ input, select, option, textarea {
 
 	#two {
 		background: url("images/overlay.png"), url("../../images/two.jpg");
-		background-size: 256px 256px, cover;
+		background-size: 100% 100%;
 		background-attachment: fixed, fixed;
 		background-position: top left, center center;
 	}
