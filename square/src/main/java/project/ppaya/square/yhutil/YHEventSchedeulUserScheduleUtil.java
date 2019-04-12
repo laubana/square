@@ -134,11 +134,6 @@ public class YHEventSchedeulUserScheduleUtil
 		
 		for(int i = 0; i < temp_event_schedule_user_schedule_list.size(); i++)
 		{
-			System.out.println(temp_event_schedule_user_schedule_list.get(i));
-		}
-		
-		for(int i = 0; i < temp_event_schedule_user_schedule_list.size(); i++)
-		{
 			if(start_date == -1 || end_date == -1)
 			{
 				start_date = temp_event_schedule_user_schedule_list.get(i).getStart_date();

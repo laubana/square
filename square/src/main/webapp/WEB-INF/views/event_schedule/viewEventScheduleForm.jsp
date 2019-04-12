@@ -55,8 +55,101 @@
         document.getElementById('timeline_image' + json_event_schedule_user_schedule_list_list[i].user.user_id).innerHTML = "<a href='viewUserForm?user_id=" + json_event_schedule_user_schedule_list_list[i].user.user_id + "' class='image avatar thumb'><img src='resources/image/user_image/" + json_event_schedule_user_schedule_list_list[i].user.image_id + "' alt='' style='width: 100px; height:auto;'></a>";
     		 }
       }
-    	 
       }
+      /* google.charts.setOnLoadCallback(drawChart1);
+      function drawChart1()
+      {
+		var list = JSON.parse('${test_list4}');
+    	  
+        var container = document.getElementById('timeline');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+        
+        dataTable.addColumn({ type: 'string', id: 'President' });
+		dataTable.addColumn({ type: 'string', id: 'Name' });
+		dataTable.addColumn({ type: 'string', id: 'style', role: 'style' });
+        dataTable.addColumn({ type: 'date', id: 'Start' });
+        dataTable.addColumn({ type: 'date', id: 'End' });
+        for(var i = 0; i < list.length; i++)
+        {
+        	if(1 == 1)
+        		{
+		        dataTable.addRows([
+		          [ '', String(list[i]["typeof"]), 'Tomato', new Date(list[i].start_date), new Date(list[i].end_date) ]]);
+        }
+        	
+        	var option = {
+					width : (list[list.length - 1].end_date - list[0].start_date) / 50000,
+					height: 250,
+				};
+				chart.draw(dataTable, option);
+        
+        
+    		 }
+      } */
+    	 
+      google.charts.load('current', {'packages':['line']});
+      google.charts.setOnLoadCallback(drawChart1);
+
+    function drawChart1() {
+    	var list = JSON.parse('${test_list4}');
+    	var map = [];
+    	var min = 0;
+    	var max = 0;
+    	for(var i = 0; i < list.length; i++)
+    		{
+    		if(min > list[i]["typeof"])
+    			{
+					min = list[i]["typeof"];    			
+    			}
+    		if(max < list[i]["typeof"])
+			{
+    			max = list[i]["typeof"];    			
+			}
+    	map.push(
+    	[ '', list[i]["typeof"] ]		
+    	);
+    		}
+    	
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Number');
+      data.addColumn('number', 'Number');
+
+      data.addRows(map);
+
+		var options = {
+				tooltip: { isHtml: true },
+				focusTarget: 'category',
+				legend: { position: 'none' },
+				axisTitlesPosition: 'none',
+			height: max * 100,
+				vAxis:{
+        	maxValue: 50,
+        	minValue: 0,
+        	viewWindow:
+        		{
+        		 max:max * 5,
+        		 min:-(max * 5)
+        		},
+
+            gridlines:{
+                	count: 0
+                },
+                textPosition: 'in'
+        },
+        hAxis:{
+        	showTextEvery: 0,
+        	title:'', 
+        	gridlines:{
+             	count: 0
+        	 },
+        	 textPosition: 'in'
+        }
+      };
+      var chart = new google.charts.Line(document.getElementById('timeline'));
+
+      chart.draw(data, google.charts.Line.convertOptions(options));
+    }
     </script>
     <script>
     	console.log(JSON.parse('${json_event_schedule_user_schedule_list_list}'));
@@ -389,6 +482,7 @@
 										<div id="timeline${event_schedule_user_schedule_list.user.user_id}" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 100%">
 										</div>
 									</c:forEach>
+									<div id="timeline" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 100%">
 									</div>
 								</div>
 							</section>

@@ -230,7 +230,38 @@ public class EventScheduleController
 			
 			test_list3.add(new EventScheduleUserSchedule("", 0, i, i + 60000, count));
 		}
-		request.addAttribute("test_list3", new JSONArray(test_list3));
+		
+		ArrayList<EventScheduleUserSchedule> test_list4 = new ArrayList<>();
+		long start_date = -1;
+		long end_date = -1;
+		int count = -1;
+		for(int i = 0; i < test_list3.size();)
+		{
+			if(start_date == -1 || end_date == -1)
+			{
+				start_date = test_list3.get(i).getStart_date();
+				end_date = test_list3.get(i).getEnd_date();
+				count = test_list3.get(i).getTypeof();
+			}
+			
+			if(count != test_list3.get(i).getTypeof())
+			{
+				test_list4.add(new EventScheduleUserSchedule("", 0, start_date, end_date, count));
+				start_date = -1;
+				end_date = -1;
+				count = -1;
+			}
+			else
+			{
+				end_date = test_list3.get(i).getEnd_date();
+				i++;
+			}
+		}
+		test_list4.add(new EventScheduleUserSchedule("", 0, start_date, end_date, count));
+		
+		logger.debug("{}", test_list4.toString());
+		
+		request.addAttribute("test_list4", new JSONArray(test_list4));
 		
 		return "event_schedule/viewEventScheduleForm";
 	}
