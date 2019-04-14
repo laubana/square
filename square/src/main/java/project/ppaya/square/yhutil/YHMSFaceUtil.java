@@ -12,12 +12,13 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import project.ppaya.square.vo.Reference;
+import project.ppaya.square.vo.*;
 
 public class YHMSFaceUtil
 {	
@@ -149,8 +150,8 @@ public class YHMSFaceUtil
         }
 	}
 	public static String detectFace(String path, String file)
-	{
-		HttpClient httpClient = HttpClients.createDefault();
+	{			
+		HttpClient httpClient= HttpClientBuilder.create().build();  
 		
         try
         {			
@@ -166,8 +167,10 @@ public class YHMSFaceUtil
             httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 
             HttpResponse httpResponse = httpClient.execute(httpPost);
+
+            String result = EntityUtils.toString(httpResponse.getEntity()).trim(); 
             
-            return EntityUtils.toString(httpResponse.getEntity()).trim();
+            return result;
         }
         catch(Exception error)
         {

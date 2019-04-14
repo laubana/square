@@ -84,11 +84,66 @@
 					error: function(error){console.log(error);}
 				});
 			}
+			
+			/* <div class="comment-wrap">
+			<div>
+			<a href="viewGroupForm?group_categoryid=${group_union.group_category_id}&group_id=${group_union.group_id}" class="image avatar thumb"><img src="resources/image/group_logo/${group_union.group_logo}" alt="" style="width: 100px; height:auto;"></a>
+			</div>
+		</div> */
+			function searchGroupAction()
+			{
+				map = {};
+				map["group_id"] = ${group.group_id};
+				map["keyword"] = $("#keyword").val();
+				
+				$.ajax({
+					url: "searchGroupAction",
+					type: "POST",
+					data: JSON.stringify(map),
+					dataType: "JSON",
+					contentType: "application/json; charset=UTF-8",
+					success: function(result)
+					{
+						var buff = "";
+						
+						for(var i = 0; i < result.length; i++)
+						{
+							buff += "<div class='comment-wrap'>";
+							buff += "<div style='display: inline;'>";
+							buff += "<a href='viewGroupForm?group_category_id=" + result[i].group_category_id +"&group_id=" + result[i].group_id + "' class='image avatar thumb'><img src='resources/image/group_logo/"+ result[i].group_logo + "' alt='' style='width: 100px; height:auto;'></a>";
+							buff += "</div>";
+							buff += "<input type='button' onclick='javascript:unifyEventAction(" + result[i].group_id + ")' value='연합하기'>";
+							buff += "</div>";
+						}
+						
+						document.getElementById("group_list").innerHTML = buff;
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+			function unifyEventAction(group_id)
+			{
+				map = {};
+				map["event_id"] = ${event.event_id};
+				map["current_group_id"] = ${group.group_id};
+				map["group_id"] = group_id;
+				
+				$.ajax({
+					url: "unifyEventAction",
+					type: "POST",
+					data: JSON.stringify(map),
+					contentType: "application/json; charset=UTF-8",
+					success: function()
+					{
+						location.reload();
+					},
+					error: function(error){console.log(error);}
+				});
+			}
 		</script>
 		
 	</head>
 	<body class="is-preload">
-
 		<!-- Header 메인 바 -->
 			<header id="header1">
 				<h1><a href="main">2조</a></h1>
@@ -216,6 +271,10 @@
 										<div class="comment-date">${event_comment.input_date}</div>
 											<ul class="comment-actions">
 												<li class="name"><a href="viewUserForm?user_id=${event_comment.user.user_id}">${event_comment.user.name}</a></li>
+												<c:if test="${event_comment.user.user_id == sessionScope.user_id}">
+													<li class="name">Edit</li>
+													<li>Delete</li>
+												</c:if>
 											</ul>
 									</div>
 							</div>
@@ -239,6 +298,12 @@
 											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.event_schedule_id}</h3>
 											</c:forEach>
 											<br>
+											<video width='auto' height='auto' controls>
+											<c:forEach var="video" items="${video_list}">
+											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
+											</c:forEach>
+											</video>
+											<br>
 											<a href="listEventAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">앨범 페이지 이동</a>
 										</article>
 									</div>
@@ -261,6 +326,28 @@
 											</div>
 											
 										<a href="listEventScheduleForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">이벤트 스케줄 페이지 이동</a>
+									</div>
+							</section>
+							<section id="six">
+								<div class="container">
+									<h3>참여 그룹</h3>
+									<div class="features">
+									<c:forEach var="group_union" items="${group_union_list}">
+						<div class="comment-wrap">
+							<div>
+							<a href="viewGroupForm?group_categoryid=${group_union.group_category_id}&group_id=${group_union.group_id}" class="image avatar thumb"><img src="resources/image/group_logo/${group_union.group_logo}" alt="" style="width: 100px; height:auto;"></a>
+							</div>
+						</div>
+						</c:forEach>
+						<c:if test="${sessionScope.user_id == leader.user_id}">
+						<input type="text" id="keyword" style="width:300px; display:inline;">
+<input type="button" onclick="javascript:searchGroupAction()" value="그룹 검색"><br><br><br>
+<div id="group_list" class="features">
+</div>
+</c:if>
+											</div>
+											
+										
 									</div>
 							</section>
 							

@@ -8,6 +8,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupSearch/assets/css/main.css" />
+		<link rel="stylesheet" href="resources/TextA/css/style.css">
 		
 		<!-- 추가 -->
 		<link rel='stylesheet' href='http://www.davilious.com/codepen/font-awesome/css/font-awesome.css'>
@@ -114,7 +115,7 @@ input::placeholder {
 .filter-btn {
   position: relative;
   display: inline-block;
-  color: #4b6a77;
+  color: black;
   text-align: center;
   line-height: 25px;
   text-decoration: none;
@@ -234,7 +235,7 @@ input::placeholder {
 
 		<!-- Work -->
 			<section id="work" class="main style3 primary" style="display: none;">
-				
+			
 			</section>
 
 
@@ -271,10 +272,10 @@ input::placeholder {
 			<script src="resources/GroupSearch/assets/js/breakpoints.min.js"></script>
 			<script src="resources/GroupSearch/assets/js/util.js"></script>
 			<script src="resources/GroupSearch/assets/js/main.js"></script>
-			
+<%-- ${group_category.filename} --%>			
 <script>
-$("#intro").css("background", "url('resources/GroupSearch/assets/css/images/overlay.png'), url('resources/Main/images/thumbs/${group_category.filename}')");
-$("#intro").css("background-size","256px 256px, cover");
+$("#intro").css("background", "url('resources/GroupSearch/assets/css/images/overlay.png'), url('resources/Main/images/thumbs/${group_category.group_category_id}.jpg')");
+$("#intro").css("background-size","100% 100%");
 </script>
 <script>
 var group_category_id = ${group_category.group_category_id};
@@ -332,26 +333,28 @@ $('input[type=search]').on({
 					success: function(group_list)
 					{
 						var buff = "";
+						buff += "<div class='gallery'>";
 						
 						for(var i = 0; i < group_list.length; i++)
 						{
 							if(i % 2 == 1)
 							{
-								buff += "<div class='gallery'>"
 								buff += "<article class='from-left'>";
 								buff += "<a href='viewGroupForm?group_category_id=" + group_category_id + "&group_id=" + group_list[i].group_id + "'class='image fit'><img src='resources/image/group_logo/" + group_list[i].group_logo + "' title='" + group_list[i].name +"' alt='' /></a>";
-								buff += "</article>"
-								buff += "</div>"
+								buff += group_list[i].name;
+								buff += "</article>";
 							}
 							else
 							{
-								buff += "<div class='gallery'>"
 								buff += "<article class='from-right'>";
 								buff += "<a href='viewGroupForm?group_category_id=" + group_category_id + "&group_id=" + group_list[i].group_id + "'class='image fit'><img src='resources/image/group_logo/" + group_list[i].group_logo + "' title='" + group_list[i].name +"' alt='' /></a>";
-								buff += "</article>"
-								buff += "</div>"
+								buff += group_list[i].name;
+								buff += "</article>";
 							}
 						}
+
+						buff += "</div>";
+						
 						$("#work").html(buff);
 					},
 					error: function(error)

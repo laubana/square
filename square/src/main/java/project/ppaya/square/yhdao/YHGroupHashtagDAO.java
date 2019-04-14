@@ -6,12 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import project.ppaya.square.vo.GroupHashtag;
-import project.ppaya.square.vo.User;
-import project.ppaya.square.yhmapper.YHGroupHashtagMapper;
-import project.ppaya.square.yhmapper.YHGroupMapper;
-import project.ppaya.square.yhmapper.YHUserHashtagMapper;
-import project.ppaya.square.yhmapper.YHUserMapper;
+import project.ppaya.square.vo.*;
+import project.ppaya.square.yhmapper.*;
 
 @Repository
 public class YHGroupHashtagDAO

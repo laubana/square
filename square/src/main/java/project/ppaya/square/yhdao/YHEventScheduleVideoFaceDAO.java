@@ -7,11 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import project.ppaya.square.vo.EventScheduleVideo;
-import project.ppaya.square.vo.EventScheduleVideoFace;
-import project.ppaya.square.yhmapper.YHEventScheduleImageFaceMapper;
-import project.ppaya.square.yhmapper.YHEventScheduleVideoFaceMapper;
-import project.ppaya.square.yhmapper.YHEventScheduleVideoMapper;
+import project.ppaya.square.vo.*;
+import project.ppaya.square.yhmapper.*;
 
 @Repository
 public class YHEventScheduleVideoFaceDAO

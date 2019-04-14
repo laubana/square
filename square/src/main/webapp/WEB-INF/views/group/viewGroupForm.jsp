@@ -154,7 +154,7 @@
 											<a href="viewUserForm?user_id=${user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 										</c:forEach>
 										</div>
-									<p>회원</p>
+									<p>회원</p>${user.size()}
 									<a href="listGroupAttendanceForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">회원 페이지 이동</a>
 								</div>
 							</section>
@@ -175,6 +175,10 @@
 										<div class="comment-date">${group_comment.input_date}</div>
 											<ul class="comment-actions">
 												<li class="name"><a href="viewUserForm?user_id=${group_comment.user.user_id}">${group_comment.user.name}</a></li>
+												<c:if test="${group_comment.user.user_id == sessionScope.user_id}">
+													<li class="name">Edit</li>
+													<li>Delete</li>
+												</c:if>
 											</ul>
 									</div>
 							</div>
@@ -199,6 +203,12 @@
 											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.event_schedule_id}</h3>
 											</c:forEach>
 											<br>
+											<video width='auto' height='auto' controls>
+											<c:forEach var="video" items="${video_list}">
+											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
+											</c:forEach>
+											</video>
+											<br>
 											<a href="listGroupAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">앨범 페이지 이동</a>
 										</article>
 									</div>
@@ -220,10 +230,25 @@
 										</article>
 										</c:forEach>
 											</div>
-											<div align="right"><a href="javascript:doDisplay1();" id="link1" onclick="javascript:link1_onclick();">+숨기기</a></div>
 										<a href="listEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">이벤트 페이지 이동</a>
 									</div>
-								</div>
+							</section>
+							<section id="six">
+								<div class="container">
+									<h3>연합 이벤트</h3>
+									<div class="features">
+									<c:forEach var="event_union_event" items="${event_union_event_list}">
+									<article>
+											<a href="viewEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event_union_event.event_id}" class="image"><img src="resources/image/event_image/${event_union_event.image_id}" alt="" /></a>
+											<div class="inner">
+												<h4>${event_union_event.name}</h4>
+												<p>${event_union_event.content}</p>
+											</div>
+										</article>
+										</c:forEach>
+											</div>
+										<a href="listEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">연합 이벤트 페이지 이동</a>
+									</div>
 							</section>
 					</div>
 

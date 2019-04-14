@@ -17,32 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import project.ppaya.square.vo.Event;
-import project.ppaya.square.vo.EventAttendance;
-import project.ppaya.square.vo.EventComment;
-import project.ppaya.square.vo.EventSchedule;
-import project.ppaya.square.vo.EventScheduleAttendance;
-import project.ppaya.square.vo.EventScheduleComment;
-import project.ppaya.square.vo.EventScheduleImage;
-import project.ppaya.square.vo.EventScheduleUserSchedule;
-import project.ppaya.square.vo.Group;
-import project.ppaya.square.vo.GroupAttendance;
-import project.ppaya.square.vo.GroupCategory;
-import project.ppaya.square.vo.GroupHashtag;
-import project.ppaya.square.vo.User;
-import project.ppaya.square.yhdao.YHEventAttendanceDAO;
-import project.ppaya.square.yhdao.YHEventDAO;
-import project.ppaya.square.yhdao.YHEventScheduleAttendanceDAO;
-import project.ppaya.square.yhdao.YHEventScheduleCommentDAO;
-import project.ppaya.square.yhdao.YHEventScheduleDAO;
-import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
-import project.ppaya.square.yhdao.YHEventScheduleUserScheduleDAO;
-import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
-import project.ppaya.square.yhdao.YHGroupCategoryDAO;
-import project.ppaya.square.yhdao.YHGroupDAO;
-import project.ppaya.square.yhdao.YHGroupHashtagDAO;
-import project.ppaya.square.yhdao.YHUserDAO;
-import project.ppaya.square.yhutil.YHEventSchedeulUserScheduleUtil;
+import project.ppaya.square.vo.*;
+import project.ppaya.square.yhdao.*;
+import project.ppaya.square.yhutil.*;
 
 @Repository
 @Controller
@@ -72,6 +49,8 @@ public class EventScheduleController
 	YHGroupAttendanceDAO yh_group_attendanceDAO;
 	@Autowired
 	YHEventScheduleImageDAO yh_event_schedule_imageDAO;
+	@Autowired
+	YHEventScheduleVideoDAO yh_event_schedule_videoDAO;
 	@Autowired
 	YHEventScheduleUserScheduleDAO yh_event_schedule_user_scheduleDAO;
 	
@@ -195,6 +174,9 @@ public class EventScheduleController
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleId(event_schedule_id);
 		//Image List 전송
 		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
+		ArrayList<EventScheduleVideo> event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleId(event_schedule_id);
+		//Video List 전송
+		request.addAttribute("video_list", event_schedule_video_list);
 		
 		long current_time = (new Date()).getTime();
 		
@@ -230,7 +212,38 @@ public class EventScheduleController
 			
 			test_list3.add(new EventScheduleUserSchedule("", 0, i, i + 60000, count));
 		}
-		request.addAttribute("test_list3", new JSONArray(test_list3));
+		
+		ArrayList<EventScheduleUserSchedule> test_list4 = new ArrayList<>();
+		long start_date = -1;
+		long end_date = -1;
+		int count = -1;
+		for(int i = 0; i < test_list3.size();)
+		{
+			if(start_date == -1 || end_date == -1)
+			{
+				start_date = test_list3.get(i).getStart_date();
+				end_date = test_list3.get(i).getEnd_date();
+				count = test_list3.get(i).getTypeof();
+			}
+			
+			if(count != test_list3.get(i).getTypeof())
+			{
+				test_list4.add(new EventScheduleUserSchedule("", 0, start_date, end_date, count));
+				start_date = -1;
+				end_date = -1;
+				count = -1;
+			}
+			else
+			{
+				end_date = test_list3.get(i).getEnd_date();
+				i++;
+			}
+		}
+		test_list4.add(new EventScheduleUserSchedule("", 0, start_date, end_date, count));
+		
+		logger.debug("{}", test_list4.toString());
+		
+		request.addAttribute("test_list4", new JSONArray(test_list4));
 		
 		return "event_schedule/viewEventScheduleForm";
 	}

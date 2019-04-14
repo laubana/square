@@ -15,18 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import project.ppaya.square.vo.EventScheduleImage;
-import project.ppaya.square.vo.EventScheduleVideo;
-import project.ppaya.square.vo.ImageAlbum;
-import project.ppaya.square.yhdao.YHImageAlbumDAO;
-import project.ppaya.square.yhdao.YHVideoAlbumDAO;
-import project.ppaya.square.yhdao.YHEventDAO;
-import project.ppaya.square.yhdao.YHEventScheduleDAO;
-import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
-import project.ppaya.square.yhdao.YHEventScheduleVideoDAO;
-import project.ppaya.square.yhutil.YHUserFormUtil;
+import project.ppaya.square.vo.*;
+import project.ppaya.square.yhdao.*;
 
 @Repository
 @Controller

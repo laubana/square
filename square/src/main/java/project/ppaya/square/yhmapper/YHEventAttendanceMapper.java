@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import project.ppaya.square.vo.EventAttendance;
-import project.ppaya.square.vo.GroupAttendance;
 
 public interface YHEventAttendanceMapper
 {

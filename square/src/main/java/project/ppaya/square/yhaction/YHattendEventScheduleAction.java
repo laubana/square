@@ -14,12 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import project.ppaya.square.yhdao.YHImageAlbumDAO;
-import project.ppaya.square.vo.EventScheduleUserSchedule;
-import project.ppaya.square.yhdao.YHEventDAO;
-import project.ppaya.square.yhdao.YHEventScheduleDAO;
-import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
-import project.ppaya.square.yhdao.YHEventScheduleUserScheduleDAO;
+import project.ppaya.square.vo.*;
+import project.ppaya.square.yhdao.*;
 
 @Repository
 @Controller

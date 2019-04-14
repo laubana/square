@@ -13,27 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import project.ppaya.square.vo.Event;
-import project.ppaya.square.vo.EventAttendance;
-import project.ppaya.square.vo.EventComment;
-import project.ppaya.square.vo.EventSchedule;
-import project.ppaya.square.vo.EventScheduleImage;
-import project.ppaya.square.vo.Group;
-import project.ppaya.square.vo.GroupAttendance;
-import project.ppaya.square.vo.GroupCategory;
-import project.ppaya.square.vo.GroupHashtag;
-import project.ppaya.square.vo.User;
-import project.ppaya.square.yhdao.YHEventAttendanceDAO;
-import project.ppaya.square.yhdao.YHEventCommentDAO;
-import project.ppaya.square.yhdao.YHEventDAO;
-import project.ppaya.square.yhdao.YHEventScheduleDAO;
-import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
-import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
-import project.ppaya.square.yhdao.YHGroupCategoryDAO;
-import project.ppaya.square.yhdao.YHGroupCommentDAO;
-import project.ppaya.square.yhdao.YHGroupDAO;
-import project.ppaya.square.yhdao.YHGroupHashtagDAO;
-import project.ppaya.square.yhdao.YHUserDAO;
+import project.ppaya.square.vo.*;
+import project.ppaya.square.yhdao.*;
 
 @Controller
 public class EventController
@@ -57,11 +38,15 @@ public class EventController
 	@Autowired
 	YHEventScheduleImageDAO yh_event_schedule_imageDAO;
 	@Autowired
+	YHEventScheduleVideoDAO yh_event_schedule_videoDAO;
+	@Autowired
 	YHGroupCommentDAO yh_group_commentDAO;
 	@Autowired
 	YHGroupHashtagDAO yh_group_hashtagDAO;
 	@Autowired
 	YHGroupAttendanceDAO yh_group_attendanceDAO;
+	@Autowired
+	YHEventUnionDAO yh_event_unionDAO;
 
 	@RequestMapping(value = "createEventForm", method = RequestMethod.GET)
 	public String createEventForm
@@ -178,6 +163,9 @@ public class EventController
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
 		//Image List 전송
 		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
+		ArrayList<EventScheduleVideo> event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleIdList(event_schedule_id_list);
+		//Video List 전송
+		request.addAttribute("video_list", event_schedule_video_list);
 		
 		ArrayList<EventComment> event_comment_list = yh_event_commentDAO.selectEventCommentByEventId(event_id);
 		for(int i = 0; i < event_comment_list.size(); i++)
@@ -190,6 +178,11 @@ public class EventController
 		//event_place 임시 전송
 		String cood = "{lat: 37.566535, lng: 126.97796919999996}";
 		request.addAttribute("event_place", cood);
+		
+		ArrayList<Integer> group_union_id_list = yh_event_unionDAO.getGroupIdByEventId(event_id);
+		ArrayList<Group> group_union_list = yh_groupDAO.selectGroupByGroupIdListNotGroupId(group_union_id_list, group_id);
+		//GroupUnion List 전송
+		request.addAttribute("group_union_list", group_union_list);
 		
 		return "event/viewEventForm";
 	}

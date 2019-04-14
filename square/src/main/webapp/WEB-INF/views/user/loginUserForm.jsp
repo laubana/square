@@ -20,12 +20,10 @@
 					{
 						if(result == true)
 						{
-							alert("로그인 성공");
 							location.replace("<c:out value='main'/>");
 						}
 						else
 						{
-							alert("로그인 실패");
 						}
 					},
 					error: function(error){console.log(error);}

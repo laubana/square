@@ -3,7 +3,6 @@ package project.ppaya.square.yhmapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import project.ppaya.square.vo.EventAttendance;
 import project.ppaya.square.vo.EventScheduleAttendance;
 
 public interface YHEventScheduleAttendanceMapper

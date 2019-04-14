@@ -68,7 +68,6 @@ label img {
   /* box-shadow: 0 0 5px #333; */
   z-index: -1;
 }
-
 </style>	
 	
 	
@@ -80,18 +79,15 @@ label img {
 			<header id="header">
 				<div class="inner">
 					<div align="left"><h1 style="font-size:50px;"><a href="main">2조</a></h1></div>
-					<a href="#" class="image avatar"><img src="resources/image/${user.image_id}" alt="" /></a>
+					<a href="#" class="image avatar"><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
 					<h1><strong>${user.user_id}</strong>님의 그룹 사진<br /></h1>
-					<p>편집 할려면 하든가ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-					ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
+					<p>사진과 동영상을 찾아보세요!<br>
+					${user.image_id}님과의 추억을<br>
+					2조가 함께합니다!
+					</p>
 					<nav id="nav">
-					<ul>
-						<li></li><li></li><li></li><li></li><li></li>
-						<li><a href="#three" class="active">그룹 선택</a></li>
-						<li><a href="#four" class="active">앨범 편집</a></li>
-						<li><a href="#video" class="active">영상 편집</a></li>
-					</ul>
-				</nav>
+					
+					</nav>
 				</div>
 			</header>
 
@@ -133,88 +129,23 @@ label img {
 						<h1>앨범 편집</h1>
 						<!-- Form 사진 영상 -->
 						<form action="">
-						<div id="image_album" class="row">
-						<c:forEach var="image" items="${event_schedule_image_list}">
+						
+						<div id="image_album" class="row"></div>
+						<%-- <c:forEach var="image" items="${event_schedule_image_list}">
 							<article class="col-6 col-12-xsmall work-item">
 								<input type="checkbox" id="albumCheckbox${image.event_schedule_image_id}" />
 								<label for="albumCheckbox${image.event_schedule_image_id}">
 								<img src="resources/image/event_schedule_image/${image.event_schedule_image_id}" alt="" />
 								</label>
-								<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								TOTAL</h3>
-								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
 							</article>
-						</c:forEach>
-					
-						<c:forEach var="image" items="${self_event_schedule_image_list}">
-							<article class="col-6 col-12-xsmall work-item">
-								<input type="checkbox" id="self_albumCheckbox${image.event_schedule_image_id}" />
-								<label for="self_albumCheckbox${image.event_schedule_image_id}">
-								<img src="resources/image/${image.event_schedule_image_id}" alt="" />
-								</label>
-								<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								SELF</h3>
-								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-						</c:forEach>
-							<!-- <article class="col-6 col-12-xsmall work-item">
-								<input type="checkbox" id="albumCheckbox1" />
-								<label for="albumCheckbox1">
-								<img src="resources/MemberPhoto/images/thumbs/01.jpg" alt="" />
-								</label>
-								<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Magna sed consequat tempus</h3>
-								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<input type="checkbox" id="albumCheckbox2" />
-								<label for="albumCheckbox2">
-								<img src="resources/MyPage/images/thumbs/02.jpg" alt="" />
-								</label>
-								<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Ultricies lacinia interdum</h3>
-								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<input type="checkbox" id="albumCheckbox3" />
-								<label for="albumCheckbox3">
-								<img src="resources/MemberPhoto/images/thumbs/01.jpg" alt="" />
-								</label>
-								<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Magna sed consequat tempus</h3>
-								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<input type="checkbox" id="albumCheckbox4" />
-								<label for="albumCheckbox4">
-								<img src="resources/MyPage/images/thumbs/02.jpg" alt="" />
-								</label>
-								<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Ultricies lacinia interdum</h3>
-								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
-							</article> -->
-							
-							
-							
-						</div>
-					<div class="video" id="video">
-						<hr>
-						<h1>영상 편집</h1>
-						<p>아무거나</p>
-						<p>아무거나</p>
-						<p>아무거나</p>
-						<p>아무거나</p>
-						<p>아무거나</p>
-						<div align="center"><input type="submit" value="편집 확인"></div>
-					</div>
-						</form>
-						<!-- Form 사진 영상 끝 -->
+						</c:forEach> --%>
+
+					<hr><br>
+					<h1>영상 편집</h1><br>
+					<div class="video" id="video"></div><br>	
+					<div align="center"><input type="submit" value="편집 확인"></div>		
+					</form>
+
 					</section>
 			</div>
 
@@ -271,10 +202,17 @@ $(document).ready(function () {
 				if(result.event_schedule_image_list.length != 0)
 				{
 					var image_buff = "";
+					
 					for(var i = 0; i < result.event_schedule_image_list.length; i++)
 					{
+						image_buff += "<article class='col-6 col-12-xsmall work-item'>";
+						image_buff += "<input type='checkbox' id='albumCheckbox" + i + "'/>";
+						image_buff += "<label for='albumCheckbox" + i + "'/>";
 						image_buff += "<img src='resources/image/event_schedule_image/" + result.event_schedule_image_list[i].filename + "'/>";
+						image_buff += "</label>";
+						image_buff += "</article>";
 					}
+					
 					
 					document.getElementById("image_album").innerHTML = image_buff;
 				}
@@ -288,7 +226,9 @@ $(document).ready(function () {
 					video_buff += "<video width='320' height='240' controls>"
 					for(var i = 0; i < result.event_schedule_video_list.length; i++)
 					{
+						
 						video_buff += "<source src='resources/image/event_schedule_video/" + result.event_schedule_video_list[i].filename +"' type='video/mp4'>";
+						
 					}
 					video_buff += "</video>"
 					

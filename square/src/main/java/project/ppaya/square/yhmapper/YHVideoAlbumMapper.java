@@ -3,9 +3,6 @@ package project.ppaya.square.yhmapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import project.ppaya.square.vo.ImageAlbum;
-import project.ppaya.square.vo.VideoAlbum;
-
 public interface YHVideoAlbumMapper
 {
 	public int insertVideoAlbum(HashMap<String, Object> map);

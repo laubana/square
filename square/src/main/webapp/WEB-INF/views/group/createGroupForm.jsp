@@ -111,7 +111,6 @@ clip:rect(0,0,0,0);
 border: 0; 
 }
 </style>
-
 	</head>
 	<body class="is-preload">
 
@@ -131,7 +130,7 @@ border: 0;
 			<section id="header">
 				<header>
 					<!-- 그룹 로고 이미지 -->
-					<span class="image avatar"><img id="foo2" src="resources/Main/images/bb.jpg" /></span>
+					<span class="image avatar" id="foo2_span"><img src="resources/Main/images/bb.jpg" id="foo2"/></span>
 					<div id="live-text"><h1 id="logo"><a>Group Name</a></h1></div>
 					<div id="live-text1"><p style="font-size:15px;">[tag1]</p></div>
 					<div id="live-text2"><p style="font-size:15px;">[tag2]</p></div><div id="live-text3"><p style="font-size:15px;">[tag3]</p></div><div id="live-text4"><p style="font-size:15px;">[tag4]</p></div><div id="live-text5"><p style="font-size:15px;">[tag5]</p></div>
@@ -239,10 +238,8 @@ border: 0;
 		</section>
 
 	</div>
-
-
-
-		<!-- 기본 Scripts -->
+<input type="button" id="test">
+<!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
 		<!-- 추가 Scripts -->
 			<script src="resources/MyPage/assets/js/jquery.poptrox.min.js"></script>
@@ -259,6 +256,14 @@ border: 0;
 			<script src="resources/GroupMain/assets/js/main.js"></script>
 
 <script type="text/javascript">
+$("#foo2_span").click(function()
+		{
+	document.getElementById("imgInp2").click();
+});
+$("#foo").click(function()
+		{
+	document.getElementById("imgInp").click();
+});
 //파일 미리보기 메인
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -404,6 +409,7 @@ $("#imgInp2").change(function() {
 </script>
 
 <script type="text/javascript">
+
   (function(container, liveText, minFontSize, maxFontSize){
 	  $.fn.getTextWidth = function(){
 	  var self = $(this),
@@ -430,7 +436,6 @@ $("#imgInp2").change(function() {
 	
 	})(30,60);
 </script>
-
 <script type="text/javascript">
   (function(container, liveText, minFontSize, maxFontSize){
 	  $.fn.getTextWidth = function(){
@@ -460,5 +465,6 @@ $("#imgInp2").change(function() {
 </script>
 
 
+		
 	</body>
 </html>

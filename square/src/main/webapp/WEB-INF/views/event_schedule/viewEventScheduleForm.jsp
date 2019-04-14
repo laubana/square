@@ -55,36 +55,100 @@
         document.getElementById('timeline_image' + json_event_schedule_user_schedule_list_list[i].user.user_id).innerHTML = "<a href='viewUserForm?user_id=" + json_event_schedule_user_schedule_list_list[i].user.user_id + "' class='image avatar thumb'><img src='resources/image/user_image/" + json_event_schedule_user_schedule_list_list[i].user.image_id + "' alt='' style='width: 100px; height:auto;'></a>";
     		 }
       }
-    	 
       }
-      
-      google.charts.load("current", {packages:['corechart']});
+      /* google.charts.setOnLoadCallback(drawChart1);
+      function drawChart1()
+      {
+		var list = JSON.parse('${test_list4}');
+    	  
+        var container = document.getElementById('timeline');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+        
+        dataTable.addColumn({ type: 'string', id: 'President' });
+		dataTable.addColumn({ type: 'string', id: 'Name' });
+		dataTable.addColumn({ type: 'string', id: 'style', role: 'style' });
+        dataTable.addColumn({ type: 'date', id: 'Start' });
+        dataTable.addColumn({ type: 'date', id: 'End' });
+        for(var i = 0; i < list.length; i++)
+        {
+        	if(1 == 1)
+        		{
+		        dataTable.addRows([
+		          [ '', String(list[i]["typeof"]), 'Tomato', new Date(list[i].start_date), new Date(list[i].end_date) ]]);
+        }
+        	
+        	var option = {
+					width : (list[list.length - 1].end_date - list[0].start_date) / 50000,
+					height: 250,
+				};
+				chart.draw(dataTable, option);
+        
+        
+    		 }
+      } */
+    	 
+      google.charts.load('current', {'packages':['line']});
       google.charts.setOnLoadCallback(drawChart1);
-      function drawChart1() {
-    	  var list = JSON.parse('${test_list3}');
-    	  var data_test = [["Element", "Density", {role: "style"}]];
-    	  for(var i = 0; i < list.length; i++)
-    		  {
-    		  	data_test.push(["Copper", list[i]["typeof"], "#b87333"]);
-    		  }
-        var data = google.visualization.arrayToDataTable(data_test);
 
-        var view = new google.visualization.DataView(data);
-        view.setColumns([0, 1,
-                         { calc: "stringify",
-                           sourceColumn: 1,
-                           type: "string",
-                           role: "annotation" },
-                         2]);
+    function drawChart1() {
+    	var list = JSON.parse('${test_list4}');
+    	var map = [];
+    	var min = 0;
+    	var max = 0;
+    	for(var i = 0; i < list.length; i++)
+    		{
+    		if(min > list[i]["typeof"])
+    			{
+					min = list[i]["typeof"];    			
+    			}
+    		if(max < list[i]["typeof"])
+			{
+    			max = list[i]["typeof"];    			
+			}
+    	map.push(
+    	[ '', list[i]["typeof"] ]		
+    	);
+    		}
+    	
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Number');
+      data.addColumn('number', 'Number');
 
-        var options = {
-          width: 10000,
-          height: 400,
-          bar: {groupWidth: "95%"},
-          legend: { position: "none" },
-        };
-        var chart = new google.visualization.ColumnChart(document.getElementById("timeline"));
-        chart.draw(view, options);
+      data.addRows(map);
+
+		var options = {
+				tooltip: { isHtml: true },
+				focusTarget: 'category',
+				legend: { position: 'none' },
+				axisTitlesPosition: 'none',
+			height: max * 100,
+				vAxis:{
+        	maxValue: 50,
+        	minValue: 0,
+        	viewWindow:
+        		{
+        		 max:max * 5,
+        		 min:-(max * 5)
+        		},
+
+            gridlines:{
+                	count: 0
+                },
+                textPosition: 'in'
+        },
+        hAxis:{
+        	showTextEvery: 0,
+        	title:'', 
+        	gridlines:{
+             	count: 0
+        	 },
+        	 textPosition: 'in'
+        }
+      };
+      var chart = new google.charts.Line(document.getElementById('timeline'));
+
+      chart.draw(data, google.charts.Line.convertOptions(options));
     }
     </script>
     <script>
@@ -300,7 +364,7 @@
 								<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="">${event.name}</a></h2>
+										<h2><a href="">${event_schedule.name}</a></h2>
 									</div>
 									<div class="meta">
 										<time class="published" datetime="2019-04-08">2019년 4월 8일</time>
@@ -367,6 +431,10 @@
 										<div class="comment-date">${event_schedule_comment.input_date}</div>
 											<ul class="comment-actions">
 												<li class="name"><a href="viewUserForm?user_id=${event_schedule_comment.user.user_id}">${event_schedule_comment.user.name}</a></li>
+												<c:if test="${event_schedule_comment.user.user_id == sessionScope.user_id}">
+													<li class="name">Edit</li>
+													<li>Delete</li>
+												</c:if>
 											</ul>
 									</div>
 							</div>
@@ -389,6 +457,12 @@
 												<a href="resources/image/event_schedule_image/${event_schedule_image.filename}" class="image thumb"><img src="resources/image/event_schedule_image/${event_schedule_image.filename}" alt="" /></a>
 											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.event_schedule_id}</h3>
 											</c:forEach>
+											<br>
+											<video width='auto' height='auto' controls>
+											<c:forEach var="video" items="${video_list}">
+											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
+											</c:forEach>
+											</video>
 											<br>
 											<a href="listGroupAlbumForm?group_id=${group.group_id}" class="button">앨범 페이지 이동</a>
 										</article>
@@ -415,10 +489,10 @@
 									<c:forEach var="event_schedule_user_schedule_list" items="${event_schedule_user_schedule_list_list}">
 									<div id="timeline_image${event_schedule_user_schedule_list.user.user_id}">
 										</div>
-										<div id="timeline${event_schedule_user_schedule_list.user.user_id}" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 80%">
+										<div id="timeline${event_schedule_user_schedule_list.user.user_id}" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 100%">
 										</div>
 									</c:forEach>
-									<div id="timeline" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 80%">
+									<div id="timeline" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 100%">
 									</div>
 								</div>
 							</section>
