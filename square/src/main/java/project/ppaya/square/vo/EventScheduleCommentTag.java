@@ -2,17 +2,10 @@ package project.ppaya.square.vo;
 
 public class EventScheduleCommentTag
 {
-	int event_schedule_comment_t_id;
 	int event_schedule_comment_id;
 	String tag;
 	long input_date;
 	public EventScheduleCommentTag(){}
-	public int getEvent_schedule_comment_t_id() {
-		return event_schedule_comment_t_id;
-	}
-	public void setEvent_schedule_comment_t_id(int event_schedule_comment_t_id) {
-		this.event_schedule_comment_t_id = event_schedule_comment_t_id;
-	}
 	public int getEvent_schedule_comment_id() {
 		return event_schedule_comment_id;
 	}

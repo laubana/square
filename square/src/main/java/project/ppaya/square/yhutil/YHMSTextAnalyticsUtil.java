@@ -16,7 +16,7 @@ import project.ppaya.square.vo.*;
 
 public class YHMSTextAnalyticsUtil
 {	
-	public static ArrayList<String> getKeyPhraseList(String string) 
+	public static ArrayList<String> getKeyPhraseList(String string, String language) 
 	{		
 		ArrayList<String> phrase_list = new ArrayList<>();
 		
@@ -35,7 +35,7 @@ public class YHMSTextAnalyticsUtil
 					+ "\"documents\":"
 					+ "["
 					+ "{"
-					+ "\"language\":\"en\","
+					+ "\"language\":\"" + language + "\","
 					+ "\"id\":\"1\","
 					+ "\"text\":\"" + string + "\""
 					+ "}"
@@ -62,7 +62,7 @@ public class YHMSTextAnalyticsUtil
 		
 		return phrase_list;
 	}
-	public static double getSentiment(String string) 
+	public static double getSentiment(String string, String language) 
 	{		
 		double sentiment = -1;
 		
@@ -81,7 +81,7 @@ public class YHMSTextAnalyticsUtil
 					+ "\"documents\":"
 					+ "["
 					+ "{"
-					+ "\"language\":\"en\","
+					+ "\"language\":\"" + language + "\","
 					+ "\"id\":\"1\","
 					+ "\"text\":\"" + string + "\""
 					+ "}"

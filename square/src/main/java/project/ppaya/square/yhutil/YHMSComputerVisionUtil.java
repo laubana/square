@@ -19,7 +19,7 @@ import project.ppaya.square.vo.*;
 
 public class YHMSComputerVisionUtil
 {	
-	public static ArrayList<String> getTagList(String path, String file) 
+	public static ArrayList<String> getTagList(String path, String file, String language) 
 	{		
 		ArrayList<String> tag_list = new ArrayList<>();
 		
@@ -29,7 +29,7 @@ public class YHMSComputerVisionUtil
 		{
 			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/tag");
 
-			uriBuilder.setParameter("language", "en");
+			uriBuilder.setParameter("language", language);
 			
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			httpPost.setHeader("Content-Type", "application/octet-stream");
@@ -53,7 +53,7 @@ public class YHMSComputerVisionUtil
 		
 		return tag_list;
 	}
-	public static ArrayList<String> getDescriptionList(String path, String file) 
+	public static ArrayList<String> getDescriptionList(String path, String file, String language) 
 	{		
 		ArrayList<String> description_list = new ArrayList<>();
 		
@@ -63,7 +63,7 @@ public class YHMSComputerVisionUtil
 		{
 			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/describe");
 
-			uriBuilder.setParameter("language", "en");
+			uriBuilder.setParameter("language", language);
 			
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			httpPost.setHeader("Content-Type", "application/octet-stream");
@@ -88,7 +88,7 @@ public class YHMSComputerVisionUtil
 		
 		return description_list;
 	}
-	public static ArrayList<String> getBrandList(String path, String file) 
+	public static ArrayList<String> getBrandList(String path, String file, String language) 
 	{		
 		ArrayList<String> brand_list = new ArrayList<>();
 		
@@ -99,7 +99,7 @@ public class YHMSComputerVisionUtil
 			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/analyze");
 
 			uriBuilder.setParameter("visualFeatures", "Brands");
-			uriBuilder.setParameter("language", "en");
+			uriBuilder.setParameter("language", language);
 			
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			httpPost.setHeader("Content-Type", "application/octet-stream");
@@ -123,7 +123,7 @@ public class YHMSComputerVisionUtil
 		
 		return brand_list;
 	}
-	public static ArrayList<String> getCategoryList(String path, String file) 
+	public static ArrayList<String> getCategoryList(String path, String file, String language) 
 	{		
 		ArrayList<String> category_list = new ArrayList<>();
 		
@@ -134,7 +134,7 @@ public class YHMSComputerVisionUtil
 			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/analyze");
 
 			uriBuilder.setParameter("visualFeatures", "Categories");
-			uriBuilder.setParameter("language", "en");
+			uriBuilder.setParameter("language", language);
 			
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			httpPost.setHeader("Content-Type", "application/octet-stream");

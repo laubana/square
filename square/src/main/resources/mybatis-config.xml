@@ -56,6 +56,7 @@
 		<mapper resource="yhmapper/yhevent_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_attendance_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_comment_mapper.xml" />
+		<mapper resource="yhmapper/yhevent_comment_tag_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_union_mapper.xml" />
 		
 		<mapper resource="yhmapper/yhevent_schedule_mapper.xml" />
@@ -64,6 +65,9 @@
 		<mapper resource="yhmapper/yhevent_schedule_user_schedule_mapper.xml" />
 
 		<mapper resource="yhmapper/yhevent_schedule_image_mapper.xml" />
+		<mapper resource="yhmapper/yhevent_schedule_image_tag_mapper.xml" />
+		<mapper resource="yhmapper/yhevent_schedule_image_description_mapper.xml" />
+		<mapper resource="yhmapper/yhevent_schedule_image_category_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_schedule_image_face_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_schedule_video_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_schedule_video_face_mapper.xml" />

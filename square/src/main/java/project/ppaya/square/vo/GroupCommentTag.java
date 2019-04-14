@@ -1,20 +1,11 @@
 package project.ppaya.square.vo;
 
-import java.util.ArrayList;
-
 public class GroupCommentTag
 {
-	int group_comment_t_id;
 	int group_comment_id;
 	String tag;
 	long input_date;
 	public GroupCommentTag(){}
-	public int getGroup_comment_t_id() {
-		return group_comment_t_id;
-	}
-	public void setGroup_comment_t_id(int group_comment_t_id) {
-		this.group_comment_t_id = group_comment_t_id;
-	}
 	public int getGroup_comment_id() {
 		return group_comment_id;
 	}

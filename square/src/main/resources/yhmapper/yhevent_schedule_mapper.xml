@@ -19,6 +19,8 @@ FROM
 	TABLE_ES
 WHERE
 	EVENT_ID = #{event_id}
+ORDER BY
+	INPUT_DATE DESC
 </select>
 <select id="selectEventScheduleByEventIdList" parameterType="list" resultType="EventSchedule">
 SELECT
@@ -30,6 +32,8 @@ WHERE
 	<foreach item="event_id" collection="list" open="OR" separator="OR">
 		EVENT_ID = #{event_id}
 	</foreach>
+ORDER BY
+	INPUT_DATE DESC
 </select>
 <select id="getEventScheduleIdByEventId" parameterType="int" resultType="int">
 SELECT DISTINCT
@@ -38,6 +42,8 @@ FROM
 	TABLE_ES
 WHERE
 	EVENT_ID = #{event_id}
+ORDER BY
+	INPUT_DATE DESC
 </select>
 <select id="getEventScheduleIdByEventIdList" parameterType="list" resultType="int">
 SELECT DISTINCT
@@ -49,5 +55,7 @@ WHERE
 	<foreach item="event_id" collection="list" open="OR" separator="OR">
 		EVENT_ID = #{event_id}
 	</foreach>
+ORDER BY
+	INPUT_DATE DESC
 </select>
 </mapper>

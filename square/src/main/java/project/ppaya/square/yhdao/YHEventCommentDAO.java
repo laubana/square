@@ -29,5 +29,19 @@ public class YHEventCommentDAO
 		
 		return event_comment_list;
 	}
+	public ArrayList<EventComment> selectEventCommentByEventIdList(ArrayList<Integer> event_id_list)
+	{
+		ArrayList<EventComment> event_comment_list = null;
+		
+		YHEventCommentMapper mapper = sqlSession.getMapper(YHEventCommentMapper.class);
+		
+		try
+		{
+			event_comment_list = mapper.selectEventCommentByEventIdList(event_id_list);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_comment_list;
+	}
 }
 

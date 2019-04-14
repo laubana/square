@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import project.ppaya.square.vo.*;
-import project.ppaya.square.yhdao.YHGroupCommentDAO;
-import project.ppaya.square.yhdao.YHGroupCommentTagDAO;
-import project.ppaya.square.yhdao.YHGroupDAO;
+import project.ppaya.square.yhdao.*;
 import project.ppaya.square.yhutil.*;
 
 @Repository
@@ -31,6 +29,22 @@ public class YHTestController
 	YHGroupCommentDAO yh_group_commentDAO;
 	@Autowired
 	YHGroupCommentTagDAO yh_group_comment_tagDAO;
+	@Autowired
+	YHEventDAO yh_eventDAO;
+	@Autowired
+	YHEventCommentDAO yh_event_commentDAO;
+	@Autowired
+	YHEventCommentTagDAO yh_event_comment_tagDAO;
+	@Autowired
+	YHEventScheduleDAO yh_event_scheduleDAO;
+	@Autowired
+	YHEventScheduleImageDAO yh_event_schedule_imageDAO;
+	@Autowired
+	YHEventScheduleImageTagDAO yh_event_schedule_image_tagDAO;
+	@Autowired
+	YHEventScheduleImageDescriptionDAO yh_event_schedule_image_descriptionDAO;
+	@Autowired
+	YHEventScheduleImageCategoryDAO yh_event_schedule_image_categoryDAO;
 	
 	@RequestMapping(value = "yhtest", method = RequestMethod.GET)
 	public void YHTest()
@@ -56,14 +70,14 @@ public class YHTestController
 		ArrayList<String> descripton_list = YHMSComputerVisionUtil.getDescriptionList(Reference.event_schedule_image_path, "event_schedule1_image" + i + ".jpg");		
 		logger.debug("{}", descripton_list.toString());*/
 
-		for(int i = 1; i <= 4; i++)
+		/*for(int i = 1; i <= 4; i++)
 		{
 			ArrayList<String> category_list = YHMSComputerVisionUtil.getCategoryList(Reference.event_schedule_image_path, "event_schedule1_image" + i + ".jpg");		
 			logger.debug("{}", category_list.toString());			
-		}
+		}*/
 	}
 	@RequestMapping(value = "yhtest1", method = RequestMethod.GET)
-	public String YHTest1(Model request)
+	public String yhtest1(Model request)
 	{
 		ArrayList<GroupComment> group_comment_list = yh_group_commentDAO.selectGroupCommentByUserId("id1@gmail.com");
 		
@@ -94,5 +108,62 @@ public class YHTestController
 		request.addAttribute("json_list", new JSONArray(list1));		
 		
 		return "yhtest/yhtest1";
+	}
+	@RequestMapping(value = "yhinit", method = RequestMethod.GET)
+	public void yhinit()
+	{
+		ArrayList<GroupComment> group_comment_list = yh_group_commentDAO.selectGroupCommentByGroupId(1);		
+		for(int i = 0; i < group_comment_list.size(); i++)
+		{
+			ArrayList<String> tag_list = YHMSTextAnalyticsUtil.getKeyPhraseList(group_comment_list.get(i).getContent(), "en");
+			
+			for(int j = 0; j < tag_list.size(); j++)
+			{
+				yh_group_comment_tagDAO.insertGroupCommentTag(group_comment_list.get(i).getGroup_comment_id(), tag_list.get(j));
+			}
+		}
+		
+		ArrayList<Integer> event_id_list = yh_eventDAO.getEventIdByGroupId(1);		
+		ArrayList<EventComment> event_comment_list = yh_event_commentDAO.selectEventCommentByEventIdList(event_id_list);
+		
+		for(int i = 0; i < event_comment_list.size(); i++)
+		{	
+			ArrayList<String> tag_list = YHMSTextAnalyticsUtil.getKeyPhraseList(event_comment_list.get(i).getContent(), "en");
+			
+			for(int j = 0; j < tag_list.size(); j++)
+			{
+				yh_event_comment_tagDAO.insertEventCommentTag(event_comment_list.get(i).getEvent_comment_id(), tag_list.get(j));
+			}
+		}
+		ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventIdList(event_id_list);
+		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
+		
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			ArrayList<String> tag_list = YHMSComputerVisionUtil.getTagList(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "en");
+			
+			for(int j = 0; j < tag_list.size(); j++)
+			{
+				yh_event_schedule_image_tagDAO.insertEventScheduleImageTag(event_schedule_image_list.get(i).getEvent_schedule_image_id(), tag_list.get(j));
+			}
+		}
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			ArrayList<String> description_list = YHMSComputerVisionUtil.getDescriptionList(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "en");
+			
+			for(int j = 0; j < description_list.size(); j++)
+			{
+				yh_event_schedule_image_descriptionDAO.insertEventScheduleImageDescription(event_schedule_image_list.get(i).getEvent_schedule_image_id(), description_list.get(j));
+			}
+		}
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			ArrayList<String> category_list = YHMSComputerVisionUtil.getCategoryList(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "en");
+			
+			for(int j = 0; j < category_list.size(); j++)
+			{
+				yh_event_schedule_image_categoryDAO.insertEventScheduleImageCategory(event_schedule_image_list.get(i).getEvent_schedule_image_id(), category_list.get(j));
+			}
+		}
 	}
 }
