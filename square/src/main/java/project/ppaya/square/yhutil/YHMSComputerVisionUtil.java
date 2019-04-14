@@ -33,7 +33,7 @@ public class YHMSComputerVisionUtil
 			
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			httpPost.setHeader("Content-Type", "application/octet-stream");
-			httpPost.setHeader("Ocp-Apim-Subscription-Key", "0d4f79cdb473478bafa24991c2d65213");
+			httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_computer_vision_key);
 
 			httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 
@@ -67,7 +67,7 @@ public class YHMSComputerVisionUtil
 			
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			httpPost.setHeader("Content-Type", "application/octet-stream");
-			httpPost.setHeader("Ocp-Apim-Subscription-Key", "0d4f79cdb473478bafa24991c2d65213");
+			httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_computer_vision_key);
 
 			httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 
@@ -103,7 +103,7 @@ public class YHMSComputerVisionUtil
 			
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			httpPost.setHeader("Content-Type", "application/octet-stream");
-			httpPost.setHeader("Ocp-Apim-Subscription-Key", "0d4f79cdb473478bafa24991c2d65213");
+			httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_computer_vision_key);
 
 			httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 
@@ -138,7 +138,7 @@ public class YHMSComputerVisionUtil
 			
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			httpPost.setHeader("Content-Type", "application/octet-stream");
-			httpPost.setHeader("Ocp-Apim-Subscription-Key", "0d4f79cdb473478bafa24991c2d65213");
+			httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_computer_vision_key);
 
 			httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 
@@ -173,7 +173,7 @@ public class YHMSComputerVisionUtil
 			
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			httpPost.setHeader("Content-Type", "application/octet-stream");
-			httpPost.setHeader("Ocp-Apim-Subscription-Key", "0d4f79cdb473478bafa24991c2d65213");
+			httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_computer_vision_key);
 
 			httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 
@@ -201,7 +201,7 @@ public class YHMSComputerVisionUtil
 			URIBuilder uriBuilder = new URIBuilder(result);
 			
 			HttpGet httpGet = new HttpGet(uriBuilder.build());
-			httpGet.setHeader("Ocp-Apim-Subscription-Key", "0d4f79cdb473478bafa24991c2d65213");
+			httpGet.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_computer_vision_key);
 
 			HttpResponse httpResponse = httpClient.execute(httpGet);
 			 

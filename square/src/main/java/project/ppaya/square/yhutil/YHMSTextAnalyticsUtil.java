@@ -28,7 +28,7 @@ public class YHMSTextAnalyticsUtil
 
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			httpPost.setHeader("Content-Type", "application/json");
-			httpPost.setHeader("Ocp-Apim-Subscription-Key", "a5de33d322474e759819f5e97a930008");
+			httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_text_analytics_key);
 
 			StringEntity stringEntity = new StringEntity(
 					"{"
@@ -74,7 +74,7 @@ public class YHMSTextAnalyticsUtil
 
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			httpPost.setHeader("Content-Type", "application/json");
-			httpPost.setHeader("Ocp-Apim-Subscription-Key", "a5de33d322474e759819f5e97a930008");
+			httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_text_analytics_key);
 
 			StringEntity stringEntity = new StringEntity(
 					"{"
@@ -95,8 +95,6 @@ public class YHMSTextAnalyticsUtil
 			String result = EntityUtils.toString(httpResponse.getEntity()).trim();
 			
 			JSONObject jsonObject = new JSONObject(result);
-			
-			System.out.println(jsonObject.toString(2));
 			
 			JSONArray jsonArray = jsonObject.getJSONArray("documents");
 			jsonObject = jsonArray.getJSONObject(0);
