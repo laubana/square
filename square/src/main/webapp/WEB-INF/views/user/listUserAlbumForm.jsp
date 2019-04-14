@@ -129,7 +129,6 @@ label img {
 						<h1>앨범 편집</h1>
 						<!-- Form 사진 영상 -->
 						<form action="">
-						
 						<div id="image_album" class="row"></div>
 						<%-- <c:forEach var="image" items="${event_schedule_image_list}">
 							<article class="col-6 col-12-xsmall work-item">
@@ -142,7 +141,7 @@ label img {
 
 					<hr><br>
 					<h1>영상 편집</h1><br>
-					<div class="video" id="video"></div><br>	
+					<div class="row" id="video"></div><br>	
 					<div align="center"><input type="submit" value="편집 확인"></div>		
 					</form>
 
@@ -206,8 +205,8 @@ $(document).ready(function () {
 					for(var i = 0; i < result.event_schedule_image_list.length; i++)
 					{
 						image_buff += "<article class='col-6 col-12-xsmall work-item'>";
-						image_buff += "<input type='checkbox' id='albumCheckbox" + i + "'/>";
-						image_buff += "<label for='albumCheckbox" + i + "'/>";
+						image_buff += "<input type='checkbox' id='" + result.event_schedule_image_list[i].filename + "' value='" + result.event_schedule_image_list[i].event_schedule_image_id + "'>";
+						image_buff += "<label for='" + result.event_schedule_image_list[i].filename + "'/>";
 						image_buff += "<img src='resources/image/event_schedule_image/" + result.event_schedule_image_list[i].filename + "'/>";
 						image_buff += "</label>";
 						image_buff += "</article>";
@@ -223,14 +222,20 @@ $(document).ready(function () {
 				if(result.event_schedule_image_list.length != 0)
 				{
 					var video_buff = "";
-					video_buff += "<video width='320' height='240' controls>"
+					
 					for(var i = 0; i < result.event_schedule_video_list.length; i++)
 					{
 						
+						video_buff += "<video width='320' height='240' controls>";
 						video_buff += "<source src='resources/image/event_schedule_video/" + result.event_schedule_video_list[i].filename +"' type='video/mp4'>";
-						
+						video_buff += "</video>";
+						video_buff += "<br>";
+						video_buff += "<input type='checkbox' id='" + result.event_schedule_video_list[i].filename + "' value='" + result.event_schedule_video_list[i].filename + "'>";
+						video_buff += "<label for='" + result.event_schedule_video_list[i].filename + "'/>";
+						video_buff += "<br><h2>Select</h2>";
+						video_buff += "</label>";
 					}
-					video_buff += "</video>"
+					
 					
 					document.getElementById("video").innerHTML = video_buff;
 				}
