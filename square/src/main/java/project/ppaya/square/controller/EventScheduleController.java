@@ -17,32 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import project.ppaya.square.vo.Event;
-import project.ppaya.square.vo.EventAttendance;
-import project.ppaya.square.vo.EventComment;
-import project.ppaya.square.vo.EventSchedule;
-import project.ppaya.square.vo.EventScheduleAttendance;
-import project.ppaya.square.vo.EventScheduleComment;
-import project.ppaya.square.vo.EventScheduleImage;
-import project.ppaya.square.vo.EventScheduleUserSchedule;
-import project.ppaya.square.vo.Group;
-import project.ppaya.square.vo.GroupAttendance;
-import project.ppaya.square.vo.GroupCategory;
-import project.ppaya.square.vo.GroupHashtag;
-import project.ppaya.square.vo.User;
-import project.ppaya.square.yhdao.YHEventAttendanceDAO;
-import project.ppaya.square.yhdao.YHEventDAO;
-import project.ppaya.square.yhdao.YHEventScheduleAttendanceDAO;
-import project.ppaya.square.yhdao.YHEventScheduleCommentDAO;
-import project.ppaya.square.yhdao.YHEventScheduleDAO;
-import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
-import project.ppaya.square.yhdao.YHEventScheduleUserScheduleDAO;
-import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
-import project.ppaya.square.yhdao.YHGroupCategoryDAO;
-import project.ppaya.square.yhdao.YHGroupDAO;
-import project.ppaya.square.yhdao.YHGroupHashtagDAO;
-import project.ppaya.square.yhdao.YHUserDAO;
-import project.ppaya.square.yhutil.YHEventSchedeulUserScheduleUtil;
+import project.ppaya.square.vo.*;
+import project.ppaya.square.yhdao.*;
+import project.ppaya.square.yhutil.*;
 
 @Repository
 @Controller
@@ -72,6 +49,8 @@ public class EventScheduleController
 	YHGroupAttendanceDAO yh_group_attendanceDAO;
 	@Autowired
 	YHEventScheduleImageDAO yh_event_schedule_imageDAO;
+	@Autowired
+	YHEventScheduleVideoDAO yh_event_schedule_videoDAO;
 	@Autowired
 	YHEventScheduleUserScheduleDAO yh_event_schedule_user_scheduleDAO;
 	
@@ -195,6 +174,9 @@ public class EventScheduleController
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleId(event_schedule_id);
 		//Image List 전송
 		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
+		ArrayList<EventScheduleVideo> event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleId(event_schedule_id);
+		//Video List 전송
+		request.addAttribute("video_list", event_schedule_video_list);
 		
 		long current_time = (new Date()).getTime();
 		

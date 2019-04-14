@@ -7,11 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import project.ppaya.square.vo.EventScheduleImage;
-import project.ppaya.square.vo.EventScheduleVideo;
-import project.ppaya.square.yhmapper.YHEventScheduleImageFaceMapper;
-import project.ppaya.square.yhmapper.YHEventScheduleImageMapper;
-import project.ppaya.square.yhmapper.YHEventScheduleVideoMapper;
+import project.ppaya.square.vo.*;
+import project.ppaya.square.yhmapper.*;
 
 @Repository
 public class YHEventScheduleVideoDAO
@@ -19,6 +16,20 @@ public class YHEventScheduleVideoDAO
 	@Autowired
 	SqlSession sqlSession;
 
+	public ArrayList<EventScheduleVideo> selectEventScheduleVideoByEventScheduleId(int event_schedule_id)
+	{
+		ArrayList<EventScheduleVideo> event_schedule_video_list = null;
+		
+		YHEventScheduleVideoMapper mapper = sqlSession.getMapper(YHEventScheduleVideoMapper.class);
+		
+		try
+		{
+			event_schedule_video_list = mapper.selectEventScheduleVideoByEventScheduleId(event_schedule_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_video_list;
+	}
 	public ArrayList<EventScheduleVideo> selectEventScheduleVideoByEventScheduleIdList(ArrayList<Integer> event_schedule_id_list)
 	{
 		ArrayList<EventScheduleVideo> event_schedule_video_list = null;

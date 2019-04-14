@@ -3,8 +3,6 @@ package project.ppaya.square.yhmapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import project.ppaya.square.vo.ImageAlbum;
-import project.ppaya.square.vo.EventScheduleVideo;
 import project.ppaya.square.vo.EventScheduleVideoFace;
 
 public interface YHEventScheduleVideoFaceMapper

@@ -14,7 +14,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import project.ppaya.square.vo.Reference;
+import project.ppaya.square.vo.*;
 
 public class YHVideoIndexerUtil
 {

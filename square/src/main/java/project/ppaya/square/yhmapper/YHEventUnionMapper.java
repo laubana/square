@@ -3,8 +3,6 @@ package project.ppaya.square.yhmapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import project.ppaya.square.vo.Event;
-
 public interface YHEventUnionMapper
 {
 	public int insertEventUnion(HashMap<String, Object> map);

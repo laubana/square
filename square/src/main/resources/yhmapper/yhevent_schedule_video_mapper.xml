@@ -4,6 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleVideoMapper">
+<select id="selectEventScheduleVideoByEventScheduleId" parameterType="int" resultType="EventScheduleVideo">
+SELECT
+	*
+FROM
+	TABLE_ESV
+WHERE
+	EVENT_SCHEDULE_ID = #{event_schedule_id}
+</select>
 <select id="selectEventScheduleVideoByEventScheduleIdList" parameterType="list" resultType="EventScheduleVideo">
 SELECT
 	*

@@ -10,9 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import project.ppaya.square.shdao.SH_DAO_Group;
-import project.ppaya.square.vo.GroupCategory;
-import project.ppaya.square.yhdao.YHGroupCategoryDAO;
+import project.ppaya.square.shdao.*;
+import project.ppaya.square.vo.*;
+import project.ppaya.square.yhdao.*;
 
 
 

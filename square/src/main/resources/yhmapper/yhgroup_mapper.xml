@@ -4,6 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHGroupMapper">
+<select id="getGroupIdByName" parameterType="string" resultType="int">
+SELECT
+	GROUP_ID
+FROM
+	TABLE_G
+WHERE
+	NAME LIKE '%' || #{name} || '%'
+</select>
+<select id="selectGroupByName" parameterType="string" resultType="Group">
+SELECT
+	*
+FROM
+	TABLE_G
+WHERE
+	NAME LIKE '%' || #{name} || '%'
+</select>
 <select id="selectGroupByGroupIdListNotGroupId" parameterType="map" resultType="Group">
 SELECT
 	*
@@ -19,14 +35,14 @@ WHERE
 	AND
 	GROUP_ID != #{group_id}
 </select>
-<select id="selectGroupByGroupCategoryIdKeyword" parameterType="map" resultType="Group">
+<select id="selectGroupByGroupCategoryIdName" parameterType="map" resultType="Group">
 SELECT
 	*
 FROM
 	TABLE_G
 WHERE
 	GROUP_CATEGORY_ID = #{group_category_id} AND
-	NAME LIKE '%' || #{keyword} || '%'
+	NAME LIKE '%' || #{name} || '%'
 </select>
 <select id="selectGroupByGroupCategoryId" parameterType="int" resultType="Group">
 SELECT

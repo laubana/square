@@ -7,8 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import project.ppaya.square.vo.GroupAttendance;
-import project.ppaya.square.yhmapper.YHGroupAttendanceMapper;
+import project.ppaya.square.vo.*;
+import project.ppaya.square.yhmapper.*;
 
 @Repository
 public class YHGroupAttendanceDAO

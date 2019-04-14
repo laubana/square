@@ -14,26 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import project.ppaya.square.shdao.SH_DAO_Group;
-import project.ppaya.square.shdao.SH_DAO_User;
-import project.ppaya.square.vo.Event;
-import project.ppaya.square.vo.EventScheduleImage;
-import project.ppaya.square.vo.Group;
-import project.ppaya.square.vo.GroupAttendance;
-import project.ppaya.square.vo.GroupCategory;
-import project.ppaya.square.vo.GroupComment;
-import project.ppaya.square.vo.GroupHashtag;
-import project.ppaya.square.vo.User;
-import project.ppaya.square.yhdao.YHEventDAO;
-import project.ppaya.square.yhdao.YHEventScheduleDAO;
-import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
-import project.ppaya.square.yhdao.YHEventUnionDAO;
-import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
-import project.ppaya.square.yhdao.YHGroupCategoryDAO;
-import project.ppaya.square.yhdao.YHGroupCommentDAO;
-import project.ppaya.square.yhdao.YHGroupDAO;
-import project.ppaya.square.yhdao.YHGroupHashtagDAO;
-import project.ppaya.square.yhdao.YHUserDAO;
+import project.ppaya.square.shdao.*;
+import project.ppaya.square.vo.*;
+import project.ppaya.square.yhdao.*;
 
 @Repository
 @Controller
@@ -55,6 +38,8 @@ public class GroupController
 	YHEventScheduleDAO yh_event_scheduleDAO;
 	@Autowired
 	YHEventScheduleImageDAO yh_event_schedule_imageDAO;
+	@Autowired
+	YHEventScheduleVideoDAO yh_event_schedule_videoDAO;
 	@Autowired
 	YHGroupCommentDAO yh_group_commentDAO;
 	@Autowired
@@ -141,7 +126,10 @@ public class GroupController
 		ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventIdList(event_id_list);
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
 		//Image List 전송
-		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
+		request.addAttribute("event_schedule_image_list", event_schedule_image_list);		
+		ArrayList<EventScheduleVideo> event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleIdList(event_schedule_id_list);
+		//Video List 전송
+		request.addAttribute("video_list", event_schedule_video_list);
 		
 		ArrayList<GroupComment> group_comment_list = yh_group_commentDAO.selectGroupCommentByGroupId(group_id);
 		for(int i = 0; i < group_comment_list.size(); i++)

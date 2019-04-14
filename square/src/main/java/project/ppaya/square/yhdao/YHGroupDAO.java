@@ -7,8 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import project.ppaya.square.vo.Group;
-import project.ppaya.square.yhmapper.YHGroupMapper;
+import project.ppaya.square.vo.*;
+import project.ppaya.square.yhmapper.*;
 
 @Repository
 public class YHGroupDAO
@@ -16,6 +16,34 @@ public class YHGroupDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<Integer> getGroupIdByName(String name)
+	{
+		ArrayList<Integer> group_id_list = null;
+		
+		YHGroupMapper mapper = sqlSession.getMapper(YHGroupMapper.class);
+		
+		try
+		{
+			group_id_list = mapper.getGroupIdByName(name);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_id_list;
+	}
+	public ArrayList<Group> selectGroupByName(String name)
+	{
+		ArrayList<Group> group_list = null;
+		
+		YHGroupMapper mapper = sqlSession.getMapper(YHGroupMapper.class);
+		
+		try
+		{
+			group_list = mapper.selectGroupByName(name);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_list;
+	}
 	public ArrayList<Group> selectGroupByGroupIdListNotGroupId(ArrayList<Integer> group_id_list, int group_id)
 	{
 		ArrayList<Group> group_list = null;
@@ -33,18 +61,18 @@ public class YHGroupDAO
 		
 		return group_list;
 	}
-	public ArrayList<Group> selectGroupByGroupCategoryIdKeyword(int group_category_id, String keyword)
+	public ArrayList<Group> selectGroupByGroupCategoryIdName(int group_category_id, String name)
 	{
 		ArrayList<Group> group_list = null;
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("group_category_id", group_category_id);
-		map.put("keyword", keyword);
+		map.put("name", name);
 		
 		YHGroupMapper mapper = sqlSession.getMapper(YHGroupMapper.class);
 		
 		try
 		{
-			group_list = mapper.selectGroupByGroupCategoryIdKeyword(map);
+			group_list = mapper.selectGroupByGroupCategoryIdName(map);
 		}
 		catch(Exception error){error.printStackTrace();}
 		

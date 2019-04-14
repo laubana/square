@@ -364,7 +364,7 @@
 								<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="">${event.name}</a></h2>
+										<h2><a href="">${event_schedule.name}</a></h2>
 									</div>
 									<div class="meta">
 										<time class="published" datetime="2019-04-08">2019년 4월 8일</time>
@@ -431,6 +431,10 @@
 										<div class="comment-date">${event_schedule_comment.input_date}</div>
 											<ul class="comment-actions">
 												<li class="name"><a href="viewUserForm?user_id=${event_schedule_comment.user.user_id}">${event_schedule_comment.user.name}</a></li>
+												<c:if test="${event_schedule_comment.user.user_id == sessionScope.user_id}">
+													<li class="name">Edit</li>
+													<li>Delete</li>
+												</c:if>
 											</ul>
 									</div>
 							</div>
@@ -453,6 +457,12 @@
 												<a href="resources/image/event_schedule_image/${event_schedule_image.filename}" class="image thumb"><img src="resources/image/event_schedule_image/${event_schedule_image.filename}" alt="" /></a>
 											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.event_schedule_id}</h3>
 											</c:forEach>
+											<br>
+											<video width='auto' height='auto' controls>
+											<c:forEach var="video" items="${video_list}">
+											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
+											</c:forEach>
+											</video>
 											<br>
 											<a href="listGroupAlbumForm?group_id=${group.group_id}" class="button">앨범 페이지 이동</a>
 										</article>

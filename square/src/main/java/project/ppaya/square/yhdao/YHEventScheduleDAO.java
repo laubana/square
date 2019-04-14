@@ -6,8 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import project.ppaya.square.vo.EventSchedule;
-import project.ppaya.square.yhmapper.YHEventScheduleMapper;
+import project.ppaya.square.vo.*;
+import project.ppaya.square.yhmapper.*;
 
 @Repository
 public class YHEventScheduleDAO

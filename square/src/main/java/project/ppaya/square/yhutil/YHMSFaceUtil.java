@@ -3,8 +3,6 @@ package project.ppaya.square.yhutil;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.net.ssl.SSLContext;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
@@ -12,18 +10,15 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import project.ppaya.square.vo.Reference;
+import project.ppaya.square.vo.*;
 
 public class YHMSFaceUtil
 {	
@@ -168,13 +163,14 @@ public class YHMSFaceUtil
 			
             httpPost.setHeader("Content-Type", "application/octet-stream");
             httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_key);
+            
             httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 
             HttpResponse httpResponse = httpClient.execute(httpPost);
 
-            String test= EntityUtils.toString(httpResponse.getEntity()).trim(); 
+            String result = EntityUtils.toString(httpResponse.getEntity()).trim(); 
             
-            return test;
+            return result;
         }
         catch(Exception error)
         {

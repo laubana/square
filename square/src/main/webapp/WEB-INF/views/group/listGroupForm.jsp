@@ -333,26 +333,28 @@ $('input[type=search]').on({
 					success: function(group_list)
 					{
 						var buff = "";
+						buff += "<div class='gallery'>";
 						
 						for(var i = 0; i < group_list.length; i++)
 						{
 							if(i % 2 == 1)
 							{
-								buff += "<div class='gallery'>"
 								buff += "<article class='from-left'>";
 								buff += "<a href='viewGroupForm?group_category_id=" + group_category_id + "&group_id=" + group_list[i].group_id + "'class='image fit'><img src='resources/image/group_logo/" + group_list[i].group_logo + "' title='" + group_list[i].name +"' alt='' /></a>";
-								buff += "</article>"
-								buff += "</div>"
+								buff += group_list[i].name;
+								buff += "</article>";
 							}
 							else
 							{
-								buff += "<div class='gallery'>"
 								buff += "<article class='from-right'>";
 								buff += "<a href='viewGroupForm?group_category_id=" + group_category_id + "&group_id=" + group_list[i].group_id + "'class='image fit'><img src='resources/image/group_logo/" + group_list[i].group_logo + "' title='" + group_list[i].name +"' alt='' /></a>";
-								buff += "</article>"
-								buff += "</div>"
+								buff += group_list[i].name;
+								buff += "</article>";
 							}
 						}
+
+						buff += "</div>";
+						
 						$("#work").html(buff);
 					},
 					error: function(error)

@@ -6,10 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import project.ppaya.square.vo.EventScheduleComment;
-import project.ppaya.square.vo.GroupComment;
-import project.ppaya.square.yhmapper.YHEventScheduleCommentMapper;
-import project.ppaya.square.yhmapper.YHGroupCommentMapper;
+import project.ppaya.square.vo.*;
+import project.ppaya.square.yhmapper.*;
 
 @Repository
 public class YHEventScheduleCommentDAO
