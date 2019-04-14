@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,12 +33,12 @@
 	</div>
 
 	<h2 align="center">급상승 키워드로 당신의 그룹을 찾아보세요!</h2>
-	<p><span id="thumbsUp" class="glyphicon glyphicon-thumbs-up" onclick="openNav()">급상승 키워드</span></p> 
+	<p><span id="thumbsUp" class="glyphicon glyphicon-thumbs-up" onclick="openNav()"> 급상승 키워드</span></p> 
 	
-	
-		<!-- Header -->
 		
-		  <p>(해시태그)</p>
+			<!-- 그룹 해시태그 뿌려줘야하는데 아직 컨트롤러 불안정
+				#${group_hashtag.hashtag} -->
+
 		
 	
   <!-- 			<div class="overlay">그룹이름</div> -->
@@ -53,7 +54,7 @@
 		<div class="row"> 
 		  <div class="column">
 		  
-		  <!--1.for 문 돌리기  -->
+		  
 		    <img src="resources/GroupPhoto/images/img/1.jpg"  style=width:100%>
 		    <img src="resources/GroupPhoto/images/img/2.jpg"  style=width:100%>
 		    <img src="resources/GroupPhoto/images/img/3.jpg"  style=width:100%>
