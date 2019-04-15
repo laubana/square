@@ -380,5 +380,21 @@
 			<script src="resources/GroupMain/assets/js/util.js"></script>
 			<script src="resources/GroupMain/assets/js/main.js"></script>
 
+<!-- 맵 띄우는 스크립트 -->
+<script>
+var map;
+
+function initMap() {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(37.5729503, 126.97935789999997);
+    var mapOptions = {
+    	      zoom: 15,
+    	      center: latlng
+    	    }
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+}
+
+
+</script>
 	</body>
 </html>

@@ -141,7 +141,7 @@
 		
 							
 				<!-- google maps-->
-							<section id="section_map">
+						<section id="section_map">
 								<article class="post">
 								<p>여기는 p태그
 								</p>
@@ -153,14 +153,11 @@
 										<input type = "text" id = "search_addr" value = "seoul">
 										<input type = "button" id = "button_mapsearch" value = "검색" onClick = "codeAddress()">
 									<div align="right">
-									<div id = "output"></div>
-									<div id = "output1"></div>
 									<footer>
-										오른쪽 아래에 버튼
 									</footer>
 								</div>
 							</article>
-							</section>
+						</section>
 
 						<!-- 그룹의 설립일 등 기본 정보 -->
 							<div id="album">
@@ -209,7 +206,7 @@
 
 	function initMap() {
 	    geocoder = new google.maps.Geocoder();
-	    var latlng = new google.maps.LatLng(-34.397, 150.644);
+	    var latlng = new google.maps.LatLng(37.5729503, 126.97935789999997);
 	    var mapOptions = {
 	    	      zoom: 8,
 	    	      center: latlng

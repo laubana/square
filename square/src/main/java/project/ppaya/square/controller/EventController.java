@@ -176,8 +176,8 @@ public class EventController
 		request.addAttribute("event_comment_list", event_comment_list);
 		
 		//event_place 임시 전송
-		String cood = "{lat: 37.566535, lng: 126.97796919999996}";
-		request.addAttribute("event_place", cood);
+		String place = "{lat: 37.566535, lng: 126.97796919999996}";
+		request.addAttribute("event_place", place);
 		
 		ArrayList<Integer> group_union_id_list = yh_event_unionDAO.getGroupIdByEventId(event_id);
 		ArrayList<Group> group_union_list = yh_groupDAO.selectGroupByGroupIdListNotGroupId(group_union_id_list, group_id);
