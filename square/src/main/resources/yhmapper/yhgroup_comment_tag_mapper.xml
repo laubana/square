@@ -16,6 +16,25 @@ VALUES
 	#{tag}
 )
 </insert>
+<select id="getTagByGroupCommentIdList" parameterType="list" resultType="string">
+SELECT DISTINCT
+	TAG
+FROM
+	TABLE_GCOT
+WHERE
+	1 = 0
+	<foreach item="group_comment_id" collection="list" open="OR" separator="OR">
+		GROUP_COMMENT_ID = #{group_comment_id}
+	</foreach>
+</select>
+<select id="getTagByGroupCommentId" parameterType="int" resultType="string">
+SELECT DISTINCT
+	TAG
+FROM
+	TABLE_GCOT
+WHERE
+	GROUP_COMMENT_ID = #{group_comment_id}
+</select>
 <select id="selectGroupCommentTagByGroupCommentId" parameterType="int" resultType="GroupCommentTag">
 SELECT
 	*

@@ -1,6 +1,9 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+<%@page import="project.ppaya.square.vo.GroupComment"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <!--
 	Read Only by HTML5 UP
@@ -107,11 +110,11 @@
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">정보</a></li>
-						<li><a href="#two">회원</a></li>
-						<li><a href="#three">코멘트</a></li>
-						<li><a href="#four">앨범</a></li>
-						<li><a href="#five">이벤트</a></li>
+						<li><a href="#one" class="active">グループ情報</a></li>
+						<li><a href="#two">メンバー</a></li>
+						<li><a href="#three">コメント</a></li>
+						<li><a href="#four">アルバム</a></li>
+						<li><a href="#five">イベント</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -144,25 +147,25 @@
 						<!-- Two -->
 							<section id="two">
 								<div class="container">
-									<h3>회원 정보</h3>
+									<h3>メンバー</h3>
+									<p>リーダー</p>
 										<div>
 											<a href="viewUserForm?user_id=${leader.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${leader.image_id}" alt="" style="width: 100px; height:auto;"></a>
 										</div>
 										<div>
-									<p>주최자</p>
+									<p>メンバー</p>
 										<c:forEach var="user" items="${user_list}">
 											<a href="viewUserForm?user_id=${user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 										</c:forEach>
-										</div>
-									<p>회원</p>${user.size()}
-									<a href="listGroupAttendanceForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">회원 페이지 이동</a>
+										</div>${user.size()}
+									<a href="listGroupAttendanceForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">メンバーページへ</a>
 								</div>
 							</section>
 						
 						<!-- Three -->
 							<section id="three">
 								<div class="container">
-									<h3>코멘트</h3>
+									<h3>コメント</h3>
 						<div class="comments">
 						<c:forEach var="group_comment" items="${group_comment_list}">
 						<div class="comment-wrap">
@@ -172,7 +175,11 @@
 							<div class="comment-block">
 								<p class="comment-text">${group_comment.content}</p>
 									<div class="bottom-comment">
-										<div class="comment-date">${group_comment.input_date}</div>
+										<div class="comment-date">
+										
+										<%= (new SimpleDateFormat("yyyy年 MM月 dd日 HH:mm:ss")).format(new Date(((GroupComment)pageContext.getAttribute("group_comment")).getInput_date()))%>
+										
+										</div>
 											<ul class="comment-actions">
 												<li class="name"><a href="viewUserForm?user_id=${group_comment.user.user_id}">${group_comment.user.name}</a></li>
 												<c:if test="${group_comment.user.user_id == sessionScope.user_id}">
@@ -181,11 +188,18 @@
 												</c:if>
 											</ul>
 									</div>
+									<br><br><br>
+									<div>
+									<c:forEach var="group_comment_tag" items="${group_comment.group_comment_tag_list}">
+										<a href="">#${group_comment_tag}</a>
+									</c:forEach>
+									</div>		
 							</div>
 						</div>
 						</c:forEach>
-						
-						<a href="listGroupCommentForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">코멘트 페이지 이동</a>
+						<textarea class="comment-block"></textarea><br>
+						<input type="button" value="作成"><br><br><br>
+						<a href="listGroupCommentForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">コメントページへ</a>
 						
 						</div>		
 								</div>
@@ -194,7 +208,7 @@
 						<!-- Four -->
 							<section id="four">
 								<div class="container">
-									<h3>앨범</h3>
+									<h3>アルバム</h3>
 						
 									<div class="features">
 										<article class="col-6 col-12-xsmall work-item">
@@ -209,7 +223,7 @@
 											</c:forEach>
 											</video>
 											<br>
-											<a href="listGroupAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">앨범 페이지 이동</a>
+											<a href="listGroupAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">アルバムページへ</a>
 										</article>
 									</div>
 								</div>
@@ -218,7 +232,8 @@
 						<!-- Five -->
 							<section id="five">
 								<div class="container">
-									<h3>이벤트</h3>
+									<h3>イベント</h3>
+											<input type="button" value="追加">
 									<div class="features">
 									<c:forEach var="event" items="${event_list}">
 									<article>
@@ -230,8 +245,9 @@
 										</article>
 										</c:forEach>
 											</div>
-										<a href="listEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">이벤트 페이지 이동</a>
+										<a href="listEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">イベントページへ</a>
 									</div>
+									
 							</section>
 							<section id="six">
 								<div class="container">

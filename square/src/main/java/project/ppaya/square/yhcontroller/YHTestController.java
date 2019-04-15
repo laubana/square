@@ -38,6 +38,10 @@ public class YHTestController
 	@Autowired
 	YHEventScheduleDAO yh_event_scheduleDAO;
 	@Autowired
+	YHEventScheduleCommentDAO yh_event_schedule_commentDAO;
+	@Autowired
+	YHEventScheduleCommentTagDAO yh_event_schedule_comment_tagDAO;
+	@Autowired
 	YHEventScheduleImageDAO yh_event_schedule_imageDAO;
 	@Autowired
 	YHEventScheduleImageTagDAO yh_event_schedule_image_tagDAO;
@@ -45,6 +49,8 @@ public class YHTestController
 	YHEventScheduleImageDescriptionDAO yh_event_schedule_image_descriptionDAO;
 	@Autowired
 	YHEventScheduleImageCategoryDAO yh_event_schedule_image_categoryDAO;
+	@Autowired
+	YHCommentTagDAO yh_comment_tagDAO;
 	
 	@RequestMapping(value = "yhtest", method = RequestMethod.GET)
 	public void YHTest()
@@ -109,17 +115,31 @@ public class YHTestController
 		
 		return "yhtest/yhtest1";
 	}
+	@RequestMapping(value = "yhtest2", method = RequestMethod.GET)
+	public void yhtest2(Model request)
+	{
+		System.out.println(YHMSTextAnalyticsUtil.getKeyPhraseList("Javaを勉強したいです。", "ja").toString());
+		System.out.println(YHMSTextAnalyticsUtil.getKeyPhraseList("Javascriptができる方いますか？", "ja").toString());
+		System.out.println(YHMSTextAnalyticsUtil.getKeyPhraseList("SQLは簡単ですよ。", "ja").toString());
+	}
 	@RequestMapping(value = "yhinit", method = RequestMethod.GET)
 	public void yhinit()
 	{
 		ArrayList<GroupComment> group_comment_list = yh_group_commentDAO.selectGroupCommentByGroupId(1);		
 		for(int i = 0; i < group_comment_list.size(); i++)
 		{
-			ArrayList<String> tag_list = YHMSTextAnalyticsUtil.getKeyPhraseList(group_comment_list.get(i).getContent(), "en");
+			ArrayList<String> source_tag_list = YHMSTextAnalyticsUtil.getKeyPhraseList(group_comment_list.get(i).getContent(), "en");
 			
-			for(int j = 0; j < tag_list.size(); j++)
+			ArrayList<String> target_tag_list = new ArrayList<>();
+			for(int j = 0; j < source_tag_list.size(); j++)
 			{
-				yh_group_comment_tagDAO.insertGroupCommentTag(group_comment_list.get(i).getGroup_comment_id(), tag_list.get(j));
+				target_tag_list.add(YHGoogleTranslationUtil.getTranslation(source_tag_list.get(j), "en", "ja"));
+			}
+			
+			for(int j = 0; j < source_tag_list.size(); j++)
+			{
+				yh_group_comment_tagDAO.insertGroupCommentTag(group_comment_list.get(i).getGroup_comment_id(), source_tag_list.get(j));
+				yh_comment_tagDAO.insertCommentTag(group_comment_list.get(i).getUser_id(), source_tag_list.get(j));
 			}
 		}
 		
@@ -128,41 +148,86 @@ public class YHTestController
 		
 		for(int i = 0; i < event_comment_list.size(); i++)
 		{	
-			ArrayList<String> tag_list = YHMSTextAnalyticsUtil.getKeyPhraseList(event_comment_list.get(i).getContent(), "en");
+			ArrayList<String> source_tag_list = YHMSTextAnalyticsUtil.getKeyPhraseList(event_comment_list.get(i).getContent(), "en");
 			
-			for(int j = 0; j < tag_list.size(); j++)
+			ArrayList<String> target_tag_list = new ArrayList<>();
+			for(int j = 0; j < source_tag_list.size(); j++)
 			{
-				yh_event_comment_tagDAO.insertEventCommentTag(event_comment_list.get(i).getEvent_comment_id(), tag_list.get(j));
+				target_tag_list.add(YHGoogleTranslationUtil.getTranslation(source_tag_list.get(j), "en", "ja"));
+			}
+			
+			for(int j = 0; j < source_tag_list.size(); j++)
+			{
+				yh_event_comment_tagDAO.insertEventCommentTag(event_comment_list.get(i).getEvent_comment_id(), source_tag_list.get(j));
+				yh_comment_tagDAO.insertCommentTag(event_comment_list.get(i).getUser_id(), source_tag_list.get(j));
 			}
 		}
+		
 		ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventIdList(event_id_list);
+		ArrayList<EventScheduleComment> event_schedule_comment_list = yh_event_schedule_commentDAO.selectEventScheduleCommentByEventScheduleIdList(event_schedule_id_list);
+		
+		for(int i = 0; i < event_schedule_comment_list.size(); i++)
+		{	
+			ArrayList<String> source_tag_list = YHMSTextAnalyticsUtil.getKeyPhraseList(event_schedule_comment_list.get(i).getContent(), "en");
+			
+			ArrayList<String> target_tag_list = new ArrayList<>();
+			for(int j = 0; j < source_tag_list.size(); j++)
+			{
+				target_tag_list.add(YHGoogleTranslationUtil.getTranslation(source_tag_list.get(j), "en", "ja"));
+			}
+			
+			for(int j = 0; j < source_tag_list.size(); j++)
+			{
+				yh_event_schedule_comment_tagDAO.insertEventScheduleCommentTag(event_comment_list.get(i).getEvent_comment_id(), source_tag_list.get(j));
+				yh_comment_tagDAO.insertCommentTag(event_schedule_comment_list.get(i).getUser_id(), source_tag_list.get(j));
+			}
+		}		
+		
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
 		
 		for(int i = 0; i < event_schedule_image_list.size(); i++)
 		{
-			ArrayList<String> tag_list = YHMSComputerVisionUtil.getTagList(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "en");
-			
-			for(int j = 0; j < tag_list.size(); j++)
+			ArrayList<String> source_tag_list = YHMSComputerVisionUtil.getTagList(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "ja");
+
+			/*ArrayList<String> target_tag_list = new ArrayList<>();
+			for(int j = 0; j < source_tag_list.size(); j++)
 			{
-				yh_event_schedule_image_tagDAO.insertEventScheduleImageTag(event_schedule_image_list.get(i).getEvent_schedule_image_id(), tag_list.get(j));
+				target_tag_list.add(YHGoogleTranslationUtil.getTranslation(source_tag_list.get(j), "ja", "ko"));
+			}*/
+			
+			for(int j = 0; j < source_tag_list.size(); j++)
+			{
+				yh_event_schedule_image_tagDAO.insertEventScheduleImageTag(event_schedule_image_list.get(i).getEvent_schedule_image_id(), source_tag_list.get(j));
 			}
 		}
 		for(int i = 0; i < event_schedule_image_list.size(); i++)
 		{
-			ArrayList<String> description_list = YHMSComputerVisionUtil.getDescriptionList(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "en");
+			ArrayList<String> source_description_list = YHMSComputerVisionUtil.getDescriptionList(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "ja");
 			
-			for(int j = 0; j < description_list.size(); j++)
+			/*ArrayList<String> target_tag_list = new ArrayList<>();
+			for(int j = 0; j < source_description_list.size(); j++)
 			{
-				yh_event_schedule_image_descriptionDAO.insertEventScheduleImageDescription(event_schedule_image_list.get(i).getEvent_schedule_image_id(), description_list.get(j));
+				target_tag_list.add(YHGoogleTranslationUtil.getTranslation(source_description_list.get(j), "ja", "ko"));
+			}*/
+			
+			for(int j = 0; j < source_description_list.size(); j++)
+			{
+				yh_event_schedule_image_descriptionDAO.insertEventScheduleImageDescription(event_schedule_image_list.get(i).getEvent_schedule_image_id(), source_description_list.get(j));
 			}
 		}
 		for(int i = 0; i < event_schedule_image_list.size(); i++)
 		{
-			ArrayList<String> category_list = YHMSComputerVisionUtil.getCategoryList(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "en");
+			ArrayList<String> source_category_list = YHMSComputerVisionUtil.getCategoryList(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "ja");
 			
-			for(int j = 0; j < category_list.size(); j++)
+			/*ArrayList<String> target_category_list = new ArrayList<>();
+			for(int j = 0; j < source_category_list.size(); j++)
 			{
-				yh_event_schedule_image_categoryDAO.insertEventScheduleImageCategory(event_schedule_image_list.get(i).getEvent_schedule_image_id(), category_list.get(j));
+				target_category_list.add(YHGoogleTranslationUtil.getTranslation(source_category_list.get(j), "ja", "ko"));
+			}*/
+			
+			for(int j = 0; j < source_category_list.size(); j++)
+			{
+				yh_event_schedule_image_categoryDAO.insertEventScheduleImageCategory(event_schedule_image_list.get(i).getEvent_schedule_image_id(), source_category_list.get(j));
 			}
 		}
 	}

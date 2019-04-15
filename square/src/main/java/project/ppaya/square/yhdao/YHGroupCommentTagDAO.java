@@ -16,6 +16,20 @@ public class YHGroupCommentTagDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<String> getTagByGroupCommentIdList(ArrayList<Integer> group_comment_id_list)
+	{
+		ArrayList<String> group_comment_tag_tag_list = null;
+		
+		YHGroupCommentTagMapper mapper = sqlSession.getMapper(YHGroupCommentTagMapper.class);
+		
+		try
+		{
+			group_comment_tag_tag_list = mapper.getTagByGroupCommentIdList(group_comment_id_list);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_comment_tag_tag_list;
+	}
 	public int insertGroupCommentTag(int group_comment_id, String tag)
 	{
 		int result = 0;
@@ -32,6 +46,20 @@ public class YHGroupCommentTagDAO
 		catch(Exception error){error.printStackTrace();}
 		
 		return result;
+	}
+	public ArrayList<String> getTagByGroupCommentId(int group_comment_id)
+	{
+		ArrayList<String> group_comment_tag_tag_list = null;
+		
+		YHGroupCommentTagMapper mapper = sqlSession.getMapper(YHGroupCommentTagMapper.class);
+		
+		try
+		{
+			group_comment_tag_tag_list = mapper.getTagByGroupCommentId(group_comment_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_comment_tag_tag_list;
 	}
 	public ArrayList<GroupCommentTag> selectGroupCommentTagByGroupCommentId(int group_comment_id)
 	{
