@@ -28,7 +28,7 @@
 			</header>
 
 		<!-- Signup Form -->
-			<form id="join-form" method="post" action="joinForm2">
+			<form id="join-form" method="post" action="joinForm">
 				<p><input type="text" name="user_id" id="user_id" placeholder="ID">
 
 		<!-- non-display 로 ~! -->

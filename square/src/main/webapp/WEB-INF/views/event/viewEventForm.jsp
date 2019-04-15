@@ -209,7 +209,7 @@
 									${event.content}
 								</p>
 									<div id="map" ></div>
-									장소: ${requestScope.event_place}
+									場所: ${requestScope.event_place}
 								<div align="right"><footer>
 										<a href="#" class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
 										<a href="#" class="icon fa-comment">128</a>&nbsp;&nbsp;				
@@ -365,7 +365,7 @@
 	</body>
 
 <!-- 맵 띄우는 스크립트 -->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP"">
 </script>
 <script>
 function initMap() {
@@ -383,6 +383,12 @@ function initMap() {
 	   		, function(results, status) {
 				if (status == 'OK') {
 					latlng = results[0].geometry.location;
+					map.setCenter(latlng);
+					var marker = new google.maps.Marker({ 
+						map: map,
+						position: latlng
+						});
+					map.setZoom(15);
 					
 				} else {
 	   				alert('Geocode was not successful for the following reason: ' + status);
@@ -390,12 +396,7 @@ function initMap() {
 	   		}
 	   );
     
-		map.setCenter(latlng);
-		var marker = new google.maps.Marker({ 
-			map: map,
-			position: latlng
-			});
-		map.setZoom(15);
+	
 }
 </script>
 </html>

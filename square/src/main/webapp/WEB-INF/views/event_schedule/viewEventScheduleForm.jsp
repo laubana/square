@@ -152,6 +152,15 @@
     }
     </script>
     <script>
+/*     
+    아래 구문 오류나길래 주석처리 해놨음
+    아래 구문 오류나길래 주석처리 해놨음
+    아래 구문 오류나길래 주석처리 해놨음
+    아래 구문 오류나길래 주석처리 해놨음
+    아래 구문 오류나길래 주석처리 해놨음
+    아래 구문 오류나길래 주석처리 해놨음
+    아래 구문 오류나길래 주석처리 해놨음
+ */    
 /*    	console.log(JSON.parse('${json_event_schedule_user_schedule_list_list}')); */
     </script>
 	<script>
@@ -297,9 +306,8 @@
 	     }
 		html,body {height: 100%; margin: 0; padding: 0;}
 	</style>
-
 	
-		<script async defer src="https://apis.google.com/js/api.js"
+	<script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
@@ -312,11 +320,11 @@
 				<nav>
 					<ul>
 						<li><a href="listRecommendationForm"></a>
-						<c:if test="${sessionScope.user_id != null}">
+						<c:if test=	"${sessionScope.user_id != null}">
 						<li><a href="createGroupForm">그룹생성</a></li>
 					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
 						</c:if>
-						<c:if test="${sessionScope.user_id == null}">
+						<c:if test=	"${sessionScope.user_id == null}">
 						<li><a href="joinUserForm">회원가입</a></li>
 							<li><a href="loginUserForm">로그인</a></li>
 						</c:if>
@@ -387,7 +395,7 @@
 									</div>
 								</header>
 								<p>
-								${event_schedule.content}
+									${event_schedule.content}
 								</p>
 								<div align="right"><footer>
 										<a href="#" class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -406,7 +414,7 @@
 						<div class="container">
 							<div id = "map"></div>
 							<div>
-								모임 장소: ${ requestScope.place }
+								場所: ${ requestScope.place }
 							</div>
 						</div>
 					</section>
@@ -543,7 +551,7 @@
 			<script src="resources/GroupMain/assets/js/main.js"></script>
 			
 <!-- 맵 띄우는 스크립트 -->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP"">
 </script>
 <!-- 서버에서 주소 받아다가, 검색해서 좌표 받고, 그 좌표로 맵 중앙을 바꾸고 마커 띄우기 -->
 <script>
@@ -562,6 +570,12 @@ function initMap() {
 	   		, function(results, status) {
 				if (status == 'OK') {
 					latlng = results[0].geometry.location;
+					map.setCenter(latlng);
+					var marker = new google.maps.Marker({ 
+						map: map,
+						position: latlng
+						});
+					map.setZoom(15);
 					
 				} else {
 	   				alert('Geocode was not successful for the following reason: ' + status);
@@ -569,12 +583,6 @@ function initMap() {
 	   		}
 	   );
     
-		map.setCenter(latlng);
-		var marker = new google.maps.Marker({ 
-			map: map,
-			position: latlng
-			});
-		map.setZoom(15);
 }
 </script>
 

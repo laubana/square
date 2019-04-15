@@ -58,13 +58,13 @@ public class EventController
 			)
 	{
 		//event_place 임시 전송
-		ArrayList<String> arealist = new ArrayList<>();
-		arealist.add("'광주광역시 북구'");
-		arealist.add("'서울특별시 종로구'");
-		arealist.add("'seoul'");
-		arealist.add("'광주광역시 북구'");
-		arealist.add("'강원도 춘천'");
-			request.addAttribute("arealist", arealist);
+		ArrayList<String> place_list = new ArrayList<>();
+		place_list.add("'東京　京橋駅'");
+		place_list.add("'名古屋　愛知県'");
+		place_list.add("'大阪市 大正区'");
+		place_list.add("'仙台市　宮城県'");
+		place_list.add("'名古屋　愛知県'");
+		request.addAttribute("place_list", place_list);
 		
 		
 		return "event/createEventForm";
@@ -176,7 +176,7 @@ public class EventController
 		request.addAttribute("event_comment_list", event_comment_list);
 		
 		//event_place 임시 전송
-		String place = "서울특별시 종로구";
+		String place = "東京　京橋駅";
 		request.addAttribute("event_place", place);
 		
 		ArrayList<Integer> group_union_id_list = yh_event_unionDAO.getGroupIdByEventId(event_id);
