@@ -297,8 +297,7 @@
 	     }
 		html,body {height: 100%; margin: 0; padding: 0;}
 	</style>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap">
-	</script>
+
 	
 		<script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
@@ -544,6 +543,8 @@
 			<script src="resources/GroupMain/assets/js/main.js"></script>
 			
 <!-- 맵 띄우는 스크립트 -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap">
+</script>
 <!-- 서버에서 주소 받아다가, 검색해서 좌표 받고, 그 좌표로 맵 중앙을 바꾸고 마커 띄우기 -->
 <script>
 function initMap() {

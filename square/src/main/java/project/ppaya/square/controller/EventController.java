@@ -176,7 +176,7 @@ public class EventController
 		request.addAttribute("event_comment_list", event_comment_list);
 		
 		//event_place 임시 전송
-		String place = "{lat: 37.566535, lng: 126.97796919999996}";
+		String place = "서울특별시 종로구";
 		request.addAttribute("event_place", place);
 		
 		ArrayList<Integer> group_union_id_list = yh_event_unionDAO.getGroupIdByEventId(event_id);
