@@ -58,13 +58,13 @@ public class EventController
 			)
 	{
 		//event_place 임시 전송
-		ArrayList<String> cood_list = new ArrayList<>();
-		cood_list.add("{lat: -41.330162, lng: 174.865694}");
-		cood_list.add("{lat: -42.734358, lng: 147.439506}");
-		cood_list.add("{lat: -42.734358, lng: 147.501315}");
-		cood_list.add("{lat: -42.734358, lng: 147.501315}");
-		cood_list.add("{lat: -43.999792, lng: 170.463352}");
-		request.addAttribute("event_place", cood_list);
+		ArrayList<String> arealist = new ArrayList<>();
+		arealist.add("'광주광역시 북구'");
+		arealist.add("'서울특별시 종로구'");
+		arealist.add("'seoul'");
+		arealist.add("'광주광역시 북구'");
+		arealist.add("'강원도 춘천'");
+			request.addAttribute("arealist", arealist);
 		
 		
 		return "event/createEventForm";
