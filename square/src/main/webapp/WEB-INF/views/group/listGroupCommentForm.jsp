@@ -50,6 +50,9 @@
 					</c:if>
 				</header>
 				<nav id="nav">
+					<ul>
+						<li><a href="#three" class="active">코멘트</a></li>
+					</ul>
 				</nav>
 				<footer>
 					<ul class="icons">

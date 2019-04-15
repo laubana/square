@@ -168,11 +168,7 @@
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">정보</a></li>
-						<li><a href="#two">회원</a></li>
-						<li><a href="#three">코멘트</a></li>
-						<li><a href="#four">앨범</a></li>
-						<li><a href="#five">이벤트 스케줄</a></li>
+						<li><a href="#one" class="active">이벤트 뷰</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -204,7 +200,7 @@
 										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">${leader.name}</span><img src="resources/image/user_image/${leader.image_id}" alt="" /></a>
 									</div>
 								</header>
-								<span class="image featured"><img src="resources/image/event_image/${event.image_id}" alt="" /></span>
+								<span class="image featured"><img src="resources/image/event_image/${event.image_id}" ></span>
 								<p>
 									${event.content}
 								</p>
