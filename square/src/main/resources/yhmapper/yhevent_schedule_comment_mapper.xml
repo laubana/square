@@ -14,4 +14,15 @@ WHERE
 ORDER BY
 	EVENT_SCHEDULE_COMMENT_ID
 </select>
+<select id="selectEventScheduleCommentByEventScheduleIdList" parameterType="list" resultType="EventScheduleComment">
+SELECT
+	*
+FROM
+	TABLE_ESCO
+WHERE
+	1 = 0
+	<foreach item="event_schedule_id" collection="list" open="OR" separator="OR">	
+		EVENT_SCHEDULE_ID = #{event_schedule_id}
+	</foreach>
+</select>
 </mapper>

@@ -18,7 +18,7 @@ public class YHMSTextAnalyticsUtil
 {	
 	public static ArrayList<String> getKeyPhraseList(String string, String language) 
 	{		
-		ArrayList<String> phrase_list = new ArrayList<>();
+		ArrayList<String> key_phrase_list = new ArrayList<>();
 		
 		HttpClient httpClient = HttpClients.createDefault();
 
@@ -55,12 +55,12 @@ public class YHMSTextAnalyticsUtil
 			
 			for(int i = 0; i < jsonArray.length(); i++)
 			{
-				phrase_list.add(jsonArray.getString(i));
+				key_phrase_list.add(jsonArray.getString(i));
 			}
 		}
 		catch(Exception error){error.printStackTrace();}
 		
-		return phrase_list;
+		return key_phrase_list;
 	}
 	public static double getSentiment(String string, String language) 
 	{		

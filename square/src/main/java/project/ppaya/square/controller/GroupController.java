@@ -43,6 +43,8 @@ public class GroupController
 	@Autowired
 	YHGroupCommentDAO yh_group_commentDAO;
 	@Autowired
+	YHGroupCommentTagDAO yh_group_comment_tagDAO;
+	@Autowired
 	YHGroupHashtagDAO yh_group_hashtagDAO;
 	@Autowired
 	YHEventUnionDAO yh_event_unionDAO;
@@ -135,6 +137,12 @@ public class GroupController
 		for(int i = 0; i < group_comment_list.size(); i++)
 		{
 			group_comment_list.get(i).setUser(yh_userDAO.selectUserByUserId(group_comment_list.get(i).getUser_id()));
+			group_comment_list.get(i).setGroup_comment_tag_list(yh_group_comment_tagDAO.getTagByGroupCommentId(group_comment_list.get(i).getGroup_comment_id()));
+			
+			for(int j = 0; j < group_comment_list.get(i).getGroup_comment_tag_list().size(); j++)
+			{
+				System.out.println(group_comment_list.get(i).getGroup_comment_tag_list().get(j));
+			}
 		}
 		//GroupComment List 전송
 		request.addAttribute("group_comment_list", group_comment_list);
