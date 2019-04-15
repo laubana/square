@@ -58,13 +58,13 @@ public class EventController
 			)
 	{
 		//event_place 임시 전송
-		ArrayList<String> cood_list = new ArrayList<>();
-		cood_list.add("{lat: -41.330162, lng: 174.865694}");
-		cood_list.add("{lat: -42.734358, lng: 147.439506}");
-		cood_list.add("{lat: -42.734358, lng: 147.501315}");
-		cood_list.add("{lat: -42.734358, lng: 147.501315}");
-		cood_list.add("{lat: -43.999792, lng: 170.463352}");
-		request.addAttribute("event_place", cood_list);
+		ArrayList<String> place_list = new ArrayList<>();
+		place_list.add("'東京　京橋駅'");
+		place_list.add("'名古屋　愛知県'");
+		place_list.add("'大阪市 大正区'");
+		place_list.add("'仙台市　宮城県'");
+		place_list.add("'名古屋　愛知県'");
+		request.addAttribute("place_list", place_list);
 		
 		
 		return "event/createEventForm";
@@ -176,8 +176,8 @@ public class EventController
 		request.addAttribute("event_comment_list", event_comment_list);
 		
 		//event_place 임시 전송
-		String cood = "{lat: 37.566535, lng: 126.97796919999996}";
-		request.addAttribute("event_place", cood);
+		String place = "東京　京橋駅";
+		request.addAttribute("event_place", place);
 		
 		ArrayList<Integer> group_union_id_list = yh_event_unionDAO.getGroupIdByEventId(event_id);
 		ArrayList<Group> group_union_list = yh_groupDAO.selectGroupByGroupIdListNotGroupId(group_union_id_list, group_id);

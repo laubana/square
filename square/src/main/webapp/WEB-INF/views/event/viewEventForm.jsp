@@ -29,23 +29,6 @@
 		     }
 		html,body {height: 100%; margin: 0; padding: 0;}
 		</style>
-		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap">
-		</script>
-			<!-- *세현: 구글 맵 띄우기 위한 script 태그 
-			여기는 맵 관련 스크립트만 들어갈 태그임. 다른 스크립트는 태그 하나 더 만들어 주기 바람.-->
-		<script>
-				/* 컨트롤러에서 보낸 좌표 값을 밑에 center 속성의 값으로 넣어주기 */ 
-			var map;
-			function initMap() {
-			    map = new google.maps.Map(document.getElementById('map'), {
-			      center: ${requestScope.event_place},
-			      zoom: 8
-			    });
-			  }
-		</script>
-			
-		
-		
 		
 		<script>
 			function withdrawEventAction()
@@ -226,7 +209,7 @@
 									${event.content}
 								</p>
 									<div id="map" ></div>
-									어디에 들어가나
+									場所: ${requestScope.event_place}
 								<div align="right"><footer>
 										<a href="#" class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
 										<a href="#" class="icon fa-comment">128</a>&nbsp;&nbsp;				
@@ -379,6 +362,41 @@
 			<script src="resources/GroupMain/assets/js/breakpoints.min.js"></script>
 			<script src="resources/GroupMain/assets/js/util.js"></script>
 			<script src="resources/GroupMain/assets/js/main.js"></script>
-
 	</body>
+
+<!-- 맵 띄우는 스크립트 -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP"">
+</script>
+<script>
+function initMap() {
+    var latlng = new google.maps.LatLng(37.5729503, 126.97935789999997);
+    var mapOptions = {
+    	      zoom: 15,
+    	      center: latlng
+    	    }
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+	var geocoder = new google.maps.Geocoder();
+ 	var address = '${requestScope.event_place}';
+ 	   geocoder.geocode(
+	   		{ 'address': address }
+	   		, function(results, status) {
+				if (status == 'OK') {
+					latlng = results[0].geometry.location;
+					map.setCenter(latlng);
+					var marker = new google.maps.Marker({ 
+						map: map,
+						position: latlng
+						});
+					map.setZoom(15);
+					
+				} else {
+	   				alert('Geocode was not successful for the following reason: ' + status);
+	   			}
+	   		}
+	   );
+    
+	
+}
+</script>
 </html>

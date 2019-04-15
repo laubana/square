@@ -244,7 +244,10 @@ public class EventScheduleController
 		logger.debug("{}", test_list4.toString());
 		
 		request.addAttribute("test_list4", new JSONArray(test_list4));
-		
+		//맵스 장소 보내기
+		String place = "東京　京橋駅";
+		request.addAttribute("place",place);
+
 		return "event_schedule/viewEventScheduleForm";
 	}
 	@RequestMapping(value = "listEventScheduleAttendanceForm", method = RequestMethod.GET)
