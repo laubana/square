@@ -114,7 +114,9 @@ border: 0;
 					</ul>
 				</footer>
 			</section>
-
+		
+<!-- 폼 -->			
+<form action="" method="post">
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -209,7 +211,7 @@ border: 0;
 										</article>
 											</div>
 									
-									
+										<div align="center"><input type="submit" value="확인"></div>
 																	
 									<!-- <button onclick="uploadFirstEventImage()" class="button">Image More</button> -->		
 								</div></footer>
@@ -226,6 +228,7 @@ border: 0;
 					</section>
 
 		</div>
+</form>
 		<!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
 		<!-- 추가 Scripts -->
