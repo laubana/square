@@ -10,10 +10,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PPaya 
      </title>
+
     <script type="text/javascript"> (function() { var css = document.createElement('link'); css.href = 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); </script>
+   	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="resources/GroupRecommend/docs/assets/css/app.css">
     <link rel="stylesheet" href="resources/GroupRecommend/docs/assets/css/theme.css">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
+	<script>
+ 	
+	function w3_open() {
+	  document.getElementById("main").style.display = "block";
+	  document.getElementById("mySidebar").style.display = "block";
+	}
+
+	function w3_close() {
+	  document.getElementById("main").style.display = "none";
+	  document.getElementById("mySidebar").style.display = "none";
+	}
+
+	</script>	
 </head>
 
 <body>
@@ -37,9 +52,44 @@
     		</li>
     	</ul>
     </div>
-    </nav>    
+    </nav> 
     
+    
+    <div class="w3-sidebar w3-bar-block w3-animate-left" style="display:none;z-index:5" id="main">
+
+ 		  <a href="#" class="w3-bar-item w3-button">쿠우쿠우 배불러</a>
+		  <a href="#" class="w3-bar-item w3-button">그거 알아 그거?</a>
+		  <a href="#" class="w3-bar-item w3-button">6월 정처기실기</a>
+		  <a href="#" class="w3-bar-item w3-button">집밥 먹고싶다</a>
+</div>
+
+<!-- Page Content -->
+<div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="mySidebar"></div>
+
+<div>
+  <button class="w3-button w3-white w3-medium" onclick="w3_open()"> #급상승 해시태그 보기</button>
+</div>
+    
+    
+<!--     	<div id="main">	
+	  <span class="glyphicon glyphicon-hand-right" onclick="openNav()"># 급상승 해시태그 보기</span> 여기 누르고 사이드바로 넘어감 
+		</div>  
+	
+		급상승 해쉬태그 받을 부분
+
+	    <div id="mySidebar" class="sidenav">
+		  <a href="javascript:void(0)" class="w3-overlay w3-animate-opacity" onclick="closeNav()">&times;</a>
+		  <a href="#">쿠우쿠우 배불러</a>
+		  <a href="#">그거 알아 그거?</a>
+		  <a href="#">6월 정처기실기</a>
+		  <a href="#">집밥 먹고싶다</a>
+		</div> 
+ -->
+
+		
+		
     <section class="mt-4 mb-5">
+    
     <div class="container mb-4">
     	<h1 class="font-weight-bold title">#해시태그</h1>
     	<div class="row">
@@ -62,50 +112,50 @@
     			<div class="card card-pin">
     				<img class="card-img" src="https://images.unsplash.com/photo-1489743342057-3448cc7c3bb9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6d284a2efbca5f89528546307f7e7b87&auto=format&fit=crop&w=500&q=60" alt="Card image">
     				<div class="overlay">
-    					<h2 class="card-title title">Cool Title</h2>
+    					<h2 class="card-title title">Yes</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit Group!</a>
     					</div>
     				</div>
     			</div>
     			<div class="card card-pin">
     				<img class="card-img" src="https://images.unsplash.com/photo-1519996521430-02b798c1d881?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=79f770fc1a5d8ff9b0eb033d0f09e15d&auto=format&fit=crop&w=500&q=60" alt="Card image">
     				<div class="overlay">
-    					<h2 class="card-title title">Cool Title</h2>
+    					<h2 class="card-title title">Plant Me!</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
     			<div class="card card-pin">
     				<img class="card-img" src="https://images.unsplash.com/photo-1505210512658-3ae58ae08744?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2ef2e23adda7b89a804cf232f57e3ca3&auto=format&fit=crop&w=333&q=80" alt="Card image">
     				<div class="overlay">
-    					<h2 class="card-title title">Cool Title</h2>
+    					<h2 class="card-title title">Home Deco</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
     			<div class="card card-pin">
     				<img class="card-img" src="https://images.unsplash.com/photo-1488353816557-87cd574cea04?ixlib=rb-0.3.5&s=06371203b2e3ad3e241c45f4e149a1b3&auto=format&fit=crop&w=334&q=80" alt="Card image">
     				<div class="overlay">
-    					<h2 class="card-title title">Cool Title</h2>
+    					<h2 class="card-title title">Cool balcony!</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
     			<div class="card card-pin">
     				<img class="card-img" src="https://images.unsplash.com/photo-1518450757707-d21c8c53c8df?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c88b5f311958f841525fdb01ab3b5deb&auto=format&fit=crop&w=500&q=60" alt="Card image">
     				<div class="overlay">
-    					<h2 class="card-title title">Cool Title</h2>
+    					<h2 class="card-title title">Dessert Club</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
@@ -115,7 +165,7 @@
     					<h2 class="card-title title">Cool Title</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
@@ -125,7 +175,7 @@
     					<h2 class="card-title title">Cool Title</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
@@ -135,7 +185,7 @@
     					<h2 class="card-title title">Cool Title</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
@@ -145,7 +195,7 @@
     					<h2 class="card-title title">Cool Title</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
@@ -155,7 +205,7 @@
     					<h2 class="card-title title">Cool Title</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
@@ -165,7 +215,7 @@
     					<h2 class="card-title title">Cool Title</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
@@ -175,7 +225,7 @@
     					<h2 class="card-title title">Cool Title</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
@@ -185,7 +235,7 @@
     					<h2 class="card-title title">Cool Title</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
@@ -195,7 +245,7 @@
     					<h2 class="card-title title">Cool Title</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
@@ -205,7 +255,7 @@
     					<h2 class="card-title title">Cool Title</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
@@ -215,7 +265,7 @@
     					<h2 class="card-title title">Cool Title</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
@@ -225,7 +275,7 @@
     					<h2 class="card-title title">Cool Title</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
@@ -235,7 +285,7 @@
     					<h2 class="card-title title">Cool Title</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
@@ -245,7 +295,7 @@
     					<h2 class="card-title title">Cool Title</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>
@@ -255,7 +305,7 @@
     					<h2 class="card-title title">Cool Title</h2>
     					<div class="more">
     						<a href="post.html">
-    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit club! </a>
     					</div>
     				</div>
     			</div>

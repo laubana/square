@@ -75,9 +75,9 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="#">회원가입</a></li>
-						<li><a href="#">그룹생성</a></li>
-						<li><a href="login">로그인</a></li>
+						<li><a href="joinUserForm">회원가입</a></li>
+						<li><a href="createGroupForm">그룹생성</a></li>
+						<li><a href="loginUserForm">로그인</a></li>
 					</ul>
 				</nav>
 			</header>
