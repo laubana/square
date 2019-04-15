@@ -18,7 +18,7 @@
 		<script src=resources/Basic/assets/js/jquery-3.3.1.min.js></script>
 	</head>
 
-	<script>
+<script>
 	function createEventImage()
 	{
 		document.getElementById("file").click();
@@ -30,7 +30,36 @@
 		x.setAttribute("type", "file");
 		document.getElementById("album").appendChild(x);
 	}
-	</script>
+</script>
+
+
+
+<style>
+.filebox label { 
+display: inline-block; 
+padding: .5em .75em; 
+color: #999; 
+font-size: inherit; 
+line-height: normal; 
+vertical-align: middle; 
+background-color: #fdfdfd; 
+cursor: pointer; 
+border: 1px solid #ebebeb; 
+border-bottom-color: #e2e2e2; 
+border-radius: .25em; 
+} 
+
+.filebox input[type="file"] { /* 파일 필드 숨기기 */ 
+position: absolute; 
+width: 1px; 
+height: 1px; 
+padding: 0; 
+margin: -1px; 
+overflow: hidden; 
+clip:rect(0,0,0,0); 
+border: 0; 
+}
+</style>
 	
 	<!-- 구글 맵스 위한 style 태그. 다른 요소 적용할 style이 있다면 style 태그를 별도로 만들어주기 바람 -->
 	<style>
@@ -65,16 +94,15 @@
 		<!-- Header -->
 			<section id="header">
 				<header>
-					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>
-					<h1 id="logo"><a href="viewGroupForm?group_id=${group.group_id}">${group.name}</a></h1>
-					<p style="font-size:15px;">
-					<c:forEach var="group_hashtag" items="${group_hashtag_list}">
-							#${group_hashtag.hashtag}
-						</c:forEach>
-					</p>
+				<span class="image avatar"><img src="resources/Main/images/logo/01.jpg" alt="" /></span>
+					<h1 id="logo"><a href="groupMain">Group name</a></h1>
+					<p style="font-size:15px;">#tag#tag</p>
+					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>	
 				</header>
 				<nav id="nav">
-					
+					<ul>
+						<li><a href="#one" class="active">이벤트 생성</a></li>
+					</ul>
 				</nav>
 				<footer>
 					<ul class="icons">
@@ -86,7 +114,9 @@
 					</ul>
 				</footer>
 			</section>
-
+		
+<!-- 폼 -->			
+<form action="" method="post">
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -94,59 +124,96 @@
 					<div id="main">
 
 						<!-- 그룹의 설립일 등 기본 정보 -->
-							<section id="five">
+							<section id="one">
 								<article class="post">
 								<header>
 								<!-- 타이틀 생성 -->
 									<div class="title">
-									<input type="text" class="Event_title "id="Event_title" placeholder="groupTitle">
+									<h2>이벤트 제목</h2>
+									<input type="text" class="Event_title "id="Event_title" placeholder="event_Title">
 									</div>
 									<div class="meta">
 								<!-- 그룹 설립일 자동입력 -데이터 베이스에 sysdate 오면 session으로 받아올 예정-->
-										<time class="published" datetime="2019-04-08">DB에서 sysdate 찍어줌</time> 
-										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><small>리더 아이디 자리</small></a>
-										<span class="name">${leader.name}</span><p><small>리더 이름 자리</small></p>
-										<p><small>리더 이미지 자리</small></p><img src="resources/image/user_image/${leader.image_id}" alt="" />
+										<time class="published" datetime="2019-04-08">2019년 4월 8일</time>
+										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">Harry</span><img src="resources/GroupMain/images/member/c1.jpg" alt="" /></a>
 									</div>
 								</header>
+								<span class="image featured"><img src="resources/GroupMain/images/bb.jpg" id="foo"></span>
 								<!-- 그룹 대표 이미지 업로드 -->
-								<div align="right"><footer>
-									<label><input type="file" id="file"></label>
-									<input type="button" class="createEventImage" id="createEventImage" value="그룹 이미지 등록" onclick="createEventImage()">		
-								</footer></div>
-							</article>
-							</section>
-					</div>		
-
-		
-							
-				<!-- google maps-->
-						<section id="section_map">
-								<article class="post">
-								<p>여기는 p태그
-								</p>
+									<div class="filebox">
+									<label for="imgInp">Main Image Upload</label>
+									<input type='file' id="imgInp" /></div>
+									<br>
+									<!-- 내용 -->
+									<h1>이벤트 내용</h1>
+									<textarea class="comment-block" placeholder="내용을 작성해주세요..."></textarea><br>
+									<!-- google maps-->
 									<div id="map" ></div>
 									<div align="right">
 										<div id = "place_output"></div>
 									</div>
+									<br>
 									<div id = "output_button"></div>
 										<input type = "text" id = "search_addr" value = "東京　京橋駅">
+										<br>
 										<input type = "button" id = "button_mapsearch" value = "検索" onClick = "codeAddress()">
 									<div align="right">
 									<footer>
 									</footer>
 								</div>
-							</article>
-						</section>
+								</article>
+							</section>
+					</div>		
 
 						<!-- 그룹의 설립일 등 기본 정보 -->
 							<div id="album">
 							<section id="six">
 								<footer><div id="album" class="container" >
-									<h3>앨범</h3>
-									<p>우리 그룹을 표현할 첫 사진을 넣어보세요</p>
-																			
-									<button onclick="uploadFirstEventImage()">사진 더 추가</button>		
+									<h3>추가 이벤트 사진</h3>
+									<p>추가 이벤트 이미지를 넣어보세요</p>
+
+									<div class="features">
+										<article>
+											<img src="resources/GroupMain/images/bb.jpg" class="image" id="foo2">
+											<div class="inner">
+												<h4>File Name</h4>
+												<div class="filebox">
+												<label for="imgInp2">Image Upload1</label>
+												<input type='file' id="imgInp2" /></div>
+											</div>
+										</article>
+										<article>
+											<img src="resources/GroupMain/images/bb.jpg" class="image" id="foo3">
+											<div class="inner">
+												<h4>File Name</h4>
+												<div class="filebox">
+												<label for="imgInp3">Image Upload2</label>
+												<input type='file' id="imgInp3" /></div>
+											</div>
+										</article>
+										<article>
+											<img src="resources/GroupMain/images/bb.jpg" class="image" id="foo4">
+											<div class="inner">
+												<h4>File Name</h4>
+												<div class="filebox">
+												<label for="imgInp4">Image Upload3</label>
+												<input type='file' id="imgInp4" /></div>
+											</div>
+										</article>
+										<article>
+											<img src="resources/GroupMain/images/bb.jpg" class="image" id="foo5">
+											<div class="inner">
+												<h4>File Name</h4>
+												<div class="filebox">
+												<label for="imgInp5">Image Upload4</label>
+												<input type='file' id="imgInp5" /></div>
+											</div>
+										</article>
+											</div>
+									
+										<div align="center"><input type="submit" value="확인"></div>
+																	
+									<!-- <button onclick="uploadFirstEventImage()" class="button">Image More</button> -->		
 								</div></footer>
 							</section>
 						</div><br><br>
@@ -161,6 +228,7 @@
 					</section>
 
 		</div>
+</form>
 		<!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
 		<!-- 추가 Scripts -->
@@ -180,6 +248,79 @@
 	</body>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP">
 	</script>
+
+<script type="text/javascript">
+//파일 미리보기 메인
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#foo').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#imgInp").change(function() {
+    readURL(this);
+});
+
+function readURL2(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#foo2').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#imgInp2").change(function() {
+    readURL2(this);
+});
+
+function readURL3(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#foo3').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#imgInp3").change(function() {
+    readURL3(this);
+});
+
+function readURL4(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#foo4').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#imgInp4").change(function() {
+    readURL4(this);
+});
+
+function readURL5(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#foo5').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#imgInp5").change(function() {
+    readURL5(this);
+});
+</script>
 	
 	
 	<script>

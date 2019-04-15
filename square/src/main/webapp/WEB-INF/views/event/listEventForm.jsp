@@ -48,6 +48,9 @@
 					</p>
 				</header>
 				<nav id="nav">
+					<ul>
+						<li><a href="#five" class="active">이벤트 리스트</a></li>
+					</ul>
 				</nav>
 				<footer>
 					<ul class="icons">
@@ -69,7 +72,7 @@
 						<!-- Five -->
 							<section id="five">
 								<div class="container">
-									<h3>이벤트</h3>
+									<h3>이벤트 리스트</h3>
 									<div class="features">
 										<c:forEach var="event" items="${event_list}">
 									<article>

@@ -233,7 +233,7 @@
 							<section id="five">
 								<div class="container">
 									<h3>イベント</h3>
-											<input type="button" value="追加">
+										<p><a href="createEventForm" class="button">追加</a></p>
 									<div class="features">
 									<c:forEach var="event" items="${event_list}">
 									<article>

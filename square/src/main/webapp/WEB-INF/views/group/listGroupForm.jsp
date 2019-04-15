@@ -69,24 +69,9 @@ input::placeholder {
 .wrap-input.focused .filters > .filter-btn:nth-child(3) {
   animation-delay: .35s;
 }
-.wrap-input.focused .filters > .filter-btn:nth-child(4) {
-  animation-delay: .45s;
-}
-.wrap-input.focused .filters > .filter-btn:nth-child(5) {
-  animation-delay: .55s;
-}
-.wrap-input.focused .filters > .filter-btn:nth-child(6) {
-  animation-delay: .65s;
-}
-.wrap-input.focused .filters > .filter-btn:nth-child(7) {
-  animation-delay: .75s;
-}
-.wrap-input.focused .filters > .filter-btn:nth-child(8) {
-  animation-delay: .85s;
-}
 .wrap-input.focused .js-close {
   animation: showControls .4s .8s forwards 1;
-  opacity: .8;
+  opacity: .3;
 }
 
 .input-txt {
@@ -195,27 +180,7 @@ input::placeholder {
     						</div>
     					<div class="filter-btn">
       						<input type="radio" value="">
-     					<label>5km</label>
-    						</div>
-    					<div class="filter-btn">
-      						<input type="radio" value="">
-     					<label>10km</label>
-    						</div>
-    						<div class="filter-btn">
-      						<input type="radio" value="">
-     					<label>25km</label>
-    						</div>
-    						<div class="filter-btn">
-      						<input type="radio" value="">
-     					<label>50km</label>
-    						</div>
-    						<div class="filter-btn">
-      						<input type="radio" value="">
-     					<label>100km</label>
-    						</div>
-    						<div class="filter-btn">
-      						<input type="radio" value="">
-     					<label>150km</label>
+     					<label>지역</label>
     						</div>
     					<div class="filter-btn" style="display:none">
       						<input type="radio" value="Subject:">

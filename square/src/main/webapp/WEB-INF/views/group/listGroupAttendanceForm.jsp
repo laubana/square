@@ -58,6 +58,9 @@
 					</c:if>
 				</header>
 				<nav id="nav">
+					<ul>
+						<li><a href="#two" class="active">회원</a></li>
+					</ul>
 				</nav>
 				<footer>
 					<ul class="icons">
