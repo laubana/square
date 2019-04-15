@@ -108,7 +108,6 @@
 						<a href="createGroupForm" class="button" style="color:white;">그룹 생성</a>
 					</div>
 				</div>
-				<a href="#intro" class="button style2 down anchored">Next</a>
 			</section>
 </c:if>
 		<!-- Footer -->
@@ -126,6 +125,7 @@
 
 				<!-- Menu -->
 					<ul class="menu">
+						<li><a href="main">2조</a></li>
 						<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
 					</ul>
 

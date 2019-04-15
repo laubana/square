@@ -48,7 +48,7 @@ public class YHMSFaceUtil
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			
             httpPost.setHeader("Content-Type", "application/json");
-            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_key);
+            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
             
             httpPost.setEntity(new StringEntity(
             		"{" +
@@ -100,7 +100,7 @@ public class YHMSFaceUtil
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			
             httpPost.setHeader("Content-Type", "application/json");
-            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_key);
+            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
             
             httpPost.setEntity(new StringEntity(
             		"{" +
@@ -130,7 +130,7 @@ public class YHMSFaceUtil
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			
             httpPost.setHeader("Content-Type", "application/json");
-            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_key);
+            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
             
             httpPost.setEntity(new StringEntity(
             		"{" +
@@ -162,7 +162,7 @@ public class YHMSFaceUtil
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			
             httpPost.setHeader("Content-Type", "application/octet-stream");
-            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_key);
+            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
             
             httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 
@@ -189,7 +189,7 @@ public class YHMSFaceUtil
 		    HttpPost httpPost = new HttpPost(uriBuilder.build());
 		    
 		    httpPost.setHeader("Content-Type", "application/octet-stream");
-		    httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_key);
+		    httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
 		    
 		    httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 		    
@@ -216,7 +216,7 @@ public class YHMSFaceUtil
 		    HttpPost httpPost = new HttpPost(uriBuilder.build());
 		    
 		    httpPost.setHeader("Content-Type", "application/octet-stream");
-		    httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_key);
+		    httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
 		    
 		    httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 		    
@@ -240,7 +240,7 @@ public class YHMSFaceUtil
 			
 			HttpGet httpGet = new HttpGet(uriBuilder.build());
 		    
-		    httpGet.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_key);
+		    httpGet.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
 		    
 		    HttpResponse httpResponse = httpClient.execute(httpGet);
 			
@@ -262,7 +262,7 @@ public class YHMSFaceUtil
 			
 			HttpDelete httpDelete = new HttpDelete(uriBuilder.build());
 		    
-		    httpDelete.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_key);
+		    httpDelete.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
 		    
 		    HttpResponse httpResponse = httpClient.execute(httpDelete);
 			
@@ -285,7 +285,7 @@ public class YHMSFaceUtil
 			HttpPut httpPut = new HttpPut(uriBuilder.build());
 		    
 		    httpPut.setHeader("Content-Type", "application/json");
-		    httpPut.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_key);
+		    httpPut.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
 		    
 		    httpPut.setEntity(new StringEntity("{\"name\":\"" + name + "\"}"));
 		    
@@ -309,7 +309,7 @@ public class YHMSFaceUtil
 			
 			HttpGet httpGet = new HttpGet(uriBuilder.build());
 			
-		    httpGet.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_key);
+		    httpGet.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
 		   
 		    HttpResponse httpResponse = httpClient.execute(httpGet);
 		    

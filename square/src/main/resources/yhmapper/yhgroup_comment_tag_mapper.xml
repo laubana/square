@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.ppaya.square.yhmapper.YHGroupCommentTagMapper">
+<insert id="insertGroupCommentTag" parameterType="map">
+INSERT INTO TABLE_GCOT
+(
+	GROUP_COMMENT_ID,
+	TAG
+)
+VALUES
+(
+	#{group_comment_id},
+	#{tag}
+)
+</insert>
+<select id="selectGroupCommentTagByGroupCommentId" parameterType="int" resultType="GroupCommentTag">
+SELECT
+	*
+FROM
+	TABLE_GCOT
+WHERE
+	GROUP_COMMENT_ID = #{group_comment_id}
+</select>
+</mapper>

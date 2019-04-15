@@ -13,6 +13,7 @@
 		<typeAlias type="project.ppaya.square.vo.Group" alias="Group" />
 		<typeAlias type="project.ppaya.square.vo.GroupAttendance" alias="GroupAttendance" />
 		<typeAlias type="project.ppaya.square.vo.GroupComment" alias="GroupComment" />
+		<typeAlias type="project.ppaya.square.vo.GroupCommentTag" alias="GroupCommentTag" />
 		<typeAlias type="project.ppaya.square.vo.GroupHashtag" alias="GroupHashtag" />
 		
 		<typeAlias type="project.ppaya.square.vo.Event" alias="Event" />
@@ -26,6 +27,9 @@
 		<typeAlias type="project.ppaya.square.vo.EventScheduleUserSchedule" alias="EventScheduleUserSchedule" />
 		
 		<typeAlias type="project.ppaya.square.vo.EventScheduleImage" alias="EventScheduleImage" />
+		<typeAlias type="project.ppaya.square.vo.EventScheduleImageTag" alias="EventScheduleImageTag" />
+		<typeAlias type="project.ppaya.square.vo.EventScheduleImageDescription" alias="EventScheduleImageDescription" />
+		<typeAlias type="project.ppaya.square.vo.EventScheduleImageCategory" alias="EventScheduleImageCategory" />
 		<typeAlias type="project.ppaya.square.vo.EventScheduleImageFace" alias="EventScheduleImageFace" />
 		<typeAlias type="project.ppaya.square.vo.EventScheduleVideo" alias="EventScheduleVideo" />
 		<typeAlias type="project.ppaya.square.vo.EventScheduleVideoFace" alias="EventScheduleVideoFace" />
@@ -46,11 +50,13 @@
 		<mapper resource="yhmapper/yhgroup_mapper.xml" />
 		<mapper resource="yhmapper/yhgroup_attendance_mapper.xml" />
 		<mapper resource="yhmapper/yhgroup_comment_mapper.xml" />
+		<mapper resource="yhmapper/yhgroup_comment_tag_mapper.xml" />
 		<mapper resource="yhmapper/yhgroup_hashtag_mapper.xml" />
 		
 		<mapper resource="yhmapper/yhevent_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_attendance_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_comment_mapper.xml" />
+		<mapper resource="yhmapper/yhevent_comment_tag_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_union_mapper.xml" />
 		
 		<mapper resource="yhmapper/yhevent_schedule_mapper.xml" />
@@ -59,6 +65,9 @@
 		<mapper resource="yhmapper/yhevent_schedule_user_schedule_mapper.xml" />
 
 		<mapper resource="yhmapper/yhevent_schedule_image_mapper.xml" />
+		<mapper resource="yhmapper/yhevent_schedule_image_tag_mapper.xml" />
+		<mapper resource="yhmapper/yhevent_schedule_image_description_mapper.xml" />
+		<mapper resource="yhmapper/yhevent_schedule_image_category_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_schedule_image_face_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_schedule_video_mapper.xml" />
 		<mapper resource="yhmapper/yhevent_schedule_video_face_mapper.xml" />

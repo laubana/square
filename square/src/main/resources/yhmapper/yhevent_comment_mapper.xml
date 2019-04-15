@@ -14,4 +14,15 @@ WHERE
 ORDER BY
 	EVENT_COMMENT_ID
 </select>
+<select id="selectEventCommentByEventIdList" parameterType="list" resultType="EventComment">
+SELECT
+	*
+FROM
+	TABLE_ECO
+WHERE
+	1 = 0
+	<foreach item="event_id" collection="list" open="OR" separator="OR">	
+		EVENT_ID = #{event_id}
+	</foreach>
+</select>
 </mapper>

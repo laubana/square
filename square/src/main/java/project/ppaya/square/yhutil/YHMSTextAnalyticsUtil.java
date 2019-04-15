@@ -16,7 +16,7 @@ import project.ppaya.square.vo.*;
 
 public class YHMSTextAnalyticsUtil
 {	
-	public static ArrayList<String> getKeyPhraseList(String string) 
+	public static ArrayList<String> getKeyPhraseList(String string, String language) 
 	{		
 		ArrayList<String> phrase_list = new ArrayList<>();
 		
@@ -28,14 +28,14 @@ public class YHMSTextAnalyticsUtil
 
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			httpPost.setHeader("Content-Type", "application/json");
-			httpPost.setHeader("Ocp-Apim-Subscription-Key", "a5de33d322474e759819f5e97a930008");
+			httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_text_analytics_key);
 
 			StringEntity stringEntity = new StringEntity(
 					"{"
 					+ "\"documents\":"
 					+ "["
 					+ "{"
-					+ "\"language\":\"en\","
+					+ "\"language\":\"" + language + "\","
 					+ "\"id\":\"1\","
 					+ "\"text\":\"" + string + "\""
 					+ "}"
@@ -62,7 +62,7 @@ public class YHMSTextAnalyticsUtil
 		
 		return phrase_list;
 	}
-	public static double getSentiment(String string) 
+	public static double getSentiment(String string, String language) 
 	{		
 		double sentiment = -1;
 		
@@ -74,14 +74,14 @@ public class YHMSTextAnalyticsUtil
 
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			httpPost.setHeader("Content-Type", "application/json");
-			httpPost.setHeader("Ocp-Apim-Subscription-Key", "a5de33d322474e759819f5e97a930008");
+			httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_text_analytics_key);
 
 			StringEntity stringEntity = new StringEntity(
 					"{"
 					+ "\"documents\":"
 					+ "["
 					+ "{"
-					+ "\"language\":\"en\","
+					+ "\"language\":\"" + language + "\","
 					+ "\"id\":\"1\","
 					+ "\"text\":\"" + string + "\""
 					+ "}"
@@ -95,8 +95,6 @@ public class YHMSTextAnalyticsUtil
 			String result = EntityUtils.toString(httpResponse.getEntity()).trim();
 			
 			JSONObject jsonObject = new JSONObject(result);
-			
-			System.out.println(jsonObject.toString(2));
 			
 			JSONArray jsonArray = jsonObject.getJSONArray("documents");
 			jsonObject = jsonArray.getJSONObject(0);

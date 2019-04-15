@@ -15,6 +15,20 @@ public class YHGroupCommentDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<GroupComment> selectGroupCommentByUserId(String user_id)
+	{
+		ArrayList<GroupComment> group_comment_list = null;
+		
+		YHGroupCommentMapper mapper = sqlSession.getMapper(YHGroupCommentMapper.class);
+		
+		try
+		{
+			group_comment_list = mapper.selectGroupCommentByUserId(user_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_comment_list;
+	}
 	public ArrayList<GroupComment> selectGroupCommentByGroupId(int group_id)
 	{
 		ArrayList<GroupComment> group_comment_list = null;
