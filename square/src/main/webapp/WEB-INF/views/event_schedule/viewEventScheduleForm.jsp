@@ -152,6 +152,15 @@
     }
     </script>
     <script>
+/*     
+    아래 구문 오류나길래 주석처리 해놨음
+    아래 구문 오류나길래 주석처리 해놨음
+    아래 구문 오류나길래 주석처리 해놨음
+    아래 구문 오류나길래 주석처리 해놨음
+    아래 구문 오류나길래 주석처리 해놨음
+    아래 구문 오류나길래 주석처리 해놨음
+    아래 구문 오류나길래 주석처리 해놨음
+ */    
 /*    	console.log(JSON.parse('${json_event_schedule_user_schedule_list_list}')); */
     </script>
 	<script>
@@ -297,9 +306,8 @@
 	     }
 		html,body {height: 100%; margin: 0; padding: 0;}
 	</style>
-
 	
-		<script async defer src="https://apis.google.com/js/api.js"
+	<script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
@@ -312,11 +320,11 @@
 				<nav>
 					<ul>
 						<li><a href="listRecommendationForm"></a>
-						<c:if test="${sessionScope.user_id != null}">
+						<c:if test=	"${sessionScope.user_id != null}">
 						<li><a href="createGroupForm">그룹생성</a></li>
 					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
 						</c:if>
-						<c:if test="${sessionScope.user_id == null}">
+						<c:if test=	"${sessionScope.user_id == null}">
 						<li><a href="joinUserForm">회원가입</a></li>
 							<li><a href="loginUserForm">로그인</a></li>
 						</c:if>
@@ -387,7 +395,7 @@
 									</div>
 								</header>
 								<p>
-								${event_schedule.content}
+									${event_schedule.content}
 								</p>
 								<div align="right"><footer>
 										<a href="#" class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;

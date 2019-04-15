@@ -245,7 +245,7 @@ public class EventScheduleController
 		
 		request.addAttribute("test_list4", new JSONArray(test_list4));
 		//맵스 장소 보내기
-		String place = "서울특별시 종로구";
+		String place = "東京　京橋駅";
 		request.addAttribute("place",place);
 
 		return "event_schedule/viewEventScheduleForm";
