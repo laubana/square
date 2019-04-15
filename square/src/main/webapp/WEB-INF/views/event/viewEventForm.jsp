@@ -367,6 +367,7 @@
 <!-- 맵 띄우는 스크립트 -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP"">
 </script>
+<!-- 東京　京橋駅 : { 35.6766907 , 139.77003390000004 } -->
 <script>
 function initMap() {
     var latlng = new google.maps.LatLng(37.5729503, 126.97935789999997);
@@ -389,6 +390,7 @@ function initMap() {
 						position: latlng
 						});
 					map.setZoom(15);
+					console.log( JSON.stringify(latlng) );
 					
 				} else {
 	   				alert('Geocode was not successful for the following reason: ' + status);

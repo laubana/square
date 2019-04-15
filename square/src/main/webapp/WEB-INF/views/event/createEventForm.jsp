@@ -46,28 +46,8 @@
 	     }
 		html,body {height: 100%; margin: 0; padding: 0;}
 	</style>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap">
-	</script>
-	
 
-<script>
-//////////////////////////////////////////////////좌표 받고 지역 넘겨주는 함수
-	
-		
-		
-		
-		
-	</script>
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	<body class="is-preload">
 
 		<!-- Header 메인 바 -->
@@ -150,8 +130,8 @@
 										<div id = "place_output"></div>
 									</div>
 									<div id = "output_button"></div>
-										<input type = "text" id = "search_addr" value = "seoul">
-										<input type = "button" id = "button_mapsearch" value = "검색" onClick = "codeAddress()">
+										<input type = "text" id = "search_addr" value = "東京　京橋駅">
+										<input type = "button" id = "button_mapsearch" value = "検索" onClick = "codeAddress()">
 									<div align="right">
 									<footer>
 									</footer>
@@ -198,6 +178,8 @@
 			<script src="resources/GroupMain/assets/js/main.js"></script>
 
 	</body>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP">
+	</script>
 	
 	
 	<script>
@@ -205,13 +187,36 @@
 	var geocoder;
 
 	function initMap() {
-	    geocoder = new google.maps.Geocoder();
-	    var latlng = new google.maps.LatLng(37.5729503, 126.97935789999997);
+		console.log( 'test1' );
+
+	    var latlng = new google.maps.LatLng(35.6766907, 139.77003390000004);
 	    var mapOptions = {
-	    	      zoom: 8,
+	    	      zoom: 15,
 	    	      center: latlng
 	    	    }
-	    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+		map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	    console.log( 'test2' );
+		geocoder = new google.maps.Geocoder();
+	 	var address = '東京　京橋駅';
+		geocoder.geocode(
+		   		{ 'address': address }
+		   		, function(results, status) {
+					if (status == 'OK') {
+						console.log( 'test3' );
+						latlng = results[0].geometry.location;
+						map.setCenter(latlng);
+						console.log( 'test4' );	    
+						var marker = new google.maps.Marker({ 
+							map: map,
+							position: latlng
+							});
+						map.setZoom(15);
+					} else {
+		   				alert('Geocode was not successful for the following reason: ' + status);
+		   			}
+		   		}
+		   );
+		
 	}
 	
 	////////////주소 던져주면 맵 중앙에 띄우는 함수
@@ -276,7 +281,7 @@
 	
 	
 	///////////////배열 중복 없애는 함수
-	var arealist = ${requestScope.arealist};
+	var arealist = ${requestScope.place_list};
 	var arealist_temp = new Array();
 	var flag_same = false;
 	var i=0;

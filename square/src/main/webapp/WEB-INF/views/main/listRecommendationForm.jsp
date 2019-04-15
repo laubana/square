@@ -63,7 +63,7 @@
 </div>
 
 <!-- Page Content -->
-<div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="mySidebar"></div>
+<div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:default" id="mySidebar"></div>
 
 <div>
   <button class="w3-button w3-white w3-medium" onclick="w3_open()"> #급상승 해시태그 보기</button>
