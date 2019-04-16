@@ -8,8 +8,8 @@ public class EventSchedule
 	long end_date;
 	String name;
 	String region;
-	long latitude;
-	long longitude;
+	String latitude;
+	String longitude;
 	String content;
 	public EventSchedule(){}
 	public int getEvent_schedule_id() {
@@ -48,16 +48,16 @@ public class EventSchedule
 	public void setRegion(String region) {
 		this.region = region;
 	}
-	public long getLatitude() {
+	public String getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(long latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
-	public long getLongitude() {
+	public String getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(long longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 	public String getContent() {
