@@ -66,6 +66,50 @@
 					error: function(error){console.log(error);}
 				});
 			}
+			function getTranslation(group_comment_id)
+			{
+				var map = {};
+				map["group_comment_id"] = group_comment_id;
+				console.log(map);
+				
+				$.ajax({
+					url: "getTranslation",
+					type: "POST",
+					data: JSON.stringify(map),
+					dataType: "JSON",
+					contentType: "application/json; charset=UTF-8",
+					success: function(jsonObject)
+					{
+						var result = decodeURIComponent(jsonObject.result.replace(/\+/g, " "));
+						
+						document.getElementById("comment" + group_comment_id).innerHTML = result;
+						document.getElementById("translation_button" + group_comment_id).innerHTML = '<a href="javascript:resetComment(' + group_comment_id + ')">リセット</a>';
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+			function resetComment(group_comment_id)
+			{
+				var map = {};
+				map["group_comment_id"] = group_comment_id;
+				console.log(map);
+				
+				$.ajax({
+					url: "resetComment",
+					type: "POST",
+					data: JSON.stringify(map),
+					dataType: "JSON",
+					contentType: "application/json; charset=UTF-8",
+					success: function(jsonObject)
+					{
+						var result = decodeURIComponent(jsonObject.result.replace(/\+/g, " "));
+						
+						document.getElementById("comment" + group_comment_id).innerHTML = result;
+						document.getElementById("translation_button" + group_comment_id).innerHTML = '<a href="javascript:getTranslation(' + group_comment_id +')">翻訳</a>';
+					},
+					error: function(error){console.log(error);}
+				});
+			}
 		</script>
 	</head>
 	<body class="is-preload" onload="fn_onload();">
@@ -140,6 +184,7 @@
 									<img src="resources/image/group_image/${group.group_image}" alt="" />
 								</div>
 								<div class="container">
+									<h3>グループ情報</h3>
 									<p>${group.content}</p>
 								</div>
 							</section>
@@ -153,11 +198,13 @@
 											<a href="viewUserForm?user_id=${leader.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${leader.image_id}" alt="" style="width: 100px; height:auto;"></a>
 										</div>
 										<div>
+										<br>
 									<p>メンバー</p>
 										<c:forEach var="user" items="${user_list}">
 											<a href="viewUserForm?user_id=${user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 										</c:forEach>
 										</div>${user.size()}
+										<br>
 									<a href="listGroupAttendanceForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">メンバーページへ</a>
 								</div>
 							</section>
@@ -173,7 +220,7 @@
 							<a href="viewUserForm?user_id=${group_comment.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${group_comment.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 							</div>
 							<div class="comment-block">
-								<p class="comment-text">${group_comment.content}</p>
+								<p class="comment-text" id="comment${group_comment.group_comment_id}">${group_comment.content}</p>
 									<div class="bottom-comment">
 										<div class="comment-date">
 										
@@ -186,19 +233,20 @@
 													<li class="name">Edit</li>
 													<li>Delete</li>
 												</c:if>
+												<li class="name" id="translation_button${group_comment.group_comment_id}"><a href="javascript:getTranslation(${group_comment.group_comment_id})">翻訳</a></li>
 											</ul>
 									</div>
 									<br><br><br>
 									<div>
 									<c:forEach var="group_comment_tag" items="${group_comment.group_comment_tag_list}">
-										<a href="">#${group_comment_tag}</a>
+										<a href="viewMindMapForm?hashtag=${group_comment_tag}">#${group_comment_tag}</a>
 									</c:forEach>
 									</div>		
 							</div>
 						</div>
 						</c:forEach>
 						<textarea class="comment-block"></textarea><br>
-						<input type="button" value="作成"><br><br><br>
+						<div align="right"><input type="button" value="作成"></div><br><br>
 						<a href="listGroupCommentForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">コメントページへ</a>
 						
 						</div>		
@@ -222,7 +270,7 @@
 											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
 											</c:forEach>
 											</video>
-											<br>
+											<br><br>
 											<a href="listGroupAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">アルバムページへ</a>
 										</article>
 									</div>

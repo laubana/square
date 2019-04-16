@@ -145,7 +145,6 @@ public class YHMSComputerVisionUtil
 			HttpResponse httpResponse = httpClient.execute(httpPost);
 			
 			String result = EntityUtils.toString(httpResponse.getEntity()).trim();
-			
 			JSONObject jsonObject = new JSONObject(result);
 			JSONArray jsonArray = jsonObject.getJSONArray("categories");
 			

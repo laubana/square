@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <link rel="stylesheet" type="text/css" href="resources/MindMap/css/js-mindmap.css" />
   <link href="resources/MindMap/css/style.css" type="text/css" rel="stylesheet"/>
-
+	<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
   <!-- jQuery -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
   <!-- UI, for draggable nodes -->
@@ -22,11 +22,42 @@
   <!-- Kick everything off -->
   <script src="resources/MindMap/js/script.js" type="text/javascript"></script>
 <script>
-console.log(json.stringify(${list}));
+//////////////////////////////////////////////////////////////////////////////
+console.log(JSON.parse('${json_list}'));
 </script>
 </head>
 <body>
-  <ul>
+<ul>
+	<li><a href="">#${root}</a>
+		<ul>
+			<c:forEach var="element1" items="${list}">
+				<li><a href="">${element1.node.group_id}</a>
+					<ul>
+						<c:forEach var="element2" items="${element1.list}">
+							<li><a href="">#${element2.node}</a>
+								<ul>
+									<c:forEach var="element3" items="${element2.list}">
+										<li><a href="">${element3.node.group_id}</a>
+											<ul>
+												<c:forEach var="element4" items="${element3.list}">
+													<li><a href="">#${element4.node}</a>
+													</li>
+												</c:forEach>
+											</ul>
+										</li>
+									</c:forEach>
+								</ul>							
+							</li>
+						</c:forEach>
+					</ul>
+				</li>
+			</c:forEach>				
+		</ul>
+	</li>
+</ul>
+
+
+  <!-- <ul>
     <li><a href="http://kenneth.kufluk.com/blog/">#Java</a>
     	<ul>
 	      	<li><a href="http://kenneth.kufluk.com/blog/">1</a>
@@ -86,6 +117,6 @@ console.log(json.stringify(${list}));
 			</li>
 		</ul>
     </li>
-  </ul>
+  </ul> -->
 </body>
 </html>

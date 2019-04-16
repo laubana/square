@@ -1,6 +1,7 @@
 package project.ppaya.square.yhdao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,23 @@ public class YHGroupHashtagDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<Integer> getGroupIdByHashtagNotHashtagList(String hashtag, ArrayList<String> hashtag_list)
+	{
+		ArrayList<Integer> group_id_list = null;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("hashtag",hashtag);
+		map.put("hashtag_list", hashtag_list);
+		
+		YHGroupHashtagMapper mapper = sqlSession.getMapper(YHGroupHashtagMapper.class);
+		
+		try
+		{
+			group_id_list = mapper.getGroupIdByHashtagNotHashtagList(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_id_list;
+	}
 	public ArrayList<String> getHashtagByGroupId(int group_id)
 	{
 		ArrayList<String> hashtag_list = null;
