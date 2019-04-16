@@ -7,8 +7,10 @@ public class EventSchedule
 	long start_date;
 	long end_date;
 	String name;
+	String region;
+	long latitude;
+	long longitude;
 	String content;
-	String place;
 	public EventSchedule(){}
 	public int getEvent_schedule_id() {
 		return event_schedule_id;
@@ -40,16 +42,28 @@ public class EventSchedule
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getRegion() {
+		return region;
+	}
+	public void setRegion(String region) {
+		this.region = region;
+	}
+	public long getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(long latitude) {
+		this.latitude = latitude;
+	}
+	public long getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(long longitude) {
+		this.longitude = longitude;
+	}
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public String getPlace() {
-		return place;
-	}
-	public void setPlace(String place) {
-		this.place = place;
 	}
 }

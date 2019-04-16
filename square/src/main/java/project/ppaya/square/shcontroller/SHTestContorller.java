@@ -18,15 +18,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import project.ppaya.square.shdao.SH_DAO_Group;
 import project.ppaya.square.shdao.SH_DAO_User;
 import project.ppaya.square.vo.Event;
+import project.ppaya.square.vo.EventAttendance;
+import project.ppaya.square.vo.EventComment;
 import project.ppaya.square.vo.EventSchedule;
+import project.ppaya.square.vo.EventScheduleImage;
+import project.ppaya.square.vo.EventScheduleVideo;
 import project.ppaya.square.vo.Group;
+import project.ppaya.square.vo.GroupAttendance;
+import project.ppaya.square.vo.GroupCategory;
 import project.ppaya.square.vo.GroupHashtag;
 import project.ppaya.square.vo.User;
 import project.ppaya.square.vo.UserHashtag;
+import project.ppaya.square.yhdao.YHEventAttendanceDAO;
+import project.ppaya.square.yhdao.YHEventCommentDAO;
 import project.ppaya.square.yhdao.YHEventDAO;
 import project.ppaya.square.yhdao.YHEventScheduleDAO;
 import project.ppaya.square.yhdao.YHEventScheduleImageDAO;
+import project.ppaya.square.yhdao.YHEventScheduleVideoDAO;
+import project.ppaya.square.yhdao.YHEventUnionDAO;
 import project.ppaya.square.yhdao.YHGroupAttendanceDAO;
+import project.ppaya.square.yhdao.YHGroupCategoryDAO;
 import project.ppaya.square.yhdao.YHGroupCommentDAO;
 import project.ppaya.square.yhdao.YHGroupDAO;
 import project.ppaya.square.yhdao.YHGroupHashtagDAO;
@@ -81,9 +92,91 @@ public String shtest4(Locale locale, Model model) {
 	return "test_sh/shtest4";
 }
 @RequestMapping(value = "shtest5", method = RequestMethod.GET)
-public String shtest5(Locale locale, Model model) {
-	
-	
+public String shtest5(
+			HttpSession session,
+			Model request,
+			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
+			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
+			@RequestParam(value = "event_id", defaultValue = "1") int event_id
+			//int group_id,
+			//int event_id
+			)
+	{
+		String user_id = (String)session.getAttribute("user_id"); 
+		if(user_id != null)
+		{
+			GroupAttendance group_attendance = yh_group_attendanceDAO.selectGroupAttendanceByGroupIdUserId(user_id, group_id);
+			request.addAttribute("group_attendance", group_attendance);
+			if(group_attendance != null)
+			{
+				EventAttendance event_attendance = yh_event_attendanceDAO.selectEventAttendanceByEventIdUserId(user_id, event_id);
+				request.addAttribute("event_attendance", event_attendance);
+			}
+			else
+			{
+				request.addAttribute("event_attendance", null);
+			}
+		}
+		else
+		{
+			request.addAttribute("group_attendance", null);
+			request.addAttribute("event_attendance", null);
+		}
+		
+		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
+		//GroupCategory 전송
+		request.addAttribute("group_category", group_category);
+		
+		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
+		//Group 전송
+		request.addAttribute("group", group);
+		
+		ArrayList<GroupHashtag> group_hashtag_list = yh_group_hashtagDAO.selectGroupHashtagByGroupId(group_id);
+		//GroupHashtag List 전송
+		request.addAttribute("group_hashtag_list", group_hashtag_list);
+		
+		Event event = yh_eventDAO.selectEventByEventId(event_id);
+		//Event 전송
+		request.addAttribute("event", event);
+		
+		User leader = yh_userDAO.selectUserByUserId(event.getUser_id());
+		//Leader 전송
+		request.addAttribute("leader", leader);
+		
+		ArrayList<String> user_id_list = yh_event_attendanceDAO.getUserIdByEventId(event_id);
+		ArrayList<User> user_list = yh_userDAO.selectUserByUserIdList(user_id_list);
+		//User List 전송
+		request.addAttribute("user_list", user_list);
+		
+		ArrayList<EventSchedule> event_schedule_list = yh_event_scheduleDAO.selectEventScheduleByEventId(event_id);
+		//EventSchedule List 전송
+		request.addAttribute("event_schedule_list", event_schedule_list);
+		
+		ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventId(event_id);
+		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
+		//Image List 전송
+		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
+		ArrayList<EventScheduleVideo> event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleIdList(event_schedule_id_list);
+		//Video List 전송
+		request.addAttribute("video_list", event_schedule_video_list);
+		
+		ArrayList<EventComment> event_comment_list = yh_event_commentDAO.selectEventCommentByEventId(event_id);
+		for(int i = 0; i < event_comment_list.size(); i++)
+		{
+			event_comment_list.get(i).setUser(yh_userDAO.selectUserByUserId(event_comment_list.get(i).getUser_id()));
+		}
+		//EventComment List 전송
+		request.addAttribute("event_comment_list", event_comment_list);
+		
+		//event_place 임시 전송
+		String place = "東京　京橋駅";
+		request.addAttribute("event_place", place);
+		
+		ArrayList<Integer> group_union_id_list = yh_event_unionDAO.getGroupIdByEventId(event_id);
+		ArrayList<Group> group_union_list = yh_groupDAO.selectGroupByGroupIdListNotGroupId(group_union_id_list, group_id);
+		//GroupUnion List 전송
+		request.addAttribute("group_union_list", group_union_list);
+		
 	return "test_sh/shtest5";
 }
 @RequestMapping(value = "shtest6", method = RequestMethod.GET)
@@ -136,19 +229,27 @@ YHUserDAO yh_userDAO;
 @Autowired
 YHGroupDAO yh_groupDAO;
 @Autowired
-YHGroupAttendanceDAO yh_group_attendanceDAO;
+YHGroupCategoryDAO yh_group_categoryDAO;
+@Autowired
+YHEventAttendanceDAO yh_event_attendanceDAO;
 @Autowired
 YHEventDAO yh_eventDAO;
+@Autowired
+YHEventCommentDAO yh_event_commentDAO;
 @Autowired
 YHEventScheduleDAO yh_event_scheduleDAO;
 @Autowired
 YHEventScheduleImageDAO yh_event_schedule_imageDAO;
 @Autowired
-YHGroupCommentDAO yh_group_boardDAO;
+YHEventScheduleVideoDAO yh_event_schedule_videoDAO;
+@Autowired
+YHGroupCommentDAO yh_group_commentDAO;
 @Autowired
 YHGroupHashtagDAO yh_group_hashtagDAO;
-
-
+@Autowired
+YHGroupAttendanceDAO yh_group_attendanceDAO;
+@Autowired
+YHEventUnionDAO yh_event_unionDAO;
 
 
 @RequestMapping(value = "viewGroupEventForm", method = RequestMethod.GET)

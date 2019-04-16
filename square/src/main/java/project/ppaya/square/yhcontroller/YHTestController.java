@@ -81,6 +81,8 @@ public class YHTestController
 			ArrayList<String> category_list = YHMSComputerVisionUtil.getCategoryList(Reference.event_schedule_image_path, "event_schedule1_image" + i + ".jpg");		
 			logger.debug("{}", category_list.toString());			
 		}*/
+		
+		YHMSFaceUtil.detectFace(Reference.event_schedule_image_path, "event_schedule2_image1.jpg");
 	}
 	@RequestMapping(value = "yhtest1", method = RequestMethod.GET)
 	public String yhtest1(Model request)

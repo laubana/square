@@ -361,40 +361,45 @@
 	</body>
 
 <!-- 맵 띄우는 스크립트 -->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP"">
-</script>
+
 <!-- 東京　京橋駅 : { 35.6766907 , 139.77003390000004 } -->
 <script>
 function initMap() {
-    var latlng = new google.maps.LatLng(37.5729503, 126.97935789999997);
+    var latlng = new google.maps.LatLng(35.6715003, 139.766613);
     var mapOptions = {
     	      zoom: 15,
     	      center: latlng
     	    }
     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
 	var geocoder = new google.maps.Geocoder();
  	var address = '${requestScope.event_place}';
- 	   geocoder.geocode(
-	   		{ 'address': address }
-	   		, function(results, status) {
-				if (status == 'OK') {
-					latlng = results[0].geometry.location;
-					map.setCenter(latlng);
-					var marker = new google.maps.Marker({ 
-						map: map,
-						position: latlng
-						});
-					map.setZoom(15);
-					console.log( JSON.stringify(latlng) );
-					
-				} else {
-	   				alert('Geocode was not successful for the following reason: ' + status);
-	   			}
-	   		}
-	   );
-    
-	
+ 	
+ 	
+ 	   /* /////////////여기부터 다음 */
+		var locations = ${requestScope.event_schedule_list};
+		console.log( JSON.stringify(locations[0]) );
+		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		var markers = locations.map( function(location, i) {
+			return new google.maps.Marker({	
+					position: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
+					label: locations[i].name,
+					icon: {
+			     	    url: 'resources/images/clustering/samplepng/sampleimg' + i + '.png',
+			     	    size: new google.maps.Size(50, 50),
+			     	    origin: new google.maps.Point(0, 0),
+			     	    anchor: new google.maps.Point(0, 32)
+					}
+				});
+			});
+
+       var markerCluster = new MarkerClusterer(map, markers,
+           {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 }
+
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP">
+</script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
 </script>
 </html>
