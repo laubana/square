@@ -59,9 +59,15 @@ public class UserController
 	SH_DAO_Group sh_gdao;
 	
 	@RequestMapping(value = "listUserGroupForm", method = RequestMethod.GET)
-	public String listUserGroupForm(Model request)
+	public String listUserGroupForm
+	(
+			Model request,
+			@RequestParam(value = "user_id", defaultValue = "id1@gmail.com") String user_id
+			)
 	{
-		String user_id = "id1@gmail.com";
+		User user = yh_userDAO.selectUserByUserId(user_id);
+		//User 전송
+		request.addAttribute("user", user);
 		ArrayList<Integer> group_id_list = yh_group_attendanceDAO.getGroupIdByUserId(user_id);
 		
 		ArrayList<Group> group_list = yh_groupDAO.selectGroupByGroupIdList(group_id_list);
@@ -70,6 +76,7 @@ public class UserController
 			group_list.get(i).setBlind(yh_group_attendanceDAO.getBlindByUserIdGroupId(user_id, group_list.get(i).getGroup_id()));
 		}
 		
+		//Group List 전송
 		request.addAttribute("group_list", group_list);
 		
 		return "user/listUserGroupForm";

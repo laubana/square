@@ -100,10 +100,10 @@ label img {
 								<c:forEach var="group" items="${group_list}">
 									<li>
 									<c:if test="${group.blind != 0}">
-										<input type="checkbox" id="checkbox${group.group_id}" />
+										<input type="checkbox" id="checkbox${group.group_id}" name="group_checkbox" value="${group.group_id}" />
 										</c:if>
 									<c:if test="${group.blind == 0}">
-										<input type="checkbox" id="checkbox${group.group_id}" checked />
+										<input type="checkbox" id="checkbox${group.group_id}" checked name="group_checkbox" value="${group.group_id}" />
 									</c:if>
 										<label for="checkbox${group.group_id}">
 										<span><img src="resources/image/group_logo/${group.group_logo}" class="image fit tumb" alt="" /></span>
@@ -113,7 +113,7 @@ label img {
 								</c:forEach>					
 								</ul>									
 						</div>
-						<div align="center"><input type="submit" value="편집 확인"></div>
+						<div align="center"><input type="button" value="確認" onclick="javascript:setGroupAlbumAction()"></div>
 						</form>
 					</section>
 
@@ -146,6 +146,36 @@ label img {
 			<script src="resources/MyPage/assets/js/breakpoints.min.js"></script>
 			<script src="resources/MyPage/assets/js/util.js"></script>
 			<script src="resources/MyPage/assets/js/main.js"></script>
-
+<script>
+function setGroupAlbumAction()
+{
+	var map = {};
+	var checked_group_id_list = [];
+	var unchecked_group_id_list = [];
+	
+	$.each($(":checkbox[name='group_checkbox']:checked"), function(){            
+		checked_group_id_list.push($(this).val());
+    });
+	$.each($(":checkbox[name='group_checkbox']:not(:checked)"), function(){            
+		unchecked_group_id_list.push($(this).val());
+    });
+	
+	map["user_id"] = "${user.user_id}";
+	map["checked_group_id_list"] = checked_group_id_list;
+	map["unchecked_group_id_list"] = unchecked_group_id_list;
+	
+	$.ajax({
+		url: "setGroupAlbumAction",
+		type: "POST",
+		data: JSON.stringify(map),
+		contentType: "application/json; charset=UTF-8",
+		success: function()
+		{			
+			location.replace("viewUserForm?user_id=${user.user_id}");
+		},
+		error: function(error){console.log(error);}
+	});
+}
+</script>
 	</body>
 </html>

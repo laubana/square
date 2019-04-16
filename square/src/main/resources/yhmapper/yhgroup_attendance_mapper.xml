@@ -4,6 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHGroupAttendanceMapper">
+<update id="updateBlindByUserIdGroupId" parameterType="map">
+UPDATE TABLE_GA
+SET
+	BLIND = #{blind}
+WHERE
+	USER_ID = #{user_id} AND
+	GROUP_ID = #{group_id}
+</update>
 <select id="getBlindByUserIdGroupId" parameterType="map" resultType="int">
 SELECT
 	BLIND

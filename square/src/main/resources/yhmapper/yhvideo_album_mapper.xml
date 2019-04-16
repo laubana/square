@@ -7,7 +7,7 @@
 <select id="getBlindByUserIdEventScheduleVideoId" parameterType="map" resultType="int">
 SELECT
 	BLIND
-FORM	
+FROM
 	TABLE_VA
 WHERE
 	USER_ID = #{user_id} AND

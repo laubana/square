@@ -22,7 +22,7 @@
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href=""><strong>그룹 이름</strong> 앨범</a></h1>
+						<h1><a href="viewGroupForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}"><strong>${group.name}</strong> 앨범</a></h1>
 						<nav>
 							<ul>
 								<li><p class="copyright">
@@ -34,81 +34,12 @@
 
 				<!-- Main -->
 					<div id="main">
-						<article class="thumb">
-							<a href="resources/GroupPhoto/images/img/1.jpg" class="image"><img src="resources/GroupPhoto/images/img/1.jpg" alt="" /></a>
-							<h2>제목</h2>
-							<p>설명.</p>
+					<c:forEach var="image" items="${event_schedule_image_list}">
+					<article class="thumb">
+							<a href="resources/image/event_schedule_image/${image.filename}" class="image"><img src="resources/image/event_schedule_image/${image.filename}" alt="" /></a>
+							
 						</article>
-						<article class="thumb">
-							<a href="resources/GroupPhoto/images/img/2.jpg" class="image"><img src="resources/GroupPhoto/images/img/2.jpg" alt="" /></a>
-							<h2>제목</h2>
-							<p>설명.</p>
-						</article>
-						<article class="thumb">
-							<a href="resources/GroupPhoto/images/img/3.jpg" class="image"><img src="resources/GroupPhoto/images/img/3.jpg" alt="" /></a>
-							<h2>제목</h2>
-							<p>설명.</p>
-						</article>
-						<article class="thumb">
-							<a href="resources/GroupPhoto/images/img/4.jpg" class="image"><img src="resources/GroupPhoto/images/img/4.jpg" alt="" /></a>
-							<h2>제목</h2>
-							<p>설명.</p>
-						</article>
-						<article class="thumb">
-							<a href="resources/GroupPhoto/images/img/5.jpg" class="image"><img src="resources/GroupPhoto/images/img/5.jpg" alt="" /></a>
-							<h2>제목</h2>
-							<p>설명.</p>
-						</article>
-						<article class="thumb">
-							<a href="resources/GroupPhoto/images/img/6.jpg" class="image"><img src="resources/GroupPhoto/images/img/6.jpg" alt="" /></a>
-							<h2>제목</h2>
-							<p>설명.</p>
-						</article>
-						<article class="thumb">
-							<a href="resources/GroupPhoto/images/img/7.jpg" class="image"><img src="resources/GroupPhoto/images/img/7.jpg" alt="" /></a>
-							<h2>제목</h2>
-							<p>설명.</p>
-						</article>
-						<article class="thumb">
-							<a href="resources/GroupPhoto/images/img/8.jpg" class="image"><img src="resources/GroupPhoto/images/img/8.jpg" alt="" /></a>
-							<h2>제목</h2>
-							<p>설명.</p>
-						</article>
-						<article class="thumb">
-							<a href="resources/GroupPhoto/images/img/9.jpg" class="image"><img src="resources/GroupPhoto/images/img/9.jpg" alt="" /></a>
-							<h2>제목</h2>
-							<p>설명.</p>
-						</article>
-						<article class="thumb">
-							<a href="resources/GroupPhoto/images/img/10.jpg" class="image"><img src="resources/GroupPhoto/images/img/10.jpg" alt="" /></a>
-							<h2>제목</h2>
-							<p>설명.</p>
-						</article>
-						<article class="thumb">
-							<a href="resources/GroupPhoto/images/img/11.jpg" class="image"><img src="resources/GroupPhoto/images/img/11.jpg" alt="" /></a>
-							<h2>제목</h2>
-							<p>설명.</p>
-						</article>
-						<article class="thumb">
-							<a href="resources/GroupPhoto/images/img/12.jpg" class="image"><img src="resources/GroupPhoto/images/img/12.jpg" alt="" /></a>
-							<h2>제목</h2>
-							<p>설명.</p>
-						</article>
-						<article class="thumb">
-							<a href="resources/GroupPhoto/images/img/13.jpg" class="image"><img src="resources/GroupPhoto/images/img/13.jpg" alt="" /></a>
-							<h2>제목</h2>
-							<p>설명.</p>
-						</article>
-						<article class="thumb">
-							<a href="resources/GroupPhoto/images/img/14.jpg" class="image"><img src="resources/GroupPhoto/images/img/14.jpg" alt="" /></a>
-							<h2>제목</h2>
-							<p>설명.</p>
-						</article>
-						<article class="thumb">
-							<a href="resources/GroupPhoto/images/img/15.jpg" class="image"><img src="resources/GroupPhoto/images/img/15.jpg" alt="" /></a>
-							<h2>제목</h2>
-							<p>설명.</p>
-						</article>
+					</c:forEach>
 					</div>
 
 				<!-- Footer -->
