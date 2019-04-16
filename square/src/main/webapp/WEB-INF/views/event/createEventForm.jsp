@@ -123,7 +123,7 @@ border: 0;
 				<!-- Main -->
 					<div id="main">
 
-						<!-- 그룹의 설립일 등 기본 정보 -->
+						<!-- 정보 -->
 							<section id="one">
 								<article class="post">
 								<header>
@@ -133,7 +133,7 @@ border: 0;
 									<input type="text" class="Event_title "id="Event_title" placeholder="event_Title">
 									</div>
 									<div class="meta">
-								<!-- 그룹 설립일 자동입력 -데이터 베이스에 sysdate 오면 session으로 받아올 예정-->
+								<!-- 날짜, 회원 이름, 회원 사진-->
 										<time class="published" datetime="2019-04-08">2019년 4월 8일</time>
 										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">Harry</span><img src="resources/GroupMain/images/member/c1.jpg" alt="" /></a>
 									</div>
@@ -147,8 +147,10 @@ border: 0;
 									<!-- 내용 -->
 									<h1>이벤트 내용</h1>
 									<textarea class="comment-block" placeholder="내용을 작성해주세요..."></textarea><br>
+									<br>
+									<div align="center"><input type="submit" value="이벤트 올리기"></div>
 									<!-- google maps-->
-									 <div id="map" ></div>
+									<!--  <div id="map" ></div>
 									<div align="right">
 										<div id = "place_output"></div>
 									</div>
@@ -160,7 +162,7 @@ border: 0;
 									<div align="right">
 									<footer>
 									</footer>
-								</div>
+								</div> -->
 								</article>
 							</section>
 					</div>		
@@ -229,6 +231,7 @@ border: 0;
 
 		</div>
 </form>
+
 		<!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
 		<!-- 추가 Scripts -->
