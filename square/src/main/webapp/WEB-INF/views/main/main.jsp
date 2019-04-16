@@ -16,7 +16,7 @@
 			    $("#realTimeHashTag").text(texts[count]);
 			    count < texts.length ? count++ : count = 0;
 			}
-			setInterval(changeText, 2000);
+			setInterval(changeText, 1000);
 		
 			function logoutUserAction()
 			{
