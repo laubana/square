@@ -72,6 +72,5 @@ public class EventScheduleVideo
 	}
 	public void setBlind(int blind) {
 		this.blind = blind;
-	}
-	
+	}	
 }

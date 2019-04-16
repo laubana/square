@@ -493,17 +493,6 @@
 								</div>
 							</section>
 							
-							<!-- 스케줄 -->
-							<section>
-								<div class="container">	
-									<h1>암거나</h1>
-									<h2>스케줄</h2>
-									<h3>스케줄</h3>
-									<h4>스케줄</h4>
-									<p>암거나암거나</p>
-								</div>
-							</section>
-							
 							<!-- 관리 -->
 							<c:if test="${sessionScope.user_id == leader.user_id}">
 							<section id="six">

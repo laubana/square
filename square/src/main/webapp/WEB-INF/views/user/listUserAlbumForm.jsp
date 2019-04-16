@@ -143,7 +143,7 @@ label img {
 					<hr><br>
 					<h1>映像編集</h1><br>
 					<div class="row" id="video"></div><br>	
-					<div align="center"><input type="button" value="確認" onclick="testAction2()"></div>		
+					<div align="center"><input type="button" value="確認" onclick="setAlbumAction()"></div>		
 					</form>
 
 					</section>
@@ -176,7 +176,7 @@ label img {
 			<script src="resources/MemberPhoto/assets/js/main.js"></script>
 
 <script>
-function testAction2()
+function setAlbumAction()
 {
 	var map = {};
 	var checked_event_schedule_image_id_list = [];
@@ -231,7 +231,7 @@ $(document).ready(function () {
 		map["self"] = self;
 		
 		$.ajax({
-			url: "testAction",
+			url: "refreshAlbumAction",
 			type: "POST",
 			data: JSON.stringify(map),
 			dataType: "JSON",
@@ -247,13 +247,13 @@ $(document).ready(function () {
 						image_buff += "<article class='col-6 col-12-xsmall work-item'>";
 						if(result.event_schedule_image_list[i].blind == 1)
 						{
-							image_buff += "<input type='checkbox' id='" + result.event_schedule_image_list[i].filename + "' name='photo_check_box' value='" + result.event_schedule_image_list[i].event_schedule_image_id + "'>";
+							image_buff += "<input type='checkbox' id='photo_check_box" + result.event_schedule_image_list[i].event_schedule_image_id + "' name='photo_check_box' value='" + result.event_schedule_image_list[i].event_schedule_image_id + "'>";
 						}
 						else
 						{
-							image_buff += "<input type='checkbox' id='" + result.event_schedule_image_list[i].filename + "' name='photo_check_box' value='" + result.event_schedule_image_list[i].event_schedule_image_id + "' checked>";
+							image_buff += "<input type='checkbox' id='photo_check_box" + result.event_schedule_image_list[i].event_schedule_image_id + "' name='photo_check_box' value='" + result.event_schedule_image_list[i].event_schedule_image_id + "' checked>";
 						}
-						image_buff += "<label for='" + result.event_schedule_image_list[i].filename + "'/>";
+						image_buff += "<label for='photo_check_box" + result.event_schedule_image_list[i].event_schedule_image_id + "'/>";
 						image_buff += "<img src='resources/image/event_schedule_image/" + result.event_schedule_image_list[i].filename + "'/>";
 						image_buff += "</label>";
 						image_buff += "</article>";
@@ -277,15 +277,16 @@ $(document).ready(function () {
 						video_buff += "<source src='resources/image/event_schedule_video/" + result.event_schedule_video_list[i].filename +"' type='video/mp4'>";
 						video_buff += "</video>";
 						video_buff += "<br>";
+						console.log(result.event_schedule_video_list[i]);
 						if(result.event_schedule_video_list[i].blind == 1)
 						{
-							video_buff += "<input type='checkbox' id='" + result.event_schedule_video_list[i].filename + "' name='video_check_box' value='" + result.event_schedule_video_list[i].filename + "'>";
+							video_buff += "<input type='checkbox' id='video_check_box" + result.event_schedule_video_list[i].event_schedule_video_id + "' name='video_check_box' value='" + result.event_schedule_video_list[i].event_schedule_video_id + "'>";
 						}
 						else
 						{
-							video_buff += "<input type='checkbox' id='" + result.event_schedule_video_list[i].filename + "' name='video_check_box' value='" + result.event_schedule_video_list[i].filename + "' checked>";
+							video_buff += "<input type='checkbox' id='video_check_box" + result.event_schedule_video_list[i].event_schedule_video_id + "' name='video_check_box' value='" + result.event_schedule_video_list[i].event_schedule_video_id + "' checked>";
 						}
-						video_buff += "<label for='" + result.event_schedule_video_list[i].filename + "'/>";
+						video_buff += "<label for='video_check_box" + result.event_schedule_video_list[i].event_schedule_video_id + "'/>";
 						video_buff += "<br><h2>Select</h2>";
 						video_buff += "</label>";
 					}

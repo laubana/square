@@ -26,7 +26,7 @@ public class YHVideoAlbumDAO
 		{
 			event_schedule_video_id_list = mapper.getEventScheduleVideoIdByUserIdNotBlind(user_id);
 		}
-		catch(Exception error){}
+		catch(Exception error){error.printStackTrace();}
 		
 		return event_schedule_video_id_list;
 	}
@@ -43,7 +43,7 @@ public class YHVideoAlbumDAO
 		{
 			result = mapper.getBlindByUserIdEventScheduleVideoId(map);
 		}
-		catch(Exception error){}
+		catch(Exception error){error.printStackTrace();}
 		
 		return result;
 	}
@@ -61,7 +61,7 @@ public class YHVideoAlbumDAO
 		{
 			result = mapper.updateBlindByUserIdEventScheduleVideoId(map);
 		}
-		catch(Exception error){}
+		catch(Exception error){error.printStackTrace();}
 		
 		return result;
 	}
@@ -78,7 +78,7 @@ public class YHVideoAlbumDAO
 		{
 			new_event_schedule_video_id_list = mapper.getEventScheduleVideoIdByEventScheduleVideoIdListUserIdSelf(map);
 		}
-		catch(Exception error){}
+		catch(Exception error){error.printStackTrace();}
 		
 		return new_event_schedule_video_id_list;
 	}

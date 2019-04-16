@@ -97,8 +97,25 @@ public class UserAction {
 		session.removeAttribute("user_id");
 	}
 	@ResponseBody
-	@RequestMapping(value = "/testAction2", method = RequestMethod.POST)
-	public void testAction2(HttpSession session, Model request, @RequestBody HashMap<String, Object> map)
+	@RequestMapping(value = "/setGroupAlbumAction", method = RequestMethod.POST)
+	public void setGroupAlbumAction(HttpSession session, Model request, @RequestBody HashMap<String, Object> map)
+	{
+		String user_id = (String)map.get("user_id");
+		ArrayList<String> checked_group_id_list = (ArrayList<String>)map.get("checked_group_id_list");
+		ArrayList<String> unchecked_group_id_list = (ArrayList<String>)map.get("unchecked_group_id_list");
+		
+		for(int i = 0; i < checked_group_id_list.size(); i++)
+		{
+			yh_group_attendanceDAO.updateBlindByUserIdGroupId(user_id, Integer.parseInt(checked_group_id_list.get(i)), 0);
+		}
+		for(int i = 0; i < unchecked_group_id_list.size(); i++)
+		{
+			yh_group_attendanceDAO.updateBlindByUserIdGroupId(user_id, Integer.parseInt(unchecked_group_id_list.get(i)), 1);
+		}
+	}
+	@ResponseBody
+	@RequestMapping(value = "/setAlbumAction", method = RequestMethod.POST)
+	public void setAlbumAction(HttpSession session, Model request, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)map.get("user_id");
 		ArrayList<String> checked_event_schedule_image_id_list = (ArrayList<String>)map.get("checked_event_schedule_image_id_list");
@@ -124,8 +141,8 @@ public class UserAction {
 		}
 	}
 	@ResponseBody
-	@RequestMapping(value = "/testAction", method = RequestMethod.POST)
-	public HashMap<String, Object> testAction(HttpSession session, Model request, @RequestBody HashMap<String, Object> map)
+	@RequestMapping(value = "/refreshAlbumAction", method = RequestMethod.POST)
+	public HashMap<String, Object> refreshAlbumAction(HttpSession session, Model request, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)map.get("user_id");
 		ArrayList<Integer> group_id_list = (ArrayList<Integer>)map.get("group_id_list");
@@ -182,6 +199,10 @@ public class UserAction {
 				event_schedule_image_list.get(i).setBlind(yh_image_albumDAO.getBlindByUserIdEventScheduleImageId(user_id, event_schedule_image_list.get(i).getEvent_schedule_image_id()));
 			}
 			event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleIdList(new_event_schedule_id_list);
+			for(int i = 0; i < event_schedule_video_list.size(); i++)
+			{
+				event_schedule_video_list.get(i).setBlind(yh_video_albumDAO.getBlindByUserIdEventScheduleVideoId(user_id, event_schedule_video_list.get(i).getEvent_schedule_video_id()));
+			}
 		}
 
 		HashMap<String, Object> result = new HashMap<>();
