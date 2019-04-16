@@ -124,6 +124,11 @@ public class YHTestController
 		System.out.println(YHMSTextAnalyticsUtil.getKeyPhraseList("Javascriptができる方いますか？", "ja").toString());
 		System.out.println(YHMSTextAnalyticsUtil.getKeyPhraseList("SQLは簡単ですよ。", "ja").toString());
 	}
+	@RequestMapping(value = "yhtest3", method = RequestMethod.GET)
+	public String yhtest3(Model request)
+	{
+		return "yhtest/yhtest3";
+	}
 	@RequestMapping(value = "yhinit", method = RequestMethod.GET)
 	public void yhinit()
 	{

@@ -21,9 +21,9 @@ import project.ppaya.square.yhdao.*;
 
 @Repository
 @Controller
-public class YHUserAction
+public class YHTestAction
 {	
-	private static final Logger logger = LoggerFactory.getLogger(YHUserAction.class);
+	private static final Logger logger = LoggerFactory.getLogger(YHTestAction.class);
 
 	@Autowired
 	YHEventDAO yh_eventDAO;
@@ -39,19 +39,12 @@ public class YHUserAction
 	YHEventScheduleVideoDAO yh_event_schedule_videoDAO;
 	
 	@ResponseBody
-	@RequestMapping(value = "/getEventScheduleImageListPOST", method = RequestMethod.POST)
-	public void getEventScheduleImageListPOST(HttpSession session, @RequestBody ArrayList<Integer> group_id_list)
+	@RequestMapping(value = "/yhtestaction3", method = RequestMethod.POST)
+	public void yhtestaction(HttpSession session, @RequestBody HashMap<String, Object> map)
 	{
-		String user_id = "id1";
-		
-		ArrayList<Integer> event_id_list = yh_eventDAO.getEventIdByGroupIdList(group_id_list);
-		
-		ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventIdList(event_id_list);
-		
-		ArrayList<String> event_schedule_image_id_list = yh_event_schedule_imageDAO.getEventScheduleImageIdByEventScheduleIdList(event_schedule_id_list);
-		
-		yh_image_albumDAO.selectImageAlbumByEventScheduleImageIdListUserId(event_schedule_image_id_list, user_id);
-		yh_image_albumDAO.selectImageAlbumByEventScheduleImageIdListUserIdSelf(event_schedule_image_id_list, user_id);
-	}
-	
+		String test = (String)map.get("test");
+		String base64 = (String)map.get("file");
+		logger.debug("{}", base64);
+		logger.debug("{}", test);
+	}	
 }

@@ -4,6 +4,30 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHGroupMapper">
+<insert id="insertGroup" parameterType="map">
+INSERT INTO TABLE_G
+(
+	GROUP_ID,
+	GROUP_CATEGORY_ID,
+	USER_ID,
+	NAME,
+	CONTENT,
+	REGION,
+	GROUP_LOGO,
+	GROUP_IMAGE
+)
+VALUES
+(
+	G_SEQ.NEXTVAL,
+	#{group_category_id},
+	#{user_id},
+	#{name},
+	#{content},
+	#{region},
+	#{group_logo},
+	#{group_image}
+)
+</insert>
 <select id="getGroupIdByName" parameterType="string" resultType="int">
 SELECT
 	GROUP_ID
