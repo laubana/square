@@ -81,7 +81,7 @@
 							</c:forEach>
 								</ul>
 						</div>
-								<div align="center"><a href="#" class="button">공개 / 비공개</a></div>
+								<div align="center"><a href="listUserGroupForm" class="button">グループリスト編集</a></div>
 					</section>
 
 				<!-- Four -->

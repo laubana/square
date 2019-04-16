@@ -365,47 +365,88 @@
 <!-- 東京　京橋駅 : { 35.6766907 , 139.77003390000004 } -->
 <script>
 function initMap() {
-    var latlng = new google.maps.LatLng(35.6715003, 139.766613);
+    var latlng = new google.maps.LatLng(35.6715003, 139.764913);
     var mapOptions = {
     	      zoom: 15,
     	      center: latlng
-    	    }
+    	}
     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	var geocoder = new google.maps.Geocoder();
- 	var address = '${requestScope.event_place}';
- 	
- 		var result = new Array();
- 	$(function(){
- 		
- 		<c:forEach items = "${requestScope.event_schedule_list}" var = "list">
- 			var es_object = new Object();
- 			es_object.lat = ${list.latitude};
- 			es_object.lng = ${list.longitude};
- 			es_object.region = "${list.region}";
- 			result.push(es_object);
- 		</c:forEach>
- 		alert("list="+JSON.stringify(result));
- 	})
+	
+
+	/* 서버에서 리스트 받아서 올띄우기 */
+ 	/* var address = ${requestScope.event_schedule_list}; */
  	
  	   /* /////////////여기부터 다음 */
 	/* 	console.log( JSON.Stringify(${requestScope.event_schedule_list[0].latitude}) ); 
-		var locations = ${requestScope.event_schedule_list};*/
-		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		var markers = result.map( function(location, i) {
-			return new google.maps.Marker({	
-					position: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
-					label: locations[i].name,
-					icon: {
-			     	    url: 'resources/images/clustering/samplepng/sampleimg' + i + '.png',
-			     	    size: new google.maps.Size(50, 50),
-			     	    origin: new google.maps.Point(0, 0),
-			     	    anchor: new google.maps.Point(0, 32)
-					}
-				});
-			});
+		
+ 	[{"lat":35.6693907,"lng":139.76803390000003,"region":"東京"},
+ 		{"lat":35.66676907,"lng":139.757390000004,"region":"東京"},
+ 		{"lat":35.6685256,"lng":139.7679124,"region":"東京"},
+ 		{"lat":35.67016907,"lng":76203390000004,"region":"東京"},
+ 		{"lat":35.67002907,"lng":139.7685339000003,"region":"東京"},
+ 		{"lat":35.67106907,"lng":139.762133900004,"region":"東京"},
+ 		{"lat":35.6759907,"lng":139.7707339000004,"region":"東京"},
+ 		{"lat":35.6766907,"lng":77013380004,"region":"東京"},
+ 		{"lat":67556907,"lng":139.7699033257,"region":"東京"},
+ 		{"lat":35.67606907,"lng":139.77113941000005,"region":"東京"},
+ 		{"lat":35.67506907,"lng":139.77044100004,"region":"東京"},
+ 		{"lat":35.67526907,"lng":139.76835000004,"region":"東京"},
+ 		{"lat":35.6681907,"lng":139.7601033333004,"region":"東京"},
+ 		{"lat":35.66726907,"lng":139.7598539004,"region":"東京"},
+ 		{"lat":35.66956907,"lng":139.76103390000003,"region":"東京"},
+ 		{"lat":35.6691329,"lng":139.7693181,"region":"東京"}]
+ 	
+		*/
+	 	var locations = [];
+ 	
+		<c:forEach items = "${requestScope.event_schedule_list}" var = "list">
+			locations.push( {lat: ${list.latitude}, lng: ${list.longitude}, region: "${list.region}"} );
+		</c:forEach>
+	 		
+ 		console.log( locations[0].lat ); 
 
+		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		
+		/* 좌표 각각들에 대해 마커 객체를 생성해서 맵에 띄우는 함수  */
+		var markers = locations.map( function(location, i) {
+			return new google.maps.Marker({	
+					position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
+					label: locations[i].name
+				});
+			});		
+		
+		
+		/* 마커 배열로 클러스터 찍어주는 함수  */
        var markerCluster = new MarkerClusterer(map, markers,
            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+       
+       
+       /* 마커 클릭했을 때 위에 툴팁 띄워주는 함수 
+       var infowindow = new google.maps.InfoWindow({
+	          content: 'test',
+	          maxWidth: 200
+	        });
+       
+     	 마커에 클릭 이벤트 걸어주는 함수      
+       marker.addListener('click', function() {
+           infowindow.open(map, marker);
+         }); */
+       
+		/* 마커 배열에 있는 마커 객체들 하나하나 꺼내서 클릭 이벤트 걸어주는 함수 */     
+		markers.map( function(marker, i) {
+			
+			var infowindow = new google.maps.InfoWindow({
+		          content:  '<img src = "resources/images/clustering/samplepng/sampleimg' + i + '.png">',
+		          maxWidth: 250
+		        });
+			  marker.addListener('click', function() {
+					infowindow.open(map, marker);
+				});
+			});
+       
+		
+       
 }
 
 </script>
