@@ -176,7 +176,7 @@ border: 0;
 										<article>
 											<img src="resources/GroupMain/images/bb.jpg" class="image" id="foo2">
 											<div class="inner">
-												<h4>File Name</h4>
+												<h4>File_1</h4>
 												<div class="filebox">
 												<label for="imgInp2">Image Upload1</label>
 												<input type='file' id="imgInp2" /></div>
@@ -185,7 +185,7 @@ border: 0;
 										<article>
 											<img src="resources/GroupMain/images/bb.jpg" class="image" id="foo3">
 											<div class="inner">
-												<h4>File Name</h4>
+												<h4>File_2</h4>
 												<div class="filebox">
 												<label for="imgInp3">Image Upload2</label>
 												<input type='file' id="imgInp3" /></div>
@@ -194,7 +194,7 @@ border: 0;
 										<article>
 											<img src="resources/GroupMain/images/bb.jpg" class="image" id="foo4">
 											<div class="inner">
-												<h4>File Name</h4>
+												<h4>File_3</h4>
 												<div class="filebox">
 												<label for="imgInp4">Image Upload3</label>
 												<input type='file' id="imgInp4" /></div>
@@ -203,7 +203,7 @@ border: 0;
 										<article>
 											<img src="resources/GroupMain/images/bb.jpg" class="image" id="foo5">
 											<div class="inner">
-												<h4>File Name</h4>
+												<h4>File_4</h4>
 												<div class="filebox">
 												<label for="imgInp5">Image Upload4</label>
 												<input type='file' id="imgInp5" /></div>
@@ -211,7 +211,7 @@ border: 0;
 										</article>
 											</div>
 									
-										<div align="center"><input type="submit" value="확인"></div>
+										<div align="center"><input type="submit" value="이벤트 올리기"></div>
 																	
 									<!-- <button onclick="uploadFirstEventImage()" class="button">Image More</button> -->		
 								</div></footer>

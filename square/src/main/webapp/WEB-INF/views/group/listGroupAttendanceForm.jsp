@@ -82,17 +82,19 @@
 						<!-- Two -->	<!-- 아바타 이미지 필섹 가로 140 세로 140 -->
 							<section id="two">
 								<div class="container">
-									<h3>회원 정보</h3>
+									<h3>メンバー</h3>
+									<p>リーダー</p>
 										<div>
 											<a href="viewUserForm?user_id=${leader.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${leader.image_id}" alt="" style="width: 100px; height:auto;"></a>
 											</div>
 										<div>
-									<p>주최자</p>
+										<br>
+									<p>メンバー</p>
 										<c:forEach var="user" items="${user_list}">
 											<a href="viewUserForm?user_id=${user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 										</c:forEach>
 										</div>
-									<p>회원</p>
+									
 								</div>
 							</section>
 	

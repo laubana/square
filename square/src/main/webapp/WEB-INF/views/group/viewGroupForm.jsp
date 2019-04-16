@@ -140,6 +140,7 @@
 									<img src="resources/image/group_image/${group.group_image}" alt="" />
 								</div>
 								<div class="container">
+									<h3>グループ情報</h3>
 									<p>${group.content}</p>
 								</div>
 							</section>
@@ -153,11 +154,13 @@
 											<a href="viewUserForm?user_id=${leader.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${leader.image_id}" alt="" style="width: 100px; height:auto;"></a>
 										</div>
 										<div>
+										<br>
 									<p>メンバー</p>
 										<c:forEach var="user" items="${user_list}">
 											<a href="viewUserForm?user_id=${user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 										</c:forEach>
 										</div>${user.size()}
+										<br>
 									<a href="listGroupAttendanceForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">メンバーページへ</a>
 								</div>
 							</section>
@@ -198,7 +201,7 @@
 						</div>
 						</c:forEach>
 						<textarea class="comment-block"></textarea><br>
-						<input type="button" value="作成"><br><br><br>
+						<div align="right"><input type="button" value="作成"></div><br><br>
 						<a href="listGroupCommentForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">コメントページへ</a>
 						
 						</div>		
@@ -222,7 +225,7 @@
 											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
 											</c:forEach>
 											</video>
-											<br>
+											<br><br>
 											<a href="listGroupAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">アルバムページへ</a>
 										</article>
 									</div>
