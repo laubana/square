@@ -16,6 +16,37 @@ public class YHGroupDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public int insertGroup
+	(
+			int group_category_id,
+			String user_id,
+			String name,
+			String content,
+			String region,
+			String group_logo,
+			String group_image
+			)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("group_category_id", group_category_id);
+		map.put("user_id", user_id);
+		map.put("name", name);
+		map.put("content", content);
+		map.put("region", region);
+		map.put("group_logo", group_logo);
+		map.put("group_image", group_image);
+		
+		YHGroupMapper mapper = sqlSession.getMapper(YHGroupMapper.class);
+		
+		try
+		{
+			result = mapper.insertGroup(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public ArrayList<Integer> getGroupIdByName(String name)
 	{
 		ArrayList<Integer> group_id_list = null;

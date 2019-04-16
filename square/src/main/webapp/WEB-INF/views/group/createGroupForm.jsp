@@ -176,7 +176,7 @@ border: 0;
 							<br>
 							<div class="comment-wrap">
 								<div class="comment-block">
-										<textarea name="" id="" cols="30" rows="3" placeholder="자유롭게 작성해 주세요..."></textarea>
+										<textarea name="" id="group_content" cols="30" rows="3" placeholder="자유롭게 작성해 주세요..."></textarea>
 								</div>
 							</div>
 						
@@ -195,31 +195,31 @@ border: 0;
 							<h1>그룹 카테고리</h1>
 							<div class="container">
   								<div class="radio">
-    								<input id="radio-1" name="radio" type="radio" checked>
+    								<input id="radio-1" name="radio" type="radio" value="1" checked>
     								<label for="radio-1" class="radio-label">IT</label>
-    								<input id="radio-2" name="radio" type="radio">
+    								<input id="radio-2" name="radio" type="radio" value="2">
     								<label  for="radio-2" class="radio-label">펫</label>
-    								<input id="radio-3" name="radio" type="radio">
+    								<input id="radio-3" name="radio" type="radio" value="3">
     								<label for="radio-3" class="radio-label">레져</label>
-    								<input id="radio-4" name="radio" type="radio">
+    								<input id="radio-4" name="radio" type="radio" value="4">
     								<label for="radio-4" class="radio-label">가족</label>
-    								<input id="radio-5" name="radio" type="radio">
+    								<input id="radio-5" name="radio" type="radio" value="5">
     								<label for="radio-5" class="radio-label">요리</label>
-    								<input id="radio-6" name="radio" type="radio">
+    								<input id="radio-6" name="radio" type="radio" value="6">
     								<label for="radio-6" class="radio-label">음악</label>
   								</div>
 							</div>
 							<h1>그룹 Tag</h1>
-							<input type="text" placeholder="그룹 tag1" class="input1">
-							<input type="text" placeholder="그룹 tag2" class="input2">
-							<input type="text" placeholder="그룹 tag3" class="input3">
-							<input type="text" placeholder="그룹 tag4" class="input4">
-							<input type="text" placeholder="그룹 tag5" class="input5">
+							<input type="text" placeholder="그룹 tag1" class="input1" name="group_hashtag">
+							<input type="text" placeholder="그룹 tag2" class="input2" name="group_hashtag">
+							<input type="text" placeholder="그룹 tag3" class="input3" name="group_hashtag">
+							<input type="text" placeholder="그룹 tag4" class="input4" name="group_hashtag">
+							<input type="text" placeholder="그룹 tag5" class="input5" name="group_hashtag">
 							<br>
 							<h1>그룹 활동 지역</h1>
-							<input type="text" placeholder="그룹 활동 지역">
+							<input type="text" placeholder="그룹 활동 지역" id="region">
 							<br>
-							<div align="center"><input type="submit" value="생성"></div>
+							<div align="center"><input type="button" value="生成" onclick="createGroupAction()"></div>
 							</form>
 						</header>	
 					</div>
@@ -238,7 +238,6 @@ border: 0;
 		</section>
 
 	</div>
-<input type="button" id="test">
 <!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
 		<!-- 추가 Scripts -->
@@ -254,7 +253,63 @@ border: 0;
 			<script src="resources/GroupMain/assets/js/breakpoints.min.js"></script>
 			<script src="resources/GroupMain/assets/js/util.js"></script>
 			<script src="resources/GroupMain/assets/js/main.js"></script>
+<script>
+	function createGroupAction()
+	{
+		var map = {};
+		map["name"] = $("#input").val();
+		map["content"] = $("#group_content").val();
+		var radio_list = document.getElementsByName("radio");
+		for(var i = 0; i < radio_list.length; i++)
+		{
+			if(radio_list[i].checked == true)
+			{
+				map["group_category_id"] = radio_list[i].value;
+				break;
+			}
+		}
+		
+		var group_hashtag_list = document.getElementsByName("group_hashtag");
+		map["group_hashtag_list"] = [];
+		for(var i = 0; i < group_hashtag_list.length; i++)
+		{
+			map["group_hashtag_list"].push(group_hashtag_list[i].value);
+		}
+		
+		map["region"] = document.getElementById("region").value;
 
+		console.log(map);
+		
+		var group_logo = new FileReader();
+		group_logo.readAsDataURL(document.getElementById("imgInp2").files[0]);
+		group_logo.onload = function()
+		{
+            map["group_logo"] = group_logo.result.substring(group_logo.result.indexOf(",") + 1);
+        }
+		var group_image = new FileReader();
+		group_image.readAsDataURL(document.getElementById("imgInp").files[0]);
+		group_image.onload = function()
+		{
+            map["group_image"] = group_image.result.substring(group_image.result.indexOf(",") + 1);
+        }
+
+		var interval = setInterval(function()
+				{
+					if(typeof(map.group_logo) != "undefined" && typeof(map.group_image) != "undefined")
+					{
+						$.ajax({
+			    			url: "createGroupAction",
+			    			type: "POST",
+			    			data: JSON.stringify(map),
+			    			contentType: "application/json; charset=UTF-8",
+			    			success: function(result){},
+			    			error: function(){}
+			    				});
+						clearInterval(interval);
+					}
+				},100);
+	}
+</script>
 <script type="text/javascript">
 $("#foo2_span").click(function()
 		{

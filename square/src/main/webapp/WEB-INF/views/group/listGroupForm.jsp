@@ -66,9 +66,7 @@ input::placeholder {
 .wrap-input.focused .filters > .filter-btn:nth-child(2) {
   animation-delay: .25s;
 }
-.wrap-input.focused .filters > .filter-btn:nth-child(3) {
-  animation-delay: .35s;
-}
+
 .wrap-input.focused .js-close {
   animation: showControls .4s .8s forwards 1;
   opacity: .3;
@@ -177,10 +175,6 @@ input::placeholder {
     					<div class="filter-btn">
        						<input type="radio" value="">
        							<label>회원수</label>
-    						</div>
-    					<div class="filter-btn">
-      						<input type="radio" value="">
-     					<label>지역</label>
     						</div>
     					<div class="filter-btn" style="display:none">
       						<input type="radio" value="Subject:">
