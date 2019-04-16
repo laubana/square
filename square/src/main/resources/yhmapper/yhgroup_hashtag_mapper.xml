@@ -7,7 +7,7 @@
 <select id="getHashtagByGroupId" parameterType="int" resultType="string">
 SELECT DISTINCT
 	HASHTAG
-WHERE
+FROM
 	TABLE_GH
 WHERE
 	GROUP_ID = #{group_id}
