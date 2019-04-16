@@ -36,7 +36,7 @@
 
 		<!-- Header -->
 			<header id="header">
-				<h1><a href="main">2조</a></h1>
+			<h1><a class="navbar-brand font-weight-bolder mr-3" href="main"><img src="resources/Main/assets/css/images/photoSquareLogo_done.png"></a></h1>
 				<nav>
 					<ul>
 						<li><a href="listRecommendationForm"><span id="realTimeHashTag"> #급상승 해시태그</span></a></li>

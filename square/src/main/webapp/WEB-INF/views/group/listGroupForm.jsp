@@ -144,7 +144,7 @@ input::placeholder {
 
 		<!-- Header -->
 			<header id="header">
-				<h1><a href="main">2조</a></h1>
+				<h1><a class="navbar-brand font-weight-bolder mr-3" href="main"><img src="resources/Main/assets/css/images/photoSquareLogo_done.png"></a></h1>
 				<nav>
 					<ul>
 						<li><a href="listRecommendationForm"></a>
