@@ -361,40 +361,62 @@
 	</body>
 
 <!-- 맵 띄우는 스크립트 -->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP"">
-</script>
+
 <!-- 東京　京橋駅 : { 35.6766907 , 139.77003390000004 } -->
 <script>
 function initMap() {
-    var latlng = new google.maps.LatLng(37.5729503, 126.97935789999997);
+    var latlng = new google.maps.LatLng(35.6715003, 139.766613);
     var mapOptions = {
     	      zoom: 15,
     	      center: latlng
     	    }
     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
 	var geocoder = new google.maps.Geocoder();
  	var address = '${requestScope.event_place}';
- 	   geocoder.geocode(
-	   		{ 'address': address }
-	   		, function(results, status) {
-				if (status == 'OK') {
-					latlng = results[0].geometry.location;
-					map.setCenter(latlng);
-					var marker = new google.maps.Marker({ 
-						map: map,
-						position: latlng
-						});
-					map.setZoom(15);
-					console.log( JSON.stringify(latlng) );
-					
-				} else {
-	   				alert('Geocode was not successful for the following reason: ' + status);
-	   			}
-	   		}
-	   );
-    
-	
+ 	
+ 	
+ 	   /* /////////////여기부터 다음 */
+       var locations = [
+	       {lat: 35.6693907, lng: 139.76803390000004},
+	       {lat: 35.6691329, lng: 139.7693181},
+	       {lat: 35.6685256, lng: 139.7679124},
+	       {lat: 35.67016907, lng: 139.76203390000004},
+	       {lat: 35.67002907, lng: 139.7685339000003},
+	       {lat: 35.67106907, lng: 139.762133900004},
+	       {lat: 35.6759907, lng: 139.7707339000004},
+	       {lat: 35.6766907, lng: 139.77013390000004},
+	       {lat: 35.67556907, lng: 139.7699033257},
+	       {lat: 35.67606907, lng: 139.77113941000004},
+	       {lat: 35.67506907, lng: 139.77044100004},
+	       {lat: 35.67526907, lng: 139.76835000004},
+	       {lat: 35.6681907, lng: 139.7601033333004},
+	       {lat: 35.66726907, lng: 139.7598539004},
+	       {lat: 35.66956907, lng: 139.76103390000004},
+	       {lat: 35.66676907, lng: 139.757390000004}
+	     ]
+
+		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		var markers = locations.map( function(location, i) {
+			return new google.maps.Marker({	
+					position: location,
+					label: 'ScheduleDate',
+					icon: {
+			     	    url: 'resources/images/clustering/samplepng/sampleimg' + i + '.png',
+			     	    size: new google.maps.Size(50, 50),
+			     	    origin: new google.maps.Point(0, 0),
+			     	    anchor: new google.maps.Point(0, 32)
+					}
+				});
+			});
+
+       var markerCluster = new MarkerClusterer(map, markers,
+           {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 }
+
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP">
+</script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
 </script>
 </html>
