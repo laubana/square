@@ -9,32 +9,15 @@
 -->
 <html>
 	<head>
-		<title>createEventForm</title>
+		<title>GroupEventView</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/EventView/assets/css/main.css" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
-		<script src=resources/Basic/assets/js/jquery-3.3.1.min.js></script>
-	</head>
-
-	<script>
-	function createEventImage()
-	{
-		document.getElementById("file").click();
-	}
-	
-	function uploadFirstEventImage()
-	{
-		var x = document.createElement("INPUT");
-		x.setAttribute("type", "file");
-		document.getElementById("album").appendChild(x);
-	}
-	</script>
-	
-	<!-- 구글 맵스 위한 style 태그. 다른 요소 적용할 style이 있다면 style 태그를 별도로 만들어주기 바람 -->
+		
 	<style>
-		#map {
+	#map {
 			width: 500px;
 			height: 350px;
 			position: relative !important; /* changing this to fixed makes the map dissapear */
@@ -43,22 +26,121 @@
 			left: 0; 
 			right: 0; 
 			z-index: 0;
-	     }
+		     }
 		html,body {height: 100%; margin: 0; padding: 0;}
-	</style>
-
-
-	
+		</style>
+		
+		<script>
+			function withdrawEventAction()
+			{
+				map = {};
+				map["user_id"] = "${sessionScope.user_id}";
+				map["event_id"] = ${event.event_id};
+				
+				$.ajax({
+					url: "withdrawEventAction",
+					type: "POST",
+					data: JSON.stringify(map),
+					contentType: "application/json; charset=UTF-8",
+					success: function()
+					{
+						location.reload();
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+			function joinEventAction()
+			{
+				map = {};
+				map["user_id"] = "${sessionScope.user_id}";
+				map["event_id"] = ${event.event_id};
+				
+				$.ajax({
+					url: "joinEventAction",
+					type: "POST",
+					data: JSON.stringify(map),
+					contentType: "application/json; charset=UTF-8",
+					success: function()
+					{
+						location.reload();
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+			
+			/* <div class="comment-wrap">
+			<div>
+			<a href="viewGroupForm?group_categoryid=${group_union.group_category_id}&group_id=${group_union.group_id}" class="image avatar thumb"><img src="resources/image/group_logo/${group_union.group_logo}" alt="" style="width: 100px; height:auto;"></a>
+			</div>
+		</div> */
+			function searchGroupAction()
+			{
+				map = {};
+				map["group_id"] = ${group.group_id};
+				map["keyword"] = $("#keyword").val();
+				
+				$.ajax({
+					url: "searchGroupAction",
+					type: "POST",
+					data: JSON.stringify(map),
+					dataType: "JSON",
+					contentType: "application/json; charset=UTF-8",
+					success: function(result)
+					{
+						var buff = "";
+						
+						for(var i = 0; i < result.length; i++)
+						{
+							buff += "<div class='comment-wrap'>";
+							buff += "<div style='display: inline;'>";
+							buff += "<a href='viewGroupForm?group_category_id=" + result[i].group_category_id +"&group_id=" + result[i].group_id + "' class='image avatar thumb'><img src='resources/image/group_logo/"+ result[i].group_logo + "' alt='' style='width: 100px; height:auto;'></a>";
+							buff += "</div>";
+							buff += "<input type='button' onclick='javascript:unifyEventAction(" + result[i].group_id + ")' value='연합하기'>";
+							buff += "</div>";
+						}
+						
+						document.getElementById("group_list").innerHTML = buff;
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+			function unifyEventAction(group_id)
+			{
+				map = {};
+				map["event_id"] = ${event.event_id};
+				map["current_group_id"] = ${group.group_id};
+				map["group_id"] = group_id;
+				
+				$.ajax({
+					url: "unifyEventAction",
+					type: "POST",
+					data: JSON.stringify(map),
+					contentType: "application/json; charset=UTF-8",
+					success: function()
+					{
+						location.reload();
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+		</script>
+		
+	</head>
 	<body class="is-preload">
-
 		<!-- Header 메인 바 -->
 			<header id="header1">
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="#">회원가입</a></li>
-						<li><a href="#">그룹생성</a></li>
-						<li><a href="login">로그인</a></li>
+						<li><a href="listRecommendationForm"></a>
+						<c:if test="${sessionScope.user_id != null}">
+						<li><a href="createGroupForm">그룹생성</a></li>
+					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
+						</c:if>
+						<c:if test="${sessionScope.user_id == null}">
+						<li><a href="joinUserForm">회원가입</a></li>
+							<li><a href="loginUserForm">로그인</a></li>
+						</c:if>
 					</ul>
 				</nav>
 			</header>
@@ -73,9 +155,25 @@
 							#${group_hashtag.hashtag}
 						</c:forEach>
 					</p>
+					<c:if test="${sessionScope.user_id != null}">
+						<c:if test="${group_attendance != null}">
+							<c:if test="${event_attendance != null}">
+								<a href="javascript:withdrawEventAction()" class="button">탈퇴</a>
+							</c:if>
+							<c:if test="${event_attendance == null}">
+								<a href="javascript:joinEventAction()" class="button">참여</a>
+							</c:if>
+						</c:if>
+					</c:if>
 				</header>
 				<nav id="nav">
-					
+					<ul>
+						<li><a href="#one" class="active">정보</a></li>
+						<li><a href="#two">회원</a></li>
+						<li><a href="#three">코멘트</a></li>
+						<li><a href="#four">앨범</a></li>
+						<li><a href="#five">이벤트 스케줄</a></li>
+					</ul>
 				</nav>
 				<footer>
 					<ul class="icons">
@@ -91,67 +189,153 @@
 		<!-- Wrapper -->
 			<div id="wrapper">
 
-				<!-- Main -->
+				<!-- Main 가:1280세:480-->
 					<div id="main">
 
-						<!-- 그룹의 설립일 등 기본 정보 -->
-							<section id="five">
+						<!-- Five -->
+							<section id="one">
 								<article class="post">
 								<header>
-								<!-- 타이틀 생성 -->
 									<div class="title">
-									<input type="text" class="Event_title "id="Event_title" placeholder="groupTitle">
+										<h2><a href="">${event.name}</a></h2>
 									</div>
 									<div class="meta">
-								<!-- 그룹 설립일 자동입력 -데이터 베이스에 sysdate 오면 session으로 받아올 예정-->
-										<time class="published" datetime="2019-04-08">DB에서 sysdate 찍어줌</time> 
-										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><small>리더 아이디 자리</small></a>
-										<span class="name">${leader.name}</span><p><small>리더 이름 자리</small></p>
-										<p><small>리더 이미지 자리</small></p><img src="resources/image/user_image/${leader.image_id}" alt="" />
+										<time class="published" datetime="2019-04-08">2019년 4월 8일</time>
+										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">${leader.name}</span><img src="resources/image/user_image/${leader.image_id}" alt="" /></a>
 									</div>
 								</header>
-								<!-- 그룹 대표 이미지 업로드 -->
+								<span class="image featured"><img src="resources/image/event_image/${event.image_id}" alt="" /></span>
+								<p>
+									${event.content}
+								</p>
+									<div id="map" ></div>
+									場所: ${requestScope.event_place}
 								<div align="right"><footer>
-									<label><input type="file" id="file"></label>
-									<input type="button" class="createEventImage" id="createEventImage" value="그룹 이미지 등록" onclick="createEventImage()">		
+										<a href="#" class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href="#" class="icon fa-comment">128</a>&nbsp;&nbsp;				
 								</footer></div>
 							</article>
 							</section>
-					</div>		
 
-		
-							
-				<!-- google maps-->
-						<section id="section_map">
-								<article class="post">
-								<p>여기는 p태그
-								</p>
-									<div id="map" ></div>
-									<div align="right">
-										<div id = "place_output"></div>
-									</div>
-									<div id = "output_button"></div>
-										<input type = "text" id = "search_addr" value = "東京　京橋駅">
-										<input type = "button" id = "button_mapsearch" value = "검색" onClick = "codeAddress()">
-									<div align="right">
-									<footer>
-									</footer>
+					</div>
+					
+					<div id="main">
+
+					<!-- Two -->
+							<section id="two">
+								<div class="container">
+									<h3>회원 정보</h3>
+										<div>
+											<a href="viewUserForm?user_id=${leader.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${leader.image_id}" alt="" style="width: 100px; height:auto;"></a>
+										</div>
+										<div>
+									<p>주최자</p>
+										<c:forEach var="user" items="${user_list}">
+											<a href="viewUserForm?user_id=${user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${user.image_id}" alt="" style="width: 100px; height:auto;"></a>
+										</c:forEach>
+										</div>
+									<p>회원</p>
+									<a href="listEventAttendanceForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">회원 페이지 이동</a>
 								</div>
-							</article>
-						</section>
-
-						<!-- 그룹의 설립일 등 기본 정보 -->
-							<div id="album">
-							<section id="six">
-								<footer><div id="album" class="container" >
-									<h3>앨범</h3>
-									<p>우리 그룹을 표현할 첫 사진을 넣어보세요</p>
-																			
-									<button onclick="uploadFirstEventImage()">사진 더 추가</button>		
-								</div></footer>
 							</section>
-						</div><br><br>
-								
+					<!-- Three -->
+							<section id="three">
+								<div class="container">
+									<h3>코멘트</h3>
+						<div class="comments">
+						<c:forEach var="event_comment" items="${event_comment_list}">
+						<div class="comment-wrap">
+							<div>
+							<a href="viewUserForm?user_id=${event_comment.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${event_comment.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
+							</div>
+							<div class="comment-block">
+								<p class="comment-text">${event_comment.content}</p>
+									<div class="bottom-comment">
+										<div class="comment-date">${event_comment.input_date}</div>
+											<ul class="comment-actions">
+												<li class="name"><a href="viewUserForm?user_id=${event_comment.user.user_id}">${event_comment.user.name}</a></li>
+												<c:if test="${event_comment.user.user_id == sessionScope.user_id}">
+													<li class="name">Edit</li>
+													<li>Delete</li>
+												</c:if>
+											</ul>
+									</div>
+							</div>
+						</div>
+						</c:forEach>
+						<a href="listEventCommentForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">코멘트 페이지 이동</a>
+						
+						</div>		
+								</div>
+							</section>
+
+					<!-- Four -->
+							<section id="four">
+								<div class="container">
+									<h3>앨범</h3>
+						
+									<div class="features">
+										<article class="col-6 col-12-xsmall work-item">
+											<c:forEach var="event_schedule_image" items="${event_schedule_image_list}">
+												<a href="resources/image/event_schedule_image/${event_schedule_image.filename}" class="image thumb"><img src="resources/image/event_schedule_image/${event_schedule_image.filename}" alt="" /></a>
+											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.event_schedule_id}</h3>
+											</c:forEach>
+											<br>
+											<video width='auto' height='auto' controls>
+											<c:forEach var="video" items="${video_list}">
+											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
+											</c:forEach>
+											</video>
+											<br>
+											<a href="listEventAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">앨범 페이지 이동</a>
+										</article>
+									</div>
+								</div>
+							</section>
+							
+							<section id="five">
+								<div class="container">
+									<h3>이벤트 스케줄 페이지</h3>
+									<div class="features">
+									<c:forEach var="event_schedule" items="${event_schedule_list}">
+									<article>
+										
+											<div class="inner">
+											<h4><a href="viewEventScheduleForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}">${event_schedule.name}</a></h4>
+										
+											</div>
+										</article>
+										</c:forEach>
+											</div>
+											
+										<a href="listEventScheduleForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">이벤트 스케줄 페이지 이동</a>
+									</div>
+							</section>
+							<section id="six">
+								<div class="container">
+									<h3>참여 그룹</h3>
+									<div class="features">
+									<c:forEach var="group_union" items="${group_union_list}">
+						<div class="comment-wrap">
+							<div>
+							<a href="viewGroupForm?group_categoryid=${group_union.group_category_id}&group_id=${group_union.group_id}" class="image avatar thumb"><img src="resources/image/group_logo/${group_union.group_logo}" alt="" style="width: 100px; height:auto;"></a>
+							</div>
+						</div>
+						</c:forEach>
+						<c:if test="${sessionScope.user_id == leader.user_id}">
+						<input type="text" id="keyword" style="width:300px; display:inline;">
+<input type="button" onclick="javascript:searchGroupAction()" value="그룹 검색"><br><br><br>
+<div id="group_list" class="features">
+</div>
+</c:if>
+											</div>
+											
+										
+									</div>
+							</section>
+							
+				</div>
+				
 				<!-- Footer -->
 					<section id="footer">
 						<div class="container">
@@ -161,7 +345,8 @@
 						</div>
 					</section>
 
-		</div>
+			</div>
+
 		<!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
 		<!-- 추가 Scripts -->
@@ -177,153 +362,87 @@
 			<script src="resources/GroupMain/assets/js/breakpoints.min.js"></script>
 			<script src="resources/GroupMain/assets/js/util.js"></script>
 			<script src="resources/GroupMain/assets/js/main.js"></script>
-
 	</body>
-	
-	
-		<!-- 맵 띄우는 스크립트 -->
-		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap">
-	</script>
-	
-	<script>
-	var map;
-	var geocoder;
 
-	function initMap() {
-		console.log( 'test1' );
+<!-- 맵 띄우는 스크립트 -->
 
-	    var latlng = new google.maps.LatLng(37.5729503, 126.97935789999997);
-	    var mapOptions = {
-	    	      zoom: 15,
-	    	      center: latlng
-	    	    }
-		map = new google.maps.Map(document.getElementById('map'), mapOptions);
-	    console.log( 'test2' );
-		geocoder = new google.maps.Geocoder();
-	 	var address = '東京　京橋駅';
-		geocoder.geocode(
-		   		{ 'address': address }
-		   		, function(results, status) {
-					if (status == 'OK') {
-						console.log( 'test3' );
-						latlng = results[0].geometry.location;
-						map.setCenter(latlng);
-						console.log( 'test4' );	    
-						var marker = new google.maps.Marker({ 
-							map: map,
-							position: latlng
-							});
-						map.setZoom(15);
-					} else {
-		   				alert('Geocode was not successful for the following reason: ' + status);
-		   			}
-		   		}
-		   );
-		
-	}
-	
-	////////////주소 던져주면 맵 중앙에 띄우는 함수
-	function setAddress(address) {
-	var result_area = "not_found";
-	    geocoder.geocode(
-	   		{ 'address': address }
-	   		, function(results, status) {
-				if (status == 'OK') {
-					map.setCenter(results[0].geometry.location);
-					var marker = new google.maps.Marker({ 
-						map: map,
-						position: results[0].geometry.location
-						});
-					///결과 값들 중에 지역 이름 찾는 함수
-					for( m = 0; m < results[0].address_components.length; m = m +1 ){ ////3번 시작
-						if( results[0].address_components[m].types[0] == "administrative_area_level_2" )
-							{ 	
-								console.log('2: '+ results[0].address_components[m].types[0]);								
-								str1 = String( results[0].address_components[m].long_name );
-								result_area = str1;
-								map.setZoom(15);
-								return result_area;
-							}
-						
-					}//3번 끝
-					console.log(result_area + 'return check');								
-					map.setZoom(15);
-					return result_area;
-				} else {
-	   				alert('Geocode was not successful for the following reason: ' + status);
-	   			}
-	   		}
-	   );
-	 } 
-	
-	
-	///////////////주소로 검색
-	function codeAddress() {
-		var result_area = "not_found";
-		var address = document.getElementById('search_addr').value;
-		console.log(address);
-		    geocoder.geocode(
-		   		{ 'address': address }
-		   		, function(results, status) {
-					if (status == 'OK') {
-						map.setCenter(results[0].geometry.location);
-						var marker = new google.maps.Marker({ 
-							map: map,
-							position: results[0].geometry.location
-							});
-						map.setZoom(15);
-						return result_area;
-					} else {
-		   				alert('Geocode was not successful for the following reason: ' + status);
-		   			}
-		   		}
-		   );
-	} 
-	
-	
-	
-	
-	///////////////배열 중복 없애는 함수
-	var arealist = ${requestScope.place_list};
-	var arealist_temp = new Array();
-	var flag_same = false;
-	var i=0;
-	var j=0;
-	var k=0;
-		
-		arealist_temp.push(arealist[0]);
-		
-		for(i = 0; i < arealist.length; i = i + 1){
-			flag_same = false;	
-			for(j = 0; j < arealist_temp.length; j = j + 1){
-				if(arealist[i]  == arealist_temp[j]){
-				console.log('i: ' + i + '   j: ' + j);
-					
-					flag_same = true;	
-					break;
-				}
+<!-- 東京　京橋駅 : { 35.6766907 , 139.77003390000004 } -->
+<script>
+function initMap() {
+    var latlng = new google.maps.LatLng(35.6715003, 139.766613);
+    var mapOptions = {
+    	      zoom: 15,
+    	      center: latlng
+    	    }
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	var geocoder = new google.maps.Geocoder();
+ 	var address = '${requestScope.event_place}';
+ /* 	
+	geocoder.geocode(
+		{ 'address': address }
+		, function(results, status) {
+			if (status == 'OK') {
+				latlng = results[0].geometry.location;
+				map.setCenter(latlng);
+				var marker = new google.maps.Marker({ 
+					map: map,
+					position: latlng
+					});
+				map.setZoom(15);
+				console.log( JSON.stringify(latlng) );
 				
-			}
-			if(!flag_same){
-				arealist_temp.push(arealist[i]);
-				
-			}
-		}	
-		
-		
-var acute = "'";
-var str_output = "";
-var output_button = document.getElementById('output_button"');
-		//////////중복이 제거된 배열 값들을 각각 꺼내와서 body에 버튼으로 채워주기
-		for(k = 0; k < arealist_temp.length; k = k + 1){
-			console.log( JSON.stringify( arealist_temp[k] ).replace(/&quot;/gi, '') + k );
-			
-			str_output = str_output + 
-			'<input type = "button" id = "button' + k + '" value = "'+ arealist_temp[k] + '" onClick = "setAddress('+ acute + arealist_temp[k]+ acute + ')">';			
-		}
-		console.log( str_output );		
-		$('output_button').html(str_output);			
-		document.getElementById('output_button').innerHTML= str_output;
+			} else {
+							alert('Geocode was not successful for the following reason: ' + status);
+						}
+					}
+			);
+    
+ 	 */   
+ 	   /* /////////////여기부터 다음 */
+       var locations = [
+	       {lat: 35.6693907, lng: 139.76803390000004},
+	       {lat: 35.6691329, lng: 139.7693181},
+	       {lat: 35.6685256, lng: 139.7679124},
+	       {lat: 35.67016907, lng: 139.76203390000004},
+	       {lat: 35.67002907, lng: 139.7685339000003},
+	       {lat: 35.67106907, lng: 139.762133900004},
+	       {lat: 35.6759907, lng: 139.7707339000004},
+	       {lat: 35.6766907, lng: 139.77013390000004},
+	       {lat: 35.67556907, lng: 139.7699033257},
+	       {lat: 35.67606907, lng: 139.77113941000004},
+	       {lat: 35.67506907, lng: 139.77044100004},
+	       {lat: 35.67526907, lng: 139.76835000004},
+	       {lat: 35.6681907, lng: 139.7601033333004},
+	       {lat: 35.66726907, lng: 139.7598539004},
+	       {lat: 35.66956907, lng: 139.76103390000004},
+	       {lat: 35.66676907, lng: 139.757390000004}
+	     ]
+
+		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		var markers = locations.map( function(location, i) {
+			return new google.maps.Marker({	
+					position: location,
+					label: 'ScheduleNumber',
+					icon: {
+			     	    url: 'resources/images/clustering/samplepng/sampleimg' + i + '.png',
+			     	    size: new google.maps.Size(50, 50),
+			     	    origin: new google.maps.Point(0, 0),
+			     	    anchor: new google.maps.Point(0, 32)
+					}
+				});
+			});
+
+       var markerCluster = new MarkerClusterer(map, markers,
+           {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
 	
+}
 </script>
+
+<!-- //////////////////////////////////////////// -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP">
+</script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+</script>
+
 </html>
