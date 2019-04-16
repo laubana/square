@@ -246,8 +246,7 @@ border: 0;
 			<script src="resources/GroupMain/assets/js/main.js"></script>
 
 	</body>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP">
-	</script>
+
 
 <script type="text/javascript">
 //파일 미리보기 메인
@@ -323,7 +322,11 @@ $("#imgInp5").change(function() {
 </script>
 	
 	
-	<script>
+	
+	<!-- 맵 띄우기 위한 스크립트 -->
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP">
+	</script>
+<script>
 	var map;
 	var geocoder;
 
@@ -379,7 +382,7 @@ $("#imgInp5").change(function() {
 								console.log('2: '+ results[0].address_components[m].types[0]);								
 								str1 = String( results[0].address_components[m].long_name );
 								result_area = str1;
-								map.setZoom(15);
+								map.setZoom(14);
 								return result_area;
 							}
 						
