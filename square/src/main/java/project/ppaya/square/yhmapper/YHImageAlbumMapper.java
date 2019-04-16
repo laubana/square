@@ -7,6 +7,10 @@ import project.ppaya.square.vo.ImageAlbum;
 
 public interface YHImageAlbumMapper
 {
+	public int updateBlindByUserIdEventScheduleImageId(HashMap<String, Object> map);
+	public int getBlindByUserIdEventScheduleImageId(HashMap<String, Object> map);
+	public int getSelfByUserIdEventScheduleImageId(HashMap<String, Object> map);
+	public ArrayList<String> getEventScheduleImageIdByUserIdNotBlind(String user_id);
 	public int insertImageAlbum(HashMap<String, Object> map);
 	public int deleteImageAlbumByNotEventScheduleImageIdUserId(HashMap<String, Object> map);
 	public ArrayList<ImageAlbum> selectImageAlbumByEventScheduleImageIdUserId(HashMap<String, Object> map);

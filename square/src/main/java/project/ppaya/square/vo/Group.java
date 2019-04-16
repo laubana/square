@@ -10,6 +10,7 @@ public class Group
 	String content;
 	String group_logo;
 	String group_image;
+	int blind;
 	public Group(){}
 	public int getGroup_id() {
 		return group_id;
@@ -58,5 +59,11 @@ public class Group
 	}
 	public void setGroup_image(String group_image) {
 		this.group_image = group_image;
+	}
+	public int getBlind() {
+		return blind;
+	}
+	public void setBlind(int blind) {
+		this.blind = blind;
 	}
 }

@@ -22,6 +22,17 @@ WHERE
 ORDER BY
 	INPUT_DATE DESC
 </select>
+<select id="getEventScheduleIdByEventScheduleIdList" parameterType="list" resultType="int">
+SELECT
+	*
+FROM
+	TABLE_ES
+WHERE
+	1 = 0
+	<foreach item="event_schedule_id" collection="list" open="OR" separator="OR">
+		EVENT_SCHEDULE_ID = #{event_schedule_id}
+	</foreach>
+</select>
 <select id="selectEventScheduleByEventIdList" parameterType="list" resultType="EventSchedule">
 SELECT
 	*

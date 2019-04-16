@@ -88,22 +88,21 @@
 					<section id="four">
 						<h1>개인 앨범</h1>
 						<div class="row">
+						<c:forEach var="event_schedule_image" items="${event_schedule_image_list}">
+						
 							<article class="col-6 col-12-xsmall work-item">
-								<a href="resources/MyPage/images/fulls/01.jpg" class="image fit thumb"><img src="resources/MyPage/images/thumbs/01.jpg" alt="" /></a>
+								<a href="resources/image/event_schedule_image/${event_schedule_image.event_schedule_image_id}" class="image fit thumb"><img src="resources/image/event_schedule_image/${event_schedule_image.event_schedule_image_id}" alt="" /></a>
 								<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">파일 이름</h3>
 							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="resources/MyPage/images/fulls/02.jpg" class="image fit thumb"><img src="resources/MyPage/images/thumbs/02.jpg" alt="" /></a>
-								<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">파일 이름</h3>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="resources/MyPage/images/fulls/02.jpg" class="image fit thumb"><img src="resources/MyPage/images/thumbs/02.jpg" alt="" /></a>
-								<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">파일 이름</h3>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="resources/MyPage/images/fulls/02.jpg" class="image fit thumb"><img src="resources/MyPage/images/thumbs/02.jpg" alt="" /></a>
-								<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">파일 이름</h3>
-							</article>
+						</c:forEach>
+						<c:if test="${video_list.size() != 0}">
+						<video width='auto' height='auto' controls>
+							<c:forEach var="video" items="${video_list}">
+								<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
+									</c:forEach>
+									</video>
+						</c:if>
+						<br><br><br>
 						</div>
 								<div align="center"><a href="listUserAlbumForm?user_id=${user.user_id}" class="button">앨범 편집</a></div>
 					</section>

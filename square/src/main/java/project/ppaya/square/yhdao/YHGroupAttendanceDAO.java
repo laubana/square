@@ -16,6 +16,23 @@ public class YHGroupAttendanceDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public int getBlindByUserIdGroupId(String user_id, int group_id)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("group_id", group_id);
+		
+		YHGroupAttendanceMapper mapper = sqlSession.getMapper(YHGroupAttendanceMapper.class);
+		
+		try
+		{
+			result = mapper.getBlindByUserIdGroupId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public int insertGroupAttendance(String user_id, int group_id)
 	{
 		int result = 0;

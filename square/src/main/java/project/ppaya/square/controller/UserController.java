@@ -59,9 +59,18 @@ public class UserController
 	SH_DAO_Group sh_gdao;
 	
 	@RequestMapping(value = "listUserGroupForm", method = RequestMethod.GET)
-	public String listUserGroupForm()
+	public String listUserGroupForm(Model request)
 	{
+		String user_id = "id1@gmail.com";
+		ArrayList<Integer> group_id_list = yh_group_attendanceDAO.getGroupIdByUserId(user_id);
 		
+		ArrayList<Group> group_list = yh_groupDAO.selectGroupByGroupIdList(group_id_list);
+		for(int i = 0; i < group_list.size(); i++)
+		{
+			group_list.get(i).setBlind(yh_group_attendanceDAO.getBlindByUserIdGroupId(user_id, group_list.get(i).getGroup_id()));
+		}
+		
+		request.addAttribute("group_list", group_list);
 		
 		return "user/listUserGroupForm";
 	}
@@ -96,6 +105,15 @@ public class UserController
 		//UserHashtag List 전송
 		request.addAttribute("user_hashtag_list", user_hashtag_list);
 		
+		ArrayList<String> event_schedule_image_id_list = yh_image_albumDAO.getEventScheduleImageIdByUserIdNotBlind(user_id);
+		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleImageIdList(event_schedule_image_id_list);
+		//EventScheduleImage List 전송
+		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
+		
+		ArrayList<String> event_schedule_video_id_list = yh_video_albumDAO.getEventScheduleVideoIdByUserIdNotBlind(user_id);
+		ArrayList<EventScheduleVideo> event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleVideoIdList(event_schedule_video_id_list);
+		//EventScheduleVideo List 전송
+		request.addAttribute("video_list", event_schedule_video_list);
 		
 		return "user/viewUserForm";
 	}
@@ -112,6 +130,7 @@ public class UserController
 		JSONObject jsonObject = null;	
 		
 		User user = yh_userDAO.selectUserByUserId(user_id);
+		//User 전송
 		request.addAttribute("user", user);
 		String image_id = user.getImage_id();
 		

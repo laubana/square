@@ -4,6 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHGroupAttendanceMapper">
+<select id="getBlindByUserIdGroupId" parameterType="map" resultType="int">
+SELECT
+	BLIND
+FROM
+	TABLE_GA
+WHERE
+	USER_ID = #{user_id} AND
+	GROUP_ID = #{group_id}
+</select>
 <insert id="insertGroupAttendance" parameterType="map">
 INSERT INTO TABLE_GA
 (

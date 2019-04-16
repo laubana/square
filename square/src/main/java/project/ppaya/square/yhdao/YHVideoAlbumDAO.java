@@ -16,6 +16,55 @@ public class YHVideoAlbumDAO
 	@Autowired
 	SqlSession sqlSession;
 
+	public ArrayList<String> getEventScheduleVideoIdByUserIdNotBlind(String user_id)
+	{
+		ArrayList<String> event_schedule_video_id_list = null;
+		
+		YHVideoAlbumMapper mapper = sqlSession.getMapper(YHVideoAlbumMapper.class);
+		
+		try
+		{
+			event_schedule_video_id_list = mapper.getEventScheduleVideoIdByUserIdNotBlind(user_id);
+		}
+		catch(Exception error){}
+		
+		return event_schedule_video_id_list;
+	}
+	public int getBlindByUserIdEventScheduleVideoId(String user_id, String event_schedule_video_id)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("event_schedule_video_id", event_schedule_video_id);
+		
+		YHVideoAlbumMapper mapper = sqlSession.getMapper(YHVideoAlbumMapper.class);
+		
+		try
+		{
+			result = mapper.getBlindByUserIdEventScheduleVideoId(map);
+		}
+		catch(Exception error){}
+		
+		return result;
+	}
+	public int updateBlindByUserIdEventScheduleVideoId(String user_id, String event_schedule_video_id, int blind)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("event_schedule_video_id", event_schedule_video_id);
+		map.put("blind", blind);
+		
+		YHVideoAlbumMapper mapper = sqlSession.getMapper(YHVideoAlbumMapper.class);
+		
+		try
+		{
+			result = mapper.updateBlindByUserIdEventScheduleVideoId(map);
+		}
+		catch(Exception error){}
+		
+		return result;
+	}
 	public ArrayList<String> getEventScheduleVideoIdByEventScheduleVideoIdListUserIdSelf(ArrayList<String> old_event_schedule_video_id_list, String user_id)
 	{
 		ArrayList<String> new_event_schedule_video_id_list = null;

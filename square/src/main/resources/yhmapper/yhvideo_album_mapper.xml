@@ -4,6 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHVideoAlbumMapper">
+<select id="getBlindByUserIdEventScheduleVideoId" parameterType="map" resultType="int">
+SELECT
+	BLIND
+FORM	
+	TABLE_VA
+WHERE
+	USER_ID = #{user_id} AND
+	EVENT_SCHEDULE_VIDEO_ID = #{event_schedule_video_id}
+</select>
+<insert id="updateBlindByUserIdEventScheduleVideoId" parameterType="map">
+UPDATE TABLE_VA
+SET
+	BLIND = #{blind}
+WHERE
+	USER_ID = #{user_id} AND
+	EVENT_SCHEDULE_VIDEO_ID = #{event_schedule_video_id}
+</insert>
 <insert id="insertVideoAlbum" parameterType="map">
 INSERT INTO TABLE_VA
 (
@@ -39,6 +56,15 @@ WHERE
 	EVENT_SCHEDULE_VIDEO_ID = #{event_schedule_video_id} AND
 	USER_ID = #{user_id}
 </update>
+<select id="getEventScheduleVideoIdByUserIdNotBlind" parameterType="string" resultType="string">
+SELECT
+	EVENT_SCHEDULE_VIDEO_ID
+FROM
+	TABLE_VA
+WHERE
+	USER_ID = #{user_id} AND
+	BLIND = 0
+</select>
 <select id="getEventScheduleVideoIdByEventScheduleVideoIdListUserIdSelf" parameterType="map" resultType="string">
 SELECT
 	EVENT_SCHEDULE_VIDEO_ID

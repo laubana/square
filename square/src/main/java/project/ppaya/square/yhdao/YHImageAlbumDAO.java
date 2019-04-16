@@ -16,6 +16,72 @@ public class YHImageAlbumDAO
 	@Autowired
 	SqlSession sqlSession;
 
+	public int updateBlindByUserIdEventScheduleImageId(String user_id, String event_schedule_image_id, int blind)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("event_schedule_image_id", event_schedule_image_id);
+		map.put("blind", blind);
+		
+		YHImageAlbumMapper mapper = sqlSession.getMapper(YHImageAlbumMapper.class);
+		
+		try
+		{
+			result = mapper.updateBlindByUserIdEventScheduleImageId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
+	public int getBlindByUserIdEventScheduleImageId(String user_id, String event_schedule_image_id)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("event_schedule_image_id", event_schedule_image_id);
+		
+		YHImageAlbumMapper mapper = sqlSession.getMapper(YHImageAlbumMapper.class);
+		
+		try
+		{
+			result = mapper.getBlindByUserIdEventScheduleImageId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
+	public int getSelfByUserIdEventScheduleImageId(String user_id, String event_schedule_image_id)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("event_schedule_image_id", event_schedule_image_id);
+		
+		YHImageAlbumMapper mapper = sqlSession.getMapper(YHImageAlbumMapper.class);
+		
+		try
+		{
+			result = mapper.getSelfByUserIdEventScheduleImageId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
+	public ArrayList<String> getEventScheduleImageIdByUserIdNotBlind(String user_id)
+	{
+		ArrayList<String> event_schedule_image_id_list = null;
+		
+		YHImageAlbumMapper mapper = sqlSession.getMapper(YHImageAlbumMapper.class);
+		
+		try
+		{
+			event_schedule_image_id_list = mapper.getEventScheduleImageIdByUserIdNotBlind(user_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_image_id_list;
+	}
 	public int updateSelfByEventScheduleImageIdListUserId(ArrayList<String> event_schedule_image_id_list, String user_id)
 	{
 		int result = 0;

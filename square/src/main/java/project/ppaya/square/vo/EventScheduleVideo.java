@@ -11,6 +11,7 @@ public class EventScheduleVideo
 	String region;
 	String latitude;
 	String longitude;
+	int blind;
 	public EventScheduleVideo(){}
 	public String getEvent_schedule_video_id() {
 		return event_schedule_video_id;
@@ -66,4 +67,11 @@ public class EventScheduleVideo
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
+	public int getBlind() {
+		return blind;
+	}
+	public void setBlind(int blind) {
+		this.blind = blind;
+	}
+	
 }

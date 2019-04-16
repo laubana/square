@@ -97,41 +97,20 @@ label img {
 						<form action="" method="post">
 						<div class="row" align="center">
 							<ul class="features">
+								<c:forEach var="group" items="${group_list}">
 									<li>
-										<input type="checkbox" id="1" />
-										<label for="1">
-										<span><img src="resources/image/group_logo/1.jpg" class="image fit tumb" alt="" /></span>
+									<c:if test="${group.blind != 0}">
+										<input type="checkbox" id="checkbox${group.group_id}" />
+										</c:if>
+									<c:if test="${group.blind == 0}">
+										<input type="checkbox" id="checkbox${group.group_id}" checked />
+									</c:if>
+										<label for="checkbox${group.group_id}">
+										<span><img src="resources/image/group_logo/${group.group_logo}" class="image fit tumb" alt="" /></span>
 										</label>
-										<h3>그룹 이름</h3>
+										<h3>${group.name}</h3>
 									</li>
-									<li>
-										<input type="checkbox" id="2" />
-										<label for="2">
-										<span><img src="resources/image/group_logo/2.jpg" class="image fit tumb" alt="" /></span>
-										</label>
-										<h3>그룹 이름</h3>	
-									</li>
-									<li>
-										<input type="checkbox" id="3" />
-										<label for="3">
-										<span><img src="resources/image/group_logo/3.jpg" class="image fit tumb" alt="" /></span>
-										</label>
-										<h3>그룹 이름</h3>	
-									</li>
-									<li>
-										<input type="checkbox" id="4" />
-										<label for="4">
-										<span><img src="resources/image/group_logo/4.jpg" class="image fit tumb" alt="" /></span>
-										</label>
-										<h3>그룹 이름</h3>	
-									</li>
-									<li>
-										<input type="checkbox" id="5" />
-										<label for="5">
-										<span><img src="resources/image/group_logo/5.jpg" class="image fit tumb" alt="" /></span>
-										</label>
-										<h3>그룹 이름</h3>	
-									</li>									
+								</c:forEach>					
 								</ul>									
 						</div>
 						<div align="center"><input type="submit" value="편집 확인"></div>

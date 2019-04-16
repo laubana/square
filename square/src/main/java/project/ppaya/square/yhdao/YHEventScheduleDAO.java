@@ -15,6 +15,20 @@ public class YHEventScheduleDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<Integer> getEventScheduleIdByEventScheduleIdList(ArrayList<Integer> old_event_schedule_id_list)
+	{
+		ArrayList<Integer> new_event_schedule_id_list = null;
+		
+		YHEventScheduleMapper mapper = sqlSession.getMapper(YHEventScheduleMapper.class);
+		
+		try
+		{
+			new_event_schedule_id_list = mapper.getEventScheduleIdByEventScheduleIdList(old_event_schedule_id_list);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return new_event_schedule_id_list;
+	}
 	public EventSchedule selectEventScheduleByEventScheduleId(int event_schedule_id)
 	{	
 		EventSchedule event_schedule = null;

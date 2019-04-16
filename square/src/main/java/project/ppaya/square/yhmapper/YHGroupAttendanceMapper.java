@@ -7,6 +7,7 @@ import project.ppaya.square.vo.GroupAttendance;
 
 public interface YHGroupAttendanceMapper
 {
+	public int getBlindByUserIdGroupId(HashMap<String, Object> map);
 	public int insertGroupAttendance(HashMap<String, Object> map);
 	public int deleteGroupAttendanceByGroupIdUserId(HashMap<String, Object> map);
 	public GroupAttendance selectGroupAttendanceByGroupIdUserId(HashMap<String, Object> map);

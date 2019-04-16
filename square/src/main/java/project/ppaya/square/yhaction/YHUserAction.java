@@ -53,44 +53,5 @@ public class YHUserAction
 		yh_image_albumDAO.selectImageAlbumByEventScheduleImageIdListUserId(event_schedule_image_id_list, user_id);
 		yh_image_albumDAO.selectImageAlbumByEventScheduleImageIdListUserIdSelf(event_schedule_image_id_list, user_id);
 	}
-	@ResponseBody
-	@RequestMapping(value = "/testAction", method = RequestMethod.POST)
-	public HashMap<String, Object> testAction(HttpSession session, Model request, @RequestBody HashMap<String, Object> map)
-	{
-		String user_id = "id1@gmail.com";
-		ArrayList<Integer> group_id_list = (ArrayList<Integer>)map.get("group_id_list");
-		boolean self = (boolean)map.get("self");
-		
-		ArrayList<Integer> event_id_list = yh_eventDAO.getEventIdByGroupIdList(group_id_list);
-		
-		ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventIdList(event_id_list);
-		
-		ArrayList<String> event_schedule_image_id_list = yh_event_schedule_imageDAO.getEventScheduleImageIdByEventScheduleIdList(event_schedule_id_list);
-		
-		ArrayList<String> event_schedule_video_id_list = yh_event_schedule_videoDAO.getEventScheduleVideoIdByEventScheduleIdList(event_schedule_id_list);
-		
-		ArrayList<EventScheduleImage> event_schedule_image_list;
-		
-		ArrayList<EventScheduleVideo> event_schedule_video_list;
-		
-		if(self == true)
-		{
-			event_schedule_image_id_list = yh_image_albumDAO.getEventScheduleImageIdByEventScheduleImageIdListUserIdSelf(event_schedule_image_id_list, user_id);
-			event_schedule_video_id_list = yh_video_albumDAO.getEventScheduleVideoIdByEventScheduleVideoIdListUserIdSelf(event_schedule_video_id_list, user_id);
-			
-			event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleImageIdList(event_schedule_image_id_list);
-			event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleVideoIdList(event_schedule_video_id_list);
-		}
-		else
-		{
-			event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
-			event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleIdList(event_schedule_id_list);
-		}
-
-		HashMap<String, Object> result = new HashMap<>();
-		result.put("event_schedule_image_list", event_schedule_image_list);
-		result.put("event_schedule_video_list", event_schedule_video_list);
-		
-		return result;
-	}
+	
 }

@@ -11,6 +11,8 @@ public class EventScheduleImage
 	String region;
 	String latitude;
 	String longitude;
+	int blind;
+	int self;
 	public EventScheduleImage(){}
 	public String getEvent_schedule_image_id() {
 		return event_schedule_image_id;
@@ -65,5 +67,17 @@ public class EventScheduleImage
 	}
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
+	}
+	public int getBlind() {
+		return blind;
+	}
+	public void setBlind(int blind) {
+		this.blind = blind;
+	}
+	public int getSelf() {
+		return self;
+	}
+	public void setSelf(int self) {
+		this.self = self;
 	}
 }
