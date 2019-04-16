@@ -1,32 +1,32 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en" >
+
 <head>
   <title>js-mindmap demo - JavaScript Mindmap</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500" rel="stylesheet">
+  <link rel="stylesheet" href="resources/MyPage/assets/css/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="resources/undermenu/css/style.css">
   <link rel="stylesheet" type="text/css" href="resources/MindMap/css/js-mindmap.css" />
   <link href="resources/MindMap/css/style.css" type="text/css" rel="stylesheet"/>
-	<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
-  <!-- jQuery -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
-  <!-- UI, for draggable nodes -->
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
-
-  <!-- Raphael for SVG support (won't work on android) -->
-  <script type="text/javascript" src="resources/MindMap/js/raphael-min.js"></script>
-
-  <!-- Mindmap -->
-  <script type="text/javascript" src="resources/MindMap/js/js-mindmap.js"></script>
-
-  <!-- Kick everything off -->
-  <script src="resources/MindMap/js/script.js" type="text/javascript"></script>
-<script>
-//////////////////////////////////////////////////////////////////////////////
-console.log(JSON.parse('${json_list}'));
-</script>
+  
+<style type="text/css">
+body{
+background: url('resources/MindMap/image/3.jpg'); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+</style>
+  
 </head>
+
 <body>
+
 <ul>
 	<li><a href="">#${root}</a>
 		<ul>
@@ -56,67 +56,68 @@ console.log(JSON.parse('${json_list}'));
 	</li>
 </ul>
 
+<article id="slider">
+  
+  <div id="thumbnail" class="thumbnail left">
+    <ul class="thumbnail-list">
+      <li class="">
+        <div align="center"><span><a href="main">Group Name</a></span></div>
+        <br>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main">#tag</a></p>
+      </li>
+      <!-- <li class="">
+        <div align="center"><span><a href="main">list 2</a></span></div>
+        <br>
+        <p align="center"><a href="main">#tag</a></p>
+      </li> -->
+      <li class="marker"></li>
+    </ul>
+  </div>
+</article>
 
-  <!-- <ul>
-    <li><a href="http://kenneth.kufluk.com/blog/">#Java</a>
-    	<ul>
-	      	<li><a href="http://kenneth.kufluk.com/blog/">1</a>
-	      		<ul>
-			      	<li><a href="http://kenneth.kufluk.com/blog/">#Java</a>
-			      		<ul>
-					      	<li><a href="http://kenneth.kufluk.com/blog/">1</a></li>
-					      	<li><a href="http://kenneth.kufluk.com/blog/">2</a></li>
-						</ul>
-			      	</li>
-			      	<li><a href="http://kenneth.kufluk.com/blog/">#C</a>
-			      		<ul>
-					      	<li><a href="http://kenneth.kufluk.com/blog/">1</a></li>
-					      	<li><a href="http://kenneth.kufluk.com/blog/">2</a></li>
-						</ul>
-			      	</li>
-				</ul>
-			</li>
-	      	<li><a href="http://kenneth.kufluk.com/blog/">2</a>
-	      		<ul>
-			      	<li><a href="http://kenneth.kufluk.com/blog/">#Java</a>
-			      		<ul>
-					      	<li><a href="http://kenneth.kufluk.com/blog/">1</a></li>
-					      	<li><a href="http://kenneth.kufluk.com/blog/">2</a></li>
-						</ul>
-			      	</li>
-				</ul>
-			</li>
-			<li><a href="http://kenneth.kufluk.com/blog/">3</a>
-	      		<ul>
-			      	<li><a href="http://kenneth.kufluk.com/blog/">#Java</a>
-			      		<ul>
-					      	<li><a href="http://kenneth.kufluk.com/blog/">1</a></li>
-					      	<li><a href="http://kenneth.kufluk.com/blog/">2</a></li>
-						</ul>
-			      	</li>
-			      	<li><a href="http://kenneth.kufluk.com/blog/">#C</a></li>
-				</ul>
-			</li>
-			<li><a href="http://kenneth.kufluk.com/blog/">4</a>
-	      		<ul>
-			      	<li><a href="http://kenneth.kufluk.com/blog/">#Java</a></li>
-			      	<li><a href="http://kenneth.kufluk.com/blog/">#C</a></li>
-				</ul>
-			</li>
-			<li><a href="http://kenneth.kufluk.com/blog/">5</a>
-	      		<ul>
-			      	<li><a href="http://kenneth.kufluk.com/blog/">#Java</a></li>
-			      	<li><a href="http://kenneth.kufluk.com/blog/">#C</a></li>
-				</ul>
-			</li>
-			<li><a href="http://kenneth.kufluk.com/blog/">6</a>
-	      		<ul>
-			      	<li><a href="http://kenneth.kufluk.com/blog/">#Java</a></li>
-			      	<li><a href="http://kenneth.kufluk.com/blog/">#C</a></li>
-				</ul>
-			</li>
-		</ul>
-    </li>
-  </ul> -->
+<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
+<script src="resources/undermenu/js/index.js"></script>
+
+  <!-- jQuery -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+  <!-- UI, for draggable nodes -->
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.15/jquery-ui.min.js"></script>
+
+  <!-- Raphael for SVG support (won't work on android) -->
+  <script type="text/javascript" src="resources/MindMap/js/raphael-min.js"></script>
+
+  <!-- Mindmap -->
+  <script type="text/javascript" src="resources/MindMap/js/js-mindmap.js"></script>
+
+  <!-- Kick everything off -->
+  <script src="resources/MindMap/js/script.js" type="text/javascript"></script>
+<script>
+//////////////////////////////////////////////////////////////////////////////
+console.log(JSON.parse('${json_list}'));
+</script>
+
+
+
 </body>
+
 </html>
