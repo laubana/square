@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import project.ppaya.square.shdao.*;
 import project.ppaya.square.vo.*;
@@ -44,12 +45,14 @@ public class MainController
 
 	}
 	@RequestMapping(value = "viewMindMapForm", method = RequestMethod.GET)
-	public String viewMindMapForm(Model request)
+	public String viewMindMapForm
+	(
+			Model request,
+			@RequestParam(value = "hashtag", defaultValue = "Java") String hashtag
+			)
 	{
 		ArrayList<Integer> group_id_list = new ArrayList<>();
 		ArrayList<String> hashtag_list = new ArrayList<>();
-
-		String hashtag = "Java";
 		
 		hashtag_list.clear();		
 		hashtag_list.add(hashtag);

@@ -239,7 +239,7 @@
 									<br><br><br>
 									<div>
 									<c:forEach var="group_comment_tag" items="${group_comment.group_comment_tag_list}">
-										<a href="">#${group_comment_tag}</a>
+										<a href="viewMindMapForm?hashtag=${group_comment_tag}">#${group_comment_tag}</a>
 									</c:forEach>
 									</div>		
 							</div>
