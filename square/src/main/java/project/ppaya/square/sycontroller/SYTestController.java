@@ -21,6 +21,6 @@ public class SYTestController
 	@RequestMapping(value = "test1", method = RequestMethod.GET)
 	public String test1()
 	{
-		return "main/test1";
+		return "sytest/test1";
 	}
 }
