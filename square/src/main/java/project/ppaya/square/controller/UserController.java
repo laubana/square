@@ -58,6 +58,13 @@ public class UserController
 	@Autowired
 	SH_DAO_Group sh_gdao;
 	
+	@RequestMapping(value = "listUserGroupForm", method = RequestMethod.GET)
+	public String listUserGroupForm()
+	{
+		
+		
+		return "user/listUserGroupForm";
+	}
 	@RequestMapping(value = "joinUserForm", method = RequestMethod.GET)
 	public String joinUserFormGET()
 	{
@@ -89,7 +96,6 @@ public class UserController
 		//UserHashtag List 전송
 		request.addAttribute("user_hashtag_list", user_hashtag_list);
 		
-		//ArrayList<String> event_schedule_image_id_list = 
 		
 		return "user/viewUserForm";
 	}
