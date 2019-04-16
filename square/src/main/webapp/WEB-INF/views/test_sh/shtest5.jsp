@@ -373,8 +373,7 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	var geocoder = new google.maps.Geocoder();
 	
-	
-	
+
 	/* 서버에서 리스트 받아서 올띄우기 */
  	/* var address = ${requestScope.event_schedule_list}; */
  	
@@ -408,21 +407,46 @@ function initMap() {
  		console.log( locations[0].lat ); 
 
 		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		
+		/* 좌표 각각들에 대해 마커 객체를 생성해서 맵에 띄우는 함수  */
 		var markers = locations.map( function(location, i) {
 			return new google.maps.Marker({	
 					position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
-					label: locations[i].name,
-					icon: {
-			     	    url: 'resources/images/clustering/samplepng/sampleimg' + i + '.png',
-			     	    size: new google.maps.Size(50, 50),
-			     	    origin: new google.maps.Point(0, 0),
-			     	    anchor: new google.maps.Point(0, 32)
-					}
+					label: locations[i].name
 				});
-			});
-
+			});		
+		
+		
+		/* 마커 배열로 클러스터 찍어주는 함수  */
        var markerCluster = new MarkerClusterer(map, markers,
            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+       
+       
+       /* 마커 클릭했을 때 위에 툴팁 띄워주는 함수 
+       var infowindow = new google.maps.InfoWindow({
+	          content: 'test',
+	          maxWidth: 200
+	        });
+       
+     	 마커에 클릭 이벤트 걸어주는 함수      
+       marker.addListener('click', function() {
+           infowindow.open(map, marker);
+         }); */
+       
+		/* 마커 배열에 있는 마커 객체들 하나하나 꺼내서 클릭 이벤트 걸어주는 함수 */     
+		markers.map( function(marker, i) {
+			
+			var infowindow = new google.maps.InfoWindow({
+		          content:  '<img src = "resources/images/clustering/samplepng/sampleimg' + i + '.png">',
+		          maxWidth: 250
+		        });
+			  marker.addListener('click', function() {
+					infowindow.open(map, marker);
+				});
+			});
+       
+		
+       
 }
 
 </script>
