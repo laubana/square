@@ -111,7 +111,7 @@
 					<header>
 						<h2>그룹 생성</h2>
 					</header>
-					<p>자신의  관심사를 토대로 이벤트를 운영하는 그룹을 만들세요. 그룹을 만들고 열정과 ??을 가진 사람들을 모아 보세요.</p>
+					<p>자신의  관심사를 토대로 이벤트를 운영하는 그룹을 만들세요. 그룹을 만들고 열정을 가진 사람들을 모아 보세요.</p>
 					<div class="actions special">
 						<a href="createGroupForm" class="button" style="color:white;">그룹 생성</a>
 					</div>
