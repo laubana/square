@@ -94,7 +94,7 @@ border: 0;
 		<!-- Header -->
 			<section id="header">
 				<header>
-				<span class="image avatar"><img src="resources/Main/images/logo/01.jpg" alt="" /></span>
+				<span class="image avatar"><img src="resources/GroupMain/images/bb2.jpg" alt="" /></span>
 					<h1 id="logo"><a href="groupMain">Group name</a></h1>
 					<p style="font-size:15px;">#tag#tag</p>
 					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>	
@@ -148,7 +148,7 @@ border: 0;
 									<h1>이벤트 내용</h1>
 									<textarea class="comment-block" placeholder="내용을 작성해주세요..."></textarea><br>
 									<!-- google maps-->
-									<div id="map" ></div>
+									 <div id="map" ></div>
 									<div align="right">
 										<div id = "place_output"></div>
 									</div>
@@ -166,7 +166,7 @@ border: 0;
 					</div>		
 
 						<!-- 그룹의 설립일 등 기본 정보 -->
-							<div id="album">
+							<!-- <div id="album">
 							<section id="six">
 								<footer><div id="album" class="container" >
 									<h3>추가 이벤트 사진</h3>
@@ -213,10 +213,10 @@ border: 0;
 									
 										<div align="center"><input type="submit" value="이벤트 올리기"></div>
 																	
-									<!-- <button onclick="uploadFirstEventImage()" class="button">Image More</button> -->		
+									<button onclick="uploadFirstEventImage()" class="button">Image More</button>		
 								</div></footer>
 							</section>
-						</div><br><br>
+						</div><br><br> -->
 								
 				<!-- Footer -->
 					<section id="footer">

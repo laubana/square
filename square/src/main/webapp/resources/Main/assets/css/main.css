@@ -2067,8 +2067,7 @@ input, select, option, textarea {
 		}
 
 			#header nav ul {
-				margin: -16px;
-				margin-right: 2px;
+				margin: 0;
 
 			}
 
