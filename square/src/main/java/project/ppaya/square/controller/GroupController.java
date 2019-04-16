@@ -128,7 +128,12 @@ public class GroupController
 		ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventIdList(event_id_list);
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
 		//Image List 전송
-		request.addAttribute("event_schedule_image_list", event_schedule_image_list);		
+		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
+		
+		//EventSchedule List 전송
+		ArrayList<EventSchedule> es_list = yh_event_scheduleDAO.selectEventScheduleByEventIdList(event_id_list);
+		request.addAttribute("event_schedule_list", es_list);	
+		
 		ArrayList<EventScheduleVideo> event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleIdList(event_schedule_id_list);
 		//Video List 전송
 		request.addAttribute("video_list", event_schedule_video_list);
