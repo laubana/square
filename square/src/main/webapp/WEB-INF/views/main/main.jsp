@@ -12,6 +12,14 @@
 		<script>
 			function logoutUserAction()
 			{
+				var texts = ["SWDO 1st graduates", "유환,세현,용빈,수연", "Asian Beauty Awards 노수연", "就職できるかな", "QooQoo Buffet"];
+				var count = 0;
+				function changeText() {
+				    $("#realTimeHashTag").text(texts[count]);
+				    count < texts.length ? count++ : count = 0;
+				}
+				setInterval(changeText, 2000);
+				
 				$.ajax({
 					url: "logoutUserAction",
 					type: "POST",
@@ -31,7 +39,7 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="listRecommendationForm"></a>
+						<li><span id="realTimeHashTag"> #급상승 해시태그</span></li>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
 						<li><a href="createGroupForm">그룹생성</a></li>

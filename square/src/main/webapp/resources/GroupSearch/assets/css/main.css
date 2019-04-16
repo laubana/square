@@ -2064,6 +2064,7 @@ input, select, option, textarea {
 			top: 0;
 			height: 3em;
 			line-height: 3em;
+			
 		}
 
 			#header nav ul {
@@ -2074,6 +2075,9 @@ input, select, option, textarea {
 					display: inline-block;
 					margin-left: 0.5em;
 					font-size: 0.9em;
+					margin: -16px;
+					margin-right: 2px;
+					
 				}
 
 					#header nav ul li a {

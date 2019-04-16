@@ -2809,12 +2809,14 @@ input, select, textarea {
 			-webkit-flex-grow: 1;
 			-ms-flex-grow: 1;
 			flex-grow: 1;
+			
 		}
 
 			#header > nav ul {
 				list-style: none;
 				margin: 0;
 				padding: 0;
+				
 			}
 
 				#header > nav ul li {
@@ -2856,6 +2858,7 @@ input, select, textarea {
 		height: 3em;
 		line-height: 3em;
 		box-shadow: 0 0 0.15em 0 rgba(0, 0, 0, 0.1);
+		
 	}
 
 		#header1 h1 {
@@ -2865,10 +2868,12 @@ input, select, textarea {
 			height: 3em;
 			line-height: 3em;
 			cursor: default;
+			
 		}
 
 			#header1 h1 a {
 				font-size: 1.25em;
+				
 			}
 
 		#header1 nav {
@@ -2877,10 +2882,12 @@ input, select, textarea {
 			top: 0;
 			height: 3em;
 			line-height: 3em;
+			
+			
 		}
 
-			#header1 nav ul {
-				margin: 0;
+			#header1 nav ul {	
+
 			}
 
 				#header1 nav ul li {
@@ -2897,6 +2904,7 @@ input, select, textarea {
 						line-height: 3em;
 						padding: 0 0.5em 0 0.5em;
 						outline: 0;
+						
 					}
 
 		@media screen and (max-width: 736px) {
@@ -2914,6 +2922,7 @@ input, select, textarea {
 					top: 1;
 					height: 2.5em;
 					line-height: 2.5em;
+					
 				}
 
 					#header1 h1 a {

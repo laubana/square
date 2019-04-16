@@ -41,8 +41,7 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><span id="realTimeHashTag">#급상승 해시태그</span></li>
-						<!-- <li><div id="changeText"><a href="listRecommendationForm">#급상승 해시태그</a></div> -->
+						<li><span id="realTimeHashTag"> #급상승 해시태그</span></li>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
 						<li><a href="createGroupForm">그룹생성</a></li>
