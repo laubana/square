@@ -13,6 +13,9 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/MyPage/assets/css/main.css" />
+		
+		
+		
 	</head>
 	<body class="is-preload">
 
@@ -41,9 +44,7 @@
 						<p>
 							${user.content}
 						</p>
-						<ul class="actions">
-							<li><a href="#" class="button">정보 편집</a></li>
-						</ul>
+						<div align="center"><a href="#" class="button">정보 편집</a></div>
 					</section>
 					
 					<!-- Two -->
@@ -62,10 +63,8 @@
 										<li><a href="#">${ hlist[2].name }</a></li>
 										<li><a href="#">${ hlist[3].name }</a></li>
 										<li><a href="#">${ hlist[4].name }</a></li>
-									</ul>
-						<ul class="actions">
-							<li><a href="#" class="button">관심 분야 편집</a></li>
 						</ul>
+						<div align="center"><a href="#" class="button">관심 분야 편집</a></div>
 					</section>
 
 					<!-- Three -->
@@ -77,12 +76,12 @@
 								<li>
 										<a href="viewGroupForm?group_id=${group.group_id}">
 										<span><img src="resources/image/group_logo/${group.group_logo}" class="image fit tumb" alt="" /></span>
-										<h3>${group.name}</h3>
-										</a>
-									</li>
+										<h3>${group.name}</h3></a>									
+								</li>
 							</c:forEach>
 								</ul>
 						</div>
+								<div align="center"><a href="#" class="button">공개 / 비공개</a></div>
 					</section>
 
 				<!-- Four -->
@@ -91,18 +90,22 @@
 						<div class="row">
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="resources/MyPage/images/fulls/01.jpg" class="image fit thumb"><img src="resources/MyPage/images/thumbs/01.jpg" alt="" /></a>
-								<h3>Magna sed consequat tempus</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+								<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">파일 이름</h3>
 							</article>
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="resources/MyPage/images/fulls/02.jpg" class="image fit thumb"><img src="resources/MyPage/images/thumbs/02.jpg" alt="" /></a>
-								<h3>Ultricies lacinia interdum</h3>
-								<p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+								<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">파일 이름</h3>
+							</article>
+							<article class="col-6 col-12-xsmall work-item">
+								<a href="resources/MyPage/images/fulls/02.jpg" class="image fit thumb"><img src="resources/MyPage/images/thumbs/02.jpg" alt="" /></a>
+								<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">파일 이름</h3>
+							</article>
+							<article class="col-6 col-12-xsmall work-item">
+								<a href="resources/MyPage/images/fulls/02.jpg" class="image fit thumb"><img src="resources/MyPage/images/thumbs/02.jpg" alt="" /></a>
+								<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">파일 이름</h3>
 							</article>
 						</div>
-						<ul class="actions">
-							<li><a href="listUserAlbumForm?user_id=${user.user_id}" class="button">앨범 편집</a></li>
-						</ul>
+								<div align="center"><a href="listUserAlbumForm?user_id=${user.user_id}" class="button">앨범 편집</a></div>
 					</section>
 
 			</div>
