@@ -10,7 +10,7 @@ public class EventSchedule
 	String region;
 	long latitude;
 	long longitude;
-	String place;
+	String content;
 	public EventSchedule(){}
 	public int getEvent_schedule_id() {
 		return event_schedule_id;
@@ -60,10 +60,10 @@ public class EventSchedule
 	public void setLongitude(long longitude) {
 		this.longitude = longitude;
 	}
-	public String getPlace() {
-		return place;
+	public String getContent() {
+		return content;
 	}
-	public void setPlace(String place) {
-		this.place = place;
+	public void setContent(String content) {
+		this.content = content;
 	}
 }

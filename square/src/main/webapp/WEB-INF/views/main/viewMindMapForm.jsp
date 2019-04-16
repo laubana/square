@@ -21,7 +21,9 @@
 
   <!-- Kick everything off -->
   <script src="resources/MindMap/js/script.js" type="text/javascript"></script>
-
+<script>
+console.log(json.stringify(${list}));
+</script>
 </head>
 <body>
   <ul>
