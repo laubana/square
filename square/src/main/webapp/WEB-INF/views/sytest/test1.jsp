@@ -10,6 +10,15 @@
 		<link rel="stylesheet" href="resources/Main/assets/css/main.css" />
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
 		<script>
+		
+		var texts = ["SWDO 1st graduates", "유환,세현,용빈,수연", "Asian Beauty Awards 노수연", "就職できるかな", "QooQoo Buffet"];
+		var count = 0;
+		function changeText() {
+		    $("#realTimeHashTag").text(texts[count]);
+		    count < texts.length ? count++ : count = 0;
+		}
+		setInterval(changeText, 2000);
+		
 			function logoutUserAction()
 			{
 				$.ajax({
@@ -22,6 +31,7 @@
 					error: function(error){console.log(error);}
 				});
 			}
+	
 		</script>
 	</head>
 	<body class="is-preload">
@@ -31,7 +41,8 @@
 				<h1><a href="main">2조</a></h1>
 				<nav>
 					<ul>
-						<li><a href="listRecommendationForm"></a>
+						<li><span id="realTimeHashTag">#급상승 해시태그</span></li>
+						<!-- <li><div id="changeText"><a href="listRecommendationForm">#급상승 해시태그</a></div> -->
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
 						<li><a href="createGroupForm">그룹생성</a></li>
@@ -66,7 +77,7 @@
 
 					<!-- Gallery  -->
 						<div class="gallery">
-							<c:forEach var="group_category" items="#{group_category_list}" varStatus="status">
+							<c:forEach var="group_category" items="${group_category_list}" varStatus="status">
 								<c:if test="${status.index % 2 == 1}">
 									<article class="from-right">
 										<a href="listGroupForm?group_category_id=${group_category.group_category_id}" class="image fit thumb${group_category.group_category_id}"><img src="resources/Main/images/thumbs/${group_category.group_category_id}.jpg" alt="" /></a>
