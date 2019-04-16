@@ -407,7 +407,6 @@ function initMap() {
 			locations.push( {lat: ${list.latitude}, lng: ${list.longitude}, region: "${list.region}"} );
 		</c:forEach>
 	 		
- 		console.log( locations[0].lat ); 
 
 		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		
