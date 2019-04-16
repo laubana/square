@@ -38,7 +38,12 @@ console.log(JSON.parse('${json_list}'));
 								<ul>
 									<c:forEach var="element3" items="${element2.list}">
 										<li><a href="">${element3.node.group_id}</a>
-											
+											<ul>
+												<c:forEach var="element4" items="${element3.list}">
+													<li><a href="">#${element4.node}</a>
+													</li>
+												</c:forEach>
+											</ul>
 										</li>
 									</c:forEach>
 								</ul>							

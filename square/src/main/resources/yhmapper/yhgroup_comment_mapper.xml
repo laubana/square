@@ -4,6 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.ppaya.square.yhmapper.YHGroupCommentMapper">
+<select id="selectGroupCommentByGroupCommentId" parameterType="int" resultType="GroupComment">
+SELECT
+	*
+FROM
+	TABLE_GCO
+WHERE
+	GROUP_COMMENT_ID = #{group_comment_id}
+</select>
 <select id="getGroupCommentIdByGroupId" parameterType="int" resultType="int">
 SELECT
 	GROUP_COMMENT_ID

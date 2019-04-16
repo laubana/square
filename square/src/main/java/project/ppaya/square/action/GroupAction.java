@@ -1,8 +1,11 @@
 package project.ppaya.square.action;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,8 @@ public class GroupAction {
 	YHUserDAO yh_userDAO;
 	@Autowired
 	YHEventDAO yh_eventDAO;
+	@Autowired
+	YHGroupCommentDAO yh_group_commentDAO;
 	@Autowired
 	YHEventScheduleDAO yh_event_scheduleDAO;
 	@Autowired
@@ -83,5 +88,45 @@ public class GroupAction {
 		int group_id = (int)map.get("group_id");		
 		
 		yh_group_attendanceDAO.deleteGroupAttendanceByGroupIdUserId(user_id, group_id);
+	}
+	@ResponseBody
+	@RequestMapping(value = "getTranslation", method = RequestMethod.POST)
+	public String getTranslation(Model request, @RequestBody HashMap<String, Object> map)
+	{
+		int group_comment_id = (int)map.get("group_comment_id");	
+		
+		GroupComment group_comment = yh_group_commentDAO.selectGroupCommentByGroupCommentId(group_comment_id); 
+		
+		String result = YHGoogleTranslationUtil.getTranslation(group_comment.getContent(), "ja", "en");
+		
+		JSONObject jsonObject = new JSONObject(); 
+		
+		try
+		{
+			jsonObject.put("result", URLEncoder.encode(result, "utf-8"));
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return jsonObject.toString();
+	}
+	@ResponseBody
+	@RequestMapping(value = "resetComment", method = RequestMethod.POST)
+	public String resetComment(Model request, @RequestBody HashMap<String, Object> map)
+	{
+		int group_comment_id = (int)map.get("group_comment_id");	
+		
+		GroupComment group_comment = yh_group_commentDAO.selectGroupCommentByGroupCommentId(group_comment_id);
+		
+		String result = group_comment.getContent();
+		
+		JSONObject jsonObject = new JSONObject(); 
+		
+		try
+		{
+			jsonObject.put("result", URLEncoder.encode(result, "utf-8"));
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return jsonObject.toString();
 	}
 }

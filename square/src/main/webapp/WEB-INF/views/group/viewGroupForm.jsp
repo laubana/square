@@ -66,6 +66,50 @@
 					error: function(error){console.log(error);}
 				});
 			}
+			function getTranslation(group_comment_id)
+			{
+				var map = {};
+				map["group_comment_id"] = group_comment_id;
+				console.log(map);
+				
+				$.ajax({
+					url: "getTranslation",
+					type: "POST",
+					data: JSON.stringify(map),
+					dataType: "JSON",
+					contentType: "application/json; charset=UTF-8",
+					success: function(jsonObject)
+					{
+						var result = decodeURIComponent(jsonObject.result.replace(/\+/g, " "));
+						
+						document.getElementById("comment" + group_comment_id).innerHTML = result;
+						document.getElementById("translation_button" + group_comment_id).innerHTML = '<a href="javascript:resetComment(' + group_comment_id + ')">リセット</a>';
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+			function resetComment(group_comment_id)
+			{
+				var map = {};
+				map["group_comment_id"] = group_comment_id;
+				console.log(map);
+				
+				$.ajax({
+					url: "resetComment",
+					type: "POST",
+					data: JSON.stringify(map),
+					dataType: "JSON",
+					contentType: "application/json; charset=UTF-8",
+					success: function(jsonObject)
+					{
+						var result = decodeURIComponent(jsonObject.result.replace(/\+/g, " "));
+						
+						document.getElementById("comment" + group_comment_id).innerHTML = result;
+						document.getElementById("translation_button" + group_comment_id).innerHTML = '<a href="javascript:getTranslation(' + group_comment_id +')">翻訳</a>';
+					},
+					error: function(error){console.log(error);}
+				});
+			}
 		</script>
 	</head>
 	<body class="is-preload" onload="fn_onload();">
@@ -176,7 +220,7 @@
 							<a href="viewUserForm?user_id=${group_comment.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${group_comment.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 							</div>
 							<div class="comment-block">
-								<p class="comment-text">${group_comment.content}</p>
+								<p class="comment-text" id="comment${group_comment.group_comment_id}">${group_comment.content}</p>
 									<div class="bottom-comment">
 										<div class="comment-date">
 										
@@ -189,6 +233,7 @@
 													<li class="name">Edit</li>
 													<li>Delete</li>
 												</c:if>
+												<li class="name" id="translation_button${group_comment.group_comment_id}"><a href="javascript:getTranslation(${group_comment.group_comment_id})">翻訳</a></li>
 											</ul>
 									</div>
 									<br><br><br>

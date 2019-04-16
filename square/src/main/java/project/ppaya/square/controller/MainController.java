@@ -48,7 +48,10 @@ public class MainController
 	{
 		ArrayList<Integer> group_id_list = new ArrayList<>();
 		ArrayList<String> hashtag_list = new ArrayList<>();
+
 		String hashtag = "Java";
+		
+		hashtag_list.clear();		
 		hashtag_list.add(hashtag);
 		
 		ArrayList<Integer> group_id_list1 = yh_group_hashtagDAO.getGroupIdByHashtag(hashtag);
@@ -56,15 +59,7 @@ public class MainController
 		
 		ArrayList<Object> list1 = new ArrayList<>();
 		for(int i = 0; i < group_list1.size(); i++)
-		{
-			if(group_id_list.contains(group_list1.get(i).getGroup_id()))
-			{
-				continue;
-			}
-			else
-			{
-				group_id_list.add(group_list1.get(i).getGroup_id());
-			}
+		{	
 			HashMap<String, Object> map1 = new HashMap<>();
 			
 			map1.put("node", group_list1.get(i));
@@ -75,13 +70,9 @@ public class MainController
 			
 			for(int j = 0; j < hashtag_list1.size(); j++)
 			{
-				if(hashtag_list.contains(hashtag_list1.get(j)))
+				if(hashtag.equals(hashtag_list1.get(j)))
 				{
 					continue;
-				}
-				else
-				{
-					hashtag_list.add(hashtag_list1.get(j));
 				}
 				HashMap<String, Object> map2 = new HashMap<>();
 				
@@ -94,13 +85,9 @@ public class MainController
 				
 				for(int k = 0; k < group_list2.size(); k++)
 				{
-					if(group_id_list.contains(group_list2.get(k).getGroup_id()))
+					if(group_list1.get(i).getGroup_id() == group_list2.get(k).getGroup_id())
 					{
 						continue;
-					}
-					else
-					{
-						group_id_list.add(group_list2.get(k).getGroup_id());
 					}
 					HashMap<String, Object> map3 = new HashMap<>();
 					
@@ -112,13 +99,9 @@ public class MainController
 					
 					for(int m = 0; m < hashtag_list2.size(); m++)
 					{
-						if(hashtag_list.contains(hashtag_list2.get(m)))
+						if(hashtag_list1.get(j).equals(hashtag_list2.get(m)))
 						{
 							continue;
-						}
-						else
-						{
-							hashtag_list.add(hashtag_list2.get(m));
 						}
 						HashMap<String, Object> map4 = new HashMap<>();
 						
@@ -131,7 +114,7 @@ public class MainController
 						
 						list4.add(map4);
 					}
-					map3.put("list", hashtag_list2);
+					map3.put("list", list4);
 					
 					list3.add(map3);
 				}
@@ -147,51 +130,8 @@ public class MainController
 		}
 		request.addAttribute("json_list", new JSONArray(list1));
 		request.addAttribute("list", list1);
-		request.addAttribute("root", hashtag);
-			
-			/*for(int j = 0; j < hashtag_list1.size(); j++)
-			{
-				ArrayList<Integer> group_id_list2 = yh_group_hashtagDAO.getGroupIdByHashtag(hashtag_list1.get(j));
-				ArrayList<Group> group_list2 = yh_groupDAO.selectGroupByGroupIdList(group_id_list2);
-				
-				ArrayList<Object> list2 = new ArrayList<>();
-				for(int k = 0; k < group_list2.size(); k++)
-				{
-					HashMap<String, Object> map2 = new HashMap<>();
-					
-					map2.put("group", group_list2.get(k));
-					ArrayList<String> hashtag_list2 = yh_group_hashtagDAO.getHashtagByGroupId(group_list2.get(k).getGroup_id());
-					for(int l = 0; l < hashtag_list2.size(); l++)
-					{
-						ArrayList<Integer> group_id_list3 = yh_group_hashtagDAO.getGroupIdByHashtag(hashtag_list2.get(l));
-						ArrayList<Group> group_list3 = yh_groupDAO.selectGroupByGroupIdList(group_id_list3);
-						
-						ArrayList<Object> list3 = new ArrayList<>();
-						for(int m = 0; m < group_list3.size(); m++)
-						{
-							HashMap<String, Object> map3 = new HashMap<>();
-							
-							map3.put("group", group_list3.get(m));
-							
-							map3.put("hashtag_list", yh_group_hashtagDAO.getHashtagByGroupId(group_list3.get(m).getGroup_id()));
-							
-							list3.add(map3);
-						}
-					}
-					
-					map2.put("hashtag_list", hashtag_list2);
-					
-					list2.add(map2);
-				}
-			}
-			
-			map1.put("hashtag_list", hashtag_list1);
-			
-			list1.add(map1);
-		}*/
-			
+		request.addAttribute("root", hashtag);			
 		
 		return "main/viewMindMapForm";
-
 	}
 }
