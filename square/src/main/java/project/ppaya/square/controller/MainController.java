@@ -22,6 +22,9 @@ public class MainController
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	@Autowired
 	SH_DAO_Group sh_gdao;
+	
+	@Autowired
+	YHGroupHashtagDAO yh_group_hashtagDAO;
 	@Autowired
 	YHGroupCategoryDAO yh_group_categoryDAO;
 
@@ -33,6 +36,15 @@ public class MainController
 		request.addAttribute("group_category_list", group_category_list);
 		
 		return "main/main";
+
+	}
+	@RequestMapping(value = "viewMindMapForm", method = RequestMethod.GET)
+	public String viewMindMapForm()
+	{
+		String tag = "Java";
+		
+		
+		return "main/viewMindMapForm";
 
 	}
 }

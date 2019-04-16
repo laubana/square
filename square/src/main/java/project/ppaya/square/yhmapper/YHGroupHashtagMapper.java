@@ -6,5 +6,6 @@ import project.ppaya.square.vo.GroupHashtag;
 
 public interface YHGroupHashtagMapper
 {
+	public ArrayList<Integer> getGroupIdByHashtag(String hashtag);
 	public ArrayList<GroupHashtag> selectGroupHashtagByGroupId(int group_id);
 }

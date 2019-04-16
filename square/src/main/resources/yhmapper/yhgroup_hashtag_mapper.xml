@@ -4,6 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.ppaya.square.yhmapper.YHGroupHashtagMapper">
+<select id="getGroupIdByHashtag" parameterType="string" resultType="int">
+SELECT
+	GROUP_ID
+FROM
+	TABLE_GH
+WHERE
+	HASHTAG = #{hashtag}	
+</select>
 <select id="selectGroupHashtagByGroupId" parameterType="int" resultType="GroupHashtag">
 SELECT
 	*
