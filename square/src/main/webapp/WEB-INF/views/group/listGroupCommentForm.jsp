@@ -51,7 +51,7 @@
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#three" class="active">코멘트</a></li>
+						<li><a href="#three" class="active">コメント</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -74,7 +74,7 @@
 						<!-- Three -->
 							<section id="three">
 								<div class="container">
-									<h3>코멘트</h3>
+									<h3>コメント</h3>
 						<div class="comments">
 
 							<c:forEach var="group_comment" items="${group_comment_list}">

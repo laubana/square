@@ -207,8 +207,8 @@
 									<div id="map" ></div>
 									場所: ${requestScope.event_place}
 								<div align="right"><footer>
-										<a href="#" class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
-										<a href="#" class="icon fa-comment">128</a>&nbsp;&nbsp;				
+										<a class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
+										<a class="icon fa-comment">128</a>&nbsp;&nbsp;				
 								</footer></div>
 							</article>
 							</section>
@@ -220,24 +220,26 @@
 					<!-- Two -->
 							<section id="two">
 								<div class="container">
-									<h3>회원 정보</h3>
+									<h3>メンバー</h3>
+									<p>リーダー</p>
 										<div>
 											<a href="viewUserForm?user_id=${leader.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${leader.image_id}" alt="" style="width: 100px; height:auto;"></a>
 										</div>
 										<div>
-									<p>주최자</p>
+										<br>
+									<p>メンバー</p>
 										<c:forEach var="user" items="${user_list}">
 											<a href="viewUserForm?user_id=${user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 										</c:forEach>
 										</div>
-									<p>회원</p>
-									<a href="listEventAttendanceForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">회원 페이지 이동</a>
+										<br>
+									<a href="listEventAttendanceForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">メンバーページへ</a>
 								</div>
 							</section>
 					<!-- Three -->
 							<section id="three">
 								<div class="container">
-									<h3>코멘트</h3>
+									<h3>コメント</h3>
 						<div class="comments">
 						<c:forEach var="event_comment" items="${event_comment_list}">
 						<div class="comment-wrap">
@@ -259,7 +261,8 @@
 							</div>
 						</div>
 						</c:forEach>
-						<a href="listEventCommentForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">코멘트 페이지 이동</a>
+						<br>
+						<a href="listEventCommentForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">コメントページへ</a>
 						
 						</div>		
 								</div>
@@ -268,7 +271,7 @@
 					<!-- Four -->
 							<section id="four">
 								<div class="container">
-									<h3>앨범</h3>
+									<h3>이벤트 사진</h3>
 						
 									<div class="features">
 										<article class="col-6 col-12-xsmall work-item">
@@ -282,8 +285,8 @@
 											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
 											</c:forEach>
 											</video>
-											<br>
-											<a href="listEventAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">앨범 페이지 이동</a>
+											<br><br>
+											<a href="listEventAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">이벤트 사진 페이지 이동</a>
 										</article>
 									</div>
 								</div>
@@ -376,30 +379,13 @@ function initMap() {
  	
  	
  	   /* /////////////여기부터 다음 */
-       var locations = [
-	       {lat: 35.6693907, lng: 139.76803390000004},
-	       {lat: 35.6691329, lng: 139.7693181},
-	       {lat: 35.6685256, lng: 139.7679124},
-	       {lat: 35.67016907, lng: 139.76203390000004},
-	       {lat: 35.67002907, lng: 139.7685339000003},
-	       {lat: 35.67106907, lng: 139.762133900004},
-	       {lat: 35.6759907, lng: 139.7707339000004},
-	       {lat: 35.6766907, lng: 139.77013390000004},
-	       {lat: 35.67556907, lng: 139.7699033257},
-	       {lat: 35.67606907, lng: 139.77113941000004},
-	       {lat: 35.67506907, lng: 139.77044100004},
-	       {lat: 35.67526907, lng: 139.76835000004},
-	       {lat: 35.6681907, lng: 139.7601033333004},
-	       {lat: 35.66726907, lng: 139.7598539004},
-	       {lat: 35.66956907, lng: 139.76103390000004},
-	       {lat: 35.66676907, lng: 139.757390000004}
-	     ]
-
+		var locations = ${requestScope.event_schedule_list};
+		console.log( JSON.stringify(locations[0]) );
 		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		var markers = locations.map( function(location, i) {
 			return new google.maps.Marker({	
-					position: location,
-					label: 'ScheduleDate',
+					position: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
+					label: locations[i].name,
 					icon: {
 			     	    url: 'resources/images/clustering/samplepng/sampleimg' + i + '.png',
 			     	    size: new google.maps.Size(50, 50),

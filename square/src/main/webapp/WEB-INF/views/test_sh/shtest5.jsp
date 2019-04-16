@@ -168,11 +168,7 @@
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">정보</a></li>
-						<li><a href="#two">회원</a></li>
-						<li><a href="#three">코멘트</a></li>
-						<li><a href="#four">앨범</a></li>
-						<li><a href="#five">이벤트 스케줄</a></li>
+						<li><a href="#one" class="active">이벤트 뷰</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -204,7 +200,7 @@
 										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">${leader.name}</span><img src="resources/image/user_image/${leader.image_id}" alt="" /></a>
 									</div>
 								</header>
-								<span class="image featured"><img src="resources/image/event_image/${event.image_id}" alt="" /></span>
+								<span class="image featured"><img src="resources/image/event_image/${event.image_id}" ></span>
 								<p>
 									${event.content}
 								</p>
@@ -377,52 +373,28 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	var geocoder = new google.maps.Geocoder();
  	var address = '${requestScope.event_place}';
- /* 	
-	geocoder.geocode(
-		{ 'address': address }
-		, function(results, status) {
-			if (status == 'OK') {
-				latlng = results[0].geometry.location;
-				map.setCenter(latlng);
-				var marker = new google.maps.Marker({ 
-					map: map,
-					position: latlng
-					});
-				map.setZoom(15);
-				console.log( JSON.stringify(latlng) );
-				
-			} else {
-							alert('Geocode was not successful for the following reason: ' + status);
-						}
-					}
-			);
-    
- 	 */   
+ 	
+ 		var result = new Array();
+ 	$(function(){
+ 		
+ 		<c:forEach items = "${requestScope.event_schedule_list}" var = "list">
+ 			var es_object = new Object();
+ 			es_object.lat = ${list.latitude};
+ 			es_object.lng = ${list.longitude};
+ 			es_object.region = "${list.region}";
+ 			result.push(es_object);
+ 		</c:forEach>
+ 		alert("list="+JSON.stringify(result));
+ 	})
+ 	
  	   /* /////////////여기부터 다음 */
-       var locations = [
-	       {lat: 35.6693907, lng: 139.76803390000004},
-	       {lat: 35.6691329, lng: 139.7693181},
-	       {lat: 35.6685256, lng: 139.7679124},
-	       {lat: 35.67016907, lng: 139.76203390000004},
-	       {lat: 35.67002907, lng: 139.7685339000003},
-	       {lat: 35.67106907, lng: 139.762133900004},
-	       {lat: 35.6759907, lng: 139.7707339000004},
-	       {lat: 35.6766907, lng: 139.77013390000004},
-	       {lat: 35.67556907, lng: 139.7699033257},
-	       {lat: 35.67606907, lng: 139.77113941000004},
-	       {lat: 35.67506907, lng: 139.77044100004},
-	       {lat: 35.67526907, lng: 139.76835000004},
-	       {lat: 35.6681907, lng: 139.7601033333004},
-	       {lat: 35.66726907, lng: 139.7598539004},
-	       {lat: 35.66956907, lng: 139.76103390000004},
-	       {lat: 35.66676907, lng: 139.757390000004}
-	     ]
-
+	/* 	console.log( JSON.Stringify(${requestScope.event_schedule_list[0].latitude}) ); 
+		var locations = ${requestScope.event_schedule_list};*/
 		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		var markers = locations.map( function(location, i) {
+		var markers = result.map( function(location, i) {
 			return new google.maps.Marker({	
-					position: location,
-					label: 'ScheduleNumber',
+					position: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
+					label: locations[i].name,
 					icon: {
 			     	    url: 'resources/images/clustering/samplepng/sampleimg' + i + '.png',
 			     	    size: new google.maps.Size(50, 50),
@@ -434,15 +406,12 @@ function initMap() {
 
        var markerCluster = new MarkerClusterer(map, markers,
            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
-	
 }
+
 </script>
 
-<!-- //////////////////////////////////////////// -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP">
 </script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
 </script>
-
 </html>
