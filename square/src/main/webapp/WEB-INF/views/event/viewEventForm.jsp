@@ -376,30 +376,13 @@ function initMap() {
  	
  	
  	   /* /////////////여기부터 다음 */
-       var locations = [
-	       {lat: 35.6693907, lng: 139.76803390000004},
-	       {lat: 35.6691329, lng: 139.7693181},
-	       {lat: 35.6685256, lng: 139.7679124},
-	       {lat: 35.67016907, lng: 139.76203390000004},
-	       {lat: 35.67002907, lng: 139.7685339000003},
-	       {lat: 35.67106907, lng: 139.762133900004},
-	       {lat: 35.6759907, lng: 139.7707339000004},
-	       {lat: 35.6766907, lng: 139.77013390000004},
-	       {lat: 35.67556907, lng: 139.7699033257},
-	       {lat: 35.67606907, lng: 139.77113941000004},
-	       {lat: 35.67506907, lng: 139.77044100004},
-	       {lat: 35.67526907, lng: 139.76835000004},
-	       {lat: 35.6681907, lng: 139.7601033333004},
-	       {lat: 35.66726907, lng: 139.7598539004},
-	       {lat: 35.66956907, lng: 139.76103390000004},
-	       {lat: 35.66676907, lng: 139.757390000004}
-	     ]
-
+		var locations = ${requestScope.event_schedule_list};
+		console.log( JSON.stringify(locations[0]) );
 		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		var markers = locations.map( function(location, i) {
 			return new google.maps.Marker({	
-					position: location,
-					label: 'ScheduleDate',
+					position: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
+					label: locations[i].name,
 					icon: {
 			     	    url: 'resources/images/clustering/samplepng/sampleimg' + i + '.png',
 			     	    size: new google.maps.Size(50, 50),
