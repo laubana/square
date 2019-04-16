@@ -439,7 +439,7 @@ function initMap() {
 		markers.map( function(marker, i) {
 			
 			var infowindow = new google.maps.InfoWindow({
-		          content:  '<img src = "resources/images/clustering/samplepng/sampleimg' + i + '.png">' +'<br>' +  locations[i].region,
+		          content:  '<img src = "resources/images/clustering/samplepng/' + i + '.png">' +'<br>' +  locations[i].region,
 		          maxWidth: 250
 		        });
 			  marker.addListener('click', function() {
