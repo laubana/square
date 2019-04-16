@@ -19,7 +19,7 @@
     // create the element for display
 	if(this.name[0] != "#")
 	{
-    this.el = $('<a href="' + this.href + '"><img src="http://127.0.0.1:8888/square/resources/image/group_logo/' + this.name + '.jpg" width=100 height=100></a>').addClass('node');
+    this.el = $('<a href="' + this.href + '" class="image avatar"><img src="http://127.0.0.1:8888/square/resources/image/group_logo/' + this.name + '.jpg" style="width: 100px; height:auto;"></a>').addClass('node');
 	}
 	else
 		{

@@ -1,8 +1,9 @@
 body {
-	background:#778899;
+	/* background:white; */
+	
 }
 .js-mindmap-active a.node {
-  background:#778899;
+  /* background:#778899; */
   -webkit-border-top-left-radius: 20px;
   -webkit-border-bottom-right-radius: 20px;
   -moz-border-radius-topleft: 20px;
