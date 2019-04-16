@@ -94,27 +94,14 @@ border: 0;
 		<!-- Header -->
 			<section id="header">
 				<header>
-					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>
-					<h1 id="logo"><a href="viewGroupForm?group_id=${group.group_id}">${group.name}</a></h1>
-					<p style="font-size:15px;">
-					<c:forEach var="group_hashtag" items="${group_hashtag_list}">
-							#${group_hashtag.hashtag}
-						</c:forEach>
-					</p>
-					<c:if test="${sessionScope.user_id != null}">
-						<c:if test="${group_attendance != null}">
-							<c:if test="${event_attendance != null}">
-								<a href="javascript:withdrawEventAction()" class="button">탈퇴</a>
-							</c:if>
-							<c:if test="${event_attendance == null}">
-								<a href="javascript:joinEventAction()" class="button">참여</a>
-							</c:if>
-						</c:if>
-					</c:if>
+				<span class="image avatar"><img src="resources/GroupMain/images/bb2.jpg" alt="" /></span>
+					<h1 id="logo"><a href="groupMain">Group name</a></h1>
+					<p style="font-size:15px;">#tag#tag</p>
+					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>	
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">이벤트 뷰</a></li>
+						<li><a href="#one" class="active">이벤트 생성</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -136,29 +123,44 @@ border: 0;
 				<!-- Main -->
 					<div id="main">
 
-						<!-- 기본 정보 -->
+						<!-- 정보 -->
 							<section id="one">
 								<article class="post">
 								<header>
+								<!-- 스케줄 타이틀 생성 -->
 									<div class="title">
-										<h2><a href="">${event.name}</a></h2>
+									<h2>스케줄 제목</h2>
+									<input type="text" class="Event_title "id="Event_title" placeholder="schedule_Title">
 									</div>
 									<div class="meta">
+								<!-- 날짜, 회원 이름, 회원 사진 -->
 										<time class="published" datetime="2019-04-08">2019년 4월 8일</time>
-										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">${leader.name}</span><img src="resources/image/user_image/${leader.image_id}" alt="" /></a>
+										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">Harry</span><img src="resources/GroupMain/images/member/c1.jpg" alt="" /></a>
 									</div>
 								</header>
-								<span class="image featured"><img src="resources/image/event_image/${event.image_id}" ></span>
-								<p>
-									${event.content}
-								</p>
-									<div id="map" ></div>
-									場所: ${requestScope.event_place}
-								<div align="right"><footer>
-										<a class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
-										<a class="icon fa-comment">128</a>&nbsp;&nbsp;				
-								</footer></div>
-							</article>
+								
+									<!-- google maps-->
+										<div id="map" ></div>
+									<div align="right">
+										<div id = "place_output"></div>
+									</div>
+									<br>
+									<div id = "output_button"></div>
+										<input type = "text" id = "search_addr" value = "東京　京橋駅">
+										<br>
+										<input type = "button" id = "button_mapsearch" value = "検索" onClick = "codeAddress()">
+									<div align="right">
+									<footer>
+									</footer>
+									</div>
+								
+									<br><br>
+									<!-- 내용 -->
+									<h1>스케줄 내용</h1>
+									<textarea class="comment-block" placeholder="내용을 작성해주세요..."></textarea><br>
+									<br>
+									<div align="center"><input type="submit" value="이벤트 올리기"></div>
+								</article>
 							</section>
 					</div>		
 
@@ -226,6 +228,7 @@ border: 0;
 
 		</div>
 </form>
+
 		<!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
 		<!-- 추가 Scripts -->
