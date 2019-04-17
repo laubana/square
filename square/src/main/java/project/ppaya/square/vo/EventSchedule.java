@@ -11,6 +11,7 @@ public class EventSchedule
 	String latitude;
 	String longitude;
 	String content;
+	long input_date;
 	public EventSchedule(){}
 	public int getEvent_schedule_id() {
 		return event_schedule_id;
@@ -65,5 +66,11 @@ public class EventSchedule
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public long getInput_date() {
+		return input_date;
+	}
+	public void setInput_date(long input_date) {
+		this.input_date = input_date;
 	}
 }

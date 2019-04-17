@@ -79,12 +79,12 @@ label img {
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<div align="left"><h1 style="font-size:50px;"><a href="main">2조</a></h1></div>
-					<a href="#" class="image avatar"><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
-					<h1><strong>${user.user_id}</strong>님의 그룹 사진<br /></h1>
+					<div align="left"><h1 style="font-size:50px;"><a href="main">Web Site Name</a></h1></div>
+					<a class="image avatar"><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
+					<h1><strong>${user.name}</strong>님의 그룹 사진<br /></h1>
 					<p>사진과 동영상을 찾아보세요!<br>
-					${user.image_id}님과의 추억을<br>
-					2조가 함께합니다!
+					${user.name}님과의 추억을<br>
+					Web Site Name가 함께합니다!
 					</p>
 					<nav id="nav">
 					
@@ -204,7 +204,7 @@ function setAlbumAction()
 	map["unchecked_event_schedule_video_id_list"] = unchecked_event_schedule_video_id_list;
 	
 	$.ajax({
-		url: "testAction2",
+		url: "setAlbumAction",
 		type: "POST",
 		data: JSON.stringify(map),
 		contentType: "application/json; charset=UTF-8",

@@ -1,3 +1,4 @@
+<%@page import="project.ppaya.square.vo.EventSchedule"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="project.ppaya.square.vo.EventScheduleComment"%>
@@ -154,18 +155,6 @@
 
       chart.draw(data, google.charts.Line.convertOptions(options));
     }
-    </script>
-    <script>
-/*     
-    아래 구문 오류나길래 주석처리 해놨음
-    아래 구문 오류나길래 주석처리 해놨음
-    아래 구문 오류나길래 주석처리 해놨음
-    아래 구문 오류나길래 주석처리 해놨음
-    아래 구문 오류나길래 주석처리 해놨음
-    아래 구문 오류나길래 주석처리 해놨음
-    아래 구문 오류나길래 주석처리 해놨음
- */    
-/*    	console.log(JSON.parse('${json_event_schedule_user_schedule_list_list}')); */
     </script>
 	<script>
 	var CLIENT_ID = '823134128365-5e3gpcpbt5nvqc4mfgsbess1v9d8kj9g.apps.googleusercontent.com';
@@ -395,7 +384,7 @@
 										<h2><a href="">${event_schedule.name}</a></h2>
 									</div>
 									<div class="meta">
-										<time class="published" datetime="2019-04-08">2019년 4월 8일</time>
+										<time class="published"><%= (new SimpleDateFormat("yyyy年 MM月 dd日")).format(new Date(((EventSchedule)(request.getAttribute("event_schedule"))).getInput_date()))%></time>
 										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">${leader.name}</span><img src="resources/image/user_image/${leader.image_id}" alt="" /></a>
 									</div>
 								</header>
@@ -428,24 +417,24 @@
 					<!-- Two -->
 							<section id="two">
 								<div class="container">
-									<h3>회원 정보</h3>
+									<h3>メンバー</h3>
 										<div>
 											<a href="viewUserForm?user_id=${leader.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${leader.image_id}" alt="" style="width: 100px; height:auto;"></a>
 										</div>
 										<div>
-									<p>주최자</p>
+									<p>リーダー</p>
 										<c:forEach var="user" items="${user_list}">
 											<a href="viewUserForm?user_id=${user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 										</c:forEach>
 										</div>
-									<p>회원</p>
+									<p>メンバー</p>
 									<a href="listEventScheduleAttendanceForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}" class="button">회원 페이지 이동</a>
 								</div>
 							</section>
 					<!-- Three -->
 							<section id="three">
 								<div class="container">
-									<h3>코멘트</h3>
+									<h3>コメント</h3>
 						<div class="comments">
 						
 						<c:forEach var="element" items="${comment_list}">

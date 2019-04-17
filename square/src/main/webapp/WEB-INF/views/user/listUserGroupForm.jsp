@@ -77,8 +77,8 @@ label img {
 			<header id="header">
 				<div class="inner">
 					<div align="left"><h1 style="font-size:50px;"><a href="main">2조</a></h1></div>
-					<a href="#" class="image avatar"><img src="resources/image/user_image/id1@gmail.com.jpg" alt="" /></a>
-					<h1><strong>???</strong>님의 마이페이지<br /></h1>
+					<a href="#" class="image avatar"><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
+					<h1><strong>${user.name}</strong>님의 마이페이지<br /></h1>
 			
 					<nav id="nav">
 					

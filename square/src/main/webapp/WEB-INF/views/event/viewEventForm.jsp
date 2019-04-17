@@ -1,3 +1,4 @@
+<%@page import="project.ppaya.square.vo.Event"%>
 <%@page import="project.ppaya.square.vo.EventComment"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Date"%>
@@ -204,7 +205,7 @@
 										<h2><a href="">${event.name}</a></h2>
 									</div>
 									<div class="meta">
-										<time class="published" datetime="2019-04-08">2019년 4월 8일</time>
+										<time class="published"><%= (new SimpleDateFormat("yyyy年 MM月 dd日")).format(new Date(((Event)(request.getAttribute("event"))).getInput_date()))%></time>
 										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">${leader.name}</span><img src="resources/image/user_image/${leader.image_id}" alt="" /></a>
 									</div>
 								</header>

@@ -231,6 +231,7 @@
 							<section id="three">
 								<div class="container">
 									<h3>コメント</h3>
+									<p class="icon fa-comment" style="display: inline;">${comment_list.size()}</p>
 						<div class="comments">
 						<c:forEach var="element" items="${comment_list}">
 						<div class="comment-wrap">
