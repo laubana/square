@@ -22,7 +22,7 @@ import project.ppaya.square.vo.*;
 
 public class YHMSFaceUtil
 {	
-	public static ArrayList<String> getSimilarEventScheduleImageFaceIdListByFaceId(ArrayList<String> face_id_list, String face_id)
+	public static ArrayList<String> getSimilarEventScheduleImageFaceIdByFaceId(ArrayList<String> face_id_list, String face_id)
 	{
 		ArrayList<String> similar_event_schedule_image_face_id_list = new ArrayList<>();
 		String result = null;

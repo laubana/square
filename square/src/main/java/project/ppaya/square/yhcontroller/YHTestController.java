@@ -52,6 +52,9 @@ public class YHTestController
 	@Autowired
 	YHCommentTagDAO yh_comment_tagDAO;
 	
+	@Autowired
+	YHUtil yh_util;
+	
 	@RequestMapping(value = "yhtest", method = RequestMethod.GET)
 	public void YHTest()
 	{
@@ -237,5 +240,10 @@ public class YHTestController
 				yh_event_schedule_image_categoryDAO.insertEventScheduleImageCategory(event_schedule_image_list.get(i).getEvent_schedule_image_id(), source_category_list.get(j));
 			}
 		}
+		
+		yh_util.updateEventScheduleImageFace("id1@gmail.com");
+		yh_util.updateImageAlbum("id1@gmail.com");
+		yh_util.updateEventScheduleVideoFace("id1@gmail.com");
+		yh_util.updateVideoAlbum("id1@gmail.com");
 	}
 }

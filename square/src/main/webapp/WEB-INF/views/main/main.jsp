@@ -44,7 +44,7 @@
 					<ul>
 						<li><a href="listRecommendationForm"><span id="realTimeHashTag"></span></a></li>
 						<c:if test="${sessionScope.user_id != null}">
-						<li>${sessionScope.user_id}</li>
+						<li><a href="viewUserForm?user_id=${sessionScope.user_id}">${sessionScope.user_id}</a></li>
 						<li><a href="createGroupForm">그룹생성</a></li>
 					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
 						</c:if>

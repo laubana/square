@@ -54,6 +54,9 @@ public class UserController
 	YHVideoAlbumDAO yh_video_albumDAO;
 	
 	@Autowired
+	YHUtil yh_util;
+	
+	@Autowired
 	SH_DAO_User sh_udao;
 	@Autowired
 	SH_DAO_Group sh_gdao;
@@ -146,160 +149,10 @@ public class UserController
 		ArrayList<Group> group_list = yh_groupDAO.selectGroupByGroupIdList(group_id_list);		
 		request.addAttribute("group_list", group_list);
 		
-		//EventScheduleImageFace 업데이트
-		ArrayList<Integer> event_schedule_id_list = yh_event_schedule_attendanceDAO.getEventScheduleIdByUserId(user_id);
-		
-		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
-		
-		for(int i = 0; i < event_schedule_image_list.size(); i++)
-		{
-			if(event_schedule_image_list.get(i).getDetect_date() == null)
-			{
-				yh_event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id(), (new Date()).getTime());
-				
-				result = YHMSFaceUtil.detectFace(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getEvent_schedule_image_id());
-				jsonArray = new JSONArray(result);
-				
-				for(int j = 0; j < jsonArray.length(); j++)
-				{
-					jsonObject = jsonArray.getJSONObject(j);
-					
-					yh_event_schedule_image_faceDAO.insertEventScheduleImageFace(jsonObject.getString("faceId"), event_schedule_image_list.get(i).getEvent_schedule_image_id(),
-							jsonObject.getJSONObject("faceRectangle").getInt("top"),
-							jsonObject.getJSONObject("faceRectangle").getInt("left"),
-							jsonObject.getJSONObject("faceRectangle").getInt("width"),
-							jsonObject.getJSONObject("faceRectangle").getInt("height")
-							);
-				}
-			}
-			else if(3600000 < (new Date()).getTime() - event_schedule_image_list.get(i).getDetect_date())
-			{
-				yh_event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id(), (new Date()).getTime());
-				
-				yh_event_schedule_image_faceDAO.deleteEventScheduleImageFaceByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id());
-				
-				result = YHMSFaceUtil.detectFace(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getEvent_schedule_image_id());
-				jsonArray = new JSONArray(result);
-				
-				for(int j = 0; j < jsonArray.length(); j++)
-				{
-					jsonObject = jsonArray.getJSONObject(j);
-					
-					yh_event_schedule_image_faceDAO.insertEventScheduleImageFace(jsonObject.getString("faceId"), event_schedule_image_list.get(i).getEvent_schedule_image_id(),
-							jsonObject.getJSONObject("faceRectangle").getInt("top"),
-							jsonObject.getJSONObject("faceRectangle").getInt("left"),
-							jsonObject.getJSONObject("faceRectangle").getInt("width"),
-							jsonObject.getJSONObject("faceRectangle").getInt("height")
-							);
-				}
-			}
-		}
-		//EventScheduleImageFace 업데이트 끝
-
-		//ImageAlbum 업데이트
-		ArrayList<Integer> attend_event_schedule_id_list = yh_event_schedule_attendanceDAO.getEventScheduleIdByUserId(user_id);
-		
-		ArrayList<String> attend_event_schedule_image_id_list = yh_event_schedule_imageDAO.getEventScheduleImageIdByEventScheduleIdList(attend_event_schedule_id_list);
-
-		yh_image_albumDAO.deleteImageAlbumByNotEventScheduleImageIdUserId(attend_event_schedule_image_id_list, user_id);
-		
-		for(int i = 0; i < attend_event_schedule_image_id_list.size(); i++)
-		{
-			yh_image_albumDAO.insertImageAlbum(attend_event_schedule_image_id_list.get(i), user_id);
-		}
-		
-		yh_image_albumDAO.updateSelfByUserId(user_id);
-		
-		ArrayList<String> attend_event_schedule_image_face_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageFaceIdByEventScheduleImageIdList(attend_event_schedule_image_id_list);
-		
-		ArrayList<String> similar_event_schedule_image_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(attend_event_schedule_image_face_id_list, (new JSONArray(YHMSFaceUtil.detectFace(Reference.user_image_path, image_id))).getJSONObject(0).getString("faceId"));
-		
-		ArrayList<String> similar_event_schedule_image_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageIdByEventScheduleImageFaceIdList(similar_event_schedule_image_face_id);
-		
-		yh_image_albumDAO.updateSelfByEventScheduleImageIdListUserId(similar_event_schedule_image_id_list, user_id);
-		//ImageAlbum 업데이트 끝
-		
-		//EventScheduleVideoFace 업데이트
-		event_schedule_id_list = yh_event_schedule_attendanceDAO.getEventScheduleIdByUserId(user_id);
-		
-		ArrayList<String> event_schedule_video_id_list = yh_event_schedule_videoDAO.getEventScheduleVideoIdByEventScheduleIdList(event_schedule_id_list);
-		
-		for(int i = 0; i < event_schedule_video_id_list.size(); i++)
-		{
-			String event_schedule_video_id = event_schedule_video_id_list.get(i);
-			
-			EventScheduleVideo event_schedule_video = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleVideoId(event_schedule_video_id);
-			
-			if(event_schedule_video.getDetect_date() == null)
-			{				
-				jsonObject = new JSONObject(YHVideoIndexerUtil.getVideoIndex(event_schedule_video_id));
-				
-				if(jsonObject.isNull("errorType"))
-				{
-					yh_event_schedule_videoDAO.updateDetectDateByEventScheduleVideoId((new Date()).getTime(), event_schedule_video_id);
-					
-					jsonArray = jsonObject.getJSONObject("summarizedInsights").getJSONArray("faces");
-					
-					for(int j = 0; j < jsonArray.length(); j++)
-					{
-						String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHVideoIndexerUtil.getThumbnail(event_schedule_video_id, jsonArray.getJSONObject(j).getString("thumbnailId")), Reference.event_schedule_video_face_path);
-						
-						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(((new JSONArray(YHMSFaceUtil.detectFace(Reference.event_schedule_video_face_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId"), event_schedule_video_image_id, event_schedule_video_id);
-					}
-				}
-			}
-			else if(3600000 < (new Date()).getTime() - event_schedule_video.getDetect_date())
-			{	
-				yh_event_schedule_videoDAO.updateDetectDateByEventScheduleVideoId((new Date()).getTime(), event_schedule_video_id);
-				
-				yh_event_schedule_video_faceDAO.deleteEventScheduleVideoFaceByEventScheduleVideoId(event_schedule_video_id);
-				
-				jsonObject = new JSONObject(YHVideoIndexerUtil.getVideoIndex(event_schedule_video_id));
-				
-				if(jsonObject.isNull("errorType"))
-				{
-					jsonArray = jsonObject.getJSONObject("summarizedInsights").getJSONArray("faces");
-					
-					for(int j = 0; j < jsonArray.length(); j++)
-					{
-						String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHVideoIndexerUtil.getThumbnail(event_schedule_video_id, jsonArray.getJSONObject(j).getString("thumbnailId")), Reference.event_schedule_video_face_path);
-						
-						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(((new JSONArray(YHMSFaceUtil.detectFace(Reference.event_schedule_video_face_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId"), event_schedule_video_image_id, event_schedule_video_id);
-					}
-				}		
-			}
-		}
-		//EventScheduleVideoFace 업데이트 끝
-		
-		//VideoAlbum 업데이트
-		attend_event_schedule_id_list = yh_event_schedule_attendanceDAO.getEventScheduleIdByUserId(user_id);
-		
-		ArrayList<String> attend_event_schedule_video_id_list = yh_event_schedule_videoDAO.getEventScheduleVideoIdByEventScheduleIdList(attend_event_schedule_id_list);
-		
-		yh_video_albumDAO.deleteVideoAlbumByNotEventScheduleVideoIdUserId(attend_event_schedule_video_id_list, user_id);
-		
-		for(int i = 0; i < attend_event_schedule_video_id_list.size(); i++)
-		{
-			yh_video_albumDAO.insertVideoAlbum(attend_event_schedule_video_id_list.get(i), user_id);
-		}
-		
-		yh_video_albumDAO.updateSelfByUserId(user_id);
-		
-		for(int i = 0; i < attend_event_schedule_video_id_list.size(); i++)
-		{
-			ArrayList<String> attend_event_schedule_video_face_id_list = yh_event_schedule_video_faceDAO.getEventScheduleVideoFaceIdByEventScheduleVideoId(attend_event_schedule_video_id_list.get(i));
-			
-			if(attend_event_schedule_video_face_id_list.size() != 0)
-			{
-				ArrayList<String> similar_event_schedule_video_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdListByFaceId(attend_event_schedule_video_face_id_list, (new JSONArray(YHMSFaceUtil.detectFace(Reference.user_image_path, image_id))).getJSONObject(0).getString("faceId"));
-				
-				if(similar_event_schedule_video_face_id.size() != 0)
-				{
-					yh_video_albumDAO.updateSelfByEventScheduleVideoIdUserId(attend_event_schedule_video_id_list.get(i), user_id);
-				}
-			}
-		}
-		//VideoAlbum 업데이트 끝
+		/*yh_util.updateEventScheduleImageFace(user_id);
+		yh_util.updateImageAlbum(user_id);
+		yh_util.updateEventScheduleVideoFace(user_id);
+		yh_util.updateVideoAlbum(user_id);*/
 		
 		return "user/listUserAlbumForm";
 	}
