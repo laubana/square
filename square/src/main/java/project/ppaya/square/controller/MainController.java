@@ -30,10 +30,47 @@ public class MainController
 	@Autowired
 	YHGroupDAO yh_groupDAO;
 	@Autowired
+	YHEventDAO yh_eventDAO;
+	@Autowired
 	YHGroupHashtagDAO yh_group_hashtagDAO;
 	@Autowired
 	YHGroupCategoryDAO yh_group_categoryDAO;
+	@Autowired
+	YHEventScheduleImageDAO yh_event_schedule_imageDAO;
+	@Autowired
+	YHEventScheduleDAO yh_event_scheduleDAO;
 
+
+	@RequestMapping(value = "listRecommendationForm", method = RequestMethod.GET)
+	public String listRecommendationForm
+	(
+			Model request,
+			String hashtag
+			)
+	{
+		if(hashtag == null)
+		{
+			ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventSchedeuleImageOrderByInputdate(0);
+			
+			//EventScheduleImage List 전송
+			request.addAttribute("image_list", event_schedule_image_list);
+		}
+		else
+		{
+			ArrayList<Integer> group_id_list = yh_group_hashtagDAO.getGroupIdByHashtag(hashtag);
+			
+			ArrayList<Integer> event_id_list = yh_eventDAO.getEventIdByGroupIdList(group_id_list);
+			
+			ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventIdList(event_id_list);
+			
+			ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdListOrderByInputdate(event_schedule_id_list, 0);
+			
+			//EventScheduleImage List 전송
+			request.addAttribute("image_list", event_schedule_image_list);
+		}
+		
+		return "main/listRecommendationForm";
+	}
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String mainForm(Model request)
 	{

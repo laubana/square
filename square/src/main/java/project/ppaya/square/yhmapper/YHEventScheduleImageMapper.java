@@ -7,6 +7,8 @@ import project.ppaya.square.vo.EventScheduleImage;
 
 public interface YHEventScheduleImageMapper
 {
+	public ArrayList<EventScheduleImage> selectEventScheduleImageByEventScheduleIdListOrderByInputdate(HashMap<String, Object> map);
+	public ArrayList<EventScheduleImage> selectEventSchedeuleImageOrderByInputdate(Integer flag);
 	public int insertEventScheduleImage(HashMap<String, Object> map);
 	public ArrayList<EventScheduleImage> selectEventScheduleImageByEventScheduleId(int event_schedule_id);
 	public ArrayList<EventScheduleImage> selectEventScheduleImageByEventScheduleIdList(ArrayList<Integer> event_schedule_id_list);

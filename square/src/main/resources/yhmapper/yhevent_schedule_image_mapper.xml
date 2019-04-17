@@ -4,6 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleImageMapper">
+<select id="selectEventSchedeuleImageOrderByInputdate" parameterType="int" resultType="EventScheduleImage">
+SELECT
+	*
+FROM
+	TABLE_ESI
+ORDER BY
+	<if test="value == 1">
+		INPUT_DATE DESC
+	</if>
+	<if test="value == 0">
+		INPUT_DATE 
+	</if>
+</select>
 <insert id="insertEventScheduleImage" parameterType="map">
 INSERT INTO TABLE_ESI
 (
@@ -59,6 +72,24 @@ WHERE
 	<foreach item="event_schedule_id" collection="list" open="OR" separator="OR">
 		EVENT_SCHEDULE_ID = #{event_schedule_id}
 	</foreach>
+</select>
+<select id="selectEventScheduleImageByEventScheduleIdListOrderByInputdate" parameterType="map" resultType="EventScheduleImage">
+SELECT
+	*
+FROM
+	TABLE_ESI
+WHERE
+	1 = 0
+	<foreach item="event_schedule_id" collection="event_schedule_id_list" open="OR" separator="OR">
+		EVENT_SCHEDULE_ID = #{event_schedule_id}
+	</foreach>
+ORDER BY
+	<if test="flag == 1">
+		INPUT_DATE DESC
+	</if>
+	<if test="flag == 0">
+		INPUT_DATE 
+	</if>
 </select>
 <update id="updateEventScheduleImageDetectDateByEventScheduleImageId" parameterType="map">
 UPDATE TABLE_ESI
