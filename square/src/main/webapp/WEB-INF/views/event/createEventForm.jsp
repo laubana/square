@@ -130,7 +130,7 @@ border: 0;
 								<!-- 타이틀 생성 -->
 									<div class="title">
 									<h2>이벤트 제목</h2>
-									<input type="text" class="Event_title "id="Event_title" placeholder="event_Title">
+									<input type="text" class="Event_title "id="Event_title" placeholder="event_Title" autocomplete="off">
 									</div>
 									<div class="meta">
 								<!-- 날짜, 회원 이름, 회원 사진-->

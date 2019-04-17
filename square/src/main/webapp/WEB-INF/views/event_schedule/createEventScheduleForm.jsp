@@ -130,7 +130,7 @@ border: 0;
 								<!-- 스케줄 타이틀 생성 -->
 									<div class="title">
 									<h2>스케줄 제목</h2>
-									<input type="text" class="Event_title "id="Event_title" placeholder="schedule_Title">
+									<input type="text" class="Event_title "id="Event_title" placeholder="schedule_Title" autocomplete="off">
 									</div>
 									<div class="meta">
 								<!-- 날짜, 회원 이름, 회원 사진 -->
@@ -146,7 +146,7 @@ border: 0;
 									</div>
 									<br>
 									<div id = "output_button"></div>
-										<input type = "text" id = "search_addr" value = "東京　京橋駅">
+										<input type = "text" id = "search_addr" value = "東京　京橋駅" autocomplete="off">
 										<br>
 										<input type = "button" id = "button_mapsearch" value = "検索" onClick = "codeAddress()">
 									<div align="right">
