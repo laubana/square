@@ -39,5 +39,21 @@ WHERE
 	NAME like '%' || #{keyword} || '%'
 </select>
 
+<insert id = "setGroupHashtag" parameterType = "GroupHashtag">
+
+INSERT INTO
+	TABLE_GH
+		( HASHTAG, GROUP_ID )
+	VALUES
+		( #{GroupHashtag.hashtag} , #{GroupHashtag.group_id} )
+
+
+</insert>
+
+
+
+
+
+
 </mapper>
 

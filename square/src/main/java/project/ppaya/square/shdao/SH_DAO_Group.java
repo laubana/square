@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import project.ppaya.square.shmapper.SH_Mapper_Group;
 import project.ppaya.square.vo.Group;
 import project.ppaya.square.vo.GroupCategory;
+import project.ppaya.square.vo.GroupHashtag;
 
 
 @Repository
@@ -65,6 +66,24 @@ public ArrayList<Group> getGroupByKeyword(String keyword){
 	return glist;
 	
 	
+}
+
+
+
+public int setGroupHashtag( ArrayList<String> group_hashtag_list ) {
+	int group_id = 1;
+	int i = 0;
+	int result = 0;
+	for (i = 0; i < group_hashtag_list.size();  i=i + 1 ){
+		SH_Mapper_Group gmapper = session.getMapper(SH_Mapper_Group.class);
+		try {
+			result = result + gmapper.setGroupHashtag( new GroupHashtag(group_hashtag_list.get(i), group_id) );
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	return result;
 }
 
 

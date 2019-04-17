@@ -137,7 +137,10 @@ public class GroupAction {
 		String name = (String)map.get("name");
 		String content = (String)map.get("content");
 		int group_category_id = Integer.parseInt((String)map.get("group_category_id"));
-		ArrayList<String> group_hashtag_list = (ArrayList<String>)map.get("group_hashtag_list");
+		ArrayList<String> group_hashtag_list = ( ArrayList<String> )map.get("group_hashtag_list");
+		int check  = sh_gdao.setGroupHashtag(group_hashtag_list);
+		
+		
 		String region = (String)map.get("region");
 		String group_logo = YHFileUtil.saveJpegFromBase64((String)map.get("group_logo"), Reference.group_logo_path);
 		String group_image = YHFileUtil.saveJpegFromBase64((String)map.get("group_image"), Reference.group_image_path);
