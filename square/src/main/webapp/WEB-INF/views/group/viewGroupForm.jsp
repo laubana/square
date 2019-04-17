@@ -425,8 +425,8 @@ function link4_onclick() {
 function initMap() {
     var latlng = new google.maps.LatLng(35.6715003, 139.764913);
     var mapOptions = {
-    	      zoom: 15,
-    	      center: latlng
+   	      zoom: 15,
+   	      center: latlng
     	}
     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	var geocoder = new google.maps.Geocoder();
@@ -494,7 +494,7 @@ function initMap() {
 		markers.map( function(marker, i) {
 			
 			var infowindow = new google.maps.InfoWindow({
-		          content: locations[i].name + '<br>場所: ' + locations[i].region + '<br>内容: '+ locations[i].content,
+		          content: locations[i].name + '<br>場所: ' + locations[i].region + '<br>内容: '+ locations[i].content + '<div> <img src = "resources/images/clustering/samplepng/' + i + '.png">',
 		          maxWidth: 250
 		        });
 			  marker.addListener('click', function() {
