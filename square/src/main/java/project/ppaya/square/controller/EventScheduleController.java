@@ -65,6 +65,16 @@ public class EventScheduleController
 			)
 	{
 
+		//event_place 임시 전송
+		ArrayList<String> place_list = new ArrayList<>();
+		place_list.add("'東京　京橋駅'");
+		place_list.add("'名古屋　愛知県'");
+		place_list.add("'大阪市 大正区'");
+		place_list.add("'仙台市　宮城県'");
+		place_list.add("'名古屋　愛知県'");
+		request.addAttribute("place_list", place_list);
+		
+		
 		return "event_schedule/createEventScheduleForm";
 	}
 	@RequestMapping(value = "listEventScheduleForm", method = RequestMethod.GET)

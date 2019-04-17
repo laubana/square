@@ -4,6 +4,14 @@ public class GroupHashtag
 {
 	String hashtag;
 	int group_id;
+	
+	
+	
+	public GroupHashtag(String hashtag, int group_id) {
+		super();
+		this.hashtag = hashtag;
+		this.group_id = group_id;
+	}
 	public GroupHashtag(){}
 	public String getHashtag() {
 		return hashtag;
