@@ -113,8 +113,12 @@ public class MainController
 	public String mainForm(Model request)
 	{
 		ArrayList<GroupCategory> group_category_list = yh_group_categoryDAO.selectGroupCategory();
-		
+		//GroupCategory List 전송
 		request.addAttribute("group_category_list", group_category_list);
+		
+		ArrayList<String> hashtag_list = yh_group_hashtagDAO.getGroupHashtagRank();
+		//GroupHashtag List 전송
+		request.addAttribute("hashtag_list", hashtag_list);
 		
 		return "main/main";
 

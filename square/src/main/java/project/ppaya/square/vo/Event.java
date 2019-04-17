@@ -8,6 +8,7 @@ public class Event
 	String name;
 	String content;
 	String image_id;
+	long input_date;
 	public Event(){}
 	public int getEvent_id() {
 		return event_id;
@@ -44,5 +45,11 @@ public class Event
 	}
 	public void setImage_id(String image_id) {
 		this.image_id = image_id;
+	}
+	public long getInput_date() {
+		return input_date;
+	}
+	public void setInput_date(long input_date) {
+		this.input_date = input_date;
 	}
 }

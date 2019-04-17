@@ -81,7 +81,7 @@
 							</c:forEach>
 								</ul>
 						</div>
-								<div align="center"><a href="listUserGroupForm" class="button">グループリスト編集</a></div>
+								<div align="center"><a href="listUserGroupForm?user_id=${user.user_id}" class="button">グループリスト編集</a></div>
 					</section>
 
 				<!-- Four -->

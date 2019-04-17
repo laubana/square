@@ -16,6 +16,20 @@ public class YHGroupHashtagDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<String> getGroupHashtagRank()
+	{
+		ArrayList<String> hashtag_list = null;
+		
+		YHGroupHashtagMapper mapper = sqlSession.getMapper(YHGroupHashtagMapper.class);
+		
+		try
+		{
+			hashtag_list = mapper.getGroupHashtagRank();
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return hashtag_list;
+	}
 	public ArrayList<Integer> getGroupIdByHashtagNotHashtagList(String hashtag, ArrayList<String> hashtag_list)
 	{
 		ArrayList<Integer> group_id_list = null;
