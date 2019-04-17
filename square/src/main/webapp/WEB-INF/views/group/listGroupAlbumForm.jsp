@@ -34,10 +34,11 @@
 
 				<!-- Main -->
 					<div id="main">
-					<c:forEach var="image" items="${event_schedule_image_list}">
+					<c:forEach var="element" items="${image_list}">
 					<article class="thumb">
-							<a href="resources/image/event_schedule_image/${image.filename}" class="image"><img src="resources/image/event_schedule_image/${image.filename}" alt="" /></a>
-							
+							<a href="resources/image/event_schedule_image/${element.image.filename}" class="image"><img src="resources/image/event_schedule_image/${element.image.filename}" alt="" /></a>
+							<h3>${element.description}</h3>
+							<p>aaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
 						</article>
 					</c:forEach>
 					</div>

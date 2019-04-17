@@ -1,6 +1,7 @@
 package project.ppaya.square.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -38,6 +39,8 @@ public class GroupController
 	YHEventScheduleDAO yh_event_scheduleDAO;
 	@Autowired
 	YHEventScheduleImageDAO yh_event_schedule_imageDAO;
+	@Autowired
+	YHEventScheduleImageDescriptionDAO yh_event_schedule_image_descriptionDAO;
 	@Autowired
 	YHEventScheduleVideoDAO yh_event_schedule_videoDAO;
 	@Autowired
@@ -127,8 +130,27 @@ public class GroupController
 		ArrayList<Integer> event_id_list = yh_eventDAO.getEventIdByGroupId(group_id);
 		ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventIdList(event_id_list);
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
-		//Image List 전송
-		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
+		
+		ArrayList<HashMap<String, Object>> image_list = new ArrayList<>();
+		
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			EventSchedule event_schedule = yh_event_scheduleDAO.selectEventScheduleByEventScheduleId(event_schedule_image_list.get(i).getEvent_schedule_id());
+			
+			Event event = yh_eventDAO.selectEventByEventId(event_schedule.getEvent_id());
+			
+			group = yh_groupDAO.selectGroupByGroupId(event.getGroup_id());
+			
+			HashMap<String, Object> map = new HashMap<>();
+			
+			map.put("image", event_schedule_image_list.get(i));
+			map.put("group", group);
+			map.put("description", yh_event_schedule_image_descriptionDAO.getDescriptionByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id()));
+			
+			image_list.add(map);
+		}
+		//EventScheduleImage List 전송
+		request.addAttribute("image_list", image_list);
 		
 		//EventSchedule List 전송
 		ArrayList<EventSchedule> es_list = yh_event_scheduleDAO.selectEventScheduleByEventIdList(event_id_list);
@@ -278,8 +300,27 @@ public class GroupController
 		ArrayList<Integer> event_id_list = yh_eventDAO.getEventIdByGroupId(group_id);
 		ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventIdList(event_id_list);
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
-		//Group의 Image List 전송
-		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
+		
+		ArrayList<HashMap<String, Object>> image_list = new ArrayList<>();
+		
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			EventSchedule event_schedule = yh_event_scheduleDAO.selectEventScheduleByEventScheduleId(event_schedule_image_list.get(i).getEvent_schedule_id());
+			
+			Event event = yh_eventDAO.selectEventByEventId(event_schedule.getEvent_id());
+			
+			group = yh_groupDAO.selectGroupByGroupId(event.getGroup_id());
+			
+			HashMap<String, Object> map = new HashMap<>();
+			
+			map.put("image", event_schedule_image_list.get(i));
+			map.put("group", group);
+			map.put("description", yh_event_schedule_image_descriptionDAO.getDescriptionByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id()));
+			
+			image_list.add(map);
+		}
+		//EventScheduleImage List 전송
+		request.addAttribute("image_list", image_list);
 
 		return "group/listGroupAlbumForm";
 	}

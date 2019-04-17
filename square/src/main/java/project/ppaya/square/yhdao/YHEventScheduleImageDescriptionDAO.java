@@ -15,6 +15,20 @@ public class YHEventScheduleImageDescriptionDAO
 	@Autowired
 	SqlSession sqlSession;
 
+	public String getDescriptionByEventScheduleImageId(String event_schedule_image_id)
+	{
+		String description = null;
+		
+		YHEventScheduleImageDescriptionMapper mapper = sqlSession.getMapper(YHEventScheduleImageDescriptionMapper.class);
+		
+		try
+		{
+			description = mapper.getDescriptionByEventScheduleImageId(event_schedule_image_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return description;
+	}
 	public int insertEventScheduleImageDescription(String event_schedule_image_id, String description)
 	{
 		int result = 0;

@@ -4,6 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleImageDescriptionMapper">
+<select id="getDescriptionByEventScheduleImageId" parameterType="string" resultType="string">
+SELECT
+	DESCRIPTION
+FROM
+	TABLE_ESID
+WHERE
+	EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id}
+</select>
 <insert id="insertEventScheduleImageDescription" parameterType="map">
 INSERT INTO TABLE_ESID
 (

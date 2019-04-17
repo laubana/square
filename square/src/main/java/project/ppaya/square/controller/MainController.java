@@ -38,6 +38,8 @@ public class MainController
 	@Autowired
 	YHEventScheduleImageDAO yh_event_schedule_imageDAO;
 	@Autowired
+	YHEventScheduleImageDescriptionDAO yh_event_schedule_image_descriptionDAO;
+	@Autowired
 	YHEventScheduleDAO yh_event_scheduleDAO;
 
 
@@ -52,8 +54,26 @@ public class MainController
 		{
 			ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventSchedeuleImageOrderByInputdate(0);
 			
+			ArrayList<HashMap<String, Object>> image_list = new ArrayList<>();
+			
+			for(int i = 0; i < event_schedule_image_list.size(); i++)
+			{
+				EventSchedule event_schedule = yh_event_scheduleDAO.selectEventScheduleByEventScheduleId(event_schedule_image_list.get(i).getEvent_schedule_id());
+				
+				Event event = yh_eventDAO.selectEventByEventId(event_schedule.getEvent_id());
+				
+				Group group = yh_groupDAO.selectGroupByGroupId(event.getGroup_id());
+				
+				HashMap<String, Object> map = new HashMap<>();
+				
+				map.put("image", event_schedule_image_list.get(i));
+				map.put("group", group);
+				map.put("description", yh_event_schedule_image_descriptionDAO.getDescriptionByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id()));
+				
+				image_list.add(map);
+			}
 			//EventScheduleImage List 전송
-			request.addAttribute("image_list", event_schedule_image_list);
+			request.addAttribute("image_list", image_list);
 		}
 		else
 		{
@@ -65,8 +85,26 @@ public class MainController
 			
 			ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdListOrderByInputdate(event_schedule_id_list, 0);
 			
+			ArrayList<HashMap<String, Object>> image_list = new ArrayList<>();
+			
+			for(int i = 0; i < event_schedule_image_list.size(); i++)
+			{
+				EventSchedule event_schedule = yh_event_scheduleDAO.selectEventScheduleByEventScheduleId(event_schedule_image_list.get(i).getEvent_schedule_id());
+				
+				Event event = yh_eventDAO.selectEventByEventId(event_schedule.getEvent_id());
+				
+				Group group = yh_groupDAO.selectGroupByGroupId(event.getGroup_id());
+				
+				HashMap<String, Object> map = new HashMap<>();
+				
+				map.put("image", event_schedule_image_list.get(i));
+				map.put("group", group);
+				map.put("description", yh_event_schedule_image_descriptionDAO.getDescriptionByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id()));
+				
+				image_list.add(map);
+			}
 			//EventScheduleImage List 전송
-			request.addAttribute("image_list", event_schedule_image_list);
+			request.addAttribute("image_list", image_list);
 		}
 		
 		return "main/listRecommendationForm";

@@ -278,16 +278,18 @@
 						
 									<div class="features">
 										<article class="col-6 col-12-xsmall work-item">
-											<c:forEach var="event_schedule_image" items="${event_schedule_image_list}">
-												<a href="resources/image/event_schedule_image/${event_schedule_image.filename}" class="image thumb"><img src="resources/image/event_schedule_image/${event_schedule_image.filename}" alt="" /></a>
-											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.event_schedule_id}</h3>
+											<c:forEach var="element" items="${image_list}">
+												<a href="resources/image/event_schedule_image/${element.image.filename}" class="image thumb"><img src="resources/image/event_schedule_image/${element.image.filename}" alt="" /></a>
+											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${element.description}</h3>
 											</c:forEach>
 											<br>
+											<c:if test="${video_list.size() != 0}">
 											<video width='auto' height='auto' controls>
 											<c:forEach var="video" items="${video_list}">
 											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
 											</c:forEach>
 											</video>
+											</c:if>
 											<br><br>
 											<a href="listGroupAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">アルバムページへ</a>
 										</article>

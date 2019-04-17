@@ -33,7 +33,7 @@ public class YHEventScheduleImageDAO
 		
 		return event_schedule_image_list;
 	}
-	public ArrayList<EventScheduleImage> selectEventSchedeuleImageOrderByInputdate(Integer flag)
+	public ArrayList<EventScheduleImage> selectEventSchedeuleImageOrderByInputdate(int flag)
 	{
 		ArrayList<EventScheduleImage> event_schedule_image_list = null;
 		
