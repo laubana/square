@@ -247,17 +247,18 @@
 										</div>
 											<ul class="comment-actions">
 												<li class="name"><a href="viewUserForm?user_id=${element.user.user_id}">${element.user.name}</a></li>
+												<li class="name" id="translation_button${element.comment.group_comment_id}"><a href="javascript:getGroupCommentTranslation(${element.comment.group_comment_id})">翻訳</a></li>
 												<c:if test="${element.user.user_id == sessionScope.user_id}">
 													<li class="name">Edit</li>
 													<li>Delete</li>
-												</c:if>
-												<li class="name">
+												</c:if><br>
+												<li>
 													<select id="translation_language${element.comment.group_comment_id}">
 														  <option value="en">英語</option>
 														  <option value="ko">韓国語</option>
 													</select>
 												</li>
-												<li class="name" id="translation_button${element.comment.group_comment_id}"><a href="javascript:getGroupCommentTranslation(${element.comment.group_comment_id})">翻訳</a></li>
+								
 											</ul>
 									</div>
 									<br><br><br>
@@ -309,7 +310,7 @@
 									<h3>イベント</h3>
 									<c:if test="${sessionScope.user_id != null}">
 						<c:if test="${group_attendance != null}">
-										<p><a href="createEventForm" class="button">追加</a></p>
+										<p align="right"><a href="createEventForm" class="button">追加</a></p>
 						</c:if>
 					</c:if>
 									<div class="features">
@@ -458,7 +459,7 @@ function initMap() {
 	 	var locations = [];
  	
 		<c:forEach items = "${requestScope.event_schedule_list}" var = "list">
-			locations.push( {lat: ${list.latitude}, lng: ${list.longitude}, region: "${list.region}"} );
+			locations.push({ lat: ${list.latitude}, lng: ${list.longitude}, region: "${list.region}", name: "${list.name}", event_schedule_id: ${list.event_schedule_id}, content: "${list.content}", start_date: "${list.start_date}" });
 		</c:forEach>
 	 		
 
@@ -468,7 +469,7 @@ function initMap() {
 		var markers = locations.map( function(location, i) {
 			return new google.maps.Marker({	
 					position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
-					label: locations[i].name
+/* 					label: locations[i].name 			*/
 				});
 			});		
 		
@@ -493,7 +494,7 @@ function initMap() {
 		markers.map( function(marker, i) {
 			
 			var infowindow = new google.maps.InfoWindow({
-		          content:  '<img src = "resources/images/clustering/samplepng/' + i + '.png">' +'<br>' +  locations[i].region,
+		          content: locations[i].name + '<br>場所: ' + locations[i].region + '<br>内容: '+ locations[i].content,
 		          maxWidth: 250
 		        });
 			  marker.addListener('click', function() {
