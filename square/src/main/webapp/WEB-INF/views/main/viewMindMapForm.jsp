@@ -63,8 +63,11 @@ background: url('resources/MindMap/image/3.jpg');
       <li class="">
         <div align="center"><span><a href="main">Group Name</a></span></div>
         <br>
+        <hr>
         <p align="center"><a href="main">#tag</a></p>
+        <hr>
         <p align="center"><a href="main">#tag</a></p>
+        <hr>
         <p align="center"><a href="main">#tag</a></p>
         <p align="center"><a href="main">#tag</a></p>
         <p align="center"><a href="main">#tag</a></p>

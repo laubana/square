@@ -10,7 +10,10 @@
 		<link rel="stylesheet" href="resources/Main/assets/css/main.css" />
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
 		<script>
-			var texts = ["#급상승 해시태그", "SWDO 1st graduates", "유환,세현,용빈,수연", "Asian Beauty Awards 노수연", "就職できるかな", "QooQoo Buffet"];
+			var texts = [];
+			<c:forEach var="hashtag" items="${hashtag_list}">
+			texts.push("#급상승 해시태그 : ${hashtag}");
+			</c:forEach>
 			var count = 0;
 			function changeText() {
 			    $("#realTimeHashTag").text(texts[count]);
@@ -39,7 +42,7 @@
 			<h1><a class="navbar-brand font-weight-bolder mr-3" href="main"><img src="resources/Main/assets/css/images/photoSquareLogo_done.png"></a></h1>
 				<nav>
 					<ul>
-						<li><a href="listRecommendationForm"><span id="realTimeHashTag"> #급상승 해시태그</span></a></li>
+						<li><a href="listRecommendationForm"><span id="realTimeHashTag"></span></a></li>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
 						<li><a href="createGroupForm">그룹생성</a></li>

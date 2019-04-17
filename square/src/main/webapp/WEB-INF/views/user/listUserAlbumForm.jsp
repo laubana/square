@@ -204,7 +204,7 @@ function setAlbumAction()
 	map["unchecked_event_schedule_video_id_list"] = unchecked_event_schedule_video_id_list;
 	
 	$.ajax({
-		url: "testAction2",
+		url: "setAlbumAction",
 		type: "POST",
 		data: JSON.stringify(map),
 		contentType: "application/json; charset=UTF-8",
