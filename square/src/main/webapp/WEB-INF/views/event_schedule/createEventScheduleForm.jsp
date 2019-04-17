@@ -145,7 +145,7 @@ border: 0;
 										<div id = "place_output"></div>
 									</div>
 									<br>
-									<div id = "output_button"></div>
+									<div id = "output_button"></div><br>
 										<input type = "text" id = "search_addr" value = "東京　京橋駅" autocomplete="off">
 										<br>
 										<input type = "button" id = "button_mapsearch" value = "検索" onClick = "codeAddress()">
@@ -442,7 +442,7 @@ var output_button = document.getElementById('output_button"');
 			console.log( JSON.stringify( arealist_temp[k] ).replace(/&quot;/gi, '') + k );
 			
 			str_output = str_output + 
-			'<input type = "button" id = "button' + k + '" value = "'+ arealist_temp[k] + '" onClick = "setAddress('+ acute + arealist_temp[k]+ acute + ')">';			
+			'<input type = "button" id = "button' + k + '" value = "'+ arealist_temp[k] + '" onClick = "setAddress('+ acute + arealist_temp[k]+ acute + ')">&nbsp;&nbsp;';			
 		}
 		console.log( str_output );		
 		$('output_button').html(str_output);			
