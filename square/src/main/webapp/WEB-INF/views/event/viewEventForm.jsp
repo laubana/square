@@ -248,7 +248,7 @@
 							<section id="three">
 								<div class="container">
 									<h3 style="display: inline;">コメント</h3>
-						<p class="icon fa-comment" style="display: inline;">${comment_list.size()}</p>
+						<p align="right" class="icon fa-comment">${comment_list.size()}</p>
 						<div class="comments">
 						<c:forEach var="element" items="${comment_list}">
 						<div class="comment-wrap">
@@ -265,18 +265,15 @@
 										</div>
 											<ul class="comment-actions">
 												<li class="name"><a href="viewUserForm?user_id=${element.user.user_id}">${element.user.name}</a></li>
+												<li class="name" id="translation_button${element.comment.event_comment_id}"><a href="javascript:getEventCommentTranslation(${element.comment.event_comment_id})">翻訳</a></li>
 											<c:if test="${element.user.user_id == sessionScope.user_id}">
 												<li class="name">Edit</li>
 												<li>Delete</li>
 											</c:if>
-												<li class="name">
 													<select id="translation_language${element.comment.event_comment_id}">
 														  <option value="en">英語</option>
 														  <option value="ko">韓国語</option>
 													</select>
-												</li>
-												<li class="name" id="translation_button${element.comment.event_comment_id}"><a href="javascript:getEventCommentTranslation(${element.comment.event_comment_id})">翻訳</a></li>
-												
 											</ul>
 									</div>
 									<br><br><br>

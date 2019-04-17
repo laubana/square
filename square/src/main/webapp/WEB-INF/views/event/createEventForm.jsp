@@ -138,7 +138,7 @@ border: 0;
 										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">Harry</span><img src="resources/GroupMain/images/member/c1.jpg" alt="" /></a>
 									</div>
 								</header>
-								<span class="image featured"><img src="resources/GroupMain/images/bb.jpg" id="foo"></span>
+								<span class="image featured"><img src="" id="foo"></span>
 								<!-- 그룹 대표 이미지 업로드 -->
 									<div class="filebox">
 									<label for="imgInp">Main Image Upload</label>
