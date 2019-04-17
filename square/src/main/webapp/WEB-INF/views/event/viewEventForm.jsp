@@ -327,6 +327,7 @@
 							<section id="five">
 								<div class="container">
 									<h3>イベント・スケジュール</h3>
+									<div align="right"><a href="createEventScheduleForm" class="button">스케줄 생성</a></div>
 									<div class="features">
 									<c:forEach var="event_schedule" items="${event_schedule_list}">
 									<article>
@@ -354,7 +355,7 @@
 						</div>
 						</c:forEach>
 						<c:if test="${sessionScope.user_id == leader.user_id}">
-						<input type="text" id="keyword" style="width:300px; display:inline;">
+						<input type="text" id="keyword" style="width:300px; display:inline;" autocomplete="off">
 <input type="button" onclick="javascript:searchGroupAction()" value="그룹 검색"><br><br><br>
 <div id="group_list" class="features">
 </div>
@@ -481,9 +482,8 @@ function initMap() {
 	 	var locations = [];
  	
 		<c:forEach items = "${requestScope.event_schedule_list}" var = "list">
-			locations.push({ lat: ${list.latitude}, lng: ${list.longitude}, region: "${list.region}", name: "${list.name}", event_schedule_id: ${list.event_schedule_id}  });
+			locations.push({ lat: ${list.latitude}, lng: ${list.longitude}, region: "${list.region}", name: "${list.name}", event_schedule_id: ${list.event_schedule_id}, content: "${list.content}", start_date: "${list.start_date}" });
 		</c:forEach>
-	 		///////////라벨링은 schedule_id 받아서 넣고 window 내용에 name 넣기
 
 		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		
@@ -516,7 +516,7 @@ function initMap() {
 		markers.map( function(marker, i) {
 			
 			var infowindow = new google.maps.InfoWindow({
-		          content:  '<img src = "resources/images/clustering/samplepng/' + i + '.png">' +'<br>' +  locations[i].name,
+		          content: locations[i].name + '<br>場所: ' + locations[i].region + '<br>内容: '+ locations[i].content + '<div><img src = "resources/images/clustering/samplepng/' + i + '.png">',
 		          maxWidth: 250
 		        });
 			  marker.addListener('click', function() {

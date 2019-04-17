@@ -116,7 +116,7 @@ border: 0;
 
 		<!-- Header 메인 바 -->
 			<header id="header1">
-				<h1><a href="main">2조</a></h1>
+				<h1><a class="navbar-brand font-weight-bolder mr-3" href="main"><img src="resources/Main/assets/css/images/photoSquareLogo_done.png"></a></h1>
 				<nav>
 					<ul>
 						<li><a href="#">회원가입</a></li>

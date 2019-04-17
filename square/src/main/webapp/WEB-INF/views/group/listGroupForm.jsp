@@ -13,7 +13,77 @@
 		<!-- 추가 -->
 		<link rel='stylesheet' href='http://www.davilious.com/codepen/font-awesome/css/font-awesome.css'>
 
-<style>
+<style type="text/css">
+$color1: #f4f4f4;
+$color2: #3197EE;
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.radio {
+  margin: 0.5rem;
+  input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    + .radio-label {
+      &:before {
+        content: '';
+        background: $color1;
+        border-radius: 100%;
+        border: 1px solid darken($color1, 25%);
+        display: inline-block;
+        width: 1.4em;
+        height: 1.4em;
+        position: relative;
+        top: -0.2em;
+        margin-right: 1em; 
+        vertical-align: top;
+        cursor: pointer;
+        text-align: center;
+        transition: all 250ms ease;
+      }
+    }
+    &:checked {
+      + .radio-label {
+        &:before {
+          background-color: $color2;
+          box-shadow: inset 0 0 0 4px $color1;
+        }
+      }
+    }
+    &:focus {
+      + .radio-label {
+        &:before {
+          outline: none;
+          border-color: $color2;
+        }
+      }
+    }
+    &:disabled {
+      + .radio-label {
+        &:before {
+          box-shadow: inset 0 0 0 4px $color1;
+          border-color: darken($color1, 25%);
+          background: darken($color1, 25%);
+        }
+      }
+    }
+    + .radio-label {
+      &:empty {
+        &:before {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+</style>
+
+<!-- <style>
 input::placeholder {
   color: white;
  
@@ -136,7 +206,8 @@ input::placeholder {
   
   color: white;
 }
-</style>
+</style> -->
+
 	</head>
 	<body class="is-preload">
 
@@ -292,6 +363,25 @@ $('input[type=search]').on({
 					success: function(group_list)
 					{
 						var buff = "";
+						
+						buff += "<div class='gallery' align='right'>";
+						buff += "<article class='from-left'>";
+						
+						buff += "</article>";
+						buff += "<article class='from-right'>";
+						buff += "<div class='radio'>";
+						buff += "<input id='radio-1' name='radio' type='radio' value='1' checked>";
+						buff += "<label for='radio-1' class='radio-label'>1</label>";
+						buff += "<input id='radio-2' name='radio' type='radio' value='2'>";
+						buff += "<label for='radio-2' class='radio-label'>2</label>";
+						buff += "<input id='radio-3' name='radio' type='radio' value='3'>";
+						buff += "<label for='radio-3' class='radio-label'>3</label>";
+						buff += "<input id='radio-4' name='radio' type='radio' value='4'>";
+						buff += "<label for='radio-4' class='radio-label'>4</label>";
+						buff += "</div>";
+						buff += "</article>";
+						buff += "</div>";
+						
 						buff += "<div class='gallery'>";
 						
 						for(var i = 0; i < group_list.length; i++)
