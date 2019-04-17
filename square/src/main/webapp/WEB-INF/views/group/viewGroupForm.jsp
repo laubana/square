@@ -247,17 +247,18 @@
 										</div>
 											<ul class="comment-actions">
 												<li class="name"><a href="viewUserForm?user_id=${element.user.user_id}">${element.user.name}</a></li>
+												<li class="name" id="translation_button${element.comment.group_comment_id}"><a href="javascript:getGroupCommentTranslation(${element.comment.group_comment_id})">翻訳</a></li>
 												<c:if test="${element.user.user_id == sessionScope.user_id}">
 													<li class="name">Edit</li>
 													<li>Delete</li>
-												</c:if>
-												<li class="name">
+												</c:if><br>
+												<li>
 													<select id="translation_language${element.comment.group_comment_id}">
 														  <option value="en">英語</option>
 														  <option value="ko">韓国語</option>
 													</select>
 												</li>
-												<li class="name" id="translation_button${element.comment.group_comment_id}"><a href="javascript:getGroupCommentTranslation(${element.comment.group_comment_id})">翻訳</a></li>
+								
 											</ul>
 									</div>
 									<br><br><br>
@@ -309,7 +310,7 @@
 									<h3>イベント</h3>
 									<c:if test="${sessionScope.user_id != null}">
 						<c:if test="${group_attendance != null}">
-										<p><a href="createEventForm" class="button">追加</a></p>
+										<p align="right"><a href="createEventForm" class="button">追加</a></p>
 						</c:if>
 					</c:if>
 									<div class="features">
