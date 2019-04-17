@@ -301,7 +301,11 @@
 							<section id="five">
 								<div class="container">
 									<h3>イベント</h3>
+									<c:if test="${sessionScope.user_id != null}">
+						<c:if test="${group_attendance != null}">
 										<p><a href="createEventForm" class="button">追加</a></p>
+						</c:if>
+					</c:if>
 									<div class="features">
 									<c:forEach var="event" items="${event_list}">
 									<article>

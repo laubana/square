@@ -208,7 +208,7 @@
 									場所: ${requestScope.event_place}
 								<div align="right"><footer>
 										<a class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
-										<a class="icon fa-comment">128</a>&nbsp;&nbsp;				
+										&nbsp;&nbsp;				
 								</footer></div>
 							</article>
 							</section>
@@ -239,7 +239,8 @@
 					<!-- Three -->
 							<section id="three">
 								<div class="container">
-									<h3>コメント</h3>
+									<h3 style="display: inline;">コメント</h3>
+						<a class="icon fa-comment" style="display: inline;">${event_comment_list.size()}</a>
 						<div class="comments">
 						<c:forEach var="event_comment" items="${event_comment_list}">
 						<div class="comment-wrap">
