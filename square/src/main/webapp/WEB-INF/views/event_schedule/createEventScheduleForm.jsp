@@ -322,34 +322,29 @@ $("#imgInp5").change(function() {
 </script>
 	
 	
-	
-	<!-- 맵 띄우기 위한 스크립트 -->
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP">
-	</script>
+
+<!-- 맵 띄우기 위한 스크립트 -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP">
+</script>
 <script>
 	var map;
 	var geocoder;
 
 	function initMap() {
-		console.log( 'test1' );
-
 	    var latlng = new google.maps.LatLng(35.6766907, 139.77003390000004);
 	    var mapOptions = {
 	    	      zoom: 15,
 	    	      center: latlng
 	    	    }
 		map = new google.maps.Map(document.getElementById('map'), mapOptions);
-	    console.log( 'test2' );
 		geocoder = new google.maps.Geocoder();
 	 	var address = '東京　京橋駅';
 		geocoder.geocode(
 		   		{ 'address': address }
 		   		, function(results, status) {
 					if (status == 'OK') {
-						console.log( 'test3' );
 						latlng = results[0].geometry.location;
 						map.setCenter(latlng);
-						console.log( 'test4' );	    
 						var marker = new google.maps.Marker({ 
 							map: map,
 							position: latlng
@@ -375,19 +370,6 @@ $("#imgInp5").change(function() {
 						map: map,
 						position: results[0].geometry.location
 						});
-					///결과 값들 중에 지역 이름 찾는 함수
-					for( m = 0; m < results[0].address_components.length; m = m +1 ){ ////3번 시작
-						if( results[0].address_components[m].types[0] == "administrative_area_level_2" )
-							{ 	
-								console.log('2: '+ results[0].address_components[m].types[0]);								
-								str1 = String( results[0].address_components[m].long_name );
-								result_area = str1;
-								map.setZoom(14);
-								return result_area;
-							}
-						
-					}//3번 끝
-					console.log(result_area + 'return check');								
 					map.setZoom(15);
 					return result_area;
 				} else {

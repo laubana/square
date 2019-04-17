@@ -56,7 +56,7 @@
     
     <div class="w3-sidebar w3-bar-block w3-animate-left" style="display:none;z-index:5" id="main">
 
- 		  <a href="#" class="w3-bar-item w3-button">쿠우쿠우 배불러</a>
+ 		  <a href="?hashtag=Java" class="w3-bar-item w3-button">쿠우쿠우 배불러</a>
 		  <a href="#" class="w3-bar-item w3-button">그거 알아 그거?</a>
 		  <a href="#" class="w3-bar-item w3-button">6월 정처기실기</a>
 		  <a href="#" class="w3-bar-item w3-button">집밥 먹고싶다</a>
