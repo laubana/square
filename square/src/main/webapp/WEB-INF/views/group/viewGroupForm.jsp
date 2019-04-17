@@ -282,7 +282,7 @@
 								<div class="container">
 									<h3>アルバム</h3>
 						
-									<div class="features">
+									<div class="features" align="center">
 										<article class="col-6 col-12-xsmall work-item">
 											<c:forEach var="element" items="${image_list}">
 												<a href="resources/image/event_schedule_image/${element.image.filename}" class="image thumb"><img src="resources/image/event_schedule_image/${element.image.filename}" alt="" /></a>
