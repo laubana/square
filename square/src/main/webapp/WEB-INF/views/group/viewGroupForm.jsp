@@ -459,7 +459,7 @@ function initMap() {
 	 	var locations = [];
  	
 		<c:forEach items = "${requestScope.event_schedule_list}" var = "list">
-			locations.push( {lat: ${list.latitude}, lng: ${list.longitude}, region: "${list.region}"} );
+			locations.push({ lat: ${list.latitude}, lng: ${list.longitude}, region: "${list.region}", name: "${list.name}", event_schedule_id: ${list.event_schedule_id}, content: "${list.content}", start_date: "${list.start_date}" });
 		</c:forEach>
 	 		
 
@@ -469,7 +469,7 @@ function initMap() {
 		var markers = locations.map( function(location, i) {
 			return new google.maps.Marker({	
 					position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
-					label: locations[i].name
+/* 					label: locations[i].name 			*/
 				});
 			});		
 		
@@ -494,7 +494,7 @@ function initMap() {
 		markers.map( function(marker, i) {
 			
 			var infowindow = new google.maps.InfoWindow({
-		          content:  '<img src = "resources/images/clustering/samplepng/' + i + '.png">' +'<br>' +  locations[i].region,
+		          content: locations[i].name + '<br>場所: ' + locations[i].region + '<br>内容: '+ locations[i].content,
 		          maxWidth: 250
 		        });
 			  marker.addListener('click', function() {

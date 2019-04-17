@@ -480,9 +480,8 @@ function initMap() {
 	 	var locations = [];
  	
 		<c:forEach items = "${requestScope.event_schedule_list}" var = "list">
-			locations.push({ lat: ${list.latitude}, lng: ${list.longitude}, region: "${list.region}", name: "${list.name}", event_schedule_id: ${list.event_schedule_id}  });
+			locations.push({ lat: ${list.latitude}, lng: ${list.longitude}, region: "${list.region}", name: "${list.name}", event_schedule_id: ${list.event_schedule_id}, content: "${list.content}", start_date: "${list.start_date}" });
 		</c:forEach>
-	 		///////////라벨링은 schedule_id 받아서 넣고 window 내용에 name 넣기
 
 		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		
@@ -515,7 +514,7 @@ function initMap() {
 		markers.map( function(marker, i) {
 			
 			var infowindow = new google.maps.InfoWindow({
-		          content:  '<img src = "resources/images/clustering/samplepng/' + i + '.png">' +'<br>' +  locations[i].name,
+		          content: locations[i].name + '<br>場所: ' + locations[i].region + '<br>内容: '+ locations[i].content,
 		          maxWidth: 250
 		        });
 			  marker.addListener('click', function() {
