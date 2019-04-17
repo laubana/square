@@ -90,14 +90,15 @@ public class GroupAction {
 		yh_group_attendanceDAO.deleteGroupAttendanceByGroupIdUserId(user_id, group_id);
 	}
 	@ResponseBody
-	@RequestMapping(value = "getTranslation", method = RequestMethod.POST)
+	@RequestMapping(value = "getGroupCommentTranslation", method = RequestMethod.POST)
 	public String getTranslation(Model request, @RequestBody HashMap<String, Object> map)
 	{
 		int group_comment_id = (int)map.get("group_comment_id");	
+		String language = (String)map.get("language");
 		
 		GroupComment group_comment = yh_group_commentDAO.selectGroupCommentByGroupCommentId(group_comment_id); 
 		
-		String result = YHGoogleTranslationUtil.getTranslation(group_comment.getContent(), "ja", "en");
+		String result = YHGoogleTranslationUtil.getTranslation(group_comment.getContent(), "ja", language);
 		
 		JSONObject jsonObject = new JSONObject(); 
 		
@@ -110,7 +111,7 @@ public class GroupAction {
 		return jsonObject.toString();
 	}
 	@ResponseBody
-	@RequestMapping(value = "resetComment", method = RequestMethod.POST)
+	@RequestMapping(value = "resetGroupComment", method = RequestMethod.POST)
 	public String resetComment(Model request, @RequestBody HashMap<String, Object> map)
 	{
 		int group_comment_id = (int)map.get("group_comment_id");	

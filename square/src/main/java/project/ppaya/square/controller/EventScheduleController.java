@@ -46,6 +46,8 @@ public class EventScheduleController
 	@Autowired
 	YHEventAttendanceDAO yh_event_attendanceDAO;
 	@Autowired
+	YHEventScheduleCommentTagDAO yh_event_schedule_comment_tagDAO;
+	@Autowired
 	YHGroupAttendanceDAO yh_group_attendanceDAO;
 	@Autowired
 	YHEventScheduleImageDAO yh_event_schedule_imageDAO;
@@ -174,12 +176,20 @@ public class EventScheduleController
 		request.addAttribute("user_list", user_list);
 		
 		ArrayList<EventScheduleComment> event_schedule_comment_list = yh_event_schedule_commentDAO.selectEventScheduleCommentByEventScheduleId(event_schedule_id);
+		
+		ArrayList<HashMap<String, Object>> comment_list = new ArrayList<>();
+		
 		for(int i = 0; i < event_schedule_comment_list.size(); i++)
 		{
-			event_schedule_comment_list.get(i).setUser(yh_userDAO.selectUserByUserId(event_schedule_comment_list.get(i).getUser_id()));
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("comment", event_schedule_comment_list.get(i));
+			map.put("user", yh_userDAO.selectUserByUserId(event_schedule_comment_list.get(i).getUser_id()));
+			map.put("tag_list", yh_event_schedule_comment_tagDAO.getTagByEventScheduleCommentId(event_schedule_comment_list.get(i).getEvent_schedule_comment_id()));
+			
+			comment_list.add(map);
 		}
-		//EventComment List 전송
-		request.addAttribute("event_schedule_comment_list", event_schedule_comment_list);
+		//EventScheduleComment List 전송
+		request.addAttribute("comment_list", comment_list);
 		
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleId(event_schedule_id);
 		//Image List 전송

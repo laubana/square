@@ -1,6 +1,7 @@
 package project.ppaya.square.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -33,6 +34,8 @@ public class EventController
 	YHEventDAO yh_eventDAO;
 	@Autowired
 	YHEventCommentDAO yh_event_commentDAO;
+	@Autowired
+	YHEventCommentTagDAO yh_event_comment_tagDAO;
 	@Autowired
 	YHEventScheduleDAO yh_event_scheduleDAO;
 	@Autowired
@@ -168,12 +171,20 @@ public class EventController
 		request.addAttribute("video_list", event_schedule_video_list);
 		
 		ArrayList<EventComment> event_comment_list = yh_event_commentDAO.selectEventCommentByEventId(event_id);
+		
+		ArrayList<HashMap<String, Object>> comment_list = new ArrayList<>();
+		
 		for(int i = 0; i < event_comment_list.size(); i++)
 		{
-			event_comment_list.get(i).setUser(yh_userDAO.selectUserByUserId(event_comment_list.get(i).getUser_id()));
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("comment", event_comment_list.get(i));
+			map.put("user", yh_userDAO.selectUserByUserId(event_comment_list.get(i).getUser_id()));
+			map.put("tag_list", yh_event_comment_tagDAO.getTagByEventCommentId(event_comment_list.get(i).getEvent_comment_id()));
+			
+			comment_list.add(map);
 		}
 		//EventComment List 전송
-		request.addAttribute("event_comment_list", event_comment_list);
+		request.addAttribute("comment_list", comment_list);
 		
 		//event_place 임시 전송
 		String place = "東京　京橋駅";

@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="project.ppaya.square.vo.GroupComment"%>
@@ -79,14 +80,14 @@
 					error: function(error){console.log(error);}
 				});
 			}
-			function getTranslation(group_comment_id)
+			function getGroupCommentTranslation(group_comment_id)
 			{
 				var map = {};
 				map["group_comment_id"] = group_comment_id;
-				console.log(map);
+				map["language"] = document.getElementById("translation_language" + group_comment_id).value;
 				
 				$.ajax({
-					url: "getTranslation",
+					url: "getGroupCommentTranslation",
 					type: "POST",
 					data: JSON.stringify(map),
 					dataType: "JSON",
@@ -96,19 +97,18 @@
 						var result = decodeURIComponent(jsonObject.result.replace(/\+/g, " "));
 						
 						document.getElementById("comment" + group_comment_id).innerHTML = result;
-						document.getElementById("translation_button" + group_comment_id).innerHTML = '<a href="javascript:resetComment(' + group_comment_id + ')">リセット</a>';
+						document.getElementById("translation_button" + group_comment_id).innerHTML = '<a href="javascript:resetGroupComment(' + group_comment_id + ')">リセット</a>';
 					},
 					error: function(error){console.log(error);}
 				});
 			}
-			function resetComment(group_comment_id)
+			function resetGroupComment(group_comment_id)
 			{
 				var map = {};
 				map["group_comment_id"] = group_comment_id;
-				console.log(map);
 				
 				$.ajax({
-					url: "resetComment",
+					url: "resetGroupComment",
 					type: "POST",
 					data: JSON.stringify(map),
 					dataType: "JSON",
@@ -118,7 +118,7 @@
 						var result = decodeURIComponent(jsonObject.result.replace(/\+/g, " "));
 						
 						document.getElementById("comment" + group_comment_id).innerHTML = result;
-						document.getElementById("translation_button" + group_comment_id).innerHTML = '<a href="javascript:getTranslation(' + group_comment_id +')">翻訳</a>';
+						document.getElementById("translation_button" + group_comment_id).innerHTML = '<a href="javascript:getGroupCommentTranslation(' + group_comment_id +')">翻訳</a>';
 					},
 					error: function(error){console.log(error);}
 				});
@@ -232,32 +232,38 @@
 								<div class="container">
 									<h3>コメント</h3>
 						<div class="comments">
-						<c:forEach var="group_comment" items="${group_comment_list}">
+						<c:forEach var="element" items="${comment_list}">
 						<div class="comment-wrap">
 							<div>
-							<a href="viewUserForm?user_id=${group_comment.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${group_comment.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
+							<a href="viewUserForm?user_id=${element.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${element.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 							</div>
 							<div class="comment-block">
-								<p class="comment-text" id="comment${group_comment.group_comment_id}">${group_comment.content}</p>
+								<p class="comment-text" id="comment${element.comment.group_comment_id}">${element.comment.content}</p>
 									<div class="bottom-comment">
 										<div class="comment-date">
 										
-										<%= (new SimpleDateFormat("yyyy年 MM月 dd日 HH:mm:ss")).format(new Date(((GroupComment)pageContext.getAttribute("group_comment")).getInput_date()))%>
+										<%= (new SimpleDateFormat("yyyy年 MM月 dd日 HH:mm:ss")).format(new Date(((GroupComment)(((HashMap)pageContext.getAttribute("element")).get("comment"))).getInput_date()))%>
 										
 										</div>
 											<ul class="comment-actions">
-												<li class="name"><a href="viewUserForm?user_id=${group_comment.user.user_id}">${group_comment.user.name}</a></li>
-												<c:if test="${group_comment.user.user_id == sessionScope.user_id}">
+												<li class="name"><a href="viewUserForm?user_id=${element.user.user_id}">${element.user.name}</a></li>
+												<c:if test="${element.user.user_id == sessionScope.user_id}">
 													<li class="name">Edit</li>
 													<li>Delete</li>
 												</c:if>
-												<li class="name" id="translation_button${group_comment.group_comment_id}"><a href="javascript:getTranslation(${group_comment.group_comment_id})">翻訳</a></li>
+												<li class="name">
+													<select id="translation_language${element.comment.group_comment_id}">
+														  <option value="en">英語</option>
+														  <option value="ko">韓国語</option>
+													</select>
+												</li>
+												<li class="name" id="translation_button${element.comment.group_comment_id}"><a href="javascript:getGroupCommentTranslation(${element.comment.group_comment_id})">翻訳</a></li>
 											</ul>
 									</div>
 									<br><br><br>
 									<div>
-									<c:forEach var="group_comment_tag" items="${group_comment.group_comment_tag_list}">
-										<a href="viewMindMapForm?hashtag=${group_comment_tag}">#${group_comment_tag}</a>
+									<c:forEach var="tag" items="${element.tag_list}">
+										<a href="viewMindMapForm?hashtag=${tag}">#${tag}</a>
 									</c:forEach>
 									</div>		
 							</div>

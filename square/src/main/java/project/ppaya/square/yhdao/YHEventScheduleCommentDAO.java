@@ -15,6 +15,20 @@ public class YHEventScheduleCommentDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public EventScheduleComment selectEventScheduleCommentByEventScheduleCommentId(int event_schedule_comment_id)
+	{
+		EventScheduleComment event_schedule_comment = null;
+		
+		YHEventScheduleCommentMapper mapper = sqlSession.getMapper(YHEventScheduleCommentMapper.class);
+		
+		try
+		{
+			event_schedule_comment = mapper.selectEventScheduleCommentByEventScheduleCommentId(event_schedule_comment_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_comment;
+	}
 	public ArrayList<EventScheduleComment> selectEventScheduleCommentByEventScheduleIdList(ArrayList<Integer> event_schedule_id_list)
 	{
 		ArrayList<EventScheduleComment> event_schedule_comment_list = null;

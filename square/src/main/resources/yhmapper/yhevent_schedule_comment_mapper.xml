@@ -4,6 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleCommentMapper">
+<select id="selectEventScheduleCommentByEventScheduleCommentId" parameterType="int" resultType="EventScheduleComment">
+SELECT
+	*
+FROM
+	TABLE_ESCO
+WHERE
+	EVENT_SCHEDULE_COMMENT_ID = #{event_schedule_comment_id}
+</select>
 <select id="selectEventScheduleCommentByEventScheduleId" parameterType="int" resultType="EventScheduleComment">
 SELECT
 	*

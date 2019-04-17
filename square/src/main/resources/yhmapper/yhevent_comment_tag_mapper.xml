@@ -4,6 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.ppaya.square.yhmapper.YHEventCommentTagMapper">
+<select id="getTagByEventCommentId" parameterType="int" resultType="string">
+SELECT
+	TAG
+FROM
+	TABLE_ECOT
+WHERE
+	EVENT_COMMENT_ID = #{event_comment_id}
+</select>
 <insert id="insertEventCommentTag" parameterType="map">
 INSERT INTO TABLE_ECOT
 (

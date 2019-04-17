@@ -1,5 +1,6 @@
 package project.ppaya.square.yhdao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,6 +16,20 @@ public class YHEventScheduleCommentTagDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<String> getTagByEventScheduleCommentId(int event_schedule_comment_id)
+	{
+		ArrayList<String> tag_list = null;
+		
+		YHEventScheduleCommentTagMapper mapper = sqlSession.getMapper(YHEventScheduleCommentTagMapper.class);
+		
+		try
+		{
+			tag_list = mapper.getTagByEventScheduleCommentId(event_schedule_comment_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return tag_list;
+	}
 	public int insertEventScheduleCommentTag(int event_schedule_comment_id, String tag)
 	{
 		int result = 0;

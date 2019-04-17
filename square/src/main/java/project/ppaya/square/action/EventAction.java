@@ -1,8 +1,10 @@
 package project.ppaya.square.action;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class EventAction {
 	YHUserDAO yh_userDAO;
 	@Autowired
 	YHEventDAO yh_eventDAO;
+	@Autowired
+	YHEventCommentDAO yh_event_commentDAO;
 	@Autowired
 	YHEventScheduleDAO yh_event_scheduleDAO;
 	@Autowired
@@ -61,6 +65,47 @@ public class EventAction {
 	@Autowired
 	SH_DAO_Group sh_gdao;
 	
+	@ResponseBody
+	@RequestMapping(value = "getEventCommentTranslation", method = RequestMethod.POST)
+	public String getEventCommentTranslation(Model request, @RequestBody HashMap<String, Object> map)
+	{
+		int event_comment_id = (int)map.get("event_comment_id");	
+		String language = (String)map.get("language");
+		
+		EventComment event_comment = yh_event_commentDAO.selectEventCommentByEventCommentId(event_comment_id); 
+		
+		String result = YHGoogleTranslationUtil.getTranslation(event_comment.getContent(), "ja", language);
+		
+		JSONObject jsonObject = new JSONObject(); 
+		
+		try
+		{
+			jsonObject.put("result", URLEncoder.encode(result, "utf-8"));
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return jsonObject.toString();
+	}
+	@ResponseBody
+	@RequestMapping(value = "resetEventComment", method = RequestMethod.POST)
+	public String resetEventComment(Model request, @RequestBody HashMap<String, Object> map)
+	{
+		int event_comment_id = (int)map.get("event_comment_id");	
+		
+		EventComment event_comment = yh_event_commentDAO.selectEventCommentByEventCommentId(event_comment_id);
+		
+		String result = event_comment.getContent();
+		
+		JSONObject jsonObject = new JSONObject(); 
+		
+		try
+		{
+			jsonObject.put("result", URLEncoder.encode(result, "utf-8"));
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return jsonObject.toString();
+	}
 	@ResponseBody
 	@RequestMapping(value = "joinEventAction", method = RequestMethod.POST)
 	public void joinEventAction(Model request, @RequestBody HashMap<String, Object> map)

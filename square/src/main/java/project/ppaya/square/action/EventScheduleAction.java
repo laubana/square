@@ -1,9 +1,11 @@
 package project.ppaya.square.action;
 
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class EventScheduleAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(EventScheduleAction.class);
 	
+	@Autowired
+	YHEventScheduleCommentDAO yh_event_schedule_commentDAO;
 	@Autowired
 	YHEventScheduleUserScheduleDAO yh_event_schedule_user_scheduleDAO;
 	@Autowired
@@ -63,16 +67,58 @@ public class EventScheduleAction {
 	SH_DAO_Group sh_gdao;
 	
 	@ResponseBody
-	@RequestMapping(value = "joinEventScheduleAction", method = RequestMethod.POST)
-	public void joinEventScheduleAction(Model request, @RequestBody HashMap<String, Object> map)
+	@RequestMapping(value = "getEventScheduleCommentTranslation", method = RequestMethod.POST)
+	public String getEventScheduleCommentTranslation(Model request, @RequestBody HashMap<String, Object> map)
 	{
-		String user_id = (String)map.get("user_id");
-		int event_schedule_id = (int)map.get("event_schedule_id");
-		ArrayList<HashMap<String, String>> google_user_schedule_list = (ArrayList<HashMap<String, String>>)map.get("google_user_schedule_list");
+		int event_schedule_comment_id = (int)map.get("event_schedule_comment_id");	
+		String language = (String)map.get("language");
+		
+		EventScheduleComment event_schedule_comment = yh_event_schedule_commentDAO.selectEventScheduleCommentByEventScheduleCommentId(event_schedule_comment_id); 
+		
+		String result = YHGoogleTranslationUtil.getTranslation(event_schedule_comment.getContent(), "ja", language);
+		
+		JSONObject jsonObject = new JSONObject(); 
+		
+		try
+		{
+			jsonObject.put("result", URLEncoder.encode(result, "utf-8"));
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return jsonObject.toString();
+	}
+	@ResponseBody
+	@RequestMapping(value = "resetEventScheduleComment", method = RequestMethod.POST)
+	public String resetEventScheduleComment(Model request, @RequestBody HashMap<String, Object> map)
+	{
+		int event_schedule_comment_id = (int)map.get("event_schedule_comment_id");	
+		
+		EventScheduleComment event_schedule_comment = yh_event_schedule_commentDAO.selectEventScheduleCommentByEventScheduleCommentId(event_schedule_comment_id);
+		
+		String result = event_schedule_comment.getContent();
+		
+		JSONObject jsonObject = new JSONObject(); 
+		
+		try
+		{
+			jsonObject.put("result", URLEncoder.encode(result, "utf-8"));
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return jsonObject.toString();
+	}
+	@ResponseBody
+	@RequestMapping(value = "joinEventScheduleAction", method = RequestMethod.POST)
+	public void joinEventScheduleAction(Model request, @RequestBody HashMap<String, Object> test_map)
+	{
+		String user_id = (String)test_map.get("user_id");
+		int event_schedule_id = (int)test_map.get("event_schedule_id");
+		ArrayList<HashMap<String, String>> google_user_schedule_list = (ArrayList<HashMap<String, String>>)test_map.get("google_user_schedule_list");
+		
+		System.err.println(user_id + ", " + event_schedule_id);
 		
 		yh_event_schedule_user_scheduleDAO.deleteEventScheduleUserScheduleByUserIdEventScheduleId(user_id, event_schedule_id);
 		
-		//String user_id, int event_schedule_id, long start_date, long end_date, int typeof
 		for(int i = 0; i < google_user_schedule_list.size(); i++)
 		{
 			

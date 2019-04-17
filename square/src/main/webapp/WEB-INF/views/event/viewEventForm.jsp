@@ -1,3 +1,7 @@
+<%@page import="project.ppaya.square.vo.EventComment"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -168,7 +172,11 @@
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">이벤트 뷰</a></li>
+						<li><a href="#one" class="active">イベント情報</a></li>
+						<li><a href="#two">メンバー</a></li>
+						<li><a href="#three">コメント</a></li>
+						<li><a href="#four">アルバム</a></li>
+						<li><a href="#five">イベント・スケジュール</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -240,29 +248,48 @@
 							<section id="three">
 								<div class="container">
 									<h3 style="display: inline;">コメント</h3>
-						<a class="icon fa-comment" style="display: inline;">${event_comment_list.size()}</a>
+						<p class="icon fa-comment" style="display: inline;">${comment_list.size()}</p>
 						<div class="comments">
-						<c:forEach var="event_comment" items="${event_comment_list}">
+						<c:forEach var="element" items="${comment_list}">
 						<div class="comment-wrap">
 							<div>
-							<a href="viewUserForm?user_id=${event_comment.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${event_comment.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
+							<a href="viewUserForm?user_id=${element.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${element.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 							</div>
 							<div class="comment-block">
-								<p class="comment-text">${event_comment.content}</p>
+								<p class="comment-text" id="comment${element.comment.event_comment_id}">${element.comment.content}</p>
 									<div class="bottom-comment">
-										<div class="comment-date">${event_comment.input_date}</div>
+										<div class="comment-date">
+										
+										<%= (new SimpleDateFormat("yyyy年 MM月 dd日 HH:mm:ss")).format(new Date(((EventComment)(((HashMap)pageContext.getAttribute("element")).get("comment"))).getInput_date()))%>
+										
+										</div>
 											<ul class="comment-actions">
-												<li class="name"><a href="viewUserForm?user_id=${event_comment.user.user_id}">${event_comment.user.name}</a></li>
-												<c:if test="${event_comment.user.user_id == sessionScope.user_id}">
-													<li class="name">Edit</li>
-													<li>Delete</li>
-												</c:if>
+												<li class="name"><a href="viewUserForm?user_id=${element.user.user_id}">${element.user.name}</a></li>
+											<c:if test="${element.user.user_id == sessionScope.user_id}">
+												<li class="name">Edit</li>
+												<li>Delete</li>
+											</c:if>
+												<li class="name">
+													<select id="translation_language${element.comment.event_comment_id}">
+														  <option value="en">英語</option>
+														  <option value="ko">韓国語</option>
+													</select>
+												</li>
+												<li class="name" id="translation_button${element.comment.event_comment_id}"><a href="javascript:getEventCommentTranslation(${element.comment.event_comment_id})">翻訳</a></li>
+												
 											</ul>
 									</div>
+									<br><br><br>
+									<div>
+									<c:forEach var="tag" items="${element.tag_list}">
+										<a href="viewMindMapForm?hashtag=${tag}">#${tag}</a>
+									</c:forEach>
+									</div>		
 							</div>
 						</div>
 						</c:forEach>
-						<br>
+						<textarea class="comment-block"></textarea><br>
+						<div align="right"><input type="button" value="作成"></div><br><br>
 						<a href="listEventCommentForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">コメントページへ</a>
 						
 						</div>		
@@ -272,7 +299,7 @@
 					<!-- Four -->
 							<section id="four">
 								<div class="container">
-									<h3>이벤트 사진</h3>
+									<h3>アルバム</h3>
 						
 									<div class="features">
 										<article class="col-6 col-12-xsmall work-item">
@@ -289,6 +316,7 @@
 											</video>
 											</c:if>
 											<br><br>
+											
 											<a href="listEventAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">이벤트 사진 페이지 이동</a>
 										</article>
 									</div>
@@ -297,7 +325,7 @@
 							
 							<section id="five">
 								<div class="container">
-									<h3>이벤트 스케줄 페이지</h3>
+									<h3>イベント・スケジュール</h3>
 									<div class="features">
 									<c:forEach var="event_schedule" items="${event_schedule_list}">
 									<article>
@@ -310,7 +338,7 @@
 										</c:forEach>
 											</div>
 											
-										<a href="listEventScheduleForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">이벤트 스케줄 페이지 이동</a>
+										<a href="listEventScheduleForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">イベント・スケジュールへ</a>
 									</div>
 							</section>
 							<section id="six">
@@ -365,7 +393,51 @@
 			<script src="resources/GroupMain/assets/js/util.js"></script>
 			<script src="resources/GroupMain/assets/js/main.js"></script>
 	</body>
-
+<script>
+function getEventCommentTranslation(event_comment_id)
+{
+	var map = {};
+	map["event_comment_id"] = event_comment_id;
+	map["language"] = document.getElementById("translation_language" + event_comment_id).value; 
+	
+	$.ajax({
+		url: "getEventCommentTranslation",
+		type: "POST",
+		data: JSON.stringify(map),
+		dataType: "JSON",
+		contentType: "application/json; charset=UTF-8",
+		success: function(jsonObject)
+		{
+			var result = decodeURIComponent(jsonObject.result.replace(/\+/g, " "));
+			
+			document.getElementById("comment" + event_comment_id).innerHTML = result;
+			document.getElementById("translation_button" + event_comment_id).innerHTML = '<a href="javascript:resetEventComment(' + event_comment_id + ')">リセット</a>';
+		},
+		error: function(error){console.log(error);}
+	});
+}
+function resetEventComment(event_comment_id)
+{
+	var map = {};
+	map["event_comment_id"] = event_comment_id;
+	
+	$.ajax({
+		url: "resetEventComment",
+		type: "POST",
+		data: JSON.stringify(map),
+		dataType: "JSON",
+		contentType: "application/json; charset=UTF-8",
+		success: function(jsonObject)
+		{
+			var result = decodeURIComponent(jsonObject.result.replace(/\+/g, " "));
+			
+			document.getElementById("comment" + event_comment_id).innerHTML = result;
+			document.getElementById("translation_button" + event_comment_id).innerHTML = '<a href="javascript:getEventCommentTranslation(' + event_comment_id +')">翻訳</a>';
+		},
+		error: function(error){console.log(error);}
+	});
+}
+</script>
 <!-- 맵 띄우는 스크립트 -->
 
 <!-- 東京　京橋駅 : { 35.6766907 , 139.77003390000004 } -->

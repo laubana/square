@@ -1,3 +1,7 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="project.ppaya.square.vo.EventScheduleComment"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -215,10 +219,10 @@
         		google_user_schedule_list.push({start_date: response.result.items[i].start.dateTime,
         			end_date: response.result.items[i].end.dateTime});
         	}
-         
+         	flag = 1;
         });
       }
-
+	var flag = 0;
 	var google_user_schedule_list = [];
 	function joinEventScheduleAction()
 	{
@@ -229,10 +233,11 @@
 			map["user_id"] = "${sessionScope.user_id}";
 			map["event_schedule_id"] = ${event_schedule.event_schedule_id};
 			map["google_user_schedule_list"] = [];
+			
 			listUpcomingEvents();
 			var interval = setInterval(function()
 					{
-				if(google_user_schedule_list.length != 0)
+				if(flag != 0)
 						{
 							for(var i = 0; i < google_user_schedule_list.length; i++)
 							{
@@ -268,7 +273,7 @@
 				listUpcomingEvents();
 				var interval = setInterval(function()
 						{
-					if(google_user_schedule_list.length != 0)
+					if(flag != 0)
 							{
 								for(var i = 0; i < google_user_schedule_list.length; i++)
 								{
@@ -443,23 +448,41 @@
 									<h3>코멘트</h3>
 						<div class="comments">
 						
-						<c:forEach var="event_schedule_comment" items="${event_schedule_comment_list}">
+						<c:forEach var="element" items="${comment_list}">
 						<div class="comment-wrap">
 							<div>
-							<a href="viewUserForm?user_id=${event_schedule_comment.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${event_schedule_comment.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
+							<a href="viewUserForm?user_id=${element.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${element.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 							</div>
 							<div class="comment-block">
-								<p class="comment-text">${event_schedule_comment.content}</p>
+								<p class="comment-text" id="comment${element.comment.event_schedule_comment_id}">${element.comment.content}</p>
 									<div class="bottom-comment">
-										<div class="comment-date">${event_schedule_comment.input_date}</div>
+										<div class="comment-date">
+										
+										<%= (new SimpleDateFormat("yyyy年 MM月 dd日 HH:mm:ss")).format(new Date(((EventScheduleComment)(((HashMap)pageContext.getAttribute("element")).get("comment"))).getInput_date()))%>
+										
+										</div>
 											<ul class="comment-actions">
-												<li class="name"><a href="viewUserForm?user_id=${event_schedule_comment.user.user_id}">${event_schedule_comment.user.name}</a></li>
-												<c:if test="${event_schedule_comment.user.user_id == sessionScope.user_id}">
-													<li class="name">Edit</li>
-													<li>Delete</li>
-												</c:if>
+												<li class="name"><a href="viewUserForm?user_id=${element.user.user_id}">${element.user.name}</a></li>
+											<c:if test="${element.user.user_id == sessionScope.user_id}">
+												<li class="name">Edit</li>
+												<li>Delete</li>
+											</c:if>
+												<li class="name">
+													<select id="translation_language${element.comment.event_schedule_comment_id}">
+														  <option value="en">英語</option>
+														  <option value="ko">韓国語</option>
+													</select>
+												</li>
+												<li class="name" id="translation_button${element.comment.event_schedule_comment_id}"><a href="javascript:getEventScheduleCommentTranslation(${element.comment.event_schedule_comment_id})">翻訳</a></li>
+												
 											</ul>
 									</div>
+									<br><br><br>
+									<div>
+									<c:forEach var="tag" items="${element.tag_list}">
+										<a href="viewMindMapForm?hashtag=${tag}">#${tag}</a>
+									</c:forEach>
+									</div>		
 							</div>
 						</div>
 						</c:forEach>
@@ -473,7 +496,15 @@
 							<section id="four">
 								<div class="container">
 									<h3>앨범</h3>
-						
+						<c:if test="${sessionScope.user_id != null}">
+						<c:if test="${group_attendance != null}">
+							<c:if test="${event_attendance != null}">
+								<c:if test="${event_schedule_attendance != null}">
+									<a href="javascript:withdrawEventScheduleAction()" class="button">追加</a><br><br><br>
+								</c:if>
+							</c:if>
+						</c:if>
+					</c:if>
 									<div class="features">
 										<article class="col-6 col-12-xsmall work-item">
 											<c:forEach var="event_schedule_image" items="${event_schedule_image_list}">
@@ -506,7 +537,7 @@
 										<div id="timeline${event_schedule_user_schedule_list.user.user_id}" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 100%">
 										</div>
 									</c:forEach>
-									<div id="timeline" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 100%">
+									<!-- <div id="timeline" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 100%"> -->
 									</div>
 								</div>
 							</section>
@@ -540,7 +571,51 @@
 			<script src="resources/GroupMain/assets/js/breakpoints.min.js"></script>
 			<script src="resources/GroupMain/assets/js/util.js"></script>
 			<script src="resources/GroupMain/assets/js/main.js"></script>
+			<script>
+function getEventScheduleCommentTranslation(event_schedule_comment_id)
+{
+	var map = {};
+	map["event_schedule_comment_id"] = event_schedule_comment_id;
+	map["language"] = document.getElementById("translation_language" + event_schedule_comment_id).value; 
+	
+	$.ajax({
+		url: "getEventScheduleCommentTranslation",
+		type: "POST",
+		data: JSON.stringify(map),
+		dataType: "JSON",
+		contentType: "application/json; charset=UTF-8",
+		success: function(jsonObject)
+		{
+			var result = decodeURIComponent(jsonObject.result.replace(/\+/g, " "));
 			
+			document.getElementById("comment" + event_schedule_comment_id).innerHTML = result;
+			document.getElementById("translation_button" + event_schedule_comment_id).innerHTML = '<a href="javascript:resetEventScheduleComment(' + event_schedule_comment_id + ')">リセット</a>';
+		},
+		error: function(error){console.log(error);}
+	});
+}
+function resetEventScheduleComment(event_schedule_comment_id)
+{
+	var map = {};
+	map["event_schedule_comment_id"] = event_schedule_comment_id;
+	
+	$.ajax({
+		url: "resetEventScheduleComment",
+		type: "POST",
+		data: JSON.stringify(map),
+		dataType: "JSON",
+		contentType: "application/json; charset=UTF-8",
+		success: function(jsonObject)
+		{
+			var result = decodeURIComponent(jsonObject.result.replace(/\+/g, " "));
+			
+			document.getElementById("comment" + event_schedule_comment_id).innerHTML = result;
+			document.getElementById("translation_button" + event_schedule_comment_id).innerHTML = '<a href="javascript:getEventScheduleCommentTranslation(' + event_schedule_comment_id +')">翻訳</a>';
+		},
+		error: function(error){console.log(error);}
+	});
+}
+</script>
 <!-- 맵 띄우는 스크립트 -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP"">
 </script>

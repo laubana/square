@@ -161,18 +161,20 @@ public class GroupController
 		request.addAttribute("video_list", event_schedule_video_list);
 		
 		ArrayList<GroupComment> group_comment_list = yh_group_commentDAO.selectGroupCommentByGroupId(group_id);
+		
+		ArrayList<HashMap<String, Object>> comment_list = new ArrayList<>();
+		
 		for(int i = 0; i < group_comment_list.size(); i++)
 		{
-			group_comment_list.get(i).setUser(yh_userDAO.selectUserByUserId(group_comment_list.get(i).getUser_id()));
-			group_comment_list.get(i).setGroup_comment_tag_list(yh_group_comment_tagDAO.getTagByGroupCommentId(group_comment_list.get(i).getGroup_comment_id()));
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("comment", group_comment_list.get(i));
+			map.put("user", yh_userDAO.selectUserByUserId(group_comment_list.get(i).getUser_id()));
+			map.put("tag_list", yh_group_comment_tagDAO.getTagByGroupCommentId(group_comment_list.get(i).getGroup_comment_id()));
 			
-			for(int j = 0; j < group_comment_list.get(i).getGroup_comment_tag_list().size(); j++)
-			{
-				System.out.println(group_comment_list.get(i).getGroup_comment_tag_list().get(j));
-			}
+			comment_list.add(map);
 		}
 		//GroupComment List 전송
-		request.addAttribute("group_comment_list", group_comment_list);
+		request.addAttribute("comment_list", comment_list);
 		
 		ArrayList<Integer> event_union_event_id_list = yh_event_unionDAO.getEventIdByGroupId(group_id);
 		ArrayList<Event> event_union_event_list = yh_eventDAO.selectEventByEventIdList(event_union_event_id_list);
