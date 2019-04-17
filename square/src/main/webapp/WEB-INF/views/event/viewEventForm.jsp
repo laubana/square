@@ -326,6 +326,7 @@
 							<section id="five">
 								<div class="container">
 									<h3>イベント・スケジュール</h3>
+									<div align="right"><a href="createEventScheduleForm" class="button">스케줄 생성</a></div>
 									<div class="features">
 									<c:forEach var="event_schedule" items="${event_schedule_list}">
 									<article>
@@ -353,7 +354,7 @@
 						</div>
 						</c:forEach>
 						<c:if test="${sessionScope.user_id == leader.user_id}">
-						<input type="text" id="keyword" style="width:300px; display:inline;">
+						<input type="text" id="keyword" style="width:300px; display:inline;" autocomplete="off">
 <input type="button" onclick="javascript:searchGroupAction()" value="그룹 검색"><br><br><br>
 <div id="group_list" class="features">
 </div>
