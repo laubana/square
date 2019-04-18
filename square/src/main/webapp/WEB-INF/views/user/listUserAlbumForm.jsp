@@ -266,7 +266,7 @@ $(document).ready(function () {
 				{
 					document.getElementById("image_album").innerHTML = "";
 				}
-				if(result.event_schedule_image_list.length != 0)
+				if(result.event_schedule_video_list.length != 0)
 				{
 					var video_buff = "";
 					

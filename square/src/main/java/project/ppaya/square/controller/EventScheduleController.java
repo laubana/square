@@ -63,19 +63,29 @@ public class EventScheduleController
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
 			@RequestParam(value = "event_id", defaultValue = "1") int event_id,
 			//int event_id,
-			Model request
+			Model request,
+			HttpSession session
 			)
 	{
-
-		//event_place 임시 전송
-		ArrayList<String> place_list = new ArrayList<>();
-		place_list.add("'東京　京橋駅'");
-		place_list.add("'名古屋　愛知県'");
-		place_list.add("'大阪市 大正区'");
-		place_list.add("'仙台市　宮城県'");
-		place_list.add("'名古屋　愛知県'");
-		request.addAttribute("place_list", place_list);
+		User user = yh_userDAO.selectUserByUserId((String)session.getAttribute("user_id"));
+		//User 전송
+		request.addAttribute("user", user);
 		
+		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
+		//GroupCategory 전송
+		request.addAttribute("group_category", group_category);
+		
+		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
+		//Group 전송
+		request.addAttribute("group", group);
+		
+		ArrayList<GroupHashtag> group_hashtag_list = yh_group_hashtagDAO.selectGroupHashtagByGroupId(group_id);
+		//GroupHashtag List 전송
+		request.addAttribute("group_hashtag_list", group_hashtag_list);		
+		
+		Event event = yh_eventDAO.selectEventByEventId(event_id);
+		//Event 전송
+		request.addAttribute("event", event);
 		
 		return "event_schedule/createEventScheduleForm";
 	}
@@ -106,6 +116,41 @@ public class EventScheduleController
 		request.addAttribute("event_schedule_list", event_schedule_list);
 		
 		return "event_schedule/listEventScheduleForm";
+	}
+
+	@RequestMapping(value = "joinEventScheduleForm", method = RequestMethod.GET)
+	public String joinEventScheduleForm
+	(
+			HttpSession session,
+			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
+			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
+			@RequestParam(value = "event_id", defaultValue = "1") int event_id,
+			@RequestParam(value = "event_schedule_id", defaultValue = "1") int event_schedule_id,
+			Model request
+			)
+	{
+		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
+		//GroupCategory 전송
+		request.addAttribute("group_category", group_category);
+		
+		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
+		//Group 전송
+		request.addAttribute("group", group);
+		
+		ArrayList<GroupHashtag> group_hashtag_list = yh_group_hashtagDAO.selectGroupHashtagByGroupId(group_id);
+		//GroupHashtag List 전송
+		request.addAttribute("group_hashtag_list", group_hashtag_list);
+		
+		EventSchedule event_schedule = yh_event_scheduleDAO.selectEventScheduleByEventScheduleId(event_schedule_id);
+		//EventSchedule 전송
+		request.addAttribute("event_schedule", event_schedule);
+		
+		Event event = yh_eventDAO.selectEventByEventId(event_id);		
+		User leader = yh_userDAO.selectUserByUserId(event.getUser_id());
+		//Leader 전송
+		request.addAttribute("leader", leader);
+		
+		return "event_schedule/joinEventScheduleForm";
 	}
 	@RequestMapping(value = "viewEventScheduleForm", method = RequestMethod.GET)
 	public String viewEventScheduleForm

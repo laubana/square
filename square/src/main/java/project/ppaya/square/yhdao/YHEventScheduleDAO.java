@@ -1,6 +1,7 @@
 package project.ppaya.square.yhdao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,29 @@ public class YHEventScheduleDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public int insertEventSchedule(int event_id, String name, String content, String region, String latitude, String longitude, long start_date, long end_date)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("event_id", event_id);
+		map.put("name", name);
+		map.put("content", content);
+		map.put("region", region);
+		map.put("latitude", latitude);
+		map.put("longitude", longitude);
+		map.put("start_date", start_date);
+		map.put("end_date", end_date);
+		
+		YHEventScheduleMapper mapper = sqlSession.getMapper(YHEventScheduleMapper.class);
+		
+		try
+		{
+			result = mapper.insertEventSchedule(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public ArrayList<Integer> getEventScheduleIdByEventScheduleIdList(ArrayList<Integer> old_event_schedule_id_list)
 	{
 		ArrayList<Integer> new_event_schedule_id_list = null;

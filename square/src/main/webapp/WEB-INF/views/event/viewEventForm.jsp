@@ -1,3 +1,4 @@
+<%@page import="project.ppaya.square.vo.EventSchedule"%>
 <%@page import="project.ppaya.square.vo.Event"%>
 <%@page import="project.ppaya.square.vo.EventComment"%>
 <%@page import="java.util.HashMap"%>
@@ -23,8 +24,8 @@
 		
 	<style>
 	#map {
-			width: 500px;
-			height: 350px;
+			width: 750px;
+			height: 500px;
 			position: relative !important; /* changing this to fixed makes the map dissapear */
 			top: 0; 
 			bottom: 0; 
@@ -154,7 +155,7 @@
 			<section id="header">
 				<header>
 					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>
-					<h1 id="logo"><a href="viewGroupForm?group_id=${group.group_id}">${group.name}</a></h1>
+					<h1 id="logo"><a href="viewGroupForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}">${group.name}</a></h1>
 					<p style="font-size:15px;">
 					<c:forEach var="group_hashtag" items="${group_hashtag_list}">
 							#${group_hashtag.hashtag}
@@ -213,8 +214,10 @@
 								<p>
 									${event.content}
 								</p>
+								<div align ="center">
 									<div id="map" ></div>
 									場所: ${requestScope.event_place}
+								</div>
 								<div align="right"><footer>
 										<a class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
 										&nbsp;&nbsp;				
@@ -324,7 +327,7 @@
 							<section id="five">
 								<div class="container">
 									<h3>イベント・スケジュール</h3>
-									<div align="right"><a href="createEventScheduleForm" class="button">스케줄 생성</a></div>
+									<div align="right"><a href="createEventScheduleForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">스케줄 생성</a></div>
 									<div class="features">
 									<c:forEach var="event_schedule" items="${event_schedule_list}" end="2">
 									<article>
@@ -334,6 +337,14 @@
 										
 											</div>
 										</article>
+										<c:if test="${event_schedule.start_date != 0 && event_schedule.end_date != 0}">
+										<h6 style="display: inline;"><%= (new SimpleDateFormat("yyyy年 MM月 dd日")).format(new Date(((EventSchedule)(pageContext.getAttribute("event_schedule"))).getStart_date()))%></h6>
+										<h6 style="display: inline;"> ~ </h6>
+										<h6 style="display: inline;"><%= (new SimpleDateFormat("yyyy年 MM月 dd日")).format(new Date(((EventSchedule)(pageContext.getAttribute("event_schedule"))).getEnd_date()))%></h6>
+									</c:if>
+									<c:if test="${event_schedule.start_date == 0 || event_schedule.end_date == 0}">
+										<h6>未定</h6>
+									</c:if>
 										</c:forEach>
 											</div>
 											
@@ -513,7 +524,7 @@ function initMap() {
 		markers.map( function(marker, i) {
 			
 			var infowindow = new google.maps.InfoWindow({
-		          content: locations[i].name + '<br>場所: ' + locations[i].region + '<br>内容: '+ locations[i].content + '<div><img src = "resources/image/event_schedule_image/event_schedule' + i + '_image1' + '.jpg">',
+		          content: locations[i].name + '<br>場所: ' + locations[i].region + '<br>内容: '+ locations[i].content + '<div><img width="210px" height="140px" src = "resources/image/sample/it/' + i + '.jpg">',
 		          maxWidth: 250
 		        });
 			  marker.addListener('click', function() {

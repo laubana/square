@@ -20,8 +20,8 @@
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
 		<style>
 			#map {
-					width: 500px;
-					height: 350px;
+					width: 750px;
+					height: 500px;
 					position: relative !important; /* changing this to fixed makes the map dissapear */
 					top: 0; 
 					bottom: 0; 
@@ -203,7 +203,9 @@
 							</section>
 							<section id="one">
 								<div class="container">
-									<div id="map" ></div>
+									<div align ="center">
+										<div id="map" ></div>
+									</div>
 								</div>
 							</section>
 						
@@ -292,9 +294,9 @@
 											</c:forEach>
 											<br>
 											<c:if test="${video_list.size() != 0}">
-											<video width='640' height='auto' controls>
+											<video width='640' height='auto' id="video" controls>
 											<c:forEach var="video" items="${video_list}">
-											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
+											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4' >
 											</c:forEach>
 											</video>
 											</c:if>
@@ -358,7 +360,21 @@
 					</section>
 
 			</div>
+<script>
+var video = document.getElementById("video");
+var video_interval;
+video.onplaying = function() {
+	video_interval = setInterval(function()
+			{
 
+		  console.log(video.currentTime);
+			}, 1000);
+};
+video.onpause = function()
+{
+	clearInterval(video_interval);
+};
+</script>
 <script type="text/javascript">
 //숨기기,보이기
 var bDisplay = true;
@@ -495,7 +511,7 @@ function initMap() {
 		markers.map( function(marker, i) {
 			
 			var infowindow = new google.maps.InfoWindow({
-		          content: locations[i].name + '<br>場所: ' + locations[i].region + '<br>内容: '+ locations[i].content + '<div> <img src = "resources/images/clustering/samplepng/' + i + '.png">',
+		          content: locations[i].name + '<br>場所: ' + locations[i].region + '<br>内容: '+ locations[i].content + '<div> <img width="210px" height="140px" src = "resources/image/sample/it/' + i + '.jpg">',
 		          maxWidth: 250
 		        });
 			  marker.addListener('click', function() {

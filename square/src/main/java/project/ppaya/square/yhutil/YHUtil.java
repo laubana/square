@@ -34,6 +34,8 @@ public class YHUtil
 	YHVideoAlbumDAO yh_video_albumDAO;
 	@Autowired
 	YHUserDAO yh_userDAO;
+	@Autowired
+	YHVideoAppearanceDAO yh_video_appearanceDAO;
 	
 	public void updateVideoAlbum(String user_id)
 	{
@@ -58,7 +60,7 @@ public class YHUtil
 			
 			if(event_schedule_video_face_id_list.size() != 0)
 			{
-				ArrayList<String> similar_event_schedule_video_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(event_schedule_video_face_id_list, (new JSONArray(YHMSFaceUtil.detectFace(Reference.user_image_path, user.getImage_id()))).getJSONObject(0).getString("faceId"));
+				ArrayList<String> similar_event_schedule_video_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(event_schedule_video_face_id_list, (new JSONArray(YHMSFaceUtil.getFace(Reference.user_image_path, user.getImage_id()))).getJSONObject(0).getString("faceId"));
 				
 				if(similar_event_schedule_video_face_id.size() != 0)
 				{
@@ -95,9 +97,38 @@ public class YHUtil
 					
 					for(int j = 0; j < jsonArray.length(); j++)
 					{
-						String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHVideoIndexerUtil.getThumbnail(event_schedule_video_list.get(i).getEvent_schedule_video_id(), jsonArray.getJSONObject(j).getString("thumbnailId")), Reference.event_schedule_video_face_path);
+						JSONObject temp_jsonObject = jsonArray.getJSONObject(j);
 						
-						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(((new JSONArray(YHMSFaceUtil.detectFace(Reference.event_schedule_video_face_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId"), event_schedule_video_image_id, event_schedule_video_list.get(i).getEvent_schedule_video_id());
+						String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHVideoIndexerUtil.getThumbnail(event_schedule_video_list.get(i).getEvent_schedule_video_id(), temp_jsonObject.getString("thumbnailId")), Reference.event_schedule_video_face_path);
+						
+						String face_id = ((new JSONArray(YHMSFaceUtil.getFace(Reference.event_schedule_video_face_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId");
+						
+						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(face_id, event_schedule_video_image_id, event_schedule_video_list.get(i).getEvent_schedule_video_id());
+						
+						JSONArray temp_jsonArray = temp_jsonObject.getJSONArray("appearances");
+						
+						for(int k = 0; k < temp_jsonArray.length(); k++)
+						{
+							temp_jsonObject = temp_jsonArray.getJSONObject(k);
+							
+							String string_start_time = temp_jsonObject.getString("startTime");							
+							long start_time = 0;
+							
+							start_time += Long.parseLong(string_start_time.split(":")[0]) * 3600000;
+							start_time += Long.parseLong(string_start_time.split(":")[1]) * 60000;
+							start_time += Long.parseLong(string_start_time.split(":")[2].split(".")[0]) * 1000;
+							start_time += Long.parseLong(string_start_time.split(":")[2].split(".")[1]);
+							
+							String string_end_time = temp_jsonObject.getString("endTime");							
+							long end_time = 0;
+							
+							end_time += Long.parseLong(string_end_time.split(":")[0]) * 3600000;
+							end_time += Long.parseLong(string_end_time.split(":")[1]) * 60000;
+							end_time += Long.parseLong(string_end_time.split(":")[2].split(".")[0]) * 1000;
+							end_time += Long.parseLong(string_end_time.split(":")[2].split(".")[1]);
+							
+							yh_video_appearanceDAO.insertVideoAppearance(face_id, start_time, end_time);
+						}
 					}
 				}
 			}
@@ -117,7 +148,7 @@ public class YHUtil
 					{
 						String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHVideoIndexerUtil.getThumbnail(event_schedule_video_list.get(i).getEvent_schedule_video_id(), jsonArray.getJSONObject(j).getString("thumbnailId")), Reference.event_schedule_video_face_path);
 						
-						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(((new JSONArray(YHMSFaceUtil.detectFace(Reference.event_schedule_video_face_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId"), event_schedule_video_image_id, event_schedule_video_list.get(i).getEvent_schedule_video_id());
+						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(((new JSONArray(YHMSFaceUtil.getFace(Reference.event_schedule_video_face_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId"), event_schedule_video_image_id, event_schedule_video_list.get(i).getEvent_schedule_video_id());
 					}
 				}		
 			}
@@ -150,9 +181,52 @@ public class YHUtil
 					
 					for(int j = 0; j < jsonArray.length(); j++)
 					{
-						String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHVideoIndexerUtil.getThumbnail(event_schedule_video_list.get(i).getEvent_schedule_video_id(), jsonArray.getJSONObject(j).getString("thumbnailId")), Reference.event_schedule_video_face_path);
+						JSONObject temp_jsonObject = jsonArray.getJSONObject(j);
 						
-						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(((new JSONArray(YHMSFaceUtil.detectFace(Reference.event_schedule_video_face_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId"), event_schedule_video_image_id, event_schedule_video_list.get(i).getEvent_schedule_video_id());
+						String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHVideoIndexerUtil.getThumbnail(event_schedule_video_list.get(i).getEvent_schedule_video_id(), temp_jsonObject.getString("thumbnailId")), Reference.event_schedule_video_face_path);
+						
+						String face_id = ((new JSONArray(YHMSFaceUtil.getFace(Reference.event_schedule_video_face_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId");
+						
+						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(face_id, event_schedule_video_image_id, event_schedule_video_list.get(i).getEvent_schedule_video_id());
+						
+						JSONArray temp_jsonArray = temp_jsonObject.getJSONArray("appearances");
+						
+						for(int k = 0; k < temp_jsonArray.length(); k++)
+						{
+							temp_jsonObject = temp_jsonArray.getJSONObject(k);
+							
+							String string_start_time = temp_jsonObject.getString("startTime");							
+							long start_time = 0;
+							
+							start_time += Long.parseLong(string_start_time.split(":")[0]) * 3600000;
+							start_time += Long.parseLong(string_start_time.split(":")[1]) * 60000;
+							if(string_start_time.contains("."))
+							{
+								start_time += Long.parseLong(string_start_time.split(":")[2].split("\\.")[0]) * 1000;
+								start_time += Long.parseLong(string_start_time.split(":")[2].split("\\.")[1]);
+							}
+							else
+							{
+								start_time += Long.parseLong(string_start_time.split(":")[2]) * 1000;
+							}
+							
+							String string_end_time = temp_jsonObject.getString("endTime");							
+							long end_time = 0;
+							
+							end_time += Long.parseLong(string_end_time.split(":")[0]) * 3600000;
+							end_time += Long.parseLong(string_end_time.split(":")[1]) * 60000;
+							if(string_end_time.contains("."))
+							{
+								end_time += Long.parseLong(string_end_time.split(":")[2].split("\\.")[0]) * 1000;
+								end_time += Long.parseLong(string_end_time.split(":")[2].split("\\.")[1]);
+							}
+							else
+							{
+								end_time += Long.parseLong(string_end_time.split(":")[2]) * 1000;
+							}
+							
+							yh_video_appearanceDAO.insertVideoAppearance(face_id, start_time, end_time);
+						}
 					}
 				}
 			}
@@ -172,7 +246,7 @@ public class YHUtil
 					{
 						String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHVideoIndexerUtil.getThumbnail(event_schedule_video_list.get(i).getEvent_schedule_video_id(), jsonArray.getJSONObject(j).getString("thumbnailId")), Reference.event_schedule_video_face_path);
 						
-						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(((new JSONArray(YHMSFaceUtil.detectFace(Reference.event_schedule_video_face_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId"), event_schedule_video_image_id, event_schedule_video_list.get(i).getEvent_schedule_video_id());
+						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(((new JSONArray(YHMSFaceUtil.getFace(Reference.event_schedule_video_face_path, event_schedule_video_image_id))).getJSONObject(0)).getString("faceId"), event_schedule_video_image_id, event_schedule_video_list.get(i).getEvent_schedule_video_id());
 					}
 				}		
 			}
@@ -194,7 +268,7 @@ public class YHUtil
 			{
 				yh_event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id(), (new Date()).getTime());
 				
-				result = YHMSFaceUtil.detectFace(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getEvent_schedule_image_id());
+				result = YHMSFaceUtil.getFace(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getEvent_schedule_image_id());
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -215,7 +289,7 @@ public class YHUtil
 				
 				yh_event_schedule_image_faceDAO.deleteEventScheduleImageFaceByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id());
 				
-				result = YHMSFaceUtil.detectFace(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getEvent_schedule_image_id());
+				result = YHMSFaceUtil.getFace(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getEvent_schedule_image_id());
 				jsonArray = new JSONArray(result);
 				
 				for(int j = 0; j < jsonArray.length(); j++)
@@ -251,7 +325,7 @@ public class YHUtil
 		
 		ArrayList<String> event_schedule_image_face_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageFaceIdByEventScheduleImageIdList(event_schedule_image_id_list);
 		
-		ArrayList<String> similar_event_schedule_image_face_id_list = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(event_schedule_image_face_id_list, (new JSONArray(YHMSFaceUtil.detectFace(Reference.user_image_path, user.getImage_id()))).getJSONObject(0).getString("faceId"));
+		ArrayList<String> similar_event_schedule_image_face_id_list = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(event_schedule_image_face_id_list, (new JSONArray(YHMSFaceUtil.getFace(Reference.user_image_path, user.getImage_id()))).getJSONObject(0).getString("faceId"));
 		
 		ArrayList<String> similar_event_schedule_image_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageIdByEventScheduleImageFaceIdList(similar_event_schedule_image_face_id_list);
 		

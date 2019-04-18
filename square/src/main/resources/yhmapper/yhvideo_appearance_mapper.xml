@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="project.ppaya.square.yhmapper.YHVideoAppearanceMapper">
+<select id="selectVideoAppearanceByFaceIdList" parameterType="list" resultType="VideoAppearance">
+SELECT
+	*
+FROM
+	TABLE_VAP
+WHERE
+	1 = 0
+	<foreach item="face_id" collection="list" open="OR" separator="OR">	
+		FACE_ID = #{face_id}
+	</foreach>
+</select>
+<insert id="insertVideoAppearance" parameterType="map">
+INSERT INTO TABLE_VAP
+(
+	FACE_ID,
+	START_TIME,
+	END_TIME
+)
+VALUES
+(
+	#{face_id},
+	#{start_time},
+	#{end_time}
+)
+</insert>
+</mapper>

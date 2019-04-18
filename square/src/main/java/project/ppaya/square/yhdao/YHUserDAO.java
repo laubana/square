@@ -16,6 +16,20 @@ public class YHUserDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<User> selectUser()
+	{
+		ArrayList<User> user_list = null;
+		
+		YHUserMapper mapper = sqlSession.getMapper(YHUserMapper.class);
+		
+		try
+		{
+			user_list = mapper.selectUser();
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return user_list;
+	}
 	public User selectUserByUserIdPassword(String user_id, String password)
 	{
 		User user = null;

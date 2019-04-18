@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -94,10 +96,13 @@ border: 0;
 		<!-- Header -->
 			<section id="header">
 				<header>
-				<span class="image avatar"><img src="resources/GroupMain/images/bb2.jpg" alt="" /></span>
-					<h1 id="logo"><a href="groupMain">Group name</a></h1>
-					<p style="font-size:15px;">#tag#tag</p>
-					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>	
+				<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>
+					<h1 id="logo"><a href="viewGroupForm?group_id=${group.group_id}">${group.name}</a></h1>
+					<p style="font-size:15px;">
+					<c:forEach var="group_hashtag" items="${group_hashtag_list}">
+							#${group_hashtag.hashtag}
+						</c:forEach>
+					</p>
 				</header>
 				<nav id="nav">
 					<ul>
@@ -119,7 +124,6 @@ border: 0;
 <form action="" method="post">
 		<!-- Wrapper -->
 			<div id="wrapper">
-
 				<!-- Main -->
 					<div id="main">
 
@@ -134,8 +138,7 @@ border: 0;
 									</div>
 									<div class="meta">
 								<!-- 날짜, 회원 이름, 회원 사진 -->
-										<time class="published" datetime="2019-04-08">2019년 4월 8일</time>
-										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">Harry</span><img src="resources/GroupMain/images/member/c1.jpg" alt="" /></a>
+										<br><br><br><a href="viewUserForm?user_id=${user.user_id}" class="author"><span class="name">${user.name}</span><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
 									</div>
 								</header>
 								
@@ -157,9 +160,12 @@ border: 0;
 									<br><br>
 									<!-- 내용 -->
 									<h1>스케줄 내용</h1>
-									<textarea class="comment-block" placeholder="내용을 작성해주세요..."></textarea><br>
+									
+<input type="datetime-local" id="start_date" value="<%= (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm")).format(new Date())%>">
+<input type="datetime-local" id="end_date" value="<%= (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm")).format(new Date(new Date().getTime() + 3600*1000))%>">
+									<textarea class="comment-block" id="event_schedule_content" placeholder="내용을 작성해주세요..."></textarea><br>
 									<br>
-									<div align="center"><input type="submit" value="이벤트 올리기"></div>
+									<div align="center"><input type="button" value="이벤트 올리기" onclick="createEventScheduleAction()"></div>
 								</article>
 							</section>
 					</div>		
@@ -247,7 +253,36 @@ border: 0;
 
 	</body>
 
-
+<script>
+function createEventScheduleAction()
+{
+	var map = {};
+	map["name"] = $("#Event_title").val();
+	map["content"] = $("#event_schedule_content").val();
+	map["event_id"] = ${event.event_id};
+	map["region"] = "R";
+	map["latitude"] = "A";
+	map["longitude"] = "L";
+	map["start_date"] = $("#start_date").val();
+	map["end_date"] = $("#end_date").val();
+	
+	var interval = setInterval(function()
+			{
+				if(typeof(map.region) != "undefined" && typeof(map.latitude) != "undefined" && typeof(map.latitude) != "undefined")
+				{
+					$.ajax({
+		    			url: "createEventScheduleAction",
+		    			type: "POST",
+		    			data: JSON.stringify(map),
+		    			contentType: "application/json; charset=UTF-8",
+		    			success: function(result){},
+		    			error: function(){}
+		    				});
+					clearInterval(interval);
+				}
+			},100);
+	}
+</script>
 <script type="text/javascript">
 //파일 미리보기 메인
 function readURL(input) {

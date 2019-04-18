@@ -7,13 +7,16 @@
   <title>js-mindmap demo - JavaScript Mindmap</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="resources/star1/css/style.css">
+  <link rel="stylesheet" href="resources/starback4/css/style.css">
   <link rel="stylesheet" href="resources/MyPage/assets/css/main.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="resources/undermenu/css/style.css">
   <link rel="stylesheet" type="text/css" href="resources/MindMap/css/js-mindmap.css" />
   <link href="resources/MindMap/css/style.css" type="text/css" rel="stylesheet"/>
   
-<style type="text/css">
+<!-- <style type="text/css">
 body{
 background: url('resources/MindMap/image/3.jpg'); 
   -webkit-background-size: cover;
@@ -21,12 +24,12 @@ background: url('resources/MindMap/image/3.jpg');
   -o-background-size: cover;
   background-size: cover;
 }
-</style>
+</style> -->
   
 </head>
 
 <body>
-
+<canvas id="canvas"></canvas>
 <ul>
 	<li><a href="">#${root}</a>
 		<ul>
@@ -60,7 +63,19 @@ background: url('resources/MindMap/image/3.jpg');
   
   <div id="thumbnail" class="thumbnail left">
     <ul class="thumbnail-list">
-      <li class="">
+      <li class=""><svg class="star" x="0px" y="0px" width="96px" height="96px" viewBox="0 0 66 66" enable-background="new 0 0 66 66">
+  <defs>
+    <path id="loader-star" d="M31.75,30.5L33,0.5l1.25,30l1.25,1.25l30,1.25l-30,1.25l-1.25,1.25L33,65.5l-1.25-30l-1.25-1.25L0.5,33l30-1.25L31.75,30.5z
+"/>
+  </defs>
+  <g class="large">
+    <g class="large-1"><use xlink:href="#loader-star"/></g>
+    <g class="large-2"><use xlink:href="#loader-star"/></g>
+  </g>
+  <g class="small">
+    <g class="small-1"><use xlink:href="#loader-star"/></g>
+  </g>
+</svg>
         <div align="center"><span><a href="main">Group Name</a></span></div>
         <br>
         <hr>
@@ -100,7 +115,8 @@ background: url('resources/MindMap/image/3.jpg');
 
 <script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
 <script src="resources/undermenu/js/index.js"></script>
-
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="resources/starback4/js/index.js"></script>
   <!-- jQuery -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
   <!-- UI, for draggable nodes -->

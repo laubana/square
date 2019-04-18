@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,6 +68,33 @@ public class EventScheduleAction {
 	@Autowired
 	SH_DAO_Group sh_gdao;
 	
+	@ResponseBody
+	@RequestMapping(value = "createEventScheduleAction", method = RequestMethod.POST)
+	public void createEventScheduleAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	{
+		String name = (String)map.get("name");
+		String content = (String)map.get("content");
+		int event_id = (int)map.get("event_id");
+		String region = (String)map.get("region");
+		String latitude = (String)map.get("latitude");
+		String longitude = (String)map.get("longitude");
+		long start_date = -1;
+		long end_date = -1;
+		try
+		{
+			start_date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm")).parse((String)map.get("start_date")).getTime();
+			end_date = (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm")).parse((String)map.get("end_date")).getTime();
+		}
+		catch(Exception error){}		
+		
+		while(true)
+		{
+			if(yh_event_scheduleDAO.insertEventSchedule(event_id, name, content, region, latitude, longitude, start_date, end_date) != 0)
+			{
+				break;
+			}
+		}
+	}
 	@ResponseBody
 	@RequestMapping(value = "getEventScheduleCommentTranslation", method = RequestMethod.POST)
 	public String getEventScheduleCommentTranslation(Model request, @RequestBody HashMap<String, Object> map)

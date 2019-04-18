@@ -4,6 +4,32 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleMapper">
+<insert id="insertEventSchedule" parameterType="map">
+INSERT INTO TABLE_ES
+(
+	EVENT_SCHEDULE_ID,	
+	EVENT_ID,
+	NAME,
+	CONTENT,
+	REGION,
+	LATITUDE,
+	LONGITUDE,
+	START_DATE,
+	END_DATE
+)
+VALUES
+(
+	ES_SEQ.NEXTVAL,
+	#{event_id},
+	#{name},
+	#{content},
+	#{region},
+	#{latitude},
+	#{longitude},
+	#{start_date},
+	#{end_date}
+)
+</insert>
 <select id="selectEventScheduleByEventScheduleId" parameterType="int" resultType="EventSchedule">
 SELECT
 	*
