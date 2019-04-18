@@ -190,34 +190,38 @@ public class YHMSFaceUtil
             
             httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 
+        	HttpResponse httpResponse = httpClient.execute(httpPost);
+        	result = EntityUtils.toString(httpResponse.getEntity()).trim();
+
+        	System.err.println(result);
+        	
             while(true)
             {
-            	HttpResponse httpResponse = httpClient.execute(httpPost);
-            	result = EntityUtils.toString(httpResponse.getEntity()).trim();
-
-            	System.err.println(result);
-            	
-            	try
+            	if(result.charAt(0) == '{')
             	{
-	            	JSONObject jsonObject = new JSONObject(result);
-	            	
-	            	if(!jsonObject.isNull("error"))
-	            	{
-	            		if(!jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
-	            		{
-	            			break;
-	            		}
-	            	}
+            		JSONObject jsonObject = new JSONObject(result);
+            		
+            		if(!jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
+            		{
+            			break;
+            		}
+            		else
+            		{
+            			return null;
+            		}
             	}
-            	catch(Exception error){break;}
-            }           
+            	else
+            	{
+            		break;
+            	}
+            }
             
-            return result;
+            return (new JSONArray(result)).getJSONObject(0).getString("faceId");
         }
         catch(Exception error)
         {
         	error.printStackTrace();
-            return error.getMessage();
+            return null;
         }
 	}
 	public static String getFace(String path, String file)
