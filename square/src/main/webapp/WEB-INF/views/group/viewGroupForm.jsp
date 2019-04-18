@@ -252,17 +252,17 @@
 												<c:if test="${element.user.user_id == sessionScope.user_id}">
 													<li class="name">Edit</li>
 													<li>Delete</li>
-												</c:if><br>
-												<li>
+												</c:if>
+												
 													<select id="translation_language${element.comment.group_comment_id}">
 														  <option value="en">英語</option>
 														  <option value="ko">韓国語</option>
 													</select>
-												</li>
+												
 								
 											</ul>
 									</div>
-									<br><br><br>
+									<br><br><br><br>
 									<div>
 									<c:forEach var="tag" items="${element.tag_list}">
 										<a href="viewMindMapForm?hashtag=${tag}">#${tag}</a>
