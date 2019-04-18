@@ -145,8 +145,6 @@ public class EventScheduleAction {
 		int event_schedule_id = (int)test_map.get("event_schedule_id");
 		ArrayList<HashMap<String, String>> google_user_schedule_list = (ArrayList<HashMap<String, String>>)test_map.get("google_user_schedule_list");
 		
-		System.err.println(user_id + ", " + event_schedule_id);
-		
 		yh_event_schedule_user_scheduleDAO.deleteEventScheduleUserScheduleByUserIdEventScheduleId(user_id, event_schedule_id);
 		
 		for(int i = 0; i < google_user_schedule_list.size(); i++)
@@ -155,13 +153,10 @@ public class EventScheduleAction {
 			try
 			{
 				yh_event_schedule_user_scheduleDAO.insertEventScheduleUserSchedule(
-						new EventScheduleUserSchedule(
 								user_id,
 								event_schedule_id,
 								new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(google_user_schedule_list.get(i).get("start_date")).getTime(),
-								new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(google_user_schedule_list.get(i).get("end_date")).getTime(),
-								1
-								)
+								new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(google_user_schedule_list.get(i).get("end_date")).getTime()
 						);
 			}
 			catch(Exception error){error.printStackTrace();}
