@@ -33,14 +33,14 @@ public class YHEventScheduleUserScheduleDAO
 		
 		return result;
 	}
-	public int insertEventScheduleUserSchedule(EventScheduleUserSchedule event_schedule_user_schedule)
+	public int insertEventScheduleUserSchedule(String user_id, int event_schedule_id, long start_date, long end_date)
 	{
 		int result = 0;
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("user_id", event_schedule_user_schedule.getUser_id());
-		map.put("event_schedule_id", event_schedule_user_schedule.getEvent_schedule_id());
-		map.put("start_date", event_schedule_user_schedule.getStart_date());
-		map.put("end_date", event_schedule_user_schedule.getEnd_date());
+		map.put("user_id", user_id);
+		map.put("event_schedule_id", event_schedule_id);
+		map.put("start_date", start_date);
+		map.put("end_date", end_date);
 		
 		YHEventScheduleUserScheduleMapper mapper = sqlSession.getMapper(YHEventScheduleUserScheduleMapper.class);
 		

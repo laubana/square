@@ -10,7 +10,7 @@ WHERE
 	USER_ID = #{user_id} AND
 	EVENT_SCHEDULE_ID = #{event_schedule_id}
 </delete>
-<insert id="insertEventScheduleUserSchedule" parameterType="EventScheduleUserSchedule">
+<insert id="insertEventScheduleUserSchedule" parameterType="map">
 INSERT INTO TABLE_ESUS
 (
 	USER_SCHEDULE_ID,
