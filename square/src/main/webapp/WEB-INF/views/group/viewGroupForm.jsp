@@ -20,8 +20,8 @@
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
 		<style>
 			#map {
-					width: 500px;
-					height: 350px;
+					width: 750px;
+					height: 500px;
 					position: relative !important; /* changing this to fixed makes the map dissapear */
 					top: 0; 
 					bottom: 0; 
@@ -203,7 +203,9 @@
 							</section>
 							<section id="one">
 								<div class="container">
-									<div id="map" ></div>
+									<div align ="center">
+										<div id="map" ></div>
+									</div>
 								</div>
 							</section>
 						
@@ -233,7 +235,7 @@
 									<h3>コメント</h3>
 									<p class="icon fa-comment" align="right">${comment_list.size()}</p>
 						<div class="comments">
-						<c:forEach var="element" items="${comment_list}">
+						<c:forEach var="element" items="${comment_list}" end="2">
 						<div class="comment-wrap">
 							<div>
 							<a href="viewUserForm?user_id=${element.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${element.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
@@ -252,17 +254,17 @@
 												<c:if test="${element.user.user_id == sessionScope.user_id}">
 													<li class="name">Edit</li>
 													<li>Delete</li>
-												</c:if><br>
-												<li>
+												</c:if>
+												
 													<select id="translation_language${element.comment.group_comment_id}">
 														  <option value="en">英語</option>
 														  <option value="ko">韓国語</option>
 													</select>
-												</li>
+												
 								
 											</ul>
 									</div>
-									<br><br><br>
+									<br><br><br><br>
 									<div>
 									<c:forEach var="tag" items="${element.tag_list}">
 										<a href="viewMindMapForm?hashtag=${tag}">#${tag}</a>
@@ -286,7 +288,7 @@
 						
 									<div class="features" align="center">
 										<article class="col-6 col-12-xsmall work-item">
-											<c:forEach var="element" items="${image_list}">
+											<c:forEach var="element" items="${image_list}" end="3">
 												<a href="resources/image/event_schedule_image/${element.image.filename}" class="image thumb"><img src="resources/image/event_schedule_image/${element.image.filename}" alt="" /></a>
 											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${element.description}</h3>
 											</c:forEach>
@@ -315,7 +317,7 @@
 						</c:if>
 					</c:if>
 									<div class="features">
-									<c:forEach var="event" items="${event_list}">
+									<c:forEach var="event" items="${event_list}" end="2">
 									<article>
 											<a href="viewEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="image"><img src="resources/image/event_image/${event.image_id}" alt="" /></a>
 											<div class="inner">
@@ -509,7 +511,7 @@ function initMap() {
 		markers.map( function(marker, i) {
 			
 			var infowindow = new google.maps.InfoWindow({
-		          content: locations[i].name + '<br>場所: ' + locations[i].region + '<br>内容: '+ locations[i].content + '<div> <img src = "resources/images/clustering/samplepng/' + i + '.png">',
+		          content: locations[i].name + '<br>場所: ' + locations[i].region + '<br>内容: '+ locations[i].content + '<div> <img width="210px" height="140px" src = "resources/image/sample/it/' + i + '.jpg">',
 		          maxWidth: 250
 		        });
 			  marker.addListener('click', function() {

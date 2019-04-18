@@ -61,7 +61,7 @@ ul {
     box-shadow: inset 0px 0px 50px 5px rgba(0, 0, 0, 0.5);
 }
 #thumbnail .thumbnail-list li {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.1);
     color: #fff;
     cursor: pointer;
     padding: 42px 15px 0 36px;
@@ -76,7 +76,7 @@ ul {
     border-bottom: none;
 }
 #thumbnail .thumbnail-list li.marker {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.1);
     position: absolute;
     top: 0;
     width: 100%;
