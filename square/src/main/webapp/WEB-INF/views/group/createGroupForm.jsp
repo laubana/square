@@ -277,8 +277,6 @@ border: 0;
 		}
 		
 		map["region"] = document.getElementById("region").value;
-
-		console.log(map);
 		
 		var group_logo = new FileReader();
 		group_logo.readAsDataURL(document.getElementById("imgInp2").files[0]);

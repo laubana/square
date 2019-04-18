@@ -307,7 +307,7 @@
 											</c:forEach>
 											<br>
 											<c:if test="${video_list.size() != 0}">
-											<video width='auto' height='auto' controls>
+											<video width='640' height='auto' controls>
 											<c:forEach var="video" items="${video_list}">
 											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
 											</c:forEach>

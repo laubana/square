@@ -4,6 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHEventMapper">
+<insert id="insertEvent" parameterType="map">
+INSERT INTO TABLE_E
+(
+	EVENT_ID,
+	NAME,
+	CONTENT,
+	GROUP_ID,
+	USER_ID,
+	IMAGE_ID
+)
+VALUES
+(
+	E_SEQ.NEXTVAL,
+	#{name},
+	#{content},
+	#{group_id},
+	#{user_id},
+	#{image_id}
+)
+</insert>
 <select id="selectEventByEventId" parameterType="int" resultType="Event">
 SELECT
 	*
