@@ -311,7 +311,7 @@
 									<h3>イベント</h3>
 									<c:if test="${sessionScope.user_id != null}">
 						<c:if test="${group_attendance != null}">
-										<p align="right"><a href="createEventForm" class="button">追加</a></p>
+										<p align="right"><a href="createEventForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}" class="button">追加</a></p>
 						</c:if>
 					</c:if>
 									<div class="features">

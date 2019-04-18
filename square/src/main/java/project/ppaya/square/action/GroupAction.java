@@ -4,6 +4,8 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -132,9 +134,9 @@ public class GroupAction {
 	}
 	@ResponseBody
 	@RequestMapping(value = "createGroupAction", method = RequestMethod.POST)
-	public void createGroupAction(Model request, @RequestBody HashMap<String, Object> map)
+	public void createGroupAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{
-		String user_id = "id1@gmail.com";
+		String user_id = (String)session.getAttribute("user_id");
 		String name = (String)map.get("name");
 		String content = (String)map.get("content");
 		int group_category_id = Integer.parseInt((String)map.get("group_category_id"));

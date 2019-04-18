@@ -57,9 +57,26 @@ public class EventController
 			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
 			//int group_id,
-			Model request
+			Model request,
+			HttpSession session
 			)
 	{
+		User user = yh_userDAO.selectUserByUserId((String)session.getAttribute("user_id"));
+		//User 전송
+		request.addAttribute("user", user);
+		
+		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
+		//GroupCategory 전송
+		request.addAttribute("group_category", group_category);
+		
+		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
+		//Group 전송
+		request.addAttribute("group", group);
+		
+		ArrayList<GroupHashtag> group_hashtag_list = yh_group_hashtagDAO.selectGroupHashtagByGroupId(group_id);
+		//GroupHashtag List 전송
+		request.addAttribute("group_hashtag_list", group_hashtag_list);
+		
 		return "event/createEventForm";
 	}
 	@RequestMapping(value = "listEventForm", method = RequestMethod.GET)
@@ -71,7 +88,6 @@ public class EventController
 			//int group_id
 			)
 	{
-		
 		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
 		//GroupCategory 전송
 		request.addAttribute("group_category", group_category);
