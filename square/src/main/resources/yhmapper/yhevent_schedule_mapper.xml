@@ -4,10 +4,49 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleMapper">
+<select id="getEventScheduleIdByGroupId" parameterType="int" resultType="int">
+SELECT
+	EVENT_SCHEDULE_ID
+FROM
+	TABLE_ES
+WHERE
+	GROUP_ID = #{group_id}
+</select>
+<select id="getEventScheduleIdByGroupIdList" parameterType="list" resultType="int">
+SELECT
+	EVENT_SCHEDULE_ID
+FROM
+	TABLE_ES
+WHERE
+	1 = 0
+	<foreach item="group_id" collection="list" open="OR" separator="OR">
+		GROUP_ID = #{group_id}
+	</foreach>
+</select>
+<select id="selectEventScheduleByGroupId" parameterType="int" resultType="EventSchedule">
+SELECT
+	*
+FROM
+	TABLE_ES
+WHERE
+	GROUP_ID = #{group_id}
+</select>
+<select id="selectEventScheduleByGroupIdList" parameterType="list" resultType="EventSchedule">
+SELECT
+	*
+FROM
+	TABLE_ES
+WHERE
+	1 = 0
+	<foreach item="group_id" collection="list" open="OR" separator="OR">
+		GROUP_ID = #{group_id}
+	</foreach>
+</select>
 <insert id="insertEventSchedule" parameterType="map">
 INSERT INTO TABLE_ES
 (
-	EVENT_SCHEDULE_ID,	
+	EVENT_SCHEDULE_ID,
+	GROUP_ID,
 	EVENT_ID,
 	NAME,
 	CONTENT,
@@ -20,6 +59,7 @@ INSERT INTO TABLE_ES
 VALUES
 (
 	ES_SEQ.NEXTVAL,
+	#{group_id},
 	#{event_id},
 	#{name},
 	#{content},

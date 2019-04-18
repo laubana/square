@@ -137,41 +137,6 @@ public class YHMSFaceUtil
             return error.getMessage();
         }
 	}
-	public static String getSimilarFace(String list_id, String face_id)
-	{		
-		String result;
-		HttpClient httpClient = HttpClients.createDefault();
-		
-        try
-        {			
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/face/v1.0/findsimilars");
-			
-			HttpPost httpPost = new HttpPost(uriBuilder.build());
-			
-            httpPost.setHeader("Content-Type", "application/json");
-            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
-            
-            httpPost.setEntity(new StringEntity(
-            		"{" +
-            				"\"faceListId\":\"" + list_id + "\"," +
-            				"\"faceId\":\"" + face_id + "\"," +
-            				"\"maxNumOfCandidatesReturned\":1000" +
-            		"}"));
-            
-            HttpResponse httpResponse = httpClient.execute(httpPost);
-            
-            result = EntityUtils.toString(httpResponse.getEntity()).trim();
-            
-            System.err.println(result);
-            
-            return result;
-        }
-        catch (Exception error)
-        {
-        	error.printStackTrace();
-            return error.getMessage();
-        }
-	}
 	public static String getFaceId(String path, String file)
 	{			
         String result;

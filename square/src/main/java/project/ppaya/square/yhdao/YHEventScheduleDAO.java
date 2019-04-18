@@ -16,10 +16,67 @@ public class YHEventScheduleDAO
 	@Autowired
 	SqlSession sqlSession;
 	
-	public int insertEventSchedule(int event_id, String name, String content, String region, String latitude, String longitude, long start_date, long end_date)
+	public ArrayList<Integer> getEventScheduleIdByGroupId(int group_id)
+	{
+		ArrayList<Integer> event_schedule_id_list = null;
+		
+		YHEventScheduleMapper mapper = sqlSession.getMapper(YHEventScheduleMapper.class);
+		
+		try
+		{
+			event_schedule_id_list = mapper.getEventScheduleIdByGroupId(group_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_id_list;
+	}
+	public ArrayList<Integer> getEventScheduleIdByGroupIdList(ArrayList<Integer> group_id_list)
+	{
+		ArrayList<Integer> event_schedule_id_list = null;
+		
+		YHEventScheduleMapper mapper = sqlSession.getMapper(YHEventScheduleMapper.class);
+		
+		try
+		{
+			event_schedule_id_list = mapper.getEventScheduleIdByGroupIdList(group_id_list);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_id_list;
+	}
+	public ArrayList<EventSchedule> selectEventScheduleByGroupId(int group_id)
+	{
+		ArrayList<EventSchedule> event_schedule_list = null;
+		
+		YHEventScheduleMapper mapper = sqlSession.getMapper(YHEventScheduleMapper.class);
+		
+		try
+		{
+			event_schedule_list = mapper.selectEventScheduleByGroupId(group_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_list;
+	}
+	public ArrayList<EventSchedule> selectEventScheduleByGroupIdList(ArrayList<Integer> group_id_list)
+	{
+		ArrayList<EventSchedule> event_schedule_list = null;
+		
+		YHEventScheduleMapper mapper = sqlSession.getMapper(YHEventScheduleMapper.class);
+		
+		try
+		{
+			event_schedule_list = mapper.selectEventScheduleByGroupIdList(group_id_list);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_list;
+	}
+	public int insertEventSchedule(int group_id, int event_id, String name, String content, String region, String latitude, String longitude, long start_date, long end_date)
 	{
 		int result = 0;
 		HashMap<String, Object> map = new HashMap<>();
+		map.put("group_id", group_id);
 		map.put("event_id", event_id);
 		map.put("name", name);
 		map.put("content", content);

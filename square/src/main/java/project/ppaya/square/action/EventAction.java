@@ -75,8 +75,7 @@ public class EventAction {
 		String name = (String)map.get("name");
 		String content = (String)map.get("content");
 		int group_id = (int)map.get("group_id");
-		String image_id = YHFileUtil.saveJpegFromBase64((String)map.get("event_image"), Reference.event_image_path);		
-		int reult;
+		String image_id = YHFileUtil.saveJpegFromBase64((String)map.get("event_image"), Reference.event_image_path);
 		
 		while(true)
 		{

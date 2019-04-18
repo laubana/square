@@ -3,6 +3,7 @@ package project.ppaya.square.vo;
 public class EventSchedule
 {
 	int event_schedule_id;
+	int group_id;
 	int event_id;
 	long start_date;
 	long end_date;
@@ -18,6 +19,12 @@ public class EventSchedule
 	}
 	public void setEvent_schedule_id(int event_schedule_id) {
 		this.event_schedule_id = event_schedule_id;
+	}
+	public int getGroup_id() {
+		return group_id;
+	}
+	public void setGroup_id(int group_id) {
+		this.group_id = group_id;
 	}
 	public int getEvent_id() {
 		return event_id;

@@ -141,7 +141,7 @@ public class UserController
 			
 			for(int j = 0; j < user_list.size(); j++)
 			{
-				ArrayList<String> similar_face_id_list = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(face_id_list, (new JSONArray(YHMSFaceUtil.getFace(Reference.user_image_path, user_list.get(j).getImage_id()))).getJSONObject(0).getString("faceId"));
+				ArrayList<String> similar_face_id_list = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(face_id_list, YHMSFaceUtil.getFace(Reference.user_image_path, user_list.get(j).getImage_id()));
 				
 				ArrayList<VideoAppearance> video_appearance_list = yh_video_appearanceDAO.selectVideoAppearanceByFaceIdList(similar_face_id_list);
 				

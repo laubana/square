@@ -259,6 +259,7 @@ function createEventScheduleAction()
 	var map = {};
 	map["name"] = $("#Event_title").val();
 	map["content"] = $("#event_schedule_content").val();
+	map["group_id"] = ${group.group_id};
 	map["event_id"] = ${event.event_id};
 	map["region"] = "R";
 	map["latitude"] = "A";
@@ -275,7 +276,10 @@ function createEventScheduleAction()
 		    			type: "POST",
 		    			data: JSON.stringify(map),
 		    			contentType: "application/json; charset=UTF-8",
-		    			success: function(result){},
+		    			success: function(result)
+		    			{
+		    				location.href("viewGroupForm?group_category=${group_category.group_category_id&group_id=${group.group_id}}");
+		    			},
 		    			error: function(){}
 		    				});
 					clearInterval(interval);
