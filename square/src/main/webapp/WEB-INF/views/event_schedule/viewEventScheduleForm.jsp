@@ -289,8 +289,8 @@
 	<!-- 맵 띄우는 스크립트 -->
 	<style>
 		#map {
-			width: 500px;
-			height: 350px;
+			width: 750px;
+			height: 500px;
 			position: relative !important; /* changing this to fixed makes the map dissapear */
 			top: 0; 
 			bottom: 0; 
@@ -406,8 +406,8 @@
 					<!-- 맵 -->
 					<section>
 						<div class="container">
-							<div id = "map"></div>
-							<div>
+							<div align ="center">
+								<div id = "map"></div>
 								場所: ${ requestScope.place }
 							</div>
 						</div>
