@@ -34,7 +34,7 @@ public class YHattendEventScheduleAction
 	@Autowired
 	YHEventScheduleUserScheduleDAO yh_event_schedule_user_scheduleDAO;
 	
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping(value = "/insertEventScheduleUserScheduleAction", method = RequestMethod.POST)
 	public void insertEventScheduleUserScheduleAction
 	(
@@ -53,5 +53,5 @@ public class YHattendEventScheduleAction
 			
 			yh_event_schedule_user_scheduleDAO.insertEventScheduleUserSchedule(event_schedule_user_schedule_list.get(i));
 		}
-	}
+	}*/
 }
