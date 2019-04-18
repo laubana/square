@@ -39,14 +39,19 @@
 					for( m = 0; m < results[0].address_components.length; m = m +1 ){ ////3번 시작
 						if( results[0].address_components[m].types[0] == "administrative_area_level_2" )
 							{ 	
-								console.log('2: '+ results[0].address_components[m].types[0]);								
-								str1 = String( results[0].address_components[m].long_name );
-								result_area = str1;
-								return result_area;
+								console.log('return check: ' + result_area);								
+								result_area = results[0].address_components[m].long_name;
+								return String( results[0].address_components[m].long_name );
 							}
-						
 					}//3번 끝
-					console.log(result_area + 'return check');								
+					for( m = 0; m < results[0].address_components.length; m = m +1 ){ ////4번 시작
+						if( results[0].address_components[m].types[0] == "administrative_area_level_1" )
+							{ 	
+								console.log('return check: ' + result_area);								
+								result_area = results[0].address_components[m].long_name;
+								return String( results[0].address_components[m].long_name );
+							}
+					}//4번 끝
 					return result_area;
 				} else {
 	   				alert('Geocode was not successful for the following reason: ' + status);
@@ -54,10 +59,6 @@
 	   		}
 	   );
 	 } 
-		
-		
-		
-		
 		
 	</script>
 	
