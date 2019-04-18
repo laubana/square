@@ -330,7 +330,7 @@
 			<section id="header">
 				<header>
 					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>
-					<h1 id="logo"><a href="viewGroupForm?group_id=${group.group_id}">${group.name}</a></h1>
+					<h1 id="logo"><a href="viewGroupForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}">${group.name}</a></h1>
 					<p style="font-size:15px;">
 					<c:forEach var="group_hashtag" items="${group_hashtag_list}">
 							#${group_hashtag.hashtag}
@@ -382,6 +382,14 @@
 								<header>
 									<div class="title">
 										<h2><a href="">${event_schedule.name}</a></h2>
+									<c:if test="${event_schedule.start_date != 0 && event_schedule.end_date != 0}">
+										<h6 style="display: inline;"><%= (new SimpleDateFormat("yyyy年 MM月 dd日")).format(new Date(((EventSchedule)(request.getAttribute("event_schedule"))).getStart_date()))%></h6>
+										<h6 style="display: inline;"> ~ </h6>
+										<h6 style="display: inline;"><%= (new SimpleDateFormat("yyyy年 MM月 dd日")).format(new Date(((EventSchedule)(request.getAttribute("event_schedule"))).getEnd_date()))%></h6>
+									</c:if>
+									<c:if test="${event_schedule.start_date == 0 || event_schedule.end_date == 0}">
+										<h6>未定</h6>
+									</c:if>
 									</div>
 									<div class="meta">
 										<time class="published"><%= (new SimpleDateFormat("yyyy年 MM月 dd日")).format(new Date(((EventSchedule)(request.getAttribute("event_schedule"))).getInput_date()))%></time>
@@ -391,9 +399,7 @@
 								<p>
 									${event_schedule.content}
 								</p>
-								<div align="right"><footer>
-										<a href="#" class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
-										<a href="#" class="icon fa-comment">128</a>&nbsp;&nbsp;				
+								<div align="right"><footer>			
 								</footer></div>
 							</article>
 							</section>
@@ -499,7 +505,7 @@
 											</c:forEach>
 											<br>
 											<c:if test="${video_list.size() != 0}">
-											<video width='auto' height='auto' controls>
+											<video width='640' height='auto' controls>
 											<c:forEach var="video" items="${video_list}">
 											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
 											</c:forEach>

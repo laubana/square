@@ -1,5 +1,6 @@
 package project.ppaya.square.yhcontroller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -85,7 +86,7 @@ public class YHTestController
 			logger.debug("{}", category_list.toString());			
 		}*/
 		
-		YHMSFaceUtil.detectFace(Reference.event_schedule_image_path, "event_schedule2_image1.jpg");
+		YHMSFaceUtil.getFace(Reference.event_schedule_image_path, "event_schedule2_image1.jpg");
 	}
 	@RequestMapping(value = "yhtest1", method = RequestMethod.GET)
 	public String yhtest1(Model request)
@@ -131,6 +132,15 @@ public class YHTestController
 	public String yhtest3(Model request)
 	{
 		return "yhtest/yhtest3";
+	}
+	@RequestMapping(value = "yhtest4", method = RequestMethod.GET)
+	public void yhtest4(Model request)
+	{
+		try
+		{
+			logger.debug("{}", (new SimpleDateFormat("HH:mm:ss.SSS")).parse("00:01:45.946").getTime());
+		}
+		catch(Exception error){error.printStackTrace();}
 	}
 	@RequestMapping(value = "yhinit", method = RequestMethod.GET)
 	public void yhinit()

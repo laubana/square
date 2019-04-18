@@ -96,11 +96,13 @@
 							</article>
 						</c:forEach>
 						<c:if test="${video_list.size() != 0}">
-						<video width='auto' height='auto' controls>
+						<video width='320' height='auto' controls id="video">
 							<c:forEach var="video" items="${video_list}">
 								<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
+								
 									</c:forEach>
 									</video>
+									<div id="video_info" class="inner"></div>
 						</c:if>
 						<br><br><br>
 						</div>
@@ -136,4 +138,45 @@
 			<script src="resources/MyPage/assets/js/main.js"></script>
 
 	</body>
+	<script>
+	var video = document.getElementById("video");
+	var video_interval;
+
+	var video_appearance_list_list = JSON.parse('${json_temp_video_list}')[0].video_appearance_list_list;
+	var user_list = JSON.parse('${json_temp_video_list}')[0].user_list;
+	
+	video.onplaying = function() {
+		video_interval = setInterval(function()
+				{
+					var time = video.currentTime * 1000;
+					var list = [];
+					
+					for(var i = 0; i < video_appearance_list_list.length; i++)
+					{
+						for(var j = 0; j < video_appearance_list_list[i].length; j++)
+						{
+							if(video_appearance_list_list[i][j].start_time <= time && time <= video_appearance_list_list[i][j].end_time)
+							{
+								list.push(i);
+								break;
+							}
+						}
+					}
+					
+					var buff = "";
+					
+					for(var i = 0; i < list.length; i++)
+					{
+						buff += "<a class='image avatar'><img src='resources/image/user_image/" + user_list[i].image_id + "' alt='' /></a>"
+					}	
+					
+					document.getElementById("video_info").innerHTML = buff;
+				}, 10);
+	};
+	video.onpause = function()
+	{
+		clearInterval(video_interval);
+	};
+	console.log(JSON.parse('${json_temp_video_list}'));
+	</script>
 </html>

@@ -32,9 +32,11 @@ public class YHVideoIndexerUtil
             HttpGet httpGet = new HttpGet(uriBuilder.build());
 
             HttpResponse httpResponse = httpClient.execute(httpGet);
-            HttpEntity entity = httpResponse.getEntity();
+            HttpEntity httpEntity = httpResponse.getEntity();
 
-            if(entity != null){return EntityUtils.toString(entity).trim();}
+            String result = EntityUtils.toString(httpEntity).trim();
+            
+            if(httpEntity != null){return result;}
             else{return null;}
         }
         catch(Exception error){error.printStackTrace(); return null;}

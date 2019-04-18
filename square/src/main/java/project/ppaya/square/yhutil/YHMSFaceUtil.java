@@ -57,10 +57,28 @@ public class YHMSFaceUtil
             				"\"maxNumOfCandidatesReturned\":1000" +
             		"}"));
             
-            HttpResponse httpResponse = httpClient.execute(httpPost);
-            
-            result = EntityUtils.toString(httpResponse.getEntity()).trim();
+            while(true)
+            {
+            	HttpResponse httpResponse = httpClient.execute(httpPost);
+            	result = EntityUtils.toString(httpResponse.getEntity()).trim();
 
+            	System.err.println(result);
+            	
+            	try
+            	{
+	            	jsonObject = new JSONObject(result);
+	            	
+	            	if(!jsonObject.isNull("error"))
+	            	{
+	            		if(!jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
+	            		{
+	            			break;
+	            		}
+	            	}
+            	}
+            	catch(Exception error){break;}
+            } 
+            
             jsonArray = new JSONArray(result);
             
             for(int i = 0; i <jsonArray.length(); i++)
@@ -121,6 +139,7 @@ public class YHMSFaceUtil
 	}
 	public static String getSimilarFace(String list_id, String face_id)
 	{		
+		String result;
 		HttpClient httpClient = HttpClients.createDefault();
 		
         try
@@ -141,7 +160,11 @@ public class YHMSFaceUtil
             
             HttpResponse httpResponse = httpClient.execute(httpPost);
             
-            return EntityUtils.toString(httpResponse.getEntity()).trim();
+            result = EntityUtils.toString(httpResponse.getEntity()).trim();
+            
+            System.err.println(result);
+            
+            return result;
         }
         catch (Exception error)
         {
@@ -149,8 +172,9 @@ public class YHMSFaceUtil
             return error.getMessage();
         }
 	}
-	public static String detectFace(String path, String file)
+	public static String getFaceId(String path, String file)
 	{			
+        String result;
 		HttpClient httpClient= HttpClientBuilder.create().build();  
 		
         try
@@ -166,9 +190,75 @@ public class YHMSFaceUtil
             
             httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 
-            HttpResponse httpResponse = httpClient.execute(httpPost);
+            while(true)
+            {
+            	HttpResponse httpResponse = httpClient.execute(httpPost);
+            	result = EntityUtils.toString(httpResponse.getEntity()).trim();
 
-            String result = EntityUtils.toString(httpResponse.getEntity()).trim(); 
+            	System.err.println(result);
+            	
+            	try
+            	{
+	            	JSONObject jsonObject = new JSONObject(result);
+	            	
+	            	if(!jsonObject.isNull("error"))
+	            	{
+	            		if(!jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
+	            		{
+	            			break;
+	            		}
+	            	}
+            	}
+            	catch(Exception error){break;}
+            }           
+            
+            return result;
+        }
+        catch(Exception error)
+        {
+        	error.printStackTrace();
+            return error.getMessage();
+        }
+	}
+	public static String getFace(String path, String file)
+	{			
+        String result;
+		HttpClient httpClient= HttpClientBuilder.create().build();  
+		
+        try
+        {			
+			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect");
+			
+			uriBuilder.setParameter("returnFaceId", "true");
+            
+			HttpPost httpPost = new HttpPost(uriBuilder.build());
+			
+            httpPost.setHeader("Content-Type", "application/octet-stream");
+            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
+            
+            httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
+
+            while(true)
+            {
+            	HttpResponse httpResponse = httpClient.execute(httpPost);
+            	result = EntityUtils.toString(httpResponse.getEntity()).trim();
+
+            	System.err.println(result);
+            	
+            	try
+            	{
+	            	JSONObject jsonObject = new JSONObject(result);
+	            	
+	            	if(!jsonObject.isNull("error"))
+	            	{
+	            		if(!jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
+	            		{
+	            			break;
+	            		}
+	            	}
+            	}
+            	catch(Exception error){break;}
+            }           
             
             return result;
         }

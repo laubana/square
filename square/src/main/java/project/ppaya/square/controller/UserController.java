@@ -2,6 +2,7 @@ package project.ppaya.square.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -52,6 +53,8 @@ public class UserController
 	YHImageAlbumDAO yh_image_albumDAO;
 	@Autowired
 	YHVideoAlbumDAO yh_video_albumDAO;
+	@Autowired
+	YHVideoAppearanceDAO yh_video_appearanceDAO;
 	
 	@Autowired
 	YHUtil yh_util;
@@ -123,6 +126,34 @@ public class UserController
 		ArrayList<String> event_schedule_video_id_list = yh_video_albumDAO.getEventScheduleVideoIdByUserIdNotBlind(user_id);
 		ArrayList<EventScheduleVideo> event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleVideoIdList(event_schedule_video_id_list);
 		//EventScheduleVideo List 전송
+		
+		ArrayList<HashMap<String, Object>> video_list = new ArrayList<>();
+		for(int i = 0; i < event_schedule_video_list.size(); i++)
+		{
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("video", event_schedule_video_list.get(i));
+			
+			ArrayList<String> face_id_list = yh_event_schedule_video_faceDAO.getEventScheduleVideoFaceIdByEventScheduleVideoId(event_schedule_video_list.get(i).getEvent_schedule_video_id());
+			
+			ArrayList<User> user_list = yh_userDAO.selectUser();
+			
+			ArrayList<ArrayList<VideoAppearance>> video_appearance_list_list = new ArrayList<>();
+			
+			for(int j = 0; j < user_list.size(); j++)
+			{
+				ArrayList<String> similar_face_id_list = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(face_id_list, (new JSONArray(YHMSFaceUtil.getFace(Reference.user_image_path, user_list.get(j).getImage_id()))).getJSONObject(0).getString("faceId"));
+				
+				ArrayList<VideoAppearance> video_appearance_list = yh_video_appearanceDAO.selectVideoAppearanceByFaceIdList(similar_face_id_list);
+				
+				video_appearance_list_list.add(video_appearance_list);
+			}
+			map.put("user_list", user_list);
+			map.put("video_appearance_list_list", video_appearance_list_list);
+			
+			video_list.add(map);
+		}
+		request.addAttribute("json_temp_video_list", new JSONArray(video_list));
+		request.addAttribute("temp_video_list", video_list);
 		request.addAttribute("video_list", event_schedule_video_list);
 		
 		return "user/viewUserForm";
@@ -149,10 +180,10 @@ public class UserController
 		ArrayList<Group> group_list = yh_groupDAO.selectGroupByGroupIdList(group_id_list);		
 		request.addAttribute("group_list", group_list);
 		
-		/*yh_util.updateEventScheduleImageFace(user_id);
+		yh_util.updateEventScheduleImageFace(user_id);
 		yh_util.updateImageAlbum(user_id);
 		yh_util.updateEventScheduleVideoFace(user_id);
-		yh_util.updateVideoAlbum(user_id);*/
+		yh_util.updateVideoAlbum(user_id);
 		
 		return "user/listUserAlbumForm";
 	}

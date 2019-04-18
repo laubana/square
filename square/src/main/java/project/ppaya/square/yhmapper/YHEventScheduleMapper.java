@@ -1,11 +1,13 @@
 package project.ppaya.square.yhmapper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import project.ppaya.square.vo.EventSchedule;
 
 public interface YHEventScheduleMapper
 {
+	public int insertEventSchedule(HashMap<String, Object> map);
 	public ArrayList<Integer> getEventScheduleIdByEventScheduleIdList(ArrayList<Integer> event_schedule_id_list);
 	public EventSchedule selectEventScheduleByEventScheduleId(int event_schedule_id);
 	public ArrayList<EventSchedule> selectEventScheduleByEventId(int event_id);

@@ -9,6 +9,8 @@
 		<typeAlias type="project.ppaya.square.vo.ImageAlbum" alias="ImageAlbum" />
 		<typeAlias type="project.ppaya.square.vo.VideoAlbum" alias="VideoAlbum" />
 		
+		<typeAlias type="project.ppaya.square.vo.VideoAppearance" alias="VideoAppearance" />
+		
 		<typeAlias type="project.ppaya.square.vo.GroupCategory" alias="GroupCategory" />
 		<typeAlias type="project.ppaya.square.vo.Group" alias="Group" />
 		<typeAlias type="project.ppaya.square.vo.GroupAttendance" alias="GroupAttendance" />
@@ -45,6 +47,8 @@
 		<mapper resource="yhmapper/yhuser_hashtag_mapper.xml" />
 		<mapper resource="yhmapper/yhimage_album_mapper.xml" />
 		<mapper resource="yhmapper/yhvideo_album_mapper.xml" />
+		
+		<mapper resource="yhmapper/yhvideo_appearance_mapper.xml" />
 		
 		<mapper resource="yhmapper/yhgroup_category_mapper.xml" />
 		<mapper resource="yhmapper/yhgroup_mapper.xml" />

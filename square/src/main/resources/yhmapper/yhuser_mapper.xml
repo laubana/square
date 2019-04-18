@@ -4,6 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.ppaya.square.yhmapper.YHUserMapper">
+<select id="selectUser" resultType="user">
+SELECT
+	*
+FROM
+	TABLE_U
+</select>
 <select id="selectUserByUserIdPassword" parameterType="map" resultType="User">
 SELECT
 	*

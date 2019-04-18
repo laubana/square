@@ -292,9 +292,9 @@
 											</c:forEach>
 											<br>
 											<c:if test="${video_list.size() != 0}">
-											<video width='640' height='auto' controls>
+											<video width='640' height='auto' id="video" controls>
 											<c:forEach var="video" items="${video_list}">
-											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
+											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4' >
 											</c:forEach>
 											</video>
 											</c:if>
@@ -358,7 +358,21 @@
 					</section>
 
 			</div>
+<script>
+var video = document.getElementById("video");
+var video_interval;
+video.onplaying = function() {
+	video_interval = setInterval(function()
+			{
 
+		  console.log(video.currentTime);
+			}, 1000);
+};
+video.onpause = function()
+{
+	clearInterval(video_interval);
+};
+</script>
 <script type="text/javascript">
 //숨기기,보이기
 var bDisplay = true;

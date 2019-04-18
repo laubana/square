@@ -1,3 +1,4 @@
+<%@page import="project.ppaya.square.vo.EventSchedule"%>
 <%@page import="project.ppaya.square.vo.Event"%>
 <%@page import="project.ppaya.square.vo.EventComment"%>
 <%@page import="java.util.HashMap"%>
@@ -154,7 +155,7 @@
 			<section id="header">
 				<header>
 					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>
-					<h1 id="logo"><a href="viewGroupForm?group_id=${group.group_id}">${group.name}</a></h1>
+					<h1 id="logo"><a href="viewGroupForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}">${group.name}</a></h1>
 					<p style="font-size:15px;">
 					<c:forEach var="group_hashtag" items="${group_hashtag_list}">
 							#${group_hashtag.hashtag}
@@ -324,7 +325,7 @@
 							<section id="five">
 								<div class="container">
 									<h3>イベント・スケジュール</h3>
-									<div align="right"><a href="createEventScheduleForm" class="button">스케줄 생성</a></div>
+									<div align="right"><a href="createEventScheduleForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">스케줄 생성</a></div>
 									<div class="features">
 									<c:forEach var="event_schedule" items="${event_schedule_list}">
 									<article>
@@ -334,6 +335,14 @@
 										
 											</div>
 										</article>
+										<c:if test="${event_schedule.start_date != 0 && event_schedule.end_date != 0}">
+										<h6 style="display: inline;"><%= (new SimpleDateFormat("yyyy年 MM月 dd日")).format(new Date(((EventSchedule)(pageContext.getAttribute("event_schedule"))).getStart_date()))%></h6>
+										<h6 style="display: inline;"> ~ </h6>
+										<h6 style="display: inline;"><%= (new SimpleDateFormat("yyyy年 MM月 dd日")).format(new Date(((EventSchedule)(pageContext.getAttribute("event_schedule"))).getEnd_date()))%></h6>
+									</c:if>
+									<c:if test="${event_schedule.start_date == 0 || event_schedule.end_date == 0}">
+										<h6>未定</h6>
+									</c:if>
 										</c:forEach>
 											</div>
 											
