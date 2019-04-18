@@ -1,6 +1,7 @@
 package project.ppaya.square.yhdao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,26 @@ public class YHEventDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public int insertEvent(String name, String content, String user_id, int group_id, String image_id)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("name", name);
+		map.put("content", content);
+		map.put("user_id", user_id);
+		map.put("group_id", group_id);
+		map.put("image_id", image_id);
+		
+		YHEventMapper mapper = sqlSession.getMapper(YHEventMapper.class);
+		
+		try
+		{
+			result = mapper.insertEvent(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public Event selectEventByEventId(int event_id)
 	{
 		Event event = null;
