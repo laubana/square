@@ -251,7 +251,7 @@
 									<h3 style="display: inline;">コメント</h3>
 						<p align="right" class="icon fa-comment">${comment_list.size()}</p>
 						<div class="comments">
-						<c:forEach var="element" items="${comment_list}">
+						<c:forEach var="element" items="${comment_list}" end="2">
 						<div class="comment-wrap">
 							<div>
 							<a href="viewUserForm?user_id=${element.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${element.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
@@ -301,7 +301,7 @@
 						
 									<div class="features" align="center">
 										<article class="col-6 col-12-xsmall work-item">
-											<c:forEach var="event_schedule_image" items="${event_schedule_image_list}">
+											<c:forEach var="event_schedule_image" items="${event_schedule_image_list}" end="3">
 												<a href="resources/image/event_schedule_image/${event_schedule_image.filename}" class="image thumb"><img src="resources/image/event_schedule_image/${event_schedule_image.filename}" alt="" /></a>
 											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.event_schedule_id}</h3>
 											</c:forEach>
@@ -326,7 +326,7 @@
 									<h3>イベント・スケジュール</h3>
 									<div align="right"><a href="createEventScheduleForm" class="button">스케줄 생성</a></div>
 									<div class="features">
-									<c:forEach var="event_schedule" items="${event_schedule_list}">
+									<c:forEach var="event_schedule" items="${event_schedule_list}" end="2">
 									<article>
 										
 											<div class="inner">

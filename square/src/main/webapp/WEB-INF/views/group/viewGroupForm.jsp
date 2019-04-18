@@ -233,7 +233,7 @@
 									<h3>コメント</h3>
 									<p class="icon fa-comment" align="right">${comment_list.size()}</p>
 						<div class="comments">
-						<c:forEach var="element" items="${comment_list}">
+						<c:forEach var="element" items="${comment_list}" end="2">
 						<div class="comment-wrap">
 							<div>
 							<a href="viewUserForm?user_id=${element.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${element.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
@@ -286,7 +286,7 @@
 						
 									<div class="features" align="center">
 										<article class="col-6 col-12-xsmall work-item">
-											<c:forEach var="element" items="${image_list}">
+											<c:forEach var="element" items="${image_list}" end="3">
 												<a href="resources/image/event_schedule_image/${element.image.filename}" class="image thumb"><img src="resources/image/event_schedule_image/${element.image.filename}" alt="" /></a>
 											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${element.description}</h3>
 											</c:forEach>
@@ -315,7 +315,7 @@
 						</c:if>
 					</c:if>
 									<div class="features">
-									<c:forEach var="event" items="${event_list}">
+									<c:forEach var="event" items="${event_list}" end="2">
 									<article>
 											<a href="viewEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="image"><img src="resources/image/event_image/${event.image_id}" alt="" /></a>
 											<div class="inner">
