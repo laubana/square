@@ -23,8 +23,8 @@
 		
 	<style>
 	#map {
-			width: 500px;
-			height: 350px;
+			width: 750px;
+			height: 500px;
 			position: relative !important; /* changing this to fixed makes the map dissapear */
 			top: 0; 
 			bottom: 0; 
@@ -213,8 +213,10 @@
 								<p>
 									${event.content}
 								</p>
+								<div align ="center">
 									<div id="map" ></div>
 									場所: ${requestScope.event_place}
+								</div>
 								<div align="right"><footer>
 										<a class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
 										&nbsp;&nbsp;				
@@ -513,7 +515,7 @@ function initMap() {
 		markers.map( function(marker, i) {
 			
 			var infowindow = new google.maps.InfoWindow({
-		          content: locations[i].name + '<br>場所: ' + locations[i].region + '<br>内容: '+ locations[i].content + '<div><img src = "resources/image/event_schedule_image/event_schedule' + i + '_image1' + '.jpg">',
+		          content: locations[i].name + '<br>場所: ' + locations[i].region + '<br>内容: '+ locations[i].content + '<div><img width="210px" height="140px" src = "resources/image/sample/it/' + i + '.jpg">',
 		          maxWidth: 250
 		        });
 			  marker.addListener('click', function() {
