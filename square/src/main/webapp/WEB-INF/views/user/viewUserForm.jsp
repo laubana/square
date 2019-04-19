@@ -22,7 +22,7 @@
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<div align="left"><h1 style="font-size:50px;"><a href="main">Web Site Name</a></h1></div>
+					<div align="left"><h1 style="font-size:30px;"><a href="main">みんな・みんな</a></h1></div>
 					<a class="image avatar"><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
 					<h1><strong>${user.name}</strong>님의 마이페이지<br /></h1>
 					<nav id="nav">
@@ -95,17 +95,21 @@
 								<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">파일 이름</h3>
 							</article>
 						</c:forEach>
+						</div>
+						<h1>영상</h1>
+						<div class="">
 						<c:if test="${video_list.size() != 0}">
 							<c:forEach var="element" items="${video_list}">
 							
-						<video width='640' height='auto' controls>
-								<source src='resources/image/event_schedule_video/${element.video.filename}' type='video/mp4'>
-								
-									</video>
-									</c:forEach>
+						<video width='360' height='300' style="background-color: black;" controls>
+								<source src='resources/image/event_schedule_video/${element.video.filename}' type='video/mp4'>		
+						</video>
+							
+							</c:forEach>
 						</c:if>
-						<br><br><br>
 						</div>
+						<br><br>
+						
 								<div align="center"><a href="listUserAlbumForm?user_id=${user.user_id}" class="button">앨범 편집</a></div>
 					</section>
 
