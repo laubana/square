@@ -53,6 +53,8 @@ public class UserAction {
 	YHImageAlbumDAO yh_image_albumDAO;
 	@Autowired
 	YHVideoAlbumDAO yh_video_albumDAO;
+	@Autowired
+	YHVideoAppearanceDAO yh_video_appearanceDAO;
 	
 	@Autowired
 	SH_DAO_User sh_udao;
@@ -148,6 +150,8 @@ public class UserAction {
 		ArrayList<Integer> group_id_list = (ArrayList<Integer>)map.get("group_id_list");
 		boolean self = (boolean)map.get("self");
 		
+		User user = yh_userDAO.selectUserByUserId(user_id);
+		
 		ArrayList<Integer> event_id_list = yh_eventDAO.getEventIdByGroupIdList(group_id_list);
 		
 		ArrayList<Integer> old_event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventIdList(event_id_list);
@@ -173,7 +177,9 @@ public class UserAction {
 		
 		ArrayList<EventScheduleImage> event_schedule_image_list;
 		
-		ArrayList<EventScheduleVideo> event_schedule_video_list;
+		ArrayList<EventScheduleVideo> event_schedule_video_list;		
+
+		ArrayList<HashMap<String, Object>> video_list = new ArrayList<>();
 		
 		if(self == true)
 		{
@@ -186,6 +192,23 @@ public class UserAction {
 				event_schedule_image_list.get(i).setBlind(yh_image_albumDAO.getBlindByUserIdEventScheduleImageId(user_id, event_schedule_image_list.get(i).getEvent_schedule_image_id()));
 			}
 			event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleVideoIdList(event_schedule_video_id_list);
+			
+			for(int i = 0; i < event_schedule_video_list.size(); i++)
+			{
+				HashMap<String, Object> video_list_map = new HashMap<>();
+				
+				video_list_map.put("index", i);
+				video_list_map.put("video", event_schedule_video_list.get(i));
+				video_list_map.put("blind", yh_video_albumDAO.getBlindByUserIdEventScheduleVideoId(user_id, event_schedule_video_list.get(i).getEvent_schedule_video_id()));
+				
+				ArrayList<String> face_id_list = yh_event_schedule_video_faceDAO.getEventScheduleVideoFaceIdByEventScheduleVideoId(event_schedule_video_list.get(i).getEvent_schedule_video_id());				
+				ArrayList<String> similar_face_id_list = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(face_id_list, YHMSFaceUtil.getFace(Reference.user_image_path, user.getImage_id()));
+				video_list_map.put("appearance_list", yh_video_appearanceDAO.selectVideoAppearanceByFaceIdList(similar_face_id_list));
+				
+				video_list.add(video_list_map);
+			}
+			
+			
 			for(int i = 0; i < event_schedule_video_list.size(); i++)
 			{
 				event_schedule_video_list.get(i).setBlind(yh_video_albumDAO.getBlindByUserIdEventScheduleVideoId(user_id, event_schedule_video_list.get(i).getEvent_schedule_video_id()));
@@ -206,6 +229,7 @@ public class UserAction {
 		}
 
 		HashMap<String, Object> result = new HashMap<>();
+		result.put("video_list", video_list);
 		result.put("event_schedule_image_list", event_schedule_image_list);
 		result.put("event_schedule_video_list", event_schedule_video_list);
 		

@@ -170,7 +170,7 @@ border: 0;
 							<br>
 							<!-- 폼 -->
 							<form action="" method="post">
-							<input type="text" name="group_id" id="input" placeholder="그룹 이름">
+							<input type="text" name="group_id" id="input" placeholder="그룹 이름" autocomplete="off">
 							<br>
 							<h1>그룹 소개</h1>
 							<br>
@@ -210,11 +210,11 @@ border: 0;
   								</div>
 							</div>
 							<h1>그룹 Tag</h1>
-							<input type="text" placeholder="그룹 tag1" class="input1" name="group_hashtag">
-							<input type="text" placeholder="그룹 tag2" class="input2" name="group_hashtag">
-							<input type="text" placeholder="그룹 tag3" class="input3" name="group_hashtag">
-							<input type="text" placeholder="그룹 tag4" class="input4" name="group_hashtag">
-							<input type="text" placeholder="그룹 tag5" class="input5" name="group_hashtag">
+							<input type="text" placeholder="그룹 tag1" class="input1" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="그룹 tag2" class="input2" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="그룹 tag3" class="input3" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="그룹 tag4" class="input4" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="그룹 tag5" class="input5" name="group_hashtag" autocomplete="off">
 							<br>
 							<h1>그룹 활동 지역</h1>
 							<input type="text" placeholder="그룹 활동 지역" id="region">
@@ -253,6 +253,32 @@ border: 0;
 			<script src="resources/GroupMain/assets/js/breakpoints.min.js"></script>
 			<script src="resources/GroupMain/assets/js/util.js"></script>
 			<script src="resources/GroupMain/assets/js/main.js"></script>
+		<!-- 자동완성검색기능 -->
+		<script type="text/javascript" src="resources/autocomplete/jquery/lib/jquery.js"></script>
+		<script type='text/javascript' src='resources/autocomplete/jquery/lib/jquery.bgiframe.min.js'></script>
+		<script type='text/javascript' src='resources/autocomplete/jquery/lib/jquery.ajaxQueue.js'></script>
+		<script type='text/javascript' src='resources/autocomplete/jquery/jquery.autocomplete.js'></script>
+
+<script>
+	var availableTags = [
+							'北海道','滋賀県','青森県','京都府','秋田県','大阪府','岩手県',
+							'奈良県','山形県','和歌山県','宮城県','兵庫県','福島県','鳥取県',
+							'茨城県','島根縣','栃木県','岡山県','群馬県','広島県','埼玉県','山口県',
+							'千葉県','香川県','東京都','徳島県','神奈川県','愛媛県','新潟県','高知県',
+							'富山県','福岡県','石川県','佐賀県','福井県','長崎県','山梨県','大分県','長野県',
+							'熊本県','静岡県','宮崎県','愛知県','鹿児島県','岐阜県','沖縄県','三重県'
+						];
+</script>
+
+<script>
+	$(document).ready(function() {
+	    $("#region").autocomplete(availableTags,{ 
+	        matchContains: true,
+	        selectFirst: false
+	    });
+	});
+</script>
+		
 <script>
 	function createGroupAction()
 	{

@@ -215,6 +215,7 @@ function setAlbumAction()
 		error: function(error){console.log(error);}
 	});
 }
+var appearance_list = [];
 $(document).ready(function () {
 	
 	$(".check").change(function()
@@ -268,9 +269,24 @@ $(document).ready(function () {
 				}
 				if(result.event_schedule_video_list.length != 0)
 				{
+					var video_list = result.video_list;
+									
 					var video_buff = "";
 					
-					for(var i = 0; i < result.event_schedule_video_list.length; i++)
+					for(var = i; i < video_list.length; i++)
+					{
+						appearance_list.push(video_list[i].appearance_list);
+						video_buff += "<video width='320' height='240' controls>";
+						video_buff += "<source src='resources/image/event_schedule_video/" + video_list[i].video.filename +"' type='video/mp4'>";
+						video_buff += "</video>";
+						video_buff += "<span>";
+						for(var j = 0; j < video_list[i].appearance_list.length; j++)
+						{
+							video_buff += "<p>" + video_list[i].appearance_list[j].start_date + "~" + video_list[i].appearance_list[j].end_date + "</p>";
+						}
+						video_buff += "</span>";
+					}
+					/* for(var i = 0; i < result.event_schedule_video_list.length; i++)
 					{
 						
 						video_buff += "<video width='320' height='240' controls>";
@@ -289,7 +305,7 @@ $(document).ready(function () {
 						video_buff += "<label for='video_check_box" + result.event_schedule_video_list[i].event_schedule_video_id + "'/>";
 						video_buff += "<br><h2>Select</h2>";
 						video_buff += "</label>";
-					}
+					} */
 					
 					
 					document.getElementById("video").innerHTML = video_buff;
