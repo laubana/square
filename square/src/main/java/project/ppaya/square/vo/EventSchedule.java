@@ -9,6 +9,7 @@ public class EventSchedule
 	long end_date;
 	String name;
 	String region;
+	String address;
 	String latitude;
 	String longitude;
 	String content;
@@ -80,4 +81,11 @@ public class EventSchedule
 	public void setInput_date(long input_date) {
 		this.input_date = input_date;
 	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
 }

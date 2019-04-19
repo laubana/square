@@ -65,8 +65,8 @@ border: 0;
 	<!-- 구글 맵스 위한 style 태그. 다른 요소 적용할 style이 있다면 style 태그를 별도로 만들어주기 바람 -->
 	<style>
 		#map {
-			width: 500px;
-			height: 350px;
+			width: 750px;
+			height: 500px;
 			position: relative !important; /* changing this to fixed makes the map dissapear */
 			top: 0; 
 			bottom: 0; 
@@ -384,7 +384,7 @@ $("#imgInp5").change(function() {
 	   		, function(results, status) {
 				if (status == 'OK') {
 					map.setCenter(results[0].geometry.location);
-					map.setZoom(12);
+					map.setZoom(15);
 					var marker = new google.maps.Marker({ 
 						map: map,
 						position: results[0].geometry.location
@@ -392,23 +392,50 @@ $("#imgInp5").change(function() {
 					$('#lat').val( results[0].geometry.location.lat );
 					$('#lng').val( results[0].geometry.location.lng );
 					for( m = 0; m < results[0].address_components.length; m = m +1 ){ ////3번 시작
-						if( results[0].address_components[m].types[0] == "administrative_area_level_2" )
+						if( results[0].address_components[m].types[0] == "sublocality" )
 							{ 	
 								result_area = results[0].address_components[m].long_name;
 								$('#region').val(result_area);
-								console.log('return check: ' + result_area);								
+								console.log('return check4: ' + result_area);								
 								return;
 							}
 					}//3번 끝
 					for( m = 0; m < results[0].address_components.length; m = m +1 ){ ////4번 시작
+						if( results[0].address_components[m].types[0] == "administrative_area_level_3" )
+							{ 	
+								result_area = results[0].address_components[m].long_name;
+								$('#region').val(result_area);
+								console.log('return check3: ' + result_area);								
+								return;
+							}
+					}//4번 끝
+					for( m = 0; m < results[0].address_components.length; m = m +1 ){ ////5번 시작
+						if( results[0].address_components[m].types[0] == "administrative_area_level_2" )
+							{ 	
+								result_area = results[0].address_components[m].long_name;
+								$('#region').val(result_area);
+								console.log('return check2: ' + result_area);								
+								return;
+							}
+					}//5번 끝
+					for( m = 0; m < results[0].address_components.length; m = m +1 ){ ////6번 시작
 						if( results[0].address_components[m].types[0] == "administrative_area_level_1" )
 							{ 	
 								result_area = results[0].address_components[m].long_name;
 								$('#region').val(result_area);
-								console.log('return check: ' + result_area);								
+								console.log('return check1: ' + result_area);								
 								return;
 							}
-					}//4번 끝
+					}//6번 끝
+					for( m = 0; m < results[0].address_components.length; m = m +1 ){ ////6번 시작
+						if( results[0].address_components[m].types[0] == "country" )
+							{ 	
+								result_area = results[0].address_components[m].long_name;
+								$('#region').val(result_area);
+								console.log('return check0: ' + result_area);								
+								return;
+							}
+					}//6번 끝
 					return result_area;
 				} else {
 	   				alert('Geocode was not successful for the following reason: ' + status);
