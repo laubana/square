@@ -16,6 +16,23 @@ public class YHGroupDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<Group> selectGroupByNameOrderByGroupAttendanceCount(int group_id, String name)
+	{
+		ArrayList<Group> group_list = null;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("group_id", group_id);
+		map.put("name", name);
+		
+		YHGroupMapper mapper = sqlSession.getMapper(YHGroupMapper.class);
+		
+		try
+		{
+			group_list = mapper.selectGroupByNameOrderByGroupAttendanceCount(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_list;
+	}
 	public int insertGroup
 	(
 			int group_category_id,

@@ -81,7 +81,7 @@
 									<h3>コメント</h3>
 						<div class="comments">
 
-							<c:forEach var="element" items="${comment_list}" end="2">
+							<c:forEach var="element" items="${comment_list}">
 						<div class="comment-wrap">
 							<div>
 							<a href="viewUserForm?user_id=${element.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${element.user.image_id}" alt="" style="width: 100px; height:auto;"></a>

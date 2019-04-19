@@ -4,6 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.ppaya.square.yhmapper.YHGroupCommentMapper">
+<insert id="insertGroupComment" parameterType="map">
+INSERT INTO TABLE_GCO
+(
+	GROUP_COMMENT_ID,
+	GROUP_ID,
+	USER_ID,
+	CONTENT
+)
+VALUES
+(
+	GCO_SEQ.NEXTVAL,
+	#{group_id},
+	#{user_id},
+	#{content}
+)
+</insert>
 <select id="selectGroupCommentByGroupCommentId" parameterType="int" resultType="GroupComment">
 SELECT
 	*
@@ -36,6 +52,6 @@ FROM
 WHERE
 	GROUP_ID = #{group_id}
 ORDER BY
-	GROUP_COMMENT_ID
+	INPUT_DATE DESC
 </select>
 </mapper>

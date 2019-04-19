@@ -167,6 +167,7 @@ $('input[type=search]').on({
 				
 				map["keyword"] = $("#keyword").val();
 				map["group_category_id"] = group_category_id;
+				console.log($(""));
 				
 				$.ajax({
 					url: "listGroupAction",

@@ -1,6 +1,7 @@
 package project.ppaya.square.yhdao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,24 @@ public class YHGroupCommentDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public int insertGroupComment(int group_id, String user_id, String content)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("group_id", group_id);
+		map.put("user_id", user_id);
+		map.put("content", content);
+		
+		YHGroupCommentMapper mapper = sqlSession.getMapper(YHGroupCommentMapper.class);	
+		
+		try
+		{
+			result = mapper.insertGroupComment(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public GroupComment selectGroupCommentByGroupCommentId(int group_comment_id)
 	{
 		GroupComment group_comment = null;

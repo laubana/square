@@ -273,8 +273,14 @@
 							</div>
 						</div>
 						</c:forEach>
-						<textarea class="comment-block"></textarea><br>
-						<div align="right"><input type="button" value="作成"></div><br><br>
+						<c:if test="${sessionScope.user_id != null}">
+						<c:if test="${group_attendance != null}">
+							
+						<textarea class="comment-block" id="write_comment_content"></textarea><br>
+						<div align="right"><input type="button" id="write_comment_button" onclick="writeGroupCommentAction()" value="作成"></div>
+						<br><br>
+						</c:if>
+					</c:if>
 						<a href="listGroupCommentForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">コメントページへ</a>
 						
 						</div>		
@@ -360,6 +366,24 @@
 					</section>
 
 			</div>
+			<script>
+			function writeGroupCommentAction()
+			{
+				var map = {};
+				map["group_id"] = ${group.group_id};
+				map["content"] = $("#write_comment_content").val();
+			
+				$.ajax({
+					url: "writeGroupCommentAction",
+					type: "POST",
+					data: JSON.stringify(map),
+					dataType: "JSON",
+					contentType: "application/json; charset=UTF-8",
+					success: function(result){location.reload()},
+					error: function(error){console.log(error);}
+				});
+			}
+			</script>
 <script>
 var video = document.getElementById("video");
 var video_interval;

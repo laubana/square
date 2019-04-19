@@ -36,6 +36,16 @@ FROM
 WHERE
 	NAME LIKE '%' || #{name} || '%'
 </select>
+<select id="selectGroupByNameOrderByGroupAttendanceCount" parameterType="map" resultType="Group">
+SELECT
+	*
+FROM
+	TABLE_G
+WHERE
+	NAME LIKE '%' || #{name} || '%'
+ORDER BY
+	(SELECT COUNT(*) FROM TABLE_GA WHERE GROUP_ID = #{group_id}) ASC
+</select>
 <select id="selectGroupByName" parameterType="string" resultType="Group">
 SELECT
 	*

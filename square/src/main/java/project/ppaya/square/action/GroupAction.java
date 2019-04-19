@@ -58,6 +58,10 @@ public class GroupAction {
 	YHImageAlbumDAO yh_image_albumDAO;
 	@Autowired
 	YHVideoAlbumDAO yh_video_albumDAO;
+	@Autowired
+	YHGroupCommentTagDAO yh_group_comment_tagDAO;
+	@Autowired
+	YHCommentTagDAO yh_comment_tagDAO;
 	
 	@Autowired
 	SH_DAO_User sh_udao;
@@ -153,6 +157,40 @@ public class GroupAction {
 			if(yh_groupDAO.insertGroup(group_category_id, user_id, name, content, region, group_logo, group_image) != 0)
 			{
 				break;
+			}
+		}
+	}
+	@ResponseBody
+	@RequestMapping(value = "writeGroupCommentAction", method = RequestMethod.POST)
+	public void writeGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	{
+		String user_id = (String)session.getAttribute("user_id");
+		int group_id = (int)map.get("group_id");
+		String content = (String)map.get("content");
+		
+		while(true)
+		{
+			if(yh_group_commentDAO.insertGroupComment(group_id, user_id, content) != 0)
+			{
+				break;
+			}
+		}
+		
+		ArrayList<GroupComment> group_comment_list = yh_group_commentDAO.selectGroupCommentByGroupId(group_id);		
+		for(int i = 0; i < group_comment_list.size(); i++)
+		{
+			ArrayList<String> source_tag_list = YHMSTextAnalyticsUtil.getKeyPhraseList(group_comment_list.get(i).getContent(), "en");
+			
+			ArrayList<String> target_tag_list = new ArrayList<>();
+			for(int j = 0; j < source_tag_list.size(); j++)
+			{
+				target_tag_list.add(YHGoogleTranslationUtil.getTranslation(source_tag_list.get(j), "en", "ja"));
+			}
+			
+			for(int j = 0; j < source_tag_list.size(); j++)
+			{
+				yh_group_comment_tagDAO.insertGroupCommentTag(group_comment_list.get(i).getGroup_comment_id(), source_tag_list.get(j));
+				yh_comment_tagDAO.insertCommentTag(group_comment_list.get(i).getUser_id(), source_tag_list.get(j));
 			}
 		}
 	}
