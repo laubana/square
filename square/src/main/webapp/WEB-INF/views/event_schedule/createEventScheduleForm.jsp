@@ -151,7 +151,7 @@ border: 0;
 									    <input type = "button" id = "button_mapsearch" value="検索" onclick="codeAddress()">
 										<input type = "hidden" value = "" id = "lat">
 										<input type = "hidden" value = "" id = "lng">
-										<input type = "C" value = "" id = "region">
+										<input type = "hidden" value = "" id = "region">
 									<br><br>
 									<!-- 내용 -->
 									<h1>스케줄 내용</h1>
