@@ -86,7 +86,7 @@
 
 				<!-- Four -->
 					<section id="four">
-						<h1>개인 앨범</h1>
+						<h1>개인 앨범</h1><br>
 						<div class="row">
 						<c:forEach var="event_schedule_image" items="${event_schedule_image_list}">
 						
@@ -96,7 +96,8 @@
 							</article>
 						</c:forEach>
 						</div>
-						<h1>영상</h1>
+						<hr style="width:380px;"><br>
+						<h1>映像</h1><br>
 						<div class="">
 						<c:if test="${video_list.size() != 0}">
 							<c:forEach var="element" items="${video_list}">

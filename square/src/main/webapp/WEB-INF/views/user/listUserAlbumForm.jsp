@@ -140,7 +140,7 @@ label img {
 							</article>
 						</c:forEach> --%>
 
-					<hr><br>
+					<hr style="width:380px;"><br>
 					<h1>映像編集</h1><br>
 					<div id="video" class=""></div><br>	
 					<div align="center"><input type="button" value="確認" onclick="setAlbumAction()"></div>		

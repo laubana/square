@@ -301,7 +301,7 @@
 											<br>
 										</article>
 									</div>
-									<h3>Video</h3>
+									<h3>映像</h3>
 									<div class="features" align="center">
 											<c:if test="${video_list.size() != 0}">
 											<video width='360' height='300' style="background-color: black;" id="video" controls>
