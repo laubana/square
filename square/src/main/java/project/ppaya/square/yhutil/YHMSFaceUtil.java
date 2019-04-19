@@ -68,9 +68,10 @@ public class YHMSFaceUtil
             	{
             		jsonObject = new JSONObject(result);
             		
-            		if(!jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
+            		if(jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
             		{
-            			break;
+            			Thread.sleep(1000);
+            			continue;
             		}
             		else
             		{
@@ -79,20 +80,18 @@ public class YHMSFaceUtil
             	}
             	else
             	{
-            		break;
+                    jsonArray = new JSONArray(result);
+                    
+                    for(int i = 0; i <jsonArray.length(); i++)
+                    {
+                    	jsonObject = jsonArray.getJSONObject(i);
+                    	
+                    	similar_event_schedule_image_face_id_list.add(jsonObject.getString("faceId"));
+                    }
+                    
+                    return similar_event_schedule_image_face_id_list;
             	}
             }
-            
-            jsonArray = new JSONArray(result);
-            
-            for(int i = 0; i <jsonArray.length(); i++)
-            {
-            	jsonObject = jsonArray.getJSONObject(i);
-            	
-            	similar_event_schedule_image_face_id_list.add(jsonObject.getString("faceId"));
-            }
-            
-            return similar_event_schedule_image_face_id_list;
         }
         catch (Exception error)
         {
@@ -170,9 +169,10 @@ public class YHMSFaceUtil
             	{
             		JSONObject jsonObject = new JSONObject(result);
             		
-            		if(!jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
+            		if(jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
             		{
-            			break;
+            			Thread.sleep(1000);
+            			continue;
             		}
             		else
             		{
@@ -180,12 +180,10 @@ public class YHMSFaceUtil
             		}
             	}
             	else
-            	{
-            		break;
+            	{                    
+                    return (new JSONArray(result)).getJSONObject(0).getString("faceId");
             	}
             }
-            
-            return (new JSONArray(result)).getJSONObject(0).getString("faceId");
         }
         catch(Exception error)
         {
@@ -218,22 +216,27 @@ public class YHMSFaceUtil
 
             	System.err.println(result);
             	
-            	try
+            	if(result.charAt(0) == '{')
             	{
-	            	JSONObject jsonObject = new JSONObject(result);
-	            	
-	            	if(!jsonObject.isNull("error"))
-	            	{
-	            		if(!jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
-	            		{
-	            			break;
-	            		}
-	            	}
+            		JSONObject jsonObject = new JSONObject(result);
+            		
+            		System.err.println(jsonObject.toString(2));
+            		
+            		if(jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
+            		{
+            			Thread.sleep(1000);
+            			continue;
+            		}
+            		else
+            		{
+            			return null;
+            		}
             	}
-            	catch(Exception error){break;}
+            	else
+            	{                    
+                    return result;
+            	}
             }           
-            
-            return result;
         }
         catch(Exception error)
         {
