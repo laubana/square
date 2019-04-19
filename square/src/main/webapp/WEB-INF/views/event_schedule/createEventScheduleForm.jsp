@@ -1,8 +1,7 @@
-<%@page import="java.util.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page import = "java.util.Date"%>
+<%@ page import = "java.text.SimpleDateFormat"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language = "java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <!--
 	Read Only by HTML5 UP
@@ -66,8 +65,8 @@ border: 0;
 	<!-- 구글 맵스 위한 style 태그. 다른 요소 적용할 style이 있다면 style 태그를 별도로 만들어주기 바람 -->
 	<style>
 		#map {
-			width: 500px;
-			height: 350px;
+			width: 750px;
+			height: 500px;
 			position: relative !important; /* changing this to fixed makes the map dissapear */
 			top: 0; 
 			bottom: 0; 
@@ -143,20 +142,16 @@ border: 0;
 								</header>
 								
 									<!-- google maps-->
-										<div id="map" ></div>
-									<div align="right">
-										<div id = "place_output"></div>
+									<div align ="center">
+									<div id="map" ></div>
 									</div>
 									<br>
-									<div id = "output_button"></div><br>
-										<input type = "text" id = "search_addr" value = "東京　京橋駅" autocomplete="off">
+									    <input id="address" type="text" value="東京　京橋駅"  autocomplete="off">
 										<br>
-										<input type = "button" id = "button_mapsearch" value = "検索" onClick = "codeAddress()">
-									<div align="right">
-									<footer>
-									</footer>
-									</div>
-								
+									    <input type = "button" id = "button_mapsearch" value="検索" onclick="codeAddress()">
+										<input type = "text" value = "" id = "lat">
+										<input type = "text" value = "" id = "lng">
+										<input type = "text" value = "" id = "region">
 									<br><br>
 									<!-- 내용 -->
 									<h1>스케줄 내용</h1>
@@ -278,7 +273,7 @@ function createEventScheduleAction()
 		    			contentType: "application/json; charset=UTF-8",
 		    			success: function(result)
 		    			{
-		    				location.href("viewGroupForm?group_category=${group_category.group_category_id&group_id=${group.group_id}}");
+		    				location.href("viewGroupForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}}");
 		    			},
 		    			error: function(){}
 		    				});
@@ -377,39 +372,70 @@ $("#imgInp5").change(function() {
 	    	    }
 		map = new google.maps.Map(document.getElementById('map'), mapOptions);
 		geocoder = new google.maps.Geocoder();
-	 	var address = '東京　京橋駅';
-		geocoder.geocode(
-		   		{ 'address': address }
-		   		, function(results, status) {
-					if (status == 'OK') {
-						latlng = results[0].geometry.location;
-						map.setCenter(latlng);
-						var marker = new google.maps.Marker({ 
-							map: map,
-							position: latlng
-							});
-						map.setZoom(15);
-					} else {
-		   				alert('Geocode was not successful for the following reason: ' + status);
-		   			}
-		   		}
-		   );
-		
 	}
 	
-	////////////주소 던져주면 맵 중앙에 띄우는 함수
-	function setAddress(address) {
+	
+	///////////////주소로 검색
+	function codeAddress(address) {
 	var result_area = "not_found";
-	    geocoder.geocode(
-	   		{ 'address': address }
+    var address = document.getElementById('address').value;
+	geocoder.geocode(
+		{ 'address': address }
 	   		, function(results, status) {
 				if (status == 'OK') {
 					map.setCenter(results[0].geometry.location);
+					map.setZoom(15);
 					var marker = new google.maps.Marker({ 
 						map: map,
 						position: results[0].geometry.location
-						});
-					map.setZoom(15);
+				    });
+					$('#lat').val( results[0].geometry.location.lat );
+					$('#lng').val( results[0].geometry.location.lng );
+					for( m = 0; m < results[0].address_components.length; m = m +1 ){ ////3번 시작
+						if( results[0].address_components[m].types[0] == "sublocality" )
+							{ 	
+								result_area = results[0].address_components[m].long_name;
+								$('#region').val(result_area);
+								console.log('return check4: ' + result_area);								
+								return;
+							}
+					}//3번 끝
+					for( m = 0; m < results[0].address_components.length; m = m +1 ){ ////4번 시작
+						if( results[0].address_components[m].types[0] == "administrative_area_level_3" )
+							{ 	
+								result_area = results[0].address_components[m].long_name;
+								$('#region').val(result_area);
+								console.log('return check3: ' + result_area);								
+								return;
+							}
+					}//4번 끝
+					for( m = 0; m < results[0].address_components.length; m = m +1 ){ ////5번 시작
+						if( results[0].address_components[m].types[0] == "administrative_area_level_2" )
+							{ 	
+								result_area = results[0].address_components[m].long_name;
+								$('#region').val(result_area);
+								console.log('return check2: ' + result_area);								
+								return;
+							}
+					}//5번 끝
+					for( m = 0; m < results[0].address_components.length; m = m +1 ){ ////6번 시작
+						if( results[0].address_components[m].types[0] == "administrative_area_level_1" )
+							{ 	
+								result_area = results[0].address_components[m].long_name;
+								$('#region').val(result_area);
+								console.log('return check1: ' + result_area);								
+								return;
+							}
+					}//6번 끝
+					for( m = 0; m < results[0].address_components.length; m = m +1 ){ ////6번 시작
+						if( results[0].address_components[m].types[0] == "country" )
+							{ 	
+								result_area = results[0].address_components[m].long_name;
+								$('#region').val(result_area);
+								console.log('return check0: ' + result_area);								
+								return;
+							}
+					}//6번 끝
 					return result_area;
 				} else {
 	   				alert('Geocode was not successful for the following reason: ' + status);
@@ -417,75 +443,6 @@ $("#imgInp5").change(function() {
 	   		}
 	   );
 	 } 
-	
-	
-	///////////////주소로 검색
-	function codeAddress() {
-		var result_area = "not_found";
-		var address = document.getElementById('search_addr').value;
-		console.log(address);
-		    geocoder.geocode(
-		   		{ 'address': address }
-		   		, function(results, status) {
-					if (status == 'OK') {
-						map.setCenter(results[0].geometry.location);
-						var marker = new google.maps.Marker({ 
-							map: map,
-							position: results[0].geometry.location
-							});
-						map.setZoom(15);
-						return result_area;
-					} else {
-		   				alert('Geocode was not successful for the following reason: ' + status);
-		   			}
-		   		}
-		   );
-	} 
-	
-	
-	
-	
-	///////////////배열 중복 없애는 함수
-	var arealist = ${requestScope.place_list};
-	var arealist_temp = new Array();
-	var flag_same = false;
-	var i=0;
-	var j=0;
-	var k=0;
-		
-		arealist_temp.push(arealist[0]);
-		
-		for(i = 0; i < arealist.length; i = i + 1){
-			flag_same = false;	
-			for(j = 0; j < arealist_temp.length; j = j + 1){
-				if(arealist[i]  == arealist_temp[j]){
-				console.log('i: ' + i + '   j: ' + j);
-					
-					flag_same = true;	
-					break;
-				}
-				
-			}
-			if(!flag_same){
-				arealist_temp.push(arealist[i]);
-				
-			}
-		}	
-		
-		
-var acute = "'";
-var str_output = "";
-var output_button = document.getElementById('output_button"');
-		//////////중복이 제거된 배열 값들을 각각 꺼내와서 body에 버튼으로 채워주기
-		for(k = 0; k < arealist_temp.length; k = k + 1){
-			console.log( JSON.stringify( arealist_temp[k] ).replace(/&quot;/gi, '') + k );
-			
-			str_output = str_output + 
-			'<input type = "button" id = "button' + k + '" value = "'+ arealist_temp[k] + '" onClick = "setAddress('+ acute + arealist_temp[k]+ acute + ')">&nbsp;&nbsp;';			
-		}
-		console.log( str_output );		
-		$('output_button').html(str_output);			
-		document.getElementById('output_button').innerHTML= str_output;
 	
 </script>
 </html>
