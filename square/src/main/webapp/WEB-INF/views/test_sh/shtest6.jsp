@@ -23,80 +23,51 @@
   </head>
   <body>
     <div id="map"></div>
+    
   </body>
 
 
  <!-- 맵 띄우는 스크립트 -->
 
 <script>
-function initMap() {
-    var latlng = new google.maps.LatLng(35.6715003, 139.764913);
-    var mapOptions = {
-			zoom: 15,
-			center: latlng
-    	}
-		var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-		var geocoder = new google.maps.Geocoder();
-		var locations = [];
- 	
-		<c:forEach items = "${requestScope.event_schedule_list}" var = "list">
-			locations.push( { lat: ${list.latitude}, lng: ${list.longitude}, region: "${list.region}", name: "${list.name}", event_schedule_id: ${list.event_schedule_id}, content: "${list.content}", start_date: "${list.start_date}" } );
-		</c:forEach>
+var locations = ${requestScope.event_schedule_list};
 
-		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		
-		var markers = locations.map( function(location, i) {
-			return new google.maps.Marker({	
-					position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
-				});
-			});		
-       var markerCluster = new MarkerClusterer(map, markers,
-           {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-		markers.map( function(marker, i) {
-			var infowindow = new google.maps.InfoWindow({
-		          content: locations[i].name + '<br>場所: ' + locations[i].region + '<br>内容: '+ locations[i].content + '<div><img src = "resources/images/clustering/samplepng/' + i + '.png">',
-		          maxWidth: 250
-		        });
-			  marker.addListener('click', function() {
-					infowindow.open(map, marker);
-				});
-			});
+var region_cnt = [];
+var region_list = [];
+var i = 0;
+var j = 0;
+var flag = false;
+for( i = 0; i < locations.length; i = i + 1 ){
+	flag = false;
+	for( j = 0; j < region_list.length; j = j + 1 ){
+		console.log('for check j: ' + j + ' / i :' + i);
+		if( region_list[j] == locations[i] ){
+			region_cnt[j] = region_cnt[j] + 1;
+			console.log('if check1: ' + region_list[j]);
+			flag = true;
+			break;
+		}
+	}
+	if(!flag){
+		region_list.push( locations[i] );
+		region_cnt.push(1);
+		console.log('if check2: ' + locations[i]);
+	}
 }
-</script>
+console.log( 'return check: region_list:' + JSON.stringify(region_list) );
 
 
-<script>
-function initMap() {
-    var latlng = new google.maps.LatLng(37.5729503, 126.97935789999997);
-    var mapOptions = {
-    	      zoom: 15,
-    	      center: latlng
-    	    }
-    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-	var geocoder = new google.maps.Geocoder();
- 	var address = '${ requestScope.place }';
- 	   geocoder.geocode(
-	   		{ 'address': address }
-	   		, function(results, status) {
-				if (status == 'OK') {
-					latlng = results[0].geometry.location;
-					map.setCenter(latlng);
-					var marker = new google.maps.Marker({ 
-						map: map,
-						position: latlng
-						});
-					map.setZoom(15);
-					
-				} else {
-	   				alert('Geocode was not successful for the following reason: ' + status);
-	   			}
-	   		}
-	   );
-    
+var max = 0;
+var index_region = 0;
+for( i = 0; i < region_cnt.length; i = i + 1){
+	if( region_cnt[i] >= max ) {
+		max = region_cnt[i];
+		index_region = i;
+	}
 }
-</script>
+console.log( 'return check: ' + region_list[index_region] );
 
+</script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP">
 </script>

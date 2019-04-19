@@ -167,7 +167,7 @@ $('input[type=search]').on({
 				
 				map["keyword"] = $("#keyword").val();
 				map["group_category_id"] = group_category_id;
-				console.log($(""));
+				console.log($(".check_group_category_id_radio").val());
 				
 				$.ajax({
 					url: "listGroupAction",
@@ -185,11 +185,11 @@ $('input[type=search]').on({
 						buff += "</article>";
 						buff += "<article class='from-right'>";
 						buff += "<div class='radio'>";
-						buff += "<input id='radio-1' name='radio' type='radio' value='1'>";
+						buff += "<input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1'>";
 						buff += "<label for='radio-1' class='radio-label'>회원수</label>";
-						buff += "<input id='radio-2' name='radio' type='radio' value='2'>";
+						buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2'>";
 						buff += "<label for='radio-2' class='radio-label'>활동수</label>";
-						buff += "<input id='radio-3' name='radio' type='radio' value='3'>";
+						buff += "<input id='radio-3' class='check_group_category_id_radio' name='radio' type='radio' value='3'>";
 						buff += "<label for='radio-3' class='radio-label'>설립날짜</label>";
 						buff += "</div>";
 						buff += "</article>";
