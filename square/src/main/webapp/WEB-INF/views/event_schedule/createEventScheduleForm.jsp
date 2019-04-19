@@ -256,9 +256,9 @@ function createEventScheduleAction()
 	map["content"] = $("#event_schedule_content").val();
 	map["group_id"] = ${group.group_id};
 	map["event_id"] = ${event.event_id};
-	map["region"] = "R";
-	map["latitude"] = "A";
-	map["longitude"] = "L";
+	map["region"] = $("#region").val();
+	map["latitude"] = $("#lat").val();
+	map["longitude"] = $("#lng").val();
 	map["start_date"] = $("#start_date").val();
 	map["end_date"] = $("#end_date").val();
 	
@@ -273,7 +273,7 @@ function createEventScheduleAction()
 		    			contentType: "application/json; charset=UTF-8",
 		    			success: function(result)
 		    			{
-		    				location.href("viewGroupForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}}");
+		    				location.href ="viewGroupForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}";
 		    			},
 		    			error: function(){}
 		    				});

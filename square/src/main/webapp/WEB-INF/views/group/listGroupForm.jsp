@@ -161,71 +161,123 @@ $('input[type=search]').on({
 					document.getElementById("show_work_button").click();
 				}
 			});
-	$("#show_work_button").on("click", function()
+/* $.each($(":checkbox[name='photo_check_box']:checked"), function(){            
+	checked_event_schedule_image_id_list.push($(this).val());
+});
+ */
+			var check_group_category_id_radio = 1;
+	$("#show_work_button").on("click", listGroupAction);
+	function listGroupAction()
+	{		
+		var map = {};
+		
+		map["name"] = $("#keyword").val();
+		map["group_category_id"] = group_category_id;
+		map["orderby"] = check_group_category_id_radio;
+		
+		$.ajax({
+			url: "listGroupAction",
+			type: "POST",
+			data: JSON.stringify(map),
+			dataType: "JSON",
+			contentType: "application/json; charset=UTF-8",
+			success: function(group_list)
 			{
-				var map = {};
+				var buff = "";
 				
-				map["keyword"] = $("#keyword").val();
-				map["group_category_id"] = group_category_id;
-				console.log($(".check_group_category_id_radio").val());
+				buff += "<div class='gallery' align='right'>";
+				buff += "<article class='from-left'>";
 				
-				$.ajax({
-					url: "listGroupAction",
-					type: "POST",
-					data: JSON.stringify(map),
-					dataType: "JSON",
-					contentType: "application/json; charset=UTF-8",
-					success: function(group_list)
+				buff += "</article>";
+				buff += "<article class='from-right'>";
+				buff += "<div class='radio'>";
+				if(check_group_category_id_radio == 1)
+				{
+					buff += "<input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1'　checked>";
+					buff += "<label for='radio-1' class='radio-label'>メンバー数順</label>";
+					buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2'>";
+					buff += "<label for='radio-2' class='radio-label'>イベント数順</label>";
+					buff += "<input id='radio-3' class='check_group_category_id_radio' name='radio' type='radio' value='3'>";
+					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数順</label>";
+					buff += "<input id='radio-4' class='check_group_category_id_radio' name='radio' type='radio' value='4'>";
+					buff += "<label for='radio-4' class='radio-label'>開設日</label>";
+				}
+				else if(check_group_category_id_radio == 2)
+				{
+					buff += "<input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1'>";
+					buff += "<label for='radio-1' class='radio-label'>メンバー数順</label>";
+					buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2' checked>";
+					buff += "<label for='radio-2' class='radio-label'>イベント数順</label>";
+					buff += "<input id='radio-3' class='check_group_category_id_radio' name='radio' type='radio' value='3'>";
+					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数順</label>";
+					buff += "<input id='radio-4' class='check_group_category_id_radio' name='radio' type='radio' value='4'>";
+					buff += "<label for='radio-4' class='radio-label'>開設日</label>";
+				}
+				else if(check_group_category_id_radio == 3)
+				{
+					buff += "<input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1'>";
+					buff += "<label for='radio-1' class='radio-label'>メンバー数順</label>";
+					buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2'>";
+					buff += "<label for='radio-2' class='radio-label'>イベント数順</label>";
+					buff += "<input id='radio-3' class='check_group_category_id_radio' name='radio' type='radio' value='3' checked>";
+					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数順</label>";
+					buff += "<input id='radio-4' class='check_group_category_id_radio' name='radio' type='radio' value='4'>";
+					buff += "<label for='radio-4' class='radio-label'>開設日</label>";
+				}
+				else
+				{
+					buff += "<input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1'>";
+					buff += "<label for='radio-1' class='radio-label'>メンバー数順</label>";
+					buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2'>";
+					buff += "<label for='radio-2' class='radio-label'>イベント数順</label>";
+					buff += "<input id='radio-3' class='check_group_category_id_radio' name='radio' type='radio' value='3'>";
+					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数順</label>";
+					buff += "<input id='radio-4' class='check_group_category_id_radio' name='radio' type='radio' value='4' checked>";
+					buff += "<label for='radio-4' class='radio-label'>開設日</label>";
+				}
+				
+				buff += "</div>";
+				buff += "</article>";
+				buff += "</div>";
+				
+				buff += "<div class='gallery'>";
+				
+				for(var i = 0; i < group_list.length; i++)
+				{
+					if(i % 2 == 1)
 					{
-						var buff = "";
-						
-						buff += "<div class='gallery' align='right'>";
 						buff += "<article class='from-left'>";
-						
+						buff += "<a href='viewGroupForm?group_category_id=" + group_category_id + "&group_id=" + group_list[i].group_id + "'class='image fit'><img src='resources/image/group_logo/" + group_list[i].group_logo + "' title='" + group_list[i].name +"' alt='' /></a>";
+						buff += group_list[i].name;
 						buff += "</article>";
-						buff += "<article class='from-right'>";
-						buff += "<div class='radio'>";
-						buff += "<input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1'>";
-						buff += "<label for='radio-1' class='radio-label'>회원수</label>";
-						buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2'>";
-						buff += "<label for='radio-2' class='radio-label'>활동수</label>";
-						buff += "<input id='radio-3' class='check_group_category_id_radio' name='radio' type='radio' value='3'>";
-						buff += "<label for='radio-3' class='radio-label'>설립날짜</label>";
-						buff += "</div>";
-						buff += "</article>";
-						buff += "</div>";
-						
-						buff += "<div class='gallery'>";
-						
-						for(var i = 0; i < group_list.length; i++)
-						{
-							if(i % 2 == 1)
-							{
-								buff += "<article class='from-left'>";
-								buff += "<a href='viewGroupForm?group_category_id=" + group_category_id + "&group_id=" + group_list[i].group_id + "'class='image fit'><img src='resources/image/group_logo/" + group_list[i].group_logo + "' title='" + group_list[i].name +"' alt='' /></a>";
-								buff += group_list[i].name;
-								buff += "</article>";
-							}
-							else
-							{
-								buff += "<article class='from-right'>";
-								buff += "<a href='viewGroupForm?group_category_id=" + group_category_id + "&group_id=" + group_list[i].group_id + "'class='image fit'><img src='resources/image/group_logo/" + group_list[i].group_logo + "' title='" + group_list[i].name +"' alt='' /></a>";
-								buff += group_list[i].name;
-								buff += "</article>";
-							}
-						}
-
-						buff += "</div>";
-						
-						$("#work").html(buff);
-					},
-					error: function(error)
-					{
-						
 					}
+					else
+					{
+						buff += "<article class='from-right'>";
+						buff += "<a href='viewGroupForm?group_category_id=" + group_category_id + "&group_id=" + group_list[i].group_id + "'class='image fit'><img src='resources/image/group_logo/" + group_list[i].group_logo + "' title='" + group_list[i].name +"' alt='' /></a>";
+						buff += group_list[i].name;
+						buff += "</article>";
+					}
+				}
+
+				buff += "</div>";
+				
+				$("#work").html(buff);
+				
+				$(".check_group_category_id_radio").change(function()
+						{
+					check_group_category_id_radio = this.value;
+					listGroupAction();
 				});
-				$("#work").css("display", "block");
-			})
+				
+			},
+			error: function(error)
+			{
+				
+			}
+		});
+		$("#work").css("display", "block");
+	}
 </script>
 
 	</body>

@@ -16,18 +16,18 @@ public class YHGroupDAO
 	@Autowired
 	SqlSession sqlSession;
 	
-	public ArrayList<Group> selectGroupByNameOrderByGroupAttendanceCount(int group_id, String name)
+	public ArrayList<Group> selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount(int group_category_id, String name)
 	{
 		ArrayList<Group> group_list = null;
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("group_id", group_id);
+		map.put("group_category_id", group_category_id);
 		map.put("name", name);
 		
 		YHGroupMapper mapper = sqlSession.getMapper(YHGroupMapper.class);
 		
 		try
 		{
-			group_list = mapper.selectGroupByNameOrderByGroupAttendanceCount(map);
+			group_list = mapper.selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount(map);
 		}
 		catch(Exception error){error.printStackTrace();}
 		

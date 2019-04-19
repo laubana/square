@@ -73,9 +73,22 @@ public class GroupAction {
 	public ArrayList<Group> listGroupAction(Model request, @RequestBody HashMap<String, Object> map)
 	{
 		int group_category_id = (int)map.get("group_category_id"); 
-		String keyword = (String)map.get("keyword");
+		String name = (String)map.get("name");
+		int orderby = (int)map.get("orderby");
 		
-		return yh_groupDAO.selectGroupByGroupCategoryIdName(group_category_id, keyword);
+		switch(orderby)
+		{
+		case 1:
+			return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount(group_category_id, name);
+		case 2:
+			return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount(group_category_id, name);
+		case 3:
+			return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount(group_category_id, name);
+		case 4:
+			return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount(group_category_id, name);
+		}
+		
+		return yh_groupDAO.selectGroupByGroupCategoryIdName(group_category_id, name);
 	}
 	@ResponseBody
 	@RequestMapping(value = "joinGroupAction", method = RequestMethod.POST)

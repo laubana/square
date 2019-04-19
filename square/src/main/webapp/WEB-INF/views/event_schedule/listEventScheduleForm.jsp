@@ -1,3 +1,6 @@
+<%@page import="project.ppaya.square.vo.EventSchedule"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -79,6 +82,14 @@
 										
 											</div>
 										</article>
+										<c:if test="${event_schedule.start_date != 0 && event_schedule.end_date != 0}">
+										<h6 style="display: inline;"><%= (new SimpleDateFormat("yyyy年 MM月 dd日")).format(new Date(((EventSchedule)(pageContext.getAttribute("event_schedule"))).getStart_date()))%></h6>
+										<h6 style="display: inline;"> ~ </h6>
+										<h6 style="display: inline;"><%= (new SimpleDateFormat("yyyy年 MM月 dd日")).format(new Date(((EventSchedule)(pageContext.getAttribute("event_schedule"))).getEnd_date()))%></h6>
+									</c:if>
+									<c:if test="${event_schedule.start_date == 0 || event_schedule.end_date == 0}">
+										<h6>未定</h6>
+									</c:if>
 										</c:forEach>
 											
 									</div>

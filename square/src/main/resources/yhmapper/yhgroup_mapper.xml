@@ -34,17 +34,29 @@ SELECT
 FROM
 	TABLE_G
 WHERE
-	NAME LIKE '%' || #{name} || '%'
+	UPPER(NAME) LIKE '%' || upper(#{name}) || '%'
 </select>
-<select id="selectGroupByNameOrderByGroupAttendanceCount" parameterType="map" resultType="Group">
+<select id="selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount" parameterType="map" resultType="Group">
 SELECT
 	*
 FROM
-	TABLE_G
+	TABLE_G G
 WHERE
-	NAME LIKE '%' || #{name} || '%'
+	GROUP_CATEGORY_ID = #{group_category_id} AND
+	UPPER(NAME) LIKE '%' || upper(#{name}) || '%'
 ORDER BY
-	(SELECT COUNT(*) FROM TABLE_GA WHERE GROUP_ID = #{group_id}) ASC
+	(SELECT COUNT(*) FROM TABLE_E E WHERE G.GROUP_ID = E.GROUP_ID) DESC
+</select>
+<select id="selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount" parameterType="map" resultType="Group">
+SELECT
+	*
+FROM
+	TABLE_G G
+WHERE
+	GROUP_CATEGORY_ID = #{group_category_id} AND
+	UPPER(NAME) LIKE '%' || upper(#{name}) || '%'
+ORDER BY
+	(SELECT COUNT(*) FROM TABLE_GA GA WHERE G.GROUP_ID = GA.GROUP_ID) DESC
 </select>
 <select id="selectGroupByName" parameterType="string" resultType="Group">
 SELECT
