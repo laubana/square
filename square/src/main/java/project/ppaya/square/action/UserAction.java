@@ -62,6 +62,17 @@ public class UserAction {
 	SH_DAO_Group sh_gdao;
 	
 	@ResponseBody
+	@RequestMapping(value = "updateContentAction", method = RequestMethod.POST)
+	public String updateContentAction(HttpSession session, Model request, @RequestBody HashMap<String, Object> map)
+	{
+		String user_id = (String)session.getAttribute("user_id");
+		String content = (String)map.get("content");
+		
+		yh_userDAO.updateContentByUserId(user_id, content);
+		
+		return "success";
+	}
+	@ResponseBody
 	@RequestMapping(value = "verifyUserIdAction", method = RequestMethod.POST)
 	public String verifyUserIdAction(String user_id)
 	{

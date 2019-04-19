@@ -467,6 +467,10 @@ INSERT INTO TABLE_ESV(EVENT_SCHEDULE_VIDEO_ID, FILENAME, EXT, USER_ID, EVENT_SCH
 INSERT INTO TABLE_ESV(EVENT_SCHEDULE_VIDEO_ID, FILENAME, EXT, USER_ID, EVENT_SCHEDULE_ID) VALUES('1f3c4600f7', '1f3c4600f7.mp4', 'mp4', 'id1@gmail.com', 1);
 
 INSERT INTO TABLE_ESI(EVENT_SCHEDULE_IMAGE_ID, FILENAME, EXT, USER_ID, EVENT_SCHEDULE_ID) VALUES('event_schedule1_image1.jpg', 'event_schedule1_image1.jpg', 'jpg', 'id1@gmail.com', 1);
+INSERT INTO TABLE_ESI(EVENT_SCHEDULE_IMAGE_ID, FILENAME, EXT, USER_ID, EVENT_SCHEDULE_ID) VALUES('event_schedule1_image2.jpg', 'event_schedule1_image2.jpg', 'jpg', 'id1@gmail.com', 1);
+INSERT INTO TABLE_ESI(EVENT_SCHEDULE_IMAGE_ID, FILENAME, EXT, USER_ID, EVENT_SCHEDULE_ID) VALUES('event_schedule1_image3.jpg', 'event_schedule1_image3.jpg', 'jpg', 'id1@gmail.com', 1);
+INSERT INTO TABLE_ESI(EVENT_SCHEDULE_IMAGE_ID, FILENAME, EXT, USER_ID, EVENT_SCHEDULE_ID) VALUES('event_schedule1_image4.jpg', 'event_schedule1_image4.jpg', 'jpg', 'id1@gmail.com', 1);
+INSERT INTO TABLE_ESI(EVENT_SCHEDULE_IMAGE_ID, FILENAME, EXT, USER_ID, EVENT_SCHEDULE_ID) VALUES('event_schedule1_image5.png', 'event_schedule1_image5.png', 'png', 'id1@gmail.com', 1);
 INSERT INTO TABLE_ESI(EVENT_SCHEDULE_IMAGE_ID, FILENAME, EXT, USER_ID, EVENT_SCHEDULE_ID) VALUES('event_schedule2_image1.jpg', 'event_schedule2_image1.jpg', 'jpg', 'id1@gmail.com', 2);
 INSERT INTO TABLE_ESI(EVENT_SCHEDULE_IMAGE_ID, FILENAME, EXT, USER_ID, EVENT_SCHEDULE_ID) VALUES('event_schedule2_image2.jpg', 'event_schedule2_image2.jpg', 'jpg', 'id2@gmail.com', 2);
 INSERT INTO TABLE_ESI(EVENT_SCHEDULE_IMAGE_ID, FILENAME, EXT, USER_ID, EVENT_SCHEDULE_ID) VALUES('event_schedule3_image1.jpg', 'event_schedule3_image1.jpg', 'jpg', 'id3@gmail.com', 3);

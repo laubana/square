@@ -25,12 +25,42 @@
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 	google.charts.load('current', {'packages':['timeline']});
-	google.charts.setOnLoadCallback(drawChart);
-	function drawChart()
+	function setChart(schedule_list)
 	{
-		var json_event_schedule_user_schedule_list_list = JSON.parse('${json_event_schedule_user_schedule_list_list}');
-    	  
-		for(var i = 0; i < json_event_schedule_user_schedule_list_list.length; i++)
+		google.charts.setOnLoadCallback(drawChart(schedule_list));				
+	}
+	function handleClientLoad()
+	{
+		gapi.load('client:auth2', initClient);
+	}
+	function initClient()
+	{
+		gapi.client.init({
+			apiKey : "AIzaSyAujlCmx3gpGvD5ZHDN3Vqwp1hG0h-J3cc",
+			clientId : "823134128365-5e3gpcpbt5nvqc4mfgsbess1v9d8kj9g.apps.googleusercontent.com",
+			discoveryDocs : ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+			scope : "https://www.googleapis.com/auth/calendar.readonly"
+		}).then(function()
+				{
+			getScheduleList();
+		},
+		function(error)
+		{
+			console.log(error);
+		});
+	}
+	function drawChart(schedule_list)
+	{
+		var buff = "";
+		
+		for(var i = 0; i < schedule_list.length; i++)
+		{
+			buff += "<div id='timeline" + i + "'></div>"; 
+		}
+		
+		document.getElementById("one").innerHTML = buff;
+		
+		for(var i = 0; i < schedule_list.length; i++)
 		{
 			var container = document.getElementById('timeline' + json_event_schedule_user_schedule_list_list[i].user.user_id);
 			var chart = new google.visualization.Timeline(container);
@@ -64,7 +94,133 @@
 			}
 		}
 	}
+	function getScheduleList()
+	{
+		var schedule_list = [];
+		
+		if(gapi.auth2.getAuthInstance().isSignedIn.get() == true)
+		{			
+			var flag;
+			
+			flag = 0;
+			gapi.client.calendar.events.list({
+		          'calendarId': 'primary',
+		          'timeMin': (new Date()).toISOString(),
+		          'showDeleted': false,
+		          'singleEvents': true,
+		          'maxResults': 10,
+		          'orderBy': 'startTime'
+		        }).then(function(response)
+		        		{
+		        			for(var i = 0; i < response.result.items.length; i++)
+		        			{
+		        				schedule_list.push({start_date: response.result.items[i].start.dateTime, end_date: response.result.items[i].end.dateTime});
+							}
+		         			flag = 1;
+		        });
+			var interval = setInterval(function()
+					{
+						if(flag == 1){clearInterval(interval);}
+					}, 100); 
+		}
+		else
+		{
+			gapi.auth2.getAuthInstance().signIn();
+			gapi.auth2.getAuthInstance().isSignedIn.listen(function()
+					{
+						var flag;
+						
+						flag = 0;
+						gapi.client.calendar.events.list({
+					          'calendarId': 'primary',
+					          'timeMin': (new Date()).toISOString(),
+					          'showDeleted': false,
+					          'singleEvents': true,
+					          'maxResults': 10,
+					          'orderBy': 'startTime'
+					        }).then(function(response)
+					        		{
+					        			for(var i = 0; i < response.result.items.length; i++)
+					        			{
+					        				schedule_list.push({start_date: response.result.items[i].start.dateTime, end_date: response.result.items[i].end.dateTime});
+										}
+					         			flag = 1;
+					        });
+						var interval = setInterval(function()
+								{
+									if(flag == 1){clearInterval(interval);}
+								}, 100);
+					});
+		}
+		////////////////////////////////////////////////////////////////////////////////////
+		console.log(schedule_list);
+		setChart(schedule_list);
+	}
+			
+			/* 
+							
+							for(var i = 0; i < google_user_schedule_list.length; i++)
+							{
+								map.google_user_schedule_list.push({start_date: google_user_schedule_list[i].start_date, end_date: google_user_schedule_list[i].end_date});
+							}
+							$.ajax({
+								url: "joinEventScheduleAction",
+								type: "POST",
+								data: JSON.stringify(map),
+								contentType: "application/json; charset=UTF-8",
+								success: function()
+								{
+									location.reload();
+								},
+								error: function(error){console.log(error);}
+							});
+							clearInterval(interval);
+						}
+					},100);
+			
+		}
+		else
+		{
+			gapi.auth2.getAuthInstance().signIn();
+			gapi.auth2.getAuthInstance().isSignedIn.listen(function()
+					{
+				
+				var map = {};
+				
+				map["user_id"] = "${sessionScope.user_id}";
+				map["event_schedule_id"] = ${event_schedule.event_schedule_id};
+				map["google_user_schedule_list"] = [];
+				listUpcomingEvents();
+				var interval = setInterval(function()
+						{
+					if(flag != 0)
+							{
+								for(var i = 0; i < google_user_schedule_list.length; i++)
+								{
+									map.google_user_schedule_list.push({start_date: google_user_schedule_list[i].start_date, end_date: google_user_schedule_list[i].end_date});
+								}
+								$.ajax({
+									url: "joinEventScheduleAction",
+									type: "POST",
+									data: JSON.stringify(map),
+									contentType: "application/json; charset=UTF-8",
+									success: function()
+									{
+										location.reload();
+									},
+									error: function(error){console.log(error);}
+								});
+								clearInterval(interval);
+							}
+						},100);
+		});
+		}
+	} */
 </script>
+	<script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
 <style>
 #map {
 	width: 500px;
@@ -184,9 +340,11 @@ html, body {
 						</div>
 					</header>
 					<div align="right">
-						<footer> </footer>
+						<footer></footer>
 					</div>
 				</article>
+			</section>
+			<section id="one">
 			</section>
 		</div>
 	</div>

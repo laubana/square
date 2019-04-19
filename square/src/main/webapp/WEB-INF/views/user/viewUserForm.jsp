@@ -41,14 +41,18 @@
 						<header class="major">
 							<h2>소개</h2>
 						</header>
+						<div id="content_div">
 						<p>
 							${user.content}
 						</p>
-						<div align="center"><a href="#" class="button">정보 편집</a></div>
+						</div>
+						<c:if test="${sessionScope.user_id == user.user_id}">
+						<div align="center" id="update_content_button_div"><a class="button" onclick="updateContent()">정보 편집</a></div>
+						</c:if>
 					</section>
 					
 					<!-- Two -->
-					<section id="two">
+					<%-- <section id="two">
 						<header class="major">
 							<h2>관심 분야</h2>
 						</header>
@@ -64,8 +68,10 @@
 										<li><a href="#">${ hlist[3].name }</a></li>
 										<li><a href="#">${ hlist[4].name }</a></li>
 						</ul>
+						<c:if test="${sessionScope.user_id == user.user_id}">
 						<div align="center"><a href="#" class="button">관심 분야 편집</a></div>
-					</section>
+						</c:if>
+					</section> --%>
 
 					<!-- Three -->
 					<section id="three">
@@ -81,7 +87,9 @@
 							</c:forEach>
 								</ul>
 						</div>
+						<c:if test="${sessionScope.user_id == user.user_id}">
 								<div align="center"><a href="listUserGroupForm?user_id=${user.user_id}" class="button">グループリスト編集</a></div>
+								</c:if>
 					</section>
 
 				<!-- Four -->
@@ -110,8 +118,9 @@
 						</c:if>
 						</div>
 						<br><br>
-						
+						<c:if test="${sessionScope.user_id == user.user_id}">
 								<div align="center"><a href="listUserAlbumForm?user_id=${user.user_id}" class="button">앨범 편집</a></div>
+								</c:if>
 					</section>
 
 			</div>
@@ -144,6 +153,33 @@
 
 	</body>
 	<script>
+	function updateContent()
+	{
+		var buff = "<textarea id='update_content_textarea'>${user.content}</textarea><br>";
+		
+		document.getElementById("content_div").innerHTML = buff;
+		
+		buff = "<a class='button' onclick='updateContentAction()'>確認</a>";
+		
+		document.getElementById("update_content_button_div").innerHTML = buff;
+	}
+	function updateContentAction()
+	{
+		map = {};
+		map["content"] = $("#update_content_textarea").val();
+		
+		$.ajax({
+			url: "updateContentAction",
+			type: "POST",
+			data: JSON.stringify(map),
+			contentType: "application/json; charset=UTF-8",
+			success: function()
+			{
+				location.reload();
+			},
+			error: function(error){console.log(error);}
+		});
+	}
 	/* var video = document.getElementById("video");
 	var video_interval;
 

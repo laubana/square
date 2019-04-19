@@ -16,6 +16,23 @@ public class YHUserDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public int updateContentByUserId(String user_id, String content)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("content", content);
+		
+		YHUserMapper mapper = sqlSession.getMapper(YHUserMapper.class);
+		
+		try
+		{
+			result = mapper.updateContentByUserId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public ArrayList<User> selectUser()
 	{
 		ArrayList<User> user_list = null;
