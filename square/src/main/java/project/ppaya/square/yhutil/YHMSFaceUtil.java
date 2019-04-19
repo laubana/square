@@ -64,20 +64,24 @@ public class YHMSFaceUtil
 
             	System.err.println(result);
             	
-            	try
+            	if(result.charAt(0) == '{')
             	{
-	            	jsonObject = new JSONObject(result);
-	            	
-	            	if(!jsonObject.isNull("error"))
-	            	{
-	            		if(!jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
-	            		{
-	            			break;
-	            		}
-	            	}
+            		jsonObject = new JSONObject(result);
+            		
+            		if(!jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
+            		{
+            			break;
+            		}
+            		else
+            		{
+            			return null;
+            		}
             	}
-            	catch(Exception error){break;}
-            } 
+            	else
+            	{
+            		break;
+            	}
+            }
             
             jsonArray = new JSONArray(result);
             
@@ -154,14 +158,14 @@ public class YHMSFaceUtil
             httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
             
             httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
-
-        	HttpResponse httpResponse = httpClient.execute(httpPost);
-        	result = EntityUtils.toString(httpResponse.getEntity()).trim();
-
-        	System.err.println(result);
         	
             while(true)
             {
+            	HttpResponse httpResponse = httpClient.execute(httpPost);
+            	result = EntityUtils.toString(httpResponse.getEntity()).trim();
+
+            	System.err.println(result);
+            	
             	if(result.charAt(0) == '{')
             	{
             		JSONObject jsonObject = new JSONObject(result);

@@ -165,19 +165,15 @@ public class UserController
 			@RequestParam(value = "user_id", defaultValue = "id1@gmail.com") String user_id
 			//String user_id
 			)
-	{
-		String result = null;
-		JSONArray jsonArray = null;
-		JSONObject jsonObject = null;	
-		
+	{		
 		User user = yh_userDAO.selectUserByUserId(user_id);
 		//User 전송
 		request.addAttribute("user", user);
-		String image_id = user.getImage_id();
 		
 		ArrayList<Integer> group_id_list = yh_group_attendanceDAO.getGroupIdByUserId(user_id);
 		
 		ArrayList<Group> group_list = yh_groupDAO.selectGroupByGroupIdList(group_id_list);		
+		//Group List 전송
 		request.addAttribute("group_list", group_list);
 		
 		yh_util.updateEventScheduleImageFace(user_id);
