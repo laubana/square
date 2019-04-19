@@ -79,7 +79,7 @@ label img {
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<div align="left"><h1 style="font-size:50px;"><a href="main">Web Site Name</a></h1></div>
+					<div align="left"><h1 style="font-size:30px;"><a href="main">みんな・みんな</a></h1></div>
 					<a class="image avatar"><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
 					<h1><strong>${user.name}</strong>님의 그룹 사진<br /></h1>
 					<p>사진과 동영상을 찾아보세요!<br>
@@ -140,9 +140,9 @@ label img {
 							</article>
 						</c:forEach> --%>
 
-					<hr><br>
+					<hr style="width:380px;"><br>
 					<h1>映像編集</h1><br>
-					<div class="row" id="video"></div><br>	
+					<div id="video" class=""></div><br>	
 					<div align="center"><input type="button" value="確認" onclick="setAlbumAction()"></div>		
 					</form>
 
@@ -279,9 +279,10 @@ $(document).ready(function () {
 					
 					for(var i = 0; i < video_list.length; i++)
 					{
-						video_buff += "<video width='320' height='auto' controls id='video" + video_list[i].video.event_schedule_video_id + "'>";
+						video_buff += "<video width='480' height='320' style='background-color: black;' controls id='video" + video_list[i].video.event_schedule_video_id + "'>";
 						video_buff += "<source src='resources/image/event_schedule_video/" + video_list[i].video.filename +"' type='video/mp4'>";
 						video_buff += "</video>";
+						video_buff += "<br>";
 						video_buff += "<span>";
 						if(video_list[i].blind == 1)
 						{
@@ -294,7 +295,7 @@ $(document).ready(function () {
 						video_buff += "<label for='video_check_box" + video_list[i].video.event_schedule_video_id + "'/>";
 						video_buff += "<h2>Select</h2>";
 						video_buff += "</label>";
-						video_buff += "<br>";
+						
 						for(var j = 0; j < video_list[i].appearance_list.length; j++)
 						{
 							var hour = parseInt(video_list[i].appearance_list[j].start_time / 3600000);
@@ -315,7 +316,7 @@ $(document).ready(function () {
 						}
 						video_buff += "</span>";
 					}
-					
+					video_buff += "<br>";
 					document.getElementById("video").innerHTML = video_buff;
 				}
 				else

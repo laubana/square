@@ -309,18 +309,20 @@
 											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.event_schedule_id}</h3>
 											</c:forEach>
 											<br>
+											</article>
+									</div>
+									<h3>映像</h3>
+									<div class="features" align="center">
 											<c:if test="${video_list.size() != 0}">
-											<video width='640' height='auto' controls>
+											<video width='360' height='300' style="background-color: black;" controls>
 											<c:forEach var="video" items="${video_list}">
 											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
 											</c:forEach>
 											</video>
 											</c:if>
 											<br><br>
-											
 											<a href="listEventAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">이벤트 사진 페이지 이동</a>
-										</article>
-									</div>
+									</div>	
 								</div>
 							</section>
 							

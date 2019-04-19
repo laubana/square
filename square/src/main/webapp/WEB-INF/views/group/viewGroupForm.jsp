@@ -299,8 +299,12 @@
 											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${element.description}</h3>
 											</c:forEach>
 											<br>
+										</article>
+									</div>
+									<h3>映像</h3>
+									<div class="features" align="center">
 											<c:if test="${video_list.size() != 0}">
-											<video width='640' height='auto' id="video" controls>
+											<video width='360' height='300' style="background-color: black;" id="video" controls>
 											<c:forEach var="video" items="${video_list}">
 											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4' >
 											</c:forEach>
@@ -308,7 +312,7 @@
 											</c:if>
 											<br><br>
 											<a href="listGroupAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">アルバムページへ</a>
-										</article>
+										
 									</div>
 								</div>
 							</section>
