@@ -87,6 +87,10 @@ public class EventScheduleController
 		//Event 전송
 		request.addAttribute("event", event);
 		
+		ArrayList<EventSchedule> event_schedule_list = yh_event_scheduleDAO.selectEventScheduleByEventId(event_id);
+		//EventSchedule List 전송
+		request.addAttribute("event_schedule_list", event_schedule_list);
+		
 		return "event_schedule/createEventScheduleForm";
 	}
 	@RequestMapping(value = "listEventScheduleForm", method = RequestMethod.GET)
