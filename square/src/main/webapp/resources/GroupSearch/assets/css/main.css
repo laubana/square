@@ -839,25 +839,25 @@ input[type="checkbox"],
 	}
 
 	::-webkit-input-placeholder {
-		color: #aaa !important;
+		color: black !important;
 		font-style: italic;
 		opacity: 1.0;
 	}
 
 	:-moz-placeholder {
-		color: #aaa !important;
+		color: black !important;
 		font-style: italic;
 		opacity: 1.0;
 	}
 
 	::-moz-placeholder {
-		color: #aaa !important;
+		color: black !important;
 		font-style: italic;
 		opacity: 1.0;
 	}
 
 	:-ms-input-placeholder {
-		color: #aaa !important;
+		color: black !important;
 		font-style: italic;
 		opacity: 1.0;
 	}

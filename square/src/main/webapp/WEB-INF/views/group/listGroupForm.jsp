@@ -11,96 +11,9 @@
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
 		
 		<!-- 추가 -->
-		<link rel='stylesheet' href='http://www.davilious.com/codepen/font-awesome/css/font-awesome.css'>
+		<!-- <link rel='stylesheet' href='http://www.davilious.com/codepen/font-awesome/css/font-awesome.css'> -->
 
-<style type="text/css">
-$color1: #f4f4f4;
-$color2: #3197EE;
-
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
-
-.radio {
-  margin: 0.5rem;
-  input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-    + .radio-label {
-      &:before {
-        content: '';
-        background: $color1;
-        border-radius: 100%;
-        border: 1px solid darken($color1, 25%);
-        display: inline-block;
-        width: 1.4em;
-        height: 1.4em;
-        position: relative;
-        top: -0.2em;
-        margin-right: 1em; 
-        vertical-align: top;
-        cursor: pointer;
-        text-align: center;
-        transition: all 250ms ease;
-      }
-    }
-    &:checked {
-      + .radio-label {
-        &:before {
-          background-color: $color2;
-          box-shadow: inset 0 0 0 4px $color1;
-        }
-      }
-    }
-    &:focus {
-      + .radio-label {
-        &:before {
-          outline: none;
-          border-color: $color2;
-        }
-      }
-    }
-    &:disabled {
-      + .radio-label {
-        &:before {
-          box-shadow: inset 0 0 0 4px $color1;
-          border-color: darken($color1, 25%);
-          background: darken($color1, 25%);
-        }
-      }
-    }
-    + .radio-label {
-      &:empty {
-        &:before {
-          margin-right: 0;
-        }
-      }
-    }
-  }
-}
-</style>
-
-<!-- <style>
-input::placeholder {
-  color: white;
- 
-}
-/* @keyframes showQuery {
-  to {
-    width: 300px;
-    border-color: white;
-
-  }
-} */
-@keyframes showControls {
-  to {
-    transform: translateY(10px);
-    opacity: 1;
-  }
-}
+<style>
 
 :root{
   background-color: whitesmoke;
@@ -124,89 +37,7 @@ input::placeholder {
     right: 20px; top: 4px;
 }
 
-.wrap-input.focused .input-txt {
-  animation: showQuery .2s forwards 1 ease;
-}
-.wrap-input.focused .filters > .filter-btn {
-  animation: showControls .3s forwards 1;
-}
-.wrap-input.focused .filters > .filter-btn:nth-child(1) {
-  animation-delay: .15s;
-}
-.wrap-input.focused .filters > .filter-btn:nth-child(2) {
-  animation-delay: .25s;
-}
-
-.wrap-input.focused .js-close {
-  animation: showControls .4s .8s forwards 1;
-  opacity: .3;
-}
-
-.input-txt {
-  position: relative;
-  z-index: 10;
-  padding: 5px;
-  border: 1px solid whitesmoke;
-  width: 150px;
-  height: 25px;
-  line-height: 15px;
-  background: white;
-}
-
-.filters {
-  width: 300px;
-}
-.filters .js-close {
-  text-decoration: none;
-  color: white;
-  float: right;
-  opacity: 0;
-  transition: opacity 1.2s;
-  transform: translateY(-25px);
-}
-
-.filter-btn {
-  position: relative;
-  display: inline-block;
-  color: black;
-  text-align: center;
-  line-height: 25px;
-  text-decoration: none;
-  display: inline-block;
-  transform: translateY(-25px);
-  opacity: 0;
-}
-.filter-btn > input[type=radio] {
-  position: absolute;
-  width: 100px;
-  height: 26px;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  opacity: 0;
-}
-.filter-btn > input[type=radio] + label {
-  display: inline-block;
-  width: auto;
-  padding: 2px 10px;
-  font-size: .9rem;
-  height: 20px;
-  /*3px at the top due to background 20 + 2 of padding - 25 of parent = 3*/
-  line-height: 20px;
-  cursor: pointer;
-  vertical-align: middle;
-  
-}
-.filter-btn:hover {
-  background: #e0e0e0;
-}
-.filter-btn.active {
-  
-  color: white;
-}
-</style> -->
+</style>
 
 	</head>
 	<body class="is-preload">
@@ -238,25 +69,8 @@ input::placeholder {
 					<div class="container">
   						<div class="wrap-input">  
   							<input type="search" id="keyword" class="input-txt" placeholder="Search" name="keyword">
-  						<div class="filters">
-    						<div class="filter-btn active">
-      							<input type="radio" value="">
-      							<label>All</label>
-    						</div>
-    					<div class="filter-btn">
-       						<input type="radio" value="">
-       							<label>회원수</label>
-    						</div>
-    					<div class="filter-btn" style="display:none">
-      						<input type="radio" value="Subject:">
-      					<label>Subject:</label>
-    					</div>
-    					<a href="#" class="js-close">
-      						<small class="icon-angle-up"></small>
-    					</a>
   						</div>
-  						</div>
-						</div>			
+					</div>			
 					<footer>
 						<a href="#work" class="button style2 down" id="show_work_button"></a>
 					</footer>
@@ -274,12 +88,12 @@ input::placeholder {
 
 				<!-- Icons -->
 					<ul class="icons">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
+						<li><a href="https://twitter.com" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://www.facebook.com" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="https://www.instagram.com" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://kr.linkedin.com" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://dribbble.com" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="https://co.pinterest.com" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
 					</ul>
 
 				<!-- Menu -->
@@ -370,14 +184,12 @@ $('input[type=search]').on({
 						buff += "</article>";
 						buff += "<article class='from-right'>";
 						buff += "<div class='radio'>";
-						buff += "<input id='radio-1' name='radio' type='radio' value='1' checked>";
-						buff += "<label for='radio-1' class='radio-label'>1</label>";
+						buff += "<input id='radio-1' name='radio' type='radio' value='1'>";
+						buff += "<label for='radio-1' class='radio-label'>회원수</label>";
 						buff += "<input id='radio-2' name='radio' type='radio' value='2'>";
-						buff += "<label for='radio-2' class='radio-label'>2</label>";
+						buff += "<label for='radio-2' class='radio-label'>활동수</label>";
 						buff += "<input id='radio-3' name='radio' type='radio' value='3'>";
-						buff += "<label for='radio-3' class='radio-label'>3</label>";
-						buff += "<input id='radio-4' name='radio' type='radio' value='4'>";
-						buff += "<label for='radio-4' class='radio-label'>4</label>";
+						buff += "<label for='radio-3' class='radio-label'>설립날짜</label>";
 						buff += "</div>";
 						buff += "</article>";
 						buff += "</div>";
