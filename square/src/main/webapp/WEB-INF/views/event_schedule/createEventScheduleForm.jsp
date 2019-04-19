@@ -365,18 +365,75 @@ $("#imgInp5").change(function() {
 	var geocoder;
 
 	function initMap() {
+		
+	 	var locations = [];
+	 	
+		<c:forEach items = "${requestScope.event_schedule_list}" var = "list">
+			locations.push({ lat: ${list.latitude}, lng: ${list.longitude}, region: "${list.region}", name: "${list.name}", event_schedule_id: ${list.event_schedule_id}, content: "${list.content}", start_date: "${list.start_date}" });
+		</c:forEach>
+		
+		console.log( JSON.stringify( locations ));
+		var region_cnt = [];
+		var region_list = [];
+		var i = 0;
+		var j = 0;
+		var flag = false;
+		for( i = 0; i < locations.length; i = i + 1 ){
+			flag = false;
+			for( j = 0; j < region_list.length; j = j + 1 ){
+				console.log('for check j: ' + j + ' / i :' + i);
+				if( region_list[j] == locations[i].region ){
+					region_cnt[j] = region_cnt[j] + 1;
+					console.log('if check1: ' + region_list[j]);
+					flag = true;
+					break;
+				}
+			}
+			if(!flag){
+				region_list.push( locations[i].region );
+				region_cnt.push(1);
+				console.log('if check2: ' + locations[i].region );
+			}
+		}
+		console.log( 'return check: region_list:' + JSON.stringify(region_list) );
+
+
+		var max = 0;
+		var index_region = 0;
+		for( i = 0; i < region_cnt.length; i = i + 1){
+			if( region_cnt[i] >= max ) {
+				max = region_cnt[i];
+				index_region = i;
+			}
+		}
+		console.log( 'return check: ' + region_list[index_region] );
+		
+		
+		geocoder = new google.maps.Geocoder();
 	    var latlng = new google.maps.LatLng(35.6766907, 139.77003390000004);
+		var address = region_list[index_region];
+		geocoder.geocode(
+			{ 'address': address }
+		   		, function(results, status) {
+					if (status == 'OK') {
+						latlng = results[0].geometry.location;
+					} else {
+		   				alert('Geocode was not successful for the following reason: ' + status);
+		   			}
+		    });
 	    var mapOptions = {
 	    	      zoom: 15,
 	    	      center: latlng
 	    	    }
 		map = new google.maps.Map(document.getElementById('map'), mapOptions);
-		geocoder = new google.maps.Geocoder();
+		var marker = new google.maps.Marker({ 
+			map: map,
+			position: latlng
+		});
 	}
 	
-	
 	///////////////주소로 검색
-	function codeAddress(address) {
+	function codeAddress() {
 	var result_area = "not_found";
     var address = document.getElementById('address').value;
 	geocoder.geocode(

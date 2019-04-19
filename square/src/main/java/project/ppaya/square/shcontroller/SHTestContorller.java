@@ -3,6 +3,7 @@
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 import javax.servlet.http.HttpSession;
@@ -181,8 +182,18 @@ public String shtest5(
 }
 @RequestMapping(value = "shtest6", method = RequestMethod.GET)
 public String shtest6(Locale locale, Model model) {
-	
-	
+	ArrayList<String> event_schedule_list = new ArrayList<>();
+	event_schedule_list.add( "'東京　京橋駅'" );
+	event_schedule_list.add( "'名古屋　愛知県'" );
+	event_schedule_list.add( "'大阪市 大正区'" );
+	event_schedule_list.add( "'名古屋　愛知県'" );
+	event_schedule_list.add( "'大阪市 大正区'" );
+	event_schedule_list.add( "'仙台市　宮城県'" );
+	event_schedule_list.add( "'名古屋　愛知県'" );
+	event_schedule_list.add( "'東京都中央区京橋'" );
+	event_schedule_list.add( "'東京都千代田区日比谷公園'" );
+	event_schedule_list.add( "'東京都中央区八重洲'" );
+	model.addAttribute("event_schedule_list", event_schedule_list);
 	return "test_sh/shtest6";
 }
 @RequestMapping(value = "shtest7", method = RequestMethod.GET)
