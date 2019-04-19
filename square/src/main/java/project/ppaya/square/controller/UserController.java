@@ -130,31 +130,12 @@ public class UserController
 		ArrayList<HashMap<String, Object>> video_list = new ArrayList<>();
 		for(int i = 0; i < event_schedule_video_list.size(); i++)
 		{
-			HashMap<String, Object> map = new HashMap<>();
-			map.put("video", event_schedule_video_list.get(i));
+			HashMap<String, Object> video_list_map = new HashMap<>();
+			video_list_map.put("video", event_schedule_video_list.get(i));
 			
-			ArrayList<String> face_id_list = yh_event_schedule_video_faceDAO.getEventScheduleVideoFaceIdByEventScheduleVideoId(event_schedule_video_list.get(i).getEvent_schedule_video_id());
-			
-			ArrayList<User> user_list = yh_userDAO.selectUser();
-			
-			ArrayList<ArrayList<VideoAppearance>> video_appearance_list_list = new ArrayList<>();
-			
-			for(int j = 0; j < user_list.size(); j++)
-			{
-				ArrayList<String> similar_face_id_list = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(face_id_list, YHMSFaceUtil.getFace(Reference.user_image_path, user_list.get(j).getImage_id()));
-				
-				ArrayList<VideoAppearance> video_appearance_list = yh_video_appearanceDAO.selectVideoAppearanceByFaceIdList(similar_face_id_list);
-				
-				video_appearance_list_list.add(video_appearance_list);
-			}
-			map.put("user_list", user_list);
-			map.put("video_appearance_list_list", video_appearance_list_list);
-			
-			video_list.add(map);
+			video_list.add(video_list_map);
 		}
-		request.addAttribute("json_temp_video_list", new JSONArray(video_list));
-		request.addAttribute("temp_video_list", video_list);
-		request.addAttribute("video_list", event_schedule_video_list);
+		request.addAttribute("video_list", video_list);
 		
 		return "user/viewUserForm";
 	}

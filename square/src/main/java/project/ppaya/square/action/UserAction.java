@@ -179,6 +179,7 @@ public class UserAction {
 		
 		ArrayList<EventScheduleVideo> event_schedule_video_list;		
 
+		ArrayList<HashMap<String, Object>> image_list = new ArrayList<>();
 		ArrayList<HashMap<String, Object>> video_list = new ArrayList<>();
 		
 		if(self == true)
@@ -189,10 +190,16 @@ public class UserAction {
 			event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleImageIdList(event_schedule_image_id_list);
 			for(int i = 0; i < event_schedule_image_list.size(); i++)
 			{
-				event_schedule_image_list.get(i).setBlind(yh_image_albumDAO.getBlindByUserIdEventScheduleImageId(user_id, event_schedule_image_list.get(i).getEvent_schedule_image_id()));
+				HashMap<String, Object> image_list_map = new HashMap<>();
+				
+				image_list_map.put("index", i);
+				image_list_map.put("image", event_schedule_image_list.get(i));
+				image_list_map.put("blind", yh_image_albumDAO.getBlindByUserIdEventScheduleImageId(user_id, event_schedule_image_list.get(i).getEvent_schedule_image_id()));
+				
+				image_list.add(image_list_map);
 			}
-			event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleVideoIdList(event_schedule_video_id_list);
 			
+			event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleVideoIdList(event_schedule_video_id_list);			
 			for(int i = 0; i < event_schedule_video_list.size(); i++)
 			{
 				HashMap<String, Object> video_list_map = new HashMap<>();
@@ -201,17 +208,19 @@ public class UserAction {
 				video_list_map.put("video", event_schedule_video_list.get(i));
 				video_list_map.put("blind", yh_video_albumDAO.getBlindByUserIdEventScheduleVideoId(user_id, event_schedule_video_list.get(i).getEvent_schedule_video_id()));
 				
-				ArrayList<String> face_id_list = yh_event_schedule_video_faceDAO.getEventScheduleVideoFaceIdByEventScheduleVideoId(event_schedule_video_list.get(i).getEvent_schedule_video_id());				
-				ArrayList<String> similar_face_id_list = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(face_id_list, YHMSFaceUtil.getFace(Reference.user_image_path, user.getImage_id()));
-				video_list_map.put("appearance_list", yh_video_appearanceDAO.selectVideoAppearanceByFaceIdList(similar_face_id_list));
+				ArrayList<String> face_id_list = yh_event_schedule_video_faceDAO.getEventScheduleVideoFaceIdByEventScheduleVideoId(event_schedule_video_list.get(i).getEvent_schedule_video_id());
+				
+				if(face_id_list.size() != 0)
+				{
+					ArrayList<String> similar_face_id_list = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(face_id_list, YHMSFaceUtil.getFaceId(Reference.user_image_path, user.getImage_id()));
+					video_list_map.put("appearance_list", yh_video_appearanceDAO.selectVideoAppearanceByFaceIdList(similar_face_id_list));
+				}
+				else
+				{
+					video_list_map.put("appearance_list", new ArrayList<VideoAppearance>());
+				}
 				
 				video_list.add(video_list_map);
-			}
-			
-			
-			for(int i = 0; i < event_schedule_video_list.size(); i++)
-			{
-				event_schedule_video_list.get(i).setBlind(yh_video_albumDAO.getBlindByUserIdEventScheduleVideoId(user_id, event_schedule_video_list.get(i).getEvent_schedule_video_id()));
 			}
 		}
 		else
@@ -219,19 +228,43 @@ public class UserAction {
 			event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(new_event_schedule_id_list);
 			for(int i = 0; i < event_schedule_image_list.size(); i++)
 			{
-				event_schedule_image_list.get(i).setBlind(yh_image_albumDAO.getBlindByUserIdEventScheduleImageId(user_id, event_schedule_image_list.get(i).getEvent_schedule_image_id()));
+				HashMap<String, Object> image_list_map = new HashMap<>();
+				
+				image_list_map.put("index", i);
+				image_list_map.put("image", event_schedule_image_list.get(i));
+				image_list_map.put("blind", yh_image_albumDAO.getBlindByUserIdEventScheduleImageId(user_id, event_schedule_image_list.get(i).getEvent_schedule_image_id()));
+				
+				image_list.add(image_list_map);
 			}
+			
 			event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleIdList(new_event_schedule_id_list);
 			for(int i = 0; i < event_schedule_video_list.size(); i++)
 			{
-				event_schedule_video_list.get(i).setBlind(yh_video_albumDAO.getBlindByUserIdEventScheduleVideoId(user_id, event_schedule_video_list.get(i).getEvent_schedule_video_id()));
+				HashMap<String, Object> video_list_map = new HashMap<>();
+				
+				video_list_map.put("index", i);
+				video_list_map.put("video", event_schedule_video_list.get(i));
+				video_list_map.put("blind", yh_video_albumDAO.getBlindByUserIdEventScheduleVideoId(user_id, event_schedule_video_list.get(i).getEvent_schedule_video_id()));
+				
+				ArrayList<String> face_id_list = yh_event_schedule_video_faceDAO.getEventScheduleVideoFaceIdByEventScheduleVideoId(event_schedule_video_list.get(i).getEvent_schedule_video_id());
+				if(face_id_list.size() != 0)
+				{
+					ArrayList<String> similar_face_id_list = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(face_id_list, YHMSFaceUtil.getFaceId(Reference.user_image_path, user.getImage_id()));
+					video_list_map.put("appearance_list", yh_video_appearanceDAO.selectVideoAppearanceByFaceIdList(similar_face_id_list));
+				}
+				else
+				{
+					video_list_map.put("appearance_list", new ArrayList<VideoAppearance>());
+				}
+				
+				
+				video_list.add(video_list_map);
 			}
 		}
 
 		HashMap<String, Object> result = new HashMap<>();
+		result.put("image_list", image_list);
 		result.put("video_list", video_list);
-		result.put("event_schedule_image_list", event_schedule_image_list);
-		result.put("event_schedule_video_list", event_schedule_video_list);
 		
 		return result;
 	}

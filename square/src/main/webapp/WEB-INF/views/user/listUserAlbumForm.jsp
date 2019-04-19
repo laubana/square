@@ -176,6 +176,10 @@ label img {
 			<script src="resources/MemberPhoto/assets/js/main.js"></script>
 
 <script>
+function setVideo(video_id, time)
+{
+	document.getElementById("video" + video_id).currentTime = time / 1000;
+}
 function setAlbumAction()
 {
 	var map = {};
@@ -215,7 +219,6 @@ function setAlbumAction()
 		error: function(error){console.log(error);}
 	});
 }
-var appearance_list = [];
 $(document).ready(function () {
 	
 	$(".check").change(function()
@@ -239,23 +242,24 @@ $(document).ready(function () {
 			contentType: "application/json; charset=UTF-8",
 			success: function(result)
 			{			
-				if(result.event_schedule_image_list.length != 0)
+				if(result.image_list.length != 0)
 				{
+					var image_list = result.image_list;
 					var image_buff = "";
 					
-					for(var i = 0; i < result.event_schedule_image_list.length; i++)
+					for(var i = 0; i < image_list.length; i++)
 					{
 						image_buff += "<article class='col-6 col-12-xsmall work-item'>";
-						if(result.event_schedule_image_list[i].blind == 1)
+						if(image_list[i].blind == 1)
 						{
-							image_buff += "<input type='checkbox' id='photo_check_box" + result.event_schedule_image_list[i].event_schedule_image_id + "' name='photo_check_box' value='" + result.event_schedule_image_list[i].event_schedule_image_id + "'>";
+							image_buff += "<input type='checkbox' id='photo_check_box" + image_list[i].image.event_schedule_image_id + "' name='photo_check_box' value='" + image_list[i].image.event_schedule_image_id + "'>";
 						}
 						else
 						{
-							image_buff += "<input type='checkbox' id='photo_check_box" + result.event_schedule_image_list[i].event_schedule_image_id + "' name='photo_check_box' value='" + result.event_schedule_image_list[i].event_schedule_image_id + "' checked>";
+							image_buff += "<input type='checkbox' id='photo_check_box" + image_list[i].image.event_schedule_image_id + "' name='photo_check_box' value='" + image_list[i].image.event_schedule_image_id + "' checked>";
 						}
-						image_buff += "<label for='photo_check_box" + result.event_schedule_image_list[i].event_schedule_image_id + "'/>";
-						image_buff += "<img src='resources/image/event_schedule_image/" + result.event_schedule_image_list[i].filename + "'/>";
+						image_buff += "<label for='photo_check_box" + image_list[i].image.event_schedule_image_id + "'/>";
+						image_buff += "<img src='resources/image/event_schedule_image/" + image_list[i].image.filename + "'/>";
 						image_buff += "</label>";
 						image_buff += "</article>";
 					}
@@ -267,46 +271,50 @@ $(document).ready(function () {
 				{
 					document.getElementById("image_album").innerHTML = "";
 				}
-				if(result.event_schedule_video_list.length != 0)
+				if(result.video_list.length != 0)
 				{
 					var video_list = result.video_list;
 									
 					var video_buff = "";
 					
-					for(var = i; i < video_list.length; i++)
+					for(var i = 0; i < video_list.length; i++)
 					{
-						appearance_list.push(video_list[i].appearance_list);
-						video_buff += "<video width='320' height='240' controls>";
+						video_buff += "<video width='320' height='auto' controls id='video" + video_list[i].video.event_schedule_video_id + "'>";
 						video_buff += "<source src='resources/image/event_schedule_video/" + video_list[i].video.filename +"' type='video/mp4'>";
 						video_buff += "</video>";
 						video_buff += "<span>";
-						for(var j = 0; j < video_list[i].appearance_list.length; j++)
+						if(video_list[i].blind == 1)
 						{
-							video_buff += "<p>" + video_list[i].appearance_list[j].start_date + "~" + video_list[i].appearance_list[j].end_date + "</p>";
-						}
-						video_buff += "</span>";
-					}
-					/* for(var i = 0; i < result.event_schedule_video_list.length; i++)
-					{
-						
-						video_buff += "<video width='320' height='240' controls>";
-						video_buff += "<source src='resources/image/event_schedule_video/" + result.event_schedule_video_list[i].filename +"' type='video/mp4'>";
-						video_buff += "</video>";
-						video_buff += "<br>";
-						console.log(result.event_schedule_video_list[i]);
-						if(result.event_schedule_video_list[i].blind == 1)
-						{
-							video_buff += "<input type='checkbox' id='video_check_box" + result.event_schedule_video_list[i].event_schedule_video_id + "' name='video_check_box' value='" + result.event_schedule_video_list[i].event_schedule_video_id + "'>";
+							video_buff += "<input type='checkbox' id='video_check_box" + video_list[i].video.event_schedule_video_id + "' name='video_check_box' value='" + video_list[i].video.event_schedule_video_id + "'>";
 						}
 						else
 						{
-							video_buff += "<input type='checkbox' id='video_check_box" + result.event_schedule_video_list[i].event_schedule_video_id + "' name='video_check_box' value='" + result.event_schedule_video_list[i].event_schedule_video_id + "' checked>";
+							video_buff += "<input type='checkbox' id='video_check_box" + video_list[i].video.event_schedule_video_id + "' name='video_check_box' value='" + video_list[i].video.event_schedule_video_id + "' checked>";
 						}
-						video_buff += "<label for='video_check_box" + result.event_schedule_video_list[i].event_schedule_video_id + "'/>";
-						video_buff += "<br><h2>Select</h2>";
+						video_buff += "<label for='video_check_box" + video_list[i].video.event_schedule_video_id + "'/>";
+						video_buff += "<h2>Select</h2>";
 						video_buff += "</label>";
-					} */
-					
+						video_buff += "<br>";
+						for(var j = 0; j < video_list[i].appearance_list.length; j++)
+						{
+							var hour = parseInt(video_list[i].appearance_list[j].start_time / 3600000);
+							var minute = parseInt((video_list[i].appearance_list[j].start_time % 3600000) / 60000);
+							var second = parseInt(((video_list[i].appearance_list[j].start_time % 3600000) % 60000) / 1000);
+							var millisecond = ((video_list[i].appearance_list[j].start_time % 3600000) % 60000) % 1000;
+							
+							video_buff += "<a href='javascript:setVideo(&quot;" + video_list[i].video.event_schedule_video_id + "&quot;, " + video_list[i].appearance_list[j].start_time + ")'>" + hour + ":" + minute + ":" + second + "." + millisecond + "</a>";
+							
+							video_buff += " ~ ";
+							
+							hour = parseInt(video_list[i].appearance_list[j].end_time / 3600000);
+							minute = parseInt((video_list[i].appearance_list[j].end_time % 3600000) / 60000);
+							second = parseInt(((video_list[i].appearance_list[j].end_time % 3600000) % 60000) / 1000);
+							millisecond = ((video_list[i].appearance_list[j].end_time % 3600000) % 60000) % 1000;
+							
+							video_buff += "<a href='javascript:setVideo(&quot;" + video_list[i].video.event_schedule_video_id + "&quot;," + video_list[i].appearance_list[j].end_time + ")'>" + hour + ":" + minute + ":" + second + "." + millisecond + "</a>";
+						}
+						video_buff += "</span>";
+					}
 					
 					document.getElementById("video").innerHTML = video_buff;
 				}

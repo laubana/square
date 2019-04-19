@@ -1,3 +1,7 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="project.ppaya.square.vo.EventComment"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -59,19 +63,38 @@
 									<h3>코멘트</h3>
 						<div class="comments">
 
-							<c:forEach var="event_comment" items="${event_comment_list}">
+							<c:forEach var="element" items="${comment_list}" end="2">
 						<div class="comment-wrap">
 							<div>
-							<a href="viewUserForm?user_id=${event_comment.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${event_comment.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
+							<a href="viewUserForm?user_id=${element.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${element.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 							</div>
 							<div class="comment-block">
-								<p class="comment-text">${event_comment.content}</p>
+								<p class="comment-text" id="comment${element.comment.event_comment_id}">${element.comment.content}</p>
 									<div class="bottom-comment">
-										<div class="comment-date">${event_comment.input_date}</div>
+										<div class="comment-date">
+										
+										<%= (new SimpleDateFormat("yyyy年 MM月 dd日 HH:mm:ss")).format(new Date(((EventComment)(((HashMap)pageContext.getAttribute("element")).get("comment"))).getInput_date()))%>
+										
+										</div>
 											<ul class="comment-actions">
-												<li class="name">${event_comment.user.name}</li>
+												<li class="name"><a href="viewUserForm?user_id=${element.user.user_id}">${element.user.name}</a></li>
+												<li class="name" id="translation_button${element.comment.event_comment_id}"><a href="javascript:getEventCommentTranslation(${element.comment.event_comment_id})">翻訳</a></li>
+											<c:if test="${element.user.user_id == sessionScope.user_id}">
+												<li class="name">Edit</li>
+												<li>Delete</li>
+											</c:if>
+													<select id="translation_language${element.comment.event_comment_id}">
+														  <option value="en">英語</option>
+														  <option value="ko">韓国語</option>
+													</select>
 											</ul>
 									</div>
+									<br><br><br>
+									<div>
+									<c:forEach var="tag" items="${element.tag_list}">
+										<a href="viewMindMapForm?hashtag=${tag}">#${tag}</a>
+									</c:forEach>
+									</div>		
 							</div>
 						</div>
 						</c:forEach>
@@ -110,4 +133,49 @@
 			<script src="resources/GroupMain/assets/js/main.js"></script>
 
 	</body>
+	<script>
+	function getEventCommentTranslation(event_comment_id)
+	{
+		var map = {};
+		map["event_comment_id"] = event_comment_id;
+		map["language"] = document.getElementById("translation_language" + event_comment_id).value; 
+		
+		$.ajax({
+			url: "getEventCommentTranslation",
+			type: "POST",
+			data: JSON.stringify(map),
+			dataType: "JSON",
+			contentType: "application/json; charset=UTF-8",
+			success: function(jsonObject)
+			{
+				var result = decodeURIComponent(jsonObject.result.replace(/\+/g, " "));
+				
+				document.getElementById("comment" + event_comment_id).innerHTML = result;
+				document.getElementById("translation_button" + event_comment_id).innerHTML = '<a href="javascript:resetEventComment(' + event_comment_id + ')">リセット</a>';
+			},
+			error: function(error){console.log(error);}
+		});
+	}
+	function resetEventComment(event_comment_id)
+	{
+		var map = {};
+		map["event_comment_id"] = event_comment_id;
+		
+		$.ajax({
+			url: "resetEventComment",
+			type: "POST",
+			data: JSON.stringify(map),
+			dataType: "JSON",
+			contentType: "application/json; charset=UTF-8",
+			success: function(jsonObject)
+			{
+				var result = decodeURIComponent(jsonObject.result.replace(/\+/g, " "));
+				
+				document.getElementById("comment" + event_comment_id).innerHTML = result;
+				document.getElementById("translation_button" + event_comment_id).innerHTML = '<a href="javascript:getEventCommentTranslation(' + event_comment_id +')">翻訳</a>';
+			},
+			error: function(error){console.log(error);}
+		});
+	}
+	</script>
 </html>

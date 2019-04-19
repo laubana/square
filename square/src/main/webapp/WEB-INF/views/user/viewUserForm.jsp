@@ -96,13 +96,13 @@
 							</article>
 						</c:forEach>
 						<c:if test="${video_list.size() != 0}">
-						<video width='320' height='auto' controls id="video">
-							<c:forEach var="video" items="${video_list}">
-								<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
+							<c:forEach var="element" items="${video_list}">
+							
+						<video width='640' height='auto' controls>
+								<source src='resources/image/event_schedule_video/${element.video.filename}' type='video/mp4'>
 								
-									</c:forEach>
 									</video>
-									<div id="video_info" class="inner"></div>
+									</c:forEach>
 						</c:if>
 						<br><br><br>
 						</div>
@@ -139,7 +139,7 @@
 
 	</body>
 	<script>
-	var video = document.getElementById("video");
+	/* var video = document.getElementById("video");
 	var video_interval;
 
 	var video_appearance_list_list = JSON.parse('${json_temp_video_list}')[0].video_appearance_list_list;
@@ -177,6 +177,6 @@
 	{
 		clearInterval(video_interval);
 	};
-	console.log(JSON.parse('${json_temp_video_list}'));
+	console.log(JSON.parse('${json_temp_video_list}')); */
 	</script>
 </html>

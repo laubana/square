@@ -56,7 +56,6 @@ public class EventController
 	(
 			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
-			//int group_id,
 			Model request,
 			HttpSession session
 			)
@@ -85,7 +84,6 @@ public class EventController
 			Model request,
 			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id
-			//int group_id
 			)
 	{
 		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
@@ -114,8 +112,6 @@ public class EventController
 			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
 			@RequestParam(value = "event_id", defaultValue = "1") int event_id
-			//int group_id,
-			//int event_id
 			)
 	{
 		String user_id = (String)session.getAttribute("user_id"); 
@@ -169,20 +165,21 @@ public class EventController
 		request.addAttribute("event_schedule_list", event_schedule_list);
 		
 		ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventId(event_id);
+		
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
 		//Image List 전송
 		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
+		
 		ArrayList<EventScheduleVideo> event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleIdList(event_schedule_id_list);
 		//Video List 전송
 		request.addAttribute("video_list", event_schedule_video_list);
 		
-		ArrayList<EventComment> event_comment_list = yh_event_commentDAO.selectEventCommentByEventId(event_id);
-		
-		ArrayList<HashMap<String, Object>> comment_list = new ArrayList<>();
-		
+		ArrayList<EventComment> event_comment_list = yh_event_commentDAO.selectEventCommentByEventId(event_id);		
+		ArrayList<HashMap<String, Object>> comment_list = new ArrayList<>();		
 		for(int i = 0; i < event_comment_list.size(); i++)
 		{
 			HashMap<String, Object> map = new HashMap<>();
+			
 			map.put("comment", event_comment_list.get(i));
 			map.put("user", yh_userDAO.selectUserByUserId(event_comment_list.get(i).getUser_id()));
 			map.put("tag_list", yh_event_comment_tagDAO.getTagByEventCommentId(event_comment_list.get(i).getEvent_comment_id()));
@@ -210,8 +207,6 @@ public class EventController
 			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
 			@RequestParam(value = "event_id", defaultValue = "1") int event_id
-			//int group_id,
-			//int event_id
 			)
 	{
 		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
@@ -241,8 +236,6 @@ public class EventController
 			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
 			@RequestParam(value = "event_id", defaultValue = "1") int event_id
-			//int group_id,
-			//int event_id
 			)
 	{
 		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
@@ -253,13 +246,20 @@ public class EventController
 		//GroupHashtag List 전송
 		request.addAttribute("group_hashtag_list", group_hashtag_list);
 		
-		ArrayList<EventComment> event_comment_list = yh_event_commentDAO.selectEventCommentByEventId(event_id);
+		ArrayList<EventComment> event_comment_list = yh_event_commentDAO.selectEventCommentByEventId(event_id);		
+		ArrayList<HashMap<String, Object>> comment_list = new ArrayList<>();		
 		for(int i = 0; i < event_comment_list.size(); i++)
 		{
-			event_comment_list.get(i).setUser(yh_userDAO.selectUserByUserId(event_comment_list.get(i).getUser_id()));
+			HashMap<String, Object> map = new HashMap<>();
+			
+			map.put("comment", event_comment_list.get(i));
+			map.put("user", yh_userDAO.selectUserByUserId(event_comment_list.get(i).getUser_id()));
+			map.put("tag_list", yh_event_comment_tagDAO.getTagByEventCommentId(event_comment_list.get(i).getEvent_comment_id()));
+			
+			comment_list.add(map);
 		}
 		//EventComment List 전송
-		request.addAttribute("event_comment_list", event_comment_list);
+		request.addAttribute("comment_list", comment_list);
 		
 		return "event/listEventCommentForm";
 	}

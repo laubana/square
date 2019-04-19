@@ -160,10 +160,8 @@ public class GroupController
 		//Video List 전송
 		request.addAttribute("video_list", event_schedule_video_list);
 		
-		ArrayList<GroupComment> group_comment_list = yh_group_commentDAO.selectGroupCommentByGroupId(group_id);
-		
-		ArrayList<HashMap<String, Object>> comment_list = new ArrayList<>();
-		
+		ArrayList<GroupComment> group_comment_list = yh_group_commentDAO.selectGroupCommentByGroupId(group_id);		
+		ArrayList<HashMap<String, Object>> comment_list = new ArrayList<>();		
 		for(int i = 0; i < group_comment_list.size(); i++)
 		{
 			HashMap<String, Object> map = new HashMap<>();
@@ -260,13 +258,19 @@ public class GroupController
 		//GroupHashtag List 전송
 		request.addAttribute("group_hashtag_list", group_hashtag_list);
 				
-		ArrayList<GroupComment> group_comment_list = yh_group_commentDAO.selectGroupCommentByGroupId(group_id);
+		ArrayList<GroupComment> group_comment_list = yh_group_commentDAO.selectGroupCommentByGroupId(group_id);		
+		ArrayList<HashMap<String, Object>> comment_list = new ArrayList<>();		
 		for(int i = 0; i < group_comment_list.size(); i++)
 		{
-			group_comment_list.get(i).setUser(yh_userDAO.selectUserByUserId(group_comment_list.get(i).getUser_id()));
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("comment", group_comment_list.get(i));
+			map.put("user", yh_userDAO.selectUserByUserId(group_comment_list.get(i).getUser_id()));
+			map.put("tag_list", yh_group_comment_tagDAO.getTagByGroupCommentId(group_comment_list.get(i).getGroup_comment_id()));
+			
+			comment_list.add(map);
 		}
 		//GroupComment List 전송
-		request.addAttribute("group_comment_list", group_comment_list);
+		request.addAttribute("comment_list", comment_list);
 		
 		return "group/listGroupCommentForm";
 	}

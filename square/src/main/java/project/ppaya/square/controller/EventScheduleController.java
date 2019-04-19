@@ -220,10 +220,8 @@ public class EventScheduleController
 		//User List 전송
 		request.addAttribute("user_list", user_list);
 		
-		ArrayList<EventScheduleComment> event_schedule_comment_list = yh_event_schedule_commentDAO.selectEventScheduleCommentByEventScheduleId(event_schedule_id);
-		
-		ArrayList<HashMap<String, Object>> comment_list = new ArrayList<>();
-		
+		ArrayList<EventScheduleComment> event_schedule_comment_list = yh_event_schedule_commentDAO.selectEventScheduleCommentByEventScheduleId(event_schedule_id);		
+		ArrayList<HashMap<String, Object>> comment_list = new ArrayList<>();		
 		for(int i = 0; i < event_schedule_comment_list.size(); i++)
 		{
 			HashMap<String, Object> map = new HashMap<>();
@@ -359,8 +357,6 @@ public class EventScheduleController
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
 			@RequestParam(value = "event_id", defaultValue = "1") int event_id,
 			@RequestParam(value = "event_schedule_id", defaultValue = "1") int event_schedule_id
-			//int group_id,
-			//int event_id
 			)
 	{
 		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
@@ -375,13 +371,19 @@ public class EventScheduleController
 		//GroupHashtag List 전송
 		request.addAttribute("group_hashtag_list", group_hashtag_list);
 		
-		ArrayList<EventScheduleComment> event_schedule_comment_list = yh_event_schedule_commentDAO.selectEventScheduleCommentByEventScheduleId(event_schedule_id);
+		ArrayList<EventScheduleComment> event_schedule_comment_list = yh_event_schedule_commentDAO.selectEventScheduleCommentByEventScheduleId(event_schedule_id);		
+		ArrayList<HashMap<String, Object>> comment_list = new ArrayList<>();		
 		for(int i = 0; i < event_schedule_comment_list.size(); i++)
 		{
-			event_schedule_comment_list.get(i).setUser(yh_userDAO.selectUserByUserId(event_schedule_comment_list.get(i).getUser_id()));
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("comment", event_schedule_comment_list.get(i));
+			map.put("user", yh_userDAO.selectUserByUserId(event_schedule_comment_list.get(i).getUser_id()));
+			map.put("tag_list", yh_event_schedule_comment_tagDAO.getTagByEventScheduleCommentId(event_schedule_comment_list.get(i).getEvent_schedule_comment_id()));
+			
+			comment_list.add(map);
 		}
-		//EventComment List 전송
-		request.addAttribute("event_schedule_comment_list", event_schedule_comment_list);
+		//EventScheduleComment List 전송
+		request.addAttribute("comment_list", comment_list);
 		
 		return "event_schedule/listEventScheduleCommentForm";
 	}
