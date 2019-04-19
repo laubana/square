@@ -100,7 +100,7 @@
 					<header>
 						<h2>회원 가입</h2>
 					</header>
-					<p>2조에 가입하여 사람들과 좋아하는 일을 함께하고 새로운 경험을 찾아보세요.</p>
+					<p>みんな・みんな에 가입하여 사람들과 좋아하는 일을 함께하고 새로운 경험을 찾아보세요.</p>
 					<div class="actions special">
 						<a href="joinUserForm" class="button" style="color:white;">회원 가입</a>
 					</div>
@@ -126,17 +126,17 @@
 
 				<!-- Icons -->
 					<ul class="icons">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
+						<li><a href="https://twitter.com" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://www.facebook.com" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="https://www.instagram.com" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://kr.linkedin.com" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://dribbble.com" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="https://co.pinterest.com" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
 					</ul>
 
 				<!-- Menu -->
 					<ul class="menu">
-						<li><a href="main">2조</a></li>
+						<li><a href="main">みんな・みんな</a></li>
 						<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
 					</ul>
 

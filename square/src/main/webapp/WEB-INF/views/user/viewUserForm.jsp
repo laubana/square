@@ -98,11 +98,11 @@
 						</div>
 						<hr style="width:380px;"><br>
 						<h1>映像</h1><br>
-						<div class="">
+						<div class="" align="center">
 						<c:if test="${video_list.size() != 0}">
 							<c:forEach var="element" items="${video_list}">
 							
-						<video width='360' height='300' style="background-color: black;" controls>
+						<video width='365' height='300' style="background-color: black;" controls>
 								<source src='resources/image/event_schedule_video/${element.video.filename}' type='video/mp4'>		
 						</video>
 							

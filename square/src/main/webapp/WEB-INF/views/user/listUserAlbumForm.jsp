@@ -84,7 +84,7 @@ label img {
 					<h1><strong>${user.name}</strong>님의 그룹 사진<br /></h1>
 					<p>사진과 동영상을 찾아보세요!<br>
 					${user.name}님과의 추억을<br>
-					Web Site Name가 함께합니다!
+					みんな・みんな가 함께합니다!
 					</p>
 					<nav id="nav">
 					
@@ -142,7 +142,7 @@ label img {
 
 					<hr style="width:380px;"><br>
 					<h1>映像編集</h1><br>
-					<div id="video" class=""></div><br>	
+					<div id="video" class="" align="center"></div><br>	
 					<div align="center"><input type="button" value="確認" onclick="setAlbumAction()"></div>		
 					</form>
 
@@ -279,6 +279,7 @@ $(document).ready(function () {
 					
 					for(var i = 0; i < video_list.length; i++)
 					{
+						video_buff += "<br><br>";
 						video_buff += "<video width='480' height='320' style='background-color: black;' controls id='video" + video_list[i].video.event_schedule_video_id + "'>";
 						video_buff += "<source src='resources/image/event_schedule_video/" + video_list[i].video.filename +"' type='video/mp4'>";
 						video_buff += "</video>";
@@ -293,8 +294,9 @@ $(document).ready(function () {
 							video_buff += "<input type='checkbox' id='video_check_box" + video_list[i].video.event_schedule_video_id + "' name='video_check_box' value='" + video_list[i].video.event_schedule_video_id + "' checked>";
 						}
 						video_buff += "<label for='video_check_box" + video_list[i].video.event_schedule_video_id + "'/>";
-						video_buff += "<h2>Select</h2>";
+						video_buff += "<h2>選択</h2>";
 						video_buff += "</label>";
+						video_buff += "<br>";
 						
 						for(var j = 0; j < video_list[i].appearance_list.length; j++)
 						{
@@ -312,11 +314,11 @@ $(document).ready(function () {
 							second = parseInt(((video_list[i].appearance_list[j].end_time % 3600000) % 60000) / 1000);
 							millisecond = ((video_list[i].appearance_list[j].end_time % 3600000) % 60000) % 1000;
 							
-							video_buff += "<a href='javascript:setVideo(&quot;" + video_list[i].video.event_schedule_video_id + "&quot;," + video_list[i].appearance_list[j].end_time + ")'>" + hour + ":" + minute + ":" + second + "." + millisecond + "</a>";
+							video_buff += "<a href='javascript:setVideo(&quot;" + video_list[i].video.event_schedule_video_id + "&quot;," + video_list[i].appearance_list[j].end_time + ")'>" + hour + ":" + minute + ":" + second + "." + millisecond + " /&nbsp;" + "</a>";
 						}
 						video_buff += "</span>";
 					}
-					video_buff += "<br>";
+					
 					document.getElementById("video").innerHTML = video_buff;
 				}
 				else

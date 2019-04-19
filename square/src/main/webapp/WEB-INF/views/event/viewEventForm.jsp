@@ -314,7 +314,7 @@
 									<h3>映像</h3>
 									<div class="features" align="center">
 											<c:if test="${video_list.size() != 0}">
-											<video width='360' height='300' style="background-color: black;" controls>
+											<video width='365' height='300' style="background-color: black;" controls>
 											<c:forEach var="video" items="${video_list}">
 											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4'>
 											</c:forEach>

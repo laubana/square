@@ -84,24 +84,7 @@ background: url('resources/MindMap/image/3.jpg');
         <p align="center"><a href="main">#tag</a></p>
         <hr>
         <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
+        <hr>
       </li>
       <!-- <li class="">
         <div align="center"><span><a href="main">list 2</a></span></div>

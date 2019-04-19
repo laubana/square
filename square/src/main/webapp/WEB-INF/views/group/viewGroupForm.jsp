@@ -153,7 +153,7 @@
 					<h1 id="logo"><a href="#">${group.name}</a></h1>
 					<p style="font-size:15px;">
 						<c:forEach var="group_hashtag" items="${group_hashtag_list}">
-							#${group_hashtag.hashtag}
+							<a href="viewMindMapForm?hashtag=${group_hashtag.hashtag}">#${group_hashtag.hashtag}</a>
 						</c:forEach>
 					</p>
 					<c:if test="${sessionScope.user_id != null}">
@@ -304,7 +304,7 @@
 									<h3>映像</h3>
 									<div class="features" align="center">
 											<c:if test="${video_list.size() != 0}">
-											<video width='360' height='300' style="background-color: black;" id="video" controls>
+											<video width='365' height='300' style="background-color: black;" id="video" controls>
 											<c:forEach var="video" items="${video_list}">
 											<source src='resources/image/event_schedule_video/${video.filename}' type='video/mp4' >
 											</c:forEach>
