@@ -36,21 +36,23 @@
 				<p><input type="text" name="user_idEmailType" placeholder="email 직접 입력"></p>
 			</div> -->
 		</p>
-				<p><input type="password" name="password" id="password" placeholder="비밀번호"></p>
-				<p><input type="text" name="name" id="name" placeholder="이름"></p>
+				<p><input type="password" name="password" id="password" placeholder="Password"></p>
+				<p><input type="text" name="name" id="name" placeholder="Name"></p>
     		<div class="custom-file mb-3" align="left">
 			</div>
-				<p><input type="text" name="region" id="region" placeholder="지역"></p>
+				<p><input type="text" name="region" id="region" placeholder="Area"></p>
 				<p><input type="submit" value="Join"></p><br>
 			</form>
 		
 		<!-- Footer -->
 			<footer id="footer">
 				<ul class="icons">
-					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-					<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-					<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+					<li><a href="https://twitter.com" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://www.facebook.com" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="https://www.instagram.com" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://kr.linkedin.com" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://dribbble.com" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="https://co.pinterest.com" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
 				</ul>
 				<ul class="copyright">
 					<li>&copy; Untitled.</li><li>Credits: <a href="http://html5up.net">HTML5 UP</a></li>
