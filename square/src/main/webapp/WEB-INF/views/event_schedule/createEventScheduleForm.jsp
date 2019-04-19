@@ -65,8 +65,8 @@ border: 0;
 	<!-- 구글 맵스 위한 style 태그. 다른 요소 적용할 style이 있다면 style 태그를 별도로 만들어주기 바람 -->
 	<style>
 		#map {
-			width: 750px;
-			height: 500px;
+			width: 500px;
+			height: 350px;
 			position: relative !important; /* changing this to fixed makes the map dissapear */
 			top: 0; 
 			bottom: 0; 
@@ -137,13 +137,13 @@ border: 0;
 									</div>
 									<div class="meta">
 								<!-- 날짜, 회원 이름, 회원 사진 -->
-<%-- 										<br><br><br><a href="viewUserForm?user_id=${user.user_id}" class="author"><span class="name">${user.name}</span><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
- --%>									</div>
+										<br><br><br><a href="viewUserForm?user_id=${user.user_id}" class="author"><span class="name">${user.name}</span><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
+									</div>
 								</header>
 								
 									<!-- google maps-->
 									<div align ="center">
-										<div id="map" ></div>
+									<div id="map" ></div>
 									</div>
 									<br>
 									    <input id="address" type="text" value="東京　京橋駅"  autocomplete="off">
@@ -273,7 +273,7 @@ function createEventScheduleAction()
 		    			contentType: "application/json; charset=UTF-8",
 		    			success: function(result)
 		    			{
-		    				location.href("viewGroupForm?group_category=${group_category.group_category_id&group_id=${group.group_id}}");
+		    				location.href("viewGroupForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}}");
 		    			},
 		    			error: function(){}
 		    				});
