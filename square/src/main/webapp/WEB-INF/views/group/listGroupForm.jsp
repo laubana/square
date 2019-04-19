@@ -193,7 +193,7 @@ $('input[type=search]').on({
 				buff += "<div class='radio'>";
 				if(check_group_category_id_radio == 1)
 				{
-					buff += "<input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1'　checked>";
+					buff += "<input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1' checked>";
 					buff += "<label for='radio-1' class='radio-label'>メンバー数順</label>";
 					buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2'>";
 					buff += "<label for='radio-2' class='radio-label'>イベント数順</label>";
@@ -266,7 +266,8 @@ $('input[type=search]').on({
 				
 				$(".check_group_category_id_radio").change(function()
 						{
-					check_group_category_id_radio = this.value;
+					console.log(this.value);
+					check_group_category_id_radio = parseInt(this.value);
 					listGroupAction();
 				});
 				

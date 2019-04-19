@@ -81,14 +81,14 @@ public class GroupAction {
 		case 1:
 			return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount(group_category_id, name);
 		case 2:
-			return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount(group_category_id, name);
+			return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByEventCount(group_category_id, name);
 		case 3:
-			return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount(group_category_id, name);
+			return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByEventScheduleCount(group_category_id, name);
 		case 4:
-			return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount(group_category_id, name);
+			return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByInputdate(group_category_id, name);
 		}
 		
-		return yh_groupDAO.selectGroupByGroupCategoryIdName(group_category_id, name);
+		return null;
 	}
 	@ResponseBody
 	@RequestMapping(value = "joinGroupAction", method = RequestMethod.POST)

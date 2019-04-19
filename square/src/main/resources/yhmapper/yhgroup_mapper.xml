@@ -36,7 +36,29 @@ FROM
 WHERE
 	UPPER(NAME) LIKE '%' || upper(#{name}) || '%'
 </select>
-<select id="selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount" parameterType="map" resultType="Group">
+<select id="selectGroupByGroupCategoryIdNameOrderByInputdate" parameterType="map" resultType="Group">
+SELECT
+	*
+FROM
+	TABLE_G G
+WHERE
+	GROUP_CATEGORY_ID = #{group_category_id} AND
+	UPPER(NAME) LIKE '%' || upper(#{name}) || '%'
+ORDER BY
+	INPUT_DATE DESC
+</select>
+<select id="selectGroupByGroupCategoryIdNameOrderByEventScheduleCount" parameterType="map" resultType="Group">
+SELECT
+	*
+FROM
+	TABLE_G G
+WHERE
+	GROUP_CATEGORY_ID = #{group_category_id} AND
+	UPPER(NAME) LIKE '%' || upper(#{name}) || '%'
+ORDER BY
+	(SELECT COUNT(*) FROM TABLE_ES ES WHERE G.GROUP_ID = ES.GROUP_ID) DESC
+</select>
+<select id="selectGroupByGroupCategoryIdNameOrderByEventCount" parameterType="map" resultType="Group">
 SELECT
 	*
 FROM
