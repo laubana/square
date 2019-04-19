@@ -146,12 +146,12 @@ border: 0;
 									<div id="map" ></div>
 									</div>
 									<br>
-									    <input id="address" type="text" value="東京　京橋駅"  autocomplete="off">
+									    <input id="address" type="text" value=""  autocomplete="off">
 										<br>
 									    <input type = "button" id = "button_mapsearch" value="検索" onclick="codeAddress()">
-										<input type = "text" value = "" id = "lat">
-										<input type = "text" value = "" id = "lng">
-										<input type = "text" value = "" id = "region">
+										<input type = "hidden" value = "" id = "lat">
+										<input type = "hidden" value = "" id = "lng">
+										<input type = "C" value = "" id = "region">
 									<br><br>
 									<!-- 내용 -->
 									<h1>스케줄 내용</h1>
@@ -407,7 +407,8 @@ $("#imgInp5").change(function() {
 			}
 		}
 		console.log( 'return check: ' + region_list[index_region] );
-		
+		$('#address').val( region_list[index_region] );
+
 		
 		geocoder = new google.maps.Geocoder();
 	    var latlng = new google.maps.LatLng(35.6766907, 139.77003390000004);
