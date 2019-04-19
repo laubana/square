@@ -170,7 +170,7 @@ border: 0;
 							<br>
 							<!-- 폼 -->
 							<form action="" method="post">
-							<input type="text" name="group_id" id="input" placeholder="그룹 이름">
+							<input type="text" name="group_id" id="input" placeholder="그룹 이름" autocomplete="off">
 							<br>
 							<h1>그룹 소개</h1>
 							<br>
@@ -210,11 +210,11 @@ border: 0;
   								</div>
 							</div>
 							<h1>그룹 Tag</h1>
-							<input type="text" placeholder="그룹 tag1" class="input1" name="group_hashtag">
-							<input type="text" placeholder="그룹 tag2" class="input2" name="group_hashtag">
-							<input type="text" placeholder="그룹 tag3" class="input3" name="group_hashtag">
-							<input type="text" placeholder="그룹 tag4" class="input4" name="group_hashtag">
-							<input type="text" placeholder="그룹 tag5" class="input5" name="group_hashtag">
+							<input type="text" placeholder="그룹 tag1" class="input1" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="그룹 tag2" class="input2" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="그룹 tag3" class="input3" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="그룹 tag4" class="input4" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="그룹 tag5" class="input5" name="group_hashtag" autocomplete="off">
 							<br>
 							<h1>그룹 활동 지역</h1>
 							<input type="text" placeholder="그룹 활동 지역" id="region">
