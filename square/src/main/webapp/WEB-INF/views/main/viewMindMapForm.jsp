@@ -4,7 +4,7 @@
 <html lang="en" >
 
 <head>
-  <title>js-mindmap demo - JavaScript Mindmap</title>
+  <title>みんな・みんな</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -84,24 +84,7 @@ background: url('resources/MindMap/image/3.jpg');
         <p align="center"><a href="main">#tag</a></p>
         <hr>
         <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
-        <p align="center"><a href="main">#tag</a></p>
+        <hr>
       </li>
       <!-- <li class="">
         <div align="center"><span><a href="main">list 2</a></span></div>

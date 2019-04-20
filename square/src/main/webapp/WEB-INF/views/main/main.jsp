@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Main</title>
+		<title>みんな・みんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/Main/assets/css/main.css" />
@@ -45,12 +45,12 @@
 						<li><a href="listRecommendationForm"><span id="realTimeHashTag"></span></a></li>
 						<c:if test="${sessionScope.user_id != null}">
 						<li><a href="viewUserForm?user_id=${sessionScope.user_id}">${sessionScope.user_id}</a></li>
-						<li><a href="createGroupForm">그룹생성</a></li>
-					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
+						<li><a href="createGroupForm">グループ・生成</a></li>
+					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
-						<li><a href="joinUserForm">회원가입</a></li>
-							<li><a href="loginUserForm">로그인</a></li>
+						<li><a href="joinUserForm">会員加入</a></li>
+							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
 						</c:if>
 					</ul>
 				</nav>
@@ -60,7 +60,7 @@
 			<section id="intro" class="main style1 dark fullscreen">
 				<div class="content">
 				<header>
-					<h2>SQUARE</h2>
+					<h2>みんな・みんな</h2>
 				</header>
 					<footer>
 						<a href="#work" class="button style2 down">More</a>
@@ -72,7 +72,7 @@
 			<section id="work" class="main style3 primary">
 				<div class="content">
 					<header>
-						<h2>카테고리</h2>
+						<h2>カテゴリー</h2>
 					</header>
 
 					<!-- Gallery  -->
@@ -98,11 +98,11 @@
 			<section id="one" class="main style2 right dark fullscreen">
 				<div class="content box style2">
 					<header>
-						<h2>회원 가입</h2>
+						<h2>会員加入</h2>
 					</header>
-					<p>2조에 가입하여 사람들과 좋아하는 일을 함께하고 새로운 경험을 찾아보세요.</p>
+					<p>みんな・みんな에 가입하여 사람들과 좋아하는 일을 함께하고 새로운 경험을 찾아보세요.</p>
 					<div class="actions special">
-						<a href="joinUserForm" class="button" style="color:white;">회원 가입</a>
+						<a href="joinUserForm" class="button" style="color:white;">会員加入</a>
 					</div>
 				</div>
 				<a href="#two" class="button style2 down anchored">Next</a>
@@ -112,11 +112,11 @@
 			<section id="two" class="main style2 left dark fullscreen">
 				<div class="content box style2">
 					<header>
-						<h2>그룹 생성</h2>
+						<h2>グループ・生成</h2>
 					</header>
 					<p>자신의  관심사를 토대로 이벤트를 운영하는 그룹을 만들세요. 그룹을 만들고 열정을 가진 사람들을 모아 보세요.</p>
 					<div class="actions special">
-						<a href="createGroupForm" class="button" style="color:white;">그룹 생성</a>
+						<a href="createGroupForm" class="button" style="color:white;">グループ・生成</a>
 					</div>
 				</div>
 			</section>
@@ -126,17 +126,16 @@
 
 				<!-- Icons -->
 					<ul class="icons">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
+						<li><a href="https://twitter.com" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://www.facebook.com" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="https://www.instagram.com" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://kr.linkedin.com" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://dribbble.com" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="https://co.pinterest.com" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
 					</ul>
 
 				<!-- Menu -->
 					<ul class="menu">
-						<li><a href="main">2조</a></li>
 						<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
 					</ul>
 

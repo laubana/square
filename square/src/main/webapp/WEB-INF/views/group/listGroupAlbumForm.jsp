@@ -9,7 +9,7 @@
 -->
 <html>
 	<head>
-		<title>Multiverse by HTML5 UP</title>
+		<title>みんな・みんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupPhoto/assets/css/main.css" />
@@ -22,7 +22,7 @@
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href="viewGroupForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}"><strong>${group.name}</strong> 앨범</a></h1>
+						<h1><a href="viewGroupForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}"><strong>${group.name}</strong> アルバム</a></h1>
 						<nav>
 							<ul>
 								<li><p class="copyright">

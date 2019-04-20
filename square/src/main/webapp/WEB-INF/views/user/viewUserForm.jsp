@@ -35,11 +35,10 @@
 
 		<!-- Main -->
 			<div id="main">
-
 				<!-- One -->
 					<section id="one">
 						<header class="major">
-							<h2>소개</h2>
+							<h2>紹介</h2>
 						</header>
 						<div id="content_div">
 						<p>
@@ -47,14 +46,14 @@
 						</p>
 						</div>
 						<c:if test="${sessionScope.user_id == user.user_id}">
-						<div align="center" id="update_content_button_div"><a class="button" onclick="updateContent()">정보 편집</a></div>
+						<div align="center" id="update_content_button_div"><a class="button" onclick="updateContent()">紹介・編集</a></div>
 						</c:if>
 					</section>
 					
 					<!-- Two -->
-					<%-- <section id="two">
+					<section id="two">
 						<header class="major">
-							<h2>관심 분야</h2>
+							<h2>関心分野</h2>
 						</header>
 						<p>
 							<c:forEach var="user_hashtag" items="${user_hashtag_list}">
@@ -69,13 +68,12 @@
 										<li><a href="#">${ hlist[4].name }</a></li>
 						</ul>
 						<c:if test="${sessionScope.user_id == user.user_id}">
-						<div align="center"><a href="#" class="button">관심 분야 편집</a></div>
+						<div align="center"><a href="#" class="button">関心分野・編集</a></div>
 						</c:if>
-					</section> --%>
-
+					</section>
 					<!-- Three -->
 					<section id="three">
-						<h1>그룹 활동</h1>
+						<h1>グループリスト</h1>
 						<div class="row" align="center">
 							<ul class="features">
 							<c:forEach var="group" items="${group_list}">
@@ -94,7 +92,7 @@
 
 				<!-- Four -->
 					<section id="four">
-						<h1>개인 앨범</h1><br>
+						<h1>アルバム</h1><br>
 						<div class="row">
 						<c:forEach var="event_schedule_image" items="${event_schedule_image_list}">
 						
@@ -106,11 +104,11 @@
 						</div>
 						<hr style="width:380px;"><br>
 						<h1>映像</h1><br>
-						<div class="">
+						<div class="" align="center">
 						<c:if test="${video_list.size() != 0}">
 							<c:forEach var="element" items="${video_list}">
 							
-						<video width='360' height='300' style="background-color: black;" controls>
+						<video width='365' height='300' style="background-color: black;" controls>
 								<source src='resources/image/event_schedule_video/${element.video.filename}' type='video/mp4'>		
 						</video>
 							
@@ -119,7 +117,7 @@
 						</div>
 						<br><br>
 						<c:if test="${sessionScope.user_id == user.user_id}">
-								<div align="center"><a href="listUserAlbumForm?user_id=${user.user_id}" class="button">앨범 편집</a></div>
+								<div align="center"><a href="listUserAlbumForm?user_id=${user.user_id}" class="button">アルバム・編集</a></div>
 								</c:if>
 					</section>
 
@@ -129,10 +127,12 @@
 			<footer id="footer">
 				<div class="inner">
 					<ul class="icons">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+						<li><a href="https://twitter.com" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://www.facebook.com" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="https://www.instagram.com" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://kr.linkedin.com" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://dribbble.com" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="https://co.pinterest.com" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
 					</ul>
 					<ul class="copyright">
 						<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
