@@ -101,7 +101,9 @@
 							buff += "<div style='display: inline;'>";
 							buff += "<a href='viewGroupForm?group_category_id=" + result[i].group_category_id +"&group_id=" + result[i].group_id + "' class='image avatar thumb'><img src='resources/image/group_logo/"+ result[i].group_logo + "' alt='' style='width: 100px; height:auto;'></a>";
 							buff += "</div>";
+							buff += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 							buff += "<input type='button' onclick='javascript:unifyEventAction(" + result[i].group_id + ")' value='連合'>";
+							buff += "<br><a> " + result[i].name + "</a><hr>";
 							buff += "</div>";
 						}
 						
@@ -205,26 +207,28 @@
 								<article class="post">
 								<header>
 									<div class="title">
-										<h2><a>${event.name}</a></h2>
+										<h2><a>${event.name}</a></h2>								
 									</div>
 									<div class="meta">
 										<time class="published"><%= (new SimpleDateFormat("yyyy年 MM月 dd日")).format(new Date(((Event)(request.getAttribute("event"))).getInput_date()))%></time>
 										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">${leader.name}</span><img src="resources/image/user_image/${leader.image_id}" alt="" /></a>
+										<div align="right"><a class="icon fa-heart">28</a></div>
 									</div>
 								</header>
 								<span class="image featured"><img src="resources/image/event_image/${event.image_id}" ></span>
-								<p>
-									${event.content}
-								</p>
 								<div align ="center">
 									<div id="map" ></div>
 									<br>
 									<a style="font-size: 25px;"><strong>場所:</strong> ${requestScope.event_place}</a>
 								</div>
-								<div align="right"><footer>
+								<br><br>
+								<p>
+									${event.content}
+								</p>
+								<!-- <div align="right"><footer>
 										<a class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
 										&nbsp;&nbsp;				
-								</footer></div>
+								</footer></div> -->
 							</article>
 							</section>
 
@@ -368,15 +372,13 @@
 						</div>
 						</c:forEach>
 						<c:if test="${sessionScope.user_id == leader.user_id}">
-						<input type="text" id="keyword" style="width:300px; display:inline;" autocomplete="off">
-<input type="button" onclick="javascript:searchGroupAction()" value="グループ・サーチ"><br><br><br>
-<div id="group_list" class="features">
-</div>
-</c:if>
-											</div>
-											
-										
+							<input type="text" id="keyword" style="width:300px; display:inline;" autocomplete="off">
+							<input type="button" onclick="javascript:searchGroupAction()" value="グループ・サーチ"><br><br><br>
+							<div id="group_list" class="features"></div>
+						</c:if>
+						
 									</div>
+								</div>
 							</section>
 							
 				</div>

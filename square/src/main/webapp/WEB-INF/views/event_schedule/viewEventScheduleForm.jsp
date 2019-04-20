@@ -140,13 +140,14 @@
 				<nav>
 					<ul>
 						<li><a href="listRecommendationForm"></a>
-						<c:if test=	"${sessionScope.user_id != null}">
-						<li><a href="createGroupForm">그룹생성</a></li>
-					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
+						<c:if test="${sessionScope.user_id != null}">
+						<li>${sessionScope.user_id}</li>
+						<li><a href="createGroupForm">グループ・生成</a></li>
+					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
-						<c:if test=	"${sessionScope.user_id == null}">
-						<li><a href="joinUserForm">회원가입</a></li>
-							<li><a href="loginUserForm">로그인</a></li>
+						<c:if test="${sessionScope.user_id == null}">
+						<li><a href="joinUserForm">会員加入</a></li>
+							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
 						</c:if>
 					</ul>
 				</nav>
@@ -159,17 +160,17 @@
 					<h1 id="logo"><a href="viewGroupForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}">${group.name}</a></h1>
 					<p style="font-size:15px;">
 					<c:forEach var="group_hashtag" items="${group_hashtag_list}">
-							#${group_hashtag.hashtag}
+							<a href="viewMindMapForm?hashtag=${group_hashtag.hashtag}">#${group_hashtag.hashtag}</a>
 						</c:forEach>
 					</p>
 					<c:if test="${sessionScope.user_id != null}">
 						<c:if test="${group_attendance != null}">
 							<c:if test="${event_attendance != null}">
 								<c:if test="${event_schedule_attendance != null}">
-									<a href="javascript:withdrawEventScheduleAction()" class="button">탈퇴</a>
+									<a href="javascript:withdrawEventScheduleAction()" class="button">脱退</a>
 								</c:if>
 								<c:if test="${event_schedule_attendance == null}">
-									<a href="javascript:joinEventScheduleAction()" class="button">참여</a>
+									<a href="javascript:joinEventScheduleAction()" class="button">参加</a>
 								</c:if>
 							</c:if>
 						</c:if>
@@ -177,21 +178,21 @@
 				</header>
 				<nav id="nav">
 					<ul>
-						<ul>
-						<li><a href="#one" class="active">정보</a></li>
-						<li><a href="#two">회원</a></li>
-						<li><a href="#three">코멘트</a></li>
-						<li><a href="#four">앨범</a></li>
-					</ul>
+						<li><a href="#one" class="active">情報</a></li>
+						<li><a href="#two">メンバー</a></li>
+						<li><a href="#three">コメント</a></li>
+						<li><a href="#four">アルバム</a></li>
+						<li><a href="#five">メンバースケジュール</a></li>
 					</ul>
 				</nav>
 				<footer>
 					<ul class="icons">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+						<li><a href="https://twitter.com" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://www.facebook.com" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="https://www.instagram.com" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://kr.linkedin.com" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://dribbble.com" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="https://co.pinterest.com" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
 					</ul>
 				</footer>
 			</section>
@@ -222,40 +223,40 @@
 										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">${leader.name}</span><img src="resources/image/user_image/${leader.image_id}" alt="" /></a>
 									</div>
 								</header>
+								<!-- 맵 -->
+								<div align ="center">
+									<div id = "map"></div>
+									<br>
+									<a style="font-size: 25px;"><strong>場所:</strong> ${ requestScope.place }</a>
+								</div>
+								<br>
 								<p>
 									${event_schedule.content}
 								</p>
 								<div align="right"><footer>			
 								</footer></div>
 							</article>
-							</section>
-
-					<!-- 맵 -->
-					<section>
-						<div class="container">
-							<div align ="center">
-								<div id = "map"></div>
-								場所: ${ requestScope.place }
-							</div>
-						</div>
-					</section>
+						</section>			
+					</div>
 					
-
+				<div id="main">
 					<!-- Two -->
 							<section id="two">
 								<div class="container">
 									<h3>メンバー</h3>
 										<div>
+									<p>リーダー</p>
 											<a href="viewUserForm?user_id=${leader.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${leader.image_id}" alt="" style="width: 100px; height:auto;"></a>
 										</div>
 										<div>
-									<p>リーダー</p>
+										<br>
+									<p>メンバー</p>
 										<c:forEach var="user" items="${user_list}">
 											<a href="viewUserForm?user_id=${user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 										</c:forEach>
 										</div>
-									<p>メンバー</p>
-									<a href="listEventScheduleAttendanceForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}" class="button">회원 페이지 이동</a>
+										<br>
+									<a href="listEventScheduleAttendanceForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}" class="button">メンバーページへ</a>
 								</div>
 							</section>
 					<!-- Three -->
@@ -298,18 +299,17 @@
 									</div>		
 							</div>
 						</div>
-						</c:forEach>
-						<a href="listEventScheduleCommentForm?group_category_id=${group_category.group_category_id}&group_id${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}" class="button">코멘트 페이지 이동</a>
-						
-						</div>		
+						</c:forEach>	
+						</div>
+						<a href="listEventScheduleCommentForm?group_category_id=${group_category.group_category_id}&group_id${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}" class="button">コメントページへ</a>		
 								</div>
 							</section>
 
 					<!-- Four -->
 							<section id="four" >
-								<div class="container" align="center">
-									<h3>앨범</h3>
-						<c:if test="${sessionScope.user_id != null}">
+								<div class="container">
+									<h3>アルバム</h3>
+					<c:if test="${sessionScope.user_id != null}">
 						<c:if test="${group_attendance != null}">
 							<c:if test="${event_attendance != null}">
 								<c:if test="${event_schedule_attendance != null}">
@@ -318,7 +318,7 @@
 							</c:if>
 						</c:if>
 					</c:if>
-									<div class="features">
+									<div class="features" align="center">
 										<article class="col-6 col-12-xsmall work-item">
 											<c:forEach var="event_schedule_image" items="${event_schedule_image_list}">
 												<a href="resources/image/event_schedule_image/${event_schedule_image.filename}" class="image thumb"><img src="resources/image/event_schedule_image/${event_schedule_image.filename}" alt="" /></a>
@@ -333,17 +333,18 @@
 											</video>
 											</c:if>
 											<br>
-											<a href="listGroupAlbumForm?group_id=${group.group_id}" class="button">앨범 페이지 이동</a>
+											<a href="listGroupAlbumForm?group_id=${group.group_id}" class="button">アルバムページへ</a>
 										</article>
 									</div>
 								</div>
 							</section>
 							
 							<!-- 관리 -->
+							<section id="five">
 							<c:if test="${sessionScope.user_id == leader.user_id}">
-							<section id="six">
+							
 								<div class="container">	
-									<h3>회원 스케줄</h3>
+									<h3>メンバースケジュール</h3>
 									<c:forEach var="event_schedule_user_schedule_list" items="${event_schedule_user_schedule_list_list}">
 									<div id="timeline_image${event_schedule_user_schedule_list.user.user_id}">
 										</div>
@@ -352,12 +353,11 @@
 									</c:forEach>
 									<!-- <div id="timeline" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 100%"> -->
 									</div>
-								</div>
-							</section>
 							</c:if>
-							
+							</section>
 				</div>
 				
+		</div>		
 				<!-- Footer -->
 					<section id="footer">
 						<div class="container">
@@ -366,8 +366,6 @@
 							</ul>
 						</div>
 					</section>
-
-			</div>
 
 		<!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
