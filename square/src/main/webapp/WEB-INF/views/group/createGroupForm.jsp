@@ -138,13 +138,13 @@ border: 0;
 				<header>
 					<!-- 그룹 로고 이미지 -->
 					<span class="image avatar" id="foo2_span"><img src="resources/Main/images/bb.jpg" id="foo2"/></span>
-					<div id="live-text"><h1 id="logo"><a>Group Name</a></h1></div>
-					<div id="live-text1"><p style="font-size:15px;">[tag1]</p></div>
-					<div id="live-text2"><p style="font-size:15px;">[tag2]</p></div><div id="live-text3"><p style="font-size:15px;">[tag3]</p></div><div id="live-text4"><p style="font-size:15px;">[tag4]</p></div><div id="live-text5"><p style="font-size:15px;">[tag5]</p></div>
+					<div id="live-text"><h1 id="logo"><a>グループ・名前</a></h1></div>
+					<div id="live-text1"><p style="font-size:15px;">[#タグ_ 1]</p></div>
+					<div id="live-text2"><p style="font-size:15px;">[#タグ _2]</p></div><div id="live-text3"><p style="font-size:15px;">[#タグ _3]</p></div><div id="live-text4"><p style="font-size:15px;">[#タグ _4]</p></div><div id="live-text5"><p style="font-size:15px;">[#タグ _5]</p></div>
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">그룹 생성</a></li>
+						<li><a href="#one" class="active">グループ・生成</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -174,58 +174,58 @@ border: 0;
 						
 						<!-- 메인 해더 -->
 						<header class="major">
-							<h1>그룹 이름</h1>
+							<h1>グループ・名前</h1>
 							<br>
 							<!-- 폼 -->
 							<form action="" method="post">
-							<input type="text" name="group_id" id="input" placeholder="그룹 이름" autocomplete="off">
+							<input type="text" name="group_id" id="input" placeholder="グループ・名前" autocomplete="off">
 							<br>
-							<h1>그룹 소개</h1>
+							<h1>グループ・紹介</h1>
 							<br>
 							<div class="comment-wrap">
 								<div class="comment-block">
-										<textarea name="" id="group_content" cols="30" rows="3" placeholder="자유롭게 작성해 주세요..."></textarea>
+										<textarea name="" id="group_content" cols="30" rows="3" placeholder="ご自由に記入してください。"></textarea>
 								</div>
 							</div>
 						
 							<br>
-							<h1>그룹 로고 이미지</h1>
+							<h1>グループ・ロゴ・イメージ</h1>
 							<div class="filebox">
-							<label for="imgInp2">Logo Upload</label> 
+							<label for="imgInp2">ロゴ・アップロード</label> 
 							<input type='file' id="imgInp2" /></div>
 							<br>
-							<h1>그룹 메인 이미지</h1>
+							<h1>グループ・メイン・イメージ</h1>
 							<div class="filebox">
-							<label for="imgInp">Main Upload</label>
+							<label for="imgInp">メイン・アップロード</label>
 							<input type='file' id="imgInp" /></div>
 						
 							<br>
-							<h1>그룹 카테고리</h1>
+							<h1>グループ・カテゴリー</h1>
 							<div class="container">
   								<div class="radio">
     								<input id="radio-1" name="radio" type="radio" value="1" checked>
     								<label for="radio-1" class="radio-label">IT</label>
     								<input id="radio-2" name="radio" type="radio" value="2">
-    								<label  for="radio-2" class="radio-label">펫</label>
+    								<label  for="radio-2" class="radio-label">ペット</label>
     								<input id="radio-3" name="radio" type="radio" value="3">
-    								<label for="radio-3" class="radio-label">레져</label>
+    								<label for="radio-3" class="radio-label">レジャー</label>
     								<input id="radio-4" name="radio" type="radio" value="4">
-    								<label for="radio-4" class="radio-label">가족</label>
+    								<label for="radio-4" class="radio-label">家族</label>
     								<input id="radio-5" name="radio" type="radio" value="5">
-    								<label for="radio-5" class="radio-label">요리</label>
+    								<label for="radio-5" class="radio-label">料理</label>
     								<input id="radio-6" name="radio" type="radio" value="6">
-    								<label for="radio-6" class="radio-label">음악</label>
+    								<label for="radio-6" class="radio-label">音樂</label>
   								</div>
 							</div>
-							<h1>그룹 Tag</h1>
-							<input type="text" placeholder="그룹 tag1" class="input1" name="group_hashtag" autocomplete="off">
-							<input type="text" placeholder="그룹 tag2" class="input2" name="group_hashtag" autocomplete="off">
-							<input type="text" placeholder="그룹 tag3" class="input3" name="group_hashtag" autocomplete="off">
-							<input type="text" placeholder="그룹 tag4" class="input4" name="group_hashtag" autocomplete="off">
-							<input type="text" placeholder="그룹 tag5" class="input5" name="group_hashtag" autocomplete="off">
+							<h1>グループ・タグ</h1>
+							<input type="text" placeholder="#グループ・タグ 1" class="input1" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="#グループ・タグ 2" class="input2" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="#グループ・タグ 3" class="input3" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="#グループ・タグ 4" class="input4" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="#グループ・タグ 5" class="input5" name="group_hashtag" autocomplete="off">
 							<br>
-							<h1>그룹 활동 지역</h1>
-							<input type="text" placeholder="그룹 활동 지역" id="region">
+							<h1>グループ・活動地域</h1>
+							<input type="text" placeholder="グループ・活動地域" id="region">
 							<br>
 							<div align="center"><input type="button" value="生成" onclick="createGroupAction()"></div>
 							</form>
