@@ -13,7 +13,7 @@
 -->
 <html>
 	<head>
-		<title>GroupMain</title>
+		<title>みんな・みんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
@@ -135,12 +135,12 @@
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
-						<li><a href="createGroupForm">그룹생성</a></li>
-					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
+						<li><a href="createGroupForm">グループ・生成</a></li>
+					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
-						<li><a href="joinUserForm">회원가입</a></li>
-							<li><a href="loginUserForm">로그인</a></li>
+						<li><a href="joinUserForm">会員加入</a></li>
+							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
 						</c:if>
 					</ul>
 				</nav>
@@ -158,10 +158,10 @@
 					</p>
 					<c:if test="${sessionScope.user_id != null}">
 						<c:if test="${group_attendance != null}">
-							<a href="javascript:withdrawGroupAction()" class="button">탈퇴</a>
+							<a href="javascript:withdrawGroupAction()" class="button">脱退</a>
 						</c:if>
 						<c:if test="${group_attendance == null}">
-							<a href="javascript:joinGroupAction()" class="button">참여</a>
+							<a href="javascript:joinGroupAction()" class="button">参加</a>
 						</c:if>
 					</c:if>
 				</header>
@@ -202,8 +202,9 @@
 									<p>${group.content}</p>
 								</div>
 							</section>
-							<section id="one">
+							<section id="">
 								<div class="container">
+								<h3>イベント・スケジュール場所</h3>
 									<div align ="center">
 										<div id="map" ></div>
 									</div>
@@ -324,7 +325,7 @@
 									<h3>イベント</h3>
 									<c:if test="${sessionScope.user_id != null}">
 						<c:if test="${group_attendance != null}">
-										<p align="right"><a href="createEventForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}" class="button">追加</a></p>
+										<p align="right"><a href="createEventForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}" class="button">生成</a></p>
 						</c:if>
 					</c:if>
 									<div class="features">
@@ -344,7 +345,7 @@
 							</section>
 							<section id="six">
 								<div class="container">
-									<h3>연합 이벤트</h3>
+									<h3>連合・イベント</h3>
 									<div class="features">
 									<c:forEach var="event_union_event" items="${event_union_event_list}">
 									<article>
@@ -356,7 +357,7 @@
 										</article>
 										</c:forEach>
 											</div>
-										<a href="listEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">연합 이벤트 페이지 이동</a>
+										<a href="listEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">連合・イベントページへ</a>
 									</div>
 							</section>
 					</div>

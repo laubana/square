@@ -15,7 +15,7 @@
 -->
 <html>
 	<head>
-		<title>GroupEventView</title>
+		<title>みんな・みんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/EventView/assets/css/main.css" />
@@ -101,7 +101,7 @@
 							buff += "<div style='display: inline;'>";
 							buff += "<a href='viewGroupForm?group_category_id=" + result[i].group_category_id +"&group_id=" + result[i].group_id + "' class='image avatar thumb'><img src='resources/image/group_logo/"+ result[i].group_logo + "' alt='' style='width: 100px; height:auto;'></a>";
 							buff += "</div>";
-							buff += "<input type='button' onclick='javascript:unifyEventAction(" + result[i].group_id + ")' value='연합하기'>";
+							buff += "<input type='button' onclick='javascript:unifyEventAction(" + result[i].group_id + ")' value='連合'>";
 							buff += "</div>";
 						}
 						
@@ -140,12 +140,13 @@
 					<ul>
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
-						<li><a href="createGroupForm">그룹생성</a></li>
-					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
+						<li>${sessionScope.user_id}</li>
+						<li><a href="createGroupForm">グループ・生成</a></li>
+					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
-						<li><a href="joinUserForm">회원가입</a></li>
-							<li><a href="loginUserForm">로그인</a></li>
+						<li><a href="joinUserForm">会員加入</a></li>
+							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
 						</c:if>
 					</ul>
 				</nav>
@@ -164,10 +165,10 @@
 					<c:if test="${sessionScope.user_id != null}">
 						<c:if test="${group_attendance != null}">
 							<c:if test="${event_attendance != null}">
-								<a href="javascript:withdrawEventAction()" class="button">탈퇴</a>
+								<a href="javascript:withdrawEventAction()" class="button">脱退</a>
 							</c:if>
 							<c:if test="${event_attendance == null}">
-								<a href="javascript:joinEventAction()" class="button">참여</a>
+								<a href="javascript:joinEventAction()" class="button">参加</a>
 							</c:if>
 						</c:if>
 					</c:if>
@@ -204,7 +205,7 @@
 								<article class="post">
 								<header>
 									<div class="title">
-										<h2><a href="">${event.name}</a></h2>
+										<h2><a>${event.name}</a></h2>
 									</div>
 									<div class="meta">
 										<time class="published"><%= (new SimpleDateFormat("yyyy年 MM月 dd日")).format(new Date(((Event)(request.getAttribute("event"))).getInput_date()))%></time>
@@ -322,7 +323,7 @@
 											</video>
 											</c:if>
 											<br><br>
-											<a href="listEventAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">이벤트 사진 페이지 이동</a>
+											<a href="listEventAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">イベント・アルバムページへ</a>
 									</div>	
 								</div>
 							</section>
@@ -330,7 +331,7 @@
 							<section id="five">
 								<div class="container">
 									<h3>イベント・スケジュール</h3>
-									<div align="right"><a href="createEventScheduleForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">스케줄 생성</a></div>
+									<div align="right"><a href="createEventScheduleForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">スケジュール・生成</a></div>
 									<div class="features">
 									<c:forEach var="event_schedule" items="${event_schedule_list}" end="2">
 									<article>
@@ -356,7 +357,7 @@
 							</section>
 							<section id="six">
 								<div class="container">
-									<h3>참여 그룹</h3>
+									<h3>参加・グループ</h3>
 									<div class="features">
 									<c:forEach var="group_union" items="${group_union_list}">
 						<div class="comment-wrap">
@@ -367,7 +368,7 @@
 						</c:forEach>
 						<c:if test="${sessionScope.user_id == leader.user_id}">
 						<input type="text" id="keyword" style="width:300px; display:inline;" autocomplete="off">
-<input type="button" onclick="javascript:searchGroupAction()" value="그룹 검색"><br><br><br>
+<input type="button" onclick="javascript:searchGroupAction()" value="グループ・サーチ"><br><br><br>
 <div id="group_list" class="features">
 </div>
 </c:if>

@@ -13,7 +13,7 @@
 -->
 <html>
 	<head>
-		<title>GroupComment</title>
+		<title>みんな・みんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
@@ -27,9 +27,16 @@
 				<h1><a class="navbar-brand font-weight-bolder mr-3" href="main"><img src="resources/Main/assets/css/images/photoSquareLogo_done.png"></a></h1>
 				<nav>
 					<ul>
-						<li><a href="joinUserForm">회원가입</a></li>
-						<li><a href="createGroupForm">그룹생성</a></li>
-						<li><a href="loginUserForm">로그인</a></li>
+						<li><a href="listRecommendationForm"></a>
+						<c:if test="${sessionScope.user_id != null}">
+						<li>${sessionScope.user_id}</li>
+						<li><a href="createGroupForm">グループ・生成</a></li>
+					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
+						</c:if>
+						<c:if test="${sessionScope.user_id == null}">
+						<li><a href="joinUserForm">会員加入</a></li>
+							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
+						</c:if>
 					</ul>
 				</nav>
 			</header>
@@ -46,10 +53,10 @@
 					</p>
 					<c:if test="${sessionScope.user_id != null}">
 						<c:if test="${group_attendance != null}">
-							<a href="" class="button">탈퇴</a>
+							<a href="" class="button">脱退</a>
 						</c:if>
 						<c:if test="${group_attendance == null}">
-							<a href="" class="button">참여</a>
+							<a href="" class="button">参加</a>
 						</c:if>
 					</c:if>
 				</header>

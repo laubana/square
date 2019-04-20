@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>GroupSearch</title>	
+		<title>みんな・みんな</title>	
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupSearch/assets/css/main.css" />
@@ -49,12 +49,12 @@
 					<ul>
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
-						<li><a href="createGroupForm">그룹생성</a></li>
-					<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
+						<li><a href="createGroupForm">グループ・生成</a></li>
+					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
-						<li><a href="joinUserForm">회원가입</a></li>
-							<li><a href="loginUserForm">로그인</a></li>
+						<li><a href="joinUserForm">会員加入</a></li>
+							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
 						</c:if>
 					</ul>
 				</nav>

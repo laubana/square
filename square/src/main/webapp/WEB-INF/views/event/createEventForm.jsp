@@ -9,7 +9,7 @@
 -->
 <html>
 	<head>
-		<title>createEventForm</title>
+		<title>みんな・みんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/EventView/assets/css/main.css" />
@@ -85,9 +85,16 @@ border: 0;
 				<h1><a class="navbar-brand font-weight-bolder mr-3" href="main"><img src="resources/Main/assets/css/images/photoSquareLogo_done.png"></a></h1>
 				<nav>
 					<ul>
-						<li><a href="joinUserForm">회원가입</a></li>
-						<li><a href="createGroupForm">그룹생성</a></li>
-						<li><a href="loginUserForm">로그인</a></li>
+						<li><a href="listRecommendationForm"></a>
+						<c:if test="${sessionScope.user_id != null}">
+						<li>${sessionScope.user_id}</li>
+						<li><a href="createGroupForm">グループ・生成</a></li>
+					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
+						</c:if>
+						<c:if test="${sessionScope.user_id == null}">
+						<li><a href="joinUserForm">会員加入</a></li>
+							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
+						</c:if>
 					</ul>
 				</nav>
 			</header>
@@ -105,7 +112,7 @@ border: 0;
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">이벤트 생성</a></li>
+						<li><a href="#one" class="active">イベント・生成</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -134,8 +141,8 @@ border: 0;
 								<header>
 								<!-- 타이틀 생성 -->
 									<div class="title">
-									<h2>이벤트 제목</h2>
-									<input type="text" class="Event_title "id="Event_title" placeholder="event_Title" autocomplete="off">
+									<h2>イベント・タイトル</h2>
+									<input type="text" class="Event_title "id="Event_title" placeholder="イベント_タイトル" autocomplete="off">
 									</div>
 									<div class="meta">
 								<!-- 날짜, 회원 이름, 회원 사진-->
@@ -146,14 +153,14 @@ border: 0;
 								<span class="image featured"><img src="" id="foo"></span>
 								<!-- 그룹 대표 이미지 업로드 -->
 									<div class="filebox">
-									<label for="imgInp">Main Image Upload</label>
+									<label for="imgInp">メイン・イメージ・アップロード</label>
 									<input type='file' id="imgInp" /></div>
 									<br>
 									<!-- 내용 -->
-									<h1>이벤트 내용</h1>
-									<textarea class="comment-block" id="event_content" placeholder="내용을 작성해주세요..."></textarea><br>
+									<h1>イベント・内容</h1>
+									<textarea class="comment-block" id="event_content" placeholder="内容を記入してください。"></textarea><br>
 									<br>
-									<div align="center"><input type="button" value="이벤트 올리기" onclick="createEventAction()"></div>
+									<div align="center"><input type="button" value="生成" onclick="createEventAction()"></div>
 									<!-- google maps-->
 									<!--  <div id="map" ></div>
 									<div align="right">

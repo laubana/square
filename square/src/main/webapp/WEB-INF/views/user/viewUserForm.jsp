@@ -39,18 +39,18 @@
 				<!-- One -->
 					<section id="one">
 						<header class="major">
-							<h2>소개</h2>
+							<h2>紹介</h2>
 						</header>
 						<p>
 							${user.content}
 						</p>
-						<div align="center"><a href="#" class="button">정보 편집</a></div>
+						<div align="center"><a href="#" class="button">紹介・編集</a></div>
 					</section>
 					
 					<!-- Two -->
 					<section id="two">
 						<header class="major">
-							<h2>관심 분야</h2>
+							<h2>関心分野</h2>
 						</header>
 						<p>
 							<c:forEach var="user_hashtag" items="${user_hashtag_list}">
@@ -64,12 +64,12 @@
 										<li><a href="#">${ hlist[3].name }</a></li>
 										<li><a href="#">${ hlist[4].name }</a></li>
 						</ul>
-						<div align="center"><a href="#" class="button">관심 분야 편집</a></div>
+						<div align="center"><a href="#" class="button">関心分野・編集</a></div>
 					</section>
 
 					<!-- Three -->
 					<section id="three">
-						<h1>그룹 활동</h1>
+						<h1>グループリスト</h1>
 						<div class="row" align="center">
 							<ul class="features">
 							<c:forEach var="group" items="${group_list}">
@@ -81,12 +81,12 @@
 							</c:forEach>
 								</ul>
 						</div>
-								<div align="center"><a href="listUserGroupForm?user_id=${user.user_id}" class="button">グループリスト編集</a></div>
+								<div align="center"><a href="listUserGroupForm?user_id=${user.user_id}" class="button">グループリスト・編集</a></div>
 					</section>
 
 				<!-- Four -->
 					<section id="four">
-						<h1>개인 앨범</h1><br>
+						<h1>アルバム</h1><br>
 						<div class="row">
 						<c:forEach var="event_schedule_image" items="${event_schedule_image_list}">
 						
@@ -111,7 +111,7 @@
 						</div>
 						<br><br>
 						
-								<div align="center"><a href="listUserAlbumForm?user_id=${user.user_id}" class="button">앨범 편집</a></div>
+								<div align="center"><a href="listUserAlbumForm?user_id=${user.user_id}" class="button">アルバム・編集</a></div>
 					</section>
 
 			</div>
