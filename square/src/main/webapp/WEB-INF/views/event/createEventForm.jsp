@@ -230,8 +230,7 @@ border: 0;
 									<button onclick="uploadFirstEventImage()" class="button">Image More</button>		
 								</div></footer>
 							</section>
-						</div><br><br> -->
-								
+						</div><br><br> -->		
 				<!-- Footer -->
 					<section id="footer">
 						<div class="container">
@@ -240,8 +239,8 @@ border: 0;
 							</ul>
 						</div>
 					</section>
-
-		</div>
+				</div>
+		
 </form>
 
 		<!-- 기본 Scripts -->

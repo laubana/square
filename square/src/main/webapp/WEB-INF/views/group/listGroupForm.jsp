@@ -12,7 +12,7 @@
 		
 		<!-- 추가 -->
 		<!-- <link rel='stylesheet' href='http://www.davilious.com/codepen/font-awesome/css/font-awesome.css'> -->
-<script type="text/javascript">
+<script>
 function logoutUserAction()
 {
 	$.ajax({
