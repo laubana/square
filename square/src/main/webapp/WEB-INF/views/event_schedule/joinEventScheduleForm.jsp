@@ -51,15 +51,19 @@
 	}
 	function drawChart(schedule_list)
 	{
+		console.log(schedule_list);
 		var buff = "";
 		
 		for(var i = 0; i < schedule_list.length; i++)
 		{
-			buff += "<div id='timeline" + i + "'></div>"; 
+			buff += "<div>";
+			buff += "<span id='timeline" + i + "'>d</span>";
+			buff += "<span><</span>";
+			buff += "</div>"; 
 		}
 		
-		document.getElementById("one").innerHTML = buff;
-		
+		document.getElementById("two").innerHTML = buff;
+		/* 
 		for(var i = 0; i < schedule_list.length; i++)
 		{
 			var container = document.getElementById('timeline' + json_event_schedule_user_schedule_list_list[i].user.user_id);
@@ -92,11 +96,11 @@
         
 			document.getElementById('timeline_image' + json_event_schedule_user_schedule_list_list[i].user.user_id).innerHTML = "<a href='viewUserForm?user_id=" + json_event_schedule_user_schedule_list_list[i].user.user_id + "' class='image avatar thumb'><img src='resources/image/user_image/" + json_event_schedule_user_schedule_list_list[i].user.image_id + "' alt='' style='width: 100px; height:auto;'></a>";
 			}
-		}
+		} */
 	}
 	function getScheduleList()
 	{
-		var schedule_list = [];
+		var schedule_list = new Array();
 		
 		if(gapi.auth2.getAuthInstance().isSignedIn.get() == true)
 		{			
@@ -112,16 +116,19 @@
 		          'orderBy': 'startTime'
 		        }).then(function(response)
 		        		{
+		        			var interval = setInterval(function()
+							{
+								if(flag == 1){clearInterval(interval);setChart(schedule_list);}
+							}, 100);
 		        			for(var i = 0; i < response.result.items.length; i++)
 		        			{
-		        				schedule_list.push({start_date: response.result.items[i].start.dateTime, end_date: response.result.items[i].end.dateTime});
+		        				var map = {};
+		        				map["start_date"] = response.result.items[i].start.dateTime;
+		        				map["end_date"] = response.result.items[i].end.dateTime;
+		        				schedule_list.push(map);
 							}
 		         			flag = 1;
-		        });
-			var interval = setInterval(function()
-					{
-						if(flag == 1){clearInterval(interval);}
-					}, 100); 
+		        });		 
 		}
 		else
 		{
@@ -142,19 +149,19 @@
 					        		{
 					        			for(var i = 0; i < response.result.items.length; i++)
 					        			{
-					        				schedule_list.push({start_date: response.result.items[i].start.dateTime, end_date: response.result.items[i].end.dateTime});
+					        				var map = {};
+					        				map["start_date"] = response.result.items[i].start.dateTime;
+					        				map["end_date"] = response.result.items[i].end.dateTime;
+					        				schedule_list.push(map);
 										}
 					         			flag = 1;
 					        });
 						var interval = setInterval(function()
 								{
 									if(flag == 1){clearInterval(interval);}
-								}, 100);
+								}, 1000);
 					});
 		}
-		////////////////////////////////////////////////////////////////////////////////////
-		console.log(schedule_list);
-		setChart(schedule_list);
 	}
 			
 			/* 
@@ -344,7 +351,7 @@ html, body {
 					</div>
 				</article>
 			</section>
-			<section id="one">
+			<section id="two">
 			</section>
 		</div>
 	</div>

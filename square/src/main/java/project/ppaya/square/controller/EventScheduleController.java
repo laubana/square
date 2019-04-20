@@ -144,12 +144,15 @@ public class EventScheduleController
 		ArrayList<GroupHashtag> group_hashtag_list = yh_group_hashtagDAO.selectGroupHashtagByGroupId(group_id);
 		//GroupHashtag List 전송
 		request.addAttribute("group_hashtag_list", group_hashtag_list);
-		
+				
 		EventSchedule event_schedule = yh_event_scheduleDAO.selectEventScheduleByEventScheduleId(event_schedule_id);
 		//EventSchedule 전송
 		request.addAttribute("event_schedule", event_schedule);
 		
 		Event event = yh_eventDAO.selectEventByEventId(event_id);		
+		//Event 전송
+		request.addAttribute("event", event);
+		
 		User leader = yh_userDAO.selectUserByUserId(event.getUser_id());
 		//Leader 전송
 		request.addAttribute("leader", leader);
@@ -164,7 +167,6 @@ public class EventScheduleController
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
 			@RequestParam(value = "event_id", defaultValue = "1") int event_id,
 			@RequestParam(value = "event_schedule_id", defaultValue = "1") int event_schedule_id,
-			//int event_schedule_id,
 			Model request
 			)
 	{
@@ -209,12 +211,15 @@ public class EventScheduleController
 		ArrayList<GroupHashtag> group_hashtag_list = yh_group_hashtagDAO.selectGroupHashtagByGroupId(group_id);
 		//GroupHashtag List 전송
 		request.addAttribute("group_hashtag_list", group_hashtag_list);
-		
+			
 		EventSchedule event_schedule = yh_event_scheduleDAO.selectEventScheduleByEventScheduleId(event_schedule_id);
 		//EventSchedule 전송
 		request.addAttribute("event_schedule", event_schedule);
 		
-		Event event = yh_eventDAO.selectEventByEventId(event_id);		
+		Event event = yh_eventDAO.selectEventByEventId(event_id);	
+		//Event 전송
+		request.addAttribute("event", event);
+		
 		User leader = yh_userDAO.selectUserByUserId(event.getUser_id());
 		//Leader 전송
 		request.addAttribute("leader", leader);
