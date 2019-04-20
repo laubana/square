@@ -61,7 +61,7 @@
     		 }
       }
       }
-      /* google.charts.setOnLoadCallback(drawChart1);
+     /*  google.charts.setOnLoadCallback(drawChart1);
       function drawChart1()
       {
 		var list = JSON.parse('${test_list4}');
@@ -350,7 +350,7 @@
 										<div id="timeline${event_schedule_user_schedule_list.user.user_id}" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 100%">
 										</div>
 									</c:forEach>
-									<!-- <div id="timeline" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 100%"> -->
+									<div id="timeline" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 100%">
 									</div>
 								</div>
 							</section>

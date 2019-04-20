@@ -21,9 +21,70 @@
 <link rel="stylesheet" href="resources/EventView/assets/css/main.css" />
 <link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
 <link rel="stylesheet" href="resources/TextA/css/style.css">
+<style type="text/css">
+input[type="checkbox"][id^="myCheckbox"] {
+  display: none;
+}
+
+label {
+  border: #fff;
+  padding: 10px;
+  display: block;
+  position: relative;
+  margin: 10px;
+  cursor: pointer;
+}
+
+label:before {
+  background-color: white;
+  color: white;
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  border: 1px solid grey;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 28px;
+  transition-duration: 0.4s;
+  transform: scale(0);
+}
+
+label img {
+  height: 100%;
+  width: 100%;
+  transition-duration: 0.2s;
+  transform-origin: 50% 50%;
+}
+
+:checked + label {
+  border-color: #ddd;
+}
+
+:checked + label:before {
+  content: "✓";
+  background-color: grey;
+  transform: scale(1);
+}
+
+:checked + label img {
+  transform: scale(0.9);
+  /* box-shadow: 0 0 5px #333; */
+  z-index: -1;
+}
+</style>
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+	var current_date = new Date(); 
+	var from_date = (new Date(current_date.getFullYear(), current_date.getMonth(), current_date.getDate(), current_date.getHours(), current_date.getMinutes())).getTime();
+	var to_date = new Date(from_date + 602000000).getTime();
+
+	console.log("test : " + new Date(from_date) + ", " + new Date(to_date));
+	
 	google.charts.load('current', {'packages':['timeline']});
 	function setChart(schedule_list)
 	{
@@ -51,22 +112,24 @@
 	}
 	function drawChart(schedule_list)
 	{
-		console.log(schedule_list);
 		var buff = "";
 		
 		for(var i = 0; i < schedule_list.length; i++)
 		{
-			buff += "<div>";
-			buff += "<span id='timeline" + i + "'>d</span>";
-			buff += "<span><</span>";
+			buff += "<div style='display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 500px;'>";
+			buff += "<span id='timeline" + i + "'></span>";
+			buff += "<span>";
+			buff += "<input type='checkbox' id='schedule_checkbox" + i + "' value='" + i + "'class='check'>";
+			buff += "<input type='hidden' id='start_date" + i + "' value='" + schedule_list[i].start_date + "'>";
+			buff += "<input type='hidden' id='end_date" + i + "' value='" + schedule_list[i].end_date + "'>";
+			buff += "<label for='schedule_checkbox" + i + "'>選択</label></span>";
 			buff += "</div>"; 
 		}
-		
 		document.getElementById("two").innerHTML = buff;
-		/* 
+		
 		for(var i = 0; i < schedule_list.length; i++)
 		{
-			var container = document.getElementById('timeline' + json_event_schedule_user_schedule_list_list[i].user.user_id);
+			var container = document.getElementById('timeline' + i);
 			var chart = new google.visualization.Timeline(container);
 			var dataTable = new google.visualization.DataTable();
         
@@ -75,28 +138,98 @@
 			dataTable.addColumn({ type: 'string', id: 'style', role: 'style' });
 			dataTable.addColumn({ type: 'date', id: 'Start' });
 			dataTable.addColumn({ type: 'date', id: 'End' });
-			for(var j = 0; j < json_event_schedule_user_schedule_list_list[i].list.length; j++)
+			
+			var start_date;
+			var end_date;
+			
+			//console.log("1 : " + new Date(schedule_list[i].start_date) + ", " + new Date(schedule_list[i].end_date));
+			
+			if(from_date < schedule_list[i].start_date)
 			{
-				if(json_event_schedule_user_schedule_list_list[i].list[j]["typeof"] == 1)
-				{
-					dataTable.addRows([
-						[ json_event_schedule_user_schedule_list_list[i].user.user_id, '', 'Tomato', new Date(json_event_schedule_user_schedule_list_list[i].list[j].start_date), new Date(json_event_schedule_user_schedule_list_list[i].list[j].end_date) ]]);
+				start_date = schedule_list[i].start_date;
+			}
+			else
+			{
+				start_date = from_date;
+			}
+			if(schedule_list[i].end_date < to_date)
+			{
+				end_date = schedule_list[i].end_date;
+			}
+			else
+			{
+				end_date = to_date;
+			}
+			//console.log("2 : " + new Date(start_date) + ", " + new Date(end_date));
+			if(from_date == start_date && to_date != end_date)
+			{
+				dataTable.addRows([
+					[ '', 'schedule', 'Tomato', new Date(start_date), new Date(end_date) ],
+					[ '', 'view', 'MediumSeaGreen', new Date(end_date), new Date(to_date) ]
+					]);
+			}
+			else if(from_date == start_date && to_date == end_date)
+			{
+				dataTable.addRows([
+					[ '', 'schedule', 'Tomato', new Date(start_date), new Date(end_date) ]
+					]);
+			}
+			else if(from_date != start_date && to_date == end_date)
+			{
+				dataTable.addRows([
+					[ '', 'view', 'MediumSeaGreen', new Date(from_date), new Date(start_date) ],
+					[ '', 'schedule', 'Tomato', new Date(start_date), new Date(end_date) ]
+					]);
 			}
 			else
 			{
 				dataTable.addRows([
-						[ json_event_schedule_user_schedule_list_list[i].user.user_id, '', 'MediumSeaGreen', new Date(json_event_schedule_user_schedule_list_list[i].list[j].start_date), new Date(json_event_schedule_user_schedule_list_list[i].list[j].end_date) ]]);
+					[ '', 'view', 'MediumSeaGreen', new Date(from_date), new Date(start_date) ],
+					[ '', 'schedule', 'Tomato', new Date(start_date), new Date(end_date) ],
+					[ '', 'view', 'MediumSeaGreen', new Date(end_date), new Date(to_date) ]
+					]);
 			}
+			
+			
 			var option =
 			{
-				width : (json_event_schedule_user_schedule_list_list[i].list[json_event_schedule_user_schedule_list_list[i].list.length - 1].end_date - json_event_schedule_user_schedule_list_list[i].list[0].start_date) / 50000,
+				width : (to_date - from_date) / 50000,
 				height: 250,
 			};
 			chart.draw(dataTable, option);
-        
-			document.getElementById('timeline_image' + json_event_schedule_user_schedule_list_list[i].user.user_id).innerHTML = "<a href='viewUserForm?user_id=" + json_event_schedule_user_schedule_list_list[i].user.user_id + "' class='image avatar thumb'><img src='resources/image/user_image/" + json_event_schedule_user_schedule_list_list[i].user.image_id + "' alt='' style='width: 100px; height:auto;'></a>";
-			}
-		} */
+		}		
+	}
+	function joinEventScheduleAction()
+	{
+		var map = {};
+		map["event_schedule_id"] = ${event_schedule.event_schedule_id};
+		
+		var schedule_id_list = [];
+		
+		$.each($(":checkbox:checked"), function(){            
+			schedule_id_list.push($(this).val());
+	    });
+		
+		var checked_schedule_list = [];
+		
+		for(var i = 0; i < schedule_id_list.length; i++)
+		{
+			checked_schedule_list.push({start_date: Number($("#start_date" + i).val()), end_date: Number($("#end_date" + i).val())});
+		}
+		
+		map["schedule_list"] = checked_schedule_list;
+		
+		$.ajax({
+			url: "joinEventScheduleAction",
+			type: "POST",
+			data: JSON.stringify(map),
+			contentType: "application/json; charset=UTF-8",
+			success: function()
+			{
+				location.href = "viewEventScheduleForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}";
+			},
+			error: function(error){console.log(error);}
+		});
 	}
 	function getScheduleList()
 	{
@@ -109,10 +242,10 @@
 			flag = 0;
 			gapi.client.calendar.events.list({
 		          'calendarId': 'primary',
-		          'timeMin': (new Date()).toISOString(),
+		          'timeMin': (new Date(from_date)).toISOString(),
+		          'timeMax': (new Date(to_date)).toISOString(),
 		          'showDeleted': false,
 		          'singleEvents': true,
-		          'maxResults': 10,
 		          'orderBy': 'startTime'
 		        }).then(function(response)
 		        		{
@@ -123,8 +256,144 @@
 		        			for(var i = 0; i < response.result.items.length; i++)
 		        			{
 		        				var map = {};
-		        				map["start_date"] = response.result.items[i].start.dateTime;
-		        				map["end_date"] = response.result.items[i].end.dateTime;
+		        				
+		        				var time;		        				
+		        				var year;
+		        				var month;
+		        				var date;
+		        				var hour;
+		        				var minute;
+		        				
+		        				time = response.result.items[i].start.dateTime;		        				
+		        				if(time.charAt(0) == '0')
+		        				{
+		        					if(time.chartAt(1) == '0')
+		        					{
+		        						if(time.charAt(2) == '0')
+		        						{
+		        							if(time.charAt(3) == '0')
+		        							{
+		        								year = 0;
+		        							}
+		        							else
+		        							{
+		        								year = parseInt(time.substr(3, 1));
+		        							}
+		        						}
+		        						else
+		        						{
+		        							year = parseInt(time.substr(2, 2));
+		        						}	
+		        					}
+		        					else
+		        					{
+		        						year = parseInt(time.substr(1, 3));
+		        					}
+		        				}
+		        				else
+		        				{
+		        					year = parseInt(time.substr(0, 4));
+		        				}		        				
+		        				if(time.charAt(5) == '0')
+		        				{
+		        					month = parseInt(time.substr(6, 1));
+		        				}
+		        				else
+		        				{
+		        					month = parseInt(time.substr(5, 2));
+		        				}		        				
+		        				if(time.charAt(8) == '0')
+		        				{
+		        					date = parseInt(time.substr(9, 1));
+		        				}
+		        				else
+		        				{
+		        					date = parseInt(time.substr(8, 2));
+		        				}		        				
+		        				if(time.charAt(11) == '0')
+		        				{
+		        					hour = parseInt(time.substr(12, 1));
+		        				}
+		        				else
+		        				{
+		        					hour = parseInt(time.substr(11, 2));
+		        				}		        				
+		        				if(time.charAt(14) == '0')
+		        				{
+		        					minute = parseInt(time.substr(15, 1));
+		        				}
+		        				else
+		        				{
+		        					minute = parseInt(time.substr(14, 2));
+		        				}
+		        				map["start_date"] = (new Date(year, month - 1, date, hour, minute)).getTime();
+		        					        	
+		        				time = response.result.items[i].end.dateTime;
+		        				if(time.charAt(0) == '0')
+		        				{
+		        					if(time.chartAt(1) == '0')
+		        					{
+		        						if(time.charAt(2) == '0')
+		        						{
+		        							if(time.charAt(3) == '0')
+		        							{
+		        								year = 0;
+		        							}
+		        							else
+		        							{
+		        								year = parseInt(time.substr(3, 1));
+		        							}
+		        						}
+		        						else
+		        						{
+		        							year = parseInt(time.substr(2, 2));
+		        						}	
+		        					}
+		        					else
+		        					{
+		        						year = parseInt(time.substr(1, 3));
+		        					}
+		        				}
+		        				else
+		        				{
+		        					year = parseInt(time.substr(0, 4));
+		        				}		        				
+		        				if(time.charAt(5) == '0')
+		        				{
+		        					month = parseInt(time.substr(6, 1));
+		        				}
+		        				else
+		        				{
+		        					month = parseInt(time.substr(5, 2));
+		        				}		        				
+		        				if(time.charAt(8) == '0')
+		        				{
+		        					date = parseInt(time.substr(9, 1));
+		        				}
+		        				else
+		        				{
+		        					date = parseInt(time.substr(8, 2));
+		        				}		        				
+		        				if(time.charAt(11) == '0')
+		        				{
+		        					hour = parseInt(time.substr(12, 1));
+		        				}
+		        				else
+		        				{
+		        					hour = parseInt(time.substr(11, 2));
+		        				}		        				
+		        				if(time.charAt(14) == '0')
+		        				{
+		        					minute = parseInt(time.substr(15, 1));
+		        				}
+		        				else
+		        				{
+		        					minute = parseInt(time.substr(14, 2));
+		        				}		        				
+		        				map["end_date"] = (new Date(year, month - 1, date, hour, minute)).getTime();
+		        				
+		        				//console.log(new Date(map.start_date) + ", " + new Date(map.end_date));
+		        				
 		        				schedule_list.push(map);
 							}
 		         			flag = 1;
@@ -283,18 +552,7 @@ html, body {
 							#${group_hashtag.hashtag}
 						</c:forEach>
 			</p>
-			<c:if test="${sessionScope.user_id != null}">
-				<c:if test="${group_attendance != null}">
-					<c:if test="${event_attendance != null}">
-						<c:if test="${event_schedule_attendance != null}">
-							<a href="javascript:withdrawEventScheduleAction()" class="button">탈퇴</a>
-						</c:if>
-						<c:if test="${event_schedule_attendance == null}">
-							<a href="javascript:joinEventScheduleAction()" class="button">참여</a>
-						</c:if>
-					</c:if>
-				</c:if>
-			</c:if>
+			<a href="javascript:joinEventScheduleAction()" class="button">참여</a>
 		</header>
 		<nav id="nav">
 			<ul>

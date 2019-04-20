@@ -139,28 +139,26 @@ public class EventScheduleAction {
 	}
 	@ResponseBody
 	@RequestMapping(value = "joinEventScheduleAction", method = RequestMethod.POST)
-	public void joinEventScheduleAction(Model request, @RequestBody HashMap<String, Object> test_map)
+	public void joinEventScheduleAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{
-		String user_id = (String)test_map.get("user_id");
-		int event_schedule_id = (int)test_map.get("event_schedule_id");
-		ArrayList<HashMap<String, String>> google_user_schedule_list = (ArrayList<HashMap<String, String>>)test_map.get("google_user_schedule_list");
+		String user_id = (String)session.getAttribute("user_id");
+		int event_schedule_id = (int)map.get("event_schedule_id");
+		ArrayList<HashMap<String, Long>> schedule_list = (ArrayList<HashMap<String, Long>>)map.get("schedule_list");
 		
 		yh_event_schedule_user_scheduleDAO.deleteEventScheduleUserScheduleByUserIdEventScheduleId(user_id, event_schedule_id);
 		
-		for(int i = 0; i < google_user_schedule_list.size(); i++)
+		for(int i = 0; i < schedule_list.size(); i++)
 		{
-			
 			try
 			{
 				yh_event_schedule_user_scheduleDAO.insertEventScheduleUserSchedule(
 								user_id,
 								event_schedule_id,
-								new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(google_user_schedule_list.get(i).get("start_date")).getTime(),
-								new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(google_user_schedule_list.get(i).get("end_date")).getTime()
+								schedule_list.get(i).get("start_date"),
+								schedule_list.get(i).get("end_date")
 						);
 			}
 			catch(Exception error){error.printStackTrace();}
-			/**/
 		}
 		
 		yh_event_schedule_attendanceDAO.insertEventScheduleAttendance(user_id, event_schedule_id);
