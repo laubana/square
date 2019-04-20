@@ -99,7 +99,7 @@ label img {
 
 					<!-- Three -->
 					<section id="three">
-						<h1>그룹 선택</h1>
+						<h1>アルバム・選択</h1>
 						<!-- Form 그룹 -->
 						<form action="">
 						<div>

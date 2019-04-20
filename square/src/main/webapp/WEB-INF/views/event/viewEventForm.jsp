@@ -218,7 +218,8 @@
 								</p>
 								<div align ="center">
 									<div id="map" ></div>
-									場所: ${requestScope.event_place}
+									<br>
+									<a style="font-size: 25px;"><strong>場所:</strong> ${requestScope.event_place}</a>
 								</div>
 								<div align="right"><footer>
 										<a class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
