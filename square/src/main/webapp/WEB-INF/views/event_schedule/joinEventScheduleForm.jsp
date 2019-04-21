@@ -116,7 +116,7 @@ label img {
 		
 		for(var i = 0; i < schedule_list.length; i++)
 		{
-			buff += "<div style='display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 500px;'>";
+			buff += "<div class='container' style='display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 100%;'>";
 			buff += "<span id='timeline" + i + "'></span>";
 			buff += "<span>";
 			buff += "<input type='checkbox' id='schedule_checkbox" + i + "' value='" + i + "'class='check'>";
@@ -164,36 +164,36 @@ label img {
 			if(from_date == start_date && to_date != end_date)
 			{
 				dataTable.addRows([
-					[ '', 'schedule', 'Tomato', new Date(start_date), new Date(end_date) ],
-					[ '', 'view', 'MediumSeaGreen', new Date(end_date), new Date(to_date) ]
+					[ '', '', 'Tomato', new Date(start_date), new Date(end_date) ],
+					[ '', '', 'MediumSeaGreen', new Date(end_date), new Date(to_date) ]
 					]);
 			}
 			else if(from_date == start_date && to_date == end_date)
 			{
 				dataTable.addRows([
-					[ '', 'schedule', 'Tomato', new Date(start_date), new Date(end_date) ]
+					[ '', '', 'Tomato', new Date(start_date), new Date(end_date) ]
 					]);
 			}
 			else if(from_date != start_date && to_date == end_date)
 			{
 				dataTable.addRows([
-					[ '', 'view', 'MediumSeaGreen', new Date(from_date), new Date(start_date) ],
-					[ '', 'schedule', 'Tomato', new Date(start_date), new Date(end_date) ]
+					[ '', '', 'MediumSeaGreen', new Date(from_date), new Date(start_date) ],
+					[ '', '', 'Tomato', new Date(start_date), new Date(end_date) ]
 					]);
 			}
 			else
 			{
 				dataTable.addRows([
-					[ '', 'view', 'MediumSeaGreen', new Date(from_date), new Date(start_date) ],
-					[ '', 'schedule', 'Tomato', new Date(start_date), new Date(end_date) ],
-					[ '', 'view', 'MediumSeaGreen', new Date(end_date), new Date(to_date) ]
+					[ '', '', 'MediumSeaGreen', new Date(from_date), new Date(start_date) ],
+					[ '', '', 'Tomato', new Date(start_date), new Date(end_date) ],
+					[ '', '', 'MediumSeaGreen', new Date(end_date), new Date(to_date) ]
 					]);
 			}
 			
 			
 			var option =
 			{
-				width : (to_date - from_date) / 50000,
+				width : (to_date - from_date) / 100000,
 				height: 250,
 			};
 			chart.draw(dataTable, option);

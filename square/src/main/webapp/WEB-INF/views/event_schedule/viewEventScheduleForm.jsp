@@ -22,76 +22,82 @@
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      google.charts.load('current', {'packages':['timeline']});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart()
-      {
-		var json_event_schedule_user_schedule_list_list = JSON.parse('${json_event_schedule_user_schedule_list_list}');
-    	  
-    	  for(var i = 0; i < json_event_schedule_user_schedule_list_list.length; i++)
-    		 {
-        var container = document.getElementById('timeline' + json_event_schedule_user_schedule_list_list[i].user.user_id);
-        var chart = new google.visualization.Timeline(container);
-        var dataTable = new google.visualization.DataTable();
-        
-        dataTable.addColumn({ type: 'string', id: 'President' });
-		dataTable.addColumn({ type: 'string', id: 'Name' });
-		dataTable.addColumn({ type: 'string', id: 'style', role: 'style' });
-        dataTable.addColumn({ type: 'date', id: 'Start' });
-        dataTable.addColumn({ type: 'date', id: 'End' });
-        for(var j = 0; j < json_event_schedule_user_schedule_list_list[i].list.length; j++)
-        {
-        	if(json_event_schedule_user_schedule_list_list[i].list[j]["typeof"] == 1)
-        		{
-		        dataTable.addRows([
-		          [ json_event_schedule_user_schedule_list_list[i].user.user_id, '', 'Tomato', new Date(json_event_schedule_user_schedule_list_list[i].list[j].start_date), new Date(json_event_schedule_user_schedule_list_list[i].list[j].end_date) ]]);
-        }
-        else
+		google.charts.load('current', {'packages':['timeline']});
+		google.charts.setOnLoadCallback(drawChart);
+		function drawChart()
 		{
-            dataTable.addRows([
-              [ json_event_schedule_user_schedule_list_list[i].user.user_id, '', 'MediumSeaGreen', new Date(json_event_schedule_user_schedule_list_list[i].list[j].start_date), new Date(json_event_schedule_user_schedule_list_list[i].list[j].end_date) ]]);
-            }
-        	var option = {
-					width : (json_event_schedule_user_schedule_list_list[i].list[json_event_schedule_user_schedule_list_list[i].list.length - 1].end_date - json_event_schedule_user_schedule_list_list[i].list[0].start_date) / 50000,
-					height: 250,
-				};
-				chart.draw(dataTable, option);
-        
-        document.getElementById('timeline_image' + json_event_schedule_user_schedule_list_list[i].user.user_id).innerHTML = "<a href='viewUserForm?user_id=" + json_event_schedule_user_schedule_list_list[i].user.user_id + "' class='image avatar thumb'><img src='resources/image/user_image/" + json_event_schedule_user_schedule_list_list[i].user.image_id + "' alt='' style='width: 100px; height:auto;'></a>";
-    		 }
-      }
-      }
-     /*  google.charts.setOnLoadCallback(drawChart1);
-      function drawChart1()
-      {
-		var list = JSON.parse('${test_list4}');
+			var json_event_schedule_user_schedule_list_list = JSON.parse('${json_event_schedule_user_schedule_list_list}');
     	  
-        var container = document.getElementById('timeline');
-        var chart = new google.visualization.Timeline(container);
-        var dataTable = new google.visualization.DataTable();
+			for(var i = 0; i < json_event_schedule_user_schedule_list_list.length; i++)
+			{
+				var container = document.getElementById('timeline' + json_event_schedule_user_schedule_list_list[i].user.user_id);
+				var chart = new google.visualization.Timeline(container);
+				var dataTable = new google.visualization.DataTable();
         
-        dataTable.addColumn({ type: 'string', id: 'President' });
-		dataTable.addColumn({ type: 'string', id: 'Name' });
-		dataTable.addColumn({ type: 'string', id: 'style', role: 'style' });
-        dataTable.addColumn({ type: 'date', id: 'Start' });
-        dataTable.addColumn({ type: 'date', id: 'End' });
-        for(var i = 0; i < list.length; i++)
-        {
-        	if(1 == 1)
-        		{
-		        dataTable.addRows([
-		          [ '', String(list[i]["typeof"]), 'Tomato', new Date(list[i].start_date), new Date(list[i].end_date) ]]);
-        }
+				dataTable.addColumn({ type: 'string', id: 'President' });
+				dataTable.addColumn({ type: 'string', id: 'Name' });
+				dataTable.addColumn({ type: 'string', id: 'style', role: 'style' });
+				dataTable.addColumn({ type: 'date', id: 'Start' });
+				dataTable.addColumn({ type: 'date', id: 'End' });
+				for(var j = 0; j < json_event_schedule_user_schedule_list_list[i].list.length; j++)
+				{
+					if(json_event_schedule_user_schedule_list_list[i].list[j]["typeof"] == 1)
+					{
+						dataTable.addRows([
+							[ json_event_schedule_user_schedule_list_list[i].user.user_id, '', 'Tomato', new Date(json_event_schedule_user_schedule_list_list[i].list[j].start_date), new Date(json_event_schedule_user_schedule_list_list[i].list[j].end_date) ]
+							]);
+					}
+					else
+					{
+						dataTable.addRows([
+							[ json_event_schedule_user_schedule_list_list[i].user.user_id, '', 'MediumSeaGreen', new Date(json_event_schedule_user_schedule_list_list[i].list[j].start_date), new Date(json_event_schedule_user_schedule_list_list[i].list[j].end_date) ]
+							]);
+					}
+					var option = {
+							width : (json_event_schedule_user_schedule_list_list[i].list[json_event_schedule_user_schedule_list_list[i].list.length - 1].end_date - json_event_schedule_user_schedule_list_list[i].list[0].start_date) / 50000,
+							height: 250
+							};
+					chart.draw(dataTable, option);
+        
+					document.getElementById('timeline_image' + json_event_schedule_user_schedule_list_list[i].user.user_id).innerHTML = "<a href='viewUserForm?user_id=" + json_event_schedule_user_schedule_list_list[i].user.user_id + "' class='image avatar thumb'><img src='resources/image/user_image/" + json_event_schedule_user_schedule_list_list[i].user.image_id + "' alt='' style='width: 100px; height:auto;'></a>";
+				}
+			}
+		}
+		
+     	google.charts.setOnLoadCallback(drawChart1);
+		function drawChart1()
+		{
+			var list = JSON.parse('${json_integrate_event_schedule_attendace_count_list}');
+    	  
+			var container = document.getElementById('timeline');
+			var chart = new google.visualization.Timeline(container);
+			var dataTable = new google.visualization.DataTable();
+        
+			dataTable.addColumn({ type: 'string', id: 'President' });
+			dataTable.addColumn({ type: 'string', id: 'Name' });
+			dataTable.addColumn({ type: 'string', id: 'style', role: 'style' });
+			dataTable.addColumn({ type: 'string', role: 'tooltip', p: {'html': true}});
+			dataTable.addColumn({ type: 'date', id: 'Start' });
+			dataTable.addColumn({ type: 'date', id: 'End' });
+			
+			<c:forEach var="event_schedule_attendace_count" items="${event_schedule_attendace_count_list}">
+			
+			switch()
+			{
+			
+			}
+				dataTable.addRows([
+						[ '', '', 'Tomato', "<div style='padding: 10px 10px 10px 10px;'>${event_schedule_attendace_count.typeof}</div>", new Date(${event_schedule_attendace_count.start_date}), new Date(${event_schedule_attendace_count.end_date}) ]
+						]);
+			</c:forEach>
         	
         	var option = {
-					width : (list[list.length - 1].end_date - list[0].start_date) / 50000,
+					//width : (list[list.length - 1].end_date - list[0].start_date) / 50000,
 					height: 250,
+					tooltip: {isHtml: true}
 				};
 				chart.draw(dataTable, option);
-        
-        
-    		 }
-      } */
+        }
     </script>
 	<script>
 	function withdrawEventScheduleAction()
@@ -352,6 +358,7 @@
 										</div>
 									</c:forEach>
 									<div id="timeline" style="display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 100%">
+									</div>
 									</div>
 							</c:if>
 							</section>

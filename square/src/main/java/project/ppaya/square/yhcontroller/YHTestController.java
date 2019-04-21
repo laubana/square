@@ -2,6 +2,7 @@ package project.ppaya.square.yhcontroller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -141,6 +142,16 @@ public class YHTestController
 			logger.debug("{}", (new SimpleDateFormat("HH:mm:ss.SSS")).parse("00:01:45.946").getTime());
 		}
 		catch(Exception error){error.printStackTrace();}
+	}
+	@RequestMapping(value = "yhtest5", method = RequestMethod.GET)
+	public void yhtest5(Model request)
+	{
+		Calendar current_date = Calendar.getInstance();
+		
+		current_date.set(Calendar.SECOND, 0);
+		current_date.set(Calendar.MILLISECOND, 0);
+		logger.debug("{}", current_date.getTime());
+		logger.debug("{}", current_date.getTime().getTime());
 	}
 	@RequestMapping(value = "yhinit", method = RequestMethod.GET)
 	public void yhinit()
