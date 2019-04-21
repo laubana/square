@@ -135,7 +135,7 @@ function logoutUserAction()
 $("#intro").css("background", "url('resources/GroupSearch/assets/css/images/overlay.png'), url('resources/Main/images/thumbs/${group_category.group_category_id}.jpg')");
 $("#intro").css("background-size","100% 100%");
 </script>
-<script>
+<script>var global_keyword = "";
 var group_category_id = ${group_category.group_category_id};
 $('input[type=search]').on({
 	  'focus': function(){
@@ -179,6 +179,8 @@ $('input[type=search]').on({
 	checked_event_schedule_image_id_list.push($(this).val());
 });
  */
+
+ var keyword = "";
 			var check_group_category_id_radio = 1;
 	$("#show_work_button").on("click", listGroupAction);
 	function listGroupAction()
@@ -188,6 +190,16 @@ $('input[type=search]').on({
 		map["name"] = $("#keyword").val();
 		map["group_category_id"] = group_category_id;
 		map["orderby"] = check_group_category_id_radio;
+		
+		if(keyword.toUpperCase() != $("#keyword").val().toUpperCase())
+		{
+			keyword = $("#keyword").val();
+			map["keyword"] = $("#keyword").val();
+		}
+		else
+		{
+			map["keyword"] = "";
+		}
 		
 		$.ajax({
 			url: "listGroupAction",
@@ -279,7 +291,6 @@ $('input[type=search]').on({
 				
 				$(".check_group_category_id_radio").change(function()
 						{
-					console.log(this.value);
 					check_group_category_id_radio = parseInt(this.value);
 					listGroupAction();
 				});

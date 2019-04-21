@@ -78,5 +78,6 @@
 		<mapper resource="yhmapper/yhevent_schedule_video_face_mapper.xml" />
 		
 		<mapper resource="yhmapper/yhcomment_tag_mapper.xml" />
+		<mapper resource="yhmapper/yhkeyword_history_mapper.xml" />
 	</mappers>
 </configuration>

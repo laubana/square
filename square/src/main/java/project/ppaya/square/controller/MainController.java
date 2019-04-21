@@ -41,7 +41,8 @@ public class MainController
 	YHEventScheduleImageDescriptionDAO yh_event_schedule_image_descriptionDAO;
 	@Autowired
 	YHEventScheduleDAO yh_event_scheduleDAO;
-
+	@Autowired
+	YHKeywordHistoryDAO yh_keyword_historyDAO;
 
 	@RequestMapping(value = "listRecommendationForm", method = RequestMethod.GET)
 	public String listRecommendationForm
@@ -116,8 +117,8 @@ public class MainController
 		//GroupCategory List 전송
 		request.addAttribute("group_category_list", group_category_list);
 		
-		ArrayList<String> hashtag_list = yh_group_hashtagDAO.getGroupHashtagRank();
-		//GroupHashtag List 전송
+		ArrayList<String> hashtag_list = yh_keyword_historyDAO.getKeywordByRank();
+		//Keyword List 전송
 		request.addAttribute("hashtag_list", hashtag_list);
 		
 		return "main/main";

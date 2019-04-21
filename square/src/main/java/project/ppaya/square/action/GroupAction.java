@@ -62,6 +62,8 @@ public class GroupAction {
 	YHGroupCommentTagDAO yh_group_comment_tagDAO;
 	@Autowired
 	YHCommentTagDAO yh_comment_tagDAO;
+	@Autowired
+	YHKeywordHistoryDAO yh_keyword_historyDAO;
 	
 	@Autowired
 	SH_DAO_User sh_udao;
@@ -75,6 +77,12 @@ public class GroupAction {
 		int group_category_id = (int)map.get("group_category_id"); 
 		String name = (String)map.get("name");
 		int orderby = (int)map.get("orderby");
+		String keyword = (String)map.get("keyword");
+		
+		if(keyword.length() != 0)
+		{
+			yh_keyword_historyDAO.insertKeywordHistory(keyword);
+		}
 		
 		switch(orderby)
 		{
