@@ -118,13 +118,16 @@ label img {
 		{
 			buff += "<div class='container' style='display: block; overflow-x: scroll; overflow-y: hidden; height: auto; width: 100%;'>";
 			buff += "<span id='timeline" + i + "'></span>";
-			buff += "<span>";
 			buff += "<input type='checkbox' id='schedule_checkbox" + i + "' value='" + i + "'class='check'>";
+			buff += "<label for='schedule_checkbox" + i + "' tabindex=''-1'>";
+			buff += "<span class='check'></span>";
+			buff += "<a style='font-size:30px;'>選択</a></label>";
 			buff += "<input type='hidden' id='start_date" + i + "' value='" + schedule_list[i].start_date + "'>";
 			buff += "<input type='hidden' id='end_date" + i + "' value='" + schedule_list[i].end_date + "'>";
-			buff += "<label for='schedule_checkbox" + i + "'>選択</label></span>";
-			buff += "</div>"; 
+			buff += "</div>";
+			
 		}
+		
 		document.getElementById("two").innerHTML = buff;
 		
 		for(var i = 0; i < schedule_list.length; i++)
@@ -537,7 +540,7 @@ html, body {
 			</ul>
 		</nav>
 	</header>
-
+<div id="main">
 	<!-- Header -->
 	<section id="header">
 		<header>
@@ -556,9 +559,7 @@ html, body {
 		</header>
 		<nav id="nav">
 			<ul>
-				<ul>
 					<li><a href="#one" class="active">정보</a></li>
-				</ul>
 			</ul>
 		</nav>
 		<footer>
@@ -574,6 +575,7 @@ html, body {
 			</ul>
 		</footer>
 	</section>
+	
 	<!-- Wrapper -->
 	<div id="wrapper">
 		<!-- Main 가:1280세:480-->
@@ -604,15 +606,16 @@ html, body {
 								src="resources/image/user_image/${leader.image_id}" alt="" /></a>
 						</div>
 					</header>
-					<div align="right">
-						<footer></footer>
-					</div>
 				</article>
 			</section>
-			<section id="two">
-			</section>
+			<div id="main">
+				<section id="two"></section>
+			</div>
 		</div>
 	</div>
+	
+	
+	
 	<!-- Footer -->
 	<section id="footer">
 		<div class="container">
@@ -623,7 +626,6 @@ html, body {
 		</div>
 	</section>
 
-	</div>
 
 	<!-- 기본 Scripts -->
 	<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>

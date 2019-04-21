@@ -93,7 +93,7 @@ label img {
 
 					<!-- Three -->
 					<section id="three">
-						<h1>그룹 공개 / 비공개</h1>
+						<h1> グループ公開 / グループ ひ公開</h1>
 						<form action="" method="post">
 						<div class="row" align="center">
 							<ul class="features">
