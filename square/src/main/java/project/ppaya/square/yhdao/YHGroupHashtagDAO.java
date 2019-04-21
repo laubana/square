@@ -16,6 +16,23 @@ public class YHGroupHashtagDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<Integer> getGroupIdByHashtagGroupCategoryId(String hashtag, int group_category_id)
+	{
+		ArrayList<Integer> group_id_list = null;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("hashtag", hashtag);
+		map.put("group_category_id", group_category_id);
+		
+		YHGroupHashtagMapper mapper = sqlSession.getMapper(YHGroupHashtagMapper.class);
+		
+		try
+		{
+			group_id_list = mapper.getGroupIdByHashtagGroupCategoryId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_id_list;
+	}
 	public int insertGroupHashtag(String hashtag, int group_category_id, int group_id)
 	{
 		int result = 0;
