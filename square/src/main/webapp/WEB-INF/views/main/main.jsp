@@ -102,7 +102,7 @@
 					</header>
 					<p>みんなさん·みんなに加入してみんなと好きなことを一緒にしながら新しい経験を探してみましょう。</p>
 					<div class="actions special">
-						<a href="joinUserForm" class="button" style="color:white;">会員加入</a>
+						<a href="joinUserForm" class="button" style="color:white;">ユーザー登録</a>
 					</div>
 				</div>
 				<a href="#two" class="button style2 down anchored">Next</a>
@@ -116,7 +116,7 @@
 					</header>
 					<p>自分の興味のもととしイベントを運営するグループを作りましょう。グループを作って熱情を持ったみんなを集めましょう。</p>
 					<div class="actions special">
-						<a href="createGroupForm" class="button" style="color:white;">グループ・生成</a>
+						<a href="createGroupForm" class="button" style="color:white;">グループ生成</a>
 					</div>
 				</div>
 			</section>
