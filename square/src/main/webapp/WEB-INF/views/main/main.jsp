@@ -12,7 +12,7 @@
 		<script>
 			var texts = [];
 			<c:forEach var="hashtag" items="${hashtag_list}">
-			texts.push("#ハットハッシュタグ : ${hashtag}");
+			texts.push("#ホットハッシュタグ : ${hashtag}");
 			</c:forEach>
 			var count = 0;
 			function changeText() {

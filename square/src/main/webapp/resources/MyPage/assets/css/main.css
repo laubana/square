@@ -155,7 +155,6 @@ input, select, textarea {
 	h1 {
 		font-size: 2em;
 		line-height: 1.5em;
-		text-align: center;
 	}
 
 	h2 {
@@ -198,6 +197,7 @@ input, select, textarea {
 	hr {
 		border: 0;
 		border-bottom: solid 2px #efefef;
+		margin: 0;
 		
 	}
 
