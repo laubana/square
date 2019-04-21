@@ -2,469 +2,308 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
-<!--
-	Read Only by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
-		<title>createEventForm</title>
+		<title>みんな・みんな</title>	
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="resources/EventView/assets/css/main.css" />
-		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
+		<link rel="stylesheet" href="resources/GroupSearch/assets/css/main.css" />
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
-		<script src=resources/Basic/assets/js/jquery-3.3.1.min.js></script>
-	</head>
-
+		
+		<!-- 추가 -->
+		<!-- <link rel='stylesheet' href='http://www.davilious.com/codepen/font-awesome/css/font-awesome.css'> -->
 <script>
-	function createEventImage()
-	{
-		document.getElementById("file").click();
-	}
-	
-	function uploadFirstEventImage()
-	{
-		var x = document.createElement("INPUT");
-		x.setAttribute("type", "file");
-		document.getElementById("album").appendChild(x);
-	}
-</script>
-
-
-
-<style>
-.filebox label { 
-display: inline-block; 
-padding: .5em .75em; 
-color: #999; 
-font-size: inherit; 
-line-height: normal; 
-vertical-align: middle; 
-background-color: #fdfdfd; 
-cursor: pointer; 
-border: 1px solid #ebebeb; 
-border-bottom-color: #e2e2e2; 
-border-radius: .25em; 
-} 
-
-.filebox input[type="file"] { /* 파일 필드 숨기기 */ 
-position: absolute; 
-width: 1px; 
-height: 1px; 
-padding: 0; 
-margin: -1px; 
-overflow: hidden; 
-clip:rect(0,0,0,0); 
-border: 0; 
+function logoutUserAction()
+{
+	$.ajax({
+		url: "logoutUserAction",
+		type: "POST",
+		success: function()
+		{
+			location.replace("<c:out value='main'/>");
+		},
+		error: function(error){console.log(error);}
+	});
 }
+</script>
+<style>
+
+:root{
+  background-color: whitesmoke;
+}
+
+.container {
+  position: relative;
+  width: 300px;
+  height: auto;
+  margin: 60px auto;
+}
+
+.wrap-input {
+  position: relative;
+  width: 300px;
+}
+
+.icon-search{
+    position: absolute;
+    color: white;
+    right: 20px; top: 4px;
+}
+
 </style>
-	
-	<!-- 구글 맵스 위한 style 태그. 다른 요소 적용할 style이 있다면 style 태그를 별도로 만들어주기 바람 -->
-	<style>
-		#map {
-			width: 500px;
-			height: 350px;
-			position: relative !important; /* changing this to fixed makes the map dissapear */
-			top: 0; 
-			bottom: 0; 
-			left: 0; 
-			right: 0; 
-			z-index: 0;
-	     }
-		html,body {height: 100%; margin: 0; padding: 0;}
-	</style>
 
-
+	</head>
 	<body class="is-preload">
 
-		<!-- Header 메인 바 -->
-			<header id="header1">
-				<h1><a href="main">2조</a></h1>
+		<!-- Header -->
+			<header id="header">
+				<h1><a class="navbar-brand font-weight-bolder mr-3" href="main"><img src="resources/Main/assets/css/images/photoSquareLogo_done.png"></a></h1>
 				<nav>
 					<ul>
-						<li><a href="joinUserForm">회원가입</a></li>
-						<li><a href="createGroupForm">그룹생성</a></li>
-						<li><a href="loginUserForm">로그인</a></li>
+						<li><a href="listRecommendationForm"><span id="realTimeHashTag"></span></a></li>
+						<c:if test="${sessionScope.user_id != null}">
+						<li><a href="viewUserForm?user_id=${sessionScope.user_id}">${sessionScope.user_id}</a></li>
+						<li><a href="createGroupForm">グループ・生成</a></li>
+					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
+						</c:if>
+						<c:if test="${sessionScope.user_id == null}">
+						<li><a href="joinUserForm">会員加入</a></li>
+							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
+						</c:if>
 					</ul>
 				</nav>
 			</header>
 
-		<!-- Header -->
-			<section id="header">
-				<header>
-				<span class="image avatar"><img src="resources/Main/images/logo/01.jpg" alt="" /></span>
-					<h1 id="logo"><a href="groupMain">Group name</a></h1>
-					<p style="font-size:15px;">#tag#tag</p>
-					<span class="image avatar"><img src="resources/image/group_logo/${group.group_logo}" alt="" /></span>	
-				</header>
-				<nav id="nav">
-					<ul>
-						<li><a href="#one" class="active">이벤트 생성</a></li>
-					</ul>
-				</nav>
-				<footer>
-					<ul class="icons">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
-					</ul>
-				</footer>
+		<!-- Intro -->
+			<section id="intro" class="main style1 dark fullscreen">
+				<div class="content">
+					<header>
+						<h2>${group_category.name}</h2>
+					</header>
+					<div class="container">
+  						<div class="wrap-input">  
+  							<input type="search" id="keyword" class="input-txt" placeholder="Search" name="keyword">
+  						</div>
+					</div>			
+					<footer>
+						<a href="#work" class="button style2 down" id="show_work_button"></a>
+					</footer>
+				</div>
 			</section>
-		
-<!-- 폼 -->			
-<form action="" method="post">
-		<!-- Wrapper -->
-			<div id="wrapper">
 
-				<!-- Main -->
-					<div id="main">
+		<!-- Work -->
+			<section id="work" class="main style3 primary" style="display: none;">
+			
+			</section>
 
-						<!-- 그룹의 설립일 등 기본 정보 -->
-							<section id="one">
-								<article class="post">
-								<header>
-								<!-- 타이틀 생성 -->
-									<div class="title">
-									<h2>이벤트 제목</h2>
-									<input type="text" class="Event_title "id="Event_title" placeholder="event_Title">
-									</div>
-									<div class="meta">
-								<!-- 그룹 설립일 자동입력 -데이터 베이스에 sysdate 오면 session으로 받아올 예정-->
-										<time class="published" datetime="2019-04-08">2019년 4월 8일</time>
-										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">Harry</span><img src="resources/GroupMain/images/member/c1.jpg" alt="" /></a>
-									</div>
-								</header>
-								<span class="image featured"><img src="resources/GroupMain/images/bb.jpg" id="foo"></span>
-								<!-- 그룹 대표 이미지 업로드 -->
-									<div class="filebox">
-									<label for="imgInp">Main Image Upload</label>
-									<input type='file' id="imgInp" /></div>
-									<br>
-									<!-- 내용 -->
-									<h1>이벤트 내용</h1>
-									<textarea class="comment-block" placeholder="내용을 작성해주세요..."></textarea><br>
-									<!-- google maps-->
-									<div id="map" ></div>
-									<div align="right">
-										<div id = "place_output"></div>
-									</div>
-									<br>
-									<div id = "output_button"></div>
-										<input type = "text" id = "search_addr" value = "東京　京橋駅">
-										<br>
-										<input type = "button" id = "button_mapsearch" value = "検索" onClick = "codeAddress()">
-									<div align="right">
-									<footer>
-									</footer>
-								</div>
-								</article>
-							</section>
-					</div>		
 
-						<!-- 그룹의 설립일 등 기본 정보 -->
-							<div id="album">
-							<section id="six">
-								<footer><div id="album" class="container" >
-									<h3>추가 이벤트 사진</h3>
-									<p>추가 이벤트 이미지를 넣어보세요</p>
+		<!-- Footer -->
+			<footer id="footer">
 
-									<div class="features">
-										<article>
-											<img src="resources/GroupMain/images/bb.jpg" class="image" id="foo2">
-											<div class="inner">
-												<h4>File_1</h4>
-												<div class="filebox">
-												<label for="imgInp2">Image Upload1</label>
-												<input type='file' id="imgInp2" /></div>
-											</div>
-										</article>
-										<article>
-											<img src="resources/GroupMain/images/bb.jpg" class="image" id="foo3">
-											<div class="inner">
-												<h4>File_2</h4>
-												<div class="filebox">
-												<label for="imgInp3">Image Upload2</label>
-												<input type='file' id="imgInp3" /></div>
-											</div>
-										</article>
-										<article>
-											<img src="resources/GroupMain/images/bb.jpg" class="image" id="foo4">
-											<div class="inner">
-												<h4>File_3</h4>
-												<div class="filebox">
-												<label for="imgInp4">Image Upload3</label>
-												<input type='file' id="imgInp4" /></div>
-											</div>
-										</article>
-										<article>
-											<img src="resources/GroupMain/images/bb.jpg" class="image" id="foo5">
-											<div class="inner">
-												<h4>File_4</h4>
-												<div class="filebox">
-												<label for="imgInp5">Image Upload4</label>
-												<input type='file' id="imgInp5" /></div>
-											</div>
-										</article>
-											</div>
-									
-										<div align="center"><input type="submit" value="이벤트 올리기"></div>
-																	
-									<!-- <button onclick="uploadFirstEventImage()" class="button">Image More</button> -->		
-								</div></footer>
-							</section>
-						</div><br><br>
-								
-				<!-- Footer -->
-					<section id="footer">
-						<div class="container">
-							<ul class="copyright">
-								<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</section>
+				<!-- Icons -->
+					<ul class="icons">
+						<li><a href="https://twitter.com" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://www.facebook.com" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="https://www.instagram.com" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://kr.linkedin.com" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://dribbble.com" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="https://co.pinterest.com" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
+					</ul>
 
-		</div>
-</form>
+				<!-- Menu -->
+					<ul class="menu">
+						<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+					</ul>
+
+			</footer>
+
+		<!-- 추가 -->
+
 		<!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
-		<!-- 추가 Scripts -->
-			<script src="resources/MyPage/assets/js/jquery.poptrox.min.js"></script>
-			<script src="resources/MyPage/assets/js/browser.min.js"></script>
-			<script src="resources/MyPage/assets/js/breakpoints.min.js"></script>	
-			<script src="resources/GroupMain/assets/js/main2.js"></script>
 		<!-- Scripts -->
-			<script src="resources/GroupMain/assets/js/jquery.min.js"></script>
-			<script src="resources/GroupMain/assets/js/jquery.scrollex.min.js"></script>
-			<script src="resources/GroupMain/assets/js/jquery.scrolly.min.js"></script>
-			<script src="resources/GroupMain/assets/js/browser.min.js"></script>
-			<script src="resources/GroupMain/assets/js/breakpoints.min.js"></script>
-			<script src="resources/GroupMain/assets/js/util.js"></script>
-			<script src="resources/GroupMain/assets/js/main.js"></script>
+			<script src="resources/GroupSearch/assets/js/jquery.min.js"></script>
+			<script src="resources/GroupSearch/assets/js/jquery.poptrox.min.js"></script>
+			<script src="resources/GroupSearch/assets/js/jquery.scrolly.min.js"></script>
+			<script src="resources/GroupSearch/assets/js/jquery.scrollex.min.js"></script>
+			<script src="resources/GroupSearch/assets/js/browser.min.js"></script>
+			<script src="resources/GroupSearch/assets/js/breakpoints.min.js"></script>
+			<script src="resources/GroupSearch/assets/js/util.js"></script>
+			<script src="resources/GroupSearch/assets/js/main.js"></script>
+<%-- ${group_category.filename} --%>			
+<script>
+$("#intro").css("background", "url('resources/GroupSearch/assets/css/images/overlay.png'), url('resources/Main/images/thumbs/${group_category.group_category_id}.jpg')");
+$("#intro").css("background-size","100% 100%");
+</script>
+<script>var global_keyword = "";
+var group_category_id = "yes";
+$('input[type=search]').on({
+	  'focus': function(){
+	     $(this).parent().addClass('focused');
+	   } 
+	})
+
+	$('.filter-btn').on('click', function(){
+	   $('.filter-btn').removeClass('active');
+	   $(this).addClass('active');
+	})
+
+	$('.js-close').on('click', function(e){
+	  e.preventDefault();
+	  $('.wrap-input').removeClass('focused');
+	})
+
+	$('input[type=radio]').on('click', function(){
+	  var queryField = $('input[type=search]'),
+	      queryValue = queryField.val();
+	  
+	  if( queryValue === '' &&
+	      queryValue.search(/:/i) == -1 )
+	  {
+	       queryField
+	        .val( $(this).val() + '' )
+	         .focus()
+	  }else{  
+	       queryField
+	         .val( queryValue + '' + $(this).val() + '' ).focus()
+	   }
+	})
+	$("#keyword").keypress(function(event)
+			{
+				if(event.which == 13)
+				{
+					document.getElementById("show_work_button").click();
+				}
+			});
+/* $.each($(":checkbox[name='photo_check_box']:checked"), function(){            
+	checked_event_schedule_image_id_list.push($(this).val());
+});
+ */
+
+ var keyword = "";
+			var check_group_category_id_radio = 1;
+	$("#show_work_button").on("click", listGroupAction);
+	function listGroupAction()
+	{		
+		var map = {};
+		
+		map["name"] = $("#keyword").val();
+		map["group_category_id"] = group_category_id;
+		map["orderby"] = check_group_category_id_radio;
+		
+		if(keyword.toUpperCase() != $("#keyword").val().toUpperCase())
+		{
+			keyword = $("#keyword").val();
+			map["keyword"] = $("#keyword").val();
+		}
+		else
+		{
+			map["keyword"] = "";
+		}
+		
+		$.ajax({
+			url: "listGroupAction",
+			type: "POST",
+			data: JSON.stringify(map),
+			dataType: "JSON",
+			contentType: "application/json; charset=UTF-8",
+			success: function(group_list)
+			{
+				var buff = "";
+				
+				buff += "<div class='gallery' align='right'>";
+				buff += "<article class='from-left'>";
+				buff += "<div class='radio' align='left'>";
+				if(check_group_category_id_radio == 1)
+				{
+					buff += "<hr><input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1' checked>";
+					buff += "<label for='radio-1' class='radio-label'>メンバー数順</label><br>";
+					buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2'>";
+					buff += "<label for='radio-2' class='radio-label'>イベント数順</label><br>";
+					buff += "<input id='radio-3' class='check_group_category_id_radio' name='radio' type='radio' value='3'>";
+					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数順</label><br>";
+					buff += "<input id='radio-4' class='check_group_category_id_radio' name='radio' type='radio' value='4'>";
+					buff += "<label for='radio-4' class='radio-label'>開設日</label><hr>";
+				}
+				else if(check_group_category_id_radio == 2)
+				{
+					buff += "<hr><input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1'>";
+					buff += "<label for='radio-1' class='radio-label'>メンバー数順</label><br>";
+					buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2' checked>";
+					buff += "<label for='radio-2' class='radio-label'>イベント数順</label><br>";
+					buff += "<input id='radio-3' class='check_group_category_id_radio' name='radio' type='radio' value='3'>";
+					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数順</label>";
+					buff += "<input id='radio-4' class='check_group_category_id_radio' name='radio' type='radio' value='4'>";
+					buff += "<label for='radio-4' class='radio-label'>開設日</label><hr>";
+				}
+				else if(check_group_category_id_radio == 3)
+				{
+					buff += "<hr><input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1'>";
+					buff += "<label for='radio-1' class='radio-label'>メンバー数順</label><br>";
+					buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2'>";
+					buff += "<label for='radio-2' class='radio-label'>イベント数順</label><br>";
+					buff += "<input id='radio-3' class='check_group_category_id_radio' name='radio' type='radio' value='3' checked>";
+					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数順</label><br>";
+					buff += "<input id='radio-4' class='check_group_category_id_radio' name='radio' type='radio' value='4'>";
+					buff += "<label for='radio-4' class='radio-label'>開設日</label><hr>";
+				}
+				else
+				{
+					buff += "<hr><input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1'>";
+					buff += "<label for='radio-1' class='radio-label'>メンバー数順</label><br>";
+					buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2'>";
+					buff += "<label for='radio-2' class='radio-label'>イベント数順</label><br>";
+					buff += "<input id='radio-3' class='check_group_category_id_radio' name='radio' type='radio' value='3'>";
+					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数順</label><br>";
+					buff += "<input id='radio-4' class='check_group_category_id_radio' name='radio' type='radio' value='4' checked>";
+					buff += "<label for='radio-4' class='radio-label'>開設日</label><hr>";
+				}		
+				buff += "</div>";
+				buff += "</article>";
+				buff += "<article class='from-right'>";
+				
+				buff += "</article>";
+				buff += "</div>";
+				
+				buff += "<div class='gallery'>";
+				
+				for(var i = 0; i < group_list.length; i++)
+				{
+					if(i % 2 == 1)
+					{
+						buff += "<article class='from-left'>";
+						buff += "<a href='viewGroupForm?group_category_id=" + group_category_id + "&group_id=" + group_list[i].group_id + "'class='image fit'><img src='resources/image/group_logo/" + group_list[i].group_logo + "' title='" + group_list[i].name +"' alt='' /></a>";
+						buff += group_list[i].name;
+						buff += "</article>";
+					}
+					else
+					{
+						buff += "<article class='from-right'>";
+						buff += "<a href='viewGroupForm?group_category_id=" + group_category_id + "&group_id=" + group_list[i].group_id + "'class='image fit'><img src='resources/image/group_logo/" + group_list[i].group_logo + "' title='" + group_list[i].name +"' alt='' /></a>";
+						buff += group_list[i].name;
+						buff += "</article>";
+					}
+				}
+
+				buff += "</div>";
+				
+				$("#work").html(buff);
+				
+				$(".check_group_category_id_radio").change(function()
+						{
+					check_group_category_id_radio = parseInt(this.value);
+					listGroupAction();
+				});
+				
+			},
+			error: function(error)
+			{
+				
+			}
+		});
+		$("#work").css("display", "block");
+	}
+</script>
 
 	</body>
-
-
-<script type="text/javascript">
-//파일 미리보기 메인
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#foo').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$("#imgInp").change(function() {
-    readURL(this);
-});
-
-function readURL2(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#foo2').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$("#imgInp2").change(function() {
-    readURL2(this);
-});
-
-function readURL3(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#foo3').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$("#imgInp3").change(function() {
-    readURL3(this);
-});
-
-function readURL4(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#foo4').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$("#imgInp4").change(function() {
-    readURL4(this);
-});
-
-function readURL5(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#foo5').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$("#imgInp5").change(function() {
-    readURL5(this);
-});
-</script>
-	
-	
-	
-	<!-- 맵 띄우기 위한 스크립트 -->
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdC1Oa4xE2ub87g1ouqeRxqapzLLg4shg&callback=initMap&language=ja&region=JP">
-	</script>
-<script>
-	var map;
-	var geocoder;
-
-	function initMap() {
-		console.log( 'test1' );
-
-	    var latlng = new google.maps.LatLng(35.6766907, 139.77003390000004);
-	    var mapOptions = {
-	    	      zoom: 15,
-	    	      center: latlng
-	    	    }
-		map = new google.maps.Map(document.getElementById('map'), mapOptions);
-	    console.log( 'test2' );
-		geocoder = new google.maps.Geocoder();
-	 	var address = '東京　京橋駅';
-		geocoder.geocode(
-		   		{ 'address': address }
-		   		, function(results, status) {
-					if (status == 'OK') {
-						console.log( 'test3' );
-						latlng = results[0].geometry.location;
-						map.setCenter(latlng);
-						console.log( 'test4' );	    
-						var marker = new google.maps.Marker({ 
-							map: map,
-							position: latlng
-							});
-						map.setZoom(15);
-					} else {
-		   				alert('Geocode was not successful for the following reason: ' + status);
-		   			}
-		   		}
-		   );
-		
-	}
-	
-	////////////주소 던져주면 맵 중앙에 띄우는 함수
-	function setAddress(address) {
-	var result_area = "not_found";
-	    geocoder.geocode(
-	   		{ 'address': address }
-	   		, function(results, status) {
-				if (status == 'OK') {
-					map.setCenter(results[0].geometry.location);
-					var marker = new google.maps.Marker({ 
-						map: map,
-						position: results[0].geometry.location
-						});
-					///결과 값들 중에 지역 이름 찾는 함수
-					for( m = 0; m < results[0].address_components.length; m = m +1 ){ ////3번 시작
-						if( results[0].address_components[m].types[0] == "administrative_area_level_2" )
-							{ 	
-								console.log('2: '+ results[0].address_components[m].types[0]);								
-								str1 = String( results[0].address_components[m].long_name );
-								result_area = str1;
-								map.setZoom(14);
-								return result_area;
-							}
-						
-					}//3번 끝
-					console.log(result_area + 'return check');								
-					map.setZoom(15);
-					return result_area;
-				} else {
-	   				alert('Geocode was not successful for the following reason: ' + status);
-	   			}
-	   		}
-	   );
-	 } 
-	
-	
-	///////////////주소로 검색
-	function codeAddress() {
-		var result_area = "not_found";
-		var address = document.getElementById('search_addr').value;
-		console.log(address);
-		    geocoder.geocode(
-		   		{ 'address': address }
-		   		, function(results, status) {
-					if (status == 'OK') {
-						map.setCenter(results[0].geometry.location);
-						var marker = new google.maps.Marker({ 
-							map: map,
-							position: results[0].geometry.location
-							});
-						map.setZoom(15);
-						return result_area;
-					} else {
-		   				alert('Geocode was not successful for the following reason: ' + status);
-		   			}
-		   		}
-		   );
-	} 
-	
-	
-	
-	
-	///////////////배열 중복 없애는 함수
-	var arealist = ${requestScope.place_list};
-	var arealist_temp = new Array();
-	var flag_same = false;
-	var i=0;
-	var j=0;
-	var k=0;
-		
-		arealist_temp.push(arealist[0]);
-		
-		for(i = 0; i < arealist.length; i = i + 1){
-			flag_same = false;	
-			for(j = 0; j < arealist_temp.length; j = j + 1){
-				if(arealist[i]  == arealist_temp[j]){
-				console.log('i: ' + i + '   j: ' + j);
-					
-					flag_same = true;	
-					break;
-				}
-				
-			}
-			if(!flag_same){
-				arealist_temp.push(arealist[i]);
-				
-			}
-		}	
-		
-		
-var acute = "'";
-var str_output = "";
-var output_button = document.getElementById('output_button"');
-		//////////중복이 제거된 배열 값들을 각각 꺼내와서 body에 버튼으로 채워주기
-		for(k = 0; k < arealist_temp.length; k = k + 1){
-			console.log( JSON.stringify( arealist_temp[k] ).replace(/&quot;/gi, '') + k );
-			
-			str_output = str_output + 
-			'<input type = "button" id = "button' + k + '" value = "'+ arealist_temp[k] + '" onClick = "setAddress('+ acute + arealist_temp[k]+ acute + ')">';			
-		}
-		console.log( str_output );		
-		$('output_button').html(str_output);			
-		document.getElementById('output_button').innerHTML= str_output;
-	
-</script>
 </html>

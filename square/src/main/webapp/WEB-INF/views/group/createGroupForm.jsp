@@ -122,11 +122,11 @@ border: 0;
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
-						<li><a href="createGroupForm">グループ・生成</a></li>
+						<li><a href="createGroupForm">グループ生成</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
-						<li><a href="joinUserForm">会員加入</a></li>
+						<li><a href="joinUserForm">ユーザー登録</a></li>
 							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
 						</c:if>
 					</ul>
@@ -138,13 +138,13 @@ border: 0;
 				<header>
 					<!-- 그룹 로고 이미지 -->
 					<span class="image avatar" id="foo2_span"><img src="resources/Main/images/bb.jpg" id="foo2"/></span>
-					<div id="live-text"><h1 id="logo"><a>グループ・名前</a></h1></div>
+					<div id="live-text"><h1 id="logo"><a>グループ名前</a></h1></div>
 					<div id="live-text1"><p style="font-size:15px;">[#タグ_ 1]</p></div>
 					<div id="live-text2"><p style="font-size:15px;">[#タグ _2]</p></div><div id="live-text3"><p style="font-size:15px;">[#タグ _3]</p></div><div id="live-text4"><p style="font-size:15px;">[#タグ _4]</p></div><div id="live-text5"><p style="font-size:15px;">[#タグ _5]</p></div>
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">グループ・生成</a></li>
+						<li><a href="#one" class="active">グループ生成</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -174,13 +174,13 @@ border: 0;
 						
 						<!-- 메인 해더 -->
 						<header class="major">
-							<h1>グループ・名前</h1>
+							<h1>グループ名前</h1>
 							<br>
 							<!-- 폼 -->
 							<form action="" method="post">
 							<input type="text" name="group_id" id="input" placeholder="グループ・名前" autocomplete="off">
 							<br>
-							<h1>グループ・紹介</h1>
+							<h1>グループ紹介</h1>
 							<br>
 							<div class="comment-wrap">
 								<div class="comment-block">
@@ -189,18 +189,18 @@ border: 0;
 							</div>
 						
 							<br>
-							<h1>グループ・ロゴ・イメージ</h1>
+							<h1>グループロゴイメージ</h1>
 							<div class="filebox">
-							<label for="imgInp2">ロゴ・アップロード</label> 
+							<label for="imgInp2">ロゴアップロード</label> 
 							<input type='file' id="imgInp2" /></div>
 							<br>
-							<h1>グループ・メイン・イメージ</h1>
+							<h1>グループメインイメージ</h1>
 							<div class="filebox">
-							<label for="imgInp">メイン・アップロード</label>
+							<label for="imgInp">メインアップロード</label>
 							<input type='file' id="imgInp" /></div>
 						
 							<br>
-							<h1>グループ・カテゴリー</h1>
+							<h1>グループカテゴリー</h1>
 							<div class="container">
   								<div class="radio">
     								<input id="radio-1" name="radio" type="radio" value="1" checked>
@@ -217,15 +217,15 @@ border: 0;
     								<label for="radio-6" class="radio-label">音樂</label>
   								</div>
 							</div>
-							<h1>グループ・タグ</h1>
-							<input type="text" placeholder="#グループ・タグ 1" class="input1" name="group_hashtag" autocomplete="off">
-							<input type="text" placeholder="#グループ・タグ 2" class="input2" name="group_hashtag" autocomplete="off">
-							<input type="text" placeholder="#グループ・タグ 3" class="input3" name="group_hashtag" autocomplete="off">
-							<input type="text" placeholder="#グループ・タグ 4" class="input4" name="group_hashtag" autocomplete="off">
-							<input type="text" placeholder="#グループ・タグ 5" class="input5" name="group_hashtag" autocomplete="off">
+							<h1>グループタグ</h1>
+							<input type="text" placeholder="#グループタグ 1" class="input1" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="#グループタグ 2" class="input2" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="#グループタグ 3" class="input3" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="#グループタグ 4" class="input4" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="#グループタグ 5" class="input5" name="group_hashtag" autocomplete="off">
 							<br>
-							<h1>グループ・活動地域</h1>
-							<input type="text" placeholder="グループ・活動地域" id="region">
+							<h1>グループ活動地域</h1>
+							<input type="text" placeholder="グループ活動地域" id="region">
 							<br>
 							<div align="center"><input type="button" value="生成" onclick="createGroupAction()"></div>
 							</form>
