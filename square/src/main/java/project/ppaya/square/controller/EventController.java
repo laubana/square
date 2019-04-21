@@ -104,6 +104,34 @@ public class EventController
 		
 		return "event/listEventForm";
 	}
+	@RequestMapping(value = "listEventUnionForm", method = RequestMethod.GET)
+	public String listEventUnionForm
+	(
+			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
+			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
+			Model request,
+			HttpSession session
+			)
+	{
+		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
+		//GroupCategory 전송
+		request.addAttribute("group_category", group_category);
+		
+		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
+		//Group 전송
+		request.addAttribute("group", group);
+		
+		ArrayList<GroupHashtag> group_hashtag_list = yh_group_hashtagDAO.selectGroupHashtagByGroupId(group_id);
+		//GroupHashtag List 전송
+		request.addAttribute("group_hashtag_list", group_hashtag_list);
+		
+		ArrayList<Integer> event_id_list = yh_event_unionDAO.getEventIdByGroupId(group_id);
+		ArrayList<Event> event_list = yh_eventDAO.selectEventByEventIdList(event_id_list);
+		//Event List 전송
+		request.addAttribute("event_list", event_list);
+		
+		return "event/listEventUnionForm";
+	}
 	@RequestMapping(value = "viewEventForm", method = RequestMethod.GET)
 	public String viewEventForm
 	(
