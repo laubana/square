@@ -324,9 +324,11 @@ public class EventScheduleController
 		
 		logger.debug("{}", integrate_event_schedule_attendace_count_list.toString());
 		
-		//HashMap<String, Object> event_schedule_attendace_count_list_map = new HashMap<>();
-		//event_schedule_attendace_count_list_map.put("list", integrate_event_schedule_attendace_count_list);
+		HashMap<String, Object> event_schedule_attendace_count_list_map = new HashMap<>();
+		event_schedule_attendace_count_list_map.put("attendance_count", user_list.size());
+		event_schedule_attendace_count_list_map.put("list", integrate_event_schedule_attendace_count_list);
 		request.addAttribute("event_schedule_attendace_count_list", integrate_event_schedule_attendace_count_list);
+		request.addAttribute("event_schedule_attendace_count_list_map", event_schedule_attendace_count_list_map);
 		
 		request.addAttribute("json_integrate_event_schedule_attendace_count_list", new JSONArray(integrate_event_schedule_attendace_count_list));
 		//맵스 장소 보내기
