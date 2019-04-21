@@ -34,13 +34,13 @@ background: url('resources/MindMap/image/3.jpg');
 	<li><a href="">#${root}</a>
 		<ul>
 			<c:forEach var="element1" items="${list}">
-				<li><a id="group1" mouseover="javascript:test()" href="viewGroupForm?group_category_id=${element1.node.group_category_id}&group_id=${element1.node.group_id}">${element1.node.group_id}</a>
+				<li><a href="viewGroupForm?group_category_id=${element1.node.group_category_id}&group_id=${element1.node.group_id}">${element1.node.group_id}</a>
 					<ul>
 						<c:forEach var="element2" items="${element1.list}">
 							<li><a href="#">#${element2.node}</a>
 								<ul>
 									<c:forEach var="element3" items="${element2.list}">
-										<li><a id="group2" href="viewGroupForm?group_category_id=${element3.node.group_category_id}&group_id=${element3.node.group_id}">${element3.node.group_id}</a>
+										<li><a href="viewGroupForm?group_category_id=${element3.node.group_category_id}&group_id=${element3.node.group_id}">${element3.node.group_id}</a>
 											<ul>
 												<c:forEach var="element4" items="${element3.list}">
 													<li><a href="#">#${element4.node}</a>
@@ -81,11 +81,15 @@ background: url('resources/MindMap/image/3.jpg');
 
 		<!-- 우측  그룹 이름 및 태그 출력-->
 		
-        <div align="center"><span><a href="main" id="gn">Group Name</a></span></div>
+        <div align="center" id="group_name">Group Name</div>
         <br>
         <hr>
-        <p align="center"><a href="main" id="tn">#tag</a></p>
+        <div id="hashtag_list">
+        <p align="center">#tag</p>
+        </div>
         <hr>
+        <div id="event_schedule_list">
+        </div>
 
 		
 		<%-- <c:forEach var="element1" items="${list}">
@@ -127,13 +131,44 @@ console.log(JSON.parse('${json_list}'));
 </script>
 
 <script>
-$("#group1").mouseover(function () {
-	alert("hi1");
-})
-
-$("#group2").mouseover(function () {
-	alert("hi2");
-})
+function setGroupAction(group_id)
+{
+	var map = {};
+	map["group_id"] = group_id;
+	
+	$.ajax({
+		url: "setGroupAction",
+		type: "POST",
+		data: JSON.stringify(map),
+		contentType: "application/json; charset=UTF-8",
+		success: function(result)
+		{
+			document.getElementById("group_name").innerHTML = result.group.name;
+						
+			var buff = "";
+			for(var i = 0; i < result.group_hashtag_list.length; i++)
+			{
+				buff += "<p>#" + result.group_hashtag_list[i].hashtag + "</p>";
+			}
+			
+			document.getElementById("hashtag_list").innerHTML = buff;
+			
+			buff = "";
+			
+			for(var i = 0; i < 5; i++)
+			{
+				if(typeof(result.event_schedule_list[i]) == 'undefined')
+				{
+					break;
+				}
+				buff += "<p>" + result.event_schedule_list[i].name + "</p>";
+			}
+			
+			document.getElementById("event_schedule_list").innerHTML = buff;
+		},
+		error: function(){}
+			});
+}
 
 </script>
 
