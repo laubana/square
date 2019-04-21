@@ -16,6 +16,20 @@ public class YHGroupDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public Group selectGroupByExactName(String name)
+	{
+		Group group = null;
+		
+		YHGroupMapper mapper = sqlSession.getMapper(YHGroupMapper.class);
+		
+		try
+		{
+			group = mapper.selectGroupByExactName(name);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group;
+	}
 	public ArrayList<Group> selectGroupByGroupCategoryIdNameOrderByInputdate(int group_category_id, String name)
 	{
 		ArrayList<Group> group_list = null;

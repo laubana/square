@@ -64,6 +64,8 @@ public class GroupAction {
 	YHCommentTagDAO yh_comment_tagDAO;
 	@Autowired
 	YHKeywordHistoryDAO yh_keyword_historyDAO;
+	@Autowired
+	YHGroupHashtagDAO yh_group_hashtagDAO;
 	
 	@Autowired
 	SH_DAO_User sh_udao;
@@ -76,10 +78,11 @@ public class GroupAction {
 	{
 		int group_category_id = (int)map.get("group_category_id"); 
 		String name = (String)map.get("name");
+		int where = (int)map.get("where");
 		int orderby = (int)map.get("orderby");
 		String keyword = (String)map.get("keyword");
 		
-		if(keyword.length() != 0)
+		if(where == 2 && keyword.length() != 0)
 		{
 			yh_keyword_historyDAO.insertKeywordHistory(keyword);
 		}
@@ -165,9 +168,8 @@ public class GroupAction {
 		String name = (String)map.get("name");
 		String content = (String)map.get("content");
 		int group_category_id = Integer.parseInt((String)map.get("group_category_id"));
-		ArrayList<String> group_hashtag_list = ( ArrayList<String> )map.get("group_hashtag_list");
+		ArrayList<String> group_hashtag_list = (ArrayList<String>)map.get("group_hashtag_list");
 		int check  = sh_gdao.setGroupHashtag(group_hashtag_list);
-		
 		
 		String region = (String)map.get("region");
 		String group_logo = YHFileUtil.saveJpegFromBase64((String)map.get("group_logo"), Reference.group_logo_path);
@@ -179,6 +181,13 @@ public class GroupAction {
 			{
 				break;
 			}
+		}
+		
+		Group group = yh_groupDAO.selectGroupByExactName(name);
+		
+		for(int i = 0; i < group_hashtag_list.size(); i++)
+		{
+			yh_group_hashtagDAO.insertGroupHashtag(group_hashtag_list.get(i), group_category_id, group.getGroup_id());
 		}
 	}
 	@ResponseBody

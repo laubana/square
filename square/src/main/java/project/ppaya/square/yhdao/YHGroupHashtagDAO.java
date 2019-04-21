@@ -16,6 +16,24 @@ public class YHGroupHashtagDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public int insertGroupHashtag(String hashtag, int group_category_id, int group_id)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("hashtag", hashtag);
+		map.put("group_category_id", group_category_id);
+		map.put("group_id", group_id);
+		
+		YHGroupHashtagMapper mapper = sqlSession.getMapper(YHGroupHashtagMapper.class);
+		
+		try
+		{
+			result = mapper.insertGroupHashtag(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public ArrayList<String> getGroupHashtagRank()
 	{
 		ArrayList<String> hashtag_list = null;

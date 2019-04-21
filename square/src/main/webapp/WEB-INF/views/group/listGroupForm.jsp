@@ -137,7 +137,6 @@ function logoutUserAction()
 		<!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
 		<!-- Scripts -->			
-			<script src="resources/SelectBox/js/index.js"></script>
 			<script src="resources/GroupSearch/assets/js/jquery.min.js"></script>
 			<script src="resources/GroupSearch/assets/js/jquery.poptrox.min.js"></script>
 			<script src="resources/GroupSearch/assets/js/jquery.scrolly.min.js"></script>
@@ -205,6 +204,7 @@ $('input[type=search]').on({
 		
 		map["name"] = $("#keyword").val();
 		map["group_category_id"] = group_category_id;
+		map["where"] = parseInt($("#select option:selected").val());
 		map["orderby"] = check_group_category_id_radio;
 		
 		if(keyword.toUpperCase() != $("#keyword").val().toUpperCase())

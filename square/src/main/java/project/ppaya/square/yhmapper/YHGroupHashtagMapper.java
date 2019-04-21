@@ -7,6 +7,7 @@ import project.ppaya.square.vo.GroupHashtag;
 
 public interface YHGroupHashtagMapper
 {
+	public int insertGroupHashtag(HashMap<String, Object> map);
 	public ArrayList<String> getGroupHashtagRank();
 	public ArrayList<Integer> getGroupIdByHashtagNotHashtagList(HashMap<String, Object> map);
 	public ArrayList<String> getHashtagByGroupId(int group_id);

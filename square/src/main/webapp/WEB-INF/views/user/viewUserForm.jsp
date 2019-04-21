@@ -24,7 +24,7 @@
 				<div class="inner">
 					<div align="left"><h1 style="font-size:30px;"><a href="main">みんな・みんな</a></h1></div>
 					<a class="image avatar"><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
-					<h1><strong>${user.name}</strong>のマイページ<br /></h1>
+					<h1><strong>${user.name}</strong>のマイページ<br></h1>
 					<nav id="nav">
 					
 					</nav>
