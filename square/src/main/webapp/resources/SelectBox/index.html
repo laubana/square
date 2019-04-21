@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Floating label filter dropdowns (with fallback)</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  
+<div class="filter js-filter">
+  <label class="filter__label js-filter-label" for="sector">Sector</label>
+  <div class="filter__control js-filter-control">
+    <select class="filter__select js-filter-select" id="sector">
+      <option value="">All</option>
+      <option value="Construction">Construction</option>
+      <option>Engineering</option>
+      <option>Healthcare</option>
+      <option>Marketing</option>
+    </select>
+    <div class="filter__indicator"></div>
+  </div>
+</div>
+<div class="filter js-filter">
+  <label class="filter__label js-filter-label" for="salary">Salary</label>
+  <div class="filter__control js-filter-control">
+    <select class="filter__select js-filter-select" id="salary">
+      <option value="">All</option>
+      <option>Up to £10,000</option>
+      <option>£10,000 - £15,000</option>
+      <option>£15,000 - £20,000</option>
+      <option>£20,000 - £25,000</option>
+      <option>£25,000 - £30,000</option>
+      <option>Over £30,000</option>
+    </select>
+    <div class="filter__indicator"></div>
+  </div>
+</div>
+<select>
+  <option value="">All</option>
+  <option value="Construction">Construction</option>
+  <option>Engineering</option>
+  <option>Healthcare</option>
+  <option>Marketing</option>
+</select>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
