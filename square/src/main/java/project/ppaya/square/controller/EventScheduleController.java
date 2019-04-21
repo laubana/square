@@ -1,6 +1,7 @@
 package project.ppaya.square.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -250,27 +251,35 @@ public class EventScheduleController
 		//Video List 전송
 		request.addAttribute("video_list", event_schedule_video_list);
 		
-		long current_time = (new Date()).getTime();
+		Calendar current_date = Calendar.getInstance();
+		current_date.set(Calendar.SECOND, 0);
+		current_date.set(Calendar.MILLISECOND, 0);
+		
+		long from_date = current_date.getTimeInMillis();
+		long to_date = new Date(from_date + 86400000 * 7).getTime();
 		
 		ArrayList<HashMap<String, Object>> user_view_list_list = new ArrayList<>();
 		ArrayList<ArrayList<EventScheduleUserSchedule>> integrate_event_schedule_user_schedule_list_list = new ArrayList<>();
 		for(int i = 0; i < user_list.size(); i++)
 		{
-			HashMap<String, Object> test_map = new HashMap<>();
-			ArrayList<EventScheduleUserSchedule> integrate_event_schedule_user_schedule_list = YHEventSchedeulUserScheduleUtil.integrateEventScheduleUserScheduleList(YHEventSchedeulUserScheduleUtil.cropEventScheduleUserScheduleList(yh_event_schedule_user_scheduleDAO.selectEventScheduleUserScheduleByUserIdEventScheduleIdStartDateEndDate(event_schedule_id, user_list.get(i).getUser_id(), current_time, current_time + 7 * 86400 * 1000), current_time, current_time + 7 * 86400 * 1000), user_list.get(i).getUser_id(), event_schedule_id);
-			integrate_event_schedule_user_schedule_list_list.add(integrate_event_schedule_user_schedule_list);
-			ArrayList<EventScheduleUserSchedule> integrate_view_list = YHEventSchedeulUserScheduleUtil.parseIntegratedEventScheduleUserScheduleListToView(integrate_event_schedule_user_schedule_list, user_list.get(i).getUser_id(), event_schedule_id, current_time, current_time + 7 * 86400 * 1000);
-			test_map.put("user", user_list.get(i));
-			test_map.put("list", integrate_view_list);
+			HashMap<String, Object> map = new HashMap<>();
 			
-			user_view_list_list.add(test_map);
+			ArrayList<EventScheduleUserSchedule> event_schedule_user_schedule_list = yh_event_schedule_user_scheduleDAO.selectEventScheduleUserScheduleByUserIdEventScheduleIdStartDateEndDate(event_schedule_id, user_list.get(i).getUser_id(), from_date, to_date);
+			ArrayList<EventScheduleUserSchedule> crop_event_schedule_user_schedule_list = YHEventSchedeulUserScheduleUtil.cropEventScheduleUserScheduleList(event_schedule_user_schedule_list, from_date, to_date);
+			ArrayList<EventScheduleUserSchedule> integrate_event_schedule_user_schedule_list = YHEventSchedeulUserScheduleUtil.integrateEventScheduleUserScheduleList(crop_event_schedule_user_schedule_list, user_list.get(i).getUser_id(), event_schedule_id);
+			integrate_event_schedule_user_schedule_list_list.add(integrate_event_schedule_user_schedule_list);
+			ArrayList<EventScheduleUserSchedule> integrate_view_list = YHEventSchedeulUserScheduleUtil.parseIntegratedEventScheduleUserScheduleListToView(integrate_event_schedule_user_schedule_list, user_list.get(i).getUser_id(), event_schedule_id, from_date, to_date);
+			map.put("user", user_list.get(i));
+			map.put("list", integrate_view_list);
+			
+			user_view_list_list.add(map);
 		}
 		
 		request.addAttribute("json_event_schedule_user_schedule_list_list", new JSONArray(user_view_list_list));
 		request.addAttribute("event_schedule_user_schedule_list_list", user_view_list_list);
 		
-		ArrayList<EventScheduleUserSchedule> test_list3 = new ArrayList<>();
-		for(long i = current_time; i < current_time + 7 * 86400000; i += 60000)
+		ArrayList<EventScheduleUserSchedule> event_schedule_attendace_count_list = new ArrayList<>();
+		for(long i = from_date; i < to_date; i += 60000)
 		{
 			int count = user_list.size();
 			
@@ -282,40 +291,44 @@ public class EventScheduleController
 				}
 			}
 			
-			test_list3.add(new EventScheduleUserSchedule("", 0, i, i + 60000, count));
+			event_schedule_attendace_count_list.add(new EventScheduleUserSchedule("", 0, i, i + 60000, count));
 		}
 		
-		ArrayList<EventScheduleUserSchedule> test_list4 = new ArrayList<>();
+		ArrayList<EventScheduleUserSchedule> integrate_event_schedule_attendace_count_list = new ArrayList<>();
 		long start_date = -1;
 		long end_date = -1;
 		int count = -1;
-		for(int i = 0; i < test_list3.size();)
+		for(int i = 0; i < event_schedule_attendace_count_list.size();)
 		{
 			if(start_date == -1 || end_date == -1)
 			{
-				start_date = test_list3.get(i).getStart_date();
-				end_date = test_list3.get(i).getEnd_date();
-				count = test_list3.get(i).getTypeof();
+				start_date = event_schedule_attendace_count_list.get(i).getStart_date();
+				end_date = event_schedule_attendace_count_list.get(i).getEnd_date();
+				count = event_schedule_attendace_count_list.get(i).getTypeof();
 			}
 			
-			if(count != test_list3.get(i).getTypeof())
+			if(count != event_schedule_attendace_count_list.get(i).getTypeof())
 			{
-				test_list4.add(new EventScheduleUserSchedule("", 0, start_date, end_date, count));
+				integrate_event_schedule_attendace_count_list.add(new EventScheduleUserSchedule("", 0, start_date, end_date, count));
 				start_date = -1;
 				end_date = -1;
 				count = -1;
 			}
 			else
 			{
-				end_date = test_list3.get(i).getEnd_date();
+				end_date = event_schedule_attendace_count_list.get(i).getEnd_date();
 				i++;
 			}
 		}
-		test_list4.add(new EventScheduleUserSchedule("", 0, start_date, end_date, count));
+		integrate_event_schedule_attendace_count_list.add(new EventScheduleUserSchedule("", 0, start_date, end_date, count));
 		
-		logger.debug("{}", test_list4.toString());
+		logger.debug("{}", integrate_event_schedule_attendace_count_list.toString());
 		
-		request.addAttribute("test_list4", new JSONArray(test_list4));
+		//HashMap<String, Object> event_schedule_attendace_count_list_map = new HashMap<>();
+		//event_schedule_attendace_count_list_map.put("list", integrate_event_schedule_attendace_count_list);
+		request.addAttribute("event_schedule_attendace_count_list", integrate_event_schedule_attendace_count_list);
+		
+		request.addAttribute("json_integrate_event_schedule_attendace_count_list", new JSONArray(integrate_event_schedule_attendace_count_list));
 		//맵스 장소 보내기
 		String place = "東京　京橋駅";
 		request.addAttribute("place",place);
