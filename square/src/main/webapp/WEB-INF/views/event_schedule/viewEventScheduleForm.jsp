@@ -22,6 +22,18 @@
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+    function logoutUserAction()
+	{
+		$.ajax({
+			url: "logoutUserAction",
+			type: "POST",
+			success: function()
+			{
+				location.replace("<c:out value='main'/>");
+			},
+			error: function(error){console.log(error);}
+		});
+	}
 		google.charts.load('current', {'packages':['timeline']});
 		google.charts.setOnLoadCallback(drawChart);
 		function drawChart()
@@ -67,8 +79,6 @@
      	google.charts.setOnLoadCallback(drawChart1);
 		function drawChart1()
 		{
-			var list = JSON.parse('${json_integrate_event_schedule_attendace_count_list}');
-    	  
 			var container = document.getElementById('timeline');
 			var chart = new google.visualization.Timeline(container);
 			var dataTable = new google.visualization.DataTable();
@@ -80,14 +90,19 @@
 			dataTable.addColumn({ type: 'date', id: 'Start' });
 			dataTable.addColumn({ type: 'date', id: 'End' });
 			
-			<c:forEach var="event_schedule_attendace_count" items="${event_schedule_attendace_count_list}">
+			var attendance_count = ${event_schedule_attendace_count_list_map.attendance_count};
+			var count;
+			var rate;
 			
-			switch()
-			{
+			<c:forEach var="event_schedule_attendace_count" items="${event_schedule_attendace_count_list_map.list}">
+				count = ${event_schedule_attendace_count.typeof};
+				rate = Math.floor(((count / attendance_count) * 10) / 2) * 10;
+				if(rate )
+				console.log(rate);
+				
 			
-			}
 				dataTable.addRows([
-						[ '', '', 'Tomato', "<div style='padding: 10px 10px 10px 10px;'>${event_schedule_attendace_count.typeof}</div>", new Date(${event_schedule_attendace_count.start_date}), new Date(${event_schedule_attendace_count.end_date}) ]
+						[ '', '', hsl2hex(9, 100, 80 - rate), "<div style='padding: 10px 10px 10px 10px;'>${event_schedule_attendace_count.typeof}</div>", new Date(${event_schedule_attendace_count.start_date}), new Date(${event_schedule_attendace_count.end_date}) ]
 						]);
 			</c:forEach>
         	
@@ -122,6 +137,48 @@
 	{
 		location.href = "joinEventScheduleForm?${group_category.group_category_id}?group_id=${group.group_id}&event_id=${event.event_id}";
 	}	
+	function hsl2hex(h, s, l) {
+	    var m1, m2, hue;
+	    var r, g, b
+	    s /=100;
+	    l /= 100;
+	    if (s == 0)
+	        r = g = b = (l * 255);
+	    else {
+	        if (l <= 0.5)
+	            m2 = l * (s + 1);
+	        else
+	            m2 = l + s - l * s;
+	        m1 = l * 2 - m2;
+	        hue = h / 360;
+	        r = Math.round(HueToRgb(m1, m2, hue + 1/3));
+	        g = Math.round(HueToRgb(m1, m2, hue));
+	        b = Math.round(HueToRgb(m1, m2, hue - 1/3));
+	    }
+	    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+	}
+	function HueToRgb(m1, m2, hue) {
+	    var v;
+	    if (hue < 0)
+	        hue += 1;
+	    else if (hue > 1)
+	        hue -= 1;
+
+	    if (6 * hue < 1)
+	        v = m1 + (m2 - m1) * hue * 6;
+	    else if (2 * hue < 1)
+	        v = m2;
+	    else if (3 * hue < 2)
+	        v = m1 + (m2 - m1) * (2/3 - hue) * 6;
+	    else
+	        v = m1;
+
+	    return 255 * v;
+	}
+	function componentToHex(c) {
+	    var hex = c.toString(16);
+	    return hex.length == 1 ? "0" + hex : hex;
+	}
 	</script>
 	<!-- 맵 띄우는 스크립트 -->
 	<style>
