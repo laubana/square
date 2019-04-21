@@ -142,11 +142,11 @@
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
-						<li><a href="createGroupForm">グループ・生成</a></li>
+						<li><a href="createGroupForm">グループ生成</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
-						<li><a href="joinUserForm">会員加入</a></li>
+						<li><a href="joinUserForm">ユーザー登録</a></li>
 							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
 						</c:if>
 					</ul>
@@ -182,7 +182,7 @@
 						<li><a href="#two">メンバー</a></li>
 						<li><a href="#three">コメント</a></li>
 						<li><a href="#four">アルバム</a></li>
-						<li><a href="#five">メンバースケジュール</a></li>
+						<li><a href="#five">メンバー ・スケジュール</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -256,7 +256,7 @@
 										</c:forEach>
 										</div>
 										<br>
-									<a href="listEventScheduleAttendanceForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}" class="button">メンバーページへ</a>
+									<a href="listEventScheduleAttendanceForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}" class="button">メンバー・ページへ</a>
 								</div>
 							</section>
 					<!-- Three -->
@@ -301,7 +301,7 @@
 						</div>
 						</c:forEach>	
 						</div>
-						<a href="listEventScheduleCommentForm?group_category_id=${group_category.group_category_id}&group_id${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}" class="button">コメントページへ</a>		
+						<a href="listEventScheduleCommentForm?group_category_id=${group_category.group_category_id}&group_id${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}" class="button">コメント・ページへ</a>		
 								</div>
 							</section>
 
@@ -333,7 +333,7 @@
 											</video>
 											</c:if>
 											<br>
-											<a href="listGroupAlbumForm?group_id=${group.group_id}" class="button">アルバムページへ</a>
+											<a href="listGroupAlbumForm?group_id=${group.group_id}" class="button">アルバム・ページへ</a>
 										</article>
 									</div>
 								</div>
@@ -344,7 +344,7 @@
 							<c:if test="${sessionScope.user_id == leader.user_id}">
 							
 								<div class="container">	
-									<h3>メンバースケジュール</h3>
+									<h3>メンバー・スケジュール</h3>
 									<c:forEach var="event_schedule_user_schedule_list" items="${event_schedule_user_schedule_list_list}">
 									<div id="timeline_image${event_schedule_user_schedule_list.user.user_id}">
 										</div>

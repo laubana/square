@@ -46,7 +46,7 @@
 						</p>
 						</div>
 						<c:if test="${sessionScope.user_id == user.user_id}">
-						<div align="center" id="update_content_button_div"><a class="button" onclick="updateContent()">紹介・編集</a></div>
+						<div align="center" id="update_content_button_div"><a class="button" onclick="updateContent()">紹介編集</a></div>
 						</c:if>
 					</section>
 					
@@ -68,7 +68,7 @@
 										<li><a href="#">${ hlist[4].name }</a></li>
 						</ul>
 						<c:if test="${sessionScope.user_id == user.user_id}">
-						<div align="center"><a href="#" class="button">関心分野・編集</a></div>
+						<div align="center"><a href="#" class="button">関心分野編集</a></div>
 						</c:if>
 					</section>
 					<!-- Three -->
@@ -117,7 +117,7 @@
 						</div>
 						<br><br>
 						<c:if test="${sessionScope.user_id == user.user_id}">
-								<div align="center"><a href="listUserAlbumForm?user_id=${user.user_id}" class="button">アルバム・編集</a></div>
+								<div align="center"><a href="listUserAlbumForm?user_id=${user.user_id}" class="button">アルバム編集</a></div>
 								</c:if>
 					</section>
 
