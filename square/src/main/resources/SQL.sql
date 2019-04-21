@@ -334,15 +334,15 @@ CREATE TABLE TABLE_KH
 	INPUT_DATE NUMBER DEFAULT (CAST(SYSTIMESTAMP AS DATE) - DATE '1970-01-01')*24*60*60*1000 + MOD( EXTRACT( SECOND FROM SYSTIMESTAMP ), 1 ) * 1000 - 32400000
 );
 
-INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id1@gmail.com', 'password', 'Joy', 'id1@gmail.com.jpg', '광주', 'id1content');
-INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id2@gmail.com', 'password', 'Arwen', 'id2@gmail.com.jpg', '광주', 'id2content');
-INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id3@gmail.com', 'password', 'Aragorn', 'id3@gmail.com.jpg', '광주', 'id3content');
-INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id4@gmail.com', 'password', 'Eowyn', 'id4@gmail.com.jpg', '광주', 'id4content');
-INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id5@gmail.com', 'password', 'Saruman', 'id5@gmail.com.jpg', '광주', 'id5content');
-INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id6@gmail.com', 'password', 'Sauron', 'id6@gmail.com.jpg', '광주', 'id6content');
-INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id7@gmail.com', 'password', 'Nancy', 'id7@gmail.com.jpg', '광주', 'id7content');
-INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id8@gmail.com', 'password', 'Emma', 'id8@gmail.com.jpg', '광주', 'id8content');
-INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id9@gmail.com', 'password', 'Emma', 'id9@gmail.com.jpg', '광주', 'id9content');
+INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id1@gmail.com', 'password', 'Joy', 'id1@gmail.com.jpg', '東京', 'id1content');
+INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id2@gmail.com', 'password', 'Arwen', 'id2@gmail.com.jpg', '東京', 'id2content');
+INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id3@gmail.com', 'password', 'Aragorn', 'id3@gmail.com.jpg', '東京', 'id3content');
+INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id4@gmail.com', 'password', 'Eowyn', 'id4@gmail.com.jpg', '東京', 'id4content');
+INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id5@gmail.com', 'password', 'Saruman', 'id5@gmail.com.jpg', '東京', 'id5content');
+INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id6@gmail.com', 'password', 'Sauron', 'id6@gmail.com.jpg', '東京', 'id6content');
+INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id7@gmail.com', 'password', 'Nancy', 'id7@gmail.com.jpg', '東京', 'id7content');
+INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id8@gmail.com', 'password', 'Emma', 'id8@gmail.com.jpg', '東京', 'id8content');
+INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id9@gmail.com', 'password', 'Emma', 'id9@gmail.com.jpg', '東京', 'id9content');
 
 INSERT INTO TABLE_GCA(GROUP_CATEGORY_ID, FILENAME, NAME) VALUES(1, '1.jpg', 'IT');
 INSERT INTO TABLE_GCA(GROUP_CATEGORY_ID, FILENAME, NAME) VALUES(2, '2.jpg', 'Family');
@@ -351,15 +351,15 @@ INSERT INTO TABLE_GCA(GROUP_CATEGORY_ID, FILENAME, NAME) VALUES(4, '4.jpg', 'Coo
 INSERT INTO TABLE_GCA(GROUP_CATEGORY_ID, FILENAME, NAME) VALUES(5, '5.jpg', 'Leisure');
 INSERT INTO TABLE_GCA(GROUP_CATEGORY_ID, FILENAME, NAME) VALUES(6, '6.jpg', 'Music');
 
-INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(1, 1, '광주', 'id1@gmail.com', 'Java Developer Group', 'Javaを使ってプログラミングをするグループです。', '1.jpg', '1.jpg');
-INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(2, 1, '광주', 'id4@gmail.com', 'Front-end Developer Group', 'group2content', '2.jpg', '2.jpg');
-INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(3, 1, '광주', 'id7@gmail.com', 'Back-end Developer Group', 'group3content', '3.jpg', '3.jpg');
-INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(4, 1, '광주', 'id1@gmail.com', 'C Developer Group', 'group4content', '4.jpg', '4.jpg');
-INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(5, 1, '광주', 'id4@gmail.com', 'Database Developer Group', 'group5content', '5.jpg', '5.jpg');
-INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(6, 1, '광주', 'id7@gmail.com', 'Web Developer Group', 'group6content', '6.jpg', '6.jpg');
-INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(7, 1, '광주', 'id1@gmail.com', 'JS Developer Group', 'group7content', '7.jpg', '7.jpg');
-INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(8, 3, '광주', 'id1@gmail.com', 'Animal Group', 'group8content', '8.jpg', '8.jpg');
-INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(9, 4, '광주', 'id1@gmail.com', 'Cooking Group', 'group9content', '9.jpg', '9.jpg');
+INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(1, 1, '東京', 'id1@gmail.com', 'Java Developer Group', 'Javaを使ってプログラミングをするグループです。', '1.jpg', '1.jpg');
+INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(2, 1, '東京', 'id4@gmail.com', 'Front-end Developer Group', 'group2content', '2.jpg', '2.jpg');
+INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(3, 1, '東京', 'id7@gmail.com', 'Back-end Developer Group', 'group3content', '3.jpg', '3.jpg');
+INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(4, 1, '東京', 'id1@gmail.com', 'C Developer Group', 'group4content', '4.jpg', '4.jpg');
+INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(5,ㄴ 1, '東京', 'id4@gmail.com', 'Database Developer Group', 'group5content', '5.jpg', '5.jpg');
+INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(6, 1, '東京', 'id7@gmail.com', 'Web Developer Group', 'group6content', '6.jpg', '6.jpg');
+INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(7, 1, '東京', 'id1@gmail.com', 'JS Developer Group', 'group7content', '7.jpg', '7.jpg');
+INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(8, 3, '東京', 'id1@gmail.com', 'Animal Group', 'group8content', '8.jpg', '8.jpg');
+INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(9, 4, '東京', 'id1@gmail.com', 'Cooking Group', 'group9content', '9.jpg', '9.jpg');
 
 INSERT INTO TABLE_GA(USER_ID, GROUP_ID, BLIND) VALUES('id1@gmail.com', 1, 0);
 INSERT INTO TABLE_GA(USER_ID, GROUP_ID) VALUES('id2@gmail.com', 1);
