@@ -2068,6 +2068,8 @@ input, select, option, textarea {
 			top: 0;
 			height: 3em;
 			line-height: 3em;
+			margin: -15px;
+    		margin-right: 2px;
 		}
 
 			#header nav ul {

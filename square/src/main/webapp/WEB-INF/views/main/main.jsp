@@ -12,7 +12,7 @@
 		<script>
 			var texts = [];
 			<c:forEach var="hashtag" items="${hashtag_list}">
-			texts.push("#급상승 해시태그 : ${hashtag}");
+			texts.push("#ハットハッシュタグ : ${hashtag}");
 			</c:forEach>
 			var count = 0;
 			function changeText() {
@@ -112,7 +112,7 @@
 			<section id="two" class="main style2 left dark fullscreen">
 				<div class="content box style2">
 					<header>
-						<h2>グループ・生成</h2>
+						<h2>グループ生成</h2>
 					</header>
 					<p>自分の興味のもととしイベントを運営するグループを作りましょう。グループを作って熱情を持ったみんなを集めましょう。</p>
 					<div class="actions special">
