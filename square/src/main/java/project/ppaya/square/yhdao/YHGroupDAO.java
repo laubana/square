@@ -16,6 +16,62 @@ public class YHGroupDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<Group> selectGroupByGroupIdListOrderByInputdate(ArrayList<Integer> group_id_list)
+	{
+		ArrayList<Group> group_list = null;
+		
+		YHGroupMapper mapper = sqlSession.getMapper(YHGroupMapper.class);
+		
+		try
+		{
+			group_list = mapper.selectGroupByGroupIdListOrderByInputdate(group_id_list);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_list;
+	}
+	public ArrayList<Group> selectGroupByGroupIdListOrderByEventScheduleCount(ArrayList<Integer> group_id_list)
+	{
+		ArrayList<Group> group_list = null;
+		
+		YHGroupMapper mapper = sqlSession.getMapper(YHGroupMapper.class);
+		
+		try
+		{
+			group_list = mapper.selectGroupByGroupIdListOrderByEventScheduleCount(group_id_list);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_list;
+	}
+	public ArrayList<Group> selectGroupByGroupIdListOrderByEventCount(ArrayList<Integer> group_id_list)
+	{
+		ArrayList<Group> group_list = null;
+		
+		YHGroupMapper mapper = sqlSession.getMapper(YHGroupMapper.class);
+		
+		try
+		{
+			group_list = mapper.selectGroupByGroupIdListOrderByEventCount(group_id_list);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_list;
+	}
+	public ArrayList<Group> selectGroupByGroupIdListOrderByGroupAttendanceCount(ArrayList<Integer> group_id_list)
+	{
+		ArrayList<Group> group_list = null;
+		
+		YHGroupMapper mapper = sqlSession.getMapper(YHGroupMapper.class);
+		
+		try
+		{
+			group_list = mapper.selectGroupByGroupIdListOrderByGroupAttendanceCount(group_id_list);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return group_list;
+	}
 	public Group selectGroupByExactName(String name)
 	{
 		Group group = null;

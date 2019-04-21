@@ -87,16 +87,34 @@ public class GroupAction {
 			yh_keyword_historyDAO.insertKeywordHistory(keyword);
 		}
 		
-		switch(orderby)
+		if(where == 1)
 		{
-		case 1:
-			return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount(group_category_id, name);
-		case 2:
-			return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByEventCount(group_category_id, name);
-		case 3:
-			return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByEventScheduleCount(group_category_id, name);
-		case 4:
-			return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByInputdate(group_category_id, name);
+			switch(orderby)
+			{
+			case 1:
+				return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount(group_category_id, name);
+			case 2:
+				return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByEventCount(group_category_id, name);
+			case 3:
+				return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByEventScheduleCount(group_category_id, name);
+			case 4:
+				return yh_groupDAO.selectGroupByGroupCategoryIdNameOrderByInputdate(group_category_id, name);
+			}
+		}
+		else
+		{
+			ArrayList<Integer> group_id_list = yh_group_hashtagDAO.getGroupIdByHashtagGroupCategoryId(name, group_category_id);
+			switch(orderby)
+			{
+			case 1:
+				return yh_groupDAO.selectGroupByGroupIdListOrderByInputdate(group_id_list);
+			case 2:
+				return yh_groupDAO.selectGroupByGroupIdListOrderByEventCount(group_id_list);
+			case 3:
+				return yh_groupDAO.selectGroupByGroupIdListOrderByEventScheduleCount(group_id_list);
+			case 4:
+				return yh_groupDAO.selectGroupByGroupIdListOrderByInputdate(group_id_list);
+			}
 		}
 		
 		return null;

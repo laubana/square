@@ -44,6 +44,19 @@ FROM
 WHERE
 	UPPER(NAME) LIKE '%' || upper(#{name}) || '%'
 </select>
+<select id="selectGroupByGroupIdListOrderByInputdate" parameterType="list" resultType="Group">
+SELECT
+	*
+FROM
+	TABLE_G G
+WHERE
+	1 = 0
+	<foreach item="group_id" collection="list" open="OR" separator="OR">
+		GROUP_ID = #{group_id}
+	</foreach>
+ORDER BY
+	INPUT_DATE DESC
+</select>
 <select id="selectGroupByGroupCategoryIdNameOrderByInputdate" parameterType="map" resultType="Group">
 SELECT
 	*
@@ -54,6 +67,19 @@ WHERE
 	UPPER(NAME) LIKE '%' || upper(#{name}) || '%'
 ORDER BY
 	INPUT_DATE DESC
+</select>
+<select id="selectGroupByGroupIdListOrderByEventScheduleCount" parameterType="list" resultType="Group">
+SELECT
+	*
+FROM
+	TABLE_G G
+WHERE
+	1 = 0
+	<foreach item="group_id" collection="list" open="OR" separator="OR">
+		GROUP_ID = #{group_id}
+	</foreach>
+ORDER BY
+	(SELECT COUNT(*) FROM TABLE_ES ES WHERE G.GROUP_ID = ES.GROUP_ID) DESC
 </select>
 <select id="selectGroupByGroupCategoryIdNameOrderByEventScheduleCount" parameterType="map" resultType="Group">
 SELECT
@@ -66,6 +92,19 @@ WHERE
 ORDER BY
 	(SELECT COUNT(*) FROM TABLE_ES ES WHERE G.GROUP_ID = ES.GROUP_ID) DESC
 </select>
+<select id="selectGroupByGroupIdListOrderByEventCount" parameterType="list" resultType="Group">
+SELECT
+	*
+FROM
+	TABLE_G G
+WHERE
+	1 = 0
+	<foreach item="group_id" collection="list" open="OR" separator="OR">
+		GROUP_ID = #{group_id}
+	</foreach>
+ORDER BY
+	(SELECT COUNT(*) FROM TABLE_E E WHERE G.GROUP_ID = E.GROUP_ID) DESC
+</select>
 <select id="selectGroupByGroupCategoryIdNameOrderByEventCount" parameterType="map" resultType="Group">
 SELECT
 	*
@@ -76,6 +115,19 @@ WHERE
 	UPPER(NAME) LIKE '%' || upper(#{name}) || '%'
 ORDER BY
 	(SELECT COUNT(*) FROM TABLE_E E WHERE G.GROUP_ID = E.GROUP_ID) DESC
+</select>
+<select id="selectGroupByGroupIdListOrderByGroupAttendanceCount" parameterType="list" resultType="Group">
+SELECT
+	*
+FROM
+	TABLE_G G
+WHERE
+	1 = 0
+	<foreach item="group_id" collection="list" open="OR" separator="OR">
+		GROUP_ID = #{group_id}
+	</foreach>
+ORDER BY
+	(SELECT COUNT(*) FROM TABLE_GA GA WHERE G.GROUP_ID = GA.GROUP_ID) DESC
 </select>
 <select id="selectGroupByGroupCategoryIdNameOrderByGroupAttendanceCount" parameterType="map" resultType="Group">
 SELECT

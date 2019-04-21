@@ -56,6 +56,15 @@ FROM
 WHERE
 	GROUP_ID = #{group_id}
 </select>
+<select id="getGroupIdByHashtagGroupCategoryId" parameterType="map" resultType="int">
+SELECT
+	GROUP_ID
+FROM
+	TABLE_GH
+WHERE
+	HASHTAG = #{hashtag} AND
+	GROUP_CATEGORY_ID = #{group_category_id}
+</select>
 <select id="getGroupIdByHashtag" parameterType="string" resultType="int">
 SELECT
 	GROUP_ID

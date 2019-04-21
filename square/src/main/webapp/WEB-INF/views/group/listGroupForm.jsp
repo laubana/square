@@ -90,7 +90,7 @@ function logoutUserAction()
   							<label class="filter__label js-filter-label" for="select">Select</label>
   							<div class="filter__control js-filter-control">
     						<select class="filter__select js-filter-select" id="select">
-      							<option value="1" class="名前">名前</option>
+      							<option value="1" class="名前" selected>名前</option>
       							<option value="2" class="名前">タグ</option>
     						</select>
     							<div class="filter__indicator"></div>   						
