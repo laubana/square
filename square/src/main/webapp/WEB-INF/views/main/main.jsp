@@ -12,7 +12,7 @@
 		<script>
 			var texts = [];
 			<c:forEach var="hashtag" items="${hashtag_list}">
-			texts.push("#급상승 해시태그 : ${hashtag}");
+			texts.push("#ハットハッシュタグ : ${hashtag}");
 			</c:forEach>
 			var count = 0;
 			function changeText() {
@@ -45,11 +45,11 @@
 						<li><a href="listRecommendationForm"><span id="realTimeHashTag"></span></a></li>
 						<c:if test="${sessionScope.user_id != null}">
 						<li><a href="viewUserForm?user_id=${sessionScope.user_id}">${sessionScope.user_id}</a></li>
-						<li><a href="createGroupForm">グループ・生成</a></li>
+						<li><a href="createGroupForm">グループ生成</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
-						<li><a href="joinUserForm">会員加入</a></li>
+						<li><a href="joinUserForm">ユーザー登録</a></li>
 							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
 						</c:if>
 					</ul>
@@ -98,9 +98,9 @@
 			<section id="one" class="main style2 right dark fullscreen">
 				<div class="content box style2">
 					<header>
-						<h2>会員加入</h2>
+						<h2>ユーザー登録</h2>
 					</header>
-					<p>みんな・みんな에 가입하여 사람들과 좋아하는 일을 함께하고 새로운 경험을 찾아보세요.</p>
+					<p>みんなさん·みんなに加入してみんなと好きなことを一緒にしながら新しい経験を探してみましょう。</p>
 					<div class="actions special">
 						<a href="joinUserForm" class="button" style="color:white;">会員加入</a>
 					</div>
@@ -112,9 +112,9 @@
 			<section id="two" class="main style2 left dark fullscreen">
 				<div class="content box style2">
 					<header>
-						<h2>グループ・生成</h2>
+						<h2>グループ生成</h2>
 					</header>
-					<p>자신의  관심사를 토대로 이벤트를 운영하는 그룹을 만들세요. 그룹을 만들고 열정을 가진 사람들을 모아 보세요.</p>
+					<p>自分の興味のもととしイベントを運営するグループを作りましょう。グループを作って熱情を持ったみんなを集めましょう。</p>
 					<div class="actions special">
 						<a href="createGroupForm" class="button" style="color:white;">グループ・生成</a>
 					</div>

@@ -23,7 +23,7 @@ function logoutUserAction()
 		type: "POST",
 		success: function()
 		{
-			location.replace("<c:out value='main'/>");
+			location.replace("<c:out value='listGroupAttendanceForm'/>");
 		},
 		error: function(error){console.log(error);}
 	});

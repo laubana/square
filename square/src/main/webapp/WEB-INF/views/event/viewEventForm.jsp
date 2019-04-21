@@ -143,11 +143,11 @@
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
-						<li><a href="createGroupForm">グループ・生成</a></li>
+						<li><a href="createGroupForm">グループ生成</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
-						<li><a href="joinUserForm">会員加入</a></li>
+						<li><a href="joinUserForm">ユーザー登録</a></li>
 							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
 						</c:if>
 					</ul>
@@ -336,7 +336,7 @@
 							<section id="five">
 								<div class="container">
 									<h3>イベント・スケジュール</h3>
-									<div align="right"><a href="createEventScheduleForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">スケジュール・生成</a></div>
+									<div align="right"><a href="createEventScheduleForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">スケジュール生成</a></div>
 									<div class="features">
 									<c:forEach var="event_schedule" items="${event_schedule_list}" end="2">
 									<article>
@@ -362,7 +362,7 @@
 							</section>
 							<section id="six">
 								<div class="container">
-									<h3>参加・グループ</h3>
+									<h3>参加グループ</h3>
 									<div class="features">
 									<c:forEach var="group_union" items="${group_union_list}">
 						<div class="comment-wrap">

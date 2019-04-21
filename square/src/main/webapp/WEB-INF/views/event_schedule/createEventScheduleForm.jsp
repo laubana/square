@@ -88,11 +88,11 @@ border: 0;
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
-						<li><a href="createGroupForm">グループ・生成</a></li>
+						<li><a href="createGroupForm">グループ生成</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
-						<li><a href="joinUserForm">会員加入</a></li>
+						<li><a href="joinUserForm">ユーザー登録</a></li>
 							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
 						</c:if>
 					</ul>
@@ -112,7 +112,7 @@ border: 0;
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">スケジュール ・生成</a></li>
+						<li><a href="#one" class="active">スケジュール 生成</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -162,7 +162,7 @@ border: 0;
 										<input type = "hidden" value = "" id = "region">
 									<br><br>
 									<!-- 내용 -->
-									<h1>スケジュール ・内容</h1>
+									<h1>スケジュール 内容</h1>
 									
 <input type="datetime-local" id="start_date" value="<%= (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm")).format(new Date())%>">
 <input type="datetime-local" id="end_date" value="<%= (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm")).format(new Date(new Date().getTime() + 3600*1000))%>">

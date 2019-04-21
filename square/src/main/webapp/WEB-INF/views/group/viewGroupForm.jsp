@@ -39,7 +39,7 @@
 					type: "POST",
 					success: function()
 					{
-						location.replace("<c:out value='main'/>");
+						location.replace("<c:out value='viewGroupForm'/>");
 					},
 					error: function(error){console.log(error);}
 				});
@@ -135,11 +135,11 @@
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
-						<li><a href="createGroupForm">グループ・生成</a></li>
+						<li><a href="createGroupForm">グループ生成</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
-						<li><a href="joinUserForm">会員加入</a></li>
+						<li><a href="joinUserForm">ユーザー登録</a></li>
 							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
 						</c:if>
 					</ul>
@@ -345,7 +345,7 @@
 							</section>
 							<section id="six">
 								<div class="container">
-									<h3>連合・イベント</h3>
+									<h3>連合イベント</h3>
 									<div class="features">
 									<c:forEach var="event_union_event" items="${event_union_event_list}">
 									<article>
