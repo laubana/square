@@ -9,6 +9,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupSearch/assets/css/main.css" />
 		<link rel="stylesheet" href="resources/TextA/css/style.css">
+		<link rel="stylesheet" href="resources/SelectBox/css/style.css">
 		
 		<!-- 추가 -->
 		<!-- <link rel='stylesheet' href='http://www.davilious.com/codepen/font-awesome/css/font-awesome.css'> -->
@@ -77,14 +78,28 @@ function logoutUserAction()
 		<!-- Intro -->
 			<section id="intro" class="main style1 dark fullscreen">
 				<div class="content">
+				
 					<header>
 						<h2>${group_category.name}</h2>
 					</header>
 					<div class="container">
   						<div class="wrap-input">  
   							<input type="search" id="keyword" class="input-txt" placeholder="Search" name="keyword">
+  							<br>
+  							<div class="filter js-filter">
+  							<label class="filter__label js-filter-label" for="select">Select</label>
+  							<div class="filter__control js-filter-control">
+    						<select class="filter__select js-filter-select" id="select">
+      							<option value="1" class="名前">名前</option>
+      							<option value="2" class="名前">タグ</option>
+    						</select>
+    							<div class="filter__indicator"></div>   						
+  							</div>
+							</div>
+							
   						</div>
-					</div>			
+					</div>
+					<br>			
 					<footer>
 						<a href="#work" class="button style2 down" id="show_work_button"></a>
 					</footer>
@@ -121,7 +136,8 @@ function logoutUserAction()
 
 		<!-- 기본 Scripts -->
 		<script src="resources/Basic/assets/js/jquery-3.3.1.min.js"></script>
-		<!-- Scripts -->
+		<!-- Scripts -->			
+			<script src="resources/SelectBox/js/index.js"></script>
 			<script src="resources/GroupSearch/assets/js/jquery.min.js"></script>
 			<script src="resources/GroupSearch/assets/js/jquery.poptrox.min.js"></script>
 			<script src="resources/GroupSearch/assets/js/jquery.scrolly.min.js"></script>

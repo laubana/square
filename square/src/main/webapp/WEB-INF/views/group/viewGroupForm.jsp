@@ -39,7 +39,7 @@
 					type: "POST",
 					success: function()
 					{
-						location.replace("<c:out value='main'/>");
+						location.replace("<c:out value='viewGroupForm'/>");
 					},
 					error: function(error){console.log(error);}
 				});
