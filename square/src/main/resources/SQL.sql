@@ -357,9 +357,9 @@ INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT,
 INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(4, 1, '광주', 'id1@gmail.com', 'C Developer Group', 'group4content', '4.jpg', '4.jpg');
 INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(5, 1, '광주', 'id4@gmail.com', 'Database Developer Group', 'group5content', '5.jpg', '5.jpg');
 INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(6, 1, '광주', 'id7@gmail.com', 'Web Developer Group', 'group6content', '6.jpg', '6.jpg');
-INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(7, 1, '광주', 'id1@gmail.com', 'JS Developer Group', 'group7content', '7.png', '7.png');
-INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(8, 3, '광주', 'id1@gmail.com', 'Animal Group', 'group8content', '8.png', '8.png');
-INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(9, 4, '광주', 'id1@gmail.com', 'Cooking Group', 'group9content', '9.png', '9.png');
+INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(7, 1, '광주', 'id1@gmail.com', 'JS Developer Group', 'group7content', '7.jpg', '7.jpg');
+INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(8, 3, '광주', 'id1@gmail.com', 'Animal Group', 'group8content', '8.jpg', '8.jpg');
+INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(9, 4, '광주', 'id1@gmail.com', 'Cooking Group', 'group9content', '9.jpg', '9.jpg');
 
 INSERT INTO TABLE_GA(USER_ID, GROUP_ID, BLIND) VALUES('id1@gmail.com', 1, 0);
 INSERT INTO TABLE_GA(USER_ID, GROUP_ID) VALUES('id2@gmail.com', 1);

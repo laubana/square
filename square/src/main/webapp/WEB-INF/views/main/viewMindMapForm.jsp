@@ -34,16 +34,16 @@ background: url('resources/MindMap/image/3.jpg');
 	<li><a href="">#${root}</a>
 		<ul>
 			<c:forEach var="element1" items="${list}">
-				<li><a href="">${element1.node.group_id}</a>
+				<li><a id="group1" mouseover="javascript:test()" href="viewGroupForm?group_category_id=${element1.node.group_category_id}&group_id=${element1.node.group_id}">${element1.node.group_id}</a>
 					<ul>
 						<c:forEach var="element2" items="${element1.list}">
-							<li><a href="">#${element2.node}</a>
+							<li><a href="#">#${element2.node}</a>
 								<ul>
 									<c:forEach var="element3" items="${element2.list}">
-										<li><a href="">${element3.node.group_id}</a>
+										<li><a id="group2" href="viewGroupForm?group_category_id=${element3.node.group_category_id}&group_id=${element3.node.group_id}">${element3.node.group_id}</a>
 											<ul>
 												<c:forEach var="element4" items="${element3.list}">
-													<li><a href="">#${element4.node}</a>
+													<li><a href="#">#${element4.node}</a>
 													</li>
 												</c:forEach>
 											</ul>
@@ -63,7 +63,9 @@ background: url('resources/MindMap/image/3.jpg');
   
   <div id="thumbnail" class="thumbnail left">
     <ul class="thumbnail-list">
-      <li class=""><svg class="star" x="0px" y="0px" width="96px" height="96px" viewBox="0 0 66 66" enable-background="new 0 0 66 66">
+      <li class="">
+<!-- 맨 우측 좌측 상단 별 -->      
+<svg class="star" x="0px" y="0px" width="96px" height="96px" viewBox="0 0 66 66" enable-background="new 0 0 66 66">
   <defs>
     <path id="loader-star" d="M31.75,30.5L33,0.5l1.25,30l1.25,1.25l30,1.25l-30,1.25l-1.25,1.25L33,65.5l-1.25-30l-1.25-1.25L0.5,33l30-1.25L31.75,30.5z
 "/>
@@ -76,22 +78,28 @@ background: url('resources/MindMap/image/3.jpg');
     <g class="small-1"><use xlink:href="#loader-star"/></g>
   </g>
 </svg>
-        <div align="center"><span><a href="main">Group Name</a></span></div>
+
+		<!-- 우측  그룹 이름 및 태그 출력-->
+		
+        <div align="center"><span><a href="main" id="gn">Group Name</a></span></div>
         <br>
         <hr>
-        <p align="center"><a href="main">#tag</a></p>
+        <p align="center"><a href="main" id="tn">#tag</a></p>
         <hr>
-        <p align="center"><a href="main">#tag</a></p>
-        <hr>
-        <p align="center"><a href="main">#tag</a></p>
-        <hr>
+
+		
+		<%-- <c:forEach var="element1" items="${list}">
+        <div align="center"><span><a href="main">${element1.node.name }</a></span></div>
+        <br>
+        	<c:forEach var="element2" items="${element1.list}">
+        		<hr>
+        			<p align="center"><a href="main">${element2.node }</a></p>
+        		<hr>
+        	</c:forEach>
+        </c:forEach> --%>
+        
       </li>
-      <!-- <li class="">
-        <div align="center"><span><a href="main">list 2</a></span></div>
-        <br>
-        <p align="center"><a href="main">#tag</a></p>
-      </li> -->
-      <li class="marker"></li>
+     
     </ul>
   </div>
 </article>
@@ -118,7 +126,16 @@ background: url('resources/MindMap/image/3.jpg');
 console.log(JSON.parse('${json_list}'));
 </script>
 
+<script>
+$("#group1").mouseover(function () {
+	alert("hi1");
+})
 
+$("#group2").mouseover(function () {
+	alert("hi2");
+})
+
+</script>
 
 </body>
 
