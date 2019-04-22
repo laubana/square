@@ -255,33 +255,33 @@ $('input[type=search]').on({
 				else if(check_group_category_id_radio == 2)
 				{
 					buff += "<hr><input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1'>";
-					buff += "<label for='radio-1' class='radio-label'>メンバー数順</label><br>";
+					buff += "<label for='radio-1' class='radio-label'>メンバー数</label><br>";
 					buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2' checked>";
-					buff += "<label for='radio-2' class='radio-label'>イベント数順</label><br>";
+					buff += "<label for='radio-2' class='radio-label'>イベント数</label><br>";
 					buff += "<input id='radio-3' class='check_group_category_id_radio' name='radio' type='radio' value='3'>";
-					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数順</label>";
+					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数</label>";
 					buff += "<input id='radio-4' class='check_group_category_id_radio' name='radio' type='radio' value='4'>";
 					buff += "<label for='radio-4' class='radio-label'>開設日</label><hr>";
 				}
 				else if(check_group_category_id_radio == 3)
 				{
 					buff += "<hr><input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1'>";
-					buff += "<label for='radio-1' class='radio-label'>メンバー数順</label><br>";
+					buff += "<label for='radio-1' class='radio-label'>メンバー数</label><br>";
 					buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2'>";
-					buff += "<label for='radio-2' class='radio-label'>イベント数順</label><br>";
+					buff += "<label for='radio-2' class='radio-label'>イベント数</label><br>";
 					buff += "<input id='radio-3' class='check_group_category_id_radio' name='radio' type='radio' value='3' checked>";
-					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数順</label><br>";
+					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数</label><br>";
 					buff += "<input id='radio-4' class='check_group_category_id_radio' name='radio' type='radio' value='4'>";
 					buff += "<label for='radio-4' class='radio-label'>開設日</label><hr>";
 				}
 				else
 				{
 					buff += "<hr><input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1'>";
-					buff += "<label for='radio-1' class='radio-label'>メンバー数順</label><br>";
+					buff += "<label for='radio-1' class='radio-label'>メンバー数</label><br>";
 					buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2'>";
-					buff += "<label for='radio-2' class='radio-label'>イベント数順</label><br>";
+					buff += "<label for='radio-2' class='radio-label'>イベント数</label><br>";
 					buff += "<input id='radio-3' class='check_group_category_id_radio' name='radio' type='radio' value='3'>";
-					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数順</label><br>";
+					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数</label><br>";
 					buff += "<input id='radio-4' class='check_group_category_id_radio' name='radio' type='radio' value='4' checked>";
 					buff += "<label for='radio-4' class='radio-label'>開設日</label><hr>";
 				}		
