@@ -15,7 +15,7 @@
 -->
 <html>
 	<head>
-		<title>みんな・みんな</title>
+		<title>みんなみんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/EventView/assets/css/main.css" />
@@ -143,7 +143,7 @@
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
-						<li><a href="createGroupForm">グループ生成</a></li>
+						<li><a href="createGroupForm">グループ開設</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
@@ -216,10 +216,7 @@
 									</div>
 								</header>
 								<span class="image featured"><img src="resources/image/event_image/${event.image_id}" ></span>
-								<div align ="center">
-									<div id="map" ></div>
-								</div>
-								<br><br>
+								
 								<p>
 									${event.content}
 								</p>
@@ -229,7 +226,14 @@
 								</footer></div> -->
 							</article>
 							</section>
-
+							<section id="">
+								<div class="container">
+								<h3>イベント・スケジュール場所</h3>
+									<div align ="center">
+										<div id="map" ></div>
+									</div>
+								</div>
+							</section>
 					</div>
 					
 					<div id="main">
@@ -250,7 +254,7 @@
 										</c:forEach>
 										</div>
 										<br>
-									<a href="listEventAttendanceForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">メンバーページへ</a>
+									<a href="listEventAttendanceForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">メンバーリストページへ</a>
 								</div>
 							</section>
 					<!-- Three -->
@@ -296,7 +300,7 @@
 						</c:forEach>
 						<textarea class="comment-block"></textarea><br>
 						<div align="right"><input type="button" value="作成"></div><br><br>
-						<a href="listEventCommentForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">コメントページへ</a>
+						<a href="listEventCommentForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">コメントリストページへ</a>
 						
 						</div>		
 								</div>
@@ -306,7 +310,7 @@
 							<section id="four">
 								<div class="container">
 									<h3>アルバム</h3>
-						
+									<h4>写真</h4>
 									<div class="features" align="center">
 										<article class="col-6 col-12-xsmall work-item">
 											<c:forEach var="event_schedule_image" items="${event_schedule_image_list}" end="3">
@@ -316,7 +320,7 @@
 											<br>
 											</article>
 									</div>
-									<h3>映像</h3>
+									<h4>映像</h4>
 									<div class="features" align="center">
 											<c:if test="${video_list.size() != 0}">
 											<video width='365' height='300' style="background-color: black;" controls>
@@ -326,7 +330,9 @@
 											</video>
 											</c:if>
 											<br><br>
+											<div class="features" align="left">
 											<a href="listEventAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">イベント・アルバムページへ</a>
+											</div>
 									</div>	
 								</div>
 							</section>
@@ -334,7 +340,7 @@
 							<section id="five">
 								<div class="container">
 									<h3>イベント・スケジュール</h3>
-									<div align="right"><a href="createEventScheduleForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">スケジュール生成</a></div>
+									<div align="right"><a href="createEventScheduleForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">開設</a></div>
 									<div class="features">
 									<c:forEach var="event_schedule" items="${event_schedule_list}" end="2">
 									<article>
@@ -355,7 +361,7 @@
 										</c:forEach>
 											</div>
 											
-										<a href="listEventScheduleForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">イベント・スケジュールへ</a>
+										<a href="listEventScheduleForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">イベント・スケジュールリストページへ</a>
 									</div>
 							</section>
 							<section id="six">

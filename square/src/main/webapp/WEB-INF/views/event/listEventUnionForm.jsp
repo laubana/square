@@ -9,7 +9,7 @@
 -->
 <html>
 	<head>
-		<title>イベント・</title>
+		<title>みんなみんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
@@ -26,7 +26,7 @@
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
-						<li><a href="createGroupForm">グループ生成</a></li>
+						<li><a href="createGroupForm">グループ開設</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">

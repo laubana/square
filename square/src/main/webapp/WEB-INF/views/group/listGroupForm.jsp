@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>みんな・みんな</title>	
+		<title>みんなみんな</title>	
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupSearch/assets/css/main.css" />
@@ -75,7 +75,7 @@
 						<li><a href="listRecommendationForm"><span id="realTimeHashTag"></span></a></li>
 						<c:if test="${sessionScope.user_id != null}">
 						<li><a href="viewUserForm?user_id=${sessionScope.user_id}">${sessionScope.user_id}</a></li>
-						<li><a href="createGroupForm">グループ生成</a></li>
+						<li><a href="createGroupForm">グループ開設</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
@@ -102,7 +102,7 @@
   							<div class="filter__control js-filter-control">
     						<select class="filter__select js-filter-select" id="select">
       							<option value="1" class="名前" selected>タイトル</option>
-      							<option value="2" class="名前">タグ</option>
+      							<option value="2" class="名前">ハッシュタグ</option>
     						</select>
     							<div class="filter__indicator"></div>   						
   							</div>
@@ -259,7 +259,7 @@ $('input[type=search]').on({
 					buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2' checked>";
 					buff += "<label for='radio-2' class='radio-label'>イベント数</label><br>";
 					buff += "<input id='radio-3' class='check_group_category_id_radio' name='radio' type='radio' value='3'>";
-					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数</label>";
+					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数</label><br>";
 					buff += "<input id='radio-4' class='check_group_category_id_radio' name='radio' type='radio' value='4'>";
 					buff += "<label for='radio-4' class='radio-label'>開設日</label><hr>";
 				}

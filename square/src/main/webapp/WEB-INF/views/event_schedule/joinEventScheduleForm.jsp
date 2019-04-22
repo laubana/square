@@ -559,7 +559,7 @@ html, body {
 		</header>
 		<nav id="nav">
 			<ul>
-					<li><a href="#one" class="active">情報</a></li>
+					<li><a href="#one" class="active">メンバー・スケジュールリスト</a></li>
 			</ul>
 		</nav>
 		<footer>

@@ -13,7 +13,7 @@
 -->
 <html>
 	<head>
-		<title>みんな・みんな</title>
+		<title>みんなみんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
@@ -44,7 +44,7 @@ function logoutUserAction()
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
-						<li><a href="createGroupForm">グループ・生成</a></li>
+						<li><a href="createGroupForm">グループ開設</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
@@ -76,7 +76,7 @@ function logoutUserAction()
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#three" class="active">コメント</a></li>
+						<li><a href="#three" class="active">コメントリスト</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -100,7 +100,7 @@ function logoutUserAction()
 						<!-- Three -->
 							<section id="three">
 								<div class="container">
-									<h3>コメント</h3>
+									<h3>コメントリスト</h3>
 						<div class="comments">
 
 							<c:forEach var="element" items="${comment_list}">

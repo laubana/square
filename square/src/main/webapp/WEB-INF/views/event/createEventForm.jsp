@@ -9,7 +9,7 @@
 -->
 <html>
 	<head>
-		<title>イベント生成</title>
+		<title>みんなみんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/EventView/assets/css/main.css" />
@@ -88,7 +88,7 @@ border: 0;
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
-						<li><a href="createGroupForm">グループ生成</a></li>
+						<li><a href="createGroupForm">グループ開設</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
@@ -112,7 +112,7 @@ border: 0;
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">イベント生成</a></li>
+						<li><a href="#one" class="active">イベント開設</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -141,8 +141,8 @@ border: 0;
 								<header>
 								<!-- 타이틀 생성 -->
 									<div class="title">
-									<h2>イベント・タイトル</h2>
-									<input type="text" class="Event_title "id="Event_title" placeholder="イベント_タイトル" autocomplete="off">
+									<h2>タイトル</h2>
+									<input type="text" class="Event_title "id="Event_title" placeholder="タイトル" autocomplete="off">
 									</div>
 									<div class="meta">
 								<!-- 날짜, 회원 이름, 회원 사진-->
@@ -152,15 +152,16 @@ border: 0;
 								</header>
 								<span class="image featured"><img src="" id="foo"></span>
 								<!-- 그룹 대표 이미지 업로드 -->
+								<h1>イメージ</h1>
 									<div class="filebox">
-									<label for="imgInp">メイン・イメージ・アップロード</label>
+									<label for="imgInp">アップロード</label>
 									<input type='file' id="imgInp" /></div>
 									<br>
 									<!-- 내용 -->
-									<h1>イベント内容</h1>
-									<textarea class="comment-block" id="event_content" placeholder="内容を記入してください。"></textarea><br>
+									<h1>紹介</h1>
+									<textarea class="comment-block" id="event_content" placeholder="紹介"></textarea><br>
 									<br>
-									<div align="center"><input type="button" value="生成" onclick="createEventAction()"></div>
+									<div align="center"><input type="button" value="開設" onclick="createEventAction()"></div>
 									<!-- google maps-->
 									<!--  <div id="map" ></div>
 									<div align="right">

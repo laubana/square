@@ -10,7 +10,7 @@
 -->
 <html>
 	<head>
-		<title>みんな・みんな</title>
+		<title>みんなみんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/EventView/assets/css/main.css" />
@@ -88,7 +88,7 @@ border: 0;
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
-						<li><a href="createGroupForm">グループ生成</a></li>
+						<li><a href="createGroupForm">グループ開設</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
@@ -112,7 +112,7 @@ border: 0;
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">スケジュール 生成</a></li>
+						<li><a href="#one" class="active">スケジュール 開設</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -140,8 +140,8 @@ border: 0;
 								<header>
 								<!-- 스케줄 타이틀 생성 -->
 									<div class="title">
-									<h2>スケジュール ・タイトル</h2>
-									<input type="text" class="Event_title "id="Event_title" placeholder="スケジュール _タイトル" autocomplete="off">
+									<h2>タイトル</h2>
+									<input type="text" class="Event_title "id="Event_title" placeholder="タイトル" autocomplete="off">
 									</div>
 									<div class="meta">
 								<!-- 날짜, 회원 이름, 회원 사진 -->
@@ -162,14 +162,14 @@ border: 0;
 										<input type = "hidden" value = "" id = "region">
 									<br><br>
 									<!-- 내용 -->
-									<h1>スケジュール 内容</h1>
+									<h1>紹介</h1>
 									
 <input type="datetime-local" id="start_date" value="<%= (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm")).format(new Date())%>">
 <input type="datetime-local" id="end_date" value="<%= (new SimpleDateFormat("yyyy-MM-dd'T'HH:mm")).format(new Date(new Date().getTime() + 3600*1000))%>">
 									<br>
-									<textarea class="comment-block" id="event_schedule_content" placeholder="内容を記入してください。"></textarea><br>
+									<textarea class="comment-block" id="event_schedule_content" placeholder="紹介"></textarea><br>
 									<br>
-									<div align="center"><input type="button" value="生成" onclick="createEventScheduleAction()"></div>
+									<div align="center"><input type="button" value="開設" onclick="createEventScheduleAction()"></div>
 								</article>
 							</section>
 					</div>		

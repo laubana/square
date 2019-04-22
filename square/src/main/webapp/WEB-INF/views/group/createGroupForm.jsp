@@ -9,7 +9,7 @@
 -->
 <html>
 	<head>
-		<title>みんな・みんな</title>
+		<title>みんなみんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
@@ -122,7 +122,7 @@ border: 0;
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
-						<li><a href="createGroupForm">グループ生成</a></li>
+						<li><a href="createGroupForm">グループ開設</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
@@ -138,13 +138,13 @@ border: 0;
 				<header>
 					<!-- 그룹 로고 이미지 -->
 					<span class="image avatar" id="foo2_span"><img src="resources/Main/images/bb.jpg" id="foo2"/></span>
-					<div id="live-text"><h1 id="logo" style="font-size:150%;"><a>グループタイトル</a></h1></div>
-					<div id="live-text1"><p style="font-size:15px;">[#タグ_ 1]</p></div>
-					<div id="live-text2"><p style="font-size:15px;">[#タグ _2]</p></div><div id="live-text3"><p style="font-size:15px;">[#タグ _3]</p></div><div id="live-text4"><p style="font-size:15px;">[#タグ _4]</p></div><div id="live-text5"><p style="font-size:15px;">[#タグ _5]</p></div>
+					<div id="live-text"><h1 id="logo" style="font-size:150%;"><a>タイトル</a></h1></div>
+					<div id="live-text1"><p style="font-size:15px;">[#ハッシュタグ]</p></div>
+					<div id="live-text2"><p style="font-size:15px;">[#ハッシュタグ]</p></div><div id="live-text3"><p style="font-size:15px;">[#ハッシュタグ]</p></div><div id="live-text4"><p style="font-size:15px;">[#ハッシュタグ]</p></div><div id="live-text5"><p style="font-size:15px;">[#ハッシュタグ]</p></div>
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">グループ生成</a></li>
+						<li><a href="#one" class="active">グループ開設</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -174,60 +174,60 @@ border: 0;
 						
 						<!-- 메인 해더 -->
 						<header class="major">
-							<h1>グループタイトル</h1>
+							<h1>タイトル</h1>
 							<br>
 							<!-- 폼 -->
 							<form action="" method="post">
-							<input type="text" name="group_id" id="input" placeholder="グループタイトル" autocomplete="off">
+							<input type="text" name="group_id" id="input" placeholder="タイトル" autocomplete="off">
 							<br>
-							<h1>グループ紹介</h1>
+							<h1>紹介</h1>
 							<br>
 							<div class="comment-wrap">
 								<div class="comment-block">
-										<textarea name="" id="group_content" cols="30" rows="3" placeholder="ご自由に記入してください。"></textarea>
+										<textarea name="" id="group_content" cols="30" rows="3" placeholder="紹介"></textarea>
 								</div>
 							</div>
 						
 							<br>
-							<h1>グループロゴイメージ</h1>
+							<h1>ロゴ</h1>
 							<div class="filebox">
-							<label for="imgInp2">ロゴアップロード</label> 
+							<label for="imgInp2">アップロード</label> 
 							<input type='file' id="imgInp2" /></div>
 							<br>
-							<h1>グループメインイメージ</h1>
+							<h1>イメージ</h1>
 							<div class="filebox">
-							<label for="imgInp">メインアップロード</label>
+							<label for="imgInp">アップロード</label>
 							<input type='file' id="imgInp" /></div>
 						
 							<br>
-							<h1>グループカテゴリー</h1>
+							<h1>カテゴリー</h1>
 							<div class="container">
   								<div class="radio">
     								<input id="radio-1" name="radio" type="radio" value="1" checked>
     								<label for="radio-1" class="radio-label">IT</label>
     								<input id="radio-2" name="radio" type="radio" value="2">
-    								<label  for="radio-2" class="radio-label">ペット</label>
+    								<label  for="radio-2" class="radio-label">Pet</label>
     								<input id="radio-3" name="radio" type="radio" value="3">
-    								<label for="radio-3" class="radio-label">レジャー</label>
+    								<label for="radio-3" class="radio-label">Leisure</label>
     								<input id="radio-4" name="radio" type="radio" value="4">
-    								<label for="radio-4" class="radio-label">家族</label>
+    								<label for="radio-4" class="radio-label">Family</label>
     								<input id="radio-5" name="radio" type="radio" value="5">
-    								<label for="radio-5" class="radio-label">料理</label>
+    								<label for="radio-5" class="radio-label">Cooking</label>
     								<input id="radio-6" name="radio" type="radio" value="6">
-    								<label for="radio-6" class="radio-label">音樂</label>
+    								<label for="radio-6" class="radio-label">Music</label>
   								</div>
 							</div>
-							<h1>グループタグ</h1>
-							<input type="text" placeholder="#グループタグ 1" class="input1" name="group_hashtag" autocomplete="off">
-							<input type="text" placeholder="#グループタグ 2" class="input2" name="group_hashtag" autocomplete="off">
-							<input type="text" placeholder="#グループタグ 3" class="input3" name="group_hashtag" autocomplete="off">
-							<input type="text" placeholder="#グループタグ 4" class="input4" name="group_hashtag" autocomplete="off">
-							<input type="text" placeholder="#グループタグ 5" class="input5" name="group_hashtag" autocomplete="off">
+							<h1>ハッシュタグ</h1>
+							<input type="text" placeholder="#ハッシュタグ" class="input1" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="#ハッシュタグ" class="input2" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="#ハッシュタグ" class="input3" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="#ハッシュタグ" class="input4" name="group_hashtag" autocomplete="off">
+							<input type="text" placeholder="#ハッシュタグ" class="input5" name="group_hashtag" autocomplete="off">
 							<br>
-							<h1>グループ活動地域</h1>
-							<input type="text" placeholder="グループ活動地域" id="region">
+							<h1>活動地域</h1>
+							<input type="text" placeholder="活動地域" id="region">
 							<br>
-							<div align="center"><input type="button" value="生成" onclick="createGroupAction()"></div>
+							<div align="center"><input type="button" value="開設" onclick="createGroupAction()"></div>
 							</form>
 						</header>	
 					</div>

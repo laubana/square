@@ -9,7 +9,7 @@
 -->
 <html>
 	<head>
-		<title>MyPage</title>
+		<title>みんなみんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/MyPage/assets/css/main.css" />
@@ -22,7 +22,7 @@
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<div align="left"><h1 style="font-size:30px;"><a href="main">みんな・みんな</a></h1></div>
+					<div align="left"><h1 style="font-size:30px;"><a href="main">みんなみんな</a></h1></div>
 					<a class="image avatar"><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
 					<h1><strong>${user.name}</strong>のマイページ<br></h1>
 					<nav id="nav">
@@ -73,7 +73,7 @@
 					</section>
 					<!-- Three -->
 					<section id="three">
-						<h1>グループリスト</h1>
+						<h1>グループ</h1>
 						<div class="row" align="center">
 							<ul class="features">
 							<c:forEach var="group" items="${group_list}">
@@ -86,13 +86,14 @@
 								</ul>
 						</div>
 						<c:if test="${sessionScope.user_id == user.user_id}">
-								<div align="center"><a href="listUserGroupForm?user_id=${user.user_id}" class="button">グループリスト編集</a></div>
+								<div align="center"><a href="listUserGroupForm?user_id=${user.user_id}" class="button">グループ編集</a></div>
 								</c:if>
 					</section>
 
 				<!-- Four -->
 					<section id="four">
-						<h1>アルバム</h1><br>
+						<h1>アルバム</h1>
+						<h2>写真</h2>
 						<div class="row">
 						<c:forEach var="event_schedule_image" items="${event_schedule_image_list}">
 						
@@ -103,7 +104,7 @@
 						</c:forEach>
 						</div>
 						<hr style="width:380px;"><br>
-						<h1>映像</h1><br>
+						<h2>映像</h2>
 						<div class="" align="center">
 						<c:if test="${video_list.size() != 0}">
 							<c:forEach var="element" items="${video_list}">

@@ -12,7 +12,7 @@
 -->
 <html>
 	<head>
-		<title>みんな・みんな</title>
+		<title>みんなみんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
@@ -29,7 +29,7 @@
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
-						<li><a href="createGroupForm">グループ生成</a></li>
+						<li><a href="createGroupForm">グループ開設</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
@@ -54,7 +54,7 @@
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#five" class="active">イベント・スケジュール</a></li>
+						<li><a href="#five" class="active">イベント・スケジュールリスト</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -78,7 +78,7 @@
 						<!-- Five -->
 							<section id="five">
 								<div class="container">
-									<h3>イベント・スケジュール</h3>
+									<h3>イベント・スケジュールリスト</h3>
 									<div class="features">
 										<c:forEach var="event_schedule" items="${event_schedule_list}">
 									<article>

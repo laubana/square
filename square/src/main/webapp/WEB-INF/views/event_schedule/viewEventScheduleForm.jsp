@@ -14,7 +14,7 @@
 -->
 <html>
 	<head>
-		<title>みんな・みんな</title>
+		<title>みんなみんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/EventView/assets/css/main.css" />
@@ -205,7 +205,7 @@
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
-						<li><a href="createGroupForm">グループ生成</a></li>
+						<li><a href="createGroupForm">グループ開設</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
@@ -241,7 +241,7 @@
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">情報</a></li>
+						<li><a href="#one" class="active">イベント・スケジュール情報</a></li>
 						<li><a href="#two">メンバー</a></li>
 						<li><a href="#three">コメント</a></li>
 						<li><a href="#four">アルバム</a></li>
@@ -319,7 +319,7 @@
 										</c:forEach>
 										</div>
 										<br>
-									<a href="listEventScheduleAttendanceForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}" class="button">メンバー・ページへ</a>
+									<a href="listEventScheduleAttendanceForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}" class="button">メンバーリストページへ</a>
 								</div>
 							</section>
 					<!-- Three -->
@@ -364,7 +364,7 @@
 						</div>
 						</c:forEach>	
 						</div>
-						<a href="listEventScheduleCommentForm?group_category_id=${group_category.group_category_id}&group_id${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}" class="button">コメント・ページへ</a>		
+						<a href="listEventScheduleCommentForm?group_category_id=${group_category.group_category_id}&group_id${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}" class="button">コメントリストページへ</a>		
 								</div>
 							</section>
 
@@ -376,11 +376,14 @@
 						<c:if test="${group_attendance != null}">
 							<c:if test="${event_attendance != null}">
 								<c:if test="${event_schedule_attendance != null}">
+								<div class="features" align="right">
 									<a href="javascript:withdrawEventScheduleAction()" class="button">追加</a><br><br><br>
+									</div>
 								</c:if>
 							</c:if>
 						</c:if>
 					</c:if>
+					<h4>写真</h4>
 									<div class="features" align="center">
 										<article class="col-6 col-12-xsmall work-item">
 											<c:forEach var="event_schedule_image" items="${event_schedule_image_list}">
@@ -388,6 +391,9 @@
 											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.event_schedule_id}</h3>
 											</c:forEach>
 											<br>
+									</div>
+										<h4>映像</h4>
+									<div class="features" align="center">
 											<c:if test="${video_list.size() != 0}">
 											<video width='640' height='auto' controls>
 											<c:forEach var="video" items="${video_list}">
@@ -396,8 +402,10 @@
 											</video>
 											</c:if>
 											<br>
-											<a href="listGroupAlbumForm?group_id=${group.group_id}" class="button">アルバム・ページへ</a>
-										</article>
+											<div class="features" align="left">
+											<a href="listGroupAlbumForm?group_id=${group.group_id}" class="button">アルバムページへ</a>
+											</div>
+										
 									</div>
 								</div>
 							</section>

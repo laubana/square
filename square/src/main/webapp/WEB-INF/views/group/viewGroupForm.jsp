@@ -13,7 +13,7 @@
 -->
 <html>
 	<head>
-		<title>みんな・みんな</title>
+		<title>みんなみんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
@@ -135,7 +135,7 @@
 						<li><a href="listRecommendationForm"></a>
 						<c:if test="${sessionScope.user_id != null}">
 						<li>${sessionScope.user_id}</li>
-						<li><a href="createGroupForm">グループ生成</a></li>
+						<li><a href="createGroupForm">グループ開設</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
@@ -227,7 +227,7 @@
 										</c:forEach>
 										</div>${user.size()}
 										<br>
-									<a href="listGroupAttendanceForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">メンバーページへ</a>
+									<a href="listGroupAttendanceForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">メンバーリストページへ</a>
 								</div>
 							</section>
 						
@@ -283,7 +283,7 @@
 						<br><br>
 						</c:if>
 					</c:if>
-						<a href="listGroupCommentForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">コメントページへ</a>
+						<a href="listGroupCommentForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">コメントリストページへ</a>
 						
 						</div>		
 								</div>
@@ -293,7 +293,7 @@
 							<section id="four">
 								<div class="container">
 									<h3>アルバム</h3>
-						
+									<h4>写真</h4>
 									<div class="features" align="center">
 										<article class="col-6 col-12-xsmall work-item">
 											<c:forEach var="element" items="${image_list}" end="3">
@@ -303,7 +303,7 @@
 											<br>
 										</article>
 									</div>
-									<h3>映像</h3>
+									<h4>映像</h4>
 									<div class="features" align="center">
 											<c:if test="${video_list.size() != 0}">
 											<video width='365' height='300' style="background-color: black;" id="video" controls>
@@ -313,7 +313,9 @@
 											</video>
 											</c:if>
 											<br><br>
+										<div class="features" align="left">
 											<a href="listGroupAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">アルバムページへ</a>
+											</div>
 										
 									</div>
 								</div>
@@ -325,7 +327,7 @@
 									<h3>イベント</h3>
 									<c:if test="${sessionScope.user_id != null}">
 						<c:if test="${group_attendance != null}">
-										<p align="right"><a href="createEventForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}" class="button">生成</a></p>
+										<p align="right"><a href="createEventForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}" class="button">開設</a></p>
 						</c:if>
 					</c:if>
 									<div class="features">
@@ -339,7 +341,7 @@
 										</article>
 										</c:forEach>
 											</div>
-										<a href="listEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">イベントページへ</a>
+										<a href="listEventForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">イベントリストページへ</a>
 									</div>
 									
 							</section>

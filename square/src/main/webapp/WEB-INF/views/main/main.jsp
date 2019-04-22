@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>みんな・みんな</title>
+		<title>みんなみんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/Main/assets/css/main.css" />
@@ -45,7 +45,7 @@
 						<li><a href="listRecommendationForm"><span id="realTimeHashTag"></span></a></li>
 						<c:if test="${sessionScope.user_id != null}">
 						<li><a href="viewUserForm?user_id=${sessionScope.user_id}">${sessionScope.user_id}</a></li>
-						<li><a href="createGroupForm">グループ生成</a></li>
+						<li><a href="createGroupForm">グループ開設</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
@@ -60,7 +60,7 @@
 			<section id="intro" class="main style1 dark fullscreen">
 				<div class="content">
 				<header>
-					<h2>みんな・みんな</h2>
+					<h2>みんなみんな</h2>
 				</header>
 					<footer>
 						<a href="#work" class="button style2 down">More</a>
@@ -100,7 +100,7 @@
 					<header>
 						<h2>ユーザー登録</h2>
 					</header>
-					<p>みんなさん·みんなに加入してみんなと好きなことを一緒にしながら新しい経験を探してみましょう。</p>
+					<p>皆様、みんなみんなに登録して、</p><p>好きなことをみんなと一緒にしてみてください。</p>
 					<div class="actions special">
 						<a href="joinUserForm" class="button" style="color:white;">ユーザー登録</a>
 					</div>
@@ -112,11 +112,11 @@
 			<section id="two" class="main style2 left dark fullscreen">
 				<div class="content box style2">
 					<header>
-						<h2>グループ生成</h2>
+						<h2>グループ開設</h2>
 					</header>
-					<p>自分の興味のもととしイベントを運営するグループを作りましょう。グループを作って熱情を持ったみんなを集めましょう。</p>
+					<p>グループを開設して、<p></p>あなたの興味をみんなと共有してみてください。</p>
 					<div class="actions special">
-						<a href="createGroupForm" class="button" style="color:white;">グループ生成</a>
+						<a href="createGroupForm" class="button" style="color:white;">グループ開設</a>
 					</div>
 				</div>
 			</section>
