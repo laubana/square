@@ -13,20 +13,31 @@
 		
 		<!-- 추가 -->
 		<!-- <link rel='stylesheet' href='http://www.davilious.com/codepen/font-awesome/css/font-awesome.css'> -->
-<script>
-function logoutUserAction()
-{
-	$.ajax({
-		url: "logoutUserAction",
-		type: "POST",
-		success: function()
-		{
-			location.replace("<c:out value='main'/>");
-		},
-		error: function(error){console.log(error);}
-	});
-}
-</script>
+			<script>
+			var texts = [];
+			<c:forEach var="hashtag" items="${hashtag_list}">
+			texts.push("#ホットハッシュタグ : ${hashtag}");
+			</c:forEach>
+			var count = 0;
+			function changeText() {
+			    $("#realTimeHashTag").text(texts[count]);
+			    count < texts.length ? count++ : count = 0;
+			}
+			setInterval(changeText, 1000);
+			
+			function logoutUserAction()
+			{
+				$.ajax({
+					url: "logoutUserAction",
+					type: "POST",
+					success: function()
+					{
+						location.replace("<c:out value='main'/>");
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+			</script>
 <style>
 
 :root{
