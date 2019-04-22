@@ -178,7 +178,7 @@ border: 0;
 							<br>
 							<!-- 폼 -->
 							<form action="" method="post">
-							<input type="text" name="group_id" id="input" placeholder="グループ・名前" autocomplete="off">
+							<input type="text" name="group_id" id="input" placeholder="グループ名前" autocomplete="off">
 							<br>
 							<h1>グループ紹介</h1>
 							<br>
