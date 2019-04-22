@@ -62,7 +62,7 @@ SELECT
 FROM
 	TABLE_GH
 WHERE
-	HASHTAG = #{hashtag} AND
+	UPPER(HASHTAG) = UPPER(#{hashtag}) AND
 	GROUP_CATEGORY_ID = #{group_category_id}
 </select>
 <select id="getGroupIdByHashtag" parameterType="string" resultType="int">

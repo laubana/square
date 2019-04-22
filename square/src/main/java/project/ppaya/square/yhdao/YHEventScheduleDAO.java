@@ -72,7 +72,7 @@ public class YHEventScheduleDAO
 		
 		return event_schedule_list;
 	}
-	public int insertEventSchedule(int group_id, int event_id, String name, String content, String region, String latitude, String longitude, long start_date, long end_date)
+	public int insertEventSchedule(int group_id, int event_id, String name, String content, String region, String address, String latitude, String longitude, long start_date, long end_date)
 	{
 		int result = 0;
 		HashMap<String, Object> map = new HashMap<>();
@@ -81,6 +81,7 @@ public class YHEventScheduleDAO
 		map.put("name", name);
 		map.put("content", content);
 		map.put("region", region);
+		map.put("address", address);
 		map.put("latitude", latitude);
 		map.put("longitude", longitude);
 		map.put("start_date", start_date);
