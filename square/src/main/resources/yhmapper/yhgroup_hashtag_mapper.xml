@@ -71,7 +71,7 @@ SELECT
 FROM
 	TABLE_GH
 WHERE
-	HASHTAG = #{hashtag}	
+	UPPER(HASHTAG) = UPPER(#{hashtag})	
 </select>
 <select id="selectGroupHashtagByGroupId" parameterType="int" resultType="GroupHashtag">
 SELECT

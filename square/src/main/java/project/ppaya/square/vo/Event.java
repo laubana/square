@@ -3,6 +3,7 @@ package project.ppaya.square.vo;
 public class Event
 {
 	int event_id;
+	int group_category_id;
 	int group_id;
 	String user_id;
 	String name;
@@ -15,6 +16,12 @@ public class Event
 	}
 	public void setEvent_id(int event_id) {
 		this.event_id = event_id;
+	}
+	public int getGroup_category_id() {
+		return group_category_id;
+	}
+	public void setGroup_category_id(int group_category_id) {
+		this.group_category_id = group_category_id;
 	}
 	public int getGroup_id() {
 		return group_id;

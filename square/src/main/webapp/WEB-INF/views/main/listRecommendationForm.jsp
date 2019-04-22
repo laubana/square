@@ -55,11 +55,9 @@
     </nav> 
     
     <div class="w3-sidebar w3-bar-block w3-animate-left" style="display:none;z-index:5" id="main">
-
- 		  <a href="?hashtag=Java" class="w3-bar-item w3-button">#Java</a>
-		  <a href="?hashtag=CSS" class="w3-bar-item w3-button">#CSS</a>
-		  <a href="?hashtag=SQL" class="w3-bar-item w3-button">#SQL</a>
-		  <a href="?hashtag=Javascript" class="w3-bar-item w3-button">#Javascript</a>
+	<c:forEach var="hashtag" items="${hashtag_list}">
+		<a href="listRecommendationForm?hashtag=${hashtag}" class="w3-bar-item w3-button">#${hashtag}</a>
+	</c:forEach>
 </div>
 
 <!-- Page Content -->
@@ -96,7 +94,7 @@
 	    				<div class="overlay">
 	    					<h2 class="card-title title">${element.group.name}</h2>
 	    					<div class="more">
-	    						<a href="post.html">
+	    						<a href="viewGroupForm?group_category_id=${element.group.group_category_id}&group_id=${element.group.group_id}">
 	    						<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Visit Group!</a>
 	    					</div>
 	    				</div>

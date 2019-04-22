@@ -215,7 +215,7 @@ public class YHTestController
 		}		
 		
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
-		System.err.println(event_schedule_image_list.size());
+		
 		for(int i = 0; i < event_schedule_image_list.size(); i++)
 		{
 			ArrayList<String> source_tag_list = YHMSComputerVisionUtil.getTagList(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "ja");

@@ -10,6 +10,7 @@ INSERT INTO TABLE_E
 	EVENT_ID,
 	NAME,
 	CONTENT,
+	GROUP_CATEGORY_ID,
 	GROUP_ID,
 	USER_ID,
 	IMAGE_ID
@@ -19,6 +20,7 @@ VALUES
 	E_SEQ.NEXTVAL,
 	#{name},
 	#{content},
+	#{group_category_id},
 	#{group_id},
 	#{user_id},
 	#{image_id}
