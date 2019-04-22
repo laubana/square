@@ -266,6 +266,7 @@ function createEventScheduleAction()
 	map["group_id"] = ${group.group_id};
 	map["event_id"] = ${event.event_id};
 	map["region"] = $("#region").val();
+	map["address"] = $("#address").val();
 	map["latitude"] = $("#lat").val();
 	map["longitude"] = $("#lng").val();
 	map["start_date"] = $("#start_date").val();
