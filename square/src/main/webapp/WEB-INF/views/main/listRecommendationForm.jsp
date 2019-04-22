@@ -42,13 +42,13 @@
 
     	<ul class="navbar-nav ml-auto align-items-center">
     		<li class="nav-item">
-    		<a class="nav-link active" href="main">メイン</a>
+    		<a class="nav-link" href="main">メイン</a>
     		</li>
     		<li class="nav-item">
     		<a class="nav-link" href="joinUserForm">ユーザー登録</a>
     		</li>
     		<li class="nav-item">
-    		<a class="nav-link" href="loginUserForm">ログイン</a>
+    		<a class="nav-link active" href="loginUserForm">ログイン</a>
     		</li>
     	</ul>
     </div>

@@ -290,7 +290,7 @@
 								<div align ="center">
 									<div id = "map"></div>
 									<br>
-									<a style="font-size: 25px;"><strong>場所:</strong> ${requestScope.event_schedule.address }</a>
+									<a style="font-size: 25px;"><strong>場所:</strong> ${requestScope.event_schedule.address}</a>
 								</div>
 								<br>
 								<p>
