@@ -80,6 +80,24 @@ WHERE
 		EVENT_SCHEDULE_ID = #{event_schedule_id}
 	</foreach>
 </select>
+<select id="selectEventScheduleImageByGroupIdListOrderByInputdate" parameterType="map" resultType="EventScheduleImage">
+SELECT
+	*
+FROM
+	TABLE_ESI
+WHERE
+	1 = 0
+	<foreach item="group_id" collection="group_id_list" open="OR" separator="OR">
+		GROUP_ID = #{group_id}
+	</foreach>
+ORDER BY
+	<if test="flag == 1">
+		INPUT_DATE DESC
+	</if>
+	<if test="flag == 0">
+		INPUT_DATE 
+	</if>
+</select>
 <select id="selectEventScheduleImageByEventScheduleIdListOrderByInputdate" parameterType="map" resultType="EventScheduleImage">
 SELECT
 	*

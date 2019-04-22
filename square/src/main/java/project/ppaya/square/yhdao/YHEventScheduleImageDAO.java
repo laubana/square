@@ -16,6 +16,23 @@ public class YHEventScheduleImageDAO
 	@Autowired
 	SqlSession sqlSession;
 
+	public ArrayList<EventScheduleImage> selectEventScheduleImageByGroupIdListOrderByInputdate(ArrayList<Integer> group_id_list, int flag)
+	{
+		ArrayList<EventScheduleImage> event_schedule_image_list = null;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("group_id_list", group_id_list);
+		map.put("flag", flag);
+		
+		YHEventScheduleImageMapper mapper = sqlSession.getMapper(YHEventScheduleImageMapper.class);
+		
+		try
+		{
+			event_schedule_image_list = mapper.selectEventScheduleImageByGroupIdListOrderByInputdate(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_image_list;
+	}
 	public ArrayList<EventScheduleImage> selectEventScheduleImageByEventScheduleIdListOrderByInputdate(ArrayList<Integer> event_schedule_id_list, int flag)
 	{
 		ArrayList<EventScheduleImage> event_schedule_image_list = null;
