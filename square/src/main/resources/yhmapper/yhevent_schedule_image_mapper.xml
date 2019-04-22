@@ -22,6 +22,10 @@ INSERT INTO TABLE_ESI
 (
 	EVENT_SCHEDULE_IMAGE_ID,
 	USER_ID,
+	GROUP_CATEGORY_ID,
+	GROUP_ID,
+	EVENT_ID,
+	USER_ID,
 	EVENT_SCHEDULE_ID,
 	FILENAME,
 	EXT
@@ -30,6 +34,9 @@ VALUES
 (
 	#{event_schedule_image_id},
 	#{user_id},
+	#{group_category_id},
+	#{group_id},
+	#{event_id},
 	#{event_schedule_id},
 	#{filename},
 	#{ext}

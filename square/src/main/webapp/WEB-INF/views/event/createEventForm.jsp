@@ -267,6 +267,7 @@ function createEventAction()
 	var map = {};
 	map["name"] = $("#Event_title").val();
 	map["content"] = $("#event_content").val();
+	map["group_category_id"] = ${group_category.group_category_id};
 	map["group_id"] = ${group.group_id};
 	
 	var event_image = new FileReader();

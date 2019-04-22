@@ -49,6 +49,9 @@ INSERT INTO TABLE_ESV
 	EXT,
 	DETECT_DATE,
 	USER_ID,
+	GROUP_CATEGORY_ID,
+	GROUP_ID,
+	EVENT_ID,
 	EVENT_SCHEDULE_ID
 )
 VALUES
@@ -58,6 +61,9 @@ VALUES
 	#{ext},
 	#{detect_date},
 	#{user_id},
+	#{group_category_id},
+	#{group_id},
+	#{event_id},
 	#{event_schedule_id}
 )
 </insert>

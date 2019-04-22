@@ -16,13 +16,14 @@ public class YHEventDAO
 	@Autowired
 	SqlSession sqlSession;
 	
-	public int insertEvent(String name, String content, String user_id, int group_id, String image_id)
+	public int insertEvent(String name, String content, String user_id, int group_category_id, int group_id, String image_id)
 	{
 		int result = 0;
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("name", name);
 		map.put("content", content);
 		map.put("user_id", user_id);
+		map.put("group_category_id", group_category_id);
 		map.put("group_id", group_id);
 		map.put("image_id", image_id);
 		

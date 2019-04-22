@@ -13,20 +13,31 @@
 		
 		<!-- 추가 -->
 		<!-- <link rel='stylesheet' href='http://www.davilious.com/codepen/font-awesome/css/font-awesome.css'> -->
-<script>
-function logoutUserAction()
-{
-	$.ajax({
-		url: "logoutUserAction",
-		type: "POST",
-		success: function()
-		{
-			location.replace("<c:out value='main'/>");
-		},
-		error: function(error){console.log(error);}
-	});
-}
-</script>
+			<script>
+			var texts = [];
+			<c:forEach var="hashtag" items="${hashtag_list}">
+			texts.push("#ホットハッシュタグ : ${hashtag}");
+			</c:forEach>
+			var count = 0;
+			function changeText() {
+			    $("#realTimeHashTag").text(texts[count]);
+			    count < texts.length ? count++ : count = 0;
+			}
+			setInterval(changeText, 1000);
+			
+			function logoutUserAction()
+			{
+				$.ajax({
+					url: "logoutUserAction",
+					type: "POST",
+					success: function()
+					{
+						location.replace("<c:out value='main'/>");
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+			</script>
 <style>
 
 :root{
@@ -90,7 +101,7 @@ function logoutUserAction()
   							<label class="filter__label js-filter-label" for="select">Select</label>
   							<div class="filter__control js-filter-control">
     						<select class="filter__select js-filter-select" id="select">
-      							<option value="1" class="名前" selected>名前</option>
+      							<option value="1" class="名前" selected>タイトル</option>
       							<option value="2" class="名前">タグ</option>
     						</select>
     							<div class="filter__indicator"></div>   						
@@ -233,11 +244,11 @@ $('input[type=search]').on({
 				if(check_group_category_id_radio == 1)
 				{
 					buff += "<hr><input id='radio-1' class='check_group_category_id_radio' name='radio' type='radio' value='1' checked>";
-					buff += "<label for='radio-1' class='radio-label'>メンバー数順</label><br>";
+					buff += "<label for='radio-1' class='radio-label'>メンバー数</label><br>";
 					buff += "<input id='radio-2' class='check_group_category_id_radio' name='radio' type='radio' value='2'>";
-					buff += "<label for='radio-2' class='radio-label'>イベント数順</label><br>";
+					buff += "<label for='radio-2' class='radio-label'>イベント数</label><br>";
 					buff += "<input id='radio-3' class='check_group_category_id_radio' name='radio' type='radio' value='3'>";
-					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数順</label><br>";
+					buff += "<label for='radio-3' class='radio-label'>イベント・スケジュール数</label><br>";
 					buff += "<input id='radio-4' class='check_group_category_id_radio' name='radio' type='radio' value='4'>";
 					buff += "<label for='radio-4' class='radio-label'>開設日</label><hr>";
 				}

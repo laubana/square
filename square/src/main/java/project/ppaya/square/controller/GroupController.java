@@ -51,6 +51,8 @@ public class GroupController
 	YHGroupHashtagDAO yh_group_hashtagDAO;
 	@Autowired
 	YHEventUnionDAO yh_event_unionDAO;
+	@Autowired
+	YHKeywordHistoryDAO yh_keyword_historyDAO;
 	
 	@Autowired
 	SH_DAO_Group sh_gdao;
@@ -70,6 +72,10 @@ public class GroupController
 			Model request
 			)
 	{
+		ArrayList<String> hashtag_list = yh_keyword_historyDAO.getKeywordByRank();
+		//Keyword List 전송
+		request.addAttribute("hashtag_list", hashtag_list);
+		
 		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
 		//GroupCategory 전송
 		request.addAttribute("group_category", group_category);

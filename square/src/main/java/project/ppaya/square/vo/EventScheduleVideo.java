@@ -7,6 +7,9 @@ public class EventScheduleVideo
 	String ext;
 	Long detect_date;
 	String user_id;
+	int group_category_id;
+	int group_id;
+	int event_id;
 	int event_schedule_id;
 	String region;
 	String latitude;
@@ -42,6 +45,24 @@ public class EventScheduleVideo
 	}
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+	public int getGroup_category_id() {
+		return group_category_id;
+	}
+	public void setGroup_category_id(int group_category_id) {
+		this.group_category_id = group_category_id;
+	}
+	public int getGroup_id() {
+		return group_id;
+	}
+	public void setGroup_id(int group_id) {
+		this.group_id = group_id;
+	}
+	public int getEvent_id() {
+		return event_id;
+	}
+	public void setEvent_id(int event_id) {
+		this.event_id = event_id;
 	}
 	public int getEvent_schedule_id() {
 		return event_schedule_id;

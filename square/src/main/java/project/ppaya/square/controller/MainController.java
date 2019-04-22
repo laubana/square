@@ -53,6 +53,10 @@ public class MainController
 	{
 		if(hashtag == null)
 		{
+			ArrayList<String> hashtag_list = yh_keyword_historyDAO.getKeywordByRank();
+			//Keyword List 전송
+			request.addAttribute("hashtag_list", hashtag_list);
+			
 			ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventSchedeuleImageOrderByInputdate(0);
 			
 			ArrayList<HashMap<String, Object>> image_list = new ArrayList<>();
@@ -78,6 +82,10 @@ public class MainController
 		}
 		else
 		{
+			ArrayList<String> hashtag_list = yh_keyword_historyDAO.getKeywordByRank();
+			//Keyword List 전송
+			request.addAttribute("hashtag_list", hashtag_list);
+			
 			ArrayList<Integer> group_id_list = yh_group_hashtagDAO.getGroupIdByHashtag(hashtag);
 			
 			ArrayList<Integer> event_id_list = yh_eventDAO.getEventIdByGroupIdList(group_id_list);
