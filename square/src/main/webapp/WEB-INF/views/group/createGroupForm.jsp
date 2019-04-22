@@ -334,7 +334,10 @@ border: 0;
 			    			type: "POST",
 			    			data: JSON.stringify(map),
 			    			contentType: "application/json; charset=UTF-8",
-			    			success: function(result){},
+			    			success: function(result)
+			    			{
+			    				location.href = "main";	
+			    			},
 			    			error: function(){}
 			    				});
 						clearInterval(interval);
