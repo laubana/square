@@ -138,7 +138,7 @@ border: 0;
 				<header>
 					<!-- 그룹 로고 이미지 -->
 					<span class="image avatar" id="foo2_span"><img src="resources/Main/images/bb.jpg" id="foo2"/></span>
-					<div id="live-text"><h1 id="logo"><a>グループ名前</a></h1></div>
+					<div id="live-text"><h1 id="logo" style="font-size:150%;"><a>グループタイトル</a></h1></div>
 					<div id="live-text1"><p style="font-size:15px;">[#タグ_ 1]</p></div>
 					<div id="live-text2"><p style="font-size:15px;">[#タグ _2]</p></div><div id="live-text3"><p style="font-size:15px;">[#タグ _3]</p></div><div id="live-text4"><p style="font-size:15px;">[#タグ _4]</p></div><div id="live-text5"><p style="font-size:15px;">[#タグ _5]</p></div>
 				</header>
@@ -174,11 +174,11 @@ border: 0;
 						
 						<!-- 메인 해더 -->
 						<header class="major">
-							<h1>グループ名前</h1>
+							<h1>グループタイトル</h1>
 							<br>
 							<!-- 폼 -->
 							<form action="" method="post">
-							<input type="text" name="group_id" id="input" placeholder="グループ名前" autocomplete="off">
+							<input type="text" name="group_id" id="input" placeholder="グループタイトル" autocomplete="off">
 							<br>
 							<h1>グループ紹介</h1>
 							<br>

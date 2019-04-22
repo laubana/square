@@ -29,18 +29,18 @@
 
 		<!-- Signup Form -->
 			<form id="join-form" method="post" action="joinForm" autocomplete="off">
-				<p><input type="text" name="user_id" id="user_id" placeholder="ID">
+				<p><input type="text" name="user_id" id="user_id" placeholder="ID" autocomplete="off">
 
 		<!-- non-display 로 ~! -->
 <!-- 			<div class="inputEmailType">
 				<p><input type="text" name="user_idEmailType" placeholder="email 직접 입력"></p>
 			</div> -->
 		</p>
-				<p><input type="password" name="password" id="password" placeholder="Password"></p>
-				<p><input type="text" name="name" id="name" placeholder="Name"></p>
+				<p><input type="password" name="password" id="password" placeholder="Password" autocomplete="off"></p>
+				<p><input type="text" name="name" id="name" placeholder="Name" autocomplete="off"></p>
     		<div class="custom-file mb-3" align="left">
 			</div>
-				<p><input type="text" name="region" id="region" placeholder="Area"></p>
+				<p><input type="text" name="region" id="region" placeholder="Area" autocomplete="off"></p>
 				<p><input type="submit" value="Join"></p><br>
 			</form>
 		
