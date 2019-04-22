@@ -37,21 +37,41 @@ public class YHMSComputerVisionUtil
 
 			httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 
-			HttpResponse httpResponse = httpClient.execute(httpPost);
-			
-			String result = EntityUtils.toString(httpResponse.getEntity()).trim();
-			
-			JSONObject jsonObject = new JSONObject(result);
-			JSONArray jsonArray = jsonObject.getJSONArray("tags");
-			
-			for(int i = 0; i < jsonArray.length(); i++)
+			while(true)
 			{
-				tag_list.add(jsonArray.getJSONObject(i).getString("name"));
+				HttpResponse httpResponse = httpClient.execute(httpPost);			
+				String result = EntityUtils.toString(httpResponse.getEntity()).trim();
+				
+				System.err.println(result);
+			
+				JSONObject jsonObject = new JSONObject(result);				
+				
+				if(!jsonObject.isNull("error"))
+				{
+					if(jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
+					{
+						Thread.sleep(1000);
+	        			continue;
+					}
+					else
+					{
+						return null;
+					}
+				}
+				else
+				{
+					JSONArray jsonArray = jsonObject.getJSONArray("tags");
+					
+					for(int i = 0; i < jsonArray.length(); i++)
+					{
+						tag_list.add(jsonArray.getJSONObject(i).getString("name"));
+					}
+					
+					return tag_list;
+				}
 			}
 		}
-		catch(Exception error){error.printStackTrace();}
-		
-		return tag_list;
+		catch(Exception error){error.printStackTrace();return null;}
 	}
 	public static ArrayList<String> getDescriptionList(String path, String file, String language) 
 	{		
@@ -70,23 +90,43 @@ public class YHMSComputerVisionUtil
 			httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_computer_vision_key);
 
 			httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
-
-			HttpResponse httpResponse = httpClient.execute(httpPost);
 			
-			String result = EntityUtils.toString(httpResponse.getEntity()).trim();
-			
-			JSONObject jsonObject = new JSONObject(result);
-			jsonObject = jsonObject.getJSONObject("description");
-			JSONArray jsonArray = jsonObject.getJSONArray("captions");
-			
-			for(int i = 0; i < jsonArray.length(); i++)
+			while(true)
 			{
-				description_list.add(jsonArray.getJSONObject(i).getString("text"));
+				HttpResponse httpResponse = httpClient.execute(httpPost);
+				String result = EntityUtils.toString(httpResponse.getEntity()).trim();
+				
+				System.err.println(result);
+				
+				JSONObject jsonObject = new JSONObject(result);
+				
+				if(!jsonObject.isNull("error"))
+				{
+					if(jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
+					{
+						Thread.sleep(1000);
+	        			continue;
+					}
+					else
+					{
+						return null;
+					}
+				}
+				else
+				{
+					jsonObject = jsonObject.getJSONObject("description");
+					JSONArray jsonArray = jsonObject.getJSONArray("captions");
+				
+					for(int i = 0; i < jsonArray.length(); i++)
+					{
+						description_list.add(jsonArray.getJSONObject(i).getString("text"));
+					}
+					
+					return description_list;
+				}
 			}
 		}
-		catch(Exception error){error.printStackTrace();}
-		
-		return description_list;
+		catch(Exception error){error.printStackTrace();return null;}
 	}
 	public static ArrayList<String> getBrandList(String path, String file, String language) 
 	{		
@@ -141,21 +181,42 @@ public class YHMSComputerVisionUtil
 			httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_computer_vision_key);
 
 			httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
-
-			HttpResponse httpResponse = httpClient.execute(httpPost);
 			
-			String result = EntityUtils.toString(httpResponse.getEntity()).trim();
-			JSONObject jsonObject = new JSONObject(result);
-			JSONArray jsonArray = jsonObject.getJSONArray("categories");
-			
-			for(int i = 0; i < jsonArray.length(); i++)
+			while(true)
 			{
-				category_list.add(jsonArray.getJSONObject(i).getString("name"));
+				HttpResponse httpResponse = httpClient.execute(httpPost);
+				String result = EntityUtils.toString(httpResponse.getEntity()).trim();
+				
+				System.err.println(result);
+				
+				JSONObject jsonObject = new JSONObject(result);
+				
+				if(!jsonObject.isNull("error"))
+				{
+					if(jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
+					{
+						Thread.sleep(1000);
+	        			continue;
+					}
+					else
+					{
+						return null;
+					}
+				}
+				else
+				{
+					JSONArray jsonArray = jsonObject.getJSONArray("categories");
+					
+					for(int i = 0; i < jsonArray.length(); i++)
+					{
+						category_list.add(jsonArray.getJSONObject(i).getString("name"));
+					}
+					
+					return category_list;
+				}
 			}
 		}
-		catch(Exception error){error.printStackTrace();}
-		
-		return category_list;
+		catch(Exception error){error.printStackTrace();return null;}
 	}
 	public static ArrayList<ArrayList<String>> setTextList(String path, String file, String mode) 
 	{		

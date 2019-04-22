@@ -50,7 +50,7 @@
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">イベント・リスト</a></li>
+						<li><a href="#one" class="active">連合イベント</a></li>
 					</ul>
 				</nav>
 				<footer>

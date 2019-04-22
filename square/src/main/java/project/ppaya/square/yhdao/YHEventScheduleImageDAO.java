@@ -51,6 +51,9 @@ public class YHEventScheduleImageDAO
 	(
 			String event_schedule_image_id,
 			String user_id,
+			int group_category_id,
+			int group_id,
+			int event_id,
 			int event_schedule_id,
 			String filename,
 			String ext
@@ -60,6 +63,9 @@ public class YHEventScheduleImageDAO
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("event_schedule_image_id", event_schedule_image_id);
 		map.put("user_id", user_id);
+		map.put("group_category_id", group_category_id);
+		map.put("group_id", group_id);
+		map.put("event_id", event_id);
 		map.put("event_schedule_id", event_schedule_id);
 		map.put("filename", filename);
 		map.put("ext", ext);

@@ -290,7 +290,7 @@
 								<div align ="center">
 									<div id = "map"></div>
 									<br>
-									<a style="font-size: 25px;"><strong>場所:</strong> ${ requestScope.place }</a>
+									<a style="font-size: 25px;"><strong>場所:</strong> ${requestScope.event_schedule.address }</a>
 								</div>
 								<br>
 								<p>
@@ -497,33 +497,16 @@ function resetEventScheduleComment(event_schedule_comment_id)
 <!-- 서버에서 주소 받아다가, 검색해서 좌표 받고, 그 좌표로 맵 중앙을 바꾸고 마커 띄우기 -->
 <script>
 function initMap() {
-    var latlng = new google.maps.LatLng(37.5729503, 126.97935789999997);
+    var latlng = new google.maps.LatLng( ${requestScope.event_schedule.latitude}, ${requestScope.event_schedule.longitude});
     var mapOptions = {
     	      zoom: 15,
     	      center: latlng
     	    }
     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-	var geocoder = new google.maps.Geocoder();
- 	var address = '${ requestScope.place }';
- 	   geocoder.geocode(
-	   		{ 'address': address }
-	   		, function(results, status) {
-				if (status == 'OK') {
-					latlng = results[0].geometry.location;
-					map.setCenter(latlng);
-					var marker = new google.maps.Marker({ 
-						map: map,
-						position: latlng
-						});
-					map.setZoom(15);
-					
-				} else {
-	   				alert('Geocode was not successful for the following reason: ' + status);
-	   			}
-	   		}
-	   );
-    
+	var marker = new google.maps.Marker({ 
+		map: map,
+		position: latlng
+		});
 }
 </script>
 

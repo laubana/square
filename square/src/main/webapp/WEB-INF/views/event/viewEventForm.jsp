@@ -525,7 +525,7 @@ function initMap() {
            infowindow.open(map, marker);
          }); */
        
-		/* 마커 배열에 있는 마커 객체들 하나하나 꺼내서 클릭 이벤트 걸어주는 함수 */     
+		/* 마커 배열에 있는 마커 객체들 하나하나 꺼내서 클릭 이벤트 + infowindow 띄우기 걸어주는 함수 */     
 		markers.map( function(marker, i) {
 			
 			var infowindow = new google.maps.InfoWindow({

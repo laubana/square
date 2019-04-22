@@ -74,12 +74,13 @@ public class EventAction {
 		String user_id = (String)session.getAttribute("user_id");
 		String name = (String)map.get("name");
 		String content = (String)map.get("content");
+		int group_category_id = (int)map.get("group_category_id");
 		int group_id = (int)map.get("group_id");
 		String image_id = YHFileUtil.saveJpegFromBase64((String)map.get("event_image"), Reference.event_image_path);
 		
 		while(true)
 		{
-			if(yh_eventDAO.insertEvent(name, content, user_id, group_id, image_id) != 0)
+			if(yh_eventDAO.insertEvent(name, content, user_id, group_category_id, group_id, image_id) != 0)
 			{
 				break;
 			}

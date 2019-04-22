@@ -65,6 +65,9 @@ public class YHEventScheduleVideoDAO
 			String ext,
 			long detect_date,
 			String user_id,
+			int group_category_id,
+			int group_id,
+			int event_id,
 			int event_schedule_id
 			)
 	{
@@ -75,6 +78,9 @@ public class YHEventScheduleVideoDAO
 		map.put("ext", ext);
 		map.put("detect_date", detect_date);
 		map.put("user_id", user_id);
+		map.put("group_category_id", group_category_id);
+		map.put("group_id", group_id);
+		map.put("event_id", event_id);
 		map.put("event_schedule_id", event_schedule_id);
 		
 		YHEventScheduleVideoMapper mapper = sqlSession.getMapper(YHEventScheduleVideoMapper.class);
