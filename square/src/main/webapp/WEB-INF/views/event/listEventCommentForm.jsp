@@ -8,7 +8,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>みんな・みんな</title>
+		<title>イベント・コメント・リスト</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />
