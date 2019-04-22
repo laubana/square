@@ -331,9 +331,6 @@ public class EventScheduleController
 		request.addAttribute("event_schedule_attendace_count_list_map", event_schedule_attendace_count_list_map);
 		
 		request.addAttribute("json_integrate_event_schedule_attendace_count_list", new JSONArray(integrate_event_schedule_attendace_count_list));
-		//맵스 장소 보내기
-		String place = "東京　京橋駅";
-		request.addAttribute("place",place);
 
 		return "event_schedule/viewEventScheduleForm";
 	}

@@ -81,16 +81,16 @@ background: url('resources/MindMap/image/3.jpg');
 
 		<!-- 우측  그룹 이름 및 태그 출력-->
 		
-        <div align="center" id="group_name">Group Name</div>
+        <div align="center" id="group_name" style="font-size:20px; ">グループ名前</div>
         <br>
-        <hr>
+        <hr><br><div align="center"><p style="font-size:15px;">ハッシュタグ</p></div><br> 
         <div id="hashtag_list">
-        <p align="center">#tag</p>
-        </div>
-        <hr>
-        <div id="event_schedule_list">
-        </div>
-
+        <p align="center">#タグ</p>
+        </div><br>
+        <hr><br><div align="center">↕</div>
+        <br><hr><br><div align="center"><p style="font-size:15px;">イベント・スケジュール</p></div><br>
+        <div id="event_schedule_list"></div>
+		<br><hr>
 		
 		<%-- <c:forEach var="element1" items="${list}">
         <div align="center"><span><a href="main">${element1.node.name }</a></span></div>

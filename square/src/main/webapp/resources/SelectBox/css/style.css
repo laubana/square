@@ -17,7 +17,7 @@
 .filter__label {
   position: absolute;
   font-weight: bold;
-  top: -20px;
+  top: -30px;
   left: 0;
   font-size: 12px;
   transition: opacity 0.2s, top 0.2s;

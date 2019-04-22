@@ -42,13 +42,13 @@
 
     	<ul class="navbar-nav ml-auto align-items-center">
     		<li class="nav-item">
-    		<a class="nav-link active" href="main">메인</a>
+    		<a class="nav-link active" href="main">メイン</a>
     		</li>
     		<li class="nav-item">
-    		<a class="nav-link" href="joinUserForm">회원가입</a>
+    		<a class="nav-link" href="joinUserForm">ユーザー登録</a>
     		</li>
     		<li class="nav-item">
-    		<a class="nav-link" href="loginUserForm">로그인</a>
+    		<a class="nav-link" href="loginUserForm">ログイン</a>
     		</li>
     	</ul>
     </div>
@@ -64,13 +64,13 @@
 <div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:default" id="mySidebar"></div>
 
 <div>
-  <button class="w3-button w3-white w3-medium" onclick="w3_open()"> #급상승 해시태그 보기</button>
+  <button class="w3-button w3-white w3-medium" onclick="w3_open()"> #ホットハッシュタグ</button>
 </div>
     	
     <section class="mt-4 mb-5">
     
     <div class="container mb-4">
-    	<h1 class="font-weight-bold title">#해시태그</h1>
+    	<h1 class="font-weight-bold title">#ハッシュタグ</h1>
     	<div class="row">
     		<nav class="navbar navbar-expand-lg navbar-light bg-white pl-2 pr-2">
     		<button class="navbar-light navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExplore" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
