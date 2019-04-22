@@ -218,8 +218,6 @@
 								<span class="image featured"><img src="resources/image/event_image/${event.image_id}" ></span>
 								<div align ="center">
 									<div id="map" ></div>
-									<br>
-									<a style="font-size: 25px;"><strong>場所:</strong> ${requestScope.event_place}</a>
 								</div>
 								<br><br>
 								<p>

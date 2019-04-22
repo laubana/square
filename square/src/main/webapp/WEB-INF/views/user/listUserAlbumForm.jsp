@@ -81,10 +81,10 @@ label img {
 				<div class="inner">
 					<div align="left"><h1 style="font-size:30px;"><a href="main">みんな・みんな</a></h1></div>
 					<a class="image avatar"><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
-					<h1><strong>${user.name}</strong>님의 그룹 사진<br /></h1>
-					<p>사진과 동영상을 찾아보세요!<br>
-					${user.name}님과의 추억을<br>
-					みんな・みんな가 함께합니다!
+					<h1><strong>${user.name}</strong>のグループ写真<br /></h1>
+					<p>写真と動画を探しましょう!<br>
+					${user.name}のと追憶を共有します。<br>
+					みんな・みんなが コミュニケーション!
 					</p>
 					<nav id="nav">
 					

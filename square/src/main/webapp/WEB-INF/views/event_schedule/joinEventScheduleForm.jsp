@@ -531,11 +531,11 @@ html, body {
 			<ul>
 				<li><a href="listRecommendationForm"></a> <c:if
 						test="${sessionScope.user_id != null}">
-						<li><a href="createGroupForm">그룹생성</a></li>
-						<li><a href="javascript:logoutUserAction()">로그아웃</a></li>
+						<li><a href="createGroupForm">グループ生成</a></li>
+						<li><a href="javascript:logoutUserAction()">ログアウト</a></li>
 					</c:if> <c:if test="${sessionScope.user_id == null}">
-						<li><a href="joinUserForm">회원가입</a></li>
-						<li><a href="loginUserForm">로그인</a></li>
+						<li><a href="joinUserForm">ユーザー登録</a></li>
+						<li><a href="loginUserForm">ログイン</a></li>
 					</c:if>
 			</ul>
 		</nav>
@@ -555,11 +555,11 @@ html, body {
 							#${group_hashtag.hashtag}
 						</c:forEach>
 			</p>
-			<a href="javascript:joinEventScheduleAction()" class="button">참여</a>
+			<a href="javascript:joinEventScheduleAction()" class="button">参加</a>
 		</header>
 		<nav id="nav">
 			<ul>
-					<li><a href="#one" class="active">정보</a></li>
+					<li><a href="#one" class="active">情報</a></li>
 			</ul>
 		</nav>
 		<footer>
