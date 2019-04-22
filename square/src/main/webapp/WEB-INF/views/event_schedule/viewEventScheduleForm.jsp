@@ -290,7 +290,7 @@
 								<div align ="center">
 									<div id = "map"></div>
 									<br>
-									<a style="font-size: 25px;"><strong>場所:</strong> ${ requestScope.place }</a>
+									<a style="font-size: 25px;"><strong>場所:</strong> ${requestScope.event_schedule.region }</a>
 								</div>
 								<br>
 								<p>
@@ -505,7 +505,7 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
 	var geocoder = new google.maps.Geocoder();
- 	var address = '${ requestScope.place }';
+ 	var address = '${requestScope.event_schedule.region }';
  	   geocoder.geocode(
 	   		{ 'address': address }
 	   		, function(results, status) {
