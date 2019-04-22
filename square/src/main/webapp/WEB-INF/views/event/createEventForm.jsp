@@ -9,7 +9,7 @@
 -->
 <html>
 	<head>
-		<title>みんな・みんな</title>
+		<title>イベント生成</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/EventView/assets/css/main.css" />
@@ -157,7 +157,7 @@ border: 0;
 									<input type='file' id="imgInp" /></div>
 									<br>
 									<!-- 내용 -->
-									<h1>イベント・内容</h1>
+									<h1>イベント内容</h1>
 									<textarea class="comment-block" id="event_content" placeholder="内容を記入してください。"></textarea><br>
 									<br>
 									<div align="center"><input type="button" value="生成" onclick="createEventAction()"></div>

@@ -77,6 +77,7 @@ public class EventScheduleAction {
 		int group_id = (int)map.get("group_id");
 		int event_id = (int)map.get("event_id");
 		String region = (String)map.get("region");
+		String address = (String)map.get("address");
 		String latitude = (String)map.get("latitude");
 		String longitude = (String)map.get("longitude");
 		long start_date = -1;
@@ -90,7 +91,7 @@ public class EventScheduleAction {
 		
 		while(true)
 		{
-			if(yh_event_scheduleDAO.insertEventSchedule(group_id, event_id, name, content, region, latitude, longitude, start_date, end_date) != 0)
+			if(yh_event_scheduleDAO.insertEventSchedule(group_id, event_id, name, content, region, address, latitude, longitude, start_date, end_date) != 0)
 			{
 				break;
 			}

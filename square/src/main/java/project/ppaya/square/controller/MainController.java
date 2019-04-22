@@ -63,11 +63,7 @@ public class MainController
 			
 			for(int i = 0; i < event_schedule_image_list.size(); i++)
 			{
-				EventSchedule event_schedule = yh_event_scheduleDAO.selectEventScheduleByEventScheduleId(event_schedule_image_list.get(i).getEvent_schedule_id());
-				
-				Event event = yh_eventDAO.selectEventByEventId(event_schedule.getEvent_id());
-				
-				Group group = yh_groupDAO.selectGroupByGroupId(event.getGroup_id());
+				Group group = yh_groupDAO.selectGroupByGroupId(event_schedule_image_list.get(i).getGroup_id());
 				
 				HashMap<String, Object> map = new HashMap<>();
 				
@@ -88,21 +84,13 @@ public class MainController
 			
 			ArrayList<Integer> group_id_list = yh_group_hashtagDAO.getGroupIdByHashtag(hashtag);
 			
-			ArrayList<Integer> event_id_list = yh_eventDAO.getEventIdByGroupIdList(group_id_list);
-			
-			ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventIdList(event_id_list);
-			
-			ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdListOrderByInputdate(event_schedule_id_list, 0);
+			ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByGroupIdListOrderByInputdate(group_id_list, 0);
 			
 			ArrayList<HashMap<String, Object>> image_list = new ArrayList<>();
 			
 			for(int i = 0; i < event_schedule_image_list.size(); i++)
 			{
-				EventSchedule event_schedule = yh_event_scheduleDAO.selectEventScheduleByEventScheduleId(event_schedule_image_list.get(i).getEvent_schedule_id());
-				
-				Event event = yh_eventDAO.selectEventByEventId(event_schedule.getEvent_id());
-				
-				Group group = yh_groupDAO.selectGroupByGroupId(event.getGroup_id());
+				Group group = yh_groupDAO.selectGroupByGroupId(event_schedule_image_list.get(i).getGroup_id());
 				
 				HashMap<String, Object> map = new HashMap<>();
 				
