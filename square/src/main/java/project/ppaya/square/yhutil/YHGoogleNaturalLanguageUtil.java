@@ -17,18 +17,6 @@ import com.google.cloud.language.v1.Token;
 
 public class YHGoogleNaturalLanguageUtil
 {
-	public static void test1()
-	{
-		try(LanguageServiceClient language = LanguageServiceClient.create())
-		{
-			String text = "Hello, world!";
-			Document doc = Document.newBuilder().setContent(text).setType(Type.PLAIN_TEXT).build();
-			Sentiment sentiment = language.analyzeSentiment(doc).getDocumentSentiment();
-			System.out.printf("Text: %s%n", text);
-			System.out.printf("Sentiment: %s, %s%n", sentiment.getScore(), sentiment.getMagnitude());
-		}
-		catch(Exception error){error.printStackTrace();}
-	}
 	public static ArrayList<String> getPhraseList(String string)
 	{
 		ArrayList<String> phrase_list = new ArrayList<>();
