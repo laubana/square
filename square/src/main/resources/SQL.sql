@@ -355,7 +355,7 @@ INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT,
 INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(2, 1, '東京', 'id4@gmail.com', 'Front-end Developer Group', 'group2content', '2.jpg', '2.jpg');
 INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(3, 1, '東京', 'id7@gmail.com', 'Back-end Developer Group', 'group3content', '3.jpg', '3.jpg');
 INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(4, 1, '東京', 'id1@gmail.com', 'C Developer Group', 'group4content', '4.jpg', '4.jpg');
-INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(5,ㄴ 1, '東京', 'id4@gmail.com', 'Database Developer Group', 'group5content', '5.jpg', '5.jpg');
+INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(5, 1, '東京', 'id4@gmail.com', 'Database Developer Group', 'group5content', '5.jpg', '5.jpg');
 INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(6, 1, '東京', 'id7@gmail.com', 'Web Developer Group', 'group6content', '6.jpg', '6.jpg');
 INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(7, 1, '東京', 'id1@gmail.com', 'JS Developer Group', 'group7content', '7.jpg', '7.jpg');
 INSERT INTO TABLE_G(GROUP_ID, GROUP_CATEGORY_ID, REGION, USER_ID, NAME, CONTENT, GROUP_LOGO, GROUP_IMAGE) VALUES(8, 3, '東京', 'id1@gmail.com', 'Animal Group', 'group8content', '8.jpg', '8.jpg');
