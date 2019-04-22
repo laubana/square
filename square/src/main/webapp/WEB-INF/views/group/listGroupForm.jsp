@@ -68,7 +68,7 @@ function logoutUserAction()
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
-						<li><a href="joinUserForm">会員加入</a></li>
+						<li><a href="joinUserForm">ユーザー登録</a></li>
 							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
 						</c:if>
 					</ul>
