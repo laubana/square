@@ -81,7 +81,7 @@ background: url('resources/MindMap/image/3.jpg');
 
 		<!-- 우측  그룹 이름 및 태그 출력-->
 		
-        <div align="center" id="group_name" style="font-size:20px; ">グループ名前</div>
+        <div align="center" id="group_name" style="font-size:20px; ">グループタイトル</div>
         <br>
         <hr><br><div align="center"><p style="font-size:15px;">ハッシュタグ</p></div><br> 
         <div id="hashtag_list">
