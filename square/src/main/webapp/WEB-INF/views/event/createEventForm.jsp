@@ -92,7 +92,7 @@ border: 0;
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
 						<c:if test="${sessionScope.user_id == null}">
-						<li><a href="joinUserForm">会員加入</a></li>
+						<li><a href="joinUserForm">ユーザー登録</a></li>
 							<li><a href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
 						</c:if>
 					</ul>
@@ -112,7 +112,7 @@ border: 0;
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">イベント・生成</a></li>
+						<li><a href="#one" class="active">イベント生成</a></li>
 					</ul>
 				</nav>
 				<footer>
