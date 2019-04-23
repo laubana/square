@@ -127,7 +127,6 @@ public class MainController
 			@RequestParam(value = "hashtag", defaultValue = "Java") String hashtag
 			)
 	{
-		ArrayList<Integer> group_id_list = new ArrayList<>();
 		ArrayList<String> hashtag_list = new ArrayList<>();
 		
 		hashtag_list.clear();		
