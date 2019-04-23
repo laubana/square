@@ -50,7 +50,7 @@
 				</header>
 				<nav id="nav">
 					<ul>
-						<li><a href="#one" class="active">連合イベント</a></li>
+						<li><a href="#one" class="active">友イベント</a></li>
 					</ul>
 				</nav>
 				<footer>
@@ -74,7 +74,7 @@
 						<!-- Five -->
 							<section id="one">
 								<div class="container">
-									<h3>連合イベント</h3>
+									<h3>友イベント</h3>
 									<div class="features">
 										<c:forEach var="event" items="${event_list}">
 									<article>

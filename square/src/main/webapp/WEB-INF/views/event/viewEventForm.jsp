@@ -103,7 +103,7 @@
 							buff += "<a href='viewGroupForm?group_category_id=" + result[i].group_category_id +"&group_id=" + result[i].group_id + "' class='image avatar thumb'><img src='resources/image/group_logo/"+ result[i].group_logo + "' alt='' style='width: 100px; height:auto;'></a>";
 							buff += "</div>";
 							buff += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-							buff += "<input type='button' onclick='javascript:unifyEventAction(" + result[i].group_id + ")' value='連合'>";
+							buff += "<input type='button' onclick='javascript:unifyEventAction(" + result[i].group_id + ")' value='友にする'>";
 							buff += "<br><a> " + result[i].name + "</a><hr>";
 							buff += "</div>";
 						}
@@ -368,7 +368,7 @@
 							</section>
 							<section id="six">
 								<div class="container">
-									<h3>参加グループ</h3>
+									<h3>友グループ</h3>
 									<div class="features">
 									<c:forEach var="group_union" items="${group_union_list}">
 						<div class="comment-wrap">

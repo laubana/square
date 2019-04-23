@@ -347,7 +347,7 @@
 							</section>
 							<section id="six">
 								<div class="container">
-									<h3>連合イベント</h3>
+									<h3>友イベント</h3>
 									<div class="features">
 									<c:forEach var="event_union_event" items="${event_union_event_list}">
 									<article>
@@ -359,7 +359,7 @@
 										</article>
 										</c:forEach>
 											</div>
-										<a href="listEventUnionForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">連合・イベントページへ</a>
+										<a href="listEventUnionForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">友イベントページへ</a>
 									</div>
 							</section>
 					</div>
