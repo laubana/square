@@ -14,7 +14,7 @@
 -->
 <html>
 <head>
-<title>Schedule</title>
+<title>みんなみんな</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -121,7 +121,7 @@ label img {
 			buff += "<input type='checkbox' id='schedule_checkbox" + i + "' value='" + i + "'class='check'>";
 			buff += "<label for='schedule_checkbox" + i + "' tabindex=''-1'>";
 			buff += "<span class='check'></span>";
-			buff += "<a style='font-size:30px;'>選択</a></label>";
+			buff += "<a class='button' style='font-size:15px;'>選択</a></label>";
 			buff += "<input type='hidden' id='start_date" + i + "' value='" + schedule_list[i].start_date + "'>";
 			buff += "<input type='hidden' id='end_date" + i + "' value='" + schedule_list[i].end_date + "'>";
 			buff += "</div>";

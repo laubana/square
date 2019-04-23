@@ -9,7 +9,7 @@
 -->
 <html>
 	<head>
-		<title>My Photo</title>
+		<title>みんなみんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/MemberPhoto/assets/css/main.css" />
@@ -79,12 +79,11 @@ label img {
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<div align="left"><h1 style="font-size:30px;"><a href="main">みんな・みんな</a></h1></div>
+					<div align="left"><h1 style="font-size:30px;"><a href="main">みんなみんな</a></h1></div>
 					<a class="image avatar"><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
-					<h1><strong>${user.name}</strong>のグループ写真<br /></h1>
-					<p>写真と動画を探しましょう!<br>
-					${user.name}のと追憶を共有します。<br>
-					みんな・みんなが コミュニケーション!
+					<h1><strong>${user.name}</strong>のアルバム<br /></h1>
+					<p>公開する写真や映像を選択してください。<br>
+					また、自撮りを検索してみてください。
 					</p>
 					<nav id="nav">
 					
@@ -99,7 +98,7 @@ label img {
 
 					<!-- Three -->
 					<section id="three">
-						<h1>アルバム・選択</h1>
+						<h1>グループ</h1>
 						<!-- Form 그룹 -->
 						<form action="">
 						<div>
@@ -108,15 +107,15 @@ label img {
 										<li>
 											<input type="checkbox" id="gruopCheckbox${group.group_id}" name="groupCheckbox" class="check" value="${group.group_id}" group_id="${group.group_id}">
 											<label for="gruopCheckbox${group.group_id}">
-											<h3 align="center">${group.group_id}</h3>	
+											<h3 align="center">${group.name}</h3>	
 											</label>
 										</li>
 									</c:forEach>
 								</ul>
 								<div align="center">
-											<input type="checkbox" id="faceCheckbox" name="faceCheckbox" class="check">
+											<input type="checkbox" id="faceCheckbox" name="faceCheckbox">
 											<label for="faceCheckbox">
-											<h3 align="center" style="color:maroon;">Face</h3>
+											<a align="center" style="color:maroon;" class="button">自撮りだけ<a>
 											</label>
 											<br>	
 								</div>
@@ -127,9 +126,9 @@ label img {
 
 				<!-- Four -->
 					<section id="four">
-						<h1>アルバム編集</h1>
+						<h1>アルバム</h1>
 						<!-- Form 사진 영상 -->
-						<form>
+						<h2>写真</h2>
 						<div id="image_album" class="row"></div>
 						<%-- <c:forEach var="image" items="${event_schedule_image_list}">
 							<article class="col-6 col-12-xsmall work-item">
@@ -141,10 +140,16 @@ label img {
 						</c:forEach> --%>
 
 					<hr style="width:380px;"><br>
-					<h1>映像編集</h1><br>
-					<div id="video" class="" align="center"></div><br>	
-					<div align="center"><input type="button" value="確認" onclick="setAlbumAction()"></div>		
-					</form>
+					<h2>映像</h2><br>
+					<div id="video" class="" align="center"></div><br><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					
+					<input type="button" value="確認" onclick="setAlbumAction()">	
+				
 
 					</section>
 			</div>
@@ -180,7 +185,7 @@ label img {
 <script>
 function setVideo(video_id, time)
 {
-	document.getElementById("video" + video_id).currentTime = time / 1000;
+	document.getElementById("video" + video_id).currentTime = (time / 1000) - 1;
 }
 function setAlbumAction()
 {
@@ -296,7 +301,7 @@ $(document).ready(function () {
 							video_buff += "<input type='checkbox' id='video_check_box" + video_list[i].video.event_schedule_video_id + "' name='video_check_box' value='" + video_list[i].video.event_schedule_video_id + "' checked>";
 						}
 						video_buff += "<label for='video_check_box" + video_list[i].video.event_schedule_video_id + "'/>";
-						video_buff += "<h2>選択</h2>";
+						video_buff += "<a class='button'>選択</a>";
 						video_buff += "</label>";
 						video_buff += "<br>";
 						

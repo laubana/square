@@ -190,11 +190,13 @@ border: 0;
 						
 							<br>
 							<h1>ロゴ</h1>
+							<span class="image avatar" id="foo3_span"><img src="resources/Main/images/bb.jpg" id="foo3" style="width:100px;height:100px;"></span>
 							<div class="filebox">
 							<label for="imgInp2">アップロード</label> 
 							<input type='file' id="imgInp2" /></div>
 							<br>
 							<h1>イメージ</h1>
+							<span class="" data-position="center"><img id="foo0" src="resources/Main/images/bb.jpg" style="width:300px;height:200px;"></span>
 							<div class="filebox">
 							<label for="imgInp">アップロード</label>
 							<input type='file' id="imgInp" /></div>
@@ -334,7 +336,10 @@ border: 0;
 			    			type: "POST",
 			    			data: JSON.stringify(map),
 			    			contentType: "application/json; charset=UTF-8",
-			    			success: function(result){},
+			    			success: function(result)
+			    			{
+			    				location.href = "main";	
+			    			},
 			    			error: function(){}
 			    				});
 						clearInterval(interval);
@@ -343,9 +348,17 @@ border: 0;
 	}
 </script>
 <script type="text/javascript">
+$("#foo3_span").click(function()
+		{
+	document.getElementById("imgInp2").click();
+});
 $("#foo2_span").click(function()
 		{
 	document.getElementById("imgInp2").click();
+});
+$("#foo0").click(function()
+		{
+	document.getElementById("imgInp").click();
 });
 $("#foo").click(function()
 		{
@@ -357,6 +370,7 @@ function readURL(input) {
         var reader = new FileReader();
         reader.onload = function(e) {
             $('#foo').attr('src', e.target.result);
+            $('#foo0').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
     }
@@ -371,6 +385,7 @@ function readURL2(input) {
         var reader = new FileReader();
         reader.onload = function(e) {
             $('#foo2').attr('src', e.target.result);
+            $('#foo3').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
     }

@@ -200,16 +200,16 @@
 								<div class="container">
 									<h3>グループ情報</h3>
 									<p>${group.content}</p>
-								</div>
-							</section>
-							<section id="">
-								<div class="container">
-								<h3>イベント・スケジュール場所</h3>
+									<hr>
+									<h3>イベント・スケジュール場所</h3>
 									<div align ="center">
 										<div id="map" ></div>
 									</div>
 								</div>
 							</section>
+								
+								
+								
 						
 						<!-- Two -->
 							<section id="two">

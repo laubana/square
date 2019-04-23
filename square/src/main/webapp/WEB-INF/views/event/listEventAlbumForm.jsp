@@ -9,7 +9,7 @@
 -->
 <html>
 	<head>
-		<title>イベント・アルバム・リスト</title>
+		<title>みんなみんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/GroupMain/assets/css/main.css" />

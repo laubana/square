@@ -51,7 +51,7 @@
 					</section>
 					
 					<!-- Two -->
-					<section id="two">
+					<%-- <section id="two">
 						<header class="major">
 							<h2>関心分野</h2>
 						</header>
@@ -70,7 +70,7 @@
 						<c:if test="${sessionScope.user_id == user.user_id}">
 						<div align="center"><a href="#" class="button">関心分野編集</a></div>
 						</c:if>
-					</section>
+					</section> --%>
 					<!-- Three -->
 					<section id="three">
 						<h1>グループ</h1>

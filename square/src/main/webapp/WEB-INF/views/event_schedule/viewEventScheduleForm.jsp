@@ -102,7 +102,7 @@
 				
 			
 				dataTable.addRows([
-						[ '', '', hsl2hex(9, 100, 80 - rate), "<div style='padding: 10px 10px 10px 10px;'>${event_schedule_attendace_count.typeof}</div>", new Date(${event_schedule_attendace_count.start_date}), new Date(${event_schedule_attendace_count.end_date}) ]
+						[ '参加者の最大人数', '', hsl2hex(9, 100, 80 - rate), "<div style='padding: 10px 10px 10px 10px;'>${event_schedule_attendace_count.typeof}</div>", new Date(${event_schedule_attendace_count.start_date}), new Date(${event_schedule_attendace_count.end_date}) ]
 						]);
 			</c:forEach>
         	
@@ -286,16 +286,19 @@
 										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">${leader.name}</span><img src="resources/image/user_image/${leader.image_id}" alt="" /></a>
 									</div>
 								</header>
+								<p>
+									${event_schedule.content}
+								</p>
+								<hr>
 								<!-- 맵 -->
+								<h3>イベント・スケジュール場所</h3>
 								<div align ="center">
 									<div id = "map"></div>
 									<br>
 									<a style="font-size: 25px;"><strong>場所:</strong> ${requestScope.event_schedule.address}</a>
 								</div>
-								<br>
-								<p>
-									${event_schedule.content}
-								</p>
+								
+								
 								<div align="right"><footer>			
 								</footer></div>
 							</article>
