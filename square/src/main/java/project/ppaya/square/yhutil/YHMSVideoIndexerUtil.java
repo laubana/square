@@ -16,7 +16,7 @@ import org.json.JSONObject;
 
 import project.ppaya.square.vo.*;
 
-public class YHVideoIndexerUtil
+public class YHMSVideoIndexerUtil
 {
 	public static String getThumbnail(String video_id, String thumbnail_id)
 	{
