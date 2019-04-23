@@ -7,6 +7,7 @@ import project.ppaya.square.vo.Group;
 
 public interface YHGroupMapper
 {
+	public ArrayList<Group> selectGroupByNameNotGroupIdList(HashMap<String, Object> map);
 	public ArrayList<Group> selectGroupByGroupIdListOrderByInputdate(ArrayList<Integer> group_id_list);
 	public ArrayList<Group> selectGroupByGroupIdListOrderByEventScheduleCount(ArrayList<Integer> group_id_list);
 	public ArrayList<Group> selectGroupByGroupIdListOrderByEventCount(ArrayList<Integer> group_id_list);

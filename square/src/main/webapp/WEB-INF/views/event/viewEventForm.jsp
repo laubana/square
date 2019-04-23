@@ -83,6 +83,7 @@
 			{
 				map = {};
 				map["group_id"] = ${group.group_id};
+				map["event_id"] = ${event.event_id};
 				map["keyword"] = $("#keyword").val();
 				
 				$.ajax({

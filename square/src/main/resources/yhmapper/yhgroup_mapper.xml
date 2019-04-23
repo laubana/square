@@ -4,6 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHGroupMapper">
+<select id="selectGroupByNameNotGroupIdList" parameterType="map" resultType="Group">
+SELECT
+	*
+FROM
+	TABLE_G
+WHERE
+	<foreach item="group_id" collection="group_id_list" separator="AND" close="AND">
+		GROUP_ID != #{group_id}
+	</foreach>
+	UPPER(NAME) LIKE '%' || upper(#{name}) || '%'
+</select>
 <select id="selectGroupByExactName" parameterType="string" resultType="Group">
 SELECT
 	*

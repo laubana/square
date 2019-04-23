@@ -161,10 +161,13 @@ public class EventAction {
 	public ArrayList<Group> searchGroupAction(Model request, @RequestBody HashMap<String, Object> map)
 	{
 		int group_id = (int)map.get("group_id");
+		int event_id = (int)map.get("event_id");
 		String name = (String)map.get("keyword");
 		
-		ArrayList<Integer> group_id_list = yh_groupDAO.getGroupIdByName(name);
-		ArrayList<Group> group_list = yh_groupDAO.selectGroupByGroupIdListNotGroupId(group_id_list, group_id);
+		ArrayList<Integer> group_id_list = yh_event_unionDAO.getGroupIdByEventId(event_id);
+		group_id_list.add(group_id);
+		
+		ArrayList<Group> group_list = yh_groupDAO.selectGroupByNameNotGroupIdList(name, group_id_list);
 		
 		return group_list;
 	}
