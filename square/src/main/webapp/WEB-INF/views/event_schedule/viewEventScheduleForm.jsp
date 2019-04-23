@@ -102,7 +102,7 @@
 				
 			
 				dataTable.addRows([
-						[ '', '', hsl2hex(9, 100, 80 - rate), "<div style='padding: 10px 10px 10px 10px;'>${event_schedule_attendace_count.typeof}</div>", new Date(${event_schedule_attendace_count.start_date}), new Date(${event_schedule_attendace_count.end_date}) ]
+						[ '参加者の最大人数', '', hsl2hex(9, 100, 80 - rate), "<div style='padding: 10px 10px 10px 10px;'>${event_schedule_attendace_count.typeof}</div>", new Date(${event_schedule_attendace_count.start_date}), new Date(${event_schedule_attendace_count.end_date}) ]
 						]);
 			</c:forEach>
         	
