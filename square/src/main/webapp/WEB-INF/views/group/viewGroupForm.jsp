@@ -359,7 +359,7 @@
 										</article>
 										</c:forEach>
 											</div>
-										<a href="listEventUnionForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">友イベントページへ</a>
+										<a href="listEventUnionForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}" class="button">友イベントリストページへ</a>
 									</div>
 							</section>
 					</div>

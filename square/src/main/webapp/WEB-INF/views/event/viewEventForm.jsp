@@ -379,7 +379,7 @@
 						</c:forEach>
 						<c:if test="${sessionScope.user_id == leader.user_id}">
 							<input type="text" id="keyword" style="width:300px; display:inline;" autocomplete="off">
-							<input type="button" onclick="javascript:searchGroupAction()" value="グループ・サーチ"><br><br><br>
+							<input type="button" onclick="javascript:searchGroupAction()" value="検索"><br><br><br>
 							<div id="group_list" class="features"></div>
 						</c:if>
 						
