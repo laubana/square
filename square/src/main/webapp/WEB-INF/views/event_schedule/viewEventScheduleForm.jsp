@@ -286,16 +286,19 @@
 										<a href="viewUserForm?user_id=${leader.user_id}" class="author"><span class="name">${leader.name}</span><img src="resources/image/user_image/${leader.image_id}" alt="" /></a>
 									</div>
 								</header>
+								<p>
+									${event_schedule.content}
+								</p>
+								<hr>
 								<!-- 맵 -->
+								<h3>イベント・スケジュール場所</h3>
 								<div align ="center">
 									<div id = "map"></div>
 									<br>
 									<a style="font-size: 25px;"><strong>場所:</strong> ${requestScope.event_schedule.address}</a>
 								</div>
-								<br>
-								<p>
-									${event_schedule.content}
-								</p>
+								
+								
 								<div align="right"><footer>			
 								</footer></div>
 							</article>

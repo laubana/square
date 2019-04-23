@@ -220,20 +220,21 @@
 								<p>
 									${event.content}
 								</p>
+								<hr>
+								<h3>イベント・スケジュール場所</h3>
+									<div align ="center">
+										<div id="map" ></div>
+									</div>
 								<!-- <div align="right"><footer>
 										<a class="icon fa-heart">28</a>&nbsp;&nbsp;&nbsp;&nbsp;
 										&nbsp;&nbsp;				
 								</footer></div> -->
 							</article>
 							</section>
-							<section id="">
-								<div class="container">
-								<h3>イベント・スケジュール場所</h3>
-									<div align ="center">
-										<div id="map" ></div>
-									</div>
-								</div>
-							</section>
+							
+								
+								
+								
 					</div>
 					
 					<div id="main">
