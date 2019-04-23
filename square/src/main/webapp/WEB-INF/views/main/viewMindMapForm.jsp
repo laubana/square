@@ -4,7 +4,7 @@
 <html lang="en" >
 
 <head>
-  <title>みんな・みんな</title>
+  <title>みんなみんな</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">

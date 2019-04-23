@@ -9,7 +9,7 @@
 -->
 <html>
 	<head>
-		<title>My Photo</title>
+		<title>みんなみんな</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/MemberPhoto/assets/css/main.css" />
@@ -107,7 +107,7 @@ label img {
 										<li>
 											<input type="checkbox" id="gruopCheckbox${group.group_id}" name="groupCheckbox" class="check" value="${group.group_id}" group_id="${group.group_id}">
 											<label for="gruopCheckbox${group.group_id}">
-											<h3 align="center">${group.group_id}</h3>	
+											<h3 align="center">${group.name}</h3>	
 											</label>
 										</li>
 									</c:forEach>
@@ -115,7 +115,7 @@ label img {
 								<div align="center">
 											<input type="checkbox" id="faceCheckbox" name="faceCheckbox">
 											<label for="faceCheckbox">
-											<h3 align="center" style="color:maroon;">自撮りだけ</h3>
+											<a align="center" style="color:maroon;" class="button">自撮りだけ<a>
 											</label>
 											<br>	
 								</div>
@@ -141,8 +141,14 @@ label img {
 
 					<hr style="width:380px;"><br>
 					<h2>映像</h2><br>
-					<div id="video" class="" align="center"></div><br>	
-					<div align="center"><input type="button" value="確認" onclick="setAlbumAction()"></div>		
+					<div id="video" class="" align="center"></div><br><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					
+					<input type="button" value="確認" onclick="setAlbumAction()">	
 				
 
 					</section>
@@ -295,7 +301,7 @@ $(document).ready(function () {
 							video_buff += "<input type='checkbox' id='video_check_box" + video_list[i].video.event_schedule_video_id + "' name='video_check_box' value='" + video_list[i].video.event_schedule_video_id + "' checked>";
 						}
 						video_buff += "<label for='video_check_box" + video_list[i].video.event_schedule_video_id + "'/>";
-						video_buff += "<h2>選択</h2>";
+						video_buff += "<a class='button'>選択</a>";
 						video_buff += "</label>";
 						video_buff += "<br>";
 						
