@@ -10,13 +10,110 @@
 		<link rel="stylesheet" href="resources/Join/assets/css/main.css" />
 	<script>
 	// Add the following code if you want the name of the file appear on select
-	$(".image_id").on(
+	/* $(".image_id").on(
 			"change",
 			function() {
 				var fileName = $(this).val().split("\\").pop();
 				$(this).siblings(".custom-file-label").addClass("selected")
 						.html(fileName);
+			}); */
+	function verifyUserIdAction()
+	{
+		if(isEmail(document.getElementById("user_id").value) == false)
+		{
+			alert("IDを確認してください。");
+			return;
+		}
+				
+		var map = {};
+		map["user_id"] = document.getElementById("user_id").value;
+		
+		$.ajax({
+			url: "verifyUserIdAction",
+			type: "POST",
+			data: JSON.stringify(map),
+			contentType: "application/json; charset=UTF-8",
+			success: function(result)
+			{			
+				if(result == "true")
+				{
+					flag = true;
+					alert("利用可能");
+				}
+				else
+				{
+					alert("利用不可");
+				}
+			},
+			error: function(error){console.log(error);}
+		});
+	}
+	function setSwitch()
+	{
+		flag = false;
+	}
+	var flag = false;
+	function joinUserAction()
+	{
+		if(document.getElementById("user_id").value.length == 0)
+		{
+			alert("IDを入力してください。");
+			return;
+		}
+		if(document.getElementById("password").value.length == 0)
+		{
+			alert("Passwordを入力してください。");
+			return;
+		}
+		if(document.getElementById("name").value.length == 0)
+		{
+			alert("Nameを入力してください。");
+			return;
+		}
+		if(document.getElementById("region").value.length == 0)
+		{
+			alert("Regionを入力してください。");
+			return;
+		}
+		
+		if(flag != false)
+		{
+			var map = {};
+			map["user_id"] = document.getElementById("user_id").value;
+			map["password"] = document.getElementById("password").value;
+			map["name"] = document.getElementById("name").value;
+			map["region"] = document.getElementById("region").value;
+			
+			$.ajax({
+				url: "joinUserAction",
+				type: "POST",
+				data: JSON.stringify(map),
+				contentType: "application/json; charset=UTF-8",
+				success: function(result)
+				{			
+					if(result == "true")
+					{
+						location.replace("main");
+					}
+					else
+					{
+						alert("登録失敗");
+					}
+				},
+				error: function(error){console.log(error);}
 			});
+		}
+		else
+		{
+			alert("IDを確認してください。");
+		}
+	}
+	function isEmail(string)
+	{
+	    var regular_expression = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	    
+	    return regular_expression.test(string);
+	}
 	</script>	
 	
 	</head>
@@ -28,9 +125,8 @@
 			</header>
 
 		<!-- Signup Form -->
-			<form id="join-form" method="post" action="joinForm" autocomplete="off">
-				<p><input type="text" name="user_id" id="user_id" placeholder="ID" autocomplete="off">
-
+				<p><input type="text" name="user_id" id="user_id" placeholder="ID" autocomplete="off" onchange="setSwitch()">
+				<input type="button" value="検索" onclick="verifyUserIdAction()">
 		<!-- non-display 로 ~! -->
 <!-- 			<div class="inputEmailType">
 				<p><input type="text" name="user_idEmailType" placeholder="email 직접 입력"></p>
@@ -41,8 +137,8 @@
     		<div class="custom-file mb-3" align="left">
 			</div>
 				<p><input type="text" name="region" id="region" placeholder="Area" autocomplete="off"></p>
-				<p><input type="submit" value="Join"></p><br>
-			</form>
+				<p><input type="button" value="Join" onclick="joinUserAction()"></p><br>
+			
 		
 		<!-- Footer -->
 			<footer id="footer">

@@ -298,6 +298,21 @@ function createEventAction()
 <script type="text/javascript">
 //파일 미리보기 메인
 function readURL(input) {
+	var file = input.files[0]; 
+	if(file.type == "image/jpg" || file.type == "image/JPG" ||
+			file.type == "image/png" || file.type == "image/PNG" ||
+			file.type == "image/jpeg" || file.type == "image/JPEG" || 
+			file.type == "image/bmp" || file.type == "image/BMP" ||
+			file.type == "image/gif" || file.type == "image/GIF")
+		{
+		
+		}
+	else
+		{
+		alert("イメージファイルではありません。");
+		return;
+		}
+	
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {

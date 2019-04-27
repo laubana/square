@@ -366,6 +366,21 @@ $("#foo").click(function()
 });
 //파일 미리보기 메인
 function readURL(input) {
+	var file = input.files[0]; 
+	if(file.type == "image/jpg" || file.type == "image/JPG" ||
+			file.type == "image/png" || file.type == "image/PNG" ||
+			file.type == "image/jpeg" || file.type == "image/JPEG" || 
+			file.type == "image/bmp" || file.type == "image/BMP" ||
+			file.type == "image/gif" || file.type == "image/GIF")
+		{
+		
+		}
+	else
+		{
+		alert("イメージファイルではありません。");
+		return;
+		}
+	
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
@@ -381,6 +396,21 @@ $("#imgInp").change(function() {
 });
 
 function readURL2(input) {
+	var file = input.files[0]; 
+	if(file.type == "image/jpg" || file.type == "image/JPG" ||
+			file.type == "image/png" || file.type == "image/PNG" ||
+			file.type == "image/jpeg" || file.type == "image/JPEG" || 
+			file.type == "image/bmp" || file.type == "image/BMP" ||
+			file.type == "image/gif" || file.type == "image/GIF")
+		{
+		
+		}
+	else
+		{
+		alert("イメージファイルではありません。");
+		return;
+		}
+	
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
@@ -446,7 +476,14 @@ $("#imgInp2").change(function() {
 	      textWidth,
 	      size;  
 	        
+	  if(text.length != 0)
+		{
 	  liveText.html('<p style="font-size:15px;">'+text+'</p>');
+		}
+	  else
+		  {
+		  liveText.html('<p style="font-size:15px;">'+'[#ハッシュタグ]'+'</p>');
+		  }
 	  
 	});
 
@@ -474,7 +511,14 @@ $("#imgInp2").change(function() {
 	      textWidth,
 	      size;  
 	        
+	  if(text.length != 0)
+		{
 	  liveText.html('<p style="font-size:15px;">'+text+'</p>');
+		}
+	  else
+		  {
+		  liveText.html('<p style="font-size:15px;">'+'[#ハッシュタグ]'+'</p>');
+		  }
 	  
 	});
 
@@ -502,7 +546,14 @@ $("#imgInp2").change(function() {
 	      textWidth,
 	      size;  
 	        
+	  if(text.length != 0)
+		{
 	  liveText.html('<p style="font-size:15px;">'+text+'</p>');
+		}
+	  else
+		  {
+		  liveText.html('<p style="font-size:15px;">'+'[#ハッシュタグ]'+'</p>');
+		  }
 	  
 	});
 
@@ -531,7 +582,14 @@ $("#imgInp2").change(function() {
 	      textWidth,
 	      size;  
 	        
+	  if(text.length != 0)
+		{
 	  liveText.html('<p style="font-size:15px;">'+text+'</p>');
+		}
+	  else
+		  {
+		  liveText.html('<p style="font-size:15px;">'+'[#ハッシュタグ]'+'</p>');
+		  }
 	  
 	});
 
@@ -558,7 +616,14 @@ $("#imgInp2").change(function() {
 	      textWidth,
 	      size;  
 	        
+	  if(text.length != 0)
+		{
 	  liveText.html('<p style="font-size:15px;">'+text+'</p>');
+		}
+	  else
+		  {
+		  liveText.html('<p style="font-size:15px;">'+'[#ハッシュタグ]'+'</p>');
+		  }
 	  
 	});
 

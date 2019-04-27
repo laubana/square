@@ -16,6 +16,42 @@ public class YHUserDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public int updateUserImage(String user_id, String image_id)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("image_id", image_id);
+		
+		YHUserMapper mapper = sqlSession.getMapper(YHUserMapper.class);
+		
+		try
+		{
+			result = mapper.updateUserImage(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
+	public int insertUser(String user_id, String password, String name, String region)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("user_id", user_id);
+		map.put("password", password);
+		map.put("name", name);
+		map.put("region", region);
+		
+		YHUserMapper mapper = sqlSession.getMapper(YHUserMapper.class);
+		
+		try
+		{
+			result = mapper.insertUser(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public int updateContentByUserId(String user_id, String content)
 	{
 		int result = 0;

@@ -4,6 +4,29 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.ppaya.square.yhmapper.YHUserMapper">
+<update id="updateUserImage" parameterType="map">
+UPDATE TABLE_U
+SET
+	IMAGE_ID = #{image_id}
+WHERE
+	USER_ID = #{user_id}
+</update>
+<insert id ="insertUser" parameterType="map">
+INSERT INTO TABLE_U
+(
+	USER_ID,
+	PASSWORD,
+	NAME,
+	REGION
+)
+VALUES
+(
+	#{user_id},
+	#{password},
+	#{name},
+	#{region}
+)
+</insert>
 <update id="updateContentByUserId" parameterType="map">
 UPDATE TABLE_U
 SET

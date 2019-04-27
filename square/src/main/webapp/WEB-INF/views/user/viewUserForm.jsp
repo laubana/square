@@ -14,7 +14,50 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/MyPage/assets/css/main.css" />
 		
-		
+		<script>
+		function setUserImage()
+		{
+			var file = document.getElementById("image_file").files[0];
+			
+			if(file.type == "image/jpg" || file.type == "image/JPG" ||
+					file.type == "image/png" || file.type == "image/PNG" ||
+					file.type == "image/jpeg" || file.type == "image/JPEG" || 
+					file.type == "image/bmp" || file.type == "image/BMP" ||
+					file.type == "image/gif" || file.type == "image/GIF")
+			{
+				var map = {};
+				
+				var image = new FileReader();
+				image.readAsDataURL(file);
+				image.onload = function()
+				{
+		            map["image"] = image.result.substring(image.result.indexOf(",") + 1);
+		        }
+
+				var interval = setInterval(function()
+						{
+							if(typeof(map.image) != "undefined")
+							{								
+								$("#user_image").attr("src", "data:image/jpeg;base64," + map.image);
+								
+								$.ajax({
+					    			url: "updateUserImageAction",
+					    			type: "POST",
+					    			data: JSON.stringify(map),
+					    			contentType: "application/json; charset=UTF-8",
+					    			success: function(result){},
+					    			error: function(){}
+					    				});
+								clearInterval(interval);
+							}
+						},100);
+			}
+			else
+			{
+				alert("イメージのファイルではありません。");
+			}
+		}
+		</script>
 		
 	</head>
 	<body class="is-preload">
@@ -23,7 +66,10 @@
 			<header id="header">
 				<div class="inner">
 					<div align="left"><h1 style="font-size:30px;"><a href="main">みんなみんな</a></h1></div>
-					<a class="image avatar"><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
+					<a class="image avatar">
+					<input type="file" id="image_file" style="display: none;" onchange="setUserImage()">
+					<label for="image_file"><img id="user_image" src="resources/image/user_image/${user.image_id}" alt="" /></label>
+					</a>
 					<h1><strong>${user.name}</strong>のマイページ<br></h1>
 					<nav id="nav">
 					

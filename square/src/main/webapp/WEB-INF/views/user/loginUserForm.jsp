@@ -9,21 +9,39 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="resources/Login/assets/css/main.css" />
 		<script>
-			function loginUserFormAction()
+			function isEmail(string)
 			{
+			    var regular_expression = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			    
+			    return regular_expression.test(string);
+			}
+		
+			function loginUserAction()
+			{
+				if(isEmail(document.getElementById("user_id").value) == false)
+				{
+					alert("IDを確認してください。");
+					return;
+				}
+				
+				var map = {};
+				map["user_id"] = document.getElementById("user_id").value;
+				map["password"] = document.getElementById("password").value; 
+				
 				$.ajax({
-					url: "loginUserFormAction",
+					url: "loginUserAction",
 					type: "POST",
-					data: $("#signup-form").serialize(),
-					dataType: "JSON",
+					data: JSON.stringify(map),
+					contentType: "application/json; charset=UTF-8",
 					success: function(result)
 					{
-						if(result == true)
+						if(result == "true")
 						{
-							location.replace("<c:out value='main'/>");
+							location.replace("main");
 						}
 						else
 						{
+							alert("ログイン失敗");
 						}
 					},
 					error: function(error){console.log(error);}
@@ -39,12 +57,11 @@
 			</header>
 
 		<!-- Signup Form -->
-			<form id="signup-form" method="post" onsubmit="loginUserFormAction()">
 				<br>
-				<p><input type="email" name="user_id" id="email" placeholder="Email Address"></p><br>
+				<p><input type="text" name="user_id" id="user_id" placeholder="Email Address"></p><br>
 				<p><input type="password" name="password" id="password" placeholder="Password"></p><br>
-				<p><input type="submit" value="Login"></p>
-			</form>
+				<p><input type="submit" value="Login" onclick="loginUserAction()"></p>
+			
 
 		<!-- Footer -->
 			<footer id="footer">

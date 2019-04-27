@@ -62,6 +62,17 @@ public class UserAction {
 	SH_DAO_Group sh_gdao;
 	
 	@ResponseBody
+	@RequestMapping(value = "updateUserImageAction", method = RequestMethod.POST)
+	public String updateUserImageAction(HttpSession session, Model request, @RequestBody HashMap<String, Object> map)
+	{
+		String user_id = (String)session.getAttribute("user_id");
+		String image_id = YHFileUtil.saveJpegFromBase64((String)map.get("image"), Reference.user_image_path);
+		
+		yh_userDAO.updateUserImage(user_id, image_id);
+		
+		return "success";
+	}
+	@ResponseBody
 	@RequestMapping(value = "updateContentAction", method = RequestMethod.POST)
 	public String updateContentAction(HttpSession session, Model request, @RequestBody HashMap<String, Object> map)
 	{
@@ -74,8 +85,10 @@ public class UserAction {
 	}
 	@ResponseBody
 	@RequestMapping(value = "verifyUserIdAction", method = RequestMethod.POST)
-	public String verifyUserIdAction(String user_id)
+	public String verifyUserIdAction(HttpSession session, Model request, @RequestBody HashMap<String, Object> map)
 	{
+		String user_id = (String)map.get("user_id");
+		
 		User user = yh_userDAO.selectUserByUserId(user_id);
 		
 		if(user != null)
@@ -88,14 +101,37 @@ public class UserAction {
 		}
 	}
 	@ResponseBody
-	@RequestMapping(value = "loginUserFormAction", method = RequestMethod.POST)
-	public String loginUserFormAction(HttpSession session, String user_id, String password)
+	@RequestMapping(value = "loginUserAction", method = RequestMethod.POST)
+	public String loginUserAction(HttpSession session, Model request, @RequestBody HashMap<String, Object> map)
 	{
+		String user_id = (String)map.get("user_id");
+		String password = (String)map.get("password");
+		
 		User user = yh_userDAO.selectUserByUserIdPassword(user_id, password);
 		
 		if(user != null)
 		{
 			session.setAttribute("user_id", user_id);
+			return "true";
+		}
+		else
+		{
+			return "false";
+		}
+	}
+	@ResponseBody
+	@RequestMapping(value = "joinUserAction", method = RequestMethod.POST)
+	public String joinUserAction(HttpSession session, Model request, @RequestBody HashMap<String, Object> map)
+	{
+		String user_id = (String)map.get("user_id");
+		String password = (String)map.get("password");
+		String name = (String)map.get("name");
+		String region = (String)map.get("region");
+		
+		int result = yh_userDAO.insertUser(user_id, password, name, region);
+		
+		if(result != 0)
+		{
 			return "true";
 		}
 		else
