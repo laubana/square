@@ -37,7 +37,7 @@
 				var interval = setInterval(function()
 						{
 							if(typeof(map.image) != "undefined")
-							{								
+							{	
 								$("#user_image").attr("src", "data:image/jpeg;base64," + map.image);
 								
 								$.ajax({

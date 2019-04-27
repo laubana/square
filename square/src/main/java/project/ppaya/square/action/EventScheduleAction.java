@@ -69,6 +69,48 @@ public class EventScheduleAction {
 	SH_DAO_Group sh_gdao;
 	
 	@ResponseBody
+	@RequestMapping(value = "deleteEventScheduleCommentAction", method = RequestMethod.POST)
+	public void deleteGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	{
+		String user_id = (String)session.getAttribute("user_id");
+		int event_schedule_comment_id = (int)map.get("event_schedule_comment_id");
+		
+		yh_event_schedule_commentDAO.deleteEventScheduleCommentByEventScheduleCommentIdUserId(event_schedule_comment_id, user_id);
+	}
+	@ResponseBody
+	@RequestMapping(value = "updateEventScheduleCommentAction", method = RequestMethod.POST)
+	public void updateGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	{
+		String user_id = (String)session.getAttribute("user_id");
+		int event_schedule_comment_id = (int)map.get("event_schedule_comment_id");
+		String content = (String)map.get("content");
+		
+		yh_event_schedule_commentDAO.updateContentByEventScheduleCommentIdUserId(event_schedule_comment_id, user_id, content);
+	}
+	@ResponseBody
+	@RequestMapping(value = "insertEventScheduleImageAction", method = RequestMethod.POST)
+	public void insertEventScheduleImageAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	{
+		String user_id = (String)session.getAttribute("user_id");
+		int group_category_id = (int)map.get("group_category_id");
+		int group_id = (int)map.get("group_id");
+		int event_id = (int)map.get("event_id");
+		int event_schedule_id = (int)map.get("event_schedule_id");
+		String filename = (String)map.get("filename");
+		String image = (String)map.get("image");
+		String ext = YHFileUtil.getExt(filename);
+		String event_schedule_image_id = YHFileUtil.saveJpegFromBase64(image, Reference.event_schedule_image_path);
+		
+		yh_event_schedule_imageDAO.insertEventScheduleImage(event_schedule_image_id, user_id, group_category_id, group_id, event_id, event_schedule_id, filename, ext);
+		
+		ArrayList<String> source_description_list = YHMSComputerVisionUtil.getDescriptionList(Reference.event_schedule_image_path, event_schedule_image_id, "ja");
+			
+		for(int j = 0; j < source_description_list.size(); j++)
+		{
+			yh_event_schedule_imageDAO.updateDescriptionByEventScheduleImageId(source_description_list.get(j), event_schedule_image_id);
+		}
+	}
+	@ResponseBody
 	@RequestMapping(value = "createEventScheduleAction", method = RequestMethod.POST)
 	public void createEventScheduleAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{

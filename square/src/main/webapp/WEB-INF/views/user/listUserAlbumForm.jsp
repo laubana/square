@@ -105,7 +105,7 @@ label img {
 								<ul class="features">
 									<c:forEach var="group" items="${group_list}">
 										<li>
-											<input type="checkbox" id="gruopCheckbox${group.group_id}" name="groupCheckbox" class="check" value="${group.group_id}" group_id="${group.group_id}">
+											<input type="checkbox" id="gruopCheckbox${group.group_id}" name="groupCheckbox" class="check" value="${group.group_id}" group_id="${group.group_id}" upper_checkbox>
 											<label for="gruopCheckbox${group.group_id}">
 											<h3 align="center">${group.name}</h3>	
 											</label>
@@ -113,7 +113,7 @@ label img {
 									</c:forEach>
 								</ul>
 								<div align="center">
-											<input type="checkbox" id="faceCheckbox" name="faceCheckbox">
+											<input type="checkbox" id="faceCheckbox" name="faceCheckbox" upper_checkbox>
 											<label for="faceCheckbox">
 											<a align="center" style="color:maroon;" class="button">自撮りだけ<a>
 											</label>
@@ -228,7 +228,7 @@ function setAlbumAction()
 }
 $(document).ready(function () {
 	
-	$(".check").change(function()
+	$("[upper_checkbox]").change(function()
 	{
 		var map = {};
 		var group_id_list = [];

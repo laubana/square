@@ -123,6 +123,54 @@
 					error: function(error){console.log(error);}
 				});
 			}
+			function showUpdateCommentForm(comment_id)
+			{
+				var content = document.getElementById("comment" + comment_id).innerHTML;
+				var content_div = document.getElementById("comment_content_div" + comment_id);
+				var button_li = document.getElementById("update_comment_button" + comment_id);
+				
+				content_div.innerHTML = "<textarea id='update_comment_textarea" + comment_id + "' class='comment-block'>" + content + "</textarea>";
+				button_li.innerHTML = "<a href='javascript:updateCommentAction(" + comment_id + ")'>Submit</a>";				
+			}
+			function updateCommentAction(comment_id)
+			{
+				var map = {};
+				map["group_comment_id"] = comment_id;
+				map["content"] = document.getElementById("update_comment_textarea" + comment_id).value;
+				
+				$.ajax({
+					url: "updateGroupCommentAction",
+					type: "POST",
+					data: JSON.stringify(map),
+					contentType: "application/json; charset=UTF-8",
+					success: function()
+					{
+						document.getElementById("comment_content_div" + comment_id).innerHTML = "<p class='comment-text' id='comment" + comment_id + "'>" + map.content + "</p>";
+						document.getElementById("update_comment_button" + comment_id).innerHTML = '<a href="javascript:showUpdateCommentForm(' + comment_id + ')">Edit</a>';
+					},
+					error: function(error){console.log(error);}
+				});
+			}
+			function deleteCommentAction(comment_id)
+			{
+				if(confirm("削除？"))
+				{
+					var map = {};
+					map["group_comment_id"] = comment_id;
+					
+					$.ajax({
+						url: "deleteGroupCommentAction",
+						type: "POST",
+						data: JSON.stringify(map),
+						contentType: "application/json; charset=UTF-8",
+						success: function()
+						{
+							location.reload();
+						},
+						error: function(error){console.log(error);}
+					});
+				}
+			}
 		</script>
 	</head>
 	<body class="is-preload" onload="fn_onload();">
@@ -243,7 +291,9 @@
 							<a href="viewUserForm?user_id=${element.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${element.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 							</div>
 							<div class="comment-block">
+								<div id="comment_content_div${element.comment.group_comment_id}">
 								<p class="comment-text" id="comment${element.comment.group_comment_id}">${element.comment.content}</p>
+								</div>
 									<div class="bottom-comment">
 										<div class="comment-date">
 										
@@ -254,8 +304,8 @@
 												<li class="name"><a href="viewUserForm?user_id=${element.user.user_id}">${element.user.name}</a></li>
 												<li class="name" id="translation_button${element.comment.group_comment_id}"><a href="javascript:getGroupCommentTranslation(${element.comment.group_comment_id})">翻訳</a></li>
 												<c:if test="${element.user.user_id == sessionScope.user_id}">
-													<li class="name">Edit</li>
-													<li>Delete</li>
+													<li class="name" id="update_comment_button${element.comment.group_comment_id}"><a href="javascript:showUpdateCommentForm(${element.comment.group_comment_id})">Edit</a></li>
+													<li class="name" id="delete_comment_button${element.comment.group_comment_id}"><a href="javascript:deleteCommentAction(${element.comment.group_comment_id})">Delete</a></li>
 												</c:if>
 												
 													<select id="translation_language${element.comment.group_comment_id}">
@@ -297,8 +347,8 @@
 									<div class="features" align="center">
 										<article class="col-6 col-12-xsmall work-item">
 											<c:forEach var="element" items="${image_list}" end="3">
-												<a href="resources/image/event_schedule_image/${element.image.filename}" class="image thumb"><img src="resources/image/event_schedule_image/${element.image.filename}" alt="" /></a>
-											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${element.description}</h3>
+												<a href="resources/image/event_schedule_image/${element.image.event_schedule_image_id}" class="image thumb"><img src="resources/image/event_schedule_image/${element.image.event_schedule_image_id}" alt="" /></a>
+											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${image.description}</h3>
 											</c:forEach>
 											<br>
 										</article>

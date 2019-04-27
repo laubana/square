@@ -4,6 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.ppaya.square.yhmapper.YHEventCommentMapper">
+<delete id="deleteEventCommentByEventCommentIdUserId" parameterType="map">
+DELETE FROM TABLE_ECO
+WHERE
+	EVENT_COMMENT_ID = #{event_comment_id} AND
+	USER_ID = #{user_id}
+</delete>
+<update id="updateContentByEventCommentIdUserId" parameterType="map">
+UPDATE TABLE_ECO
+SET
+	CONTENT = #{content}
+WHERE
+	EVENT_COMMENT_ID = #{event_comment_id} AND
+	USER_ID = #{user_id}
+</update>
 <select id="selectEventCommentByEventCommentId" parameterType="int" resultType="EventComment">
 SELECT
 	*

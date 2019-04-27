@@ -4,6 +4,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleImageMapper">
+<select id="selectEventScheduleImageByEventId" parameterType="int" resultType="EventScheduleImage">
+SELECT
+	*
+FROM
+	TABLE_ESI
+WHERE
+	EVENT_ID = #{event_id}
+</select>
+<update id="updateDescriptionByEventScheduleImageId" parameterType="map">
+UPDATE TABLE_ESI
+SET
+	DESCRIPTION = #{description}
+WHERE
+	EVENT_SCHEDULE_IMAGE_ID = #{event_schedule_image_id}
+</update>
 <select id="selectEventSchedeuleImageOrderByInputdate" parameterType="int" resultType="EventScheduleImage">
 SELECT
 	*
@@ -25,7 +40,6 @@ INSERT INTO TABLE_ESI
 	GROUP_CATEGORY_ID,
 	GROUP_ID,
 	EVENT_ID,
-	USER_ID,
 	EVENT_SCHEDULE_ID,
 	FILENAME,
 	EXT
@@ -68,6 +82,14 @@ FROM
 	TABLE_ESI
 WHERE
 	EVENT_SCHEDULE_ID = #{event_schedule_id}
+</select>
+<select id="selectEventScheduleImageByGroupId" parameterType="int" resultType="EventScheduleImage">
+SELECT
+	*
+FROM
+	TABLE_ESI
+WHERE
+	GROUP_ID = #{group_id}
 </select>
 <select id="selectEventScheduleImageByEventScheduleIdList" parameterType="list" resultType="EventScheduleImage">
 SELECT

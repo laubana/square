@@ -1,6 +1,7 @@
 package project.ppaya.square.yhdao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,41 @@ public class YHEventScheduleCommentDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public int deleteEventScheduleCommentByEventScheduleCommentIdUserId(int event_schedule_comment_id, String user_id)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("event_schedule_comment_id", event_schedule_comment_id);
+		map.put("user_id", user_id);
+		
+		YHEventScheduleCommentMapper mapper = sqlSession.getMapper(YHEventScheduleCommentMapper.class);	
+		
+		try
+		{
+			result = mapper.deleteEventScheduleCommentByEventScheduleCommentIdUserId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
+	public int updateContentByEventScheduleCommentIdUserId(int event_schedule_comment_id, String user_id, String content)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("event_schedule_comment_id", event_schedule_comment_id);
+		map.put("user_id", user_id);
+		map.put("content", content);
+		
+		YHEventScheduleCommentMapper mapper = sqlSession.getMapper(YHEventScheduleCommentMapper.class);	
+		
+		try
+		{
+			result = mapper.updateContentByEventScheduleCommentIdUserId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public EventScheduleComment selectEventScheduleCommentByEventScheduleCommentId(int event_schedule_comment_id)
 	{
 		EventScheduleComment event_schedule_comment = null;

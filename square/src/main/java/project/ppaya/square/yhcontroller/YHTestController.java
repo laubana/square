@@ -216,21 +216,21 @@ public class YHTestController
 		
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
 		
-		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		/*for(int i = 0; i < event_schedule_image_list.size(); i++)
 		{
 			ArrayList<String> source_tag_list = YHMSComputerVisionUtil.getTagList(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "ja");
 
-			/*ArrayList<String> target_tag_list = new ArrayList<>();
+			ArrayList<String> target_tag_list = new ArrayList<>();
 			for(int j = 0; j < source_tag_list.size(); j++)
 			{
 				target_tag_list.add(YHGoogleTranslationUtil.getTranslation(source_tag_list.get(j), "ja", "ko"));
-			}*/
+			}
 			
 			for(int j = 0; j < source_tag_list.size(); j++)
 			{
 				yh_event_schedule_image_tagDAO.insertEventScheduleImageTag(event_schedule_image_list.get(i).getEvent_schedule_image_id(), source_tag_list.get(j));
 			}
-		}
+		}*/
 		for(int i = 0; i < event_schedule_image_list.size(); i++)
 		{
 			ArrayList<String> source_description_list = YHMSComputerVisionUtil.getDescriptionList(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "ja");
@@ -243,7 +243,7 @@ public class YHTestController
 			
 			for(int j = 0; j < source_description_list.size(); j++)
 			{
-				yh_event_schedule_image_descriptionDAO.insertEventScheduleImageDescription(event_schedule_image_list.get(i).getEvent_schedule_image_id(), source_description_list.get(j));
+				yh_event_schedule_imageDAO.updateDescriptionByEventScheduleImageId(source_description_list.get(j), event_schedule_image_list.get(i).getEvent_schedule_image_id());
 			}
 		}
 		for(int i = 0; i < event_schedule_image_list.size(); i++)

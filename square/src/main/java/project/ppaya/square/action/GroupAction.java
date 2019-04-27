@@ -73,6 +73,15 @@ public class GroupAction {
 	SH_DAO_Group sh_gdao;
 	
 	@ResponseBody
+	@RequestMapping(value = "deleteGroupCommentAction", method = RequestMethod.POST)
+	public void deleteGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	{
+		String user_id = (String)session.getAttribute("user_id");
+		int group_comment_id = (int)map.get("group_comment_id");
+		
+		yh_group_commentDAO.deleteGroupCommentByGroupCommentIdUserId(group_comment_id, user_id);
+	}
+	@ResponseBody
 	@RequestMapping(value = "listGroupAction", method = RequestMethod.POST)
 	public ArrayList<Group> listGroupAction(Model request, @RequestBody HashMap<String, Object> map)
 	{
@@ -118,6 +127,16 @@ public class GroupAction {
 		}
 		
 		return null;
+	}
+	@ResponseBody
+	@RequestMapping(value = "updateGroupCommentAction", method = RequestMethod.POST)
+	public void updateGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	{
+		String user_id = (String)session.getAttribute("user_id");
+		int group_comment_id = (int)map.get("group_comment_id");
+		String content = (String)map.get("content");
+		
+		yh_group_commentDAO.updateContentByGroupCommentIdUserId(group_comment_id, user_id, content);
 	}
 	@ResponseBody
 	@RequestMapping(value = "joinGroupAction", method = RequestMethod.POST)

@@ -7,6 +7,8 @@ import project.ppaya.square.vo.GroupComment;
 
 public interface YHGroupCommentMapper
 {
+	public int deleteGroupCommentByGroupCommentIdUserId(HashMap<String, Object> map);
+	public int updateContentByGroupCommentIdUserId(HashMap<String, Object> map);
 	public int insertGroupComment(HashMap<String, Object> map);
 	public GroupComment selectGroupCommentByGroupCommentId(int group_comment_id);
 	public ArrayList<Integer> getGroupCommentIdByGroupId(int group_id);

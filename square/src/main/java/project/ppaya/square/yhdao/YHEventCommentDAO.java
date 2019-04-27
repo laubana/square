@@ -1,6 +1,7 @@
 package project.ppaya.square.yhdao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,41 @@ public class YHEventCommentDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public int deleteEventCommentByEventCommentIdUserId(int event_comment_id, String user_id)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("event_comment_id", event_comment_id);
+		map.put("user_id", user_id);
+		
+		YHEventCommentMapper mapper = sqlSession.getMapper(YHEventCommentMapper.class);	
+		
+		try
+		{
+			result = mapper.deleteEventCommentByEventCommentIdUserId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
+	public int updateContentByEventCommentIdUserId(int event_comment_id, String user_id, String content)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("event_comment_id", event_comment_id);
+		map.put("user_id", user_id);
+		map.put("content", content);
+		
+		YHEventCommentMapper mapper = sqlSession.getMapper(YHEventCommentMapper.class);	
+		
+		try
+		{
+			result = mapper.updateContentByEventCommentIdUserId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public EventComment selectEventCommentByEventCommentId(int event_comment_id)
 	{
 		EventComment event_comment = null;

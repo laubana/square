@@ -68,6 +68,25 @@ public class EventAction {
 	SH_DAO_Group sh_gdao;
 	
 	@ResponseBody
+	@RequestMapping(value = "deleteEventCommentAction", method = RequestMethod.POST)
+	public void deleteGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	{
+		String user_id = (String)session.getAttribute("user_id");
+		int event_comment_id = (int)map.get("event_comment_id");
+		
+		yh_event_commentDAO.deleteEventCommentByEventCommentIdUserId(event_comment_id, user_id);
+	}
+	@ResponseBody
+	@RequestMapping(value = "updateEventCommentAction", method = RequestMethod.POST)
+	public void updateEventCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	{
+		String user_id = (String)session.getAttribute("user_id");
+		int event_comment_id = (int)map.get("event_comment_id");
+		String content = (String)map.get("content");
+		
+		yh_event_commentDAO.updateContentByEventCommentIdUserId(event_comment_id, user_id, content);
+	}
+	@ResponseBody
 	@RequestMapping(value = "createEventAction", method = RequestMethod.POST)
 	public void createEventAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{

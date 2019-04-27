@@ -36,8 +36,8 @@
 					<div id="main">
 					<c:forEach var="element" items="${image_list}">
 					<article class="thumb">
-							<a href="resources/image/event_schedule_image/${element.image.filename}" class="image"><img src="resources/image/event_schedule_image/${element.image.filename}" alt="" /></a>
-							<h2>${element.description}</h2>
+							<a href="resources/image/event_schedule_image/${element.image.event_schedule_image_id}" class="image"><img src="resources/image/event_schedule_image/${element.image.event_schedule_image_id}" alt="" /></a>
+							<h2>${element.image.description}</h2>
 						</article>
 					</c:forEach>
 					</div>

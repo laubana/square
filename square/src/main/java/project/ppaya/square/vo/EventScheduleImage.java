@@ -14,6 +14,7 @@ public class EventScheduleImage
 	String region;
 	String latitude;
 	String longitude;
+	String description;
 	int blind;
 	int self;
 	public EventScheduleImage(){}
@@ -88,6 +89,12 @@ public class EventScheduleImage
 	}
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public int getBlind() {
 		return blind;

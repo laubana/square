@@ -194,9 +194,18 @@ public class EventController
 		
 		ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventId(event_id);
 		
-		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
-		//Image List 전송
-		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
+		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventId(event_id);
+		ArrayList<HashMap<String, Object>> image_list = new ArrayList<>();		
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			HashMap<String, Object> map = new HashMap<>();
+			
+			map.put("image", event_schedule_image_list.get(i));
+			
+			image_list.add(map);
+		}
+		//EventScheduleImage List 전송
+		request.addAttribute("image_list", image_list);
 		
 		ArrayList<EventScheduleVideo> event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleIdList(event_schedule_id_list);
 		//Video List 전송
@@ -298,10 +307,33 @@ public class EventController
 			@RequestParam(value = "group_category_id", defaultValue = "1") int group_category_id,
 			@RequestParam(value = "group_id", defaultValue = "1") int group_id,
 			@RequestParam(value = "event_id", defaultValue = "1") int event_id
-			//int group_id,
-			//int event_id
 			)
 	{
+		GroupCategory group_category = yh_group_categoryDAO.selectGroupCategoryByGroupCategoryId(group_category_id);
+		//GroupCategory 전송
+		request.addAttribute("group_category", group_category);
+		
+		Group group = yh_groupDAO.selectGroupByGroupId(group_id);
+		//Group 전송
+		request.addAttribute("group", group);
+		
+		Event event = yh_eventDAO.selectEventByEventId(event_id);
+		//Event 전송
+		request.addAttribute("event", event);
+		
+		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventId(event_id);
+		ArrayList<HashMap<String, Object>> image_list = new ArrayList<>();		
+		for(int i = 0; i < event_schedule_image_list.size(); i++)
+		{
+			HashMap<String, Object> map = new HashMap<>();
+			
+			map.put("image", event_schedule_image_list.get(i));
+			
+			image_list.add(map);
+		}
+		//EventScheduleImage List 전송
+		request.addAttribute("image_list", image_list);
+		
 		return "event/listEventAlbumForm";
 	}
 }

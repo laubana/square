@@ -96,10 +96,7 @@
 			
 			<c:forEach var="event_schedule_attendace_count" items="${event_schedule_attendace_count_list_map.list}">
 				count = ${event_schedule_attendace_count.typeof};
-				rate = Math.floor(((count / attendance_count) * 10) / 2) * 10;
-				if(rate )
-				console.log(rate);
-				
+				rate = Math.floor(((count / attendance_count) * 10) / 2) * 10;				
 			
 				dataTable.addRows([
 						[ '参加者の最大人数', '', hsl2hex(9, 100, 80 - rate), "<div style='padding: 10px 10px 10px 10px;'>${event_schedule_attendace_count.typeof}</div>", new Date(${event_schedule_attendace_count.start_date}), new Date(${event_schedule_attendace_count.end_date}) ]
@@ -178,6 +175,106 @@
 	function componentToHex(c) {
 	    var hex = c.toString(16);
 	    return hex.length == 1 ? "0" + hex : hex;
+	}
+	function clickUploadEventScheduleImageFile()
+	{
+		document.getElementById("insert_event_schedule_image_file").click();
+	}
+	function insertEventScheduleImageAction()
+	{
+		var file = document.getElementById("insert_event_schedule_image_file").files[0];
+		
+		if(file.type == "image/jpg" || file.type == "image/JPG" ||
+				file.type == "image/png" || file.type == "image/PNG" ||
+				file.type == "image/jpeg" || file.type == "image/JPEG" || 
+				file.type == "image/bmp" || file.type == "image/BMP" ||
+				file.type == "image/gif" || file.type == "image/GIF")
+		{
+			var map = {};
+			map["filename"] = file.name;
+			map["group_category_id"] = ${group_category.group_category_id};
+			map["group_id"] = ${group.group_id};
+			map["event_id"] = ${event.event_id};
+			map["event_schedule_id"] = ${event_schedule.event_schedule_id};
+			
+			var image = new FileReader();
+			image.readAsDataURL(file);
+			image.onload = function()
+			{
+	            map["image"] = image.result.substring(image.result.indexOf(",") + 1);
+	        }
+
+			var interval = setInterval(function()
+					{
+						if(typeof(map.image) != "undefined")
+						{								
+							$.ajax({
+				    			url: "insertEventScheduleImageAction",
+				    			type: "POST",
+				    			data: JSON.stringify(map),
+				    			contentType: "application/json; charset=UTF-8",
+				    			success: function(result)
+				    			{
+				    				location.reload();
+				    			},
+				    			error: function(){}
+				    				});
+							clearInterval(interval);
+						}
+					},100);
+		}
+		else
+		{
+			alert("イメージのファイルではありません。");
+		}
+	}
+	function showUpdateCommentForm(comment_id)
+	{
+		var content = document.getElementById("comment" + comment_id).innerHTML;
+		var content_div = document.getElementById("comment_content_div" + comment_id);
+		var button_li = document.getElementById("update_comment_button" + comment_id);
+		
+		content_div.innerHTML = "<textarea id='update_comment_textarea" + comment_id + "' class='comment-block'>" + content + "</textarea>";
+		button_li.innerHTML = "<a href='javascript:updateCommentAction(" + comment_id + ")'>Submit</a>";				
+	}
+	function updateCommentAction(comment_id)
+	{
+		var map = {};
+		map["event_schedule_comment_id"] = comment_id;
+		map["content"] = document.getElementById("update_comment_textarea" + comment_id).value;
+		
+		$.ajax({
+			url: "updateEventScheduleCommentAction",
+			type: "POST",
+			data: JSON.stringify(map),
+			contentType: "application/json; charset=UTF-8",
+			success: function()
+			{
+				document.getElementById("comment_content_div" + comment_id).innerHTML = "<p class='comment-text' id='comment" + comment_id + "'>" + map.content + "</p>";
+				document.getElementById("update_comment_button" + comment_id).innerHTML = '<a href="javascript:showUpdateCommentForm(' + comment_id + ')">Edit</a>';
+			},
+			error: function(error){console.log(error);}
+		});
+	}
+	function deleteCommentAction(comment_id)
+	{
+		if(confirm("削除？"))
+		{
+			var map = {};
+			map["event_schedule_comment_id"] = comment_id;
+			
+			$.ajax({
+				url: "deleteEventScheduleCommentAction",
+				type: "POST",
+				data: JSON.stringify(map),
+				contentType: "application/json; charset=UTF-8",
+				success: function()
+				{
+					location.reload();
+				},
+				error: function(error){console.log(error);}
+			});
+		}
 	}
 	</script>
 	<!-- 맵 띄우는 스크립트 -->
@@ -337,7 +434,9 @@
 							<a href="viewUserForm?user_id=${element.user.user_id}" class="image avatar thumb"><img src="resources/image/user_image/${element.user.image_id}" alt="" style="width: 100px; height:auto;"></a>
 							</div>
 							<div class="comment-block">
+							<div id="comment_content_div${element.comment.event_schedule_comment_id}">
 								<p class="comment-text" id="comment${element.comment.event_schedule_comment_id}">${element.comment.content}</p>
+								</div>
 									<div class="bottom-comment">
 										<div class="comment-date">
 										
@@ -348,8 +447,8 @@
 												<li class="name"><a href="viewUserForm?user_id=${element.user.user_id}">${element.user.name}</a></li>
 												<li class="name" id="translation_button${element.comment.event_schedule_comment_id}"><a href="javascript:getEventScheduleCommentTranslation(${element.comment.event_schedule_comment_id})">翻訳</a></li>
 											<c:if test="${element.user.user_id == sessionScope.user_id}">
-												<li class="name">Edit</li>
-												<li>Delete</li>
+												<li class="name" id="update_comment_button${element.comment.event_schedule_comment_id}"><a href="javascript:showUpdateCommentForm(${element.comment.event_schedule_comment_id})">Edit</a></li>
+												<li class="name" id="delete_comment_button${element.comment.event_schedule_comment_id}"><a href="javascript:deleteCommentAction(${element.comment.event_schedule_comment_id})">Delete</a></li>
 											</c:if>
 													<select id="translation_language${element.comment.event_schedule_comment_id}">
 														  <option value="en">英語</option>
@@ -380,7 +479,8 @@
 							<c:if test="${event_attendance != null}">
 								<c:if test="${event_schedule_attendance != null}">
 								<div class="features" align="right">
-									<a href="javascript:withdrawEventScheduleAction()" class="button">追加</a><br><br><br>
+								<input type="file" id="insert_event_schedule_image_file" style="display:none;" onchange="insertEventScheduleImageAction()">
+									<a href="javascript:clickUploadEventScheduleImageFile()" class="button">追加</a><br><br><br>
 									</div>
 								</c:if>
 							</c:if>
@@ -389,9 +489,9 @@
 					<h4>写真</h4>
 									<div class="features" align="center">
 										<article class="col-6 col-12-xsmall work-item">
-											<c:forEach var="event_schedule_image" items="${event_schedule_image_list}">
-												<a href="resources/image/event_schedule_image/${event_schedule_image.filename}" class="image thumb"><img src="resources/image/event_schedule_image/${event_schedule_image.filename}" alt="" /></a>
-											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.event_schedule_id}</h3>
+											<c:forEach var="element" items="${image_list}">
+												<a href="resources/image/event_schedule_image/${element.image.event_schedule_image_id}" class="image thumb"><img src="resources/image/event_schedule_image/${element.image.event_schedule_image_id}" alt="" /></a>
+											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${element.image.description}</h3>
 											</c:forEach>
 											<br>
 									</div>
@@ -406,7 +506,7 @@
 											</c:if>
 											<br>
 											<div class="features" align="left">
-											<a href="listGroupAlbumForm?group_id=${group.group_id}" class="button">アルバムページへ</a>
+											<a href="listEventScheduleAlbumForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}" class="button">アルバムページへ</a>
 											</div>
 										
 									</div>

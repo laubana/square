@@ -16,6 +16,41 @@ public class YHGroupCommentDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public int deleteGroupCommentByGroupCommentIdUserId(int group_comment_id, String user_id)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("group_comment_id", group_comment_id);
+		map.put("user_id", user_id);
+		
+		YHGroupCommentMapper mapper = sqlSession.getMapper(YHGroupCommentMapper.class);	
+		
+		try
+		{
+			result = mapper.deleteGroupCommentByGroupCommentIdUserId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
+	public int updateContentByGroupCommentIdUserId(int group_comment_id, String user_id, String content)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("group_comment_id", group_comment_id);
+		map.put("user_id", user_id);
+		map.put("content", content);
+		
+		YHGroupCommentMapper mapper = sqlSession.getMapper(YHGroupCommentMapper.class);	
+		
+		try
+		{
+			result = mapper.updateContentByGroupCommentIdUserId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public int insertGroupComment(int group_id, String user_id, String content)
 	{
 		int result = 0;

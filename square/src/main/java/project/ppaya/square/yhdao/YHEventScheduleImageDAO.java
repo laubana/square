@@ -16,6 +16,51 @@ public class YHEventScheduleImageDAO
 	@Autowired
 	SqlSession sqlSession;
 
+	public ArrayList<EventScheduleImage> selectEventScheduleImageByEventId(int event_id)
+	{
+		ArrayList<EventScheduleImage> event_schedule_image_list = null;
+		
+		YHEventScheduleImageMapper mapper = sqlSession.getMapper(YHEventScheduleImageMapper.class);
+		
+		try
+		{
+			event_schedule_image_list = mapper.selectEventScheduleImageByEventId(event_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_image_list;
+	}
+	public int updateDescriptionByEventScheduleImageId(String description, String event_schedule_image_id)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("description", description);
+		map.put("event_schedule_image_id", event_schedule_image_id);
+		
+		YHEventScheduleImageMapper mapper = sqlSession.getMapper(YHEventScheduleImageMapper.class);
+		
+		try
+		{
+			result = mapper.updateDescriptionByEventScheduleImageId(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
+	public ArrayList<EventScheduleImage> selectEventScheduleImageByGroupId(int group_id)
+	{
+		ArrayList<EventScheduleImage> event_schedule_image_list = null;
+		
+		YHEventScheduleImageMapper mapper = sqlSession.getMapper(YHEventScheduleImageMapper.class);
+		
+		try
+		{
+			event_schedule_image_list = mapper.selectEventScheduleImageByGroupId(group_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return event_schedule_image_list;
+	}
 	public ArrayList<EventScheduleImage> selectEventScheduleImageByGroupIdListOrderByInputdate(ArrayList<Integer> group_id_list, int flag)
 	{
 		ArrayList<EventScheduleImage> event_schedule_image_list = null;
