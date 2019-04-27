@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import project.ppaya.square.vo.*;
 import project.ppaya.square.yhdao.*;
+import project.ppaya.square.yhthread.YHInsertEventScheduleImageFaceThread;
 import project.ppaya.square.yhutil.*;
 
 @Repository
@@ -152,6 +153,31 @@ public class YHTestController
 		current_date.set(Calendar.MILLISECOND, 0);
 		logger.debug("{}", current_date.getTime());
 		logger.debug("{}", current_date.getTime().getTime());
+	}
+	@RequestMapping(value = "yhtest6", method = RequestMethod.GET)
+	public void yhtest6(Model request)
+	{
+		ArrayList<String> event_schedule_image_id_list = yh_event_schedule_imageDAO.getEventScheduleImageIdByEventScheduleId(1);
+		for(int i = 0; i < event_schedule_image_id_list.size(); i++)
+		{
+			YHInsertEventScheduleImageFaceThread thread = new YHInsertEventScheduleImageFaceThread(Reference.event_schedule_image_path, event_schedule_image_id_list.get(i));
+			thread.start();
+		}
+		
+		while(true)
+		{
+			try
+			{
+				Thread.sleep(100);
+			}
+			catch(Exception error){}
+			if(YHInsertEventScheduleImageFaceThread.index == event_schedule_image_id_list.size())
+			{
+				break;
+			}
+		}
+		
+		logger.debug("{}", "done");
 	}
 	@RequestMapping(value = "yhinit", method = RequestMethod.GET)
 	public void yhinit()

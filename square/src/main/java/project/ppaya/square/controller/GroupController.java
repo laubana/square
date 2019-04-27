@@ -19,7 +19,6 @@ import project.ppaya.square.shdao.*;
 import project.ppaya.square.vo.*;
 import project.ppaya.square.yhdao.*;
 
-@Repository
 @Controller
 public class GroupController
 {	

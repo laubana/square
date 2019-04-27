@@ -18,8 +18,6 @@ import project.ppaya.square.shdao.*;
 import project.ppaya.square.vo.*;
 import project.ppaya.square.yhdao.*;
 
-
-
 @Controller
 public class MainController
 { 

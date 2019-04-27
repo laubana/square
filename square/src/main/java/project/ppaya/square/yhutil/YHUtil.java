@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import project.ppaya.square.vo.*;
 import project.ppaya.square.yhdao.*;
+import project.ppaya.square.yhthread.YHInsertEventScheduleImageFaceThread;
 
 @Repository
 public class YHUtil

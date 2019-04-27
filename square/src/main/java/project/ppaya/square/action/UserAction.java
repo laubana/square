@@ -21,7 +21,6 @@ import project.ppaya.square.vo.*;
 import project.ppaya.square.yhdao.*;
 import project.ppaya.square.yhutil.*;
 
-@Repository
 @Controller
 public class UserAction {
 
