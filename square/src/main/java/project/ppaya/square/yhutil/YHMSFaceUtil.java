@@ -218,19 +218,19 @@ public class YHMSFaceUtil
             	
             	if(result.charAt(0) == '{')
             	{
-            		JSONObject jsonObject = new JSONObject(result);
+            		/*JSONObject jsonObject = new JSONObject(result);
             		
             		System.err.println(jsonObject.toString(2));
             		
             		if(jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
             		{
-            			Thread.sleep(1000);
-            			continue;
+            			*/Thread.sleep(1000);
+            			continue;/*
             		}
             		else
             		{
             			return null;
-            		}
+            		}*/
             	}
             	else
             	{                    

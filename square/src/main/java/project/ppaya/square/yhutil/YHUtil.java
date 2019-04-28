@@ -3,6 +3,7 @@ package project.ppaya.square.yhutil;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import project.ppaya.square.vo.*;
 import project.ppaya.square.yhdao.*;
-import project.ppaya.square.yhthread.YHInsertEventScheduleImageFaceThread;
+import project.ppaya.square.yhthread.YHUpdateEventScheduleImageFaceThread;
+import project.ppaya.square.yhthread.YHUpdateEventScheduleVideoFaceThread;
 
 @Repository
 public class YHUtil
@@ -80,9 +82,12 @@ public class YHUtil
 		
 		ArrayList<EventScheduleVideo> event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleIdList(event_schedule_id_list);
 		
+		YHUpdateEventScheduleVideoFaceThread.index = 0;
 		for(int i = 0; i < event_schedule_video_list.size(); i++)
 		{			
-			if(event_schedule_video_list.get(i).getDetect_date() == null)
+			YHUpdateEventScheduleVideoFaceThread thread = new YHUpdateEventScheduleVideoFaceThread(event_schedule_video_list.get(i));
+			thread.start();
+			/*if(event_schedule_video_list.get(i).getDetect_date() == null)
 			{				
 				result = YHMSVideoIndexerUtil.getVideoIndex(event_schedule_video_list.get(i).getEvent_schedule_video_id());
 				
@@ -150,8 +155,22 @@ public class YHUtil
 						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(YHMSFaceUtil.getFaceId(Reference.event_schedule_video_face_path, event_schedule_video_image_id), event_schedule_video_image_id, event_schedule_video_list.get(i).getEvent_schedule_video_id());
 					}
 				}		
+			}*/
+		}
+		
+		while(true)
+		{
+			try
+			{
+				Thread.sleep(100);
+			}
+			catch(Exception error){}
+			if(YHUpdateEventScheduleVideoFaceThread.index == event_schedule_video_list.size())
+			{
+				break;
 			}
 		}
+		System.err.println("done");
 	}
 
 	public void updateEventScheduleVideoFace(String user_id)
@@ -164,9 +183,12 @@ public class YHUtil
 		
 		ArrayList<EventScheduleVideo> event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleIdList(event_schedule_id_list);
 		
+		YHUpdateEventScheduleVideoFaceThread.index = 0;
 		for(int i = 0; i < event_schedule_video_list.size(); i++)
 		{			
-			if(event_schedule_video_list.get(i).getDetect_date() == null)
+			YHUpdateEventScheduleVideoFaceThread thread = new YHUpdateEventScheduleVideoFaceThread(event_schedule_video_list.get(i));
+			thread.start();
+			/*if(event_schedule_video_list.get(i).getDetect_date() == null)
 			{				
 				result = YHMSVideoIndexerUtil.getVideoIndex(event_schedule_video_list.get(i).getEvent_schedule_video_id());
 				
@@ -248,8 +270,22 @@ public class YHUtil
 						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(YHMSFaceUtil.getFaceId(Reference.event_schedule_video_face_path, event_schedule_video_image_id), event_schedule_video_image_id, event_schedule_video_list.get(i).getEvent_schedule_video_id());
 					}
 				}		
+			}*/
+		}
+		
+		while(true)
+		{
+			try
+			{
+				Thread.sleep(100);
+			}
+			catch(Exception error){}
+			if(YHUpdateEventScheduleVideoFaceThread.index == event_schedule_video_list.size())
+			{
+				break;
 			}
 		}
+		System.err.println("done");
 	}
 	public void updateEventScheduleImageFace(String user_id)
 	{
@@ -261,9 +297,12 @@ public class YHUtil
 		
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
 		
+		YHUpdateEventScheduleImageFaceThread.index = 0;
 		for(int i = 0; i < event_schedule_image_list.size(); i++)
 		{
-			if(event_schedule_image_list.get(i).getDetect_date() == null)
+			YHUpdateEventScheduleImageFaceThread thread = new YHUpdateEventScheduleImageFaceThread(event_schedule_image_list.get(i));
+			thread.start();
+			/*if(event_schedule_image_list.get(i).getDetect_date() == null)
 			{
 				yh_event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image_list.get(i).getEvent_schedule_image_id(), (new Date()).getTime());
 				
@@ -302,8 +341,21 @@ public class YHUtil
 							jsonObject.getJSONObject("faceRectangle").getInt("height")
 							);
 				}
+			}*/
+		}
+		while(true)
+		{
+			try
+			{
+				Thread.sleep(100);
+			}
+			catch(Exception error){}
+			if(YHUpdateEventScheduleImageFaceThread.index == event_schedule_image_list.size())
+			{
+				break;
 			}
 		}
+		System.err.println("done");
 	}
 	public void updateImageAlbum(String user_id)
 	{

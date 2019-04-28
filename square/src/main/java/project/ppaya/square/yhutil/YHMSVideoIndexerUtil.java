@@ -96,6 +96,7 @@ public class YHMSVideoIndexerUtil
 	public static String getVideoIndex(String video_id) 
     {
         HttpClient httpClient = HttpClients.createDefault();
+        String result;
 
         try
         {
@@ -109,7 +110,11 @@ public class YHMSVideoIndexerUtil
 
             if(entity != null)
             {
-            	JSONObject jsonObject = new JSONObject(EntityUtils.toString(entity).trim());
+            	result = EntityUtils.toString(entity).trim();
+            	
+            	System.err.println(result);
+            	
+            	JSONObject jsonObject = new JSONObject(result);
             	return jsonObject.toString(2);
             }
             else{return null;}
