@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleCommentTagMapper">
+<delete id="deleteEventScheduleCommentByEventScheduleCommentId" parameterType="int">
+DELETE FROM TABLE_ESCOT
+WHERE
+	EVENT_SCHEDULE_COMMENT_ID = #{event_schedule_comment_id}
+</delete>
 <select id="getTagByEventScheduleCommentId" parameterType="int" resultType="string">
 SELECT
 	TAG

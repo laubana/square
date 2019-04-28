@@ -154,8 +154,7 @@
 					contentType: "application/json; charset=UTF-8",
 					success: function()
 					{
-						document.getElementById("comment_content_div" + comment_id).innerHTML = "<p class='comment-text' id='comment" + comment_id + "'>" + map.content + "</p>";
-						document.getElementById("update_comment_button" + comment_id).innerHTML = '<a href="javascript:showUpdateCommentForm(' + comment_id + ')">Edit</a>';
+						location.reload();
 					},
 					error: function(error){console.log(error);}
 				});
@@ -179,6 +178,21 @@
 						error: function(error){console.log(error);}
 					});
 				}
+			}
+			function writeEventCommentAction()
+			{
+				var map = {};
+				map["event_id"] = ${event.event_id};
+				map["content"] = $("#write_comment_content").val();
+			
+				$.ajax({
+					url: "writeEventCommentAction",
+					type: "POST",
+					data: JSON.stringify(map),
+					contentType: "application/json; charset=UTF-8",
+					success: function(){location.reload();},
+					error: function(error){console.log(error);}
+				});
 			}
 		</script>
 		
@@ -350,8 +364,15 @@
 							</div>
 						</div>
 						</c:forEach>
-						<textarea class="comment-block"></textarea><br>
-						<div align="right"><input type="button" value="作成"></div><br><br>
+						<c:if test="${sessionScope.user_id != null}">
+						<c:if test="${group_attendance != null}">
+							<c:if test="${event_attendance != null}">
+								<textarea class="comment-block" id="write_comment_content"></textarea><br>
+						<div align="right"><input type="button" id="write_comment_button" onclick="writeEventCommentAction()" value="作成"></div><br><br>
+							</c:if>
+						</c:if>
+					</c:if>
+						
 						<a href="listEventCommentForm?group_category_id=${group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}" class="button">コメントリストページへ</a>
 						
 						</div>		
@@ -367,7 +388,7 @@
 										<article class="col-6 col-12-xsmall work-item">
 											<c:forEach var="element" items="${image_list}" end="3">
 												<a href="resources/image/event_schedule_image/${element.image.event_schedule_image_id}" class="image thumb"><img src="resources/image/event_schedule_image/${element.image.event_schedule_image_id}" alt="" /></a>
-											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${element.image.event_schedule_id}</h3>
+											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${element.image.description}</h3>
 											</c:forEach>
 											<br>
 											</article>

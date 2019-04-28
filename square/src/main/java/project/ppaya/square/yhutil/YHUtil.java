@@ -14,6 +14,8 @@ import project.ppaya.square.vo.*;
 import project.ppaya.square.yhdao.*;
 import project.ppaya.square.yhthread.YHUpdateEventScheduleImageFaceThread;
 import project.ppaya.square.yhthread.YHUpdateEventScheduleVideoFaceThread1;
+import project.ppaya.square.yhthread.YHUpdateEventScheduleVideoFaceThread3;
+import project.ppaya.square.yhthread.YHUpdateVideoAlbumThread;
 
 @Repository
 public class YHUtil
@@ -58,9 +60,14 @@ public class YHUtil
 		
 		yh_video_albumDAO.updateSelfByUserId(user_id);
 		
+		int index = 0;
+		YHUpdateVideoAlbumThread.out_map.put(index, new HashMap<>());
 		for(int i = 0; i < event_schedule_video_id_list.size(); i++)
 		{
-			ArrayList<String> event_schedule_video_face_id_list = yh_event_schedule_video_faceDAO.getEventScheduleVideoFaceIdByEventScheduleVideoId(event_schedule_video_id_list.get(i));
+			YHUpdateVideoAlbumThread thread = new YHUpdateVideoAlbumThread(index, i, event_schedule_video_id_list.get(i), user);
+			thread.start();
+			
+			/*ArrayList<String> event_schedule_video_face_id_list = yh_event_schedule_video_faceDAO.getEventScheduleVideoFaceIdByEventScheduleVideoId(event_schedule_video_id_list.get(i));
 			
 			if(event_schedule_video_face_id_list.size() != 0)
 			{
@@ -70,8 +77,26 @@ public class YHUtil
 				{
 					yh_video_albumDAO.updateSelfByEventScheduleVideoIdUserId(event_schedule_video_id_list.get(i), user_id);
 				}
-			}
+			}*/
 		}
+		out_while:
+		while(true)
+		{
+			try
+			{
+				Thread.sleep(100);
+			}
+			catch(Exception error){error.printStackTrace();}
+			for(int i = 0; i < event_schedule_video_id_list.size(); i++)
+			{
+				if((boolean)YHUpdateVideoAlbumThread.out_map.get(index).get(i) == false)
+				{
+					continue out_while;
+				}
+			}
+			break;
+		}
+		System.err.println("done");
 	}
 	/*public void updateEventScheduleVideoFaceByGroupId(int group_id)
 	{

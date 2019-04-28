@@ -7,6 +7,7 @@ import project.ppaya.square.vo.EventComment;
 
 public interface YHEventCommentMapper
 {
+	public int insertEventComment(HashMap<String, Object> map);
 	public int deleteEventCommentByEventCommentIdUserId(HashMap<String, Object> map);
 	public int updateContentByEventCommentIdUserId(HashMap<String, Object> map);
 	public EventComment selectEventCommentByEventCommentId(int event_comment_id);

@@ -40,6 +40,8 @@ public class EventScheduleAction {
 	@Autowired
 	YHEventScheduleDAO yh_event_scheduleDAO;
 	@Autowired
+	YHEventScheduleCommentTagDAO yh_event_schedule_comment_tagDAO;
+	@Autowired
 	YHEventScheduleAttendanceDAO yh_event_schedule_attendanceDAO;
 	@Autowired
 	YHEventScheduleImageDAO yh_event_schedule_imageDAO;
@@ -68,6 +70,39 @@ public class EventScheduleAction {
 	SH_DAO_Group sh_gdao;
 	
 	@ResponseBody
+	@RequestMapping(value = "writeEventScheduleCommentAction", method = RequestMethod.POST)
+	public void writeEventScheduleCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	{
+		String user_id = (String)session.getAttribute("user_id");
+		int event_schedule_id = (int)map.get("event_schedule_id");
+		String content = (String)map.get("content");
+		
+		while(true)
+		{
+			if(yh_event_schedule_commentDAO.insertEventScheduleComment(event_schedule_id, user_id, content) != 0)
+			{
+				break;
+			}
+		}
+		
+		ArrayList<EventScheduleComment> event_schedule_comment_list = yh_event_schedule_commentDAO.selectEventScheduleCommentByEventScheduleId(event_schedule_id);		
+		for(int i = 0; i < event_schedule_comment_list.size(); i++)
+		{
+			ArrayList<String> source_tag_list = YHMSTextAnalyticsUtil.getKeyPhraseList(event_schedule_comment_list.get(i).getContent(), "en");
+			
+			ArrayList<String> target_tag_list = new ArrayList<>();
+			for(int j = 0; j < source_tag_list.size(); j++)
+			{
+				target_tag_list.add(YHGoogleTranslationUtil.getTranslation(source_tag_list.get(j), "en", "ja"));
+			}
+			
+			for(int j = 0; j < source_tag_list.size(); j++)
+			{
+				yh_event_schedule_comment_tagDAO.insertEventScheduleCommentTag(event_schedule_comment_list.get(i).getEvent_schedule_comment_id(), source_tag_list.get(j));
+			}
+		}
+	}
+	@ResponseBody
 	@RequestMapping(value = "deleteEventScheduleCommentAction", method = RequestMethod.POST)
 	public void deleteGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{
@@ -85,6 +120,21 @@ public class EventScheduleAction {
 		String content = (String)map.get("content");
 		
 		yh_event_schedule_commentDAO.updateContentByEventScheduleCommentIdUserId(event_schedule_comment_id, user_id, content);
+		
+		yh_event_schedule_comment_tagDAO.deleteEventScheduleCommentByEventScheduleCommentId(event_schedule_comment_id);
+		
+		ArrayList<String> source_tag_list = YHMSTextAnalyticsUtil.getKeyPhraseList(content, "en");
+			
+		ArrayList<String> target_tag_list = new ArrayList<>();
+		for(int j = 0; j < source_tag_list.size(); j++)
+		{
+			target_tag_list.add(YHGoogleTranslationUtil.getTranslation(source_tag_list.get(j), "en", "ja"));
+		}
+		
+		for(int j = 0; j < source_tag_list.size(); j++)
+		{
+			yh_event_schedule_comment_tagDAO.insertEventScheduleCommentTag(event_schedule_comment_id, source_tag_list.get(j));
+		}
 	}
 	@ResponseBody
 	@RequestMapping(value = "insertEventScheduleImageAction", method = RequestMethod.POST)

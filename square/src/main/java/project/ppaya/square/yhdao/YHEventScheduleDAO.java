@@ -16,6 +16,23 @@ public class YHEventScheduleDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public ArrayList<Integer> getEventScheduleIdByGroupIdListEventScheduleIdList(ArrayList<Integer> group_id_list, ArrayList<Integer> old_event_schedule_id_list)
+	{
+		ArrayList<Integer> new_event_schedule_id_list = null;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("group_id_list", group_id_list);
+		map.put("event_schedule_id_list", old_event_schedule_id_list);
+		
+		YHEventScheduleMapper mapper = sqlSession.getMapper(YHEventScheduleMapper.class);
+		
+		try
+		{
+			new_event_schedule_id_list = mapper.getEventScheduleIdByGroupIdListEventScheduleIdList(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return new_event_schedule_id_list;
+	}
 	public ArrayList<Integer> getEventScheduleIdByGroupId(int group_id)
 	{
 		ArrayList<Integer> event_schedule_id_list = null;

@@ -16,6 +16,20 @@ public class YHEventCommentTagDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public int deleteEventCommentByEventCommentId(int event_comment_id)
+	{
+		int result = 0;
+		
+		YHEventCommentTagMapper mapper = sqlSession.getMapper(YHEventCommentTagMapper.class);
+		
+		try
+		{
+			result = mapper.deleteEventCommentByEventCommentId(event_comment_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public ArrayList<String> getTagByEventCommentId(int event_comment_id)
 	{
 		ArrayList<String> tag_list = null;

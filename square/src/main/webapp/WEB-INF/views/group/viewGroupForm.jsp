@@ -145,8 +145,7 @@
 					contentType: "application/json; charset=UTF-8",
 					success: function()
 					{
-						document.getElementById("comment_content_div" + comment_id).innerHTML = "<p class='comment-text' id='comment" + comment_id + "'>" + map.content + "</p>";
-						document.getElementById("update_comment_button" + comment_id).innerHTML = '<a href="javascript:showUpdateCommentForm(' + comment_id + ')">Edit</a>';
+						location.reload();
 					},
 					error: function(error){console.log(error);}
 				});
@@ -348,7 +347,7 @@
 										<article class="col-6 col-12-xsmall work-item">
 											<c:forEach var="element" items="${image_list}" end="3">
 												<a href="resources/image/event_schedule_image/${element.image.event_schedule_image_id}" class="image thumb"><img src="resources/image/event_schedule_image/${element.image.event_schedule_image_id}" alt="" /></a>
-											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${image.description}</h3>
+											<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${element.image.description}</h3>
 											</c:forEach>
 											<br>
 										</article>
@@ -435,9 +434,11 @@
 					url: "writeGroupCommentAction",
 					type: "POST",
 					data: JSON.stringify(map),
-					dataType: "JSON",
 					contentType: "application/json; charset=UTF-8",
-					success: function(result){location.reload()},
+					success: function()
+					{
+						location.reload();
+					},
 					error: function(error){console.log(error);}
 				});
 			}

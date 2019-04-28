@@ -4,6 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="project.ppaya.square.yhmapper.YHEventScheduleMapper">
+<select id="getEventScheduleIdByGroupIdListEventScheduleIdList" parameterType="map" resultType="int">
+SELECT DISTINCT
+	EVENT_SCHEDULE_ID
+FROM
+	TABLE_ES
+WHERE
+	(
+	1 = 0
+	<foreach item="group_id" collection="group_id_list" open="OR" separator="OR">
+		GROUP_ID = #{group_id}
+	</foreach>
+	)
+	AND
+	(
+	1 = 0
+	<foreach item="event_schedule_id" collection="event_schedule_id_list" open="OR" separator="OR">
+		EVENT_SCHEDULE_ID = #{event_schedule_id}
+	</foreach>
+	)
+</select>
 <select id="getEventScheduleIdByGroupId" parameterType="int" resultType="int">
 SELECT
 	EVENT_SCHEDULE_ID

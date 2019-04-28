@@ -109,7 +109,7 @@ public class YHUpdateEventScheduleVideoFaceThread1 extends Thread
 					{
 						Thread.sleep(100);
 					}
-					catch(Exception error){}
+					catch(Exception error){error.printStackTrace();}
 
 					for(int i = 0; i < jsonArray.length(); i++)
 					{

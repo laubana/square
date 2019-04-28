@@ -7,6 +7,7 @@ import project.ppaya.square.vo.EventSchedule;
 
 public interface YHEventScheduleMapper
 {	
+	public ArrayList<Integer> getEventScheduleIdByGroupIdListEventScheduleIdList(HashMap<String, Object> map);
 	public ArrayList<Integer> getEventScheduleIdByGroupId(int group_id);
 	public ArrayList<Integer> getEventScheduleIdByGroupIdList(ArrayList<Integer> group_id_list);
 	public ArrayList<EventSchedule> selectEventScheduleByGroupId(int group_id);

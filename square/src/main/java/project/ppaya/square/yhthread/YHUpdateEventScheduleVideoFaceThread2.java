@@ -88,7 +88,7 @@ public class YHUpdateEventScheduleVideoFaceThread2 extends Thread
 			{
 				Thread.sleep(100);
 			}
-			catch(Exception error){}
+			catch(Exception error){error.printStackTrace();}
 			for(int i = 0; i < jsonArray.length(); i++)
 			{
 				if((boolean)YHUpdateEventScheduleVideoFaceThread3.out_map.get(this.i).get(i) == false)

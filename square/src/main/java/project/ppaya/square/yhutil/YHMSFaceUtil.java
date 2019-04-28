@@ -5,10 +5,7 @@ import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.StringEntity;
@@ -23,10 +20,10 @@ import project.ppaya.square.yhdao.*;
 
 public class YHMSFaceUtil
 {	
+	private static int delay = 0;
 	public static ArrayList<String> getSimilarEventScheduleImageFaceIdByFaceId(ArrayList<String> face_id_list, String face_id)
 	{
 		ArrayList<String> similar_event_schedule_image_face_id_list = new ArrayList<>();
-		YHLogDAO yh_logDAO = (YHLogDAO)YHBeanUtil.getBean("YHLogDAO");
 		String result = null;
 		JSONArray jsonArray = null;
 		JSONObject jsonObject = null;
@@ -65,7 +62,6 @@ public class YHMSFaceUtil
             	result = EntityUtils.toString(httpResponse.getEntity()).trim();
 
             	System.err.println(result);
-            	yh_logDAO.insertLog(result);
             	
             	if(result.charAt(0) == '{')
             	{
@@ -73,7 +69,7 @@ public class YHMSFaceUtil
             		
             		if(jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
             		{
-            			Thread.sleep(1000);
+            			Thread.sleep(delay);
             			continue;
             		}
             		else
@@ -129,7 +125,8 @@ public class YHMSFaceUtil
             	
             	if(result.charAt(0) == '{')
             	{
-            		Thread.sleep(500);
+            		Thread.sleep(delay);
+            		continue;
             	}
             	else
             	{                    
@@ -170,7 +167,7 @@ public class YHMSFaceUtil
             	
             	if(result.charAt(0) == '{')
             	{
-            		Thread.sleep(500);
+            		Thread.sleep(delay);
             		continue;
             	}
             	else

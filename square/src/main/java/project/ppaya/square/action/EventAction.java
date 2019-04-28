@@ -35,6 +35,8 @@ public class EventAction {
 	@Autowired
 	YHEventCommentDAO yh_event_commentDAO;
 	@Autowired
+	YHEventCommentTagDAO yh_event_comment_tagDAO;
+	@Autowired
 	YHEventScheduleDAO yh_event_scheduleDAO;
 	@Autowired
 	YHEventScheduleAttendanceDAO yh_event_schedule_attendanceDAO;
@@ -84,6 +86,21 @@ public class EventAction {
 		String content = (String)map.get("content");
 		
 		yh_event_commentDAO.updateContentByEventCommentIdUserId(event_comment_id, user_id, content);
+		
+		yh_event_comment_tagDAO.deleteEventCommentByEventCommentId(event_comment_id);
+		
+		ArrayList<String> source_tag_list = YHMSTextAnalyticsUtil.getKeyPhraseList(content, "en");
+			
+		ArrayList<String> target_tag_list = new ArrayList<>();
+		for(int j = 0; j < source_tag_list.size(); j++)
+		{
+			target_tag_list.add(YHGoogleTranslationUtil.getTranslation(source_tag_list.get(j), "en", "ja"));
+		}
+		
+		for(int j = 0; j < source_tag_list.size(); j++)
+		{
+			yh_event_comment_tagDAO.insertEventCommentTag(event_comment_id, source_tag_list.get(j));
+		}
 	}
 	@ResponseBody
 	@RequestMapping(value = "createEventAction", method = RequestMethod.POST)
@@ -188,5 +205,38 @@ public class EventAction {
 		ArrayList<Group> group_list = yh_groupDAO.selectGroupByNameNotGroupIdList(name, group_id_list);
 		
 		return group_list;
+	}
+	@ResponseBody
+	@RequestMapping(value = "writeEventCommentAction", method = RequestMethod.POST)
+	public void writeEventCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	{
+		String user_id = (String)session.getAttribute("user_id");
+		int event_id = (int)map.get("event_id");
+		String content = (String)map.get("content");
+		
+		while(true)
+		{
+			if(yh_event_commentDAO.insertEventComment(event_id, user_id, content) != 0)
+			{
+				break;
+			}
+		}
+		
+		ArrayList<EventComment> event_comment_list = yh_event_commentDAO.selectEventCommentByEventId(event_id);		
+		for(int i = 0; i < event_comment_list.size(); i++)
+		{
+			ArrayList<String> source_tag_list = YHMSTextAnalyticsUtil.getKeyPhraseList(event_comment_list.get(i).getContent(), "en");
+			
+			ArrayList<String> target_tag_list = new ArrayList<>();
+			for(int j = 0; j < source_tag_list.size(); j++)
+			{
+				target_tag_list.add(YHGoogleTranslationUtil.getTranslation(source_tag_list.get(j), "en", "ja"));
+			}
+			
+			for(int j = 0; j < source_tag_list.size(); j++)
+			{
+				yh_event_comment_tagDAO.insertEventCommentTag(event_comment_list.get(i).getEvent_comment_id(), source_tag_list.get(j));
+			}
+		}
 	}
 }

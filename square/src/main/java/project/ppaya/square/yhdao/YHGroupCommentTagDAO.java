@@ -16,6 +16,20 @@ public class YHGroupCommentTagDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public int deleteGroupCommentByGroupCommentId(int group_comment_id)
+	{
+		int result = 0;
+		
+		YHGroupCommentTagMapper mapper = sqlSession.getMapper(YHGroupCommentTagMapper.class);
+		
+		try
+		{
+			result = mapper.deleteGroupCommentByGroupCommentId(group_comment_id);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public ArrayList<String> getTagByGroupCommentIdList(ArrayList<Integer> group_comment_id_list)
 	{
 		ArrayList<String> group_comment_tag_tag_list = null;

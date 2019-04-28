@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.ppaya.square.yhmapper.YHGroupCommentTagMapper">
+<delete id="deleteGroupCommentByGroupCommentId" parameterType="int">
+DELETE FROM TABLE_GCOT
+WHERE
+	GROUP_COMMENT_ID = #{group_comment_id}
+</delete>
 <insert id="insertGroupCommentTag" parameterType="map">
 INSERT INTO TABLE_GCOT
 (

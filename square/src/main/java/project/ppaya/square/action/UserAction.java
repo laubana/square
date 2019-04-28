@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import project.ppaya.square.shdao.*;
 import project.ppaya.square.vo.*;
 import project.ppaya.square.yhdao.*;
+import project.ppaya.square.yhthread.YHRefreshAlbumThread;
+import project.ppaya.square.yhthread.YHUpdateVideoAlbumThread;
 import project.ppaya.square.yhutil.*;
 
 @Controller
@@ -198,28 +200,13 @@ public class UserAction {
 		
 		User user = yh_userDAO.selectUserByUserId(user_id);
 		
-		ArrayList<Integer> event_id_list = yh_eventDAO.getEventIdByGroupIdList(group_id_list);
-		
-		ArrayList<Integer> old_event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByEventIdList(event_id_list);
-		
 		ArrayList<Integer> attendance_event_schedule_id_list = yh_event_schedule_attendanceDAO.getEventScheduleIdByUserId(user_id);
 		
-		ArrayList<Integer> new_event_schedule_id_list = new ArrayList<>();
-		for(int i = 0; i < old_event_schedule_id_list.size(); i++)
-		{
-			for(int j = 0; j < attendance_event_schedule_id_list.size(); j++)
-			{
-				if(old_event_schedule_id_list.get(i) == attendance_event_schedule_id_list.get(j))
-				{
-					new_event_schedule_id_list.add(old_event_schedule_id_list.get(i));
-					break;
-				}
-			}
-		}
+		ArrayList<Integer> event_schedule_id_list = yh_event_scheduleDAO.getEventScheduleIdByGroupIdListEventScheduleIdList(group_id_list, attendance_event_schedule_id_list);
 		
-		ArrayList<String> event_schedule_image_id_list = yh_event_schedule_imageDAO.getEventScheduleImageIdByEventScheduleIdList(new_event_schedule_id_list);
+		ArrayList<String> event_schedule_image_id_list = yh_event_schedule_imageDAO.getEventScheduleImageIdByEventScheduleIdList(event_schedule_id_list);
 		
-		ArrayList<String> event_schedule_video_id_list = yh_event_schedule_videoDAO.getEventScheduleVideoIdByEventScheduleIdList(new_event_schedule_id_list);
+		ArrayList<String> event_schedule_video_id_list = yh_event_schedule_videoDAO.getEventScheduleVideoIdByEventScheduleIdList(event_schedule_id_list);
 		
 		ArrayList<EventScheduleImage> event_schedule_image_list;
 		
@@ -245,10 +232,15 @@ public class UserAction {
 				image_list.add(image_list_map);
 			}
 			
-			event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleVideoIdList(event_schedule_video_id_list);			
+			event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleVideoIdList(event_schedule_video_id_list);
+			int index = 0;
+			YHRefreshAlbumThread.out_map.put(index, new HashMap<>());
+			YHRefreshAlbumThread.video_list = new ArrayList<>();
 			for(int i = 0; i < event_schedule_video_list.size(); i++)
 			{
-				HashMap<String, Object> video_list_map = new HashMap<>();
+				YHRefreshAlbumThread thread = new YHRefreshAlbumThread(index, i, event_schedule_video_list.get(i), user);
+				thread.start();
+				/*HashMap<String, Object> video_list_map = new HashMap<>();
 				
 				video_list_map.put("index", i);
 				video_list_map.put("video", event_schedule_video_list.get(i));
@@ -266,12 +258,30 @@ public class UserAction {
 					video_list_map.put("appearance_list", new ArrayList<VideoAppearance>());
 				}
 				
-				video_list.add(video_list_map);
+				video_list.add(video_list_map);*/
 			}
+			out_while:
+			while(true)
+			{
+				try
+				{
+					Thread.sleep(100);
+				}
+				catch(Exception error){error.printStackTrace();}
+				for(int i = 0; i < event_schedule_video_list.size(); i++)
+				{
+					if((boolean)YHRefreshAlbumThread.out_map.get(index).get(i) == false)
+					{
+						continue out_while;
+					}
+				}
+				break;
+			}
+			video_list = YHRefreshAlbumThread.video_list;
 		}
 		else
 		{
-			event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(new_event_schedule_id_list);
+			event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
 			for(int i = 0; i < event_schedule_image_list.size(); i++)
 			{
 				HashMap<String, Object> image_list_map = new HashMap<>();
@@ -283,16 +293,22 @@ public class UserAction {
 				image_list.add(image_list_map);
 			}
 			
-			event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleIdList(new_event_schedule_id_list);
+			event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleVideoIdList(event_schedule_video_id_list);
+			int index = 0;
+			YHRefreshAlbumThread.out_map.put(index, new HashMap<>());
+			YHRefreshAlbumThread.video_list = new ArrayList<>();
 			for(int i = 0; i < event_schedule_video_list.size(); i++)
 			{
-				HashMap<String, Object> video_list_map = new HashMap<>();
+				YHRefreshAlbumThread thread = new YHRefreshAlbumThread(index, i, event_schedule_video_list.get(i), user);
+				thread.start();
+				/*HashMap<String, Object> video_list_map = new HashMap<>();
 				
 				video_list_map.put("index", i);
 				video_list_map.put("video", event_schedule_video_list.get(i));
 				video_list_map.put("blind", yh_video_albumDAO.getBlindByUserIdEventScheduleVideoId(user_id, event_schedule_video_list.get(i).getEvent_schedule_video_id()));
 				
 				ArrayList<String> face_id_list = yh_event_schedule_video_faceDAO.getEventScheduleVideoFaceIdByEventScheduleVideoId(event_schedule_video_list.get(i).getEvent_schedule_video_id());
+				
 				if(face_id_list.size() != 0)
 				{
 					ArrayList<String> similar_face_id_list = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(face_id_list, YHMSFaceUtil.getFaceId(Reference.user_image_path, user.getImage_id()));
@@ -303,9 +319,26 @@ public class UserAction {
 					video_list_map.put("appearance_list", new ArrayList<VideoAppearance>());
 				}
 				
-				
-				video_list.add(video_list_map);
+				video_list.add(video_list_map);*/
 			}
+			out_while:
+			while(true)
+			{
+				try
+				{
+					Thread.sleep(100);
+				}
+				catch(Exception error){error.printStackTrace();}
+				for(int i = 0; i < event_schedule_video_list.size(); i++)
+				{
+					if((boolean)YHRefreshAlbumThread.out_map.get(index).get(i) == false)
+					{
+						continue out_while;
+					}
+				}
+				break;
+			}
+			video_list = YHRefreshAlbumThread.video_list;
 		}
 
 		HashMap<String, Object> result = new HashMap<>();

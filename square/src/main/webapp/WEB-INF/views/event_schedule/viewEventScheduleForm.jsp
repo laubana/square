@@ -132,7 +132,7 @@
 	}
 	function joinEventScheduleAction()
 	{
-		location.href = "joinEventScheduleForm?${group_category.group_category_id}?group_id=${group.group_id}&event_id=${event.event_id}";
+		location.href = "joinEventScheduleForm?${group_category.group_category_id}?group_id=${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}";
 	}	
 	function hsl2hex(h, s, l) {
 	    var m1, m2, hue;
@@ -250,8 +250,7 @@
 			contentType: "application/json; charset=UTF-8",
 			success: function()
 			{
-				document.getElementById("comment_content_div" + comment_id).innerHTML = "<p class='comment-text' id='comment" + comment_id + "'>" + map.content + "</p>";
-				document.getElementById("update_comment_button" + comment_id).innerHTML = '<a href="javascript:showUpdateCommentForm(' + comment_id + ')">Edit</a>';
+				location.reload();
 			},
 			error: function(error){console.log(error);}
 		});
@@ -275,6 +274,21 @@
 				error: function(error){console.log(error);}
 			});
 		}
+	}
+	function writeEventScheduleCommentAction()
+	{
+		var map = {};
+		map["event_schedule_id"] = ${event_schedule.event_schedule_id};
+		map["content"] = $("#write_comment_content").val();
+	
+		$.ajax({
+			url: "writeEventScheduleCommentAction",
+			type: "POST",
+			data: JSON.stringify(map),
+			contentType: "application/json; charset=UTF-8",
+			success: function(){location.reload();},
+			error: function(error){console.log(error);}
+		});
 	}
 	</script>
 	<!-- 맵 띄우는 스크립트 -->
@@ -466,6 +480,17 @@
 						</div>
 						</c:forEach>	
 						</div>
+						<c:if test="${sessionScope.user_id != null}">
+						<c:if test="${group_attendance != null}">
+							<c:if test="${event_attendance != null}">
+								<c:if test="${event_schedule_attendance != null}">
+									<textarea class="comment-block" id="write_comment_content"></textarea><br>
+						<div align="right"><input type="button" id="write_comment_button" onclick="writeEventScheduleCommentAction()" value="作成"></div><br><br>
+								</c:if>
+							</c:if>
+						</c:if>
+					</c:if>
+						
 						<a href="listEventScheduleCommentForm?group_category_id=${group_category.group_category_id}&group_id${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}" class="button">コメントリストページへ</a>		
 								</div>
 							</section>

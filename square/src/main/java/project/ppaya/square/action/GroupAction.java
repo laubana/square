@@ -6,13 +6,11 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -136,6 +134,21 @@ public class GroupAction {
 		String content = (String)map.get("content");
 		
 		yh_group_commentDAO.updateContentByGroupCommentIdUserId(group_comment_id, user_id, content);
+		
+		yh_group_comment_tagDAO.deleteGroupCommentByGroupCommentId(group_comment_id);
+		
+		ArrayList<String> source_tag_list = YHMSTextAnalyticsUtil.getKeyPhraseList(content, "en");
+			
+		ArrayList<String> target_tag_list = new ArrayList<>();
+		for(int j = 0; j < source_tag_list.size(); j++)
+		{
+			target_tag_list.add(YHGoogleTranslationUtil.getTranslation(source_tag_list.get(j), "en", "ja"));
+		}
+		
+		for(int j = 0; j < source_tag_list.size(); j++)
+		{
+			yh_group_comment_tagDAO.insertGroupCommentTag(group_comment_id, source_tag_list.get(j));
+		}
 	}
 	@ResponseBody
 	@RequestMapping(value = "joinGroupAction", method = RequestMethod.POST)

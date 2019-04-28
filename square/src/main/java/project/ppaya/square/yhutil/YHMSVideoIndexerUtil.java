@@ -1,18 +1,12 @@
 package project.ppaya.square.yhutil;
 
-import java.io.File;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import project.ppaya.square.vo.*;
@@ -20,6 +14,7 @@ import project.ppaya.square.yhdao.*;
 
 public class YHMSVideoIndexerUtil
 {	
+	public static int delay = 0;
 	public static String getThumbnail(String video_id, String thumbnail_id)
 	{
 		HttpClient httpClient = HttpClients.createDefault();
@@ -44,7 +39,8 @@ public class YHMSVideoIndexerUtil
             	
             	if(result.charAt(0) == '{' || result.charAt(0) == '[')
             	{
-            		Thread.sleep(1000);
+            		Thread.sleep(delay);
+            		continue;
             	}
             	else
             	{                    
@@ -76,43 +72,14 @@ public class YHMSVideoIndexerUtil
             	
             	if(result.charAt(0) == '{' || result.charAt(0) == '[')
             	{
-            		Thread.sleep(1000);
+            		Thread.sleep(delay);
+            		continue;
             	}
             	else
             	{                    
                     return result.replaceAll("\"", "");
             	}
             }
-        }
-        catch(Exception error){error.printStackTrace(); return null;}
-	}
-	public static String uploadVideo(String path, String filename)
-	{
-		HttpClient httpClient = HttpClients.createDefault();
-
-        try
-        {
-            URIBuilder uriBuilder = new URIBuilder("https://api.videoindexer.ai/trial/Accounts/"+ Reference.ms_video_indexer_id +"/Videos?name=" + filename + "&accessToken=" + getAccessToken());
-
-            HttpPost httpPost = new HttpPost(uriBuilder.build());
-	        
-            MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
-            
-            multipartEntityBuilder.addBinaryBody("film2", new File(path + "\\" + filename));
-            
-            HttpEntity httpEntity = multipartEntityBuilder.build();
-            
-            httpPost.setEntity(httpEntity);
-
-            HttpResponse response = httpClient.execute(httpPost);
-            httpEntity = response.getEntity();
-
-            if(httpEntity != null)
-            {
-            	JSONObject jsonObject = new JSONObject(EntityUtils.toString(httpEntity).trim());
-            	return jsonObject.getString("id");
-            }
-            else{return null;}
         }
         catch(Exception error){error.printStackTrace(); return null;}
 	}

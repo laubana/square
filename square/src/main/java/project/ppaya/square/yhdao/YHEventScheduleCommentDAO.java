@@ -16,6 +16,24 @@ public class YHEventScheduleCommentDAO
 	@Autowired
 	SqlSession sqlSession;
 	
+	public int insertEventScheduleComment(int event_schedule_id, String user_id, String content)
+	{
+		int result = 0;
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("event_schedule_id", event_schedule_id);
+		map.put("user_id", user_id);
+		map.put("content", content);
+		
+		YHEventScheduleCommentMapper mapper = sqlSession.getMapper(YHEventScheduleCommentMapper.class);	
+		
+		try
+		{
+			result = mapper.insertEventScheduleComment(map);
+		}
+		catch(Exception error){error.printStackTrace();}
+		
+		return result;
+	}
 	public int deleteEventScheduleCommentByEventScheduleCommentIdUserId(int event_schedule_comment_id, String user_id)
 	{
 		int result = 0;

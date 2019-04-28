@@ -292,6 +292,26 @@ border: 0;
 <script>
 	function createGroupAction()
 	{
+		if(document.getElementById("input").value.length == 0)
+		{
+			alert("タイトルがありません。");
+			return;
+		}
+		if(document.getElementById("group_content").value.length == 0)
+		{
+			alert("紹介がありません。");
+			return;
+		}
+		if(isLogoReady == false)
+		{
+			alert("ロコがありません。");
+			return;
+		}
+		if(isImageReady == false)
+		{
+			alert("イメージがありません。");
+			return;
+		}
 		var map = {};
 		map["name"] = $("#input").val();
 		map["content"] = $("#group_content").val();
@@ -364,6 +384,7 @@ $("#foo").click(function()
 		{
 	document.getElementById("imgInp").click();
 });
+var isImageReady = false;
 //파일 미리보기 메인
 function readURL(input) {
 	var file = input.files[0]; 
@@ -373,7 +394,7 @@ function readURL(input) {
 			file.type == "image/bmp" || file.type == "image/BMP" ||
 			file.type == "image/gif" || file.type == "image/GIF")
 		{
-		
+			isImageReady = true;
 		}
 	else
 		{
@@ -392,9 +413,10 @@ function readURL(input) {
 }
 
 $("#imgInp").change(function() {
+	isImageReady = false;
     readURL(this);
 });
-
+var isLogoReady = false;
 function readURL2(input) {
 	var file = input.files[0]; 
 	if(file.type == "image/jpg" || file.type == "image/JPG" ||
@@ -403,7 +425,7 @@ function readURL2(input) {
 			file.type == "image/bmp" || file.type == "image/BMP" ||
 			file.type == "image/gif" || file.type == "image/GIF")
 		{
-		
+			isLogoReady = true;
 		}
 	else
 		{
@@ -422,6 +444,7 @@ function readURL2(input) {
 }
 
 $("#imgInp2").change(function() {
+	isLogoReady = false;
     readURL2(this);
 });
 

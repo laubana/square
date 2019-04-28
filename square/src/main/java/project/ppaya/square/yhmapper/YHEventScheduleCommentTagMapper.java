@@ -7,6 +7,7 @@ import project.ppaya.square.vo.*;
 
 public interface YHEventScheduleCommentTagMapper
 {
+	public int deleteEventScheduleCommentByEventScheduleCommentId(int event_schedule_comment_id);
 	public ArrayList<String> getTagByEventScheduleCommentId(int event_schedule_comment_id);
 	public int insertEventScheduleCommentTag(HashMap<String, Object> map);
 }

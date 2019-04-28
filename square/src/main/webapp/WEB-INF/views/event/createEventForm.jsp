@@ -265,6 +265,22 @@ border: 0;
 <script>
 function createEventAction()
 {
+	if(document.getElementById("Event_title").value.length == 0)
+	{
+		alert("タイトルがありません。");
+		return;
+	}
+	if(document.getElementById("event_content").value.length == 0)
+	{
+		alert("タイトルがありません。");
+		return;
+	}
+	if(isImageReady == false)
+	{
+		alert("イメージがありません。");
+		return;
+	}
+	
 	var map = {};
 	map["name"] = $("#Event_title").val();
 	map["content"] = $("#event_content").val();
@@ -296,6 +312,7 @@ function createEventAction()
 }
 </script>
 <script type="text/javascript">
+var isImageReady = false;
 //파일 미리보기 메인
 function readURL(input) {
 	var file = input.files[0]; 
@@ -305,7 +322,7 @@ function readURL(input) {
 			file.type == "image/bmp" || file.type == "image/BMP" ||
 			file.type == "image/gif" || file.type == "image/GIF")
 		{
-		
+		isImageReady = true;
 		}
 	else
 		{
@@ -323,6 +340,7 @@ function readURL(input) {
 }
 
 $("#imgInp").change(function() {
+	isImageReady = false;
     readURL(this);
 });
 

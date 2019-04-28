@@ -34,7 +34,7 @@ FROM
 WHERE
 	EVENT_ID = #{event_id}
 ORDER BY
-	EVENT_COMMENT_ID
+	INPUT_DATE DESC
 </select>
 <select id="selectEventCommentByEventIdList" parameterType="list" resultType="EventComment">
 SELECT
@@ -47,4 +47,20 @@ WHERE
 		EVENT_ID = #{event_id}
 	</foreach>
 </select>
+<insert id="insertEventComment" parameterType="map">
+INSERT INTO TABLE_ECO
+(
+	EVENT_COMMENT_ID,
+	EVENT_ID,
+	USER_ID,
+	CONTENT
+)
+VALUES
+(
+	ECO_SEQ.NEXTVAL,
+	#{event_id},
+	#{user_id},
+	#{content}
+)
+</insert>
 </mapper>

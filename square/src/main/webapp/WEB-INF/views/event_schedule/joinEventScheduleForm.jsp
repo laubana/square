@@ -229,7 +229,7 @@ label img {
 			contentType: "application/json; charset=UTF-8",
 			success: function()
 			{
-				location.href = "viewEventScheduleForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}";
+				location.href = "viewEventScheduleForm?group_category_id=${group_category.group_category_id}&group_id=${group.group_id}&event_id=${event.event_id}&event_schedule_id=${event_schedule.event_schedule_id}";
 			},
 			error: function(error){console.log(error);}
 		});
