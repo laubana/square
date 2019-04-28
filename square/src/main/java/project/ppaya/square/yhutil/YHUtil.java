@@ -2,6 +2,7 @@ package project.ppaya.square.yhutil;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import project.ppaya.square.vo.*;
 import project.ppaya.square.yhdao.*;
 import project.ppaya.square.yhthread.YHUpdateEventScheduleImageFaceThread;
-import project.ppaya.square.yhthread.YHUpdateEventScheduleVideoFaceThread;
+import project.ppaya.square.yhthread.YHUpdateEventScheduleVideoFaceThread1;
 
 @Repository
 public class YHUtil
@@ -72,7 +73,7 @@ public class YHUtil
 			}
 		}
 	}
-	public void updateEventScheduleVideoFaceByGroupId(int group_id)
+	/*public void updateEventScheduleVideoFaceByGroupId(int group_id)
 	{
 		String result;
 		JSONArray jsonArray;
@@ -82,12 +83,12 @@ public class YHUtil
 		
 		ArrayList<EventScheduleVideo> event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleIdList(event_schedule_id_list);
 		
-		YHUpdateEventScheduleVideoFaceThread.index = 0;
+		int index = 0;
 		for(int i = 0; i < event_schedule_video_list.size(); i++)
 		{			
-			YHUpdateEventScheduleVideoFaceThread thread = new YHUpdateEventScheduleVideoFaceThread(event_schedule_video_list.get(i));
+			YHUpdateEventScheduleVideoFaceThread1 thread = new YHUpdateEventScheduleVideoFaceThread1(index, event_schedule_video_list.get(i));
 			thread.start();
-			/*if(event_schedule_video_list.get(i).getDetect_date() == null)
+			if(event_schedule_video_list.get(i).getDetect_date() == null)
 			{				
 				result = YHMSVideoIndexerUtil.getVideoIndex(event_schedule_video_list.get(i).getEvent_schedule_video_id());
 				
@@ -155,7 +156,7 @@ public class YHUtil
 						yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(YHMSFaceUtil.getFaceId(Reference.event_schedule_video_face_path, event_schedule_video_image_id), event_schedule_video_image_id, event_schedule_video_list.get(i).getEvent_schedule_video_id());
 					}
 				}		
-			}*/
+			}
 		}
 		
 		while(true)
@@ -165,28 +166,25 @@ public class YHUtil
 				Thread.sleep(100);
 			}
 			catch(Exception error){}
-			if(YHUpdateEventScheduleVideoFaceThread.index == event_schedule_video_list.size())
+			if(YHUpdateEventScheduleVideoFaceThread1.map == event_schedule_video_list.size())
 			{
 				break;
 			}
 		}
 		System.err.println("done");
-	}
+	}*/
 
 	public void updateEventScheduleVideoFace(String user_id)
 	{
-		String result;
-		JSONArray jsonArray;
-		JSONObject jsonObject;
-		
 		ArrayList<Integer> event_schedule_id_list = yh_event_schedule_attendanceDAO.getEventScheduleIdByUserId(user_id);
 		
 		ArrayList<EventScheduleVideo> event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleIdList(event_schedule_id_list);
 		
-		YHUpdateEventScheduleVideoFaceThread.index = 0;
+		int index = 0;
+		YHUpdateEventScheduleVideoFaceThread1.out_map.put(index, new HashMap<>());
 		for(int i = 0; i < event_schedule_video_list.size(); i++)
 		{			
-			YHUpdateEventScheduleVideoFaceThread thread = new YHUpdateEventScheduleVideoFaceThread(event_schedule_video_list.get(i));
+			YHUpdateEventScheduleVideoFaceThread1 thread = new YHUpdateEventScheduleVideoFaceThread1(index, i, event_schedule_video_list.get(i));
 			thread.start();
 			/*if(event_schedule_video_list.get(i).getDetect_date() == null)
 			{				
@@ -272,7 +270,7 @@ public class YHUtil
 				}		
 			}*/
 		}
-		
+		out_while:
 		while(true)
 		{
 			try
@@ -280,27 +278,28 @@ public class YHUtil
 				Thread.sleep(100);
 			}
 			catch(Exception error){}
-			if(YHUpdateEventScheduleVideoFaceThread.index == event_schedule_video_list.size())
+			for(int i = 0; i < event_schedule_video_list.size(); i++)
 			{
-				break;
+				if((boolean)YHUpdateEventScheduleVideoFaceThread1.out_map.get(index).get(i) == false)
+				{
+					continue out_while;
+				}
 			}
+			break;
 		}
 		System.err.println("done");
 	}
 	public void updateEventScheduleImageFace(String user_id)
 	{
-		String result;
-		JSONArray jsonArray;
-		JSONObject jsonObject;
-		
 		ArrayList<Integer> event_schedule_id_list = yh_event_schedule_attendanceDAO.getEventScheduleIdByUserId(user_id);
 		
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleIdList(event_schedule_id_list);
 		
-		YHUpdateEventScheduleImageFaceThread.index = 0;
+		int index = 0;
+		YHUpdateEventScheduleImageFaceThread.out_map.put(index, new HashMap<>());
 		for(int i = 0; i < event_schedule_image_list.size(); i++)
 		{
-			YHUpdateEventScheduleImageFaceThread thread = new YHUpdateEventScheduleImageFaceThread(event_schedule_image_list.get(i));
+			YHUpdateEventScheduleImageFaceThread thread = new YHUpdateEventScheduleImageFaceThread(index, i, event_schedule_image_list.get(i));
 			thread.start();
 			/*if(event_schedule_image_list.get(i).getDetect_date() == null)
 			{
@@ -343,6 +342,7 @@ public class YHUtil
 				}
 			}*/
 		}
+		out_while:
 		while(true)
 		{
 			try
@@ -350,10 +350,14 @@ public class YHUtil
 				Thread.sleep(100);
 			}
 			catch(Exception error){}
-			if(YHUpdateEventScheduleImageFaceThread.index == event_schedule_image_list.size())
+			for(int i = 0; i < event_schedule_image_list.size(); i++)
 			{
-				break;
+				if((boolean)YHUpdateEventScheduleImageFaceThread.out_map.get(index).get(i) == false)
+				{
+					continue out_while;
+				}
 			}
+			break;
 		}
 		System.err.println("done");
 	}

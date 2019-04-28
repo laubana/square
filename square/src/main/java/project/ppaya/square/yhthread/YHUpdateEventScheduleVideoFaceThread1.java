@@ -1,6 +1,7 @@
 package project.ppaya.square.yhthread;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -9,20 +10,26 @@ import project.ppaya.square.vo.*;
 import project.ppaya.square.yhdao.*;
 import project.ppaya.square.yhutil.*;
 
-public class YHUpdateEventScheduleVideoFaceThread extends Thread
+public class YHUpdateEventScheduleVideoFaceThread1 extends Thread
 {	
+	public static HashMap<Integer, HashMap<Integer, Object>> out_map = new HashMap<>();
+	
 	private YHEventScheduleVideoDAO yh_event_schedule_videoDAO;
 	private YHEventScheduleVideoFaceDAO yh_event_schedule_video_faceDAO;
-	private YHVideoAppearanceDAO yh_video_appearanceDAO;
-	public static int index = 0;
-	private EventScheduleVideo event_schedule_video;
 	
-	public YHUpdateEventScheduleVideoFaceThread(EventScheduleVideo event_schedule_video)
+	private EventScheduleVideo event_schedule_video;
+	private int i;
+	private int index;
+	
+	public YHUpdateEventScheduleVideoFaceThread1(int index, int i, EventScheduleVideo event_schedule_video)
 	{
 		yh_event_schedule_videoDAO = (YHEventScheduleVideoDAO)YHBeanUtil.getBean("YHEventScheduleVideoDAO");
 		yh_event_schedule_video_faceDAO = (YHEventScheduleVideoFaceDAO)YHBeanUtil.getBean("YHEventScheduleVideoFaceDAO");
-		yh_video_appearanceDAO = (YHVideoAppearanceDAO)YHBeanUtil.getBean("YHVideoAppearanceDAO");
+		
 		this.event_schedule_video = event_schedule_video;
+		this.index = index;
+		this.i = i;
+		out_map.get(index).put(i, false);
 	}
 	@Override
 	public void run()
@@ -43,9 +50,12 @@ public class YHUpdateEventScheduleVideoFaceThread extends Thread
 				
 				jsonArray = jsonObject.getJSONObject("summarizedInsights").getJSONArray("faces");
 				
-				for(int j = 0; j < jsonArray.length(); j++)
+				YHUpdateEventScheduleVideoFaceThread2.out_map.put(this.i, new HashMap<>());
+				for(int i = 0; i < jsonArray.length(); i++)
 				{
-					JSONObject temp_jsonObject = jsonArray.getJSONObject(j);
+					YHUpdateEventScheduleVideoFaceThread2 thread = new YHUpdateEventScheduleVideoFaceThread2(this.i, i, event_schedule_video, jsonArray.getJSONObject(i));
+					thread.start();
+					/*JSONObject temp_jsonObject = jsonArray.getJSONObject(j);
 					
 					String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHMSVideoIndexerUtil.getThumbnail(event_schedule_video.getEvent_schedule_video_id(), temp_jsonObject.getString("thumbnailId")), Reference.event_schedule_video_face_path);
 					
@@ -90,7 +100,25 @@ public class YHUpdateEventScheduleVideoFaceThread extends Thread
 						}
 						
 						yh_video_appearanceDAO.insertVideoAppearance(face_id, start_time, end_time);
+					}*/
+				}
+				out_while:
+				while(true)
+				{
+					try
+					{
+						Thread.sleep(100);
 					}
+					catch(Exception error){}
+
+					for(int i = 0; i < jsonArray.length(); i++)
+					{
+						if((boolean)YHUpdateEventScheduleVideoFaceThread2.out_map.get(this.i).get(i) == false)
+						{
+							continue out_while;
+						}
+					}
+					break;
 				}
 			}
 		}
@@ -114,6 +142,7 @@ public class YHUpdateEventScheduleVideoFaceThread extends Thread
 				}
 			}		
 		}
-		index++;
+		
+		out_map.get(index).put(this.i, true);
 	}
 }

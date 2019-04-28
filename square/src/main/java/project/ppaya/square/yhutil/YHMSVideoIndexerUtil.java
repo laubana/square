@@ -12,16 +12,19 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import project.ppaya.square.vo.*;
+import project.ppaya.square.yhdao.*;
 
 public class YHMSVideoIndexerUtil
-{
+{	
 	public static String getThumbnail(String video_id, String thumbnail_id)
 	{
 		HttpClient httpClient = HttpClients.createDefault();
-
+		String result;
+		
         try
         {
             URIBuilder uriBuilder = new URIBuilder("https://api.videoindexer.ai/trial/Accounts/" + Reference.ms_video_indexer_id + "/Videos/" + video_id + "/Thumbnails/" + thumbnail_id);
@@ -30,21 +33,31 @@ public class YHMSVideoIndexerUtil
             uriBuilder.setParameter("accessToken", getAccessToken());
 
             HttpGet httpGet = new HttpGet(uriBuilder.build());
-
-            HttpResponse httpResponse = httpClient.execute(httpGet);
-            HttpEntity httpEntity = httpResponse.getEntity();
-
-            String result = EntityUtils.toString(httpEntity).trim();
             
-            if(httpEntity != null){return result;}
-            else{return null;}
+            while(true)
+            {
+
+                HttpResponse httpResponse = httpClient.execute(httpGet);
+                result = EntityUtils.toString(httpResponse.getEntity()).trim();
+                
+            	System.err.println(result);
+            	
+            	if(result.charAt(0) == '{' || result.charAt(0) == '[')
+            	{
+            		Thread.sleep(1000);
+            	}
+            	else
+            	{                    
+                    return result;
+            	}
+            }
         }
         catch(Exception error){error.printStackTrace(); return null;}
 	}
 	public static String getAccessToken()
 	{		
 		HttpClient httpClient = HttpClients.createDefault();
-		
+		String result;
         try
         {
             URIBuilder uriBuilder = new URIBuilder("https://api.videoindexer.ai/auth/trial/Accounts/" + Reference.ms_video_indexer_id + "/AccessToken");
@@ -54,14 +67,24 @@ public class YHMSVideoIndexerUtil
             HttpGet httpGet = new HttpGet(uriBuilder.build());
             httpGet.setHeader("Ocp-Apim-Subscription-Key", Reference.ms_video_indexer_key);
 
-            HttpResponse httpResponse = httpClient.execute(httpGet);
-            
-            HttpEntity httpEntity = httpResponse.getEntity();
-
-            if(httpEntity != null){return EntityUtils.toString(httpEntity).replaceAll("\"", "");}
-            else{return null;}
+            while(true)
+            {
+            	HttpResponse httpResponse = httpClient.execute(httpGet);            
+            	result = EntityUtils.toString(httpResponse.getEntity()).trim();
+            	
+            	System.err.println(result);
+            	
+            	if(result.charAt(0) == '{' || result.charAt(0) == '[')
+            	{
+            		Thread.sleep(1000);
+            	}
+            	else
+            	{                    
+                    return result.replaceAll("\"", "");
+            	}
+            }
         }
-        catch(Exception error){error.printStackTrace(); return "";}
+        catch(Exception error){error.printStackTrace(); return null;}
 	}
 	public static String uploadVideo(String path, String filename)
 	{
@@ -94,7 +117,7 @@ public class YHMSVideoIndexerUtil
         catch(Exception error){error.printStackTrace(); return null;}
 	}
 	public static String getVideoIndex(String video_id) 
-    {
+    {	
         HttpClient httpClient = HttpClients.createDefault();
         String result;
 
@@ -120,31 +143,5 @@ public class YHMSVideoIndexerUtil
             else{return null;}
         }
         catch (Exception error){error.printStackTrace(); return null;}
-    }
-	public static void createPersonModel(String name) 
-    {
-        HttpClient httpClient = HttpClients.createDefault();
-
-        try
-        {
-            URIBuilder uriBuilder = new URIBuilder("https://api.videoindexer.ai/trial/Accounts/" + Reference.ms_video_indexer_id + "/Customization/PersonModels?name=" + name + "&accessToken=" + getAccessToken());
-
-            HttpPost request = new HttpPost(uriBuilder.build());
-
-            StringEntity reqEntity = new StringEntity("{body}");
-            request.setEntity(reqEntity);
-
-            HttpResponse response = httpClient.execute(request);
-            HttpEntity entity = response.getEntity();
-
-            if (entity != null) 
-            {
-                System.out.println(EntityUtils.toString(entity));
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
     }
 }

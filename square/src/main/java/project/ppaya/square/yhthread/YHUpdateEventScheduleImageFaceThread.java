@@ -1,6 +1,7 @@
 package project.ppaya.square.yhthread;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,16 +12,23 @@ import project.ppaya.square.yhutil.*;
 
 public class YHUpdateEventScheduleImageFaceThread extends Thread
 {	
+	public static HashMap<Integer, HashMap<Integer, Object>> out_map = new HashMap<>();
+	
 	private YHEventScheduleImageDAO yh_event_schedule_imageDAO;
 	private YHEventScheduleImageFaceDAO yh_event_schedule_image_faceDAO;
-	public static int index = 0;
+	private int index;
+	private int i;
 	private EventScheduleImage event_schedule_image;
 	
-	public YHUpdateEventScheduleImageFaceThread(EventScheduleImage event_schedule_image)
+	public YHUpdateEventScheduleImageFaceThread(int index, int i, EventScheduleImage event_schedule_image)
 	{
 		yh_event_schedule_imageDAO = (YHEventScheduleImageDAO)YHBeanUtil.getBean("YHEventScheduleImageDAO");
 		yh_event_schedule_image_faceDAO = (YHEventScheduleImageFaceDAO)YHBeanUtil.getBean("YHEventScheduleImageFaceDAO");
+		
 		this.event_schedule_image = event_schedule_image;
+		this.index = index;
+		this.i = i;
+		out_map.get(index).put(i, false);
 	}
 	@Override
 	public void run()
@@ -70,6 +78,6 @@ public class YHUpdateEventScheduleImageFaceThread extends Thread
 			}
 		}
 		
-		index++;
+		out_map.get(index).put(i, true);
 	}
 }

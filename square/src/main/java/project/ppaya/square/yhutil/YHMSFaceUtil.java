@@ -19,12 +19,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import project.ppaya.square.vo.*;
+import project.ppaya.square.yhdao.*;
 
 public class YHMSFaceUtil
 {	
 	public static ArrayList<String> getSimilarEventScheduleImageFaceIdByFaceId(ArrayList<String> face_id_list, String face_id)
 	{
 		ArrayList<String> similar_event_schedule_image_face_id_list = new ArrayList<>();
+		YHLogDAO yh_logDAO = (YHLogDAO)YHBeanUtil.getBean("YHLogDAO");
 		String result = null;
 		JSONArray jsonArray = null;
 		JSONObject jsonObject = null;
@@ -63,6 +65,7 @@ public class YHMSFaceUtil
             	result = EntityUtils.toString(httpResponse.getEntity()).trim();
 
             	System.err.println(result);
+            	yh_logDAO.insertLog(result);
             	
             	if(result.charAt(0) == '{')
             	{
@@ -99,47 +102,6 @@ public class YHMSFaceUtil
             return null;
         }
 	}
-	public static String getSimilarEventScheduleImageFaceListByFaceId(ArrayList<String> face_id_list, String face_id)
-	{
-		String temp = "";
-		temp += "[";
-		for(int i = 0; i < face_id_list.size() - 1; i++)
-		{
-			temp += "\"";
-			temp += face_id_list.get(i);
-			temp += "\",";
-		}
-		temp += "\"" + face_id_list.get(face_id_list.size() - 1) + "\"";
-		temp += "]";
-		
-		HttpClient httpClient = HttpClients.createDefault();
-		
-        try
-        {			
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/face/v1.0/findsimilars");
-			
-			HttpPost httpPost = new HttpPost(uriBuilder.build());
-			
-            httpPost.setHeader("Content-Type", "application/json");
-            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
-            
-            httpPost.setEntity(new StringEntity(
-            		"{" +
-            				"\"faceId\":\"" + face_id + "\"," +
-            				"\"faceIds\":" + temp + "," +
-            				"\"maxNumOfCandidatesReturned\":1000" +
-            		"}"));
-            
-            HttpResponse httpResponse = httpClient.execute(httpPost);
-            
-            return EntityUtils.toString(httpResponse.getEntity()).trim();
-        }
-        catch (Exception error)
-        {
-        	error.printStackTrace();
-            return error.getMessage();
-        }
-	}
 	public static String getFaceId(String path, String file)
 	{			
         String result;
@@ -167,17 +129,7 @@ public class YHMSFaceUtil
             	
             	if(result.charAt(0) == '{')
             	{
-            		JSONObject jsonObject = new JSONObject(result);
-            		
-            		if(jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
-            		{
-            			Thread.sleep(1000);
-            			continue;
-            		}
-            		else
-            		{
-            			return null;
-            		}
+            		Thread.sleep(500);
             	}
             	else
             	{                    
@@ -218,19 +170,8 @@ public class YHMSFaceUtil
             	
             	if(result.charAt(0) == '{')
             	{
-            		/*JSONObject jsonObject = new JSONObject(result);
-            		
-            		System.err.println(jsonObject.toString(2));
-            		
-            		if(jsonObject.getJSONObject("error").getString("code").equals("RateLimitExceeded"))
-            		{
-            			*/Thread.sleep(1000);
-            			continue;/*
-            		}
-            		else
-            		{
-            			return null;
-            		}*/
+            		Thread.sleep(500);
+            		continue;
             	}
             	else
             	{                    
@@ -243,148 +184,5 @@ public class YHMSFaceUtil
         	error.printStackTrace();
             return error.getMessage();
         }
-	}
-	public static String insertFace(String list_id, String path, String file)
-	{
-		HttpClient httpClient = HttpClients.createDefault();
-		
-		try
-		{
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/face/v1.0/facelists/" + list_id + "/persistedFaces");
-		 
-		    HttpPost httpPost = new HttpPost(uriBuilder.build());
-		    
-		    httpPost.setHeader("Content-Type", "application/octet-stream");
-		    httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
-		    
-		    httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
-		    
-		    HttpResponse httpResponse = httpClient.execute(httpPost);
-			
-			return EntityUtils.toString(httpResponse.getEntity()).trim();
-		}
-		catch (Exception error)
-		{
-			error.printStackTrace();
-		    return error.getMessage();
-		}
-	}
-	public static String insertFace(String list_id, String path, String file, int left, int top, int width, int height)
-	{
-		HttpClient httpClient = HttpClients.createDefault();
-		
-		try
-		{
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/face/v1.0/facelists/" + list_id + "/persistedFaces");
-			
-		    uriBuilder.setParameter("targetFace", left + "," + top + "," + width + "," + height);
-		 
-		    HttpPost httpPost = new HttpPost(uriBuilder.build());
-		    
-		    httpPost.setHeader("Content-Type", "application/octet-stream");
-		    httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
-		    
-		    httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
-		    
-		    HttpResponse httpResponse = httpClient.execute(httpPost);
-			
-			return EntityUtils.toString(httpResponse.getEntity()).trim();
-		}
-		catch (Exception error)
-		{
-			error.printStackTrace();
-		    return error.getMessage();
-		}
-	}
-	public static String getFaceList(String id)
-	{
-		HttpClient httpClient = HttpClients.createDefault();
-		
-		try
-		{			
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/face/v1.0/facelists/" + id);
-			
-			HttpGet httpGet = new HttpGet(uriBuilder.build());
-		    
-		    httpGet.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
-		    
-		    HttpResponse httpResponse = httpClient.execute(httpGet);
-			
-			return EntityUtils.toString(httpResponse.getEntity()).trim();
-		}
-		catch (Exception error)
-		{
-			error.printStackTrace();
-		    return error.getMessage();
-		}
-	}
-	public static String deleteFaceList(String id)
-	{
-		HttpClient httpClient = HttpClients.createDefault();
-		
-		try
-		{			
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/face/v1.0/facelists/" + id);
-			
-			HttpDelete httpDelete = new HttpDelete(uriBuilder.build());
-		    
-		    httpDelete.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
-		    
-		    HttpResponse httpResponse = httpClient.execute(httpDelete);
-			
-			return EntityUtils.toString(httpResponse.getEntity()).trim();
-		}
-		catch (Exception error)
-		{
-			error.printStackTrace();
-		    return error.getMessage();
-		}
-	}
-	public static String createFaceList(String id, String name)
-	{
-		HttpClient httpClient = HttpClients.createDefault();
-		
-		try
-		{			
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/face/v1.0/facelists/" + id);
-			
-			HttpPut httpPut = new HttpPut(uriBuilder.build());
-		    
-		    httpPut.setHeader("Content-Type", "application/json");
-		    httpPut.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
-		    
-		    httpPut.setEntity(new StringEntity("{\"name\":\"" + name + "\"}"));
-		    
-		    HttpResponse httpResponse = httpClient.execute(httpPut);
-			
-			return EntityUtils.toString(httpResponse.getEntity()).trim();
-		}
-		catch (Exception error)
-		{
-			error.printStackTrace();
-		    return error.getMessage();
-		}
-	}
-	public static String getMultipleFaceList()
-	{
-		HttpClient httpClient = HttpClients.createDefault();
-		
-		try
-		{			
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/face/v1.0/facelists");
-			
-			HttpGet httpGet = new HttpGet(uriBuilder.build());
-			
-		    httpGet.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
-		   
-		    HttpResponse httpResponse = httpClient.execute(httpGet);
-		    
-		    return EntityUtils.toString(httpResponse.getEntity()).trim();
-		}
-		catch (Exception error)
-		{
-			error.printStackTrace();
-		    return error.getMessage();
-		}
 	}
 }

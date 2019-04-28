@@ -79,5 +79,7 @@
 		
 		<mapper resource="yhmapper/yhcomment_tag_mapper.xml" />
 		<mapper resource="yhmapper/yhkeyword_history_mapper.xml" />
+		
+		<mapper resource="yhmapper/yhlog_mapper.xml" />
 	</mappers>
 </configuration>

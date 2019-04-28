@@ -157,6 +157,9 @@ public class YHTestController
 	@RequestMapping(value = "yhtest6", method = RequestMethod.GET)
 	public void yhtest6(Model request)
 	{
+		String user_id = "id1@gmail.com";
+		yh_util.updateEventScheduleVideoFace(user_id);
+		yh_util.updateVideoAlbum(user_id);
 	}
 	@RequestMapping(value = "yhinit", method = RequestMethod.GET)
 	public void yhinit()

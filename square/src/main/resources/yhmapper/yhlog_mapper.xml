@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="project.ppaya.square.yhmapper.YHLogMapper">
+<insert id="insertLog" parameterType="map">
+INSERT INTO TABLE_L
+(
+	LOG_ID,
+	MESSAGE
+)
+VALUES
+(
+	L_SEQ.NEXTVAL,
+	#{message}
+)
+</insert>
+</mapper>
