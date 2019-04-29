@@ -357,7 +357,7 @@ CREATE TABLE TABLE_L
 DROP SEQUENCE L_SEQ;
 CREATE SEQUENCE L_SEQ;
 
-INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id1@gmail.com', 'password', 'Joy', 'id1@gmail.com.jpg', '東京', 'id1content');
+INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id1@gmail.com', 'password', 'Colin', 'id1@gmail.com.jpg', '東京', '私はプログラミングが好きです。どうぞよろしくお願いします。');
 INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id2@gmail.com', 'password', 'Arwen', 'id2@gmail.com.jpg', '東京', 'id2content');
 INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id3@gmail.com', 'password', 'Aragorn', 'id3@gmail.com.jpg', '東京', 'id3content');
 INSERT INTO TABLE_U(USER_ID, PASSWORD, NAME, IMAGE_ID, REGION, CONTENT) VALUES('id4@gmail.com', 'password', 'Eowyn', 'id4@gmail.com.jpg', '東京', 'id4content');

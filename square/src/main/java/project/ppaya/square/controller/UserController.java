@@ -1,16 +1,12 @@
 package project.ppaya.square.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -99,28 +95,27 @@ public class UserController
 	@RequestMapping(value = "viewUserForm", method = RequestMethod.GET)
 	public String viewUserForm
 	(
-			Model request,
+			Model model,
 			@RequestParam(value = "user_id", defaultValue = "id1@gmail.com") String user_id
-			//String user_id
 			)
 	{
 		User user = yh_userDAO.selectUserByUserId(user_id);
 		//User 전송
-		request.addAttribute("user", user);
+		model.addAttribute("user", user);
 		
 		ArrayList<Integer> group_id_list = yh_group_attendanceDAO.getGroupIdByUserIdNotBlind(user_id);
 		ArrayList<Group> group_list = yh_groupDAO.selectGroupByGroupIdList(group_id_list);
 		//Group List 전송
-		request.addAttribute("group_list", group_list);
+		model.addAttribute("group_list", group_list);
 		
 		ArrayList<UserHashtag> user_hashtag_list = yhuser_hashtagDAO.selectUserHashtagByUserId(user_id);
 		//UserHashtag List 전송
-		request.addAttribute("user_hashtag_list", user_hashtag_list);
+		model.addAttribute("user_hashtag_list", user_hashtag_list);
 		
 		ArrayList<String> event_schedule_image_id_list = yh_image_albumDAO.getEventScheduleImageIdByUserIdNotBlind(user_id);
 		ArrayList<EventScheduleImage> event_schedule_image_list = yh_event_schedule_imageDAO.selectEventScheduleImageByEventScheduleImageIdList(event_schedule_image_id_list);
 		//EventScheduleImage List 전송
-		request.addAttribute("event_schedule_image_list", event_schedule_image_list);
+		model.addAttribute("event_schedule_image_list", event_schedule_image_list);
 		
 		ArrayList<String> event_schedule_video_id_list = yh_video_albumDAO.getEventScheduleVideoIdByUserIdNotBlind(user_id);
 		ArrayList<EventScheduleVideo> event_schedule_video_list = yh_event_schedule_videoDAO.selectEventScheduleVideoByEventScheduleVideoIdList(event_schedule_video_id_list);
@@ -134,7 +129,7 @@ public class UserController
 			
 			video_list.add(video_list_map);
 		}
-		request.addAttribute("video_list", video_list);
+		model.addAttribute("video_list", video_list);
 		
 		return "user/viewUserForm";
 	}
