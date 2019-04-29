@@ -138,7 +138,7 @@ public class EventScheduleAction {
 	}
 	@ResponseBody
 	@RequestMapping(value = "insertEventScheduleImageAction", method = RequestMethod.POST)
-	public void insertEventScheduleImageAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	public String insertEventScheduleImageAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)session.getAttribute("user_id");
 		int group_category_id = (int)map.get("group_category_id");
@@ -158,6 +158,8 @@ public class EventScheduleAction {
 		{
 			yh_event_schedule_imageDAO.updateDescriptionByEventScheduleImageId(source_description_list.get(j), event_schedule_image_id);
 		}
+		
+		return "success";
 	}
 	@ResponseBody
 	@RequestMapping(value = "createEventScheduleAction", method = RequestMethod.POST)

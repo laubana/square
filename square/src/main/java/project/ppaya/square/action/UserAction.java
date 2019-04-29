@@ -1,10 +1,12 @@
 package project.ppaya.square.action;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,9 +71,38 @@ public class UserAction {
 		String user_id = (String)session.getAttribute("user_id");
 		String image_id = YHFileUtil.saveJpegFromBase64((String)map.get("image"), Reference.user_image_path);
 		
-		yh_userDAO.updateUserImage(user_id, image_id);
+		String result = YHMSFaceUtil.getFace(Reference.user_image_path, image_id);
 		
-		return "success";
+		if(result.charAt(0) == '{')
+		{
+			try
+			{
+				return URLEncoder.encode("イメージに顔がありません。", "utf-8");
+			}
+			catch(Exception error){return null;}
+		}
+		else
+		{
+			JSONArray jsonArray = new JSONArray(result);
+			
+			if(jsonArray.length() == 1)
+			{
+				yh_userDAO.updateUserImage(user_id, image_id);
+				try
+				{
+					return URLEncoder.encode("success", "utf-8");
+				}
+				catch(Exception error){return null;}
+			}
+			else
+			{
+				try
+				{
+					return URLEncoder.encode("イメージに顔が２つ以上あります。", "utf-8");
+				}
+				catch(Exception error){return null;}
+			}
+		}
 	}
 	@ResponseBody
 	@RequestMapping(value = "updateContentAction", method = RequestMethod.POST)

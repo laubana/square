@@ -212,10 +212,14 @@
 				    			url: "insertEventScheduleImageAction",
 				    			type: "POST",
 				    			data: JSON.stringify(map),
+				    			dataType: "text",
 				    			contentType: "application/json; charset=UTF-8",
 				    			success: function(result)
 				    			{
-				    				location.reload();
+				    				if(result == success)
+				    				{
+				    					location.reload();
+				    				}
 				    			},
 				    			error: function(){}
 				    				});

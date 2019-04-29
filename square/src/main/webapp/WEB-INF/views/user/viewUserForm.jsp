@@ -37,15 +37,26 @@
 				var interval = setInterval(function()
 						{
 							if(typeof(map.image) != "undefined")
-							{	
-								$("#user_image").attr("src", "data:image/jpeg;base64," + map.image);
-								
+							{									
 								$.ajax({
 					    			url: "updateUserImageAction",
 					    			type: "POST",
 					    			data: JSON.stringify(map),
+					    			dateType: "text",
 					    			contentType: "application/json; charset=UTF-8",
-					    			success: function(result){},
+					    			success: function(result)
+					    			{
+					    				var result = decodeURIComponent(result.replace(/\+/g, " "));
+					    				
+					    				if(result == "success")
+					    				{
+											$("#user_image").attr("src", "data:image/jpeg;base64," + map.image);
+					    				}
+					    				else
+					    				{
+					    					alert(result);
+					    				}
+					    			},
 					    			error: function(){}
 					    				});
 								clearInterval(interval);
@@ -57,6 +68,10 @@
 				alert("イメージのファイルではありません。");
 			}
 		}
+		function noImage()
+		{
+			alert("イメージがありません。");
+		}
 		</script>
 		
 	</head>
@@ -67,8 +82,18 @@
 				<div class="inner">
 					<div align="left"><h1 style="font-size:30px;"><a href="main">みんなみんな</a></h1></div>
 					<a class="image avatar">
-					<input type="file" id="image_file" style="display: none;" onchange="setUserImage()">
+					<c:if test="${sessionScope.user_id != null}">
+						<c:if test="${sessionScope.user_id == user.user_id}">
+						
+						<input type="file" id="image_file" style="display: none;" onchange="setUserImage()">
+						</c:if>
+					</c:if>
+					<c:if test="${user.image_id != null}">
 					<label for="image_file"><img id="user_image" src="resources/image/user_image/${user.image_id}" alt="" /></label>
+					</c:if>
+					<c:if test="${user.image_id == null}">
+					<label for="image_file"><img id="user_image" src="resources/Main/images/bb.jpg" alt="" /></label>
+					</c:if>
 					</a>
 					<h1><strong>${user.name}</strong>のマイページ<br></h1>
 					<nav id="nav">
@@ -164,7 +189,12 @@
 						</div>
 						<br><br>
 						<c:if test="${sessionScope.user_id == user.user_id}">
+						<c:if test="${user.image_id != null}">
 								<div align="center"><a href="listUserAlbumForm?user_id=${user.user_id}" class="button">アルバム編集</a></div>
+								</c:if>
+								<c:if test="${user.image_id == null}">
+								<div align="center"><a href="javascript:noImage()" class="button">アルバム編集</a></div>
+								</c:if>
 								</c:if>
 					</section>
 

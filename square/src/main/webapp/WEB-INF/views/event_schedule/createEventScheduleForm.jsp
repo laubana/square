@@ -260,6 +260,22 @@ border: 0;
 <script>
 function createEventScheduleAction()
 {
+	
+	if(document.getElementById("Event_title").value.length == 0)
+	{
+		alert("タイトルがありません。");
+		return;
+	}
+	if(document.getElementById("event_schedule_content").value.length == 0)
+	{
+		alert("紹介がありません。");
+		return;
+	}
+	if(document.getElementById("region").value.length == 0)
+	{
+		alert("地域がありません。");
+		return;
+	}
 	var map = {};
 	map["name"] = $("#Event_title").val();
 	map["content"] = $("#event_schedule_content").val();

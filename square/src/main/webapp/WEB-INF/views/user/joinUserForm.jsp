@@ -123,7 +123,10 @@
 			<header id="header">
 				<h1>Join</h1>
 			</header>
-
+					<a class="image avatar">
+					<input type="file" id="image_file" style="display: none;" onchange="setUserImage()">
+					<label for="image_file"><img id="user_image" src="resources/Main/images/bb.jpg" alt="" /></label>
+					</a>
 		<!-- Signup Form -->
 				<p><input type="text" name="user_id" id="user_id" placeholder="ID" autocomplete="off" onchange="setSwitch()">
 				<input type="button" value="検索" onclick="verifyUserIdAction()">
