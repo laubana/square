@@ -18,8 +18,9 @@ public class YHUpdateVideoAlbumThread extends Thread
 	private User user;
 	private int index;
 	private int i;
+	private String path;
 	
-	public YHUpdateVideoAlbumThread(int index, int i, String event_schedule_video_id, User user)
+	public YHUpdateVideoAlbumThread(int index, int i, String event_schedule_video_id, User user, String path)
 	{
 		yh_event_schedule_video_faceDAO = (YHEventScheduleVideoFaceDAO)YHBeanUtil.getBean("YHEventScheduleVideoFaceDAO");
 		yh_video_albumDAO = (YHVideoAlbumDAO)YHBeanUtil.getBean("YHVideoAlbumDAO");
@@ -28,6 +29,7 @@ public class YHUpdateVideoAlbumThread extends Thread
 		this.user = user;
 		this.index = index;
 		this.i = i;
+		this.path = path;
 		out_map.get(index).put(i, false);
 	}
 	@Override
@@ -37,7 +39,7 @@ public class YHUpdateVideoAlbumThread extends Thread
 		
 		if(event_schedule_video_face_id_list.size() != 0)
 		{
-			ArrayList<String> similar_event_schedule_video_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(event_schedule_video_face_id_list, YHMSFaceUtil.getFaceId(Reference.user_image_path, user.getImage_id()));
+			ArrayList<String> similar_event_schedule_video_face_id = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(event_schedule_video_face_id_list, YHMSFaceUtil.getFaceId(path + Reference.user_image_path, user.getImage_id()));
 			
 			if(similar_event_schedule_video_face_id.size() != 0)
 			{

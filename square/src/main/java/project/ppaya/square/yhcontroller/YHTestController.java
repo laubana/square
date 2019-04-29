@@ -157,9 +157,6 @@ public class YHTestController
 	@RequestMapping(value = "yhtest6", method = RequestMethod.GET)
 	public void yhtest6(Model request)
 	{
-		String user_id = "id1@gmail.com";
-		yh_util.updateEventScheduleVideoFace(user_id);
-		yh_util.updateVideoAlbum(user_id);
 	}
 	@RequestMapping(value = "yhinit", method = RequestMethod.GET)
 	public void yhinit()
@@ -269,10 +266,5 @@ public class YHTestController
 				yh_event_schedule_image_categoryDAO.insertEventScheduleImageCategory(event_schedule_image_list.get(i).getEvent_schedule_image_id(), source_category_list.get(j));
 			}
 		}
-		
-		yh_util.updateEventScheduleImageFace("id1@gmail.com");
-		yh_util.updateImageAlbum("id1@gmail.com");
-		yh_util.updateEventScheduleVideoFace("id1@gmail.com");
-		yh_util.updateVideoAlbum("id1@gmail.com");
 	}
 }

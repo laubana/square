@@ -4,6 +4,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
@@ -66,12 +67,12 @@ public class UserAction {
 	
 	@ResponseBody
 	@RequestMapping(value = "updateUserImageAction", method = RequestMethod.POST)
-	public String updateUserImageAction(HttpSession session, Model request, @RequestBody HashMap<String, Object> map)
+	public String updateUserImageAction(HttpSession session, Model request, HttpServletRequest servletRequest, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)session.getAttribute("user_id");
-		String image_id = YHFileUtil.saveJpegFromBase64((String)map.get("image"), Reference.user_image_path);
+		String image_id = YHFileUtil.saveJpegFromBase64((String)map.get("image"), servletRequest.getSession().getServletContext().getRealPath("") + Reference.user_image_path);
 		
-		String result = YHMSFaceUtil.getFace(Reference.user_image_path, image_id);
+		String result = YHMSFaceUtil.getFace(servletRequest.getSession().getServletContext().getRealPath("") + Reference.user_image_path, image_id);
 		
 		if(result.charAt(0) == '{')
 		{
@@ -223,7 +224,7 @@ public class UserAction {
 	}
 	@ResponseBody
 	@RequestMapping(value = "/refreshAlbumAction", method = RequestMethod.POST)
-	public HashMap<String, Object> refreshAlbumAction(HttpSession session, Model request, @RequestBody HashMap<String, Object> map)
+	public HashMap<String, Object> refreshAlbumAction(HttpSession session, Model request,HttpServletRequest servletRequest, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)map.get("user_id");
 		ArrayList<Integer> group_id_list = (ArrayList<Integer>)map.get("group_id_list");
@@ -269,7 +270,7 @@ public class UserAction {
 			YHRefreshAlbumThread.video_list = new ArrayList<>();
 			for(int i = 0; i < event_schedule_video_list.size(); i++)
 			{
-				YHRefreshAlbumThread thread = new YHRefreshAlbumThread(index, i, event_schedule_video_list.get(i), user);
+				YHRefreshAlbumThread thread = new YHRefreshAlbumThread(index, i, event_schedule_video_list.get(i), user, servletRequest.getSession().getServletContext().getRealPath(""));
 				thread.start();
 				/*HashMap<String, Object> video_list_map = new HashMap<>();
 				
@@ -330,7 +331,7 @@ public class UserAction {
 			YHRefreshAlbumThread.video_list = new ArrayList<>();
 			for(int i = 0; i < event_schedule_video_list.size(); i++)
 			{
-				YHRefreshAlbumThread thread = new YHRefreshAlbumThread(index, i, event_schedule_video_list.get(i), user);
+				YHRefreshAlbumThread thread = new YHRefreshAlbumThread(index, i, event_schedule_video_list.get(i), user, servletRequest.getSession().getServletContext().getRealPath(""));
 				thread.start();
 				/*HashMap<String, Object> video_list_map = new HashMap<>();
 				

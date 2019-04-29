@@ -14,7 +14,7 @@ import project.ppaya.square.yhdao.*;
 
 public class YHMSVideoIndexerUtil
 {	
-	public static int delay = 0;
+	public static int delay = 500;
 	public static String getThumbnail(String video_id, String thumbnail_id)
 	{
 		HttpClient httpClient = HttpClients.createDefault();

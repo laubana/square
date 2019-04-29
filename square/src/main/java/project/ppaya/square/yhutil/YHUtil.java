@@ -43,7 +43,7 @@ public class YHUtil
 	@Autowired
 	YHVideoAppearanceDAO yh_video_appearanceDAO;
 	
-	public void updateVideoAlbum(String user_id)
+	public void updateVideoAlbum(String user_id, String path)
 	{
 		User user = yh_userDAO.selectUserByUserId(user_id);
 		
@@ -64,7 +64,7 @@ public class YHUtil
 		YHUpdateVideoAlbumThread.out_map.put(index, new HashMap<>());
 		for(int i = 0; i < event_schedule_video_id_list.size(); i++)
 		{
-			YHUpdateVideoAlbumThread thread = new YHUpdateVideoAlbumThread(index, i, event_schedule_video_id_list.get(i), user);
+			YHUpdateVideoAlbumThread thread = new YHUpdateVideoAlbumThread(index, i, event_schedule_video_id_list.get(i), user, path);
 			thread.start();
 			
 			/*ArrayList<String> event_schedule_video_face_id_list = yh_event_schedule_video_faceDAO.getEventScheduleVideoFaceIdByEventScheduleVideoId(event_schedule_video_id_list.get(i));
@@ -199,7 +199,7 @@ public class YHUtil
 		System.err.println("done");
 	}*/
 
-	public void updateEventScheduleVideoFace(String user_id)
+	public void updateEventScheduleVideoFace(String user_id, String path)
 	{
 		ArrayList<Integer> event_schedule_id_list = yh_event_schedule_attendanceDAO.getEventScheduleIdByUserId(user_id);
 		
@@ -209,7 +209,7 @@ public class YHUtil
 		YHUpdateEventScheduleVideoFaceThread1.out_map.put(index, new HashMap<>());
 		for(int i = 0; i < event_schedule_video_list.size(); i++)
 		{			
-			YHUpdateEventScheduleVideoFaceThread1 thread = new YHUpdateEventScheduleVideoFaceThread1(index, i, event_schedule_video_list.get(i));
+			YHUpdateEventScheduleVideoFaceThread1 thread = new YHUpdateEventScheduleVideoFaceThread1(index, i, event_schedule_video_list.get(i), path);
 			thread.start();
 			/*if(event_schedule_video_list.get(i).getDetect_date() == null)
 			{				
@@ -314,7 +314,7 @@ public class YHUtil
 		}
 		System.err.println("done");
 	}
-	public void updateEventScheduleImageFace(String user_id)
+	public void updateEventScheduleImageFace(String user_id, String path)
 	{
 		ArrayList<Integer> event_schedule_id_list = yh_event_schedule_attendanceDAO.getEventScheduleIdByUserId(user_id);
 		
@@ -324,7 +324,7 @@ public class YHUtil
 		YHUpdateEventScheduleImageFaceThread.out_map.put(index, new HashMap<>());
 		for(int i = 0; i < event_schedule_image_list.size(); i++)
 		{
-			YHUpdateEventScheduleImageFaceThread thread = new YHUpdateEventScheduleImageFaceThread(index, i, event_schedule_image_list.get(i));
+			YHUpdateEventScheduleImageFaceThread thread = new YHUpdateEventScheduleImageFaceThread(index, i, event_schedule_image_list.get(i), path);
 			thread.start();
 			/*if(event_schedule_image_list.get(i).getDetect_date() == null)
 			{
@@ -386,7 +386,7 @@ public class YHUtil
 		}
 		System.err.println("done");
 	}
-	public void updateImageAlbum(String user_id)
+	public void updateImageAlbum(String user_id, String path)
 	{
 		User user = yh_userDAO.selectUserByUserId(user_id);
 		
@@ -407,7 +407,7 @@ public class YHUtil
 		
 		if(event_schedule_image_face_id_list.size() != 0)
 		{
-			ArrayList<String> similar_event_schedule_image_face_id_list = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(event_schedule_image_face_id_list, YHMSFaceUtil.getFaceId(Reference.user_image_path, user.getImage_id()));
+			ArrayList<String> similar_event_schedule_image_face_id_list = YHMSFaceUtil.getSimilarEventScheduleImageFaceIdByFaceId(event_schedule_image_face_id_list, YHMSFaceUtil.getFaceId(path + Reference.user_image_path, user.getImage_id()));
 			
 			ArrayList<String> similar_event_schedule_image_id_list = yh_event_schedule_image_faceDAO.getEventScheduleImageIdByEventScheduleImageFaceIdList(similar_event_schedule_image_face_id_list);
 			

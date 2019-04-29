@@ -303,7 +303,10 @@ function createEventAction()
 		    			type: "POST",
 		    			data: JSON.stringify(map),
 		    			contentType: "application/json; charset=UTF-8",
-		    			success: function(result){},
+		    			success: function(result)
+		    			{
+		    				location.href = "viewGroupForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}";
+		    			},
 		    			error: function(){}
 		    				});
 					clearInterval(interval);

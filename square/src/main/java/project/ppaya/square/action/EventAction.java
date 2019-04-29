@@ -4,6 +4,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
@@ -104,14 +105,14 @@ public class EventAction {
 	}
 	@ResponseBody
 	@RequestMapping(value = "createEventAction", method = RequestMethod.POST)
-	public void createEventAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	public void createEventAction(Model request, HttpSession session, HttpServletRequest servletReqeust, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)session.getAttribute("user_id");
 		String name = (String)map.get("name");
 		String content = (String)map.get("content");
 		int group_category_id = (int)map.get("group_category_id");
 		int group_id = (int)map.get("group_id");
-		String image_id = YHFileUtil.saveJpegFromBase64((String)map.get("event_image"), Reference.event_image_path);
+		String image_id = YHFileUtil.saveJpegFromBase64((String)map.get("event_image"), servletReqeust.getSession().getServletContext().getRealPath("") + Reference.event_image_path);
 		
 		while(true)
 		{

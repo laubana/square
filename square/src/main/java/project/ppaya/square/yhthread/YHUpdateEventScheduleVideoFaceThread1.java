@@ -20,8 +20,9 @@ public class YHUpdateEventScheduleVideoFaceThread1 extends Thread
 	private EventScheduleVideo event_schedule_video;
 	private int i;
 	private int index;
+	private String path;
 	
-	public YHUpdateEventScheduleVideoFaceThread1(int index, int i, EventScheduleVideo event_schedule_video)
+	public YHUpdateEventScheduleVideoFaceThread1(int index, int i, EventScheduleVideo event_schedule_video, String path)
 	{
 		yh_event_schedule_videoDAO = (YHEventScheduleVideoDAO)YHBeanUtil.getBean("YHEventScheduleVideoDAO");
 		yh_event_schedule_video_faceDAO = (YHEventScheduleVideoFaceDAO)YHBeanUtil.getBean("YHEventScheduleVideoFaceDAO");
@@ -29,6 +30,7 @@ public class YHUpdateEventScheduleVideoFaceThread1 extends Thread
 		this.event_schedule_video = event_schedule_video;
 		this.index = index;
 		this.i = i;
+		this.path = path;
 		out_map.get(index).put(i, false);
 	}
 	@Override
@@ -53,7 +55,7 @@ public class YHUpdateEventScheduleVideoFaceThread1 extends Thread
 				YHUpdateEventScheduleVideoFaceThread2.out_map.put(this.i, new HashMap<>());
 				for(int i = 0; i < jsonArray.length(); i++)
 				{
-					YHUpdateEventScheduleVideoFaceThread2 thread = new YHUpdateEventScheduleVideoFaceThread2(this.i, i, event_schedule_video, jsonArray.getJSONObject(i));
+					YHUpdateEventScheduleVideoFaceThread2 thread = new YHUpdateEventScheduleVideoFaceThread2(this.i, i, event_schedule_video, jsonArray.getJSONObject(i), path);
 					thread.start();
 					/*JSONObject temp_jsonObject = jsonArray.getJSONObject(j);
 					
@@ -136,9 +138,9 @@ public class YHUpdateEventScheduleVideoFaceThread1 extends Thread
 				
 				for(int j = 0; j < jsonArray.length(); j++)
 				{
-					String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHMSVideoIndexerUtil.getThumbnail(event_schedule_video.getEvent_schedule_video_id(), jsonArray.getJSONObject(j).getString("thumbnailId")), Reference.event_schedule_video_face_path);
+					String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHMSVideoIndexerUtil.getThumbnail(event_schedule_video.getEvent_schedule_video_id(), jsonArray.getJSONObject(j).getString("thumbnailId")), path + Reference.event_schedule_video_face_path);
 					
-					yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(YHMSFaceUtil.getFaceId(Reference.event_schedule_video_face_path, event_schedule_video_image_id), event_schedule_video_image_id, event_schedule_video.getEvent_schedule_video_id());
+					yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(YHMSFaceUtil.getFaceId(path + Reference.event_schedule_video_face_path, event_schedule_video_image_id), event_schedule_video_image_id, event_schedule_video.getEvent_schedule_video_id());
 				}
 			}		
 		}

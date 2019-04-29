@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
@@ -138,7 +139,7 @@ public class EventScheduleAction {
 	}
 	@ResponseBody
 	@RequestMapping(value = "insertEventScheduleImageAction", method = RequestMethod.POST)
-	public String insertEventScheduleImageAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	public String insertEventScheduleImageAction(Model request, HttpSession session, HttpServletRequest servletRequest, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)session.getAttribute("user_id");
 		int group_category_id = (int)map.get("group_category_id");
@@ -148,11 +149,11 @@ public class EventScheduleAction {
 		String filename = (String)map.get("filename");
 		String image = (String)map.get("image");
 		String ext = YHFileUtil.getExt(filename);
-		String event_schedule_image_id = YHFileUtil.saveJpegFromBase64(image, Reference.event_schedule_image_path);
+		String event_schedule_image_id = YHFileUtil.saveJpegFromBase64(image, servletRequest.getSession().getServletContext().getRealPath("") + Reference.event_schedule_image_path);
 		
 		yh_event_schedule_imageDAO.insertEventScheduleImage(event_schedule_image_id, user_id, group_category_id, group_id, event_id, event_schedule_id, filename, ext);
 		
-		ArrayList<String> source_description_list = YHMSComputerVisionUtil.getDescriptionList(Reference.event_schedule_image_path, event_schedule_image_id, "ja");
+		ArrayList<String> source_description_list = YHMSComputerVisionUtil.getDescriptionList(servletRequest.getSession().getServletContext().getRealPath("") + Reference.event_schedule_image_path, event_schedule_image_id, "ja");
 			
 		for(int j = 0; j < source_description_list.size(); j++)
 		{

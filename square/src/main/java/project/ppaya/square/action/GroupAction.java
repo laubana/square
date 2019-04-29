@@ -4,6 +4,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
@@ -211,7 +212,7 @@ public class GroupAction {
 	}
 	@ResponseBody
 	@RequestMapping(value = "createGroupAction", method = RequestMethod.POST)
-	public void createGroupAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	public void createGroupAction(Model request, HttpSession session, HttpServletRequest servletRequest, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)session.getAttribute("user_id");
 		String name = (String)map.get("name");
@@ -221,8 +222,8 @@ public class GroupAction {
 		int check  = sh_gdao.setGroupHashtag(group_hashtag_list);
 		
 		String region = (String)map.get("region");
-		String group_logo = YHFileUtil.saveJpegFromBase64((String)map.get("group_logo"), Reference.group_logo_path);
-		String group_image = YHFileUtil.saveJpegFromBase64((String)map.get("group_image"), Reference.group_image_path);
+		String group_logo = YHFileUtil.saveJpegFromBase64((String)map.get("group_logo"), servletRequest.getSession().getServletContext().getRealPath("") + Reference.group_logo_path);
+		String group_image = YHFileUtil.saveJpegFromBase64((String)map.get("group_image"), servletRequest.getSession().getServletContext().getRealPath("") + Reference.group_image_path);
 		
 		while(true)
 		{

@@ -19,8 +19,9 @@ public class YHUpdateEventScheduleImageFaceThread extends Thread
 	private int index;
 	private int i;
 	private EventScheduleImage event_schedule_image;
+	private String path;
 	
-	public YHUpdateEventScheduleImageFaceThread(int index, int i, EventScheduleImage event_schedule_image)
+	public YHUpdateEventScheduleImageFaceThread(int index, int i, EventScheduleImage event_schedule_image, String path)
 	{
 		yh_event_schedule_imageDAO = (YHEventScheduleImageDAO)YHBeanUtil.getBean("YHEventScheduleImageDAO");
 		yh_event_schedule_image_faceDAO = (YHEventScheduleImageFaceDAO)YHBeanUtil.getBean("YHEventScheduleImageFaceDAO");
@@ -28,6 +29,7 @@ public class YHUpdateEventScheduleImageFaceThread extends Thread
 		this.event_schedule_image = event_schedule_image;
 		this.index = index;
 		this.i = i;
+		this.path = path;
 		out_map.get(index).put(i, false);
 	}
 	@Override
@@ -41,7 +43,7 @@ public class YHUpdateEventScheduleImageFaceThread extends Thread
 		{
 			yh_event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image.getEvent_schedule_image_id(), (new Date()).getTime());
 			
-			result = YHMSFaceUtil.getFace(Reference.event_schedule_image_path, event_schedule_image.getEvent_schedule_image_id());
+			result = YHMSFaceUtil.getFace(path + Reference.event_schedule_image_path, event_schedule_image.getEvent_schedule_image_id());
 			jsonArray = new JSONArray(result);
 			
 			for(int j = 0; j < jsonArray.length(); j++)
@@ -62,7 +64,7 @@ public class YHUpdateEventScheduleImageFaceThread extends Thread
 			
 			yh_event_schedule_image_faceDAO.deleteEventScheduleImageFaceByEventScheduleImageId(event_schedule_image.getEvent_schedule_image_id());
 			
-			result = YHMSFaceUtil.getFace(Reference.event_schedule_image_path, event_schedule_image.getEvent_schedule_image_id());
+			result = YHMSFaceUtil.getFace(path + Reference.event_schedule_image_path, event_schedule_image.getEvent_schedule_image_id());
 			jsonArray = new JSONArray(result);
 			
 			for(int j = 0; j < jsonArray.length(); j++)

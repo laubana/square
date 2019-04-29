@@ -299,7 +299,7 @@ function createEventScheduleAction()
 		    			contentType: "application/json; charset=UTF-8",
 		    			success: function(result)
 		    			{
-		    				location.href ="viewGroupForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}";
+		    				location.href = "viewEventForm?group_category=${group_category.group_category_id}&group_id=${group.group_id}&event_schedule_id=${event_schedule.event_schedule_id}";
 		    			},
 		    			error: function(){}
 		    				});

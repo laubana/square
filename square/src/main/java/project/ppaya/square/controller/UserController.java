@@ -3,6 +3,8 @@ package project.ppaya.square.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -137,8 +139,8 @@ public class UserController
 	public String listUserAlbumForm
 	(
 			Model request,
+			HttpServletRequest servletRequest,
 			@RequestParam(value = "user_id", defaultValue = "id1@gmail.com") String user_id
-			//String user_id
 			)
 	{		
 		User user = yh_userDAO.selectUserByUserId(user_id);
@@ -151,10 +153,10 @@ public class UserController
 		//Group List 전송
 		request.addAttribute("group_list", group_list);
 		
-		yh_util.updateEventScheduleImageFace(user_id);
-		yh_util.updateImageAlbum(user_id);
-		yh_util.updateEventScheduleVideoFace(user_id);
-		yh_util.updateVideoAlbum(user_id);
+		yh_util.updateEventScheduleImageFace(user_id, servletRequest.getSession().getServletContext().getRealPath(""));
+		yh_util.updateImageAlbum(user_id, servletRequest.getSession().getServletContext().getRealPath(""));
+		yh_util.updateEventScheduleVideoFace(user_id, servletRequest.getSession().getServletContext().getRealPath(""));
+		yh_util.updateVideoAlbum(user_id, servletRequest.getSession().getServletContext().getRealPath(""));
 		
 		return "user/listUserAlbumForm";
 	}

@@ -107,6 +107,7 @@ public class MainController
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String mainForm(Model request)
 	{
+		logger.debug("{}", this.getClass().getResource("/").getPath());
 		ArrayList<GroupCategory> group_category_list = yh_group_categoryDAO.selectGroupCategory();
 		//GroupCategory List 전송
 		request.addAttribute("group_category_list", group_category_list);

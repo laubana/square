@@ -20,7 +20,7 @@ import project.ppaya.square.yhdao.*;
 
 public class YHMSFaceUtil
 {	
-	private static int delay = 0;
+	private static int delay = 500;
 	public static ArrayList<String> getSimilarEventScheduleImageFaceIdByFaceId(ArrayList<String> face_id_list, String face_id)
 	{
 		ArrayList<String> similar_event_schedule_image_face_id_list = new ArrayList<>();

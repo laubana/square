@@ -20,8 +20,9 @@ public class YHUpdateEventScheduleVideoFaceThread2 extends Thread
 	private JSONObject jsonObject;
 	private int index;
 	private int i;
+	private String path;
 	
-	public YHUpdateEventScheduleVideoFaceThread2(int index, int i, EventScheduleVideo event_schedule_video, JSONObject jsonObject)
+	public YHUpdateEventScheduleVideoFaceThread2(int index, int i, EventScheduleVideo event_schedule_video, JSONObject jsonObject, String path)
 	{
 		yh_event_schedule_video_faceDAO = (YHEventScheduleVideoFaceDAO)YHBeanUtil.getBean("YHEventScheduleVideoFaceDAO");
 		
@@ -29,14 +30,15 @@ public class YHUpdateEventScheduleVideoFaceThread2 extends Thread
 		this.jsonObject = jsonObject;
 		this.index = index;
 		this.i = i;
+		this.path = path;
 		out_map.get(index).put(i, false);
 	}
 	@Override
 	public void run()
 	{
-		String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHMSVideoIndexerUtil.getThumbnail(event_schedule_video.getEvent_schedule_video_id(), jsonObject.getString("thumbnailId")), Reference.event_schedule_video_face_path);
+		String event_schedule_video_image_id = YHFileUtil.saveJpegFromBase64(YHMSVideoIndexerUtil.getThumbnail(event_schedule_video.getEvent_schedule_video_id(), jsonObject.getString("thumbnailId")), path + Reference.event_schedule_video_face_path);
 		
-		String face_id = YHMSFaceUtil.getFaceId(Reference.event_schedule_video_face_path, event_schedule_video_image_id);
+		String face_id = YHMSFaceUtil.getFaceId(path + Reference.event_schedule_video_face_path, event_schedule_video_image_id);
 		
 		yh_event_schedule_video_faceDAO.insertEventScheduleVideoFace(face_id, event_schedule_video_image_id, event_schedule_video.getEvent_schedule_video_id());
 		

@@ -312,6 +312,11 @@ border: 0;
 			alert("イメージがありません。");
 			return;
 		}
+		if(document.getElementById("region").value.length == 0)
+		{
+			alert("地域がありません。");
+			return;
+		}
 		var map = {};
 		map["name"] = $("#input").val();
 		map["content"] = $("#group_content").val();
