@@ -2,7 +2,8 @@ package project.ppaya.square.vo;
 
 public class Reference
 {
-	public static final String azure_face_key = "03f227484a964b46b877be96fdae5444";
+	public static final String azure_face_key1 = "03f227484a964b46b877be96fdae5444";
+	public static final String azure_face_key2 = "e5d2d6e8daa54e7c899966121b261859";
 	public static final String azure_text_analytics_key = "722def5c5311404d9eed2a53fbdf3c11";
 	public static final String azure_computer_vision_key = "19d2540feab74161ad15af4835db0a43";
 	

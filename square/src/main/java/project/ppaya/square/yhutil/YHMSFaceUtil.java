@@ -47,7 +47,7 @@ public class YHMSFaceUtil
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			
             httpPost.setHeader("Content-Type", "application/json");
-            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
+            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key1);
             
             httpPost.setEntity(new StringEntity(
             		"{" +
@@ -112,7 +112,7 @@ public class YHMSFaceUtil
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			
             httpPost.setHeader("Content-Type", "application/octet-stream");
-            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
+            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key1);
             
             httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
         	
@@ -154,7 +154,7 @@ public class YHMSFaceUtil
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			
             httpPost.setHeader("Content-Type", "application/octet-stream");
-            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
+            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key1);
             
             httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 
