@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,7 +91,7 @@ public class YHTestController
 			logger.debug("{}", category_list.toString());			
 		}*/
 		
-		YHMSFaceUtil.getFace(Reference.event_schedule_image_path, "event_schedule2_image1.jpg");
+//		YHMSFaceUtil.getFace(servletRequestReference.event_schedule_image_path, "event_schedule2_image1.jpg");
 	}
 	@RequestMapping(value = "yhtest1", method = RequestMethod.GET)
 	public String yhtest1(Model request)
@@ -159,7 +162,7 @@ public class YHTestController
 	{
 	}
 	@RequestMapping(value = "yhinit", method = RequestMethod.GET)
-	public void yhinit()
+	public void yhinit(HttpServletRequest servletRequest)
 	{
 		ArrayList<GroupComment> group_comment_list = yh_group_commentDAO.selectGroupCommentByGroupId(1);		
 		for(int i = 0; i < group_comment_list.size(); i++)
@@ -238,7 +241,7 @@ public class YHTestController
 		}*/
 		for(int i = 0; i < event_schedule_image_list.size(); i++)
 		{
-			ArrayList<String> source_description_list = YHMSComputerVisionUtil.getDescriptionList(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "ja");
+			ArrayList<String> source_description_list = YHMSComputerVisionUtil.getDescriptionList(servletRequest.getSession().getServletContext().getRealPath("") + Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "ja");
 			
 			/*ArrayList<String> target_tag_list = new ArrayList<>();
 			for(int j = 0; j < source_description_list.size(); j++)
@@ -253,7 +256,8 @@ public class YHTestController
 		}
 		for(int i = 0; i < event_schedule_image_list.size(); i++)
 		{
-			ArrayList<String> source_category_list = YHMSComputerVisionUtil.getCategoryList(Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "ja");
+			ArrayList<String> source_category_list = YHMSComputerVisionUtil.getCategoryList(servletRequest.getSession().getServletContext().getRealPath("") + Reference.event_schedule_image_path, event_schedule_image_list.get(i).getFilename(), "ja");
+			
 			
 			/*ArrayList<String> target_category_list = new ArrayList<>();
 			for(int j = 0; j < source_category_list.size(); j++)
