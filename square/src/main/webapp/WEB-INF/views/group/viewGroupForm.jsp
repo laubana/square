@@ -172,7 +172,7 @@
 			}
 		</script>
 	</head>
-	<body class="is-preload" onload="fn_onload();">
+	<body class="is-preload">
 
 		<!-- Header 메인 바 -->
 			<header id="header1">
@@ -561,14 +561,14 @@ function initMap() {
 		<c:forEach items = "${requestScope.event_schedule_list}" var = "list">
 			locations.push({ lat: ${list.latitude}, lng: ${list.longitude}, region: "${list.region}", name: "${list.name}", event_schedule_id: ${list.event_schedule_id}, content: "${list.content}", start_date: "${list.start_date}" });
 		</c:forEach>
-	 		
 
 		var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		
 		/* 좌표 각각들에 대해 마커 객체를 생성해서 맵에 띄우는 함수  */
 		var markers = locations.map( function(location, i) {
 			return new google.maps.Marker({	
-					position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
+					position: new google.maps.LatLng(locations[i].lat, locations[i].lng)
+					
 /* 					label: locations[i].name 			*/
 				});
 			});		
