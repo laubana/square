@@ -61,6 +61,10 @@ public class GroupController
 	@RequestMapping(value = "createGroupForm", method = RequestMethod.GET)
 	public String createGroupForm(Model request)
 	{
+		ArrayList<GroupCategory> group_category_list = yh_group_categoryDAO.selectGroupCategory();
+		//GroupCategory List 전송
+		request.addAttribute("group_category_list", group_category_list);
+		
 		return "group/createGroupForm";
 	}
 	@RequestMapping(value = "listGroupForm", method = RequestMethod.GET)

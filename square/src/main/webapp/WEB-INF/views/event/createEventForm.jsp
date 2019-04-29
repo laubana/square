@@ -85,9 +85,9 @@ border: 0;
 				<h1><a class="navbar-brand font-weight-bolder mr-3" href="main"><img src="resources/Main/assets/css/images/photoSquareLogo_done.png"></a></h1>
 				<nav>
 					<ul>
-						<li><a href="listRecommendationForm"></a>
+						<li><a href="listRecommendationForm"><span id="realTimeHashTag"></span></a></li>
 						<c:if test="${sessionScope.user_id != null}">
-						<li>${sessionScope.user_id}</li>
+						<li><a href="viewUserForm?user_id=${sessionScope.user_id}">${sessionScope.user_id}</a></li>
 						<li><a href="createGroupForm">グループ開設</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
@@ -272,7 +272,7 @@ function createEventAction()
 	}
 	if(document.getElementById("event_content").value.length == 0)
 	{
-		alert("タイトルがありません。");
+		alert("紹介がありません。");
 		return;
 	}
 	if(isImageReady == false)

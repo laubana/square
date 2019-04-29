@@ -119,9 +119,9 @@ border: 0;
 				<h1><a class="navbar-brand font-weight-bolder mr-3" href="main"><img src="resources/Main/assets/css/images/photoSquareLogo_done.png"></a></h1>
 				<nav>
 					<ul>
-						<li><a href="listRecommendationForm"></a>
+						<li><a href="listRecommendationForm"><span id="realTimeHashTag"></span></a></li>
 						<c:if test="${sessionScope.user_id != null}">
-						<li>${sessionScope.user_id}</li>
+						<li><a href="viewUserForm?user_id=${sessionScope.user_id}">${sessionScope.user_id}</a></li>
 						<li><a href="createGroupForm">グループ開設</a></li>
 					<li><a href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
 						</c:if>
@@ -205,18 +205,10 @@ border: 0;
 							<h1>カテゴリー</h1>
 							<div class="container">
   								<div class="radio">
-    								<input id="radio-1" name="radio" type="radio" value="1" checked>
-    								<label for="radio-1" class="radio-label">IT</label>
-    								<input id="radio-2" name="radio" type="radio" value="2">
-    								<label  for="radio-2" class="radio-label">Pet</label>
-    								<input id="radio-3" name="radio" type="radio" value="3">
-    								<label for="radio-3" class="radio-label">Leisure</label>
-    								<input id="radio-4" name="radio" type="radio" value="4">
-    								<label for="radio-4" class="radio-label">Family</label>
-    								<input id="radio-5" name="radio" type="radio" value="5">
-    								<label for="radio-5" class="radio-label">Cooking</label>
-    								<input id="radio-6" name="radio" type="radio" value="6">
-    								<label for="radio-6" class="radio-label">Music</label>
+  									<c:forEach var="element" items="${group_category_list}">
+  									<input id="radio-${element.group_category_id}" name="radio" type="radio" value="${element.group_category_id}">
+    								<label for="radio-${element.group_category_id}" class="radio-label">${element.name}</label>
+    								</c:forEach>
   								</div>
 							</div>
 							<h1>ハッシュタグ</h1>
@@ -286,10 +278,8 @@ border: 0;
 	        matchContains: true,
 	        selectFirst: false
 	    });
+	    $("#radio-1").attr("checked", true);
 	});
-</script>
-		
-<script>
 	function createGroupAction()
 	{
 		if(document.getElementById("input").value.length == 0)
@@ -334,7 +324,10 @@ border: 0;
 		map["group_hashtag_list"] = [];
 		for(var i = 0; i < group_hashtag_list.length; i++)
 		{
-			map["group_hashtag_list"].push(group_hashtag_list[i].value);
+			if(group_hashtag_list[i].value.length != 0)
+			{
+				map["group_hashtag_list"].push(group_hashtag_list[i].value);
+			}
 		}
 		
 		map["region"] = document.getElementById("region").value;

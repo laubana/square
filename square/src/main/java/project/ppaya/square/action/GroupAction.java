@@ -219,7 +219,7 @@ public class GroupAction {
 		String content = (String)map.get("content");
 		int group_category_id = Integer.parseInt((String)map.get("group_category_id"));
 		ArrayList<String> group_hashtag_list = (ArrayList<String>)map.get("group_hashtag_list");
-		int check  = sh_gdao.setGroupHashtag(group_hashtag_list);
+		logger.debug("{}", group_hashtag_list.toString());
 		
 		String region = (String)map.get("region");
 		String group_logo = YHFileUtil.saveJpegFromBase64((String)map.get("group_logo"), servletRequest.getSession().getServletContext().getRealPath("") + Reference.group_logo_path);
