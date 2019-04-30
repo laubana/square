@@ -169,7 +169,7 @@
 						
 							<article class="col-6 col-12-xsmall work-item">
 								<a href="resources/image/event_schedule_image/${event_schedule_image.event_schedule_image_id}" class="image fit thumb"><img src="resources/image/event_schedule_image/${event_schedule_image.event_schedule_image_id}" alt="" /></a>
-								<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">파일 이름</h3>
+								<h3 style="width:0px;height:0px;font-size:0px;line-height:0px;position:absolute;overflow:hidden;">${event_schedule_image.description}</h3>
 							</article>
 						</c:forEach>
 						</div>
