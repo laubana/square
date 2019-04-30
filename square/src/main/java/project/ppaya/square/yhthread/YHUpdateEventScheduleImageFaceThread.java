@@ -58,7 +58,7 @@ public class YHUpdateEventScheduleImageFaceThread extends Thread
 						);
 			}
 		}
-		else if(3600000 < (new Date()).getTime() - event_schedule_image.getDetect_date())
+		else if(36000000 < (new Date()).getTime() - event_schedule_image.getDetect_date())
 		{
 			yh_event_schedule_imageDAO.updateEventScheduleImageDetectDateByEventScheduleImageId(event_schedule_image.getEvent_schedule_image_id(), (new Date()).getTime());
 			

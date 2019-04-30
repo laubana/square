@@ -124,7 +124,7 @@ public class YHUpdateEventScheduleVideoFaceThread1 extends Thread
 				}
 			}
 		}
-		else if(3600000 < (new Date()).getTime() - event_schedule_video.getDetect_date())
+		else if(36000000 < (new Date()).getTime() - event_schedule_video.getDetect_date())
 		{	
 			yh_event_schedule_videoDAO.updateDetectDateByEventScheduleVideoId((new Date()).getTime(), event_schedule_video.getEvent_schedule_video_id());
 			
