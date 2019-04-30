@@ -26,7 +26,19 @@
 		  document.getElementById("main").style.display = "none";
 		  document.getElementById("mySidebar").style.display = "none";
 		}
-
+		function logoutUserAction()
+		{
+			$.ajax({
+				url: "logoutUserAction",
+				type: "POST",
+				success: function()
+				{
+					location.replace("<c:out value='main'/>");
+				},
+				error: function(error){console.log(error);}
+			});
+		}
+		
 	</script>	
 </head>
 
@@ -39,7 +51,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarsDefault">
 
-    	<ul class="navbar-nav ml-auto align-items-center">
+    	<!-- <ul class="navbar-nav ml-auto align-items-center">
     		<li class="nav-item">
     		<a class="nav-link" href="main">メイン</a>
     		</li>
@@ -49,7 +61,19 @@
     		<li class="nav-item">
     		<a class="nav-link active" href="loginUserForm">ログイン</a>
     		</li>
-    	</ul>
+    	</ul> -->
+					<ul class="navbar-nav ml-auto align-items-center">
+						<li class="nav-item"><a class="nav-link" href="listRecommendationForm"><span id="realTimeHashTag"></span></a></li>
+						<c:if test="${sessionScope.user_id != null}">
+						<li class="nav-item"><a class="nav-link" href="viewUserForm?user_id=${sessionScope.user_id}">${sessionScope.user_id}</a></li>
+						<li class="nav-item"><a class="nav-link" href="createGroupForm">グループ開設</a></li>
+					<li class="nav-item"><a class="nav-link" href="javascript:logoutUserAction()"><strong style="color:#778899;">ログアウト</strong></a></li>
+						</c:if>
+						<c:if test="${sessionScope.user_id == null}">
+						<li class="nav-item"><a class="nav-link" href="joinUserForm">ユーザー登録</a></li>
+							<li><a class="nav-link" href="loginUserForm"><strong style="color:#778899;">ログイン</strong></a></li>
+						</c:if>
+					</ul>
     </div>
     </nav> 
     
