@@ -260,10 +260,12 @@ public class EventScheduleAction {
 	}
 	@ResponseBody
 	@RequestMapping(value = "withdrawEventScheduleAction", method = RequestMethod.POST)
-	public void withdrawEventScheduleAction(Model request, @RequestBody HashMap<String, Object> map)
+	public void withdrawEventScheduleAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{
-		String user_id = (String)map.get("user_id");
+		String user_id = (String)session.getAttribute("user_id");
 		int event_schedule_id = (int)map.get("event_schedule_id");	
+
+		yh_event_schedule_user_scheduleDAO.deleteEventScheduleUserScheduleByUserIdEventScheduleId(user_id, event_schedule_id);
 		
 		yh_event_schedule_attendanceDAO.deleteEventScheduleAttendanceByEventScheduleIdUserId(user_id, event_schedule_id);
 	}

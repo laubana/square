@@ -217,7 +217,7 @@ label img {
 		
 		for(var i = 0; i < schedule_id_list.length; i++)
 		{
-			checked_schedule_list.push({start_date: Number($("#start_date" + i).val()), end_date: Number($("#end_date" + i).val())});
+			checked_schedule_list.push({start_date: Number($("#start_date" + schedule_id_list[i]).val()), end_date: Number($("#end_date" + schedule_id_list[i]).val())});
 		}
 		
 		map["schedule_list"] = checked_schedule_list;

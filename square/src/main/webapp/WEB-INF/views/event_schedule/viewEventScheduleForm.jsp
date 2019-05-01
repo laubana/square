@@ -71,7 +71,7 @@
 							};
 					chart.draw(dataTable, option);
         
-					document.getElementById('timeline_image' + json_event_schedule_user_schedule_list_list[i].user.user_id).innerHTML = "<a href='viewUserForm?user_id=" + json_event_schedule_user_schedule_list_list[i].user.user_id + "' class='image avatar thumb'><img src='resources/image/user_image/" + json_event_schedule_user_schedule_list_list[i].user.image_id + "' alt='' style='width: 100px; height:auto;'></a>";
+					//document.getElementById('timeline_image' + json_event_schedule_user_schedule_list_list[i].user.user_id).innerHTML = "<a href='viewUserForm?user_id=" + json_event_schedule_user_schedule_list_list[i].user.user_id + "' class='image avatar thumb'><img src='resources/image/user_image/" + json_event_schedule_user_schedule_list_list[i].user.image_id + "' alt='' style='width: 100px; height:auto;'></a>";
 				}
 			}
 		}
@@ -115,7 +115,6 @@
 	function withdrawEventScheduleAction()
 	{
 		map = {};
-		map["user_id"] = "${sessionScope.user_id}";
 		map["event_schedule_id"] = ${event_schedule.event_schedule_id};
 		
 		$.ajax({
