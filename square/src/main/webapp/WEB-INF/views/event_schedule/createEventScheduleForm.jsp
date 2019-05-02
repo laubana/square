@@ -20,6 +20,18 @@
 	</head>
 
 <script>
+function logoutUserAction()
+{
+	$.ajax({
+		url: "logoutUserAction",
+		type: "POST",
+		success: function()
+		{
+			location.replace("<c:out value='main'/>");
+		},
+		error: function(error){console.log(error);}
+	});
+}
 	function createEventImage()
 	{
 		document.getElementById("file").click();

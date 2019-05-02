@@ -147,6 +147,18 @@
 
 	</body>
 	<script>
+	function logoutUserAction()
+	{
+		$.ajax({
+			url: "logoutUserAction",
+			type: "POST",
+			success: function()
+			{
+				location.replace("<c:out value='main'/>");
+			},
+			error: function(error){console.log(error);}
+		});
+	}
 	function getEventCommentTranslation(event_comment_id)
 	{
 		var map = {};

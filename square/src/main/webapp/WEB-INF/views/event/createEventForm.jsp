@@ -263,6 +263,18 @@ border: 0;
 	</body>
 
 <script>
+function logoutUserAction()
+{
+	$.ajax({
+		url: "logoutUserAction",
+		type: "POST",
+		success: function()
+		{
+			location.replace("<c:out value='main'/>");
+		},
+		error: function(error){console.log(error);}
+	});
+}
 function createEventAction()
 {
 	if(document.getElementById("Event_title").value.length == 0)

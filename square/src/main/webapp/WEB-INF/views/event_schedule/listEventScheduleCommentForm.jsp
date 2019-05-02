@@ -169,6 +169,18 @@ function getEventScheduleCommentTranslation(event_schedule_comment_id)
 		error: function(error){console.log(error);}
 	});
 }
+function logoutUserAction()
+{
+	$.ajax({
+		url: "logoutUserAction",
+		type: "POST",
+		success: function()
+		{
+			location.replace("<c:out value='main'/>");
+		},
+		error: function(error){console.log(error);}
+	});
+}
 function resetEventScheduleComment(event_schedule_comment_id)
 {
 	var map = {};

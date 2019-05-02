@@ -273,6 +273,18 @@ border: 0;
 </script>
 
 <script>
+function logoutUserAction()
+{
+	$.ajax({
+		url: "logoutUserAction",
+		type: "POST",
+		success: function()
+		{
+			location.replace("<c:out value='main'/>");
+		},
+		error: function(error){console.log(error);}
+	});
+}
 	$(document).ready(function() {
 	    $("#region").autocomplete(availableTags,{ 
 	        matchContains: true,

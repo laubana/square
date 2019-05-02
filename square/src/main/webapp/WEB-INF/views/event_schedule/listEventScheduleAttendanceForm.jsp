@@ -118,6 +118,19 @@
 			<script src="resources/GroupMain/assets/js/breakpoints.min.js"></script>
 			<script src="resources/GroupMain/assets/js/util.js"></script>
 			<script src="resources/GroupMain/assets/js/main.js"></script>
-
+<script>
+function logoutUserAction()
+{
+	$.ajax({
+		url: "logoutUserAction",
+		type: "POST",
+		success: function()
+		{
+			location.replace("<c:out value='main'/>");
+		},
+		error: function(error){console.log(error);}
+	});
+}
+</script>
 	</body>
 </html>

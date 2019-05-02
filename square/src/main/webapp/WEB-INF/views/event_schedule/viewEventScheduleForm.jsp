@@ -99,7 +99,7 @@
 				rate = Math.floor(((count / attendance_count) * 10) / 2) * 10;				
 			
 				dataTable.addRows([
-						[ '参加者の最大人数', '', hsl2hex(9, 100, 80 - rate), "<div style='padding: 10px 10px 10px 10px;'>${event_schedule_attendace_count.typeof}</div>", new Date(${event_schedule_attendace_count.start_date}), new Date(${event_schedule_attendace_count.end_date}) ]
+						[ '参加できる人数', '', hsl2hex(9, 100, 80 - rate), "<div style='margin: 30px 30px 30px 30px;'><p style='font-size:15px; text-align:center;'>${event_schedule_attendace_count.typeof}</p></div>", new Date(${event_schedule_attendace_count.start_date}), new Date(${event_schedule_attendace_count.end_date}) ]
 						]);
 			</c:forEach>
         	
