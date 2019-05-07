@@ -76,7 +76,7 @@ label img {
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<div align="left"><h1 style="font-size:50px;"><a href="main">みんな・みんな</a></h1></div>
+					<div align="left"><h1 style="font-size:50px;"><a href="main">みんなみんな</a></h1></div>
 					<c:if test="${user.image_id != null}">
 					
 					<a class="image avatar"><img src="resources/image/user_image/${user.image_id}" alt="" /></a>
