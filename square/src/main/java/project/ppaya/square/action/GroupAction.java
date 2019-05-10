@@ -72,12 +72,14 @@ public class GroupAction {
 	
 	@ResponseBody
 	@RequestMapping(value = "deleteGroupCommentAction", method = RequestMethod.POST)
-	public void deleteGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	public String deleteGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)session.getAttribute("user_id");
 		int group_comment_id = (int)map.get("group_comment_id");
 		
 		yh_group_commentDAO.deleteGroupCommentByGroupCommentIdUserId(group_comment_id, user_id);
+		
+		return "success";
 	}
 	@ResponseBody
 	@RequestMapping(value = "listGroupAction", method = RequestMethod.POST)
@@ -128,7 +130,7 @@ public class GroupAction {
 	}
 	@ResponseBody
 	@RequestMapping(value = "updateGroupCommentAction", method = RequestMethod.POST)
-	public void updateGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	public String updateGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)session.getAttribute("user_id");
 		int group_comment_id = (int)map.get("group_comment_id");
@@ -150,6 +152,8 @@ public class GroupAction {
 		{
 			yh_group_comment_tagDAO.insertGroupCommentTag(group_comment_id, source_tag_list.get(j));
 		}
+		
+		return "success";
 	}
 	@ResponseBody
 	@RequestMapping(value = "joinGroupAction", method = RequestMethod.POST)
@@ -242,7 +246,7 @@ public class GroupAction {
 	}
 	@ResponseBody
 	@RequestMapping(value = "writeGroupCommentAction", method = RequestMethod.POST)
-	public void writeGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	public String writeGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)session.getAttribute("user_id");
 		int group_id = (int)map.get("group_id");
@@ -273,5 +277,7 @@ public class GroupAction {
 				yh_comment_tagDAO.insertCommentTag(group_comment_list.get(i).getUser_id(), source_tag_list.get(j));
 			}
 		}
+		
+		return "success";
 	}
 }

@@ -72,7 +72,7 @@ public class EventScheduleAction {
 	
 	@ResponseBody
 	@RequestMapping(value = "writeEventScheduleCommentAction", method = RequestMethod.POST)
-	public void writeEventScheduleCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	public String writeEventScheduleCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)session.getAttribute("user_id");
 		int event_schedule_id = (int)map.get("event_schedule_id");
@@ -102,19 +102,23 @@ public class EventScheduleAction {
 				yh_event_schedule_comment_tagDAO.insertEventScheduleCommentTag(event_schedule_comment_list.get(i).getEvent_schedule_comment_id(), source_tag_list.get(j));
 			}
 		}
+		
+		return "success";
 	}
 	@ResponseBody
 	@RequestMapping(value = "deleteEventScheduleCommentAction", method = RequestMethod.POST)
-	public void deleteGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	public String deleteGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)session.getAttribute("user_id");
 		int event_schedule_comment_id = (int)map.get("event_schedule_comment_id");
 		
 		yh_event_schedule_commentDAO.deleteEventScheduleCommentByEventScheduleCommentIdUserId(event_schedule_comment_id, user_id);
+		
+		return "success";
 	}
 	@ResponseBody
 	@RequestMapping(value = "updateEventScheduleCommentAction", method = RequestMethod.POST)
-	public void updateGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	public String updateGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)session.getAttribute("user_id");
 		int event_schedule_comment_id = (int)map.get("event_schedule_comment_id");
@@ -136,6 +140,8 @@ public class EventScheduleAction {
 		{
 			yh_event_schedule_comment_tagDAO.insertEventScheduleCommentTag(event_schedule_comment_id, source_tag_list.get(j));
 		}
+		
+		return "success";
 	}
 	@ResponseBody
 	@RequestMapping(value = "insertEventScheduleImageAction", method = RequestMethod.POST)

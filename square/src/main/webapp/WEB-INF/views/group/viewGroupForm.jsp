@@ -142,10 +142,14 @@
 					url: "updateGroupCommentAction",
 					type: "POST",
 					data: JSON.stringify(map),
+					dataType: "text",
 					contentType: "application/json; charset=UTF-8",
-					success: function()
+					success: function(result)
 					{
-						location.reload();
+						if(result == "success")
+						{
+							location.reload();
+						}
 					},
 					error: function(error){console.log(error);}
 				});
@@ -161,10 +165,14 @@
 						url: "deleteGroupCommentAction",
 						type: "POST",
 						data: JSON.stringify(map),
+						dataType: "text",
 						contentType: "application/json; charset=UTF-8",
-						success: function()
+						success: function(result)
 						{
-							location.reload();
+							if(result == "success")
+							{
+								location.reload();
+							}
 						},
 						error: function(error){console.log(error);}
 					});
@@ -434,10 +442,14 @@
 					url: "writeGroupCommentAction",
 					type: "POST",
 					data: JSON.stringify(map),
+					dataType: "text",
 					contentType: "application/json; charset=UTF-8",
-					success: function()
+					success: function(result)
 					{
-						location.reload();
+						if(result == "success")
+						{
+							location.reload();
+						}
 					},
 					error: function(error){console.log(error);}
 				});

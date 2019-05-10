@@ -266,7 +266,7 @@ $(document).ready(function () {
 							image_buff += "<input type='checkbox' id='photo_check_box" + image_list[i].image.event_schedule_image_id + "' name='photo_check_box' value='" + image_list[i].image.event_schedule_image_id + "' checked>";
 						}
 						image_buff += "<label for='photo_check_box" + image_list[i].image.event_schedule_image_id + "'/>";
-						image_buff += "<img src='resources/image/event_schedule_image/" + image_list[i].image.filename + "'/>";
+						image_buff += "<img src='resources/image/event_schedule_image/" + image_list[i].image.event_schedule_image_id + "'/>";
 						image_buff += "</label>";
 						image_buff += "</article>";
 					}

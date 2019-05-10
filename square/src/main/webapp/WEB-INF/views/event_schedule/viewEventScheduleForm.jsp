@@ -215,7 +215,7 @@
 				    			contentType: "application/json; charset=UTF-8",
 				    			success: function(result)
 				    			{
-				    				if(result == success)
+				    				if(result == "success")
 				    				{
 				    					location.reload();
 				    				}
@@ -250,10 +250,14 @@
 			url: "updateEventScheduleCommentAction",
 			type: "POST",
 			data: JSON.stringify(map),
+			dataType: "text",
 			contentType: "application/json; charset=UTF-8",
-			success: function()
+			success: function(result)
 			{
-				location.reload();
+				if(result == "success")
+				{
+					location.reload();
+				}
 			},
 			error: function(error){console.log(error);}
 		});
@@ -269,10 +273,14 @@
 				url: "deleteEventScheduleCommentAction",
 				type: "POST",
 				data: JSON.stringify(map),
+				dataType: "text",
 				contentType: "application/json; charset=UTF-8",
-				success: function()
+				success: function(result)
 				{
-					location.reload();
+					if(result == "success")
+					{
+						location.reload();
+					}
 				},
 				error: function(error){console.log(error);}
 			});
@@ -288,8 +296,15 @@
 			url: "writeEventScheduleCommentAction",
 			type: "POST",
 			data: JSON.stringify(map),
+			dateType: "text",
 			contentType: "application/json; charset=UTF-8",
-			success: function(){location.reload();},
+			success: function(result)
+			{
+				if(result == "success")
+				{
+					location.reload();
+				}
+			},
 			error: function(error){console.log(error);}
 		});
 	}

@@ -71,16 +71,18 @@ public class EventAction {
 	
 	@ResponseBody
 	@RequestMapping(value = "deleteEventCommentAction", method = RequestMethod.POST)
-	public void deleteGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	public String deleteGroupCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)session.getAttribute("user_id");
 		int event_comment_id = (int)map.get("event_comment_id");
 		
 		yh_event_commentDAO.deleteEventCommentByEventCommentIdUserId(event_comment_id, user_id);
+		
+		return "success";
 	}
 	@ResponseBody
 	@RequestMapping(value = "updateEventCommentAction", method = RequestMethod.POST)
-	public void updateEventCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	public String updateEventCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)session.getAttribute("user_id");
 		int event_comment_id = (int)map.get("event_comment_id");
@@ -102,6 +104,8 @@ public class EventAction {
 		{
 			yh_event_comment_tagDAO.insertEventCommentTag(event_comment_id, source_tag_list.get(j));
 		}
+		
+		return "success";
 	}
 	@ResponseBody
 	@RequestMapping(value = "createEventAction", method = RequestMethod.POST)
@@ -209,7 +213,7 @@ public class EventAction {
 	}
 	@ResponseBody
 	@RequestMapping(value = "writeEventCommentAction", method = RequestMethod.POST)
-	public void writeEventCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
+	public String writeEventCommentAction(Model request, HttpSession session, @RequestBody HashMap<String, Object> map)
 	{
 		String user_id = (String)session.getAttribute("user_id");
 		int event_id = (int)map.get("event_id");
@@ -239,5 +243,7 @@ public class EventAction {
 				yh_event_comment_tagDAO.insertEventCommentTag(event_comment_list.get(i).getEvent_comment_id(), source_tag_list.get(j));
 			}
 		}
+		
+		return "success";
 	}
 }

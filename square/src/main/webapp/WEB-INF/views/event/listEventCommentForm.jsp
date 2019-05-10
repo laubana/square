@@ -221,11 +221,14 @@
 			url: "updateEventCommentAction",
 			type: "POST",
 			data: JSON.stringify(map),
+			dataType: "text",
 			contentType: "application/json; charset=UTF-8",
-			success: function()
+			success: function(result)
 			{
-				document.getElementById("comment_content_div" + comment_id).innerHTML = "<p class='comment-text' id='comment" + comment_id + "'>" + map.content + "</p>";
-				document.getElementById("update_comment_button" + comment_id).innerHTML = '<a href="javascript:showUpdateCommentForm(' + comment_id + ')">Edit</a>';
+				if(result == "success")
+				{
+					location.reload();
+				}
 			},
 			error: function(error){console.log(error);}
 		});
@@ -241,10 +244,14 @@
 				url: "deleteEventCommentAction",
 				type: "POST",
 				data: JSON.stringify(map),
+				dataType: "text",
 				contentType: "application/json; charset=UTF-8",
-				success: function()
+				success: function(result)
 				{
-					location.reload();
+					if(result == "success")
+					{
+						location.reload();
+					}
 				},
 				error: function(error){console.log(error);}
 			});
