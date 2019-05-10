@@ -97,8 +97,8 @@ label img {
 	function initClient()
 	{
 		gapi.client.init({
-			apiKey : "AIzaSyAujlCmx3gpGvD5ZHDN3Vqwp1hG0h-J3cc",
-			clientId : "823134128365-5e3gpcpbt5nvqc4mfgsbess1v9d8kj9g.apps.googleusercontent.com",
+			apiKey : "",
+			clientId : "",
 			discoveryDocs : ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
 			scope : "https://www.googleapis.com/auth/calendar.readonly"
 		}).then(function()
