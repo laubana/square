@@ -42,12 +42,12 @@ public class YHMSFaceUtil
 		
         try
         {			
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/face/v1.0/findsimilars");
+			URIBuilder uriBuilder = new URIBuilder("https://" + Reference.azure_face_region + ".api.cognitive.microsoft.com/face/v1.0/findsimilars");
 			
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			
             httpPost.setHeader("Content-Type", "application/json");
-            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key1);
+            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
             
             httpPost.setEntity(new StringEntity(
             		"{" +
@@ -105,14 +105,14 @@ public class YHMSFaceUtil
 		
         try
         {			
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect");
+			URIBuilder uriBuilder = new URIBuilder("https://" + Reference.azure_face_region + ".api.cognitive.microsoft.com/face/v1.0/detect");
 			
 			uriBuilder.setParameter("returnFaceId", "true");
             
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			
             httpPost.setHeader("Content-Type", "application/octet-stream");
-            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key1);
+            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
             
             httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
         	
@@ -147,14 +147,14 @@ public class YHMSFaceUtil
 		
         try
         {			
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect");
+			URIBuilder uriBuilder = new URIBuilder("https://" + Reference.azure_face_region + ".api.cognitive.microsoft.com/face/v1.0/detect");
 			
 			uriBuilder.setParameter("returnFaceId", "true");
             
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			
             httpPost.setHeader("Content-Type", "application/octet-stream");
-            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key1);
+            httpPost.setHeader("Ocp-Apim-Subscription-Key", Reference.azure_face_key);
             
             httpPost.setEntity(new FileEntity(new File(path + "\\" + file)));
 

@@ -27,7 +27,7 @@ public class YHMSComputerVisionUtil
 
 		try
 		{
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/tag");
+			URIBuilder uriBuilder = new URIBuilder("https://" + Reference.azure_computer_vision_region + ".api.cognitive.microsoft.com/vision/v2.0/tag");
 
 			uriBuilder.setParameter("language", language);
 			
@@ -81,7 +81,7 @@ public class YHMSComputerVisionUtil
 
 		try
 		{
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/describe");
+			URIBuilder uriBuilder = new URIBuilder("https://" + Reference.azure_computer_vision_region + ".api.cognitive.microsoft.com/vision/v2.0/describe");
 
 			uriBuilder.setParameter("language", language);
 			
@@ -136,7 +136,7 @@ public class YHMSComputerVisionUtil
 
 		try
 		{
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/analyze");
+			URIBuilder uriBuilder = new URIBuilder("https://" + Reference.azure_computer_vision_region + ".api.cognitive.microsoft.com/vision/v2.0/analyze");
 
 			uriBuilder.setParameter("visualFeatures", "Brands");
 			uriBuilder.setParameter("language", language);
@@ -171,7 +171,7 @@ public class YHMSComputerVisionUtil
 
 		try
 		{
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/analyze");
+			URIBuilder uriBuilder = new URIBuilder("https://" + Reference.azure_computer_vision_region + ".api.cognitive.microsoft.com/vision/v2.0/analyze");
 
 			uriBuilder.setParameter("visualFeatures", "Categories");
 			uriBuilder.setParameter("language", language);
@@ -227,7 +227,7 @@ public class YHMSComputerVisionUtil
 
 		try
 		{
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/vision/v2.0/read/core/asyncBatchAnalyze");
+			URIBuilder uriBuilder = new URIBuilder("https://" + Reference.azure_computer_vision_region + ".api.cognitive.microsoft.com/vision/v2.0/read/core/asyncBatchAnalyze");
 
 			uriBuilder.setParameter("mode", mode);
 			

@@ -24,7 +24,7 @@ public class YHMSTextAnalyticsUtil
 
 		try
 		{
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases");
+			URIBuilder uriBuilder = new URIBuilder("https://" + Reference.azure_text_analytics_region + ".api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases");
 
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			httpPost.setHeader("Content-Type", "application/json");
@@ -70,7 +70,7 @@ public class YHMSTextAnalyticsUtil
 
 		try
 		{
-			URIBuilder uriBuilder = new URIBuilder("https://westcentralus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment");
+			URIBuilder uriBuilder = new URIBuilder("https://" + Reference.azure_text_analytics_region + ".api.cognitive.microsoft.com/text/analytics/v2.0/sentiment");
 
 			HttpPost httpPost = new HttpPost(uriBuilder.build());
 			httpPost.setHeader("Content-Type", "application/json");
