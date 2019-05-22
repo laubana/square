@@ -1,6 +1,5 @@
 package project.ppaya.square.yhthread;
 
-import java.util.Date;
 import java.util.HashMap;
 
 import org.json.JSONArray;

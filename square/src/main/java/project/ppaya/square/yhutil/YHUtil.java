@@ -1,12 +1,8 @@
 package project.ppaya.square.yhutil;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
-import org.apache.log4j.Logger;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +10,6 @@ import project.ppaya.square.vo.*;
 import project.ppaya.square.yhdao.*;
 import project.ppaya.square.yhthread.YHUpdateEventScheduleImageFaceThread;
 import project.ppaya.square.yhthread.YHUpdateEventScheduleVideoFaceThread1;
-import project.ppaya.square.yhthread.YHUpdateEventScheduleVideoFaceThread3;
 import project.ppaya.square.yhthread.YHUpdateVideoAlbumThread;
 
 @Repository
